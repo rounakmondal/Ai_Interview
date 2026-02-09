@@ -66,34 +66,55 @@ export const useAudioPlayback = (
 
       try {
         setError(null);
-        
-        // Cancel any ongoing speech
+        setIsLoading(true);
+
+        // Cancel any ongoing speech first
         window.speechSynthesis.cancel();
 
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = language;
-        utterance.rate = 1;
-        utterance.pitch = 1;
-        utterance.volume = volume;
+        // Small delay to ensure cancel completes before starting new utterance
+        setTimeout(() => {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = language;
+          utterance.rate = 1;
+          utterance.pitch = 1;
+          utterance.volume = Math.min(Math.max(volume, 0), 1);
 
-        utterance.onstart = () => {
-          setIsPlaying(true);
-        };
+          utterance.onstart = () => {
+            setIsPlaying(true);
+            setIsLoading(false);
+          };
 
-        utterance.onend = () => {
-          setIsPlaying(false);
-        };
+          utterance.onend = () => {
+            setIsPlaying(false);
+            setIsLoading(false);
+          };
 
-        utterance.onerror = (event) => {
-          console.error("Speech synthesis error:", event.error);
-          setError(`Speech error: ${event.error}`);
-          setIsPlaying(false);
-        };
+          utterance.onpause = () => {
+            setIsPlaying(false);
+          };
 
-        window.speechSynthesis.speak(utterance);
-        setIsLoading(false);
+          utterance.onresume = () => {
+            setIsPlaying(true);
+          };
+
+          utterance.onerror = (event) => {
+            // "interrupted" error is expected when we cancel speech
+            // Only show actual errors to the user
+            if (event.error !== "interrupted") {
+              console.error("Speech synthesis error:", event.error);
+              setError(`Speech error: ${event.error}`);
+            } else {
+              console.log("Speech synthesis was interrupted (expected behavior)");
+            }
+            setIsPlaying(false);
+            setIsLoading(false);
+          };
+
+          window.speechSynthesis.speak(utterance);
+        }, 100);
       } catch (err) {
         const message = err instanceof Error ? err.message : "Speech synthesis error";
+        console.error("Failed to play text-to-speech:", err);
         setError(message);
         setIsLoading(false);
       }
