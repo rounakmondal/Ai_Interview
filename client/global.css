@@ -140,6 +140,19 @@
     animation: pulseSubtle 2s ease-in-out infinite;
   }
 
+  /* Animation delays */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
   /* Glow effects */
   .glow-primary {
     box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
