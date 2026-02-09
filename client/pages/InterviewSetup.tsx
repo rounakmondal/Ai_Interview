@@ -10,15 +10,10 @@ import {
   Upload,
   ChevronRight,
   ArrowLeft,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
-
-type InterviewType =
-  | "government"
-  | "private"
-  | "it"
-  | "non-it"
-  | null;
-type Language = "english" | "hindi" | "bengali" | null;
+import type { InterviewType, Language } from "@shared/api";
 
 const interviewTypes = [
   {
@@ -55,10 +50,14 @@ const languages = [
 
 export default function InterviewSetup() {
   const navigate = useNavigate();
-  const [selectedType, setSelectedType] = useState<InterviewType>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>(null);
+  const [selectedType, setSelectedType] = useState<InterviewType | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(
+    null
+  );
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [step, setStep] = useState<"type" | "language" | "cv">("type");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleTypeSelect = (type: string) => {
     setSelectedType(type as InterviewType);
@@ -71,25 +70,57 @@ export default function InterviewSetup() {
   const handleCVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        setError("File size must be less than 10MB");
+        return;
+      }
       setCvFile(file);
+      setError(null);
     }
   };
 
-  const handleStartInterview = () => {
-    if (selectedType && selectedLanguage) {
-      // Navigate to interview room with state
+  const readCVText = async (file: File): Promise<string | undefined> => {
+    try {
+      return await file.text();
+    } catch (err) {
+      console.warn("Could not read CV file as text:", err);
+      return undefined;
+    }
+  };
+
+  const handleStartInterview = async () => {
+    if (!selectedType || !selectedLanguage) {
+      setError("Please complete all required steps");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Read CV if provided
+      let cvText: string | undefined;
+      if (cvFile) {
+        cvText = await readCVText(cvFile);
+      }
+
+      // Navigate to interview room with setup state
+      // The interview will actually start when the user grants permissions
       navigate("/interview", {
         state: {
           interviewType: selectedType,
           language: selectedLanguage,
-          cvUploaded: !!cvFile,
+          cvText: cvText,
         },
       });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to proceed";
+      setError(message);
+      setIsLoading(false);
     }
   };
 
-  const isReadyToStart =
-    selectedType && selectedLanguage;
+  const isReadyToStart = selectedType && selectedLanguage;
 
   return (
     <div className="min-h-screen bg-background">
@@ -120,14 +151,9 @@ export default function InterviewSetup() {
         <div className="max-w-4xl mx-auto">
           {/* Progress Steps */}
           <div className="mb-12 sm:mb-16">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-3xl sm:text-4xl font-bold">
-                Setup Your Interview
-              </h1>
-              <div className="text-sm text-muted-foreground">
-                Step {step === "type" ? 1 : step === "language" ? 2 : 3} of 3
-              </div>
-            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">
+              Setup Your Interview
+            </h1>
 
             {/* Progress bar */}
             <div className="flex gap-2">
@@ -150,6 +176,21 @@ export default function InterviewSetup() {
               />
             </div>
           </div>
+
+          {/* Error display */}
+          {error && (
+            <div className="mb-8 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
+              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-red-900 dark:text-red-300">
+                  Error
+                </p>
+                <p className="text-xs text-red-800 dark:text-red-400 mt-1">
+                  {error}
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Step 1: Interview Type */}
           {step === "type" && (
@@ -190,7 +231,7 @@ export default function InterviewSetup() {
                         </div>
                         {isSelected && (
                           <div className="flex justify-end pt-2">
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white">
+                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
                               ✓
                             </div>
                           </div>
@@ -247,7 +288,7 @@ export default function InterviewSetup() {
                         <h3 className="font-bold text-lg">{lang.label}</h3>
                         {isSelected && (
                           <div className="flex justify-end pt-2">
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white">
+                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
                               ✓
                             </div>
                           </div>
@@ -311,7 +352,7 @@ export default function InterviewSetup() {
                         <input
                           type="file"
                           className="hidden"
-                          accept=".pdf,.doc,.docx"
+                          accept=".pdf,.doc,.docx,.txt"
                           onChange={handleCVUpload}
                         />
                         <Button
@@ -344,7 +385,7 @@ export default function InterviewSetup() {
                         <input
                           type="file"
                           className="hidden"
-                          accept=".pdf,.doc,.docx"
+                          accept=".pdf,.doc,.docx,.txt"
                           onChange={handleCVUpload}
                         />
                         <Button
@@ -383,12 +424,21 @@ export default function InterviewSetup() {
                 </Button>
                 <Button
                   onClick={handleStartInterview}
-                  disabled={!isReadyToStart}
+                  disabled={!isReadyToStart || isLoading}
                   size="lg"
-                  className="gradient-primary text-base font-semibold px-8"
+                  className="gradient-primary text-base font-semibold px-8 gap-2"
                 >
-                  Start Interview
-                  <ChevronRight className="w-5 h-5 ml-2" />
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Preparing...
+                    </>
+                  ) : (
+                    <>
+                      Start Interview
+                      <ChevronRight className="w-5 h-5" />
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
