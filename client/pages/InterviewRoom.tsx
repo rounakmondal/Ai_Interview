@@ -79,17 +79,26 @@ export default function InterviewRoom() {
       setPhase("active");
       setAvatarState("idle");
 
+      // Stop any current listening/speaking before playing first question
+      speech.stopListening();
+      audio.stopPlayback();
+
       // Play first question using text-to-speech
       setTimeout(() => {
-        audio.playTextToSpeech(response.firstQuestion, getLanguageCode());
-        setAvatarState("speaking");
-      }, 500);
+        try {
+          audio.playTextToSpeech(response.firstQuestion, getLanguageCode());
+          setAvatarState("speaking");
+        } catch (err) {
+          console.error("Failed to play first question:", err);
+          setError("Failed to play question audio");
+        }
+      }, 300);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to start interview";
       setError(message);
       setAvatarState("idle");
     }
-  }, [state, audio]);
+  }, [state, audio, speech]);
 
   // Get next question after answer submission
   const handleAnswerSubmit = useCallback(
