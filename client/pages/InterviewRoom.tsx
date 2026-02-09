@@ -110,6 +110,10 @@ export default function InterviewRoom() {
         setIsSubmittingAnswer(true);
         setAvatarState("thinking");
 
+        // Stop listening and any playback
+        speech.stopListening();
+        audio.stopPlayback();
+
         const response: NextQuestionResponse = await apiClient.getNextQuestion(
           {
             sessionId,
@@ -138,12 +142,18 @@ export default function InterviewRoom() {
         // Reset voice input
         speech.resetTranscript();
 
-        // Play next question
+        // Play next question with proper error handling
         setAvatarState("idle");
         setTimeout(() => {
-          audio.playTextToSpeech(response.questionText, getLanguageCode());
-          setAvatarState("speaking");
-        }, 500);
+          try {
+            audio.playTextToSpeech(response.questionText, getLanguageCode());
+            setAvatarState("speaking");
+          } catch (err) {
+            console.error("Failed to play next question:", err);
+            setError("Failed to play question audio");
+            setAvatarState("idle");
+          }
+        }, 300);
 
         setIsSubmittingAnswer(false);
       } catch (err) {
