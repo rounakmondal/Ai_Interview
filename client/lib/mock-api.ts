@@ -81,6 +81,18 @@ function generateSessionId(): string {
   return `mock-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
+// Log startup message
+if (typeof window !== "undefined") {
+  console.log(
+    "%c Mock Interview API Active",
+    "color: #f97316; font-weight: bold; font-size: 12px;"
+  );
+  console.log(
+    "%c Using mock data for development & testing",
+    "color: #f97316; font-size: 11px;"
+  );
+}
+
 export const mockApi = {
   async startInterview(
     data: StartInterviewRequest
