@@ -1,12 +1,61 @@
-/**
- * Shared code between client and server
- * Useful to share types between client and server
- * and/or small pure JS functions that can be used on both client and server
- */
+// Interview Types
+export type InterviewType = "government" | "private" | "it" | "non-it";
+export type Language = "english" | "hindi" | "bengali";
 
-/**
- * Example response type for /api/demo
- */
-export interface DemoResponse {
-  message: string;
+// API Request/Response Types
+export interface StartInterviewRequest {
+  interviewType: InterviewType;
+  language: Language;
+  cvText?: string;
+}
+
+export interface StartInterviewResponse {
+  sessionId: string;
+  firstQuestion: string;
+}
+
+export interface NextQuestionRequest {
+  sessionId: string;
+  userAnswer: string;
+}
+
+export interface NextQuestionResponse {
+  questionText: string;
+  isFollowUp: boolean;
+  questionNumber?: number;
+  totalQuestions?: number;
+}
+
+export interface FinishInterviewRequest {
+  sessionId: string;
+}
+
+export interface EvaluationScore {
+  overallScore: number;
+  communicationScore: number;
+  technicalScore: number;
+  confidenceScore: number;
+}
+
+export interface FinishInterviewResponse extends EvaluationScore {
+  weakAreas: string[];
+  improvementSuggestions: string[];
+  strengths?: string[];
+}
+
+// Interview Session State
+export interface InterviewSession {
+  sessionId: string;
+  interviewType: InterviewType;
+  language: Language;
+  currentQuestion: string;
+  questionNumber: number;
+  totalQuestions: number;
+  isFollowUp: boolean;
+  isCompleted: boolean;
+}
+
+export interface InterviewEvaluation extends FinishInterviewResponse {
+  sessionId: string;
+  completedAt: string;
 }
