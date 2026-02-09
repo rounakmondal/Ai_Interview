@@ -19,6 +19,22 @@ class ApiClient {
   constructor(baseUrl: string = API_BASE_URL, useMock: boolean = USE_MOCK_API) {
     this.baseUrl = baseUrl;
     this.useMock = useMock;
+
+    // Log API configuration
+    if (typeof window !== "undefined") {
+      console.log(
+        `%c InterviewAI API Client Initialized`,
+        "color: #4f46e5; font-weight: bold; font-size: 12px;"
+      );
+      console.log(`%c Mode: ${useMock ? "Mock API" : "Real API"}`, "color: #4f46e5;");
+      if (!useMock) {
+        console.log(`%c Endpoint: ${baseUrl}`, "color: #4f46e5;");
+        console.log(
+          `%c Fallback: Using mock API if real API is unavailable`,
+          "color: #4f46e5; font-size: 11px;"
+        );
+      }
+    }
   }
 
   private async request<T>(
