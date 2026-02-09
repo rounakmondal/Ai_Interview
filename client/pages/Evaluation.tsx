@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -8,46 +9,68 @@ import {
   Lightbulb,
   AlertCircle,
   TrendingUp,
+  Loader2,
 } from "lucide-react";
+import type { FinishInterviewResponse } from "@shared/api";
+
+interface EvaluationLocationState {
+  sessionId: string;
+  evaluation: FinishInterviewResponse;
+  completedAt: string;
+}
 
 export default function EvaluationPage() {
-  const overallScore = 8.2;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [evaluation, setEvaluation] = useState<FinishInterviewResponse | null>(
+    null
+  );
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const state = location.state as EvaluationLocationState | null;
+
+    if (!state?.evaluation) {
+      navigate("/", { replace: true });
+      return;
+    }
+
+    setEvaluation(state.evaluation);
+    setIsLoading(false);
+  }, [location, navigate]);
+
+  if (isLoading || !evaluation) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-8 h-8 text-primary mx-auto animate-spin" />
+          <p className="text-muted-foreground">Loading evaluation...</p>
+        </div>
+      </div>
+    );
+  }
+
   const scores = {
-    communication: 8.5,
-    technical: 7.8,
-    confidence: 9.2,
+    overall: evaluation.overallScore,
+    communication: evaluation.communicationScore,
+    technical: evaluation.technicalScore,
+    confidence: evaluation.confidenceScore,
   };
 
-  const strengths = [
-    "Excellent articulation and clarity in explanations",
-    "Strong confidence and composed demeanor",
-    "Good problem-solving approach",
-    "Relevant examples and experiences shared",
-  ];
+  const getScoreColor = (score: number): string => {
+    if (score >= 8) return "text-green-600 dark:text-green-400";
+    if (score >= 6) return "text-yellow-600 dark:text-yellow-400";
+    return "text-red-600 dark:text-red-400";
+  };
 
-  const weakAreas = [
-    "Could provide more depth in technical explanations",
-    "Some hesitation when answering follow-up questions",
-    "Could structure answers more systematically",
-  ];
-
-  const suggestions = [
-    {
-      title: "Practice Technical Depth",
-      description:
-        "Focus on explaining technical concepts in more detail. Practice explaining system architecture and design decisions.",
-    },
-    {
-      title: "Improve Structural Answers",
-      description:
-        "Use frameworks like STAR method for better answer structuring. This helps in presenting information logically.",
-    },
-    {
-      title: "Enhance Follow-up Readiness",
-      description:
-        "Anticipate potential follow-up questions and prepare detailed responses. Practice handling difficult questions.",
-    },
-  ];
+  const getScoreLabel = (score: number): string => {
+    if (score >= 9) return "Excellent";
+    if (score >= 8) return "Very Good";
+    if (score >= 7) return "Good";
+    if (score >= 6) return "Satisfactory";
+    if (score >= 5) return "Needs Improvement";
+    return "Poor";
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,7 +100,7 @@ export default function EvaluationPage() {
 
       {/* Main Content */}
       <main className="container py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto space-y-12">
+        <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
           {/* Header Section */}
           <div className="space-y-2">
             <h1 className="text-4xl sm:text-5xl font-bold">
@@ -95,7 +118,10 @@ export default function EvaluationPage() {
                 {/* Score Circle */}
                 <div className="flex flex-col items-center justify-center space-y-4">
                   <div className="relative w-32 h-32">
-                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+                    <svg
+                      className="w-full h-full transform -rotate-90"
+                      viewBox="0 0 120 120"
+                    >
                       <circle
                         cx="60"
                         cy="60"
@@ -112,7 +138,7 @@ export default function EvaluationPage() {
                         fill="none"
                         stroke="url(#scoreGradient)"
                         strokeWidth="2"
-                        strokeDasharray={`${(overallScore / 10) * 339.3} 339.3`}
+                        strokeDasharray={`${(scores.overall / 10) * 339.3} 339.3`}
                         className="transition-all duration-1000"
                       />
                       <defs>
@@ -130,14 +156,19 @@ export default function EvaluationPage() {
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <span className="text-4xl font-bold text-primary">
-                        {overallScore}
+                        {scores.overall.toFixed(1)}
                       </span>
                       <span className="text-sm text-muted-foreground">/10</span>
                     </div>
                   </div>
-                  <p className="text-center text-sm font-semibold text-foreground">
-                    Excellent Performance
-                  </p>
+                  <div className="text-center space-y-1">
+                    <p className="text-center text-sm font-semibold text-foreground">
+                      {getScoreLabel(scores.overall)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Performance
+                    </p>
+                  </div>
                 </div>
 
                 {/* Score Details */}
@@ -147,8 +178,10 @@ export default function EvaluationPage() {
                       <span className="font-semibold text-foreground">
                         Communication
                       </span>
-                      <span className="text-sm font-bold text-primary">
-                        {scores.communication}/10
+                      <span
+                        className={`text-sm font-bold ${getScoreColor(scores.communication)}`}
+                      >
+                        {scores.communication.toFixed(1)}/10
                       </span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -164,8 +197,10 @@ export default function EvaluationPage() {
                       <span className="font-semibold text-foreground">
                         Technical / Subject Knowledge
                       </span>
-                      <span className="text-sm font-bold text-secondary">
-                        {scores.technical}/10
+                      <span
+                        className={`text-sm font-bold ${getScoreColor(scores.technical)}`}
+                      >
+                        {scores.technical.toFixed(1)}/10
                       </span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -181,8 +216,10 @@ export default function EvaluationPage() {
                       <span className="font-semibold text-foreground">
                         Confidence
                       </span>
-                      <span className="text-sm font-bold text-accent">
-                        {scores.confidence}/10
+                      <span
+                        className={`text-sm font-bold ${getScoreColor(scores.confidence)}`}
+                      >
+                        {scores.confidence.toFixed(1)}/10
                       </span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -200,126 +237,105 @@ export default function EvaluationPage() {
           {/* Two Column Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Strengths */}
-            <Card className="p-6 sm:p-8 border-border/40 space-y-4">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-6 h-6 text-green-500" />
-                <h2 className="text-2xl font-bold">Your Strengths</h2>
-              </div>
-              <div className="space-y-3">
-                {strengths.map((strength, idx) => (
-                  <div key={idx} className="flex gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
-                    <p className="text-foreground/80">{strength}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
+            {evaluation.strengths && evaluation.strengths.length > 0 && (
+              <Card className="p-6 sm:p-8 border-border/40 space-y-4">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-green-500" />
+                  <h2 className="text-2xl font-bold">Your Strengths</h2>
+                </div>
+                <div className="space-y-3">
+                  {evaluation.strengths.map((strength, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                      <p className="text-foreground/80">{strength}</p>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
 
             {/* Weak Areas */}
-            <Card className="p-6 sm:p-8 border-border/40 space-y-4">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="w-6 h-6 text-amber-500" />
-                <h2 className="text-2xl font-bold">Areas for Improvement</h2>
-              </div>
-              <div className="space-y-3">
-                {weakAreas.map((area, idx) => (
-                  <div key={idx} className="flex gap-3">
-                    <div className="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                    <p className="text-foreground/80">{area}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
+            {evaluation.weakAreas && evaluation.weakAreas.length > 0 && (
+              <Card className="p-6 sm:p-8 border-border/40 space-y-4">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-6 h-6 text-amber-500" />
+                  <h2 className="text-2xl font-bold">Areas for Improvement</h2>
+                </div>
+                <div className="space-y-3">
+                  {evaluation.weakAreas.map((area, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
+                      <p className="text-foreground/80">{area}</p>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
           </div>
 
           {/* Improvement Suggestions */}
-          <Card className="p-6 sm:p-8 border-border/40 space-y-6">
-            <div className="flex items-center gap-2">
-              <Lightbulb className="w-6 h-6 text-amber-500" />
-              <h2 className="text-2xl font-bold">Personalized Suggestions</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              {suggestions.map((suggestion, idx) => (
-                <Card
-                  key={idx}
-                  className="p-5 border-border/40 bg-muted/30 space-y-3"
-                >
-                  <h3 className="font-bold text-foreground">
-                    {suggestion.title}
-                  </h3>
-                  <p className="text-sm text-foreground/80">
-                    {suggestion.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </Card>
-
-          {/* Detailed Feedback */}
-          <Card className="p-6 sm:p-8 border-border/40 space-y-6">
-            <h2 className="text-2xl font-bold">Detailed Feedback</h2>
-
-            <div className="space-y-6">
-              {[
-                {
-                  question: "Tell me about a challenging project you've worked on",
-                  yourAnswer:
-                    "I worked on a large-scale e-commerce platform migration where we needed to ensure zero downtime...",
-                  feedback:
-                    "Good introduction and context setting. Consider providing more metrics and specific technical details about the challenges faced.",
-                  score: 8,
-                },
-                {
-                  question: "What was the biggest challenge you faced?",
-                  yourAnswer:
-                    "The main challenge was handling database migration with 50 million records...",
-                  feedback:
-                    "Excellent breakdown of the problem. You could expand on your role and specific technical contributions.",
-                  score: 8.5,
-                },
-                {
-                  question: "How would you approach this differently?",
-                  yourAnswer:
-                    "I would use a more systematic approach with better planning...",
-                  feedback:
-                    "While your answer was reasonable, try to be more specific with technical solutions and trade-offs.",
-                  score: 7.5,
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0 space-y-3">
-                  <div className="flex justify-between items-start gap-4">
-                    <h3 className="font-semibold text-lg text-foreground flex-1">
-                      Q{idx + 1}: {item.question}
-                    </h3>
-                    <div className="flex items-center gap-1 flex-shrink-0">
-                      <span className="text-sm font-bold text-primary">
-                        {item.score}
-                      </span>
-                      <span className="text-xs text-muted-foreground">/10</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">
-                        Your Response:
-                      </p>
-                      <p className="text-sm text-foreground/80">
-                        {item.yourAnswer}
-                      </p>
-                    </div>
-                    <div className="bg-primary/5 border border-primary/20 rounded p-3">
-                      <p className="text-xs text-muted-foreground mb-1">
-                        AI Feedback:
-                      </p>
-                      <p className="text-sm text-foreground/80">
-                        {item.feedback}
-                      </p>
-                    </div>
-                  </div>
+          {evaluation.improvementSuggestions &&
+            evaluation.improvementSuggestions.length > 0 && (
+              <Card className="p-6 sm:p-8 border-border/40 space-y-6">
+                <div className="flex items-center gap-2">
+                  <Lightbulb className="w-6 h-6 text-amber-500" />
+                  <h2 className="text-2xl font-bold">
+                    Personalized Suggestions
+                  </h2>
                 </div>
-              ))}
+
+                <div className="grid md:grid-cols-1 gap-4">
+                  {evaluation.improvementSuggestions.map((suggestion, idx) => (
+                    <Card
+                      key={idx}
+                      className="p-5 border-border/40 bg-muted/30 space-y-2"
+                    >
+                      <div className="flex gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
+                          {idx + 1}
+                        </span>
+                        <p className="text-sm text-foreground/80">{suggestion}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+          {/* Score Summary */}
+          <Card className="p-6 sm:p-8 border-border/40 bg-gradient-to-r from-primary/5 to-secondary/5 space-y-4">
+            <h2 className="text-xl font-bold">Score Summary</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="text-center space-y-2">
+                <p className="text-xs text-muted-foreground">Overall</p>
+                <p className={`text-2xl font-bold ${getScoreColor(scores.overall)}`}>
+                  {scores.overall.toFixed(1)}
+                </p>
+              </div>
+              <div className="text-center space-y-2">
+                <p className="text-xs text-muted-foreground">Communication</p>
+                <p
+                  className={`text-2xl font-bold ${getScoreColor(scores.communication)}`}
+                >
+                  {scores.communication.toFixed(1)}
+                </p>
+              </div>
+              <div className="text-center space-y-2">
+                <p className="text-xs text-muted-foreground">Technical</p>
+                <p
+                  className={`text-2xl font-bold ${getScoreColor(scores.technical)}`}
+                >
+                  {scores.technical.toFixed(1)}
+                </p>
+              </div>
+              <div className="text-center space-y-2">
+                <p className="text-xs text-muted-foreground">Confidence</p>
+                <p
+                  className={`text-2xl font-bold ${getScoreColor(scores.confidence)}`}
+                >
+                  {scores.confidence.toFixed(1)}
+                </p>
+              </div>
             </div>
           </Card>
 
