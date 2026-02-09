@@ -5,9 +5,7 @@ export interface UseAudioPlaybackOptions {
   volume?: number;
 }
 
-export const useAudioPlayback = (
-  options: UseAudioPlaybackOptions = {}
-) => {
+export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
   const { autoplay = false, volume = 1 } = options;
   const audioRef = useRef<HTMLAudioElement>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
@@ -24,38 +22,41 @@ export const useAudioPlayback = (
     }
   }, []);
 
-  const playAudio = useCallback((url: string) => {
-    try {
-      setError(null);
-      setIsLoading(true);
+  const playAudio = useCallback(
+    (url: string) => {
+      try {
+        setError(null);
+        setIsLoading(true);
 
-      if (!audioRef.current) {
+        if (!audioRef.current) {
+          setIsLoading(false);
+          return;
+        }
+
+        audioRef.current.src = url;
+        audioRef.current.volume = volume;
+
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              setIsLoading(false);
+            })
+            .catch((err) => {
+              console.error("Playback failed:", err);
+              setError("Failed to play audio");
+              setIsLoading(false);
+            });
+        }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Playback error";
+        setError(message);
         setIsLoading(false);
-        return;
       }
-
-      audioRef.current.src = url;
-      audioRef.current.volume = volume;
-
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-            setIsLoading(false);
-          })
-          .catch((err) => {
-            console.error("Playback failed:", err);
-            setError("Failed to play audio");
-            setIsLoading(false);
-          });
-      }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Playback error";
-      setError(message);
-      setIsLoading(false);
-    }
-  }, [volume]);
+    },
+    [volume],
+  );
 
   const playTextToSpeech = useCallback(
     (text: string, language: string = "en-US") => {
@@ -104,7 +105,9 @@ export const useAudioPlayback = (
               console.error("Speech synthesis error:", event.error);
               setError(`Speech error: ${event.error}`);
             } else {
-              console.log("Speech synthesis was interrupted (expected behavior)");
+              console.log(
+                "Speech synthesis was interrupted (expected behavior)",
+              );
             }
             setIsPlaying(false);
             setIsLoading(false);
@@ -113,13 +116,14 @@ export const useAudioPlayback = (
           window.speechSynthesis.speak(utterance);
         }, 100);
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Speech synthesis error";
+        const message =
+          err instanceof Error ? err.message : "Speech synthesis error";
         console.error("Failed to play text-to-speech:", err);
         setError(message);
         setIsLoading(false);
       }
     },
-    [isSupported, volume]
+    [isSupported, volume],
   );
 
   const stopPlayback = useCallback(() => {

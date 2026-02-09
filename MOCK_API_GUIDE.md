@@ -30,24 +30,30 @@ Return Mock Response
 ### Configuration
 
 #### 1. Use Real API (Default)
+
 ```bash
 pnpm dev
 # Tries real API at /api, falls back to mock if unavailable
 ```
 
 #### 2. Force Real API Only
+
 Create `.env` file:
+
 ```env
 VITE_API_URL=http://localhost:3001
 ```
 
 Then start dev server:
+
 ```bash
 pnpm dev
 ```
 
 #### 3. Force Mock API
+
 Create `.env` file:
+
 ```env
 VITE_USE_MOCK_API=true
 ```
@@ -55,6 +61,7 @@ VITE_USE_MOCK_API=true
 This always uses mock data, useful for development.
 
 #### 4. Custom API Server
+
 ```env
 VITE_API_URL=https://api.example.com
 ```
@@ -64,6 +71,7 @@ VITE_API_URL=https://api.example.com
 When you start the app, you'll see messages in the browser console:
 
 ### Real API Mode (with fallback)
+
 ```
 ✓ InterviewAI API Client Initialized
   Mode: Real API
@@ -72,12 +80,14 @@ When you start the app, you'll see messages in the browser console:
 ```
 
 ### Mock API Mode (when activated)
+
 ```
 ✓ Mock Interview API Active
   Using mock data for development & testing
 ```
 
 ### When API Falls Back
+
 ```
 ⚠ Real API unavailable (/interview/start), falling back to mock API
 ```
@@ -87,12 +97,14 @@ When you start the app, you'll see messages in the browser console:
 The mock API provides:
 
 ### Interview Types
+
 - **IT / Software**: Technical questions about programming, design patterns, etc.
 - **Government**: Questions about public service, ethics, etc.
 - **Private**: General corporate interview questions
 - **Non-IT**: Role-specific non-technical questions
 
 ### Mock Behavior
+
 - Realistic network delays (500ms-1000ms)
 - Follow-up questions (~30% chance)
 - Dynamic scoring based on answer quality
@@ -100,12 +112,15 @@ The mock API provides:
 - Clean session cleanup
 
 ### Sample Scores
+
 Scores are calculated based on:
+
 - Answer length and detail
 - Presence of keywords (experience, learned, achieved, etc.)
 - Random variation for realism
 
 Example output:
+
 ```json
 {
   "overallScore": 7.8,
@@ -132,11 +147,13 @@ When you have a backend running:
 1. Start your backend server (e.g., on port 3001)
 
 2. Set environment variable:
+
    ```bash
    VITE_API_URL=http://localhost:3001 pnpm dev
    ```
 
    Or create `.env`:
+
    ```env
    VITE_API_URL=http://localhost:3001
    ```
@@ -146,6 +163,7 @@ When you have a backend running:
 ## Testing Scenarios
 
 ### Test Full Interview Flow
+
 ```bash
 # Uses mock API by default
 pnpm dev
@@ -160,6 +178,7 @@ pnpm dev
 7. Get evaluation results
 
 ### Test Real API Integration
+
 ```bash
 # Terminal 1: Start backend
 cd backend
@@ -170,6 +189,7 @@ VITE_API_URL=http://localhost:3001 pnpm dev
 ```
 
 ### Test Fallback Behavior
+
 ```bash
 # This will try real API and fall back to mock
 pnpm dev
@@ -179,6 +199,7 @@ pnpm dev
 ## Browser Console
 
 Always check the browser console (F12) to see:
+
 - Which API mode is active
 - When fallback occurs
 - Any errors or warnings
@@ -189,12 +210,14 @@ Always check the browser console (F12) to see:
 For production:
 
 1. **Set correct API endpoint:**
+
    ```bash
    VITE_API_URL=https://api.production.com pnpm build
    ```
 
 2. **Disable mock API fallback (optional):**
    Create a `.env.production` file if you want to prevent mock API usage:
+
    ```env
    VITE_API_URL=https://api.production.com
    # Mock API will still be fallback, but real API should never fail
@@ -206,19 +229,25 @@ For production:
 ## Troubleshooting
 
 ### "API request failed" with 404
+
 **Solution:** This is normal in development if backend isn't running. Mock API will activate automatically.
 
 ### Wrong interview type questions
+
 **Solution:** Restart dev server after changing `VITE_API_URL` environment variable.
 
 ### Mock API not activating
-**Solution:** 
+
+**Solution:**
+
 1. Check browser console for error messages
 2. Verify network request in DevTools Network tab
 3. Try setting `VITE_USE_MOCK_API=true` explicitly
 
 ### Real API not being used
+
 **Solution:**
+
 1. Verify backend is running at configured URL
 2. Check CORS settings on backend
 3. Look at Network tab in DevTools for actual requests

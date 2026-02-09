@@ -41,7 +41,8 @@ export const useCamera = (options: UseCameraOptions = {}) => {
       setIsActive(true);
       setIsLoading(false);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to start camera";
+      const message =
+        err instanceof Error ? err.message : "Failed to start camera";
       setError(message);
       setIsLoading(false);
       console.error("Camera error:", err);

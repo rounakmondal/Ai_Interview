@@ -34,38 +34,35 @@ const initialState: UseInterviewSessionState = {
 export const useInterviewSession = () => {
   const [state, setState] = useState<UseInterviewSessionState>(initialState);
 
-  const startInterview = useCallback(
-    async (config: StartInterviewRequest) => {
-      setState((prev) => ({ ...prev, isInitializing: true, error: null }));
+  const startInterview = useCallback(async (config: StartInterviewRequest) => {
+    setState((prev) => ({ ...prev, isInitializing: true, error: null }));
 
-      try {
-        const response = await apiClient.startInterview(config);
+    try {
+      const response = await apiClient.startInterview(config);
 
-        setState((prev) => ({
-          ...prev,
-          sessionId: response.sessionId,
-          currentQuestion: response.firstQuestion,
-          interviewType: config.interviewType,
-          language: config.language,
-          questionNumber: 1,
-          totalQuestions: 8,
-          isInitializing: false,
-        }));
+      setState((prev) => ({
+        ...prev,
+        sessionId: response.sessionId,
+        currentQuestion: response.firstQuestion,
+        interviewType: config.interviewType,
+        language: config.language,
+        questionNumber: 1,
+        totalQuestions: 8,
+        isInitializing: false,
+      }));
 
-        return response;
-      } catch (err) {
-        const error =
-          err instanceof Error ? err.message : "Failed to start interview";
-        setState((prev) => ({
-          ...prev,
-          isInitializing: false,
-          error,
-        }));
-        throw err;
-      }
-    },
-    []
-  );
+      return response;
+    } catch (err) {
+      const error =
+        err instanceof Error ? err.message : "Failed to start interview";
+      setState((prev) => ({
+        ...prev,
+        isInitializing: false,
+        error,
+      }));
+      throw err;
+    }
+  }, []);
 
   const submitAnswer = useCallback(
     async (userAnswer: string) => {
@@ -78,11 +75,10 @@ export const useInterviewSession = () => {
       setState((prev) => ({ ...prev, isLoadingQuestion: true, error: null }));
 
       try {
-        const response: NextQuestionResponse =
-          await apiClient.getNextQuestion({
-            sessionId: state.sessionId,
-            userAnswer,
-          });
+        const response: NextQuestionResponse = await apiClient.getNextQuestion({
+          sessionId: state.sessionId,
+          userAnswer,
+        });
 
         setState((prev) => ({
           ...prev,
@@ -105,7 +101,7 @@ export const useInterviewSession = () => {
         throw err;
       }
     },
-    [state.sessionId]
+    [state.sessionId],
   );
 
   const finishInterview = useCallback(async () => {
@@ -118,10 +114,11 @@ export const useInterviewSession = () => {
     setState((prev) => ({ ...prev, isFinishing: true, error: null }));
 
     try {
-      const response: FinishInterviewResponse =
-        await apiClient.finishInterview({
+      const response: FinishInterviewResponse = await apiClient.finishInterview(
+        {
           sessionId: state.sessionId,
-        });
+        },
+      );
 
       setState((prev) => ({
         ...prev,

@@ -52,7 +52,7 @@ export default function InterviewSetup() {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<InterviewType | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(
-    null
+    null,
   );
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [step, setStep] = useState<"type" | "language" | "cv">("type");
@@ -166,7 +166,9 @@ export default function InterviewSetup() {
               />
               <div
                 className={`flex-1 h-1 rounded-full transition-colors ${
-                  step === "language" || step === "cv" ? "bg-primary" : "bg-muted"
+                  step === "language" || step === "cv"
+                    ? "bg-primary"
+                    : "bg-muted"
                 }`}
               />
               <div
@@ -264,7 +266,8 @@ export default function InterviewSetup() {
                   Select Interview Language
                 </h2>
                 <p className="text-muted-foreground">
-                  Choose the language in which you want to conduct the interview.
+                  Choose the language in which you want to conduct the
+                  interview.
                 </p>
               </div>
 

@@ -82,7 +82,9 @@ const QuestionDisplay: FC<QuestionDisplayProps> = ({
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Volume2 className="w-4 h-4 text-muted-foreground" />
-              <p className="text-xs text-muted-foreground font-medium">Subtitles</p>
+              <p className="text-xs text-muted-foreground font-medium">
+                Subtitles
+              </p>
             </div>
             <p className="text-sm text-foreground leading-relaxed">
               {subtitleText}

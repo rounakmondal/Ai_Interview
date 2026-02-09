@@ -43,7 +43,9 @@ const AvatarPanel: FC<AvatarPanelProps> = ({
   };
 
   return (
-    <Card className={`bg-gradient-to-br ${getStateColor()} border-border/40 overflow-hidden transition-all duration-300`}>
+    <Card
+      className={`bg-gradient-to-br ${getStateColor()} border-border/40 overflow-hidden transition-all duration-300`}
+    >
       {/* Avatar Container */}
       <div className="aspect-square bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center relative overflow-hidden">
         {/* Animated avatar placeholder - can be replaced with real avatar/video */}

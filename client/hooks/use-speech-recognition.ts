@@ -39,7 +39,7 @@ export interface UseSpeechRecognitionOptions {
 }
 
 export const useSpeechRecognition = (
-  options: UseSpeechRecognitionOptions = {}
+  options: UseSpeechRecognitionOptions = {},
 ) => {
   const {
     language = "en-US",
@@ -145,7 +145,8 @@ export const useSpeechRecognition = (
       recognitionRef.current.start();
       resetSilenceTimer();
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to start listening";
+      const message =
+        err instanceof Error ? err.message : "Failed to start listening";
       setError(message);
       setIsListening(false);
     }

@@ -24,14 +24,17 @@ class ApiClient {
     if (typeof window !== "undefined") {
       console.log(
         `%c InterviewAI API Client Initialized`,
-        "color: #4f46e5; font-weight: bold; font-size: 12px;"
+        "color: #4f46e5; font-weight: bold; font-size: 12px;",
       );
-      console.log(`%c Mode: ${useMock ? "Mock API" : "Real API"}`, "color: #4f46e5;");
+      console.log(
+        `%c Mode: ${useMock ? "Mock API" : "Real API"}`,
+        "color: #4f46e5;",
+      );
       if (!useMock) {
         console.log(`%c Endpoint: ${baseUrl}`, "color: #4f46e5;");
         console.log(
           `%c Fallback: Using mock API if real API is unavailable`,
-          "color: #4f46e5; font-size: 11px;"
+          "color: #4f46e5; font-size: 11px;",
         );
       }
     }
@@ -39,7 +42,7 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<T> {
     // If using mock API or it's already been determined to be unavailable
     if (this.useMock || this.mockAvailable) {
@@ -65,7 +68,7 @@ class ApiClient {
     } catch (error) {
       console.warn(
         `Real API unavailable (${endpoint}), falling back to mock API`,
-        error
+        error,
       );
       // Fall back to mock API
       this.mockAvailable = true;
@@ -75,7 +78,7 @@ class ApiClient {
 
   private async requestMock<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<T> {
     try {
       const body = options.body ? JSON.parse(options.body as string) : {};
@@ -97,7 +100,7 @@ class ApiClient {
 
   // Start a new interview session
   async startInterview(
-    data: StartInterviewRequest
+    data: StartInterviewRequest,
   ): Promise<StartInterviewResponse> {
     return this.request<StartInterviewResponse>("/interview/start", {
       method: "POST",
@@ -107,7 +110,7 @@ class ApiClient {
 
   // Get next question based on user answer
   async getNextQuestion(
-    data: NextQuestionRequest
+    data: NextQuestionRequest,
   ): Promise<NextQuestionResponse> {
     return this.request<NextQuestionResponse>("/interview/next-question", {
       method: "POST",
@@ -117,7 +120,7 @@ class ApiClient {
 
   // Finish interview and get evaluation
   async finishInterview(
-    data: FinishInterviewRequest
+    data: FinishInterviewRequest,
   ): Promise<FinishInterviewResponse> {
     return this.request<FinishInterviewResponse>("/interview/finish", {
       method: "POST",

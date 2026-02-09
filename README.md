@@ -5,6 +5,7 @@ A full-featured, production-grade React application for conducting realistic AI-
 ## Features
 
 ✨ **Core Features:**
+
 - Real-time interview simulation with AI interviewer
 - Camera and microphone integration
 - Speech-to-text and text-to-speech support
@@ -15,6 +16,7 @@ A full-featured, production-grade React application for conducting realistic AI-
 - Fully responsive design
 
 🎯 **Interview Capabilities:**
+
 - Multiple interview types (Government, Private, IT, Non-IT)
 - Multi-language support (English, Hindi, Bengali)
 - Optional CV upload for personalized questions
@@ -23,6 +25,7 @@ A full-featured, production-grade React application for conducting realistic AI-
 - Automatic silence detection for voice input
 
 📊 **Evaluation Features:**
+
 - Overall performance score (0-10)
 - Communication score
 - Technical/Subject knowledge score
@@ -94,6 +97,7 @@ server/
 The frontend integrates with these API endpoints:
 
 #### 1. Start Interview
+
 ```http
 POST /api/interview/start
 Content-Type: application/json
@@ -112,6 +116,7 @@ Response:
 ```
 
 #### 2. Get Next Question
+
 ```http
 POST /api/interview/next-question
 Content-Type: application/json
@@ -131,6 +136,7 @@ Response:
 ```
 
 #### 3. Finish Interview
+
 ```http
 POST /api/interview/finish
 Content-Type: application/json
@@ -162,24 +168,25 @@ import { apiClient } from "@/lib/api-client";
 const response = await apiClient.startInterview({
   interviewType: "it",
   language: "english",
-  cvText: cvContent
+  cvText: cvContent,
 });
 
 // Get next question
 const nextQuestion = await apiClient.getNextQuestion({
   sessionId: response.sessionId,
-  userAnswer: userTranscript
+  userAnswer: userTranscript,
 });
 
 // Finish interview
 const evaluation = await apiClient.finishInterview({
-  sessionId: sessionId
+  sessionId: sessionId,
 });
 ```
 
 ## Hook Usage Guide
 
 ### useCamera
+
 Manages camera access and video streaming:
 
 ```typescript
@@ -190,15 +197,16 @@ const {
   error,
   startCamera,
   stopCamera,
-  toggleCamera
+  toggleCamera,
 } = useCamera({
   width: 1280,
   height: 720,
-  facingMode: "user"
+  facingMode: "user",
 });
 ```
 
 ### useSpeechRecognition
+
 Handles voice input and transcription:
 
 ```typescript
@@ -210,16 +218,17 @@ const {
   isSupported,
   startListening,
   stopListening,
-  resetTranscript
+  resetTranscript,
 } = useSpeechRecognition({
   language: "en-US",
   continuous: false,
   interimResults: true,
-  silenceTimeout: 5000
+  silenceTimeout: 5000,
 });
 ```
 
 ### useAudioPlayback
+
 Manages audio playback and text-to-speech:
 
 ```typescript
@@ -229,13 +238,14 @@ const {
   isLoading,
   error,
   isSupported,
-  playAudio,      // Play audio from URL
+  playAudio, // Play audio from URL
   playTextToSpeech, // Convert text to speech
-  stopPlayback
+  stopPlayback,
 } = useAudioPlayback({ volume: 0.8 });
 ```
 
 ### useInterviewSession
+
 High-level interview state management:
 
 ```typescript
@@ -245,34 +255,39 @@ const {
   submitAnswer,
   finishInterview,
   resetError,
-  reset
+  reset,
 } = useInterviewSession();
 ```
 
 ## Setup Instructions
 
 ### Prerequisites
+
 - Node.js 16+ and npm/pnpm
 - Modern browser with WebRTC support (Chrome, Firefox, Safari 14.1+, Edge)
 
 ### Installation
 
 1. **Install dependencies:**
+
 ```bash
 pnpm install
 ```
 
 2. **Set API URL (if needed):**
+
 ```bash
 export REACT_APP_API_URL=http://your-api-server:3000
 ```
 
 Or add to `.env`:
+
 ```env
 REACT_APP_API_URL=http://localhost:3000
 ```
 
 3. **Start development server:**
+
 ```bash
 pnpm dev
 ```
@@ -288,19 +303,20 @@ pnpm start
 
 ## Browser Support
 
-| Browser | Minimum Version | Features |
-|---------|-----------------|----------|
-| Chrome  | 25+            | Full support |
-| Firefox | 25+            | Full support |
-| Safari  | 14.1+          | Full support |
-| Edge    | 79+            | Full support |
-| Opera   | 15+            | Full support |
+| Browser | Minimum Version | Features     |
+| ------- | --------------- | ------------ |
+| Chrome  | 25+             | Full support |
+| Firefox | 25+             | Full support |
+| Safari  | 14.1+           | Full support |
+| Edge    | 79+             | Full support |
+| Opera   | 15+             | Full support |
 
 **Note:** Web Speech API and getUserMedia require HTTPS in production (except localhost).
 
 ## Feature Details
 
 ### Camera Integration
+
 - Uses WebRTC getUserMedia API
 - Requests permission before access
 - Clean resource management on exit
@@ -308,6 +324,7 @@ pnpm start
 - Mobile-friendly video feed
 
 ### Voice Features
+
 - **Speech-to-Text**: Uses Web Speech API
   - Automatic silence detection (3-5 seconds)
   - Real-time interim results display
@@ -321,14 +338,18 @@ pnpm start
   - Volume control
 
 ### Avatar System
+
 The avatar component supports multiple states:
+
 - **Idle**: Awaiting questions
 - **Speaking**: Questions being played
 - **Listening**: User is answering
 - **Thinking**: Processing user response
 
 ### Error Handling
+
 Comprehensive error handling for:
+
 - Network/API errors with user-friendly messages
 - Camera/microphone permission denials
 - Browser compatibility issues
@@ -337,6 +358,7 @@ Comprehensive error handling for:
 - Audio/speech synthesis failures
 
 ### Security Considerations
+
 - ✅ No API keys embedded in frontend code
 - ✅ HTTPS enforced in production
 - ✅ CORS properly configured
@@ -357,21 +379,25 @@ Comprehensive error handling for:
 ## Development Workflow
 
 ### Running Tests
+
 ```bash
 pnpm test
 ```
 
 ### Type Checking
+
 ```bash
 pnpm typecheck
 ```
 
 ### Linting (when configured)
+
 ```bash
 pnpm lint
 ```
 
 ### Building
+
 ```bash
 pnpm build
 ```
@@ -379,24 +405,28 @@ pnpm build
 ## Troubleshooting
 
 ### Camera/Microphone Not Working
+
 1. Check browser permissions settings
 2. Ensure using HTTPS in production
 3. Try a different browser
 4. Check `console` for specific error messages
 
 ### Voice Input Not Recognized
+
 1. Check microphone levels
 2. Try English language first
 3. Speak clearly and at normal volume
 4. Check browser compatibility (Chrome recommended)
 
 ### Audio Playback Issues
+
 1. Check system volume
 2. Verify browser audio permissions
 3. Clear browser cache
 4. Try different browser
 
 ### API Connection Errors
+
 1. Check API server is running
 2. Verify `REACT_APP_API_URL` environment variable
 3. Check CORS configuration on backend

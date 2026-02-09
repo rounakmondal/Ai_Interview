@@ -23,7 +23,7 @@ export default function EvaluationPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const [evaluation, setEvaluation] = useState<FinishInterviewResponse | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -165,9 +165,7 @@ export default function EvaluationPage() {
                     <p className="text-center text-sm font-semibold text-foreground">
                       {getScoreLabel(scores.overall)}
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      Performance
-                    </p>
+                    <p className="text-xs text-muted-foreground">Performance</p>
                   </div>
                 </div>
 
@@ -294,7 +292,9 @@ export default function EvaluationPage() {
                         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
                           {idx + 1}
                         </span>
-                        <p className="text-sm text-foreground/80">{suggestion}</p>
+                        <p className="text-sm text-foreground/80">
+                          {suggestion}
+                        </p>
                       </div>
                     </Card>
                   ))}
@@ -308,7 +308,9 @@ export default function EvaluationPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="text-center space-y-2">
                 <p className="text-xs text-muted-foreground">Overall</p>
-                <p className={`text-2xl font-bold ${getScoreColor(scores.overall)}`}>
+                <p
+                  className={`text-2xl font-bold ${getScoreColor(scores.overall)}`}
+                >
                   {scores.overall.toFixed(1)}
                 </p>
               </div>

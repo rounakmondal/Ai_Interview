@@ -46,8 +46,12 @@ export default function InterviewRoom() {
   // Media hooks
   const camera = useCamera();
   const speech = useSpeechRecognition({
-    language: state?.language === "hindi" ? "hi-IN" : 
-              state?.language === "bengali" ? "bn-IN" : "en-US",
+    language:
+      state?.language === "hindi"
+        ? "hi-IN"
+        : state?.language === "bengali"
+          ? "bn-IN"
+          : "en-US",
     silenceTimeout: 5000,
   });
   const audio = useAudioPlayback({ volume: 0.8 });
@@ -94,7 +98,8 @@ export default function InterviewRoom() {
         }
       }, 300);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to start interview";
+      const message =
+        err instanceof Error ? err.message : "Failed to start interview";
       setError(message);
       setAvatarState("idle");
     }
@@ -114,12 +119,10 @@ export default function InterviewRoom() {
         speech.stopListening();
         audio.stopPlayback();
 
-        const response: NextQuestionResponse = await apiClient.getNextQuestion(
-          {
-            sessionId,
-            userAnswer: transcript,
-          }
-        );
+        const response: NextQuestionResponse = await apiClient.getNextQuestion({
+          sessionId,
+          userAnswer: transcript,
+        });
 
         // Check if interview is complete
         if (
@@ -136,8 +139,7 @@ export default function InterviewRoom() {
         setCurrentQuestion(response.questionText);
         setIsFollowUp(response.isFollowUp || false);
         if (response.questionNumber) setQuestionNumber(response.questionNumber);
-        if (response.totalQuestions)
-          setTotalQuestions(response.totalQuestions);
+        if (response.totalQuestions) setTotalQuestions(response.totalQuestions);
 
         // Reset voice input
         speech.resetTranscript();
@@ -164,7 +166,7 @@ export default function InterviewRoom() {
         setIsSubmittingAnswer(false);
       }
     },
-    [sessionId, speech, audio]
+    [sessionId, speech, audio],
   );
 
   // Finish interview
@@ -184,7 +186,8 @@ export default function InterviewRoom() {
         },
       });
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to finish interview";
+      const message =
+        err instanceof Error ? err.message : "Failed to finish interview";
       setError(message);
       setAvatarState("idle");
     }
@@ -201,14 +204,15 @@ export default function InterviewRoom() {
       // Check speech recognition support
       if (!speech.isSupported) {
         setError(
-          "Voice input not supported. Please use text input or update your browser."
+          "Voice input not supported. Please use text input or update your browser.",
         );
       }
 
       setPermissionsGranted(true);
       await initializeInterview();
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to start interview";
+      const message =
+        err instanceof Error ? err.message : "Failed to start interview";
       setError(message);
     }
   }, [camera, speech.isSupported, initializeInterview]);
@@ -217,7 +221,7 @@ export default function InterviewRoom() {
   const handleEndInterview = async () => {
     if (
       window.confirm(
-        "Are you sure you want to end this interview? Your progress will be saved."
+        "Are you sure you want to end this interview? Your progress will be saved.",
       )
     ) {
       audio.stopPlayback();
@@ -373,8 +377,8 @@ export default function InterviewRoom() {
             {/* Info */}
             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4">
               <p className="text-xs text-blue-900 dark:text-blue-300">
-                💡 Make sure you're in a quiet, well-lit room for the best interview
-                experience.
+                💡 Make sure you're in a quiet, well-lit room for the best
+                interview experience.
               </p>
             </div>
           </div>

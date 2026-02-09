@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Zap,
-  Brain,
-  BarChart3,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { Zap, Brain, BarChart3, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function LandingPage() {
   return (
@@ -65,9 +59,9 @@ export default function LandingPage() {
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-lg">
-                  Practice realistic mock interviews with our professional female
-                  AI interviewer. Get instant feedback and improve your interview
-                  skills in minutes.
+                  Practice realistic mock interviews with our professional
+                  female AI interviewer. Get instant feedback and improve your
+                  interview skills in minutes.
                 </p>
               </div>
 
@@ -152,7 +146,10 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 sm:py-32 border-t border-border/40">
+      <section
+        id="features"
+        className="py-20 sm:py-32 border-t border-border/40"
+      >
         <div className="container space-y-12 sm:space-y-16">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">

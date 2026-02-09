@@ -58,7 +58,9 @@ const CameraPanel: FC<CameraPanelProps> = ({
                 <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-100" />
                 <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-200" />
               </div>
-              <p className="text-sm text-muted-foreground">Initializing camera...</p>
+              <p className="text-sm text-muted-foreground">
+                Initializing camera...
+              </p>
             </div>
           </div>
         )}

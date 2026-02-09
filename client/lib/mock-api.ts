@@ -85,17 +85,17 @@ function generateSessionId(): string {
 if (typeof window !== "undefined") {
   console.log(
     "%c Mock Interview API Active",
-    "color: #f97316; font-weight: bold; font-size: 12px;"
+    "color: #f97316; font-weight: bold; font-size: 12px;",
   );
   console.log(
     "%c Using mock data for development & testing",
-    "color: #f97316; font-size: 11px;"
+    "color: #f97316; font-size: 11px;",
   );
 }
 
 export const mockApi = {
   async startInterview(
-    data: StartInterviewRequest
+    data: StartInterviewRequest,
   ): Promise<StartInterviewResponse> {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -124,7 +124,7 @@ export const mockApi = {
   },
 
   async getNextQuestion(
-    data: NextQuestionRequest
+    data: NextQuestionRequest,
   ): Promise<NextQuestionResponse> {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 800));
@@ -141,7 +141,7 @@ export const mockApi = {
     const answerLength = data.userAnswer.length;
     const hasKeywords =
       /experience|implemented|learned|achieved|problem|solution/.test(
-        data.userAnswer.toLowerCase()
+        data.userAnswer.toLowerCase(),
       );
 
     session.scores.communication += Math.min(answerLength / 50, 1) * 2;
@@ -184,7 +184,7 @@ export const mockApi = {
   },
 
   async finishInterview(
-    data: FinishInterviewRequest
+    data: FinishInterviewRequest,
   ): Promise<FinishInterviewResponse> {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -197,17 +197,18 @@ export const mockApi = {
     // Calculate final scores
     const communicationScore = Math.min(
       (session.scores.communication / session.answers.length) * 10,
-      10
+      10,
     );
     const technicalScore = Math.min(
       (session.scores.technical / session.answers.length) * 10,
-      10
+      10,
     );
     const confidenceScore = Math.min(
       (session.scores.confidence / session.answers.length) * 10,
-      10
+      10,
     );
-    const overallScore = (communicationScore + technicalScore + confidenceScore) / 3;
+    const overallScore =
+      (communicationScore + technicalScore + confidenceScore) / 3;
 
     // Clean up session
     sessions.delete(data.sessionId);

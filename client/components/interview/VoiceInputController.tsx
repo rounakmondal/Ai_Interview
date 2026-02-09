@@ -1,13 +1,7 @@
 import { FC, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Mic,
-  MicOff,
-  Send,
-  AlertCircle,
-  MessageSquare,
-} from "lucide-react";
+import { Mic, MicOff, Send, AlertCircle, MessageSquare } from "lucide-react";
 
 interface VoiceInputControllerProps {
   isListening: boolean;
