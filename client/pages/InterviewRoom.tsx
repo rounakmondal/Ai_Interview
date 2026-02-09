@@ -1,45 +1,242 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Mic,
-  MicOff,
-  Phone,
-  MessageSquare,
-  MoreVertical,
-} from "lucide-react";
-import { useState } from "react";
+import { Phone, AlertCircle, CheckCircle2 } from "lucide-react";
+import { useCamera } from "@/hooks/use-camera";
+import { useSpeechRecognition } from "@/hooks/use-speech-recognition";
+import { useAudioPlayback } from "@/hooks/use-audio-playback";
+import { apiClient } from "@/lib/api-client";
+import AvatarPanel, { AvatarState } from "@/components/interview/AvatarPanel";
+import CameraPanel from "@/components/interview/CameraPanel";
+import VoiceInputController from "@/components/interview/VoiceInputController";
+import QuestionDisplay from "@/components/interview/QuestionDisplay";
+import ProgressIndicator from "@/components/interview/ProgressIndicator";
+import type {
+  NextQuestionResponse,
+  InterviewType,
+  Language,
+} from "@shared/api";
 
 interface LocationState {
-  interviewType: string;
-  language: string;
-  cvUploaded: boolean;
+  interviewType: InterviewType;
+  language: Language;
+  cvText?: string;
 }
+
+type InterviewPhase = "setup" | "active" | "complete";
 
 export default function InterviewRoom() {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state as LocationState | undefined;
-  const [isMuted, setIsMuted] = useState(false);
-  const [userAnswer, setUserAnswer] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [isThinking, setIsThinking] = useState(false);
 
-  const totalQuestions = 8;
+  // Interview state
+  const [phase, setPhase] = useState<InterviewPhase>("setup");
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [totalQuestions, setTotalQuestions] = useState(8);
+  const [isFollowUp, setIsFollowUp] = useState(false);
+  const [avatarState, setAvatarState] = useState<AvatarState>("idle");
+  const [isSubmittingAnswer, setIsSubmittingAnswer] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [permissionsGranted, setPermissionsGranted] = useState(false);
 
-  const handleSubmitAnswer = () => {
-    setIsThinking(true);
-    setUserAnswer("");
-    // Simulate AI thinking
-    setTimeout(() => {
-      setIsThinking(false);
-      setCurrentQuestion(currentQuestion + 1);
-    }, 2000);
+  // Media hooks
+  const camera = useCamera();
+  const speech = useSpeechRecognition({
+    language: state?.language === "hindi" ? "hi-IN" : 
+              state?.language === "bengali" ? "bn-IN" : "en-US",
+    silenceTimeout: 5000,
+  });
+  const audio = useAudioPlayback({ volume: 0.8 });
+
+  // Validate setup
+  useEffect(() => {
+    if (!state) {
+      navigate("/setup", { replace: true });
+    }
+  }, [state, navigate]);
+
+  // Start interview session
+  const initializeInterview = useCallback(async () => {
+    if (!state) return;
+
+    try {
+      setError(null);
+      setAvatarState("thinking");
+
+      const response = await apiClient.startInterview({
+        interviewType: state.interviewType,
+        language: state.language,
+        cvText: state.cvText,
+      });
+
+      setSessionId(response.sessionId);
+      setCurrentQuestion(response.firstQuestion);
+      setQuestionNumber(1);
+      setPhase("active");
+      setAvatarState("idle");
+
+      // Play first question using text-to-speech
+      setTimeout(() => {
+        audio.playTextToSpeech(response.firstQuestion, getLanguageCode());
+        setAvatarState("speaking");
+      }, 500);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to start interview";
+      setError(message);
+      setAvatarState("idle");
+    }
+  }, [state, audio]);
+
+  // Get next question after answer submission
+  const handleAnswerSubmit = useCallback(
+    async (transcript: string) => {
+      if (!sessionId || !transcript.trim()) return;
+
+      try {
+        setError(null);
+        setIsSubmittingAnswer(true);
+        setAvatarState("thinking");
+
+        const response: NextQuestionResponse = await apiClient.getNextQuestion(
+          {
+            sessionId,
+            userAnswer: transcript,
+          }
+        );
+
+        // Check if interview is complete
+        if (
+          response.questionNumber &&
+          response.totalQuestions &&
+          response.questionNumber > response.totalQuestions
+        ) {
+          // Interview complete
+          await finishInterview();
+          return;
+        }
+
+        // Update state
+        setCurrentQuestion(response.questionText);
+        setIsFollowUp(response.isFollowUp || false);
+        if (response.questionNumber) setQuestionNumber(response.questionNumber);
+        if (response.totalQuestions)
+          setTotalQuestions(response.totalQuestions);
+
+        // Reset voice input
+        speech.resetTranscript();
+
+        // Play next question
+        setAvatarState("idle");
+        setTimeout(() => {
+          audio.playTextToSpeech(response.questionText, getLanguageCode());
+          setAvatarState("speaking");
+        }, 500);
+
+        setIsSubmittingAnswer(false);
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Failed to get next question";
+        setError(message);
+        setAvatarState("idle");
+        setIsSubmittingAnswer(false);
+      }
+    },
+    [sessionId, speech, audio]
+  );
+
+  // Finish interview
+  const finishInterview = useCallback(async () => {
+    if (!sessionId) return;
+
+    try {
+      setAvatarState("thinking");
+      const evaluation = await apiClient.finishInterview({ sessionId });
+
+      // Navigate to evaluation page with results
+      navigate("/evaluation", {
+        state: {
+          sessionId,
+          evaluation,
+          completedAt: new Date().toISOString(),
+        },
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to finish interview";
+      setError(message);
+      setAvatarState("idle");
+    }
+  }, [sessionId, navigate]);
+
+  // Request permissions and start interview
+  const handleStartInterview = useCallback(async () => {
+    try {
+      setError(null);
+
+      // Request camera
+      await camera.startCamera();
+
+      // Check speech recognition support
+      if (!speech.isSupported) {
+        setError(
+          "Voice input not supported. Please use text input or update your browser."
+        );
+      }
+
+      setPermissionsGranted(true);
+      await initializeInterview();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to start interview";
+      setError(message);
+    }
+  }, [camera, speech.isSupported, initializeInterview]);
+
+  // Handle end interview
+  const handleEndInterview = async () => {
+    if (
+      window.confirm(
+        "Are you sure you want to end this interview? Your progress will be saved."
+      )
+    ) {
+      audio.stopPlayback();
+      speech.stopListening();
+      await finishInterview();
+    }
   };
 
-  const handleEndInterview = () => {
-    // Navigate to evaluation page
-    window.location.href = "/evaluation";
+  // Update avatar state based on what's happening
+  useEffect(() => {
+    if (speech.isListening) {
+      setAvatarState("listening");
+    } else if (audio.isPlaying) {
+      setAvatarState("speaking");
+    } else if (isSubmittingAnswer) {
+      setAvatarState("thinking");
+    }
+  }, [speech.isListening, audio.isPlaying, isSubmittingAnswer]);
+
+  const getLanguageCode = (): string => {
+    switch (state?.language) {
+      case "hindi":
+        return "hi-IN";
+      case "bengali":
+        return "bn-IN";
+      default:
+        return "en-US";
+    }
   };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      camera.stopCamera();
+      speech.stopListening();
+      audio.stopPlayback();
+    };
+  }, [camera, speech, audio]);
 
   if (!state) {
     return (
@@ -57,263 +254,229 @@ export default function InterviewRoom() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
-      {/* Header */}
-      <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-        <div className="container h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-              AI
-            </div>
-            <div>
+  // Setup phase - request permissions
+  if (phase === "setup" && !permissionsGranted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container h-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+                AI
+              </div>
               <h1 className="font-bold text-foreground hidden sm:block">
-                Interview Room
+                Interview Setup
               </h1>
-              <p className="text-xs text-muted-foreground">
-                {state.interviewType.charAt(0).toUpperCase() +
-                  state.interviewType.slice(1)}{" "}
-                • {state.language}
+            </div>
+            <Link to="/setup">
+              <Button variant="outline" size="sm">
+                Cancel
+              </Button>
+            </Link>
+          </div>
+        </header>
+
+        <main className="container py-12">
+          <div className="max-w-2xl mx-auto space-y-8">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold">Prepare for Interview</h2>
+              <p className="text-muted-foreground">
+                We need access to your camera and microphone for the interview.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              {/* Camera setup */}
+              <Card className="p-6 border-border/40 space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M23 7l-7 5 7 5V7z" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-lg">Camera</h3>
+                <p className="text-sm text-muted-foreground">
+                  We'll access your camera so the interviewer can see you.
+                </p>
+              </Card>
+
+              {/* Microphone setup */}
+              <Card className="p-6 border-border/40 space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M12 1a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                    <line x1="8" y1="23" x2="16" y2="23" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-lg">Microphone</h3>
+                <p className="text-sm text-muted-foreground">
+                  We'll record your voice for the interview.
+                </p>
+              </Card>
+            </div>
+
+            {/* Error display */}
+            {error && (
+              <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
+                <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-red-900 dark:text-red-300">
+                    Setup Error
+                  </p>
+                  <p className="text-xs text-red-800 dark:text-red-400 mt-1">
+                    {error}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Start button */}
+            <Button
+              onClick={handleStartInterview}
+              disabled={camera.isLoading}
+              className="w-full gradient-primary text-base font-semibold py-6"
+            >
+              {camera.isLoading ? "Initializing..." : "Continue to Interview"}
+            </Button>
+
+            {/* Info */}
+            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4">
+              <p className="text-xs text-blue-900 dark:text-blue-300">
+                💡 Make sure you're in a quiet, well-lit room for the best interview
+                experience.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-              <MoreVertical className="w-5 h-5 text-muted-foreground" />
-            </button>
-          </div>
-        </div>
-      </header>
+        </main>
+      </div>
+    );
+  }
 
-      {/* Main Interview Room */}
-      <main className="container py-8">
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left: Avatar and Video */}
-          <div className="lg:col-span-1 order-2 lg:order-1">
-            <Card className="bg-gradient-to-br from-card to-card/50 border-border/40 overflow-hidden">
-              {/* Avatar Container */}
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center relative overflow-hidden">
-                {/* Animated avatar placeholder */}
-                <div className="relative">
-                  <div className="w-40 h-40 rounded-full bg-gradient-primary animate-pulse-subtle flex items-center justify-center text-white text-center">
-                    <svg
-                      className="w-24 h-24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </div>
-
-                  {/* Speaking indicator */}
-                  {!isThinking && (
-                    <div className="absolute bottom-4 right-4 flex gap-1">
-                      <div className="w-2 h-6 bg-primary/60 rounded-full animate-pulse" />
-                      <div className="w-2 h-6 bg-secondary/60 rounded-full animate-pulse delay-100" />
-                      <div className="w-2 h-6 bg-accent/60 rounded-full animate-pulse delay-200" />
-                    </div>
-                  )}
-                </div>
-
-                {/* Status badge */}
-                <div className="absolute top-4 right-4 px-3 py-1 bg-green-500/20 border border-green-500/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
-                  Live
-                </div>
+  // Active interview phase
+  if (phase === "active" && sessionId) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container h-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+                AI
               </div>
+              <div className="hidden sm:block">
+                <h1 className="font-bold text-foreground">Interview Room</h1>
+                <p className="text-xs text-muted-foreground">
+                  {state.interviewType.charAt(0).toUpperCase() +
+                    state.interviewType.slice(1)}{" "}
+                  • {state.language}
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={handleEndInterview}
+              variant="outline"
+              className="border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 gap-2"
+            >
+              <Phone className="w-5 h-5" />
+              <span className="hidden sm:inline">End Interview</span>
+            </Button>
+          </div>
+        </header>
 
-              {/* Avatar Info */}
-              <div className="p-6 space-y-3">
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">
-                    AI Interviewer
-                  </p>
-                  <p className="font-bold text-lg">Priya Sharma</p>
-                  <p className="text-sm text-muted-foreground">
-                    Senior Interview Coach
-                  </p>
-                </div>
+        <main className="container py-8">
+          <div className="grid lg:grid-cols-3 gap-6">
+            {/* Left: Avatar and Camera */}
+            <div className="lg:col-span-1 order-2 lg:order-1 space-y-6">
+              {/* Avatar Panel */}
+              <AvatarPanel state={avatarState} />
 
-                {/* Status Text */}
-                <div className="pt-3 border-t border-border/40">
-                  {isThinking ? (
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-100" />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-200" />
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Thinking...
-                      </p>
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">
-                      Listening to your response...
+              {/* Camera Panel */}
+              <CameraPanel
+                videoRef={camera.videoRef}
+                isActive={camera.isActive}
+                isLoading={camera.isLoading}
+                error={camera.error}
+                onStartCamera={camera.startCamera}
+                onStopCamera={camera.stopCamera}
+              />
+            </div>
+
+            {/* Right: Question and Input */}
+            <div className="lg:col-span-2 order-1 lg:order-2 space-y-6">
+              {/* Progress */}
+              <ProgressIndicator
+                currentQuestion={questionNumber}
+                totalQuestions={totalQuestions}
+                isFollowUp={isFollowUp}
+              />
+
+              {/* Question Display */}
+              <QuestionDisplay
+                questionText={currentQuestion}
+                isFollowUp={isFollowUp}
+                questionNumber={questionNumber}
+                totalQuestions={totalQuestions}
+                subtitleText={currentQuestion}
+                isPlaying={audio.isPlaying}
+              />
+
+              {/* Error display */}
+              {error && (
+                <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-red-900 dark:text-red-300">
+                      Interview Error
                     </p>
-                  )}
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Right: Question and Answer Area */}
-          <div className="lg:col-span-2 order-1 lg:order-2 space-y-6">
-            {/* Progress */}
-            <Card className="p-4 border-border/40">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-bold">Interview Progress</h3>
-                <span className="text-sm font-semibold text-primary">
-                  Question {Math.min(currentQuestion, totalQuestions)} of{" "}
-                  {totalQuestions}
-                </span>
-              </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-primary rounded-full transition-all duration-500"
-                  style={{
-                    width: `${(Math.min(currentQuestion, totalQuestions) / totalQuestions) * 100}%`,
-                  }}
-                />
-              </div>
-            </Card>
-
-            {/* Current Question */}
-            <Card className="p-6 border-border/40 space-y-4">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  Current Question
-                </p>
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-                  <p className="text-lg font-semibold text-foreground leading-relaxed">
-                    {isThinking
-                      ? "Processing your answer..."
-                      : currentQuestion <= totalQuestions
-                        ? "Tell me about a challenging project you've worked on and how you overcame the obstacles."
-                        : "Thank you for completing the interview!"}
-                  </p>
-                </div>
-              </div>
-
-              {/* Subtitles */}
-              <div className="bg-muted/50 rounded-lg p-4">
-                <p className="text-xs text-muted-foreground mb-2">Subtitles</p>
-                <p className="text-sm text-foreground">
-                  {isThinking
-                    ? "AI is analyzing your response and preparing the next question..."
-                    : currentQuestion <= totalQuestions
-                      ? "Tell me about a challenging project you've worked on and how you overcame the obstacles."
-                      : "All questions have been completed. Moving to evaluation..."}
-                </p>
-              </div>
-            </Card>
-
-            {/* Answer Input */}
-            {currentQuestion <= totalQuestions && !isThinking && (
-              <Card className="p-6 border-border/40 space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Your Response
-                  </p>
-                  <textarea
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    placeholder="Type your answer here... (or click the microphone icon to speak)"
-                    className="w-full p-4 rounded-lg border border-border/40 bg-muted/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none"
-                    rows={6}
-                  />
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button
-                    variant="outline"
-                    className="border-border/40 text-base flex-1 sm:flex-none"
-                    onClick={() => setIsMuted(!isMuted)}
-                  >
-                    {isMuted ? (
-                      <>
-                        <MicOff className="w-5 h-5 mr-2" />
-                        Microphone Off
-                      </>
-                    ) : (
-                      <>
-                        <Mic className="w-5 h-5 mr-2" />
-                        Microphone On
-                      </>
-                    )}
-                  </Button>
-
-                  <div className="flex gap-3 flex-1 sm:flex-none">
-                    <Button
-                      variant="outline"
-                      className="border-border/40 text-base flex-1"
-                      onClick={handleEndInterview}
-                    >
-                      <Phone className="w-5 h-5 mr-2" />
-                      End Interview
-                    </Button>
-                    <Button
-                      onClick={handleSubmitAnswer}
-                      disabled={!userAnswer.trim()}
-                      className="gradient-primary text-base flex-1"
-                    >
-                      <MessageSquare className="w-5 h-5 mr-2" />
-                      Submit Answer
-                    </Button>
+                    <p className="text-xs text-red-800 dark:text-red-400 mt-1">
+                      {error}
+                    </p>
                   </div>
                 </div>
-              </Card>
-            )}
+              )}
 
-            {/* Thinking State */}
-            {isThinking && (
-              <Card className="p-6 border-border/40 text-center space-y-4">
-                <div className="flex justify-center gap-2">
-                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-                  <div className="w-3 h-3 bg-secondary rounded-full animate-pulse delay-100" />
-                  <div className="w-3 h-3 bg-accent rounded-full animate-pulse delay-200" />
-                </div>
-                <p className="text-muted-foreground">
-                  Processing your response and generating the next question...
-                </p>
-              </Card>
-            )}
-
-            {/* Interview Complete */}
-            {currentQuestion > totalQuestions && (
-              <Card className="p-6 border-border/40 text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                  <svg
-                    className="w-8 h-8 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold">Interview Complete!</h3>
-                <p className="text-muted-foreground">
-                  Great job! Your interview has been recorded and will be evaluated
-                  shortly.
-                </p>
-                <Button
-                  onClick={handleEndInterview}
-                  className="gradient-primary text-base w-full"
-                >
-                  View Your Evaluation
-                </Button>
-              </Card>
-            )}
+              {/* Voice Input Controller */}
+              <VoiceInputController
+                isListening={speech.isListening}
+                transcript={speech.transcript}
+                interimTranscript={speech.interimTranscript}
+                error={speech.error}
+                isSupported={speech.isSupported}
+                onStartListening={speech.startListening}
+                onStopListening={speech.stopListening}
+                onResetTranscript={speech.resetTranscript}
+                onSubmit={handleAnswerSubmit}
+                isSubmitting={isSubmittingAnswer}
+              />
+            </div>
           </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Fallback
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <div className="flex justify-center gap-1">
+          <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
+          <div className="w-3 h-3 bg-secondary rounded-full animate-pulse delay-100" />
+          <div className="w-3 h-3 bg-accent rounded-full animate-pulse delay-200" />
         </div>
-      </main>
+        <p className="text-muted-foreground">Loading interview...</p>
+      </div>
     </div>
   );
 }
