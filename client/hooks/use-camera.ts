@@ -23,6 +23,12 @@ export const useCamera = (options: UseCameraOptions = {}) => {
         throw new Error("Camera is not supported in this browser");
       }
 
+      // Stop existing stream if any
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           width: { ideal: width },
@@ -36,6 +42,16 @@ export const useCamera = (options: UseCameraOptions = {}) => {
 
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        
+        // Wait for video to be ready before playing
+        try {
+          await videoRef.current.play();
+        } catch (playErr) {
+          // AbortError is expected if play is interrupted - ignore it
+          if (playErr instanceof Error && playErr.name !== 'AbortError') {
+            console.warn("Video play warning:", playErr);
+          }
+        }
       }
 
       setIsActive(true);

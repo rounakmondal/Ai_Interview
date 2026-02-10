@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Card } from "@/components/ui/card";
-import { Volume2 } from "lucide-react";
 
 interface QuestionDisplayProps {
   questionText: string;
@@ -53,45 +52,7 @@ const QuestionDisplay: FC<QuestionDisplayProps> = ({
             </div>
           )}
         </div>
-
-        {/* Question metadata */}
-        {(questionNumber || totalQuestions) && (
-          <div className="flex items-center justify-between pt-2 border-t border-border/40">
-            <p className="text-xs text-muted-foreground">
-              {questionNumber && totalQuestions && (
-                <>
-                  Question {questionNumber} of {totalQuestions}
-                </>
-              )}
-            </p>
-            <div className="w-32 h-1.5 bg-muted rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-primary rounded-full transition-all duration-300"
-                style={{
-                  width: `${questionNumber && totalQuestions ? (questionNumber / totalQuestions) * 100 : 0}%`,
-                }}
-              />
-            </div>
-          </div>
-        )}
       </Card>
-
-      {/* Subtitles */}
-      {subtitleText && (
-        <Card className="p-4 border-border/40 bg-muted/50">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <Volume2 className="w-4 h-4 text-muted-foreground" />
-              <p className="text-xs text-muted-foreground font-medium">
-                Subtitles
-              </p>
-            </div>
-            <p className="text-sm text-foreground leading-relaxed">
-              {subtitleText}
-            </p>
-          </div>
-        </Card>
-      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -12,441 +12,334 @@ import {
   ArrowLeft,
   AlertCircle,
   Loader2,
+  X,
+  CheckCircle,
 } from "lucide-react";
 import type { InterviewType, Language } from "@shared/api";
 
 const interviewTypes = [
-  {
-    id: "government",
-    label: "Government",
-    description: "Civil services, banking, and government job interviews",
-    icon: Briefcase,
-  },
-  {
-    id: "private",
-    label: "Private Sector",
-    description: "Corporate and private company interviews",
-    icon: Briefcase,
-  },
-  {
-    id: "it",
-    label: "IT / Software",
-    description: "Technical interviews for software engineers",
-    icon: Code,
-  },
-  {
-    id: "non-it",
-    label: "Non-IT",
-    description: "Interviews for non-technical roles",
-    icon: Briefcase,
-  },
+  { id: "government", label: "Government", icon: Briefcase },
+  { id: "private", label: "Private Sector", icon: Briefcase },
+  { id: "it", label: "IT / Software", icon: Code },
+  { id: "non-it", label: "Non-IT", icon: Briefcase },
 ];
 
 const languages = [
   { id: "english", label: "English" },
-  { id: "hindi", label: "Hindi (हिंदी)" },
-  { id: "bengali", label: "Bengali (বাংলা)" },
+  { id: "hindi", label: "Hindi" },
+  { id: "bengali", label: "Bengali" },
 ];
 
 export default function InterviewSetup() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [step, setStep] = useState<"type" | "language" | "cv" | "timer">("type");
   const [selectedType, setSelectedType] = useState<InterviewType | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(
-    null,
-  );
+  const [selectedLanguage, setSelectedLanguage] =
+    useState<Language | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [step, setStep] = useState<"type" | "language" | "cv">("type");
-  const [isLoading, setIsLoading] = useState(false);
+  const [timerDuration, setTimerDuration] = useState(30);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleTypeSelect = (type: string) => {
-    setSelectedType(type as InterviewType);
+  const acceptedFileTypes = [".pdf", ".doc", ".docx"];
+  const maxFileSize = 5 * 1024 * 1024; // 5MB
+
+  const validateFile = (file: File): string | null => {
+    const extension = "." + file.name.split(".").pop()?.toLowerCase();
+    if (!acceptedFileTypes.includes(extension)) {
+      return "Please upload a PDF or Word document (.pdf, .doc, .docx)";
+    }
+    if (file.size > maxFileSize) {
+      return "File size must be less than 5MB";
+    }
+    return null;
   };
 
-  const handleLanguageSelect = (lang: string) => {
-    setSelectedLanguage(lang as Language);
-  };
+  const handleFileSelect = useCallback((file: File) => {
+    const validationError = validateFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+    setError(null);
+    setCvFile(file);
+  }, []);
 
-  const handleCVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        setError("File size must be less than 10MB");
-        return;
-      }
-      setCvFile(file);
-      setError(null);
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleFileSelect(files[0]);
+    }
+  }, [handleFileSelect]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleFileSelect(files[0]);
     }
   };
 
-  const readCVText = async (file: File): Promise<string | undefined> => {
-    try {
-      return await file.text();
-    } catch (err) {
-      console.warn("Could not read CV file as text:", err);
-      return undefined;
+  const handleBrowseClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const removeFile = () => {
+    setCvFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
-  const handleStartInterview = async () => {
+  const startInterview = () => {
     if (!selectedType || !selectedLanguage) {
-      setError("Please complete all required steps");
+      setError("Please complete all steps");
       return;
     }
 
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      // Read CV if provided
-      let cvText: string | undefined;
-      if (cvFile) {
-        cvText = await readCVText(cvFile);
-      }
-
-      // Navigate to interview room with setup state
-      // The interview will actually start when the user grants permissions
-      navigate("/interview", {
-        state: {
-          interviewType: selectedType,
-          language: selectedLanguage,
-          cvText: cvText,
-        },
-      });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to proceed";
-      setError(message);
-      setIsLoading(false);
-    }
+    setLoading(true);
+    navigate("/interview", {
+      state: {
+        interviewType: selectedType,
+        language: selectedLanguage,
+        timerDuration,
+      },
+    });
   };
-
-  const isReadyToStart = selectedType && selectedLanguage;
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container h-16 flex items-center justify-between">
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="hidden sm:inline">Back</span>
+      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
+        <div className="max-w-5xl mx-auto px-4 h-14 sm:h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 text-sm sm:text-base">
+            <ArrowLeft size={18} /> <span className="hidden sm:inline">Back</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-              AI
-            </div>
-            <span className="font-bold text-foreground hidden sm:inline">
-              InterviewAI
-            </span>
-          </div>
-          <div className="w-10" /> {/* Spacer for alignment */}
+          <strong className="text-sm sm:text-base">InterviewAI</strong>
+          <div className="w-12" />
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container py-12 sm:py-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Progress Steps */}
-          <div className="mb-12 sm:mb-16">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-              Setup Your Interview
-            </h1>
+      {/* Main */}
+      <main className="max-w-5xl mx-auto px-4 py-6 sm:py-10">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Setup Your Interview</h1>
 
-            {/* Progress bar */}
-            <div className="flex gap-2">
-              <div
-                className={`flex-1 h-1 rounded-full transition-colors ${
-                  step === "type" || step === "language" || step === "cv"
-                    ? "bg-primary"
-                    : "bg-muted"
-                }`}
-              />
-              <div
-                className={`flex-1 h-1 rounded-full transition-colors ${
-                  step === "language" || step === "cv"
-                    ? "bg-primary"
-                    : "bg-muted"
-                }`}
-              />
-              <div
-                className={`flex-1 h-1 rounded-full transition-colors ${
-                  step === "cv" ? "bg-primary" : "bg-muted"
-                }`}
-              />
-            </div>
+        {error && (
+          <div className="mb-4 sm:mb-6 flex gap-2 text-red-600 text-sm sm:text-base">
+            <AlertCircle className="w-5 h-5 flex-shrink-0" /> {error}
           </div>
+        )}
 
-          {/* Error display */}
-          {error && (
-            <div className="mb-8 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-medium text-red-900 dark:text-red-300">
-                  Error
-                </p>
-                <p className="text-xs text-red-800 dark:text-red-400 mt-1">
-                  {error}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Step 1: Interview Type */}
-          {step === "type" && (
-            <div className="space-y-8 animate-slide-up">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">
-                  What type of interview?
-                </h2>
-                <p className="text-muted-foreground">
-                  Select the interview category that matches your target job or
-                  exam.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {interviewTypes.map((type) => {
-                  const Icon = type.icon;
-                  const isSelected = selectedType === type.id;
-                  return (
-                    <Card
-                      key={type.id}
-                      className={`p-6 cursor-pointer border-2 transition-all ${
-                        isSelected
-                          ? "border-primary bg-primary/5"
-                          : "border-border/40 hover:border-primary/50 hover:bg-primary/2"
-                      }`}
-                      onClick={() => handleTypeSelect(type.id)}
-                    >
-                      <div className="space-y-4">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-                          <Icon className="w-6 h-6 text-primary" />
-                        </div>
-                        <div className="space-y-1">
-                          <h3 className="font-bold text-lg">{type.label}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            {type.description}
-                          </p>
-                        </div>
-                        {isSelected && (
-                          <div className="flex justify-end pt-2">
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
-                              ✓
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              <div className="flex justify-end pt-4">
-                <Button
-                  onClick={() => setStep("language")}
-                  disabled={!selectedType}
-                  size="lg"
-                  className="gradient-primary text-base font-semibold"
+        {/* STEP 1 */}
+        {step === "type" && (
+          <>
+            <p className="text-sm text-muted-foreground mb-4">Select interview type</p>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+              {interviewTypes.map((t) => (
+                <Card
+                  key={t.id}
+                  className={`p-4 sm:p-6 cursor-pointer transition-all active:scale-[0.98] ${
+                    selectedType === t.id
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "hover:border-primary/50"
+                  }`}
+                  onClick={() => setSelectedType(t.id as InterviewType)}
                 >
-                  Continue
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
-              </div>
+                  <t.icon className="mb-2 sm:mb-3 text-primary w-5 h-5 sm:w-6 sm:h-6" />
+                  <h3 className="font-semibold text-sm sm:text-base">{t.label}</h3>
+                </Card>
+              ))}
             </div>
-          )}
 
-          {/* Step 2: Language Selection */}
-          {step === "language" && (
-            <div className="space-y-8 animate-slide-up">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">
-                  Select Interview Language
-                </h2>
-                <p className="text-muted-foreground">
-                  Choose the language in which you want to conduct the
-                  interview.
-                </p>
-              </div>
+            <Button
+              disabled={!selectedType}
+              onClick={() => setStep("language")}
+              className="w-full sm:w-auto"
+            >
+              Continue <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </>
+        )}
 
-              <div className="grid sm:grid-cols-3 gap-4">
-                {languages.map((lang) => {
-                  const isSelected = selectedLanguage === lang.id;
-                  return (
-                    <Card
-                      key={lang.id}
-                      className={`p-6 cursor-pointer border-2 transition-all ${
-                        isSelected
-                          ? "border-primary bg-primary/5"
-                          : "border-border/40 hover:border-primary/50"
-                      }`}
-                      onClick={() => handleLanguageSelect(lang.id)}
-                    >
-                      <div className="space-y-4">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-                          <Globe className="w-6 h-6 text-primary" />
-                        </div>
-                        <h3 className="font-bold text-lg">{lang.label}</h3>
-                        {isSelected && (
-                          <div className="flex justify-end pt-2">
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
-                              ✓
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              <div className="flex justify-between pt-4">
-                <Button
-                  onClick={() => setStep("type")}
-                  variant="outline"
-                  size="lg"
-                  className="text-base font-semibold"
+        {/* STEP 2 */}
+        {step === "language" && (
+          <>
+            <p className="text-sm text-muted-foreground mb-4">Select interview language</p>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+              {languages.map((l) => (
+                <Card
+                  key={l.id}
+                  className={`p-4 sm:p-6 cursor-pointer text-center transition-all active:scale-[0.98] ${
+                    selectedLanguage === l.id
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "hover:border-primary/50"
+                  }`}
+                  onClick={() => setSelectedLanguage(l.id as Language)}
                 >
-                  <ChevronRight className="w-5 h-5 mr-2 rotate-180" />
-                  Back
-                </Button>
-                <Button
-                  onClick={() => setStep("cv")}
-                  disabled={!selectedLanguage}
-                  size="lg"
-                  className="gradient-primary text-base font-semibold"
-                >
-                  Continue
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
-              </div>
+                  <Globe className="mb-2 sm:mb-3 text-primary w-5 h-5 sm:w-6 sm:h-6 mx-auto" />
+                  <span className="text-sm sm:text-base font-medium">{l.label}</span>
+                </Card>
+              ))}
             </div>
-          )}
 
-          {/* Step 3: CV Upload (Optional) */}
-          {step === "cv" && (
-            <div className="space-y-8 animate-slide-up">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">Upload Your CV</h2>
-                <p className="text-muted-foreground">
-                  Optional: Upload your CV to help the AI interviewer ask
-                  relevant questions about your experience.
-                </p>
-              </div>
+            <div className="flex gap-3 sm:justify-between">
+              <Button variant="outline" onClick={() => setStep("type")} className="flex-1 sm:flex-none">
+                Back
+              </Button>
+              <Button
+                disabled={!selectedLanguage}
+                onClick={() => setStep("cv")}
+                className="flex-1 sm:flex-none"
+              >
+                Continue
+              </Button>
+            </div>
+          </>
+        )}
 
-              <Card className="border-2 border-dashed border-border/40 p-8 sm:p-12">
-                <div className="space-y-4 text-center">
-                  {!cvFile ? (
-                    <>
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10 mx-auto">
-                        <FileText className="w-8 h-8 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg mb-1">
-                          Drag your CV here
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          or click to browse (PDF, DOC up to 10MB)
-                        </p>
-                      </div>
-                      <label className="cursor-pointer">
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept=".pdf,.doc,.docx,.txt"
-                          onChange={handleCVUpload}
-                        />
-                        <Button
-                          variant="outline"
-                          size="lg"
-                          className="text-base font-semibold"
-                          asChild
-                        >
-                          <span>
-                            <Upload className="w-5 h-5 mr-2" />
-                            Choose File
-                          </span>
-                        </Button>
-                      </label>
-                    </>
-                  ) : (
-                    <>
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10 mx-auto">
-                        <FileText className="w-8 h-8 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg mb-1">
-                          {cvFile.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          Ready to upload
-                        </p>
-                      </div>
-                      <label className="cursor-pointer">
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept=".pdf,.doc,.docx,.txt"
-                          onChange={handleCVUpload}
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-primary text-base font-semibold"
-                          asChild
-                        >
-                          <span>Change File</span>
-                        </Button>
-                      </label>
-                    </>
-                  )}
+        {/* STEP 3 */}
+        {step === "cv" && (
+          <>
+            <p className="text-sm text-muted-foreground mb-4">Upload your CV (optional)</p>
+            <Card
+              className={`p-6 sm:p-8 mb-6 sm:mb-8 border-2 border-dashed transition-all duration-200 ${
+                isDragging
+                  ? "border-primary bg-primary/10 scale-[1.02]"
+                  : cvFile
+                  ? "border-green-500 bg-green-50 dark:bg-green-950/20"
+                  : "border-muted-foreground/30 hover:border-primary/50"
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <input
+                type="file"
+                ref={fileInputRef}
+                hidden
+                accept=".pdf,.doc,.docx"
+                onChange={handleInputChange}
+              />
+
+              {cvFile ? (
+                <div className="text-center">
+                  <CheckCircle className="mx-auto mb-4 text-green-500 w-12 h-12" />
+                  <p className="font-semibold text-lg mb-2">File uploaded successfully!</p>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                    <FileText className="w-4 h-4" />
+                    <span>{cvFile.name}</span>
+                    <span className="text-xs">({(cvFile.size / 1024).toFixed(1)} KB)</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={removeFile}
+                    className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                  >
+                    <X className="w-4 h-4 mr-1" /> Remove
+                  </Button>
                 </div>
-              </Card>
-
-              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4 flex gap-3">
-                <div className="text-blue-600 dark:text-blue-400 flex-shrink-0">
-                  ℹ️
+              ) : (
+                <div className="text-center">
+                  <div
+                    className={`mx-auto mb-4 w-16 h-16 rounded-full flex items-center justify-center transition-colors ${
+                      isDragging ? "bg-primary/20" : "bg-primary/10"
+                    }`}
+                  >
+                    <Upload
+                      className={`w-8 h-8 transition-colors ${
+                        isDragging ? "text-primary" : "text-primary/70"
+                      }`}
+                    />
+                  </div>
+                  <p className="font-semibold text-lg mb-2">
+                    {isDragging ? "Drop your CV here" : "Upload your CV"}
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Drag and drop your resume here, or click to browse
+                  </p>
+                  <Button variant="outline" onClick={handleBrowseClick}>
+                    <Upload className="mr-2 w-4 h-4" /> Browse Files
+                  </Button>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    Supported formats: PDF, DOC, DOCX (Max 5MB)
+                  </p>
                 </div>
-                <p className="text-sm text-blue-900 dark:text-blue-300">
-                  Your CV is optional and helps personalize the interview
-                  questions. You can skip this step if you prefer.
-                </p>
-              </div>
+              )}
+            </Card>
 
-              <div className="flex justify-between pt-4">
-                <Button
-                  onClick={() => setStep("language")}
-                  variant="outline"
-                  size="lg"
-                  className="text-base font-semibold"
-                >
-                  <ChevronRight className="w-5 h-5 mr-2 rotate-180" />
-                  Back
-                </Button>
-                <Button
-                  onClick={handleStartInterview}
-                  disabled={!isReadyToStart || isLoading}
-                  size="lg"
-                  className="gradient-primary text-base font-semibold px-8 gap-2"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Preparing...
-                    </>
-                  ) : (
-                    <>
-                      Start Interview
-                      <ChevronRight className="w-5 h-5" />
-                    </>
-                  )}
-                </Button>
-              </div>
+            <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6 text-center">
+              This step is optional. You can skip it and continue without uploading a CV.
+            </p>
+
+            <div className="flex gap-3 sm:justify-between">
+              <Button variant="outline" onClick={() => setStep("language")} className="flex-1 sm:flex-none">
+                Back
+              </Button>
+              <Button onClick={() => setStep("timer")} className="flex-1 sm:flex-none">
+                {cvFile ? "Continue" : "Skip & Continue"}
+              </Button>
             </div>
-          )}
-        </div>
+          </>
+        )}
+
+        {/* STEP 4 */}
+        {step === "timer" && (
+          <>
+            <p className="text-sm text-muted-foreground mb-4">Set interview duration</p>
+            <Card className="p-4 sm:p-6 mb-6 sm:mb-8">
+              <p className="mb-3 sm:mb-4 font-semibold text-center text-lg sm:text-xl">
+                {timerDuration} minutes
+              </p>
+              <input
+                type="range"
+                min={5}
+                max={120}
+                step={5}
+                value={timerDuration}
+                onChange={(e) => setTimerDuration(+e.target.value)}
+                className="w-full accent-primary"
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <span>5 min</span>
+                <span>120 min</span>
+              </div>
+            </Card>
+
+            <div className="flex gap-3 sm:justify-between">
+              <Button variant="outline" onClick={() => setStep("cv")} className="flex-1 sm:flex-none">
+                Back
+              </Button>
+              <Button onClick={startInterview} disabled={loading} className="flex-1 sm:flex-none">
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2 w-4 h-4" /> Starting...
+                  </>
+                ) : (
+                  "Start Interview"
+                )}
+              </Button>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );

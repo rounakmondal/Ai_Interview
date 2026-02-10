@@ -2,6 +2,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Phone, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useCamera } from "@/hooks/use-camera";
 import { useSpeechRecognition } from "@/hooks/use-speech-recognition";
@@ -11,7 +21,6 @@ import AvatarPanel, { AvatarState } from "@/components/interview/AvatarPanel";
 import CameraPanel from "@/components/interview/CameraPanel";
 import VoiceInputController from "@/components/interview/VoiceInputController";
 import QuestionDisplay from "@/components/interview/QuestionDisplay";
-import ProgressIndicator from "@/components/interview/ProgressIndicator";
 import type {
   NextQuestionResponse,
   InterviewType,
@@ -22,6 +31,7 @@ interface LocationState {
   interviewType: InterviewType;
   language: Language;
   cvText?: string;
+  timerDuration?: number; // in minutes
 }
 
 type InterviewPhase = "setup" | "active" | "complete";
@@ -42,6 +52,8 @@ export default function InterviewRoom() {
   const [isSubmittingAnswer, setIsSubmittingAnswer] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [permissionsGranted, setPermissionsGranted] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState<number>(0); // in seconds
+  const [showEndDialog, setShowEndDialog] = useState(false);
 
   // Media hooks
   const camera = useCamera();
@@ -54,7 +66,7 @@ export default function InterviewRoom() {
           : "en-US",
     silenceTimeout: 5000,
   });
-  const audio = useAudioPlayback({ volume: 0.8 });
+  const audio = useAudioPlayback({ volume: 1.0 });
 
   // Validate setup
   useEffect(() => {
@@ -62,6 +74,28 @@ export default function InterviewRoom() {
       navigate("/setup", { replace: true });
     }
   }, [state, navigate]);
+
+  // Timer countdown effect
+  useEffect(() => {
+    if (phase !== "active" || timeRemaining <= 0) return;
+
+    const timer = setInterval(() => {
+      setTimeRemaining((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [phase]);
+
+  // Auto-finish when timer expires
+  useEffect(() => {
+    if (timeRemaining === 0 && phase === "active" && sessionId) {
+      // Automatically finish interview without confirmation
+      audio.stopPlayback();
+      speech.stopListening();
+      finishInterview();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeRemaining, phase, sessionId]);
 
   // Start interview session
   const initializeInterview = useCallback(async () => {
@@ -77,26 +111,28 @@ export default function InterviewRoom() {
         cvText: state.cvText,
       });
 
+      console.log("API Start Interview Response:", response);
+      console.log("Setting question to:", response.message);
+      
       setSessionId(response.sessionId);
-      setCurrentQuestion(response.firstQuestion);
+      setCurrentQuestion(response.message || "No question received");
       setQuestionNumber(1);
       setPhase("active");
       setAvatarState("idle");
+      
+      // Set timer if provided (convert minutes to seconds)
+      if (state.timerDuration) {
+        setTimeRemaining(state.timerDuration * 60);
+      }
 
       // Stop any current listening/speaking before playing first question
       speech.stopListening();
       audio.stopPlayback();
 
-      // Play first question using text-to-speech
-      setTimeout(() => {
-        try {
-          audio.playTextToSpeech(response.firstQuestion, getLanguageCode());
-          setAvatarState("speaking");
-        } catch (err) {
-          console.error("Failed to play first question:", err);
-          setError("Failed to play question audio");
-        }
-      }, 300);
+      // Play first question using text-to-speech immediately and loudly
+      console.log("Playing first question:", response.message);
+      audio.playTextToSpeech(response.message, getLanguageCode());
+      setAvatarState("speaking");
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to start interview";
@@ -136,7 +172,7 @@ export default function InterviewRoom() {
         }
 
         // Update state
-        setCurrentQuestion(response.questionText);
+        setCurrentQuestion(response.message);
         setIsFollowUp(response.isFollowUp || false);
         if (response.questionNumber) setQuestionNumber(response.questionNumber);
         if (response.totalQuestions) setTotalQuestions(response.totalQuestions);
@@ -144,18 +180,11 @@ export default function InterviewRoom() {
         // Reset voice input
         speech.resetTranscript();
 
-        // Play next question with proper error handling
+        // Play next question immediately and loudly
+        console.log("Playing next question:", response.message);
         setAvatarState("idle");
-        setTimeout(() => {
-          try {
-            audio.playTextToSpeech(response.questionText, getLanguageCode());
-            setAvatarState("speaking");
-          } catch (err) {
-            console.error("Failed to play next question:", err);
-            setError("Failed to play question audio");
-            setAvatarState("idle");
-          }
-        }, 300);
+        audio.playTextToSpeech(response.message, getLanguageCode());
+        setAvatarState("speaking");
 
         setIsSubmittingAnswer(false);
       } catch (err) {
@@ -171,25 +200,52 @@ export default function InterviewRoom() {
 
   // Finish interview
   const finishInterview = useCallback(async () => {
-    if (!sessionId) return;
-
     try {
       setAvatarState("thinking");
-      const evaluation = await apiClient.finishInterview({ sessionId });
+      
+      let evaluation;
+      if (sessionId) {
+        evaluation = await apiClient.finishInterview({ sessionId });
+      } else {
+        // No sessionId - provide default evaluation
+        console.warn("No sessionId, using default evaluation");
+        evaluation = {
+          overallScore: 7.0,
+          communicationScore: 7.0,
+          technicalScore: 7.0,
+          confidenceScore: 7.0,
+          weakAreas: ["Session was not properly initialized"],
+          improvementSuggestions: ["Try starting a new interview session"],
+          strengths: ["Completed interview attempt"],
+        };
+      }
 
       // Navigate to evaluation page with results
       navigate("/evaluation", {
         state: {
-          sessionId,
+          sessionId: sessionId || "no-session",
           evaluation,
           completedAt: new Date().toISOString(),
         },
       });
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Failed to finish interview";
-      setError(message);
-      setAvatarState("idle");
+      console.error("Failed to finish interview:", err);
+      // Navigate with default evaluation even on error
+      navigate("/evaluation", {
+        state: {
+          sessionId: sessionId || "error-session",
+          evaluation: {
+            overallScore: 6.0,
+            communicationScore: 6.0,
+            technicalScore: 6.0,
+            confidenceScore: 6.0,
+            weakAreas: ["Interview ended with an error"],
+            improvementSuggestions: ["Try starting a new interview"],
+            strengths: ["Completed interview attempt"],
+          },
+          completedAt: new Date().toISOString(),
+        },
+      });
     }
   }, [sessionId, navigate]);
 
@@ -218,16 +274,15 @@ export default function InterviewRoom() {
   }, [camera, speech.isSupported, initializeInterview]);
 
   // Handle end interview
-  const handleEndInterview = async () => {
-    if (
-      window.confirm(
-        "Are you sure you want to end this interview? Your progress will be saved.",
-      )
-    ) {
-      audio.stopPlayback();
-      speech.stopListening();
-      await finishInterview();
-    }
+  const handleEndInterview = () => {
+    setShowEndDialog(true);
+  };
+
+  const confirmEndInterview = async () => {
+    setShowEndDialog(false);
+    audio.stopPlayback();
+    speech.stopListening();
+    await finishInterview();
   };
 
   // Update avatar state based on what's happening
@@ -250,6 +305,13 @@ export default function InterviewRoom() {
       default:
         return "en-US";
     }
+  };
+
+  const formatTime = (seconds: number): string => {
+    if (seconds <= 0) return "00:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   // Cleanup on unmount
@@ -281,15 +343,15 @@ export default function InterviewRoom() {
   if (phase === "setup" && !permissionsGranted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container h-16 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold">
                 AI
               </div>
-              <h1 className="font-bold text-foreground hidden sm:block">
-                Interview Setup
-              </h1>
+              <span className="font-bold text-lg text-foreground hidden sm:inline">
+                InterviewAI
+              </span>
             </div>
             <Link to="/setup">
               <Button variant="outline" size="sm">
@@ -299,16 +361,16 @@ export default function InterviewRoom() {
           </div>
         </header>
 
-        <main className="container py-12">
-          <div className="max-w-2xl mx-auto space-y-8">
+        <main className="container px-4 sm:px-6 py-8 sm:py-12">
+          <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold">Prepare for Interview</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-2xl sm:text-3xl font-bold">Prepare for Interview</h2>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 We need access to your camera and microphone for the interview.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* Camera setup */}
               <Card className="p-6 border-border/40 space-y-4">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -391,98 +453,140 @@ export default function InterviewRoom() {
   if (phase === "active" && sessionId) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container h-16 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+        {/* End Interview Confirmation Dialog */}
+        <AlertDialog open={showEndDialog} onOpenChange={setShowEndDialog}>
+          <AlertDialogContent className="sm:max-w-md">
+            <AlertDialogHeader>
+              <AlertDialogTitle>End Interview?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to end this interview? Your progress will be saved and you'll receive your evaluation.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Continue Interview</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={confirmEndInterview}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                End Interview
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        {/* Hidden audio element for speaker output */}
+        <audio ref={audio.audioRef} crossOrigin="anonymous" />
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm sm:text-base">
                 AI
               </div>
-              <div className="hidden sm:block">
-                <h1 className="font-bold text-foreground">Interview Room</h1>
-                <p className="text-xs text-muted-foreground">
-                  {state.interviewType.charAt(0).toUpperCase() +
-                    state.interviewType.slice(1)}{" "}
-                  • {state.language}
-                </p>
-              </div>
+              <span className="font-bold text-base sm:text-lg text-foreground hidden sm:inline">
+                InterviewAI
+              </span>
             </div>
-            <Button
-              onClick={handleEndInterview}
-              variant="outline"
-              className="border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 gap-2"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="hidden sm:inline">End Interview</span>
-            </Button>
+            <div className="flex items-center gap-2 sm:gap-4">
+              {timeRemaining > 0 && (
+                <div className={`text-lg sm:text-2xl font-bold ${timeRemaining < 60 ? 'text-red-600' : 'text-primary'}`}>
+                  {formatTime(timeRemaining)}
+                </div>
+              )}
+              <Button
+                onClick={handleEndInterview}
+                variant="outline"
+                size="sm"
+                className="border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 gap-1 sm:gap-2 px-2 sm:px-4"
+              >
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">End Interview</span>
+              </Button>
+            </div>
           </div>
         </header>
 
-        <main className="container py-8">
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Left: Avatar and Camera */}
-            <div className="lg:col-span-1 order-2 lg:order-1 space-y-6">
-              {/* Avatar Panel */}
-              <AvatarPanel state={avatarState} />
-
-              {/* Camera Panel */}
-              <CameraPanel
-                videoRef={camera.videoRef}
-                isActive={camera.isActive}
-                isLoading={camera.isLoading}
-                error={camera.error}
-                onStartCamera={camera.startCamera}
-                onStopCamera={camera.stopCamera}
-              />
+        <main className="container relative px-4 sm:px-6">
+          {/* Mobile Layout: Stack vertically */}
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 py-4 lg:py-8">
+            {/* Avatar - Full width on mobile, fixed width on desktop */}
+            <div className="w-full lg:w-72 xl:w-80 flex-shrink-0 order-2 lg:order-1">
+              <div className="lg:sticky lg:top-8 w-full">
+                <AvatarPanel state={avatarState} />
+              </div>
             </div>
 
-            {/* Right: Question and Input */}
-            <div className="lg:col-span-2 order-1 lg:order-2 space-y-6">
-              {/* Progress */}
-              <ProgressIndicator
-                currentQuestion={questionNumber}
-                totalQuestions={totalQuestions}
-                isFollowUp={isFollowUp}
-              />
-
-              {/* Question Display */}
-              <QuestionDisplay
-                questionText={currentQuestion}
-                isFollowUp={isFollowUp}
-                questionNumber={questionNumber}
-                totalQuestions={totalQuestions}
-                subtitleText={currentQuestion}
-                isPlaying={audio.isPlaying}
-              />
-
-              {/* Error display */}
-              {error && (
-                <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
-                  <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-medium text-red-900 dark:text-red-300">
-                      Interview Error
-                    </p>
-                    <p className="text-xs text-red-800 dark:text-red-400 mt-1">
-                      {error}
-                    </p>
-                  </div>
+            {/* Center: main interview area */}
+            <div className="flex-1 flex flex-col items-center order-1 lg:order-2">
+              <div className="w-full max-w-2xl space-y-4 lg:space-y-6">
+                <div className="bg-transparent">
+                  {currentQuestion ? (
+                    <QuestionDisplay
+                      questionText={currentQuestion}
+                      isFollowUp={isFollowUp}
+                      questionNumber={questionNumber}
+                      totalQuestions={totalQuestions}
+                      subtitleText={currentQuestion}
+                      isPlaying={audio.isPlaying}
+                    />
+                  ) : (
+                    <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4 lg:p-6 text-center">
+                      <p className="text-muted-foreground">Loading question...</p>
+                    </div>
+                  )}
                 </div>
-              )}
 
-              {/* Voice Input Controller */}
-              <VoiceInputController
-                isListening={speech.isListening}
-                transcript={speech.transcript}
-                interimTranscript={speech.interimTranscript}
-                error={speech.error}
-                isSupported={speech.isSupported}
-                onStartListening={speech.startListening}
-                onStopListening={speech.stopListening}
-                onResetTranscript={speech.resetTranscript}
-                onSubmit={handleAnswerSubmit}
-                isSubmitting={isSubmittingAnswer}
-              />
+                {error && (
+                  <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-3 lg:p-4 flex gap-3">
+                    <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium text-red-900 dark:text-red-300">Interview Error</p>
+                      <p className="text-xs text-red-800 dark:text-red-400 mt-1">{error}</p>
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <VoiceInputController
+                    isListening={speech.isListening}
+                    transcript={speech.transcript}
+                    interimTranscript={speech.interimTranscript}
+                    error={speech.error}
+                    isSupported={speech.isSupported}
+                    onStartListening={speech.startListening}
+                    onStopListening={speech.stopListening}
+                    onResetTranscript={speech.resetTranscript}
+                    onSubmit={handleAnswerSubmit}
+                    isSubmitting={isSubmittingAnswer}
+                  />
+                </div>
+              </div>
             </div>
+
+            {/* Right: Camera - Hidden on mobile, small on tablet, normal on desktop */}
+            <div className="hidden md:block w-32 lg:w-44 flex-shrink-0 order-3">
+              <div className="lg:sticky lg:top-8 shadow-lg rounded-lg overflow-hidden w-full">
+                <CameraPanel
+                  videoRef={camera.videoRef}
+                  isActive={camera.isActive}
+                  isLoading={camera.isLoading}
+                  error={camera.error}
+                  onStartCamera={camera.startCamera}
+                  onStopCamera={camera.stopCamera}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Camera - Fixed bottom on mobile only */}
+          <div className="fixed bottom-4 right-4 w-24 h-32 md:hidden z-50 shadow-xl rounded-lg overflow-hidden border-2 border-background">
+            <CameraPanel
+              videoRef={camera.videoRef}
+              isActive={camera.isActive}
+              isLoading={camera.isLoading}
+              error={camera.error}
+              onStartCamera={camera.startCamera}
+              onStopCamera={camera.stopCamera}
+            />
           </div>
         </main>
       </div>

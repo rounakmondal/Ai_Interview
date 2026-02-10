@@ -46,40 +46,47 @@ const AvatarPanel: FC<AvatarPanelProps> = ({
     <Card
       className={`bg-gradient-to-br ${getStateColor()} border-border/40 overflow-hidden transition-all duration-300`}
     >
-      {/* Avatar Container */}
-      <div className="aspect-square bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center relative overflow-hidden">
-        {/* Animated avatar placeholder - can be replaced with real avatar/video */}
-        <div className="relative">
-          {/* Avatar circle */}
-          <div className="w-40 h-40 rounded-full bg-gradient-primary animate-pulse-subtle flex items-center justify-center text-white text-center shadow-lg">
-            <svg
-              className="w-24 h-24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          </div>
+      {/* Avatar Container - image fills the box */}
+      <div className="w-full h-56 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center relative overflow-hidden">
+        {/* Local Gemini-generated avatar image with lip-sync overlay */}
+        <div className="relative flex items-center justify-center">
+          {/* Compute avatar src (local PNG) with fallback to public path; onError falls back to DiceBear */}
+          <img
+            src="/Gemini_Generated_Image_9cu79a9cu79a9cu7.png"
+            alt={avatarName}
+            className="w-full h-full object-cover shadow-lg bg-white"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).onerror = null;
+              (e.currentTarget as HTMLImageElement).src = `https://api.dicebear.com/8.x/avataaars/svg?seed=${encodeURIComponent(
+                avatarName,
+              )}&size=512`;
+            }}
+          />
 
-          {/* State indicator - Speaking animation */}
+          {/* Lip-sync styling (only animate when speaking) */}
+          <style>{`
+            @keyframes lipsync {
+              0% { transform: scaleY(0.6); }
+              50% { transform: scaleY(1.05); }
+              100% { transform: scaleY(0.7); }
+            }
+            .lipsync-anim { animation: lipsync 360ms infinite ease-in-out; transform-origin: center; }
+          `}</style>
+
+          {/* Mouth overlay - visible and animated only when speaking */}
           {state === "speaking" && (
-            <div className="absolute bottom-4 right-4 flex gap-1">
-              <div className="w-2 h-6 bg-primary/80 rounded-full animate-pulse" />
-              <div className="w-2 h-6 bg-secondary/80 rounded-full animate-pulse delay-100" />
-              <div className="w-2 h-6 bg-accent/80 rounded-full animate-pulse delay-200" />
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+              <div className="w-24 h-3 bg-red-600 rounded-full lipsync-anim" style={{ opacity: 0.95 }} />
             </div>
           )}
 
-          {/* State indicator - Listening animation */}
+          {/* State indicators (compact) */}
           {state === "listening" && (
             <div className="absolute bottom-4 right-4 flex gap-2">
               <div className="w-3 h-3 rounded-full border-2 border-accent animate-ping" />
             </div>
           )}
 
-          {/* State indicator - Thinking animation */}
           {state === "thinking" && (
             <div className="absolute bottom-4 right-4 flex gap-1">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />

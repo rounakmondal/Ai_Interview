@@ -60,6 +60,56 @@ const mockFollowUps = [
   "What was the outcome?",
 ];
 
+// Answer analysis helpers
+function analyzeAnswer(answer: string, questionType: string) {
+  const wordCount = answer.split(/\s+/).filter(Boolean).length;
+  const sentenceCount = answer.split(/[.!?]+/).filter(Boolean).length;
+  const lowerAnswer = answer.toLowerCase();
+  
+  // Check for STAR method components
+  const hasSituation = /situation|background|context|when|was working|at my|in my/.test(lowerAnswer);
+  const hasTask = /task|goal|objective|needed to|responsible for|had to/.test(lowerAnswer);
+  const hasAction = /action|implemented|created|developed|built|designed|led|managed|organized/.test(lowerAnswer);
+  const hasResult = /result|outcome|achieved|improved|increased|reduced|saved|delivered|completed/.test(lowerAnswer);
+  const starScore = [hasSituation, hasTask, hasAction, hasResult].filter(Boolean).length;
+  
+  // Technical keywords by type
+  const technicalKeywords: Record<string, RegExp> = {
+    it: /api|database|code|system|algorithm|architecture|testing|deployment|cloud|agile|scrum|git|docker|kubernetes|react|node|python|java|sql|rest|microservice|ci\/cd|devops/,
+    government: /policy|regulation|compliance|stakeholder|public|citizen|government|procedure|protocol|legal|administrative|bureaucratic/,
+    private: /strategy|market|revenue|client|customer|profit|growth|competitive|stakeholder|kpi|roi|metrics/,
+    "non-it": /process|workflow|efficiency|quality|customer|service|management|organization|coordination|communication/,
+  };
+  
+  const techPattern = technicalKeywords[questionType] || technicalKeywords.it;
+  const techMatches = (lowerAnswer.match(techPattern) || []).length;
+  
+  // Communication indicators
+  const hasTransitions = /firstly|secondly|additionally|moreover|furthermore|finally|in conclusion|as a result/.test(lowerAnswer);
+  const hasExamples = /for example|for instance|such as|specifically|in particular/.test(lowerAnswer);
+  const isWellStructured = sentenceCount >= 2 && wordCount >= 30 && wordCount <= 200;
+  
+  // Confidence indicators
+  const hasHedging = /maybe|perhaps|i think|i guess|not sure|probably|might/.test(lowerAnswer);
+  const hasAssertive = /i am|i have|i can|i will|i did|i achieved|definitely|certainly|absolutely/.test(lowerAnswer);
+  
+  return {
+    wordCount,
+    sentenceCount,
+    starScore,
+    techMatches,
+    hasTransitions,
+    hasExamples,
+    isWellStructured,
+    hasHedging,
+    hasAssertive,
+    hasSituation,
+    hasTask,
+    hasAction,
+    hasResult,
+  };
+}
+
 // Simple session storage
 const sessions = new Map<
   string,
@@ -69,6 +119,7 @@ const sessions = new Map<
     questionIndex: number;
     questions: string[];
     answers: string[];
+    answerAnalyses: ReturnType<typeof analyzeAnswer>[];
     scores: {
       communication: number;
       technical: number;
@@ -110,6 +161,7 @@ export const mockApi = {
       questionIndex: 0,
       questions: shuffled,
       answers: [],
+      answerAnalyses: [],
       scores: {
         communication: 0,
         technical: 0,
@@ -119,7 +171,8 @@ export const mockApi = {
 
     return {
       sessionId,
-      firstQuestion: shuffled[0],
+      message: shuffled[0],
+      success: true,
     };
   },
 
@@ -134,19 +187,34 @@ export const mockApi = {
       throw new Error("Session not found");
     }
 
-    // Store answer
+    // Store answer and analyze it
     session.answers.push(data.userAnswer);
+    const analysis = analyzeAnswer(data.userAnswer, session.type);
+    session.answerAnalyses.push(analysis);
 
-    // Mock scoring based on answer length and keywords
-    const answerLength = data.userAnswer.length;
-    const hasKeywords =
-      /experience|implemented|learned|achieved|problem|solution/.test(
-        data.userAnswer.toLowerCase(),
-      );
+    // Score based on actual answer quality
+    // Communication: structure, examples, transitions, appropriate length
+    let commScore = 0;
+    if (analysis.isWellStructured) commScore += 2;
+    if (analysis.hasExamples) commScore += 1.5;
+    if (analysis.hasTransitions) commScore += 1;
+    if (analysis.wordCount >= 50 && analysis.wordCount <= 150) commScore += 1.5;
+    else if (analysis.wordCount >= 30) commScore += 0.5;
+    session.scores.communication += commScore;
 
-    session.scores.communication += Math.min(answerLength / 50, 1) * 2;
-    session.scores.technical += hasKeywords ? Math.random() * 2 : Math.random();
-    session.scores.confidence += Math.random() * 2;
+    // Technical: STAR method, technical keywords, depth
+    let techScore = 0;
+    techScore += analysis.starScore * 1.5; // Up to 6 points for STAR
+    techScore += Math.min(analysis.techMatches * 0.5, 2); // Up to 2 points for keywords
+    session.scores.technical += techScore;
+
+    // Confidence: assertive language, lack of hedging
+    let confScore = 0;
+    if (analysis.hasAssertive) confScore += 3;
+    if (!analysis.hasHedging) confScore += 2;
+    else confScore += 0.5; // Some hedging is okay
+    if (analysis.wordCount >= 30) confScore += 1; // Didn't give up quickly
+    session.scores.confidence += confScore;
 
     // Randomly decide if follow-up or next question
     const isFollowUp = Math.random() < 0.3 && session.questionIndex < 6;
@@ -155,7 +223,7 @@ export const mockApi = {
       const followUp =
         mockFollowUps[Math.floor(Math.random() * mockFollowUps.length)];
       return {
-        questionText: followUp,
+        message: followUp,
         isFollowUp: true,
         questionNumber: session.questionIndex + 1,
         totalQuestions: session.questions.length,
@@ -168,7 +236,7 @@ export const mockApi = {
     // Check if interview complete
     if (session.questionIndex >= session.questions.length) {
       return {
-        questionText: "Thank you! Your interview is complete.",
+        message: "Thank you! Your interview is complete.",
         isFollowUp: false,
         questionNumber: session.questions.length + 1,
         totalQuestions: session.questions.length,
@@ -176,7 +244,7 @@ export const mockApi = {
     }
 
     return {
-      questionText: session.questions[session.questionIndex],
+      message: session.questions[session.questionIndex],
       isFollowUp: false,
       questionNumber: session.questionIndex + 1,
       totalQuestions: session.questions.length,
@@ -190,25 +258,147 @@ export const mockApi = {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const session = sessions.get(data.sessionId);
+    
+    // If session not found, return default evaluation (graceful fallback)
     if (!session) {
-      throw new Error("Session not found");
+      console.warn("Session not found, returning default evaluation");
+      return {
+        overallScore: 7.5,
+        communicationScore: 7.8,
+        technicalScore: 7.2,
+        confidenceScore: 7.5,
+        strengths: [
+          "Completed the interview session",
+          "Demonstrated willingness to participate",
+        ],
+        weakAreas: [
+          "Session data was not tracked properly",
+        ],
+        improvementSuggestions: [
+          "Try starting a new interview for accurate feedback",
+        ],
+      };
     }
 
-    // Calculate final scores
+    const answerCount = session.answers.length || 1;
+    
+    // Calculate final scores (normalize to 10)
+    const maxPossibleComm = 6 * answerCount; // ~6 points possible per answer
+    const maxPossibleTech = 8 * answerCount; // ~8 points possible per answer  
+    const maxPossibleConf = 6 * answerCount; // ~6 points possible per answer
+
     const communicationScore = Math.min(
-      (session.scores.communication / session.answers.length) * 10,
-      10,
+      Math.max((session.scores.communication / maxPossibleComm) * 10, 3),
+      10
     );
     const technicalScore = Math.min(
-      (session.scores.technical / session.answers.length) * 10,
-      10,
+      Math.max((session.scores.technical / maxPossibleTech) * 10, 3),
+      10
     );
     const confidenceScore = Math.min(
-      (session.scores.confidence / session.answers.length) * 10,
-      10,
+      Math.max((session.scores.confidence / maxPossibleConf) * 10, 3),
+      10
     );
-    const overallScore =
-      (communicationScore + technicalScore + confidenceScore) / 3;
+    const overallScore = (communicationScore + technicalScore + confidenceScore) / 3;
+
+    // Analyze performance patterns
+    const analyses = session.answerAnalyses;
+    const avgWordCount = analyses.reduce((sum, a) => sum + a.wordCount, 0) / answerCount;
+    const starUsage = analyses.filter(a => a.starScore >= 3).length / answerCount;
+    const exampleUsage = analyses.filter(a => a.hasExamples).length / answerCount;
+    const hedgingCount = analyses.filter(a => a.hasHedging).length;
+    const assertiveCount = analyses.filter(a => a.hasAssertive).length;
+    const wellStructuredCount = analyses.filter(a => a.isWellStructured).length;
+    const techKeywordUsage = analyses.filter(a => a.techMatches > 0).length / answerCount;
+
+    // Generate dynamic strengths based on actual performance
+    const strengths: string[] = [];
+    
+    if (starUsage >= 0.5) {
+      strengths.push("Excellent use of the STAR method to structure responses");
+    }
+    if (exampleUsage >= 0.4) {
+      strengths.push("Good use of specific examples to support answers");
+    }
+    if (avgWordCount >= 50 && avgWordCount <= 150) {
+      strengths.push("Provided appropriately detailed responses without being too verbose");
+    }
+    if (assertiveCount >= answerCount * 0.6) {
+      strengths.push("Demonstrated confidence in your abilities and experience");
+    }
+    if (techKeywordUsage >= 0.5) {
+      strengths.push("Strong use of relevant technical/professional terminology");
+    }
+    if (wellStructuredCount >= answerCount * 0.5) {
+      strengths.push("Well-organized and structured communication style");
+    }
+    if (analyses.some(a => a.hasResult)) {
+      strengths.push("Good at highlighting outcomes and achievements");
+    }
+    
+    // Ensure at least one strength
+    if (strengths.length === 0) {
+      strengths.push("Completed the interview and provided responses to all questions");
+    }
+
+    // Generate dynamic weak areas based on actual performance
+    const weakAreas: string[] = [];
+    
+    if (starUsage < 0.3) {
+      weakAreas.push("Answers lacked clear structure (consider using STAR method: Situation, Task, Action, Result)");
+    }
+    if (exampleUsage < 0.3) {
+      weakAreas.push("Few concrete examples were provided to support your claims");
+    }
+    if (avgWordCount < 30) {
+      weakAreas.push("Responses were too brief - try to elaborate more on your experiences");
+    } else if (avgWordCount > 200) {
+      weakAreas.push("Responses tended to be lengthy - practice being more concise");
+    }
+    if (hedgingCount >= answerCount * 0.5) {
+      weakAreas.push("Frequent use of uncertain language (\"maybe\", \"I think\", \"probably\")");
+    }
+    if (techKeywordUsage < 0.3 && session.type === 'it') {
+      weakAreas.push("Limited use of technical terminology - be more specific about technologies used");
+    }
+    if (analyses.filter(a => !a.hasAction).length >= answerCount * 0.5) {
+      weakAreas.push("Answers often missed the \"Action\" component - describe what YOU specifically did");
+    }
+
+    // Ensure at least one weak area for constructive feedback
+    if (weakAreas.length === 0) {
+      weakAreas.push("Continue practicing to maintain consistency across longer interviews");
+    }
+
+    // Generate dynamic improvement suggestions based on weak areas
+    const improvementSuggestions: string[] = [];
+    
+    if (starUsage < 0.3) {
+      improvementSuggestions.push("Practice structuring responses using STAR: Start with the Situation, explain the Task, detail your Actions, and highlight the Results");
+    }
+    if (exampleUsage < 0.3) {
+      improvementSuggestions.push("Prepare 3-5 detailed examples from your experience that you can adapt to different questions");
+    }
+    if (hedgingCount >= answerCount * 0.5) {
+      improvementSuggestions.push("Replace uncertain phrases with confident statements. Instead of \"I think I can...\", say \"I can...\"");
+    }
+    if (avgWordCount < 30) {
+      improvementSuggestions.push("Aim for responses that are 60-120 words. Practice expanding on your initial answer with specific details");
+    }
+    if (techKeywordUsage < 0.3) {
+      improvementSuggestions.push("Research common terminology in your field and incorporate it naturally into your responses");
+    }
+    if (analyses.filter(a => !a.hasResult).length >= answerCount * 0.5) {
+      improvementSuggestions.push("Always conclude with measurable results or impact - numbers, percentages, or tangible outcomes make answers memorable");
+    }
+    if (wellStructuredCount < answerCount * 0.5) {
+      improvementSuggestions.push("Use transition phrases like \"firstly\", \"additionally\", \"as a result\" to improve answer flow");
+    }
+
+    // Ensure at least one suggestion
+    if (improvementSuggestions.length === 0) {
+      improvementSuggestions.push("Keep practicing with mock interviews to build consistency and natural delivery");
+    }
 
     // Clean up session
     sessions.delete(data.sessionId);
@@ -218,20 +408,9 @@ export const mockApi = {
       communicationScore: Math.round(communicationScore * 10) / 10,
       technicalScore: Math.round(technicalScore * 10) / 10,
       confidenceScore: Math.round(confidenceScore * 10) / 10,
-      strengths: [
-        "Good articulation and communication",
-        "Relevant examples provided",
-        "Positive attitude throughout",
-      ],
-      weakAreas: [
-        "Could provide more technical depth",
-        "Some hesitation in certain responses",
-      ],
-      improvementSuggestions: [
-        "Practice explaining technical concepts more clearly",
-        "Prepare more concrete examples for common questions",
-        "Work on confidence and speaking pace",
-      ],
+      strengths: strengths.slice(0, 4), // Limit to top 4
+      weakAreas: weakAreas.slice(0, 3), // Limit to top 3
+      improvementSuggestions: improvementSuggestions.slice(0, 4), // Limit to top 4
     };
   },
 };

@@ -76,21 +76,21 @@ export default function EvaluationPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container h-16 flex items-center justify-between">
+        <div className="container px-4 h-14 sm:h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm sm:text-base">
               AI
             </div>
-            <span className="font-bold text-foreground hidden sm:inline">
+            <span className="font-bold text-base sm:text-lg text-foreground hidden sm:inline">
               InterviewAI
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-3">
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Download</span>
             </Button>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-3">
               <Share2 className="w-4 h-4" />
               <span className="hidden sm:inline">Share</span>
             </Button>
@@ -99,25 +99,25 @@ export default function EvaluationPage() {
       </header>
 
       {/* Main Content */}
-      <main className="container py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
+      <main className="container px-4 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12 animate-fade-in">
           {/* Header Section */}
           <div className="space-y-2">
-            <h1 className="text-4xl sm:text-5xl font-bold">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
               Interview Evaluation
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               Your comprehensive interview analysis and feedback
             </p>
           </div>
 
           {/* Overall Score Card */}
           <Card className="overflow-hidden border-border/40">
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 sm:p-12">
-              <div className="grid md:grid-cols-3 gap-8 items-center">
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-4 sm:p-8 lg:p-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center">
                 {/* Score Circle */}
-                <div className="flex flex-col items-center justify-center space-y-4">
-                  <div className="relative w-32 h-32">
+                <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4">
+                  <div className="relative w-24 h-24 sm:w-32 sm:h-32">
                     <svg
                       className="w-full h-full transform -rotate-90"
                       viewBox="0 0 120 120"
@@ -155,14 +155,14 @@ export default function EvaluationPage() {
                       </defs>
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-4xl font-bold text-primary">
+                      <span className="text-3xl sm:text-4xl font-bold text-primary">
                         {scores.overall.toFixed(1)}
                       </span>
-                      <span className="text-sm text-muted-foreground">/10</span>
+                      <span className="text-xs sm:text-sm text-muted-foreground">/10</span>
                     </div>
                   </div>
                   <div className="text-center space-y-1">
-                    <p className="text-center text-sm font-semibold text-foreground">
+                    <p className="text-center text-xs sm:text-sm font-semibold text-foreground">
                       {getScoreLabel(scores.overall)}
                     </p>
                     <p className="text-xs text-muted-foreground">Performance</p>
@@ -170,7 +170,7 @@ export default function EvaluationPage() {
                 </div>
 
                 {/* Score Details */}
-                <div className="md:col-span-2 space-y-6">
+                <div className="md:col-span-2 space-y-4 sm:space-y-6">
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-semibold text-foreground">

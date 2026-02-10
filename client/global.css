@@ -119,7 +119,8 @@
 
 @layer utilities {
   /* Premium gradient animations */
-  .gradient-primary {
+  .gradient-primary,
+  .bg-gradient-primary {
     @apply bg-gradient-to-r from-primary to-secondary;
   }
 

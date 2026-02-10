@@ -8,7 +8,8 @@ import {
 } from "@shared/api";
 import { mockApi } from "./mock-api";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+// Force all API calls to localhost:8000 (server listens on this port)
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === "true";
 
 class ApiClient {
@@ -129,4 +130,5 @@ class ApiClient {
   }
 }
 
-export const apiClient = new ApiClient();
+// Export a client explicitly bound to the chosen base URL
+export const apiClient = new ApiClient(API_BASE_URL);

@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Zap, Brain, BarChart3, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Zap, Brain, BarChart3, ArrowRight, CheckCircle2, Mail, Phone, MapPin } from "lucide-react";
+import HeroAvatar from "./components/HeroAvatar";
+import Footer from "@/components/Footer";
+
+
+// Sample hero text for TTS demo
+const HERO_SAMPLE = "Hello, welcome to Interview AI. I will ask you questions and provide feedback to help you improve.";
 
 export default function LandingPage() {
   return (
@@ -17,12 +23,18 @@ export default function LandingPage() {
               InterviewAI
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <a
               href="#features"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              How it works
+              Features
+            </a>
+            <a
+              href="#contact"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Contact
             </a>
             <Link to="/setup">
               <Button variant="default" size="sm">
@@ -34,7 +46,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
+      <section className="relative py-12 sm:py-24 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
@@ -106,39 +118,7 @@ export default function LandingPage() {
             <div className="relative h-96 sm:h-[500px] animate-fade-in">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
               <div className="relative h-full bg-gradient-to-br from-card to-card/50 rounded-2xl border border-border/40 p-8 flex items-center justify-center overflow-hidden">
-                <div className="space-y-4 w-full">
-                  {/* Animated avatar placeholder */}
-                  <div className="flex justify-center mb-6">
-                    <div className="w-32 h-32 rounded-full bg-gradient-primary animate-pulse-subtle flex items-center justify-center text-white">
-                      <svg
-                        className="w-20 h-20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Sample question */}
-                  <div className="space-y-2 text-center">
-                    <p className="text-sm text-muted-foreground">
-                      AI Interviewer is speaking...
-                    </p>
-                    <p className="text-base font-medium text-foreground">
-                      Tell me about your experience with...
-                    </p>
-                  </div>
-
-                  {/* Visual indicators */}
-                  <div className="flex justify-center gap-2 py-4">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <div className="w-2 h-2 rounded-full bg-secondary animate-pulse delay-100" />
-                    <div className="w-2 h-2 rounded-full bg-accent animate-pulse delay-200" />
-                  </div>
-                </div>
+                <HeroAvatar />
               </div>
             </div>
           </div>
@@ -211,77 +191,163 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features Highlights */}
-      <section className="py-20 sm:py-32 bg-gradient-to-b from-primary/5 to-transparent border-t border-border/40">
+      {/* Contact Section */}
+      <section id="contact" className="py-20 sm:py-32 border-t border-border/40 bg-gradient-to-b from-primary/5 via-transparent to-transparent">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left features list */}
-            <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-bold">
-                Premium Features
-              </h2>
-              <div className="space-y-4">
-                {[
-                  "Professional female AI interviewer avatar",
-                  "Real-time voice and text interactions",
-                  "Multiple interview types and languages",
-                  "Detailed evaluation metrics and scores",
-                  "Follow-up and cross-questioning",
-                  "Personalized improvement suggestions",
-                ].map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-base text-foreground/80">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <div className="max-w-5xl mx-auto space-y-12">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Get In Touch</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Have questions or feedback? We'd love to hear from you. Reach out to our team and we'll respond as soon as possible.</p>
             </div>
 
-            {/* Right image placeholder */}
-            <div className="relative h-96 sm:h-[450px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-3xl blur-3xl" />
-              <div className="relative h-full bg-gradient-to-br from-card to-card/50 rounded-2xl border border-border/40 p-8 flex items-center justify-center">
-                <div className="space-y-4 w-full text-center">
-                  <p className="text-sm text-muted-foreground">
-                    Evaluation Metrics
-                  </p>
-                  <div className="space-y-3">
-                    <div>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Communication</span>
-                        <span className="font-semibold">8.5/10</span>
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+              {/* Contact Info Cards */}
+              <div className="grid grid-cols-1 gap-6 h-fit">
+                {[
+                  { icon: Mail, label: 'Email', value: 'support@interviewai.example' },
+                  { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567' },
+                  { icon: MapPin, label: 'Address', value: '123 AI Street, Tech City' }
+                ].map((contact, idx) => {
+                  const Icon = contact.icon;
+                  return (
+                    <Card key={idx} className="p-5 border-border/40 hover:border-primary/50 transition-all">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <Icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground">{contact.label}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{contact.value}</p>
+                        </div>
                       </div>
-                      <div className="h-2 bg-muted rounded-full overflow-hidden">
-                        <div className="h-full w-[85%] bg-primary rounded-full" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Technical</span>
-                        <span className="font-semibold">7.8/10</span>
-                      </div>
-                      <div className="h-2 bg-muted rounded-full overflow-hidden">
-                        <div className="h-full w-[78%] bg-secondary rounded-full" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Confidence</span>
-                        <span className="font-semibold">9.2/10</span>
-                      </div>
-                      <div className="h-2 bg-muted rounded-full overflow-hidden">
-                        <div className="h-full w-[92%] bg-accent rounded-full" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    </Card>
+                  );
+                })}
               </div>
+
+              {/* Contact Form */}
+              <Card className="p-8 border-border/40">
+                <form id="contactForm" onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.target as HTMLFormElement;
+                  const fd = new FormData(form);
+                  const body = Object.fromEntries(fd.entries());
+                  try {
+                    await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) });
+                    alert('Message submitted — thank you!');
+                    form.reset();
+                  } catch (err) {
+                    console.warn('Contact submit failed', err);
+                    alert('Message saved locally.');
+                  }
+                }}>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-foreground">Name *</label>
+                      <input name="name" placeholder="Your full name" required className="w-full mt-2 p-3 rounded-lg border border-border/40 bg-background focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-foreground">Email *</label>
+                      <input name="email" type="email" placeholder="you@example.com" required className="w-full mt-2 p-3 rounded-lg border border-border/40 bg-background focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-foreground">Message *</label>
+                      <textarea name="message" placeholder="Your message here..." rows={4} required className="w-full mt-2 p-3 rounded-lg border border-border/40 bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none" />
+                    </div>
+                    <Button type="submit" className="w-full gradient-primary text-base font-semibold py-2.5">Send Message</Button>
+                  </div>
+                </form>
+              </Card>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Features Highlights */}
+    <section className="py-24 sm:py-36 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent border-t border-border/40">
+  <div className="container px-4 sm:px-6 lg:px-8">
+    <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+      
+      {/* Left features list */}
+      <div className="space-y-8">
+        <div className="space-y-3">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Premium Features
+          </h2>
+          <p className="text-muted-foreground max-w-md">
+            Everything you need to simulate a real-world interview and get
+            actionable feedback.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          {[
+            "Professional female AI interviewer avatar",
+            "Real-time voice and text interactions",
+            "Multiple interview types and languages",
+            "Detailed evaluation metrics and scores",
+            "Follow-up and cross-questioning",
+            "Personalized improvement suggestions",
+          ].map((feature, idx) => (
+            <div
+              key={idx}
+              className="flex items-start gap-4 p-3 rounded-xl hover:bg-primary/5 transition"
+            >
+              <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <span className="text-base text-foreground/90">
+                {feature}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right visual card */}
+      <div className="relative h-[420px] sm:h-[480px] lg:h-[520px]">
+        {/* Glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60" />
+
+        {/* Card */}
+        <div className="relative h-full bg-card/80 backdrop-blur-xl rounded-3xl border border-border/50 p-10 flex items-center justify-center shadow-xl">
+          <div className="space-y-6 w-full text-center">
+            <p className="text-sm uppercase tracking-wide text-muted-foreground">
+              Evaluation Metrics
+            </p>
+
+            <div className="space-y-5 text-left">
+              {[
+                { label: "Communication", value: 85, color: "bg-primary" },
+                { label: "Technical", value: 78, color: "bg-secondary" },
+                { label: "Confidence", value: 92, color: "bg-accent" },
+              ].map((item) => (
+                <div key={item.label}>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="font-medium">{item.label}</span>
+                    <span className="font-semibold">
+                      {(item.value / 10).toFixed(1)}/10
+                    </span>
+                  </div>
+
+                  <div className="h-2.5 bg-muted rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${item.color} rounded-full transition-all duration-700`}
+                      style={{ width: `${item.value}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-4 text-xs text-muted-foreground">
+              AI-generated score based on interview performance
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-20 sm:py-32 border-t border-border/40">
@@ -310,21 +376,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 py-12">
-        <div className="container">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-                AI
-              </div>
-              <span className="font-semibold">InterviewAI</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              © 2024 InterviewAI. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

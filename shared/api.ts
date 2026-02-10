@@ -11,7 +11,11 @@ export interface StartInterviewRequest {
 
 export interface StartInterviewResponse {
   sessionId: string;
-  firstQuestion: string;
+  message: string;
+  success?: boolean;
+  cvUploaded?: boolean;
+  interviewType?: string;
+  language?: string;
 }
 
 export interface NextQuestionRequest {
@@ -20,7 +24,7 @@ export interface NextQuestionRequest {
 }
 
 export interface NextQuestionResponse {
-  questionText: string;
+  message: string;
   isFollowUp: boolean;
   questionNumber?: number;
   totalQuestions?: number;

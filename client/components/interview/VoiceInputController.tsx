@@ -51,10 +51,10 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   };
 
   return (
-    <Card className="border-border/40 space-y-4 p-6">
+    <Card className="border-border/40 space-y-3 sm:space-y-4 p-4 sm:p-6">
       {/* Input mode indicator */}
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-foreground">
+      <div className="flex items-center justify-between gap-2">
+        <h3 className="font-semibold text-sm sm:text-base text-foreground">
           {useManualInput ? "Type your answer" : "Speak your answer"}
         </h3>
         {allowManualInput && (
@@ -62,9 +62,9 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
             variant="ghost"
             size="sm"
             onClick={handleToggleInputMode}
-            className="text-xs text-muted-foreground hover:text-foreground"
+            className="text-xs text-muted-foreground hover:text-foreground px-2 sm:px-3"
           >
-            {useManualInput ? "Switch to Voice" : "Switch to Text"}
+            {useManualInput ? "Voice" : "Text"}
           </Button>
         )}
       </div>
@@ -161,7 +161,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
           onChange={(e) => setManualAnswer(e.target.value)}
           placeholder="Type your answer here..."
           className="w-full p-4 rounded-lg border border-border/40 bg-muted/50 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none"
-          rows={6}
+          rows={4}
         />
       )}
 
@@ -184,7 +184,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
       <Button
         onClick={handleSubmit}
         disabled={!finalAnswer.trim() || isSubmitting}
-        className="w-full gradient-primary text-base font-semibold gap-2"
+        className="w-full gradient-primary text-lg py-3 font-semibold gap-2"
       >
         {isSubmitting ? (
           <>
