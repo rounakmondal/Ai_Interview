@@ -43,7 +43,7 @@ export const useInterviewSession = () => {
       setState((prev) => ({
         ...prev,
         sessionId: response.sessionId,
-        currentQuestion: response.firstQuestion,
+        currentQuestion: response.message,
         interviewType: config.interviewType,
         language: config.language,
         questionNumber: 1,
@@ -82,7 +82,7 @@ export const useInterviewSession = () => {
 
         setState((prev) => ({
           ...prev,
-          currentQuestion: response.questionText,
+          currentQuestion: response.message,
           isFollowUp: response.isFollowUp || false,
           questionNumber: response.questionNumber || prev.questionNumber + 1,
           totalQuestions: response.totalQuestions || prev.totalQuestions,

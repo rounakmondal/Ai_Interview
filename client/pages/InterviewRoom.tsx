@@ -54,6 +54,7 @@ export default function InterviewRoom() {
   const [permissionsGranted, setPermissionsGranted] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState<number>(0); // in seconds
   const [showEndDialog, setShowEndDialog] = useState(false);
+  const [autoMode, setAutoMode] = useState(true); // Auto-listen and auto-submit
 
   // Media hooks
   const camera = useCamera();
@@ -64,7 +65,7 @@ export default function InterviewRoom() {
         : state?.language === "bengali"
           ? "bn-IN"
           : "en-US",
-    silenceTimeout: 5000,
+    silenceTimeout: 2000, // 2 seconds of silence before auto-stopping
   });
   const audio = useAudioPlayback({ volume: 1.0 });
 
@@ -105,6 +106,8 @@ export default function InterviewRoom() {
       setError(null);
       setAvatarState("thinking");
 
+      console.log("Starting interview with CV text:", state.cvText ? `${state.cvText.length} chars` : "No CV");
+      
       const response = await apiClient.startInterview({
         interviewType: state.interviewType,
         language: state.language,
@@ -129,10 +132,16 @@ export default function InterviewRoom() {
       speech.stopListening();
       audio.stopPlayback();
 
-      // Play first question using text-to-speech immediately and loudly
+      // Delay to ensure browser is ready after canceling previous speech
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Play first question using text-to-speech
       console.log("Playing first question:", response.message);
-      audio.playTextToSpeech(response.message, getLanguageCode());
-      setAvatarState("speaking");
+      if (response.message && response.message.trim()) {
+        audio.playTextToSpeech(response.message, getLanguageCode());
+      } else {
+        console.error("No message received from API");
+      }
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to start interview";
@@ -179,12 +188,17 @@ export default function InterviewRoom() {
 
         // Reset voice input
         speech.resetTranscript();
+        speech.stopListening();
+        audio.stopPlayback();
 
-        // Play next question immediately and loudly
+        // Delay to ensure browser is ready
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        // Play next question
         console.log("Playing next question:", response.message);
-        setAvatarState("idle");
-        audio.playTextToSpeech(response.message, getLanguageCode());
-        setAvatarState("speaking");
+        if (response.message && response.message.trim()) {
+          audio.playTextToSpeech(response.message, getLanguageCode());
+        }
 
         setIsSubmittingAnswer(false);
       } catch (err) {
@@ -254,6 +268,9 @@ export default function InterviewRoom() {
     try {
       setError(null);
 
+      // Warm up TTS immediately on user interaction (unlocks audio)
+      audio.warmUp();
+
       // Request camera
       await camera.startCamera();
 
@@ -271,7 +288,7 @@ export default function InterviewRoom() {
         err instanceof Error ? err.message : "Failed to start interview";
       setError(message);
     }
-  }, [camera, speech.isSupported, initializeInterview]);
+  }, [camera, speech.isSupported, initializeInterview, audio]);
 
   // Handle end interview
   const handleEndInterview = () => {
@@ -293,6 +310,8 @@ export default function InterviewRoom() {
       setAvatarState("speaking");
     } else if (isSubmittingAnswer) {
       setAvatarState("thinking");
+    } else {
+      setAvatarState("idle");
     }
   }, [speech.isListening, audio.isPlaying, isSubmittingAnswer]);
 
@@ -321,7 +340,8 @@ export default function InterviewRoom() {
       speech.stopListening();
       audio.stopPlayback();
     };
-  }, [camera, speech, audio]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on unmount
 
   if (!state) {
     return (
@@ -557,6 +577,10 @@ export default function InterviewRoom() {
                     onResetTranscript={speech.resetTranscript}
                     onSubmit={handleAnswerSubmit}
                     isSubmitting={isSubmittingAnswer}
+                    isSpeaking={audio.isPlaying}
+                    autoMode={autoMode}
+                    onAutoModeChange={setAutoMode}
+                    onStopSpeaking={audio.stopPlayback}
                   />
                 </div>
               </div>

@@ -315,22 +315,150 @@ export default function PremiumHowItWorks() {
           </div>
         </motion.div>
 
-        {/* Bottom CTA hint */}
+        {/* Bottom CTA - Professional with breathing effect */}
         <motion.div
-          className="text-center mt-16 lg:mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 1, ease: smoothEase }}
+          className="mt-16 lg:mt-24"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 1, ease: smoothEase }}
         >
-          <p className="text-sm text-muted-foreground">
-            Ready to start?{" "}
-            <a
-              href="/setup"
-              className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline underline-offset-4"
-            >
-              Begin your first interview →
-            </a>
-          </p>
+          <div className="relative max-w-2xl mx-auto">
+            {/* Breathing glow background */}
+            <div className="absolute inset-0 -m-4 sm:-m-8">
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-3xl blur-2xl animate-pulse"
+                style={{ animationDuration: '3s' }}
+              />
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-violet-500/10 rounded-3xl blur-3xl"
+                style={{ 
+                  animation: 'breathe 4s ease-in-out infinite',
+                }}
+              />
+            </div>
+
+            {/* Card container */}
+            <div className="relative bg-gradient-to-br from-slate-900/90 via-slate-900/95 to-indigo-950/90 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950 rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-indigo-500/20 shadow-2xl shadow-indigo-500/10 overflow-hidden">
+              {/* Animated gradient border */}
+              <div className="absolute inset-0 rounded-2xl sm:rounded-3xl p-px overflow-hidden">
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 opacity-30"
+                  style={{
+                    animation: 'rotate 8s linear infinite',
+                    transformOrigin: 'center',
+                  }}
+                />
+              </div>
+
+              {/* Floating particles */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-indigo-400/40 rounded-full"
+                    style={{
+                      left: `${15 + i * 15}%`,
+                      top: `${20 + (i % 3) * 25}%`,
+                      animation: `float ${3 + i * 0.5}s ease-in-out infinite`,
+                      animationDelay: `${i * 0.3}s`,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 text-center space-y-4 sm:space-y-6">
+                {/* Breathing icon */}
+                <div className="inline-flex items-center justify-center">
+                  <div 
+                    className="relative w-14 h-14 sm:w-16 sm:h-16"
+                    style={{ animation: 'breathe 3s ease-in-out infinite' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl rotate-3" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-violet-500 rounded-2xl flex items-center justify-center">
+                      <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Text */}
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">
+                    Ready to Transform Your Interview Skills?
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-400 max-w-md mx-auto">
+                    Join thousands of successful candidates who aced their interviews with AI-powered practice
+                  </p>
+                </div>
+
+                {/* CTA Button with breathing effect */}
+                <a href="/setup" className="inline-block group">
+                  <div 
+                    className="relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl overflow-hidden"
+                    style={{ animation: 'breathe 3s ease-in-out infinite' }}
+                  >
+                    {/* Button glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+                        style={{
+                          animation: 'shimmer 2s infinite',
+                        }}
+                      />
+                    </div>
+
+                    <span className="relative flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
+                      Begin Your First Interview
+                      <svg 
+                        className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor" 
+                        strokeWidth={2}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+
+                {/* Trust indicator */}
+                <p className="text-xs text-slate-500 flex items-center justify-center gap-2">
+                  <span className="inline-flex items-center">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse" />
+                    Free to start
+                  </span>
+                  <span className="text-slate-600">•</span>
+                  <span>No credit card required</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CSS Keyframes */}
+          <style>{`
+            @keyframes breathe {
+              0%, 100% { transform: scale(1); opacity: 1; }
+              50% { transform: scale(1.02); opacity: 0.9; }
+            }
+            @keyframes float {
+              0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+              50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+            }
+            @keyframes shimmer {
+              0% { transform: translateX(-100%) skewX(-12deg); }
+              100% { transform: translateX(200%) skewX(-12deg); }
+            }
+            @keyframes rotate {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+          `}</style>
         </motion.div>
       </div>
 

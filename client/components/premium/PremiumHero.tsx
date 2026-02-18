@@ -44,7 +44,7 @@ export default function PremiumHero() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-[calc(100vh-5rem)] overflow-hidden pt-4 sm:pt-6 flex items-center"
+      className="relative min-h-[calc(100vh-10rem)] overflow-hidden pt-1 sm:pt-6 flex items-center"
     >
       {/* Animated gradient background */}
       <div className="absolute inset-0 -z-20">
@@ -87,15 +87,16 @@ export default function PremiumHero() {
 
             {/* Subtext */}
             <motion.div variants={textRevealVariants}>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Experience a realistic mock interview with AI-powered feedback, voice interaction, and real-time coaching. Master your interview skills in minutes.
-              </p>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-lg leading-relaxed">
+  Experience a realistic mock interview with AI-powered feedback, voice interaction, and real-time coaching. Master your interview skills in minutes.
+</p>
+
             </motion.div>
 
             {/* CTAs */}
             <motion.div
               variants={textRevealVariants}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <Link to="/setup">
                 <motion.div

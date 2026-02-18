@@ -16,6 +16,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import type { InterviewType, Language } from "@shared/api";
+import { extractCVText } from "@/lib/cv-extractor";
 
 const interviewTypes = [
   { id: "government", label: "Government", icon: Briefcase },
@@ -39,6 +40,8 @@ export default function InterviewSetup() {
   const [selectedLanguage, setSelectedLanguage] =
     useState<Language | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvText, setCvText] = useState<string | null>(null);
+  const [isExtracting, setIsExtracting] = useState(false);
   const [timerDuration, setTimerDuration] = useState(30);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +61,7 @@ export default function InterviewSetup() {
     return null;
   };
 
-  const handleFileSelect = useCallback((file: File) => {
+  const handleFileSelect = useCallback(async (file: File) => {
     const validationError = validateFile(file);
     if (validationError) {
       setError(validationError);
@@ -66,6 +69,20 @@ export default function InterviewSetup() {
     }
     setError(null);
     setCvFile(file);
+    setCvText(null);
+    setIsExtracting(true);
+    
+    try {
+      const extractedText = await extractCVText(file);
+      setCvText(extractedText);
+      console.log("Extracted CV text:", extractedText.substring(0, 200) + "...");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to extract text from CV";
+      setError(message);
+      setCvFile(null);
+    } finally {
+      setIsExtracting(false);
+    }
   }, []);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -104,6 +121,7 @@ export default function InterviewSetup() {
 
   const removeFile = () => {
     setCvFile(null);
+    setCvText(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -121,6 +139,7 @@ export default function InterviewSetup() {
         interviewType: selectedType,
         language: selectedLanguage,
         timerDuration,
+        cvText: cvText || undefined,
       },
     });
   };
@@ -241,21 +260,56 @@ export default function InterviewSetup() {
 
               {cvFile ? (
                 <div className="text-center">
-                  <CheckCircle className="mx-auto mb-4 text-green-500 w-12 h-12" />
-                  <p className="font-semibold text-lg mb-2">File uploaded successfully!</p>
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
-                    <FileText className="w-4 h-4" />
-                    <span>{cvFile.name}</span>
-                    <span className="text-xs">({(cvFile.size / 1024).toFixed(1)} KB)</span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={removeFile}
-                    className="text-red-500 hover:text-red-600 hover:bg-red-50"
-                  >
-                    <X className="w-4 h-4 mr-1" /> Remove
-                  </Button>
+                  {isExtracting ? (
+                    <>
+                      <Loader2 className="mx-auto mb-4 text-primary w-12 h-12 animate-spin" />
+                      <p className="font-semibold text-lg mb-2">Extracting text from CV...</p>
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                        <FileText className="w-4 h-4" />
+                        <span>{cvFile.name}</span>
+                      </div>
+                    </>
+                  ) : cvText ? (
+                    <>
+                      <CheckCircle className="mx-auto mb-4 text-green-500 w-12 h-12" />
+                      <p className="font-semibold text-lg mb-2">CV uploaded and extracted!</p>
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                        <FileText className="w-4 h-4" />
+                        <span>{cvFile.name}</span>
+                        <span className="text-xs">({(cvFile.size / 1024).toFixed(1)} KB)</span>
+                      </div>
+                      <div className="bg-muted/50 rounded-md p-3 text-left text-xs text-muted-foreground max-h-32 overflow-y-auto mb-4 mx-4">
+                        <p className="font-medium text-foreground mb-1">Extracted text preview:</p>
+                        <p className="whitespace-pre-wrap">{cvText.substring(0, 300)}{cvText.length > 300 ? "..." : ""}</p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={removeFile}
+                        className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                      >
+                        <X className="w-4 h-4 mr-1" /> Remove
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle className="mx-auto mb-4 text-green-500 w-12 h-12" />
+                      <p className="font-semibold text-lg mb-2">File uploaded successfully!</p>
+                      <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                        <FileText className="w-4 h-4" />
+                        <span>{cvFile.name}</span>
+                        <span className="text-xs">({(cvFile.size / 1024).toFixed(1)} KB)</span>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={removeFile}
+                        className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                      >
+                        <X className="w-4 h-4 mr-1" /> Remove
+                      </Button>
+                    </>
+                  )}
                 </div>
               ) : (
                 <div className="text-center">

@@ -9,6 +9,7 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
   const { autoplay = false, volume = 1 } = options;
   const audioRef = useRef<HTMLAudioElement>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const keepAliveRef = useRef<NodeJS.Timeout | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +37,42 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
     } else {
       setIsSupported(false);
     }
+    
+    // Cleanup keep-alive interval on unmount
+    return () => {
+      if (keepAliveRef.current) {
+        clearInterval(keepAliveRef.current);
+        keepAliveRef.current = null;
+      }
+    };
   }, []);
+
+  // Warm up TTS - call this from user interaction context to unlock audio
+  const warmUp = useCallback(() => {
+    if (!synthRef.current || !isSupported) {
+      console.log("TTS warmUp: not supported or synth not ready");
+      return;
+    }
+    
+    try {
+      // Cancel any pending speech
+      window.speechSynthesis.cancel();
+      
+      // Load voices first
+      const voices = window.speechSynthesis.getVoices();
+      console.log("TTS warmUp: found", voices.length, "voices");
+      
+      // Speak a brief silent utterance to unlock TTS on first user interaction
+      const utterance = new SpeechSynthesisUtterance(".");
+      utterance.volume = 0.01; // Almost silent but present
+      utterance.rate = 2; // Fast to complete quickly
+      window.speechSynthesis.speak(utterance);
+      
+      console.log("TTS warmed up (audio unlocked)");
+    } catch (err) {
+      console.warn("Failed to warm up TTS:", err);
+    }
+  }, [isSupported]);
 
   const playAudio = useCallback(
     (url: string) => {
@@ -76,7 +112,10 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
 
   const playTextToSpeech = useCallback(
     (text: string, language: string = "en-US") => {
+      console.log("playTextToSpeech called with:", text?.substring(0, 50), "language:", language);
+      
       if (!synthRef.current || !isSupported) {
+        console.error("TTS not supported - synthRef:", !!synthRef.current, "isSupported:", isSupported);
         setError("Text-to-speech not supported");
         return;
       }
@@ -92,6 +131,7 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
 
         // Cancel any ongoing speech first
         window.speechSynthesis.cancel();
+        console.log("Cancelled previous speech, pending:", window.speechSynthesis.pending, "speaking:", window.speechSynthesis.speaking);
 
         const speak = () => {
           // Create utterance
@@ -132,12 +172,29 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
             console.log("TTS started speaking:", text.substring(0, 50) + "...");
             setIsPlaying(true);
             setIsLoading(false);
+            
+            // Chrome bug workaround: Keep-alive to prevent pausing after ~15 seconds
+            if (keepAliveRef.current) {
+              clearInterval(keepAliveRef.current);
+            }
+            keepAliveRef.current = setInterval(() => {
+              if (window.speechSynthesis.speaking && window.speechSynthesis.paused) {
+                console.log("Resuming paused speech (Chrome workaround)");
+                window.speechSynthesis.resume();
+              }
+            }, 5000);
           };
 
           utterance.onend = () => {
             console.log("TTS finished speaking");
             setIsPlaying(false);
             setIsLoading(false);
+            
+            // Clear keep-alive interval
+            if (keepAliveRef.current) {
+              clearInterval(keepAliveRef.current);
+              keepAliveRef.current = null;
+            }
           };
 
           utterance.onpause = () => {
@@ -158,18 +215,26 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
             }
             setIsPlaying(false);
             setIsLoading(false);
+            
+            // Clear keep-alive interval on error
+            if (keepAliveRef.current) {
+              clearInterval(keepAliveRef.current);
+              keepAliveRef.current = null;
+            }
           };
 
           // Small delay to ensure browser is ready, then speak
           setTimeout(() => {
-            console.log("Calling speechSynthesis.speak()");
+            console.log("Calling speechSynthesis.speak() - pending:", window.speechSynthesis.pending, "speaking:", window.speechSynthesis.speaking);
             window.speechSynthesis.speak(utterance);
+            console.log("speak() called - pending:", window.speechSynthesis.pending, "speaking:", window.speechSynthesis.speaking);
             
             // Chrome bug workaround: resume if paused
             if (window.speechSynthesis.paused) {
+              console.log("Speech was paused, resuming...");
               window.speechSynthesis.resume();
             }
-          }, 50);
+          }, 100);
         };
 
         // Force load voices if not loaded yet
@@ -219,6 +284,12 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
     if (synthRef.current) {
       window.speechSynthesis.cancel();
     }
+    
+    // Clear keep-alive interval
+    if (keepAliveRef.current) {
+      clearInterval(keepAliveRef.current);
+      keepAliveRef.current = null;
+    }
 
     setIsPlaying(false);
   }, []);
@@ -232,5 +303,6 @@ export const useAudioPlayback = (options: UseAudioPlaybackOptions = {}) => {
     playAudio,
     playTextToSpeech,
     stopPlayback,
+    warmUp,
   };
 };

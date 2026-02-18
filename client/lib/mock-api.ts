@@ -116,6 +116,7 @@ const sessions = new Map<
   {
     type: string;
     language: string;
+    cvText?: string;
     questionIndex: number;
     questions: string[];
     answers: string[];
@@ -130,6 +131,69 @@ const sessions = new Map<
 
 function generateSessionId(): string {
   return `mock-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Generate personalized interview questions based on CV content
+ */
+function generateCVBasedQuestions(cvText: string, interviewType: string): string[] {
+  const questions: string[] = [];
+  const lowerCV = cvText.toLowerCase();
+  
+  // Extract skills mentioned in CV
+  const techSkills = ["react", "angular", "vue", "node", "python", "java", "javascript", "typescript", "sql", "mongodb", "aws", "azure", "docker", "kubernetes", "git", "agile", "scrum"];
+  const foundSkills = techSkills.filter(skill => lowerCV.includes(skill));
+  
+  // Extract experience indicators
+  const hasManagement = /manager|lead|supervisor|director|head of|team lead/.test(lowerCV);
+  const yearsMatch = lowerCV.match(/(\d+)\+?\s*years?\s*(of\s*)?(experience|exp)/);
+  const yearsExperience = yearsMatch ? parseInt(yearsMatch[1]) : 0;
+  
+  // Extract company names (simplified detection)
+  const hasCompanyExperience = /worked at|employed at|company|organization|corporation/.test(lowerCV);
+  
+  // Extract education
+  const hasHigherEd = /bachelor|master|phd|b\.tech|m\.tech|mba|degree/.test(lowerCV);
+  
+  // Extract projects
+  const hasProjects = /project|developed|built|created|implemented|designed/.test(lowerCV);
+  
+  // Generate questions based on CV content
+  if (foundSkills.length > 0) {
+    const primarySkill = foundSkills[0];
+    questions.push(`I see you have experience with ${primarySkill}. Can you describe a challenging project where you used ${primarySkill}?`);
+    
+    if (foundSkills.length > 2) {
+      questions.push(`Your CV shows expertise in ${foundSkills.slice(0, 3).join(", ")}. How do you stay updated with these technologies?`);
+    }
+  }
+  
+  if (hasManagement) {
+    questions.push("Your CV indicates leadership experience. Can you describe your management style and how you handle team conflicts?");
+  }
+  
+  if (yearsExperience > 5) {
+    questions.push(`With ${yearsExperience}+ years of experience, what would you say has been your most significant professional achievement?`);
+  } else if (yearsExperience > 0) {
+    questions.push("What key lessons have you learned early in your career that you apply today?");
+  }
+  
+  if (hasProjects) {
+    questions.push("Walk me through one of the projects mentioned in your CV. What was your specific role and contribution?");
+  }
+  
+  if (hasHigherEd) {
+    questions.push("How has your educational background prepared you for this role?");
+  }
+  
+  // Add generic CV-based question if we couldn't extract specific info
+  if (questions.length === 0) {
+    questions.push("Based on your CV, tell me more about your most recent role and responsibilities.");
+    questions.push("What aspects of your background make you a strong fit for this position?");
+  }
+  
+  // Limit to 3-4 CV-based questions
+  return questions.slice(0, 4);
 }
 
 // Log startup message
@@ -152,12 +216,22 @@ export const mockApi = {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const sessionId = generateSessionId();
-    const questions = mockQuestions[data.interviewType] || mockQuestions.it;
+    let questions = [...(mockQuestions[data.interviewType] || mockQuestions.it)];
+    
+    // If CV is provided, generate personalized questions based on CV content
+    if (data.cvText && data.cvText.trim().length > 50) {
+      const cvQuestions = generateCVBasedQuestions(data.cvText, data.interviewType);
+      // Mix CV-based questions with standard questions
+      questions = [...cvQuestions, ...questions.slice(0, 5)];
+      console.log("Generated CV-based questions:", cvQuestions);
+    }
+    
     const shuffled = [...questions].sort(() => Math.random() - 0.5);
 
     sessions.set(sessionId, {
       type: data.interviewType,
       language: data.language,
+      cvText: data.cvText,
       questionIndex: 0,
       questions: shuffled,
       answers: [],
@@ -169,10 +243,19 @@ export const mockApi = {
       },
     });
 
+    // Create personalized opening message if CV was provided
+    let openingMessage = shuffled[0];
+    if (data.cvText && data.cvText.trim().length > 50) {
+      openingMessage = `I've reviewed your CV. ${shuffled[0]}`;
+    }
+
     return {
       sessionId,
-      message: shuffled[0],
+      message: openingMessage,
       success: true,
+      cvUploaded: !!(data.cvText && data.cvText.trim().length > 50),
+      interviewType: data.interviewType,
+      language: data.language,
     };
   },
 
