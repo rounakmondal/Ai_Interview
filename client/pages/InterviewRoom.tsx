@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Phone, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Phone, AlertCircle, CheckCircle2, Mic, Brain, Sparkles, Video, Shield } from "lucide-react";
 import { useCamera } from "@/hooks/use-camera";
 import { useSpeechRecognition } from "@/hooks/use-speech-recognition";
 import { useAudioPlayback } from "@/hooks/use-audio-playback";
@@ -23,14 +23,14 @@ import VoiceInputController from "@/components/interview/VoiceInputController";
 import QuestionDisplay from "@/components/interview/QuestionDisplay";
 import type {
   NextQuestionResponse,
-  InterviewType,
   Language,
 } from "@shared/api";
 
 interface LocationState {
-  interviewType: InterviewType;
+  interviewType: string; // Free text interview type
   language: Language;
   cvText?: string;
+  jobDescription?: string; // Optional job description
   timerDuration?: number; // in minutes
 }
 
@@ -107,11 +107,13 @@ export default function InterviewRoom() {
       setAvatarState("thinking");
 
       console.log("Starting interview with CV text:", state.cvText ? `${state.cvText.length} chars` : "No CV");
+      console.log("Job description:", state.jobDescription ? `${state.jobDescription.length} chars` : "No JD");
       
       const response = await apiClient.startInterview({
         interviewType: state.interviewType,
         language: state.language,
         cvText: state.cvText,
+        jobDescription: state.jobDescription,
       });
 
       console.log("API Start Interview Response:", response);
@@ -228,8 +230,7 @@ export default function InterviewRoom() {
           communicationScore: 7.0,
           technicalScore: 7.0,
           confidenceScore: 7.0,
-          weakAreas: ["Session was not properly initialized"],
-          improvementSuggestions: ["Try starting a new interview session"],
+          weakAreas: [{ area: "Session", issue: "Session was not properly initialized", howToImprove: "Try starting a new interview session" }],
           strengths: ["Completed interview attempt"],
         };
       }
@@ -253,8 +254,7 @@ export default function InterviewRoom() {
             communicationScore: 6.0,
             technicalScore: 6.0,
             confidenceScore: 6.0,
-            weakAreas: ["Interview ended with an error"],
-            improvementSuggestions: ["Try starting a new interview"],
+            weakAreas: [{ area: "Error", issue: "Interview ended with an error", howToImprove: "Try starting a new interview" }],
             strengths: ["Completed interview attempt"],
           },
           completedAt: new Date().toISOString(),
@@ -531,7 +531,10 @@ export default function InterviewRoom() {
             {/* Avatar - Full width on mobile, fixed width on desktop */}
             <div className="w-full lg:w-72 xl:w-80 flex-shrink-0 order-2 lg:order-1">
               <div className="lg:sticky lg:top-8 w-full">
-                <AvatarPanel state={avatarState} />
+                <AvatarPanel 
+                  state={avatarState} 
+                  isSpeaking={audio.isPlaying}
+                />
               </div>
             </div>
 
@@ -617,17 +620,198 @@ export default function InterviewRoom() {
     );
   }
 
-  // Fallback
+  // Fallback — stylish loading screen
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <div className="flex justify-center gap-1">
-          <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-          <div className="w-3 h-3 bg-secondary rounded-full animate-pulse delay-100" />
-          <div className="w-3 h-3 bg-accent rounded-full animate-pulse delay-200" />
-        </div>
-        <p className="text-muted-foreground">Loading interview...</p>
+    <div className="min-h-screen bg-background relative overflow-hidden flex items-center justify-center">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
+          style={{
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
+            animation: "loaderPulseRing 4s ease-in-out infinite",
+          }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20"
+          style={{
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.25) 0%, transparent 70%)",
+            animation: "loaderPulseRing 4s ease-in-out infinite 1s",
+          }}
+        />
       </div>
+
+      {/* Floating particles */}
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1.5 h-1.5 rounded-full bg-primary/30"
+          style={{
+            top: `${20 + Math.random() * 60}%`,
+            left: `${15 + Math.random() * 70}%`,
+            animation: `loaderFloat ${3 + i * 0.5}s ease-in-out infinite`,
+            animationDelay: `${i * 0.4}s`,
+          }}
+        />
+      ))}
+
+      <div className="relative z-10 flex flex-col items-center gap-10 px-6 max-w-sm w-full">
+        {/* Central animated icon */}
+        <div className="relative w-32 h-32">
+          {/* Outer spinning ring */}
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 128 128"
+            style={{ animation: "loaderSpin 6s linear infinite" }}
+          >
+            <defs>
+              <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <circle cx="64" cy="64" r="60" fill="none" stroke="hsl(var(--primary) / 0.08)" strokeWidth="2" />
+            <circle
+              cx="64" cy="64" r="60" fill="none"
+              stroke="url(#loaderGrad)" strokeWidth="2.5"
+              strokeDasharray="90 290" strokeLinecap="round"
+            />
+          </svg>
+
+          {/* Inner spinning ring (reverse) */}
+          <svg
+            className="absolute inset-3 w-[calc(100%-1.5rem)] h-[calc(100%-1.5rem)]"
+            viewBox="0 0 104 104"
+            style={{ animation: "loaderSpinReverse 4s linear infinite" }}
+          >
+            <circle
+              cx="52" cy="52" r="50" fill="none"
+              stroke="hsl(var(--primary) / 0.15)" strokeWidth="1.5"
+              strokeDasharray="40 280" strokeLinecap="round"
+            />
+          </svg>
+
+          {/* Center icon */}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ animation: "loaderBreath 3s ease-in-out infinite" }}
+          >
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-xl shadow-primary/25">
+              <Brain className="w-8 h-8 text-primary-foreground" />
+            </div>
+          </div>
+
+          {/* Orbiting dots */}
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="absolute inset-0"
+              style={{
+                animation: "loaderSpin 3s linear infinite",
+                animationDelay: `${i * 1}s`,
+              }}
+            >
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-lg shadow-primary/40"
+                style={{ opacity: 1 - i * 0.25 }}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Text */}
+        <div className="text-center space-y-3">
+          <h2
+            className="text-xl font-semibold tracking-tight"
+            style={{ animation: "loaderFadeSlideUp 0.6s ease-out both" }}
+          >
+            Preparing your interview
+          </h2>
+          <p
+            className="text-sm text-muted-foreground leading-relaxed"
+            style={{ animation: "loaderFadeSlideUp 0.6s ease-out 0.15s both" }}
+          >
+            Setting up AI, camera & microphone
+          </p>
+        </div>
+
+        {/* Animated feature pills */}
+        <div
+          className="flex flex-wrap justify-center gap-2"
+          style={{ animation: "loaderFadeSlideUp 0.6s ease-out 0.3s both" }}
+        >
+          {[
+            { icon: Mic, label: "Voice" },
+            { icon: Video, label: "Camera" },
+            { icon: Brain, label: "AI Engine" },
+            { icon: Shield, label: "Secure" },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.label}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-muted-foreground"
+                style={{
+                  animation: "loaderPillPop 0.4s ease-out both",
+                  animationDelay: `${0.5 + i * 0.12}s`,
+                }}
+              >
+                <Icon className="w-3 h-3 text-primary" />
+                {item.label}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Animated progress bar */}
+        <div className="w-full max-w-xs space-y-2">
+          <div className="h-1 w-full rounded-full bg-muted overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-primary via-primary/80 to-primary"
+              style={{
+                animation: "loaderProgress 2.5s ease-in-out infinite",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Inline keyframes */}
+      <style>{`
+        @keyframes loaderSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes loaderSpinReverse {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
+        }
+        @keyframes loaderPulseRing {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+          50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.35; }
+        }
+        @keyframes loaderBreath {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+        }
+        @keyframes loaderFloat {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+          50% { transform: translateY(-18px) scale(1.3); opacity: 0.6; }
+        }
+        @keyframes loaderFadeSlideUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes loaderPillPop {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes loaderProgress {
+          0% { width: 0%; }
+          50% { width: 80%; }
+          100% { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }

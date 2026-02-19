@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import {
   ArrowRight,
   Download,
   Share2,
@@ -10,13 +17,222 @@ import {
   AlertCircle,
   TrendingUp,
   Loader2,
+  BookOpen,
+  ChevronDown,
+  Target,
+  Rocket,
+  GraduationCap,
+  MessageSquareText,
 } from "lucide-react";
-import type { FinishInterviewResponse } from "@shared/api";
+import type { FinishInterviewResponse, PracticeQuestion, WeakArea, ImprovementPlan } from "@shared/api";
 
 interface EvaluationLocationState {
   sessionId: string;
   evaluation: FinishInterviewResponse;
   completedAt: string;
+}
+
+// Practice Questions Component with filtering and expandable answers
+function PracticeQuestionsSection({
+  questions,
+  interviewType,
+}: {
+  questions: PracticeQuestion[];
+  interviewType?: string;
+}) {
+  const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [filterDifficulty, setFilterDifficulty] = useState<string>("all");
+  const [showAll, setShowAll] = useState(false);
+
+  // Get unique categories
+  const categories = ["all", ...new Set(questions.map((q) => q.category))];
+
+  // Filter questions
+  const filteredQuestions = questions.filter((q) => {
+    const matchCategory = filterCategory === "all" || q.category === filterCategory;
+    const matchDifficulty = filterDifficulty === "all" || q.difficulty === filterDifficulty;
+    return matchCategory && matchDifficulty;
+  });
+
+  const displayedQuestions = showAll ? filteredQuestions : filteredQuestions.slice(0, 10);
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty.toLowerCase()) {
+      case "easy":
+        return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
+      case "medium":
+        return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";
+      case "hard":
+        return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
+  };
+
+  const getCategoryColor = (category: string) => {
+    switch (category.toLowerCase()) {
+      case "behavioral":
+        return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
+      case "technical":
+        return "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400";
+      case "situational":
+        return "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400";
+      case "leadership":
+        return "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400";
+      default:
+        return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+    }
+  };
+
+  return (
+    <Card className="p-6 sm:p-8 border-border/40 space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <BookOpen className="w-6 h-6 text-primary" />
+          <div>
+            <h2 className="text-2xl font-bold">Practice Questions</h2>
+            <p className="text-sm text-muted-foreground">
+              {questions.length} questions tailored for {interviewType || "your role"}
+            </p>
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2">
+          <select
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+            className="text-sm px-3 py-1.5 rounded-md border border-border bg-background"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat === "all" ? "All Categories" : cat}
+              </option>
+            ))}
+          </select>
+          <select
+            value={filterDifficulty}
+            onChange={(e) => setFilterDifficulty(e.target.value)}
+            className="text-sm px-3 py-1.5 rounded-md border border-border bg-background"
+          >
+            <option value="all">All Levels</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Questions Accordion */}
+      <Accordion type="single" collapsible className="space-y-3">
+        {displayedQuestions.map((q, idx) => (
+          <AccordionItem
+            key={idx}
+            value={`question-${idx}`}
+            className="border border-border/50 rounded-lg px-4 data-[state=open]:bg-muted/30"
+          >
+            <AccordionTrigger className="hover:no-underline py-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-left w-full pr-4">
+                <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                  {idx + 1}
+                </span>
+                <span className="flex-1 font-medium text-sm sm:text-base">
+                  {q.question}
+                </span>
+                <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                  {q.topic && (
+                    <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      {q.topic}
+                    </Badge>
+                  )}
+                  <Badge variant="secondary" className={`text-xs ${getCategoryColor(q.category)}`}>
+                    {q.category}
+                  </Badge>
+                  <Badge variant="secondary" className={`text-xs capitalize ${getDifficultyColor(q.difficulty)}`}>
+                    {q.difficulty}
+                  </Badge>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pb-4">
+              <div className="pl-9 pr-4">
+                {q.suggestedAnswer ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                      <Lightbulb className="w-4 h-4" />
+                      Suggested Answer
+                    </div>
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                      <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-wrap">
+                        {q.suggestedAnswer}
+                      </p>
+                    </div>
+                    <p className="text-xs text-muted-foreground italic">
+                      Tip: Personalize this answer with your own experiences and specific examples.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                      <Lightbulb className="w-4 h-4" />
+                      How to Prepare
+                    </div>
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                      <p className="text-sm text-foreground/90 leading-relaxed">
+                        Research this topic thoroughly and prepare a structured answer. Focus on <strong>{q.topic || q.category}</strong> concepts and be ready to explain with real-world examples from your experience.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+
+      {/* Show More/Less */}
+      {filteredQuestions.length > 10 && (
+        <div className="flex justify-center pt-2">
+          <Button
+            variant="outline"
+            onClick={() => setShowAll(!showAll)}
+            className="gap-2"
+          >
+            {showAll ? (
+              <>Show Less</>
+            ) : (
+              <>
+                Show All {filteredQuestions.length} Questions
+                <ChevronDown className="w-4 h-4" />
+              </>
+            )}
+          </Button>
+        </div>
+      )}
+
+      {/* Summary Stats */}
+      <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/40">
+        <div className="text-center">
+          <p className="text-2xl font-bold text-primary">
+            {questions.filter((q) => q.difficulty === "easy").length}
+          </p>
+          <p className="text-xs text-muted-foreground">Easy</p>
+        </div>
+        <div className="text-center">
+          <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+            {questions.filter((q) => q.difficulty === "medium").length}
+          </p>
+          <p className="text-xs text-muted-foreground">Medium</p>
+        </div>
+        <div className="text-center">
+          <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+            {questions.filter((q) => q.difficulty === "hard").length}
+          </p>
+          <p className="text-xs text-muted-foreground">Hard</p>
+        </div>
+      </div>
+    </Card>
+  );
 }
 
 export default function EvaluationPage() {
@@ -252,18 +468,29 @@ export default function EvaluationPage() {
               </Card>
             )}
 
-            {/* Weak Areas */}
+            {/* Weak Areas — now rich objects */}
             {evaluation.weakAreas && evaluation.weakAreas.length > 0 && (
               <Card className="p-6 sm:p-8 border-border/40 space-y-4">
                 <div className="flex items-center gap-2">
-                  <AlertCircle className="w-6 h-6 text-amber-500" />
+                  <Target className="w-6 h-6 text-amber-500" />
                   <h2 className="text-2xl font-bold">Areas for Improvement</h2>
                 </div>
-                <div className="space-y-3">
-                  {evaluation.weakAreas.map((area, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                      <p className="text-foreground/80">{area}</p>
+                <div className="space-y-4">
+                  {evaluation.weakAreas.map((weakArea, idx) => (
+                    <div key={idx} className="rounded-lg border border-amber-200 dark:border-amber-900/40 bg-amber-50/50 dark:bg-amber-950/20 p-4 space-y-2">
+                      <div className="flex items-start gap-2">
+                        <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1">
+                          <p className="font-semibold text-foreground">{weakArea.area}</p>
+                          <p className="text-sm text-muted-foreground">{weakArea.issue}</p>
+                        </div>
+                      </div>
+                      {weakArea.howToImprove && (
+                        <div className="flex items-start gap-2 ml-6 pt-1">
+                          <Lightbulb className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                          <p className="text-sm text-primary/90">{weakArea.howToImprove}</p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -271,36 +498,97 @@ export default function EvaluationPage() {
             )}
           </div>
 
-          {/* Improvement Suggestions */}
-          {evaluation.improvementSuggestions &&
-            evaluation.improvementSuggestions.length > 0 && (
-              <Card className="p-6 sm:p-8 border-border/40 space-y-6">
-                <div className="flex items-center gap-2">
-                  <Lightbulb className="w-6 h-6 text-amber-500" />
-                  <h2 className="text-2xl font-bold">
-                    Personalized Suggestions
-                  </h2>
-                </div>
+          {/* Detailed Feedback */}
+          {evaluation.detailedFeedback && (
+            <Card className="p-6 sm:p-8 border-border/40 space-y-4">
+              <div className="flex items-center gap-2">
+                <MessageSquareText className="w-6 h-6 text-primary" />
+                <h2 className="text-2xl font-bold">Detailed Feedback</h2>
+              </div>
+              <div className="bg-primary/5 border border-primary/10 rounded-xl p-5">
+                <p className="text-foreground/85 leading-relaxed whitespace-pre-wrap">
+                  {evaluation.detailedFeedback}
+                </p>
+              </div>
+            </Card>
+          )}
 
-                <div className="grid md:grid-cols-1 gap-4">
-                  {evaluation.improvementSuggestions.map((suggestion, idx) => (
-                    <Card
-                      key={idx}
-                      className="p-5 border-border/40 bg-muted/30 space-y-2"
-                    >
-                      <div className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
-                          {idx + 1}
-                        </span>
-                        <p className="text-sm text-foreground/80">
-                          {suggestion}
-                        </p>
+          {/* Improvement Plan */}
+          {evaluation.improvementPlan && (
+            <Card className="p-6 sm:p-8 border-border/40 space-y-6">
+              <div className="flex items-center gap-2">
+                <Rocket className="w-6 h-6 text-primary" />
+                <h2 className="text-2xl font-bold">Your Improvement Plan</h2>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-5">
+                {/* Immediate Actions */}
+                {evaluation.improvementPlan.immediateActions.length > 0 && (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                        <Target className="w-4 h-4 text-red-600 dark:text-red-400" />
                       </div>
-                    </Card>
-                  ))}
-                </div>
-              </Card>
-            )}
+                      <h3 className="font-semibold">Do Now</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {evaluation.improvementPlan.immediateActions.map((action, idx) => (
+                        <div key={idx} className="flex gap-2 text-sm">
+                          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-xs font-bold text-red-600 dark:text-red-400 mt-0.5">
+                            {idx + 1}
+                          </span>
+                          <p className="text-foreground/80">{action}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Resources to Study */}
+                {evaluation.improvementPlan.resourcesToStudy.length > 0 && (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                        <GraduationCap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <h3 className="font-semibold">Study Resources</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {evaluation.improvementPlan.resourcesToStudy.map((resource, idx) => (
+                        <div key={idx} className="flex gap-2 text-sm">
+                          <BookOpen className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                          <p className="text-foreground/80">{resource}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Practice Strategy */}
+                {evaluation.improvementPlan.practiceStrategy && (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                        <Lightbulb className="w-4 h-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <h3 className="font-semibold">Practice Strategy</h3>
+                    </div>
+                    <p className="text-sm text-foreground/80 leading-relaxed">
+                      {evaluation.improvementPlan.practiceStrategy}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </Card>
+          )}
+
+          {/* Practice Questions Section */}
+          {evaluation.practiceQuestions && evaluation.practiceQuestions.length > 0 && (
+            <PracticeQuestionsSection
+              questions={evaluation.practiceQuestions}
+              interviewType={evaluation.interviewType}
+            />
+          )}
 
           {/* Score Summary */}
           <Card className="p-6 sm:p-8 border-border/40 bg-gradient-to-r from-primary/5 to-secondary/5 space-y-4">

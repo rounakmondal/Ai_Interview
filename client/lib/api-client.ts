@@ -5,6 +5,7 @@ import {
   NextQuestionResponse,
   FinishInterviewRequest,
   FinishInterviewResponse,
+  RawFinishInterviewResponse,
 } from "@shared/api";
 import { mockApi } from "./mock-api";
 
@@ -123,10 +124,54 @@ class ApiClient {
   async finishInterview(
     data: FinishInterviewRequest,
   ): Promise<FinishInterviewResponse> {
-    return this.request<FinishInterviewResponse>("/interview/finish", {
+    const raw = await this.request<RawFinishInterviewResponse>("/interview/finish", {
       method: "POST",
       body: JSON.stringify(data),
     });
+
+    return this.transformEvaluation(raw);
+  }
+
+  // Transform snake_case API response to camelCase frontend types
+  private transformEvaluation(raw: RawFinishInterviewResponse): FinishInterviewResponse {
+    // If the response already has camelCase keys (mock API), pass through
+    const evalData = raw.evaluation ?? (raw as any);
+
+    // Check if data is already in camelCase format (mock API)
+    if (typeof evalData.overallScore === "number") {
+      return evalData as FinishInterviewResponse;
+    }
+
+    return {
+      overallScore: evalData.overall_score ?? 0,
+      communicationScore: evalData.communication_score ?? 0,
+      technicalScore: evalData.technical_score ?? 0,
+      confidenceScore: evalData.confidence_score ?? 0,
+      weakAreas: Array.isArray(evalData.weak_areas)
+        ? evalData.weak_areas.map((w: any) => ({
+            area: w.area ?? "",
+            issue: w.issue ?? "",
+            howToImprove: w.how_to_improve ?? "",
+          }))
+        : [],
+      improvementPlan: evalData.improvement_plan
+        ? {
+            immediateActions: evalData.improvement_plan.immediate_actions ?? [],
+            resourcesToStudy: evalData.improvement_plan.resources_to_study ?? [],
+            practiceStrategy: evalData.improvement_plan.practice_strategy ?? "",
+          }
+        : undefined,
+      detailedFeedback: evalData.detailed_feedback ?? undefined,
+      practiceQuestions: Array.isArray(evalData.practice_questions)
+        ? evalData.practice_questions.map((q: any) => ({
+            question: q.question ?? "",
+            category: q.category ?? "General",
+            difficulty: (q.difficulty ?? "medium").toLowerCase(),
+            topic: q.topic ?? "",
+            suggestedAnswer: q.suggested_answer ?? q.suggestedAnswer ?? undefined,
+          }))
+        : undefined,
+    };
   }
 }
 

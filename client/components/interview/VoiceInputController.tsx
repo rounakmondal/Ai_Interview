@@ -44,24 +44,58 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   const wasListeningRef = useRef(false);
   const wasSpeakingRef = useRef(false);
   const autoSubmitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const autoListenTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Keep localAutoMode in sync with prop
+  useEffect(() => {
+    setLocalAutoMode(autoMode);
+  }, [autoMode]);
 
   const combinedTranscript = transcript + interimTranscript;
   const finalAnswer = useManualInput ? manualAnswer : transcript;
   const displayText = useManualInput ? manualAnswer : combinedTranscript;
 
+  // Keep refs updated for timeout closure access
+  const isListeningRef = useRef(isListening);
+  const isSubmittingRef = useRef(isSubmitting);
+  const onStartListeningRef = useRef(onStartListening);
+  useEffect(() => { isListeningRef.current = isListening; }, [isListening]);
+  useEffect(() => { isSubmittingRef.current = isSubmitting; }, [isSubmitting]);
+  useEffect(() => { onStartListeningRef.current = onStartListening; }, [onStartListening]);
+
   // Auto-start listening when TTS finishes speaking
   useEffect(() => {
+    // Clear any existing auto-listen timeout first
+    if (autoListenTimeoutRef.current) {
+      clearTimeout(autoListenTimeoutRef.current);
+      autoListenTimeoutRef.current = null;
+    }
+
     if (localAutoMode && !useManualInput && isSupported) {
       // TTS just finished speaking
-      if (wasSpeakingRef.current && !isSpeaking && !isListening && !isSubmitting) {
+      if (wasSpeakingRef.current && !isSpeaking) {
         console.log("Auto-mode: TTS finished, starting to listen after 500ms...");
-        setTimeout(() => {
-          onStartListening();
+        autoListenTimeoutRef.current = setTimeout(() => {
+          autoListenTimeoutRef.current = null;
+          // Double-check conditions still valid before starting (using refs for current values)
+          if (!isListeningRef.current && !isSubmittingRef.current) {
+            console.log("Auto-mode: Now starting listening...");
+            onStartListeningRef.current();
+          } else {
+            console.log("Auto-mode: Skipped auto-listen - already listening or submitting");
+          }
         }, 500); // Delay after TTS ends to avoid picking up echo
       }
     }
     wasSpeakingRef.current = isSpeaking;
-  }, [isSpeaking, localAutoMode, useManualInput, isSupported, isListening, isSubmitting, onStartListening]);
+
+    return () => {
+      if (autoListenTimeoutRef.current) {
+        clearTimeout(autoListenTimeoutRef.current);
+        autoListenTimeoutRef.current = null;
+      }
+    };
+  }, [isSpeaking, localAutoMode, useManualInput, isSupported]);
 
   // Auto-submit when listening stops and there's a transcript
   useEffect(() => {

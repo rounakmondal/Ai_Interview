@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 
 export type AvatarState = "idle" | "speaking" | "listening" | "thinking";
@@ -7,6 +7,8 @@ interface AvatarPanelProps {
   state: AvatarState;
   avatarName?: string;
   avatarTitle?: string;
+  isSpeaking?: boolean; // Controls video playback - true when TTS is active
+  videoSrc?: string; // Video URL (defaults to /avatar.mp4)
   children?: ReactNode;
 }
 
@@ -14,8 +16,27 @@ const AvatarPanel: FC<AvatarPanelProps> = ({
   state,
   avatarName = "Priya Sharma",
   avatarTitle = "Senior Interview Coach",
+  isSpeaking = false,
+  videoSrc = "/HR_Video_Generation_Request.mp4",
   children,
 }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Control video playback based on isSpeaking prop
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isSpeaking) {
+      // Play video when interviewer is speaking
+      videoRef.current.play().catch(err => {
+        console.warn("Video autoplay failed:", err);
+      });
+    } else {
+      // Pause video when not speaking
+      videoRef.current.pause();
+    }
+  }, [isSpeaking]);
+
   const getStateLabel = (): string => {
     switch (state) {
       case "speaking":
@@ -46,55 +67,32 @@ const AvatarPanel: FC<AvatarPanelProps> = ({
     <Card
       className={`bg-gradient-to-br ${getStateColor()} border-border/40 overflow-hidden transition-all duration-300`}
     >
-      {/* Avatar Container - image fills the box */}
+      {/* Avatar Container - video fills the box */}
       <div className="w-full h-56 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center relative overflow-hidden">
-        {/* Local Gemini-generated avatar image with lip-sync overlay */}
-        <div className="relative flex items-center justify-center">
-          {/* Compute avatar src (local PNG) with fallback to public path; onError falls back to DiceBear */}
-          <img
-            src="/Gemini_Generated_Image_9cu79a9cu79a9cu7.png"
-            alt={avatarName}
-            className="w-full h-full object-cover shadow-lg bg-white"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).onerror = null;
-              (e.currentTarget as HTMLImageElement).src = `https://api.dicebear.com/8.x/avataaars/svg?seed=${encodeURIComponent(
-                avatarName,
-              )}&size=512`;
-            }}
-          />
+        {/* Video element - always visible, plays when speaking, paused otherwise */}
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-          {/* Lip-sync styling (only animate when speaking) */}
-          <style>{`
-            @keyframes lipsync {
-              0% { transform: scaleY(0.6); }
-              50% { transform: scaleY(1.05); }
-              100% { transform: scaleY(0.7); }
-            }
-            .lipsync-anim { animation: lipsync 360ms infinite ease-in-out; transform-origin: center; }
-          `}</style>
+        {/* State indicators (compact) */}
+        {state === "listening" && (
+          <div className="absolute bottom-4 right-4 flex gap-2 z-10">
+            <div className="w-3 h-3 rounded-full border-2 border-accent animate-ping" />
+          </div>
+        )}
 
-          {/* Mouth overlay - visible and animated only when speaking */}
-          {state === "speaking" && (
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-              <div className="w-24 h-3 bg-red-600 rounded-full lipsync-anim" style={{ opacity: 0.95 }} />
-            </div>
-          )}
-
-          {/* State indicators (compact) */}
-          {state === "listening" && (
-            <div className="absolute bottom-4 right-4 flex gap-2">
-              <div className="w-3 h-3 rounded-full border-2 border-accent animate-ping" />
-            </div>
-          )}
-
-          {state === "thinking" && (
-            <div className="absolute bottom-4 right-4 flex gap-1">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-100" />
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-200" />
-            </div>
-          )}
-        </div>
+        {state === "thinking" && (
+          <div className="absolute bottom-4 right-4 flex gap-1 z-10">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-100" />
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-200" />
+          </div>
+        )}
 
         {/* Status badge */}
         <div className="absolute top-4 right-4 px-3 py-1 bg-green-500/20 border border-green-500/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
