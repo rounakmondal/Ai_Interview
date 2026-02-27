@@ -1,5 +1,50 @@
+// ─────────────────────────────────────────────
+// Career Mentor Types
+// ─────────────────────────────────────────────
+
+export type CareerIntent =
+  | "no_job"
+  | "layoff_fear"
+  | "ai_impact"
+  | "career_gap"
+  | "low_salary"
+  | "tech_confusion"
+  | "non_it_switch"
+  | "skill_roadmap"
+  | "general";
+
+export interface RoadmapWeek {
+  week: string;
+  tasks: string[];
+}
+
+export interface RoadmapData {
+  title: string;
+  weeks: RoadmapWeek[];
+}
+
+export interface CareerMentorRequest {
+  message: string;
+  context?: string; // Optional: extra user context (years of experience, skills, target role)
+}
+
+export interface CareerMentorResponse {
+  intent: CareerIntent;
+  summary: string;
+  advice: string[];
+  roadmap: RoadmapData | null;
+  salaryExpectation: string | null;
+  resources: string[];
+}
+
+// ─────────────────────────────────────────────
 // Interview Types
 export type Language = "english" | "hindi" | "bengali";
+
+// Demo
+export interface DemoResponse {
+  message: string;
+}
 
 // API Request/Response Types
 export interface StartInterviewRequest {
@@ -64,6 +109,12 @@ export interface PracticeQuestion {
   topic?: string;
 }
 
+export interface YoutubeVideoSuggestion {
+  title: string;
+  url: string;
+  reason?: string;
+}
+
 export interface FinishInterviewResponse extends EvaluationScore {
   weakAreas: WeakArea[];
   improvementPlan?: ImprovementPlan;
@@ -71,6 +122,7 @@ export interface FinishInterviewResponse extends EvaluationScore {
   strengths?: string[];
   practiceQuestions?: PracticeQuestion[];
   interviewType?: string;
+  youtubeVideos?: YoutubeVideoSuggestion[];
 }
 
 // Raw API response shape (snake_case from backend)
@@ -98,6 +150,13 @@ export interface RawFinishInterviewResponse {
       question: string;
       difficulty: string;
       topic: string;
+    }>;
+    youtube_videos?: Array<{
+      video_id: string;
+      title: string;
+      channel_title?: string;
+      description?: string;
+      thumbnail_url?: string;
     }>;
   };
 }

@@ -84,6 +84,7 @@ async function extractTextFromDOC(file: File): Promise<string> {
 
 /**
  * Extract text from CV file (PDF, DOC, or DOCX)
+ * d782dc03-e45c-45c2-881b-c1ae7d55056f
  */
 export async function extractCVText(file: File): Promise<string> {
   const extension = file.name.split(".").pop()?.toLowerCase();

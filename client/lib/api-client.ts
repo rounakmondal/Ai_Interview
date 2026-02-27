@@ -171,6 +171,13 @@ class ApiClient {
             suggestedAnswer: q.suggested_answer ?? q.suggestedAnswer ?? undefined,
           }))
         : undefined,
+      youtubeVideos: Array.isArray(evalData.suggested_videos)
+        ? evalData.suggested_videos.map((v: any) => ({
+            title: v.title,
+            url: v.url,
+            reason: v.reason,
+          }))
+        : undefined,
     };
   }
 }

@@ -236,24 +236,30 @@ function PracticeQuestionsSection({
 }
 
 export default function EvaluationPage() {
+
+  // All hooks must be called unconditionally
   const location = useLocation();
   const navigate = useNavigate();
-  const [evaluation, setEvaluation] = useState<FinishInterviewResponse | null>(
-    null,
-  );
+  const [evaluation, setEvaluation] = useState<FinishInterviewResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // LinkedIn login state and handlers (single declaration)
+  const [isLinkedInLoggedIn, setIsLinkedInLoggedIn] = useState(false);
   useEffect(() => {
     const state = location.state as EvaluationLocationState | null;
-
     if (!state?.evaluation) {
       navigate("/", { replace: true });
       return;
     }
-
     setEvaluation(state.evaluation);
     setIsLoading(false);
   }, [location, navigate]);
+  const handleLinkedInLogin = () => {
+    setIsLinkedInLoggedIn(true);
+  };
+  const handleLinkedInShare = () => {
+    alert("LinkedIn sharing coming soon!\n\nThis will post your interview evaluation, scores, strengths, improvement plan, and recommended YouTube videos.");
+  };
 
   if (isLoading || !evaluation) {
     return (
@@ -287,6 +293,8 @@ export default function EvaluationPage() {
     if (score >= 5) return "Needs Improvement";
     return "Poor";
   };
+
+  // ...existing code...
 
   return (
     <div className="min-h-screen bg-background">
@@ -405,7 +413,6 @@ export default function EvaluationPage() {
                       />
                     </div>
                   </div>
-
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-semibold text-foreground">
@@ -578,6 +585,66 @@ export default function EvaluationPage() {
                     </p>
                   </div>
                 )}
+              </div>
+            </Card>
+          )}
+
+
+          {/* YouTube Video Suggestions */}
+          {evaluation.youtubeVideos && evaluation.youtubeVideos.length > 0 && (
+            <Card className="p-6 sm:p-8 border-border/40 space-y-6">
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://www.gstatic.com/youtube/img/favicon_144.png"
+                  alt="YouTube logo"
+                  className="w-12 h-12 rounded bg-white border border-border object-contain shadow"
+                  style={{ minWidth: 48, minHeight: 48 }}
+                  onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg'; }}
+                />
+                <h2 className="text-2xl font-bold">Recommended YouTube Videos</h2>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {evaluation.youtubeVideos.map((video, idx) => {
+                  // Extract videoId from url (supports youtu.be and youtube.com)
+                  let videoId = "";
+                  try {
+                    const urlObj = new URL(video.url);
+                    if (urlObj.hostname.includes("youtu.be")) {
+                      videoId = urlObj.pathname.replace("/", "");
+                    } else if (urlObj.hostname.includes("youtube.com")) {
+                      videoId = urlObj.searchParams.get("v") || "";
+                    }
+                  } catch {}
+                  const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined;
+                  return (
+                    <a
+                      key={video.url}
+                      href={video.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block rounded-xl border border-border bg-muted/30 hover:bg-primary/10 transition overflow-hidden shadow-sm"
+                    >
+                      <div className="relative aspect-video w-full bg-black/10">
+                        {thumbnailUrl ? (
+                          <img
+                            src={thumbnailUrl}
+                            alt={video.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">No thumbnail</div>
+                        )}
+                        <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded">YouTube</span>
+                      </div>
+                      <div className="p-3 space-y-1">
+                        <div className="font-semibold text-base line-clamp-2 text-foreground group-hover:text-primary transition-colors">{video.title}</div>
+                        {video.reason && (
+                          <div className="text-xs text-muted-foreground italic">{video.reason}</div>
+                        )}
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </Card>
           )}

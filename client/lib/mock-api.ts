@@ -1201,7 +1201,7 @@ export const mockApi = {
           "Demonstrated willingness to participate",
         ],
         weakAreas: [
-          { area: "Session", issue: "Session data was not tracked properly", howToImprove: "Try starting a new interview for accurate feedback" },
+          { area: "Session", issue: "Interview session could not be found or expired.", howToImprove: "Please restart your interview to receive personalized feedback and video suggestions." },
         ],
       };
     }

@@ -13,6 +13,8 @@ import InterviewSetup from "./pages/InterviewSetup";
 import InterviewRoom from "./pages/InterviewRoom";
 import EvaluationPage from "./pages/Evaluation";
 import NotFound from "./pages/NotFound";
+import ResumeBuilder from "./pages/ResumeBuilder";
+import CareerMentorPage from "./pages/CareerMentor";
 
 const queryClient = new QueryClient();
 
@@ -22,19 +24,21 @@ export default function App() {
       <ThemeProvider defaultTheme="dark">
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<PremiumLanding />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/setup" element={<InterviewSetup />} />
-              <Route path="/interview" element={<InterviewRoom />} />
-              <Route path="/evaluation" element={<EvaluationPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<PremiumLanding />} />
+                <Route path="/landing" element={<LandingPage />} />
+                <Route path="/setup" element={<InterviewSetup />} />
+                <Route path="/interview" element={<InterviewRoom />} />
+                <Route path="/evaluation" element={<EvaluationPage />} />
+                <Route path="/resume" element={<ResumeBuilder />} />
+                <Route path="/career-mentor" element={<CareerMentorPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
           </TooltipProvider>
         </QueryClientProvider>
       </ThemeProvider>
