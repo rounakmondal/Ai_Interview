@@ -67,62 +67,170 @@ const mockFollowUps = [
 function generateContextualFollowUp(answer: string, questionType: string): string {
   const lowerAnswer = answer.toLowerCase();
   
-  // Technology mentions - ask for more details
+  // Technology mentions - ask for more details with specific technology follow-ups
   const techPatterns: Array<[RegExp, string[]]> = [
-    [/react|angular|vue/, [
-      "You mentioned frontend frameworks - can you describe a challenging UI problem you solved?",
-      "How do you handle state management in your frontend applications?",
-      "What's your approach to component architecture and reusability?",
+    // .NET Family
+    [/\.net core|net core|dotnet core|asp\.net core|\.net 6|\.net 7|\.net 8|c#|csharp/, [
+      "You mentioned .NET Core - can you explain how you handle dependency injection in your applications?",
+      "Tell me about your experience with Entity Framework Core and how you optimize database queries.",
+      "How do you implement authentication and authorization in ASP.NET Core applications?",
+      "Can you describe your approach to building RESTful APIs using .NET Core?",
+      "What's your experience with middleware in ASP.NET Core and how do you use it?",
+      "How do you handle exception handling and logging in your .NET Core applications?",
     ]],
-    [/python|java|node|backend/, [
-      "Tell me more about your backend architecture decisions.",
-      "How do you handle scalability challenges in your backend systems?",
-      "What's your experience with API design and documentation?",
+    [/\.net framework|asp\.net|web forms|mvc|wcf/, [
+      "You have .NET Framework experience - how is it different from working with .NET Core?",
+      "Can you describe a migration from .NET Framework to .NET Core you've worked on?",
+      "How do you handle legacy code in .NET Framework applications?",
     ]],
-    [/database|sql|mongodb|postgres/, [
-      "How do you approach database optimization and query performance?",
-      "Can you describe a complex data modeling challenge you faced?",
-      "What's your experience with database migrations in production?",
+    // Frontend Frameworks
+    [/react(?!ive)|nextjs|next\.js/, [
+      "You mentioned React - how do you manage complex state across your application?",
+      "Can you describe your approach to React performance optimization?",
+      "How do you handle server-side rendering or use Next.js features?",
+      "What's your testing strategy for React components?",
     ]],
-    [/cloud|aws|azure|gcp|kubernetes|docker/, [
-      "How do you approach cloud architecture and cost optimization?",
-      "Can you describe your experience with containerization and orchestration?",
-      "What deployment strategies have you used in production?",
+    [/angular|typescript/, [
+      "Tell me about your Angular architecture - how do you structure modules and services?",
+      "How do you handle RxJS observables and reactive programming in Angular?",
+      "Can you describe your approach to Angular dependency injection?",
     ]],
+    [/vue|vuex|nuxt/, [
+      "You mentioned Vue - how do you handle state management with Vuex or Pinia?",
+      "Can you describe your approach to Vue composition API vs options API?",
+      "What's your experience with Vue 3 and its performance improvements?",
+    ]],
+    // Backend Technologies
+    [/python|django|flask|fastapi/, [
+      "Tell me more about your Python backend architecture decisions.",
+      "How do you handle async programming in Python?",
+      "Can you describe your experience with Python performance optimization?",
+      "What's your approach to API design using Python frameworks?",
+    ]],
+    [/java|spring boot|spring framework|hibernate/, [
+      "You mentioned Java/Spring - can you explain your approach to microservices architecture?",
+      "How do you handle transaction management in Spring applications?",
+      "Tell me about your experience with Spring Security and JWT authentication.",
+      "What's your approach to testing Spring Boot applications?",
+    ]],
+    [/node(?:js)?|express|nestjs/, [
+      "Tell me more about your Node.js backend architecture.",
+      "How do you prevent callback hell or manage async/await patterns?",
+      "Can you describe your experience with Node.js performance optimization?",
+      "What's your approach to handling concurrent requests in Node.js?",
+    ]],
+    [/go|golang|gin|fiber/, [
+      "You mentioned Go - what do you love about goroutines and concurrency in Go?",
+      "How do you handle error handling patterns in Go?",
+      "Can you describe a performance-critical system you built with Go?",
+    ]],
+    // Databases
+    [/sql server|mssql|t-sql/, [
+      "You mentioned SQL Server - how do you optimize stored procedures and query performance?",
+      "Can you explain your approach to database indexing strategies?",
+      "What's your experience with SQL Server Integration Services or reporting?",
+    ]],
+    [/postgresql|postgres/, [
+      "Tell me about your PostgreSQL experience - how do you leverage its advanced features?",
+      "How do you handle database partitioning or sharding in PostgreSQL?",
+      "What's your approach to PostgreSQL performance tuning?",
+    ]],
+    [/mongodb|nosql|document database/, [
+      "How do you approach data modeling in MongoDB differently from SQL?",
+      "Can you describe your experience with MongoDB aggregation pipelines?",
+      "What's your strategy for handling MongoDB indexes and performance?",
+    ]],
+    [/redis|caching|cache/, [
+      "You mentioned caching - can you explain your caching strategy?",
+      "How do you handle cache invalidation and maintain data consistency?",
+      "What's your experience with distributed caching systems?",
+    ]],
+    // Cloud & DevOps
+    [/azure|microsoft azure/, [
+      "You have Azure experience - which Azure services do you use most?",
+      "Can you describe your experience with Azure DevOps or CI/CD pipelines?",
+      "How do you handle Azure resource management and cost optimization?",
+      "What's your experience with Azure Functions or serverless architecture?",
+    ]],
+    [/aws|amazon web services/, [
+      "Tell me about your AWS architecture decisions - which services do you prefer and why?",
+      "How do you approach AWS security and IAM policies?",
+      "Can you describe your experience with AWS Lambda and serverless?",
+    ]],
+    [/docker|containerization|containers/, [
+      "You mentioned Docker - how do you optimize Docker images for production?",
+      "Can you explain your Docker compose or container orchestration strategy?",
+      "What's your approach to Docker networking and secret management?",
+    ]],
+    [/kubernetes|k8s|container orchestration/, [
+      "Tell me about your Kubernetes experience - how do you handle deployments?",
+      "Can you describe your approach to Kubernetes monitoring and logging?",
+      "How do you manage Kubernetes configurations and secrets?",
+    ]],
+    [/ci\/cd|jenkins|github actions|gitlab ci|azure devops/, [
+      "You mentioned CI/CD - can you walk me through your pipeline setup?",
+      "How do you handle automated testing in your CI/CD pipeline?",
+      "What's your strategy for deployment rollbacks and blue-green deployments?",
+    ]],
+    // Methodologies
     [/agile|scrum|sprint/, [
       "How do you contribute to sprint planning and estimation?",
       "Can you describe how you handle changing requirements mid-sprint?",
       "What's your experience with retrospectives and continuous improvement?",
     ]],
+    [/microservices|service-oriented/, [
+      "You mentioned microservices - how do you handle inter-service communication?",
+      "Can you describe your approach to distributed transactions and data consistency?",
+      "What's your strategy for microservices monitoring and debugging?",
+    ]],
   ];
 
-  // Project/achievement mentions
+  // Project/achievement mentions with deeper probing
   const projectPatterns: Array<[RegExp, string[]]> = [
+    [/e-?commerce|online store|shopping cart/, [
+      "Tell me about how you handled payment integration and security for that e-commerce project.",
+      "How did you optimize the user experience for the checkout flow?",
+      "What was your approach to handling inventory management and real-time updates?",
+    ]],
+    [/api|rest|graphql|microservice/, [
+      "Can you explain the API design principles you followed?",
+      "How did you handle API versioning and backward compatibility?",
+      "What was your approach to API authentication and rate limiting?",
+    ]],
     [/project|built|developed|created|implemented/, [
-      "What was the most challenging part of that project?",
-      "How did you ensure the quality of your deliverables?",
-      "If you could do that project again, what would you do differently?",
-      "How did that project impact the business or users?",
+      "What was the most challenging technical decision you made in that project?",
+      "How did you ensure code quality and maintainability?",
+      "If you could do that project again, what would you architect differently?",
+      "How did you measure the success of that project?",
     ]],
     [/team|collaborated|worked with/, [
       "How did you handle disagreements within the team?",
       "What role did you typically play in team dynamics?",
       "Can you describe a situation where team collaboration was critical?",
+      "How did you ensure effective communication across the team?",
     ]],
-    [/challenge|problem|difficult|solved/, [
+    [/challenge|problem|difficult|solved|bug|issue/, [
       "Walk me through your problem-solving approach step by step.",
       "How did you validate that your solution was effective?",
+      "What was your debugging process for that issue?",
       "What resources or people did you consult to solve this?",
     ]],
-    [/improved|increased|reduced|saved|achieved/, [
+    [/performance|optimiz|slow|latency|bottleneck/, [
+      "Can you quantify the performance improvements you achieved?",
+      "What profiling tools did you use to identify the bottleneck?",
+      "How did you balance performance with code maintainability?",
+    ]],
+    [/improved|increased|reduced|saved|achieved|delivered/, [
       "How did you measure that improvement?",
       "What was the baseline before your contribution?",
       "Can you share the specific metrics or data behind that achievement?",
+      "What was the business impact of that improvement?",
     ]],
-    [/learned|grew|developed skills/, [
+    [/learned|grew|developed skills|new technology/, [
       "How do you continue to learn and grow professionally?",
       "What resources do you use to stay updated in your field?",
       "Can you give an example of applying something you recently learned?",
+      "How long did it take you to become proficient in that new skill?",
     ]],
   ];
 
@@ -226,12 +334,12 @@ function analyzeAnswer(answer: string, questionType: string) {
   const hasResult = /result|outcome|achieved|improved|increased|reduced|saved|delivered|completed/.test(lowerAnswer);
   const starScore = [hasSituation, hasTask, hasAction, hasResult].filter(Boolean).length;
   
-  // Technical keywords by type
+  // Technical keywords by type (enhanced with more modern tech)
   const technicalKeywords: Record<string, RegExp> = {
-    it: /api|database|code|system|algorithm|architecture|testing|deployment|cloud|agile|scrum|git|docker|kubernetes|react|node|python|java|sql|rest|microservice|ci\/cd|devops/,
-    government: /policy|regulation|compliance|stakeholder|public|citizen|government|procedure|protocol|legal|administrative|bureaucratic/,
-    private: /strategy|market|revenue|client|customer|profit|growth|competitive|stakeholder|kpi|roi|metrics/,
-    "non-it": /process|workflow|efficiency|quality|customer|service|management|organization|coordination|communication/,
+    it: /\.net core|net core|asp\.net core|c#|entity framework|sql server|azure|react|angular|vue|node|python|java|javascript|typescript|api|rest|graphql|database|sql|mongodb|postgresql|docker|kubernetes|microservice|cloud|aws|devops|ci\/cd|git|agile|scrum|architecture|design pattern|solid|unit test|integration test|debugg|performance|scalability|security|authentication|authorization|cache|redis|rabbitmq|kafka|elk|monitoring|logging|swagger|linq|dependency injection|middleware|jwt|oauth|blazor/i,
+    government: /policy|regulation|compliance|stakeholder|public|citizen|government|procedure|protocol|legal|administrative|bureaucratic|ministry|department|service delivery|public sector|governance|transparency|accountability/i,
+    private: /strategy|market|revenue|client|customer|profit|growth|competitive|stakeholder|kpi|roi|metrics|business development|sales|marketing|branding|product management|user acquisition|retention|conversion/i,
+    "non-it": /process|workflow|efficiency|quality|customer|service|management|organization|coordination|communication|leadership|planning|project management|collaboration|stakeholder|deadline|operational/i,
   };
   
   const techPattern = technicalKeywords[questionType] || technicalKeywords.it;
@@ -320,9 +428,26 @@ function generateCVBasedQuestions(cvText: string, interviewType: string): string
   const questions: string[] = [];
   const lowerCV = cvText.toLowerCase();
   
-  // Extract skills mentioned in CV
-  const techSkills = ["react", "angular", "vue", "node", "python", "java", "javascript", "typescript", "sql", "mongodb", "aws", "azure", "docker", "kubernetes", "git", "agile", "scrum"];
-  const foundSkills = techSkills.filter(skill => lowerCV.includes(skill));
+  // Extract skills mentioned in CV (enhanced for .NET and other frameworks)
+  const techSkills = [
+    // .NET Family
+    ".net core", "asp.net core", ".net 6", ".net 7", ".net 8", "c#", "entity framework",
+    "linq", "asp.net", "blazor", "xamarin", "maui", "wcf", "web api",
+    // Frontend
+    "react", "angular", "vue", "next.js", "nuxt", "svelte",
+    // Backend
+    "node", "express", "nestjs", "python", "django", "flask", "fastapi",
+    "java", "spring boot", "spring", "go", "golang", "ruby", "rails",
+    // Databases
+    "sql server", "postgresql", "mysql", "mongodb", "redis", "elasticsearch",
+    // Cloud & DevOps
+    "azure", "aws", "gcp", "docker", "kubernetes", "jenkins", "github actions",
+    "terraform", "ansible",
+    // General
+    "javascript", "typescript", "sql", "nosql", "git", "agile", "scrum",
+    "microservices", "rest api", "graphql",
+  ];
+  const foundSkills = techSkills.filter(skill => lowerCV.includes(skill.toLowerCase()));
   
   // Extract experience indicators
   const hasManagement = /manager|lead|supervisor|director|head of|team lead/.test(lowerCV);
@@ -338,13 +463,26 @@ function generateCVBasedQuestions(cvText: string, interviewType: string): string
   // Extract projects
   const hasProjects = /project|developed|built|created|implemented|designed/.test(lowerCV);
   
-  // Generate questions based on CV content
+  // Generate questions based on CV content (more authentic and contextual)
   if (foundSkills.length > 0) {
     const primarySkill = foundSkills[0];
-    questions.push(`I see you have experience with ${primarySkill}. Can you describe a challenging project where you used ${primarySkill}?`);
+    const skillName = primarySkill.charAt(0).toUpperCase() + primarySkill.slice(1);
+    questions.push(`I see you have experience with ${skillName}. Can you walk me through a specific project where you used ${skillName} to solve a challenging problem?`);
     
     if (foundSkills.length > 2) {
-      questions.push(`Your CV shows expertise in ${foundSkills.slice(0, 3).join(", ")}. How do you stay updated with these technologies?`);
+      const skills = foundSkills.slice(0, 3).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(", ");
+      questions.push(`Your CV shows expertise in ${skills}. How do you choose between these technologies when starting a new project?`);
+    }
+    
+    // Add technology-specific follow-up questions
+    if (primarySkill.includes("net") || primarySkill.includes("c#")) {
+      questions.push("Can you explain how you implement dependency injection and the repository pattern in .NET applications?");
+    } else if (["react", "angular", "vue"].some(fw => primarySkill.includes(fw))) {
+      questions.push("How do you approach state management and performance optimization in your frontend applications?");
+    } else if (["node", "python", "java", "go"].some(lang => primarySkill.includes(lang))) {
+      questions.push("Describe your approach to building scalable backend services. How do you handle monitoring and error tracking?");
+    } else if (["azure", "aws", "gcp"].some(cloud => primarySkill.includes(cloud))) {
+      questions.push("What's your experience with cloud architecture design and cost optimization?");
     }
   }
   
@@ -1105,28 +1243,46 @@ export const mockApi = {
     const analysis = analyzeAnswer(data.userAnswer, session.type);
     session.answerAnalyses.push(analysis);
 
-    // Score based on actual answer quality
+       // Score based on actual answer quality (more realistic and nuanced)
     // Communication: structure, examples, transitions, appropriate length
     let commScore = 0;
-    if (analysis.isWellStructured) commScore += 2;
+    if (analysis.isWellStructured) commScore += 1.8;
     if (analysis.hasExamples) commScore += 1.5;
-    if (analysis.hasTransitions) commScore += 1;
-    if (analysis.wordCount >= 50 && analysis.wordCount <= 150) commScore += 1.5;
-    else if (analysis.wordCount >= 30) commScore += 0.5;
+    if (analysis.hasTransitions) commScore += 0.8;
+    // Ideal length is 50-120 words
+    if (analysis.wordCount >= 50 && analysis.wordCount <= 120) commScore += 1.5;
+    else if (analysis.wordCount >= 30 && analysis.wordCount < 50) commScore += 1;
+    else if (analysis.wordCount > 120 && analysis.wordCount <= 180) commScore += 1;
+    else if (analysis.wordCount >= 20) commScore += 0.5;
+    // Bonus for multiple sentences (shows detail)
+    if (analysis.sentenceCount >= 3) commScore += 0.5;
     session.scores.communication += commScore;
 
-    // Technical: STAR method, technical keywords, depth
+    // Technical: STAR method, technical keywords, depth (more realistic scoring)
     let techScore = 0;
-    techScore += analysis.starScore * 1.5; // Up to 6 points for STAR
-    techScore += Math.min(analysis.techMatches * 0.5, 2); // Up to 2 points for keywords
+    // STAR method bonus (but not too heavy - real interviews value other things too)
+    techScore += analysis.starScore * 1.2; // Up to 4.8 points for full STAR
+    // Technical keywords (relevant terminology matters)
+    techScore += Math.min(analysis.techMatches * 0.6, 2.5); // Up to 2.5 points for keywords
+    // Bonus for having situation AND action (core of good answer)
+    if (analysis.hasSituation && analysis.hasAction) techScore += 1;
+    // Bonus for quantifiable result
+    if (analysis.hasResult && /\d+%|\d+x|increased|decreased|saved|improved/.test(data.userAnswer.toLowerCase())) {
+      techScore += 1.2;
+    }
     session.scores.technical += techScore;
 
-    // Confidence: assertive language, lack of hedging
+    // Confidence: assertive language, lack of excessive hedging (more nuanced)
     let confScore = 0;
-    if (analysis.hasAssertive) confScore += 3;
-    if (!analysis.hasHedging) confScore += 2;
-    else confScore += 0.5; // Some hedging is okay
-    if (analysis.wordCount >= 30) confScore += 1; // Didn't give up quickly
+    if (analysis.hasAssertive) confScore += 2.5;
+    // A little hedging is okay and shows thoughtfulness
+    if (!analysis.hasHedging) confScore += 1.8;
+    else confScore += 0.8; // Some hedging is actually professional
+    // Bonus for substantive answers
+    if (analysis.wordCount >= 40) confScore += 1;
+    if (analysis.wordCount >= 70) confScore += 0.5; // Extra for detailed
+    // Penalty for being too brief (shows lack of confidence or preparation)
+    if (analysis.wordCount < 20) confScore -= 1;
     session.scores.confidence += confScore;
 
     // Persist session changes
@@ -1208,24 +1364,26 @@ export const mockApi = {
 
     const answerCount = session.answers.length || 1;
     
-    // Calculate final scores (normalize to 10)
-    const maxPossibleComm = 6 * answerCount; // ~6 points possible per answer
-    const maxPossibleTech = 8 * answerCount; // ~8 points possible per answer  
-    const maxPossibleConf = 6 * answerCount; // ~6 points possible per answer
+    // Calculate final scores (normalize to 10) - more realistic scoring
+    const maxPossibleComm = 5.6 * answerCount; // Adjusted for new scoring system
+    const maxPossibleTech = 7.5 * answerCount; // Adjusted for new scoring system 
+    const maxPossibleConf = 5.3 * answerCount; // Adjusted for new scoring system
 
+    // Realistic score ranges: 4-9.5, with 7-8 being good, 8.5+ being excellent
     const communicationScore = Math.min(
-      Math.max((session.scores.communication / maxPossibleComm) * 10, 3),
-      10
+      Math.max((session.scores.communication / maxPossibleComm) * 10, 4.0),
+      9.5
     );
     const technicalScore = Math.min(
-      Math.max((session.scores.technical / maxPossibleTech) * 10, 3),
-      10
+      Math.max((session.scores.technical / maxPossibleTech) * 10, 4.0),
+      9.5
     );
     const confidenceScore = Math.min(
-      Math.max((session.scores.confidence / maxPossibleConf) * 10, 3),
-      10
+      Math.max((session.scores.confidence / maxPossibleConf) * 10, 4.0),
+      9.5
     );
-    const overallScore = (communicationScore + technicalScore + confidenceScore) / 3;
+    // Weighted average: Technical (40%), Communication (35%), Confidence (25%)
+    const overallScore = (communicationScore * 0.35 + technicalScore * 0.40 + confidenceScore * 0.25);
 
     // Analyze performance patterns
     const analyses = session.answerAnalyses;
