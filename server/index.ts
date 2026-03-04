@@ -3,6 +3,11 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleCareerMentor } from "./routes/careerMentor";
+import { 
+  handleStartInterview, 
+  handleNextQuestion, 
+  handleFinishInterview 
+} from "./routes/interview";
 
 export function createServer() {
   const app = express();
@@ -26,6 +31,23 @@ export function createServer() {
   // Returns: structured advice, roadmap, salary info, resources
   // ─────────────────────────────────────────────────────────────────────
   app.post("/api/career-mentor", handleCareerMentor);
+
+  // ── Interview API ─────────────────────────────────────────────────────
+  // POST /api/interview/start
+  // Body: { userId: string, jobRole: string, experienceLevel: string, cvText: string }
+  // Returns: { sessionId: string, firstQuestion: string, totalQuestions: number }
+  // 
+  // POST /api/interview/next-question
+  // Body: { sessionId: string, previousAnswer?: string }
+  // Returns: { question: string, questionNumber: number, totalQuestions: number, isLastQuestion: boolean }
+  // 
+  // POST /api/interview/finish
+  // Body: { sessionId: string, lastAnswer?: string }
+  // Returns: { overallScore, communicationScore, technicalScore, confidenceScore, feedback, suggestions, duration }
+  // ─────────────────────────────────────────────────────────────────────
+  app.post("/api/interview/start", handleStartInterview);
+  app.post("/api/interview/next-question", handleNextQuestion);
+  app.post("/api/interview/finish", handleFinishInterview);
 
   return app;
 }
