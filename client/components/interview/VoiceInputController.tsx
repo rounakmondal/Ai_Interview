@@ -2,6 +2,7 @@ import { FC, useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mic, MicOff, Send, AlertCircle, MessageSquare, Zap } from "lucide-react";
+import VoiceActivityIndicator from "./VoiceActivityIndicator";
 
 interface VoiceInputControllerProps {
   isListening: boolean;
@@ -235,6 +236,15 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
       {/* Voice mode */}
       {!useManualInput && isSupported && (
         <div className="space-y-4">
+          {/* Voice Activity Visualization */}
+          <div className="flex justify-center py-4">
+            <VoiceActivityIndicator
+              isListening={isListening && !isSpeaking}
+              isSpeaking={isSpeaking}
+              hasTranscript={!!transcript.trim()}
+            />
+          </div>
+
           {/* TTS playing indicator */}
           {isSpeaking && (
             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-3">

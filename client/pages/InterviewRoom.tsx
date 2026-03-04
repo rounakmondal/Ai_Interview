@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Phone, AlertCircle, CheckCircle2, Mic, Brain, Sparkles, Video, Shield } from "lucide-react";
 import { useCamera } from "@/hooks/use-camera";
-import { useSpeechRecognition } from "@/hooks/use-speech-recognition";
-import { useAudioPlayback } from "@/hooks/use-audio-playback";
+import { useImprovedSpeech } from "@/hooks/use-improved-speech";
+import { useEnhancedAudio } from "@/hooks/use-enhanced-audio";
 import { apiClient } from "@/lib/api-client";
 import AvatarPanel, { AvatarState } from "@/components/interview/AvatarPanel";
 import CameraPanel from "@/components/interview/CameraPanel";
@@ -56,18 +56,37 @@ export default function InterviewRoom() {
   const [showEndDialog, setShowEndDialog] = useState(false);
   const [autoMode, setAutoMode] = useState(true); // Auto-listen and auto-submit
 
-  // Media hooks
+  // Media hooks with enhanced quality
   const camera = useCamera();
-  const speech = useSpeechRecognition({
+  
+  // Enhanced audio with natural voice
+  const audio = useEnhancedAudio({
+    volume: 0.7, // Lower volume to prevent echo
+    useElevenLabs: true, // Use natural AI voices
+    onStartPlaying: () => {
+      setAvatarState("speaking");
+      // Stop listening to prevent echo
+      speech.abort();
+    },
+    onStopPlaying: () => {
+      setAvatarState("idle");
+    },
+  });
+
+  // Improved speech recognition
+  const speech = useImprovedSpeech({
     language:
       state?.language === "hindi"
         ? "hi-IN"
         : state?.language === "bengali"
           ? "bn-IN"
           : "en-US",
-    silenceTimeout: 2000, // 2 seconds of silence before auto-stopping
+    silenceTimeout: 3000, // 3 seconds for natural pauses
+    echoCancellation: true,
+    onSilenceDetected: () => {
+      console.log("User finished speaking");
+    },
   });
-  const audio = useAudioPlayback({ volume: 1.0 });
 
   // Validate setup
   useEffect(() => {
@@ -91,7 +110,7 @@ export default function InterviewRoom() {
   useEffect(() => {
     if (timeRemaining === 0 && phase === "active" && sessionId) {
       // Automatically finish interview without confirmation
-      audio.stopPlayback();
+      audio.stop();
       speech.stopListening();
       finishInterview();
     }
@@ -132,17 +151,19 @@ export default function InterviewRoom() {
 
       // Stop any current listening/speaking before playing first question
       speech.stopListening();
-      audio.stopPlayback();
+      audio.stop();
 
-      // Delay to ensure browser is ready after canceling previous speech
-      await new Promise(resolve => setTimeout(resolve, 300));
+      // Delay to ensure clean state
+      await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Play first question using text-to-speech
+      // Play first question with natural voice
       console.log("Playing first question:", response.message);
+      setAvatarState("speaking");
       if (response.message && response.message.trim()) {
-        audio.playTextToSpeech(response.message, getLanguageCode());
+        await audio.speak(response.message, getLanguageCode());
       } else {
         console.error("No message received from API");
+        setAvatarState("idle");
       }
     } catch (err) {
       const message =
@@ -164,7 +185,7 @@ export default function InterviewRoom() {
 
         // Stop listening and any playback
         speech.stopListening();
-        audio.stopPlayback();
+        audio.stop();
 
         const response: NextQuestionResponse = await apiClient.getNextQuestion({
           sessionId,
@@ -191,15 +212,18 @@ export default function InterviewRoom() {
         // Reset voice input
         speech.resetTranscript();
         speech.stopListening();
-        audio.stopPlayback();
+        audio.stop();
 
-        // Delay to ensure browser is ready
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Delay for smooth transition
+        await new Promise(resolve => setTimeout(resolve, 500));
         
-        // Play next question
+        // Play next question with natural voice
         console.log("Playing next question:", response.message);
+        setAvatarState("speaking");
         if (response.message && response.message.trim()) {
-          audio.playTextToSpeech(response.message, getLanguageCode());
+          await audio.speak(response.message, getLanguageCode());
+        } else {
+          setAvatarState("idle");
         }
 
         setIsSubmittingAnswer(false);
@@ -268,8 +292,7 @@ export default function InterviewRoom() {
     try {
       setError(null);
 
-      // Warm up TTS immediately on user interaction (unlocks audio)
-      audio.warmUp();
+      // Audio will auto-initialize on first use
 
       // Request camera
       await camera.startCamera();
@@ -297,7 +320,7 @@ export default function InterviewRoom() {
 
   const confirmEndInterview = async () => {
     setShowEndDialog(false);
-    audio.stopPlayback();
+    audio.stop();
     speech.stopListening();
     await finishInterview();
   };
@@ -338,7 +361,7 @@ export default function InterviewRoom() {
     return () => {
       camera.stopCamera();
       speech.stopListening();
-      audio.stopPlayback();
+      audio.stop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run on unmount
@@ -494,8 +517,6 @@ export default function InterviewRoom() {
           </AlertDialogContent>
         </AlertDialog>
 
-        {/* Hidden audio element for speaker output */}
-        <audio ref={audio.audioRef} crossOrigin="anonymous" />
         <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -583,7 +604,7 @@ export default function InterviewRoom() {
                     isSpeaking={audio.isPlaying}
                     autoMode={autoMode}
                     onAutoModeChange={setAutoMode}
-                    onStopSpeaking={audio.stopPlayback}
+                    onStopSpeaking={audio.stop}
                     answerTimeLimit={120}
                   />
                 </div>
