@@ -20,12 +20,13 @@ export default function PremiumNavbar() {
   }, []);
 
   const navItems = [
-    { label: "Features", href: "#features" },
     { label: "How It Works", href: "#features" },
+    { label: "Features", href: "#features" },
+    { label: "Interview Types", href: "#interview-types" },
+    { label: "Testimonials", href: "#testimonials" },
     { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
-    { label: "Career Mentor", href: "/career-mentor" },
-    { label: "Build Your Resume", href: "/resume" },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -109,18 +110,6 @@ export default function PremiumNavbar() {
             <div className="hidden md:flex items-center gap-4">
               {/* Theme Toggle */}
               <ThemeToggle />
-
-              {/* Sign In */}
-              <motion.a
-                href="#features"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
-                className={`text-[14px] font-medium transition-colors duration-200 px-3 py-2 ${isDark ? "text-white/60 hover:text-white/90" : "text-slate-500 hover:text-slate-900"
-                  }`}
-              >
-                Sign In
-              </motion.a>
 
               {/* Get Started Button */}
               <Link to="/setup">

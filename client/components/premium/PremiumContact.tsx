@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Sparkles } from "lucide-react";
+import { Mail, User, MapPin, Clock, Send, MessageCircle, Sparkles } from "lucide-react";
 
 // Smooth easing for enterprise feel
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -9,20 +9,20 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email Us",
-    value: "support@interviewai.com",
+    value: "rounakmondal198@gmail.com",
     description: "We'll respond within 24 hours",
   },
   {
-    icon: Phone,
-    label: "Call Us",
-    value: "+1 (555) 123-4567",
-    description: "Mon-Fri, 9am-6pm EST",
+    icon: User,
+    label: "Developer",
+    value: "Ranjan Mondal",
+    description: "Creator & Lead Developer, InterviewAI",
   },
   {
     icon: MapPin,
-    label: "Visit Us",
-    value: "123 Innovation Drive",
-    description: "San Francisco, CA 94102",
+    label: "Based In",
+    value: "West Bengal, India",
+    description: "Serving candidates across India",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function PremiumContact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden"
     >
       {/* Soft gradient background */}
       <div className="absolute inset-0 -z-10">
@@ -135,7 +135,7 @@ export default function PremiumContact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
+          className="text-center max-w-3xl mx-auto mb-8 lg:mb-10"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, ease: smoothEase }}

@@ -36,7 +36,7 @@ export default function PremiumCTA() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden"
     >
       {/* Soft gradient background with depth */}
       <div className="absolute inset-0 -z-20">

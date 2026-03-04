@@ -1,477 +1,291 @@
-import { motion, useInView } from "framer-motion";
+﻿import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Brain, Zap, BarChart3, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import {
+  Settings2,
+  Mic2,
+  BarChart3,
+  ArrowRight,
+  Globe2,
+  FileText,
+  Clock4,
+  Brain,
+  TrendingUp,
+  MessageSquare,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 
 const steps = [
   {
-    step: "01",
-    title: "Choose Your Interview",
+    number: "01",
+    label: "Setup",
+    title: "Personalise Your Session",
+    headline: "Tell us what job you're going for â€” we'll handle the rest.",
     description:
-      "Select from Government, Private, IT, or Non-IT interviews. Pick your preferred language and set your desired duration.",
-    icon: Brain,
+      "Configure every detail of your mock interview in under 60 seconds. Choose your industry, set the difficulty, upload your CV, and specify the job role. Our AI builds a bespoke question set around your exact profile.",
+    icon: Settings2,
+    color: "from-indigo-500 to-blue-600",
+    glow: "shadow-indigo-500/20",
+    ring: "ring-indigo-500/30",
+    bg: "bg-indigo-500/10",
+    details: [
+      { icon: Globe2, text: "4 languages â€” English, Hindi, Bengali, Telugu" },
+      { icon: FileText, text: "Upload your CV for hyper-personalised questions" },
+      { icon: Clock4, text: "Choose session length: 10 min to 60 min" },
+      { icon: Settings2, text: "Government, IT, Private, Campus interview modes" },
+    ],
   },
   {
-    step: "02",
-    title: "Practice with AI",
+    number: "02",
+    label: "Practice",
+    title: "Face a Real AI Interviewer",
+    headline: "A professional voice-driven interview â€” as close to the real thing as it gets.",
     description:
-      "Experience a realistic mock interview with our intelligent AI interviewer. Answer questions, receive follow-ups, and engage naturally.",
-    icon: Zap,
+      "Your AI interviewer asks targeted questions via voice, listens to your spoken answers in real-time, and fires intelligent follow-up questions â€” just like a live panel would. No scripts, no repetition.",
+    icon: Mic2,
+    color: "from-violet-500 to-purple-600",
+    glow: "shadow-violet-500/20",
+    ring: "ring-violet-500/30",
+    bg: "bg-violet-500/10",
+    details: [
+      { icon: Mic2, text: "Live voice recognition with 2-minute answer timer" },
+      { icon: Brain, text: "Dynamic follow-up questions based on your answers" },
+      { icon: MessageSquare, text: "Realistic conversation flow â€” not a quiz" },
+      { icon: Clock4, text: "Auto-paced: interviewer speaks, waits, responds" },
+    ],
   },
   {
-    step: "03",
-    title: "Get Detailed Feedback",
+    number: "03",
+    label: "Improve",
+    title: "Receive Deep Performance Insights",
+    headline: "Know exactly what to fix before your real interview.",
     description:
-      "Receive comprehensive evaluation on communication, technical skills, confidence, and personalized improvement suggestions.",
+      "After every session you get a structured evaluation report with scores across four key dimensions, specific weak-area coaching, and actionable improvement steps prioritised by impact.",
     icon: BarChart3,
+    color: "from-emerald-500 to-teal-600",
+    glow: "shadow-emerald-500/20",
+    ring: "ring-emerald-500/30",
+    bg: "bg-emerald-500/10",
+    details: [
+      { icon: BarChart3, text: "Scores: Communication, Technical, Confidence, Clarity" },
+      { icon: TrendingUp, text: "Track improvement across multiple sessions" },
+      { icon: Sparkles, text: "AI-written strength & weakness breakdown" },
+      { icon: CheckCircle2, text: "Prioritised action plan to improve fast" },
+    ],
   },
 ];
 
-// Smooth easing for enterprise feel
+// Smooth easing
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
 export default function PremiumHowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: smoothEase,
-      },
-    },
-  };
-
-  const stepNumberVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: smoothEase,
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: 0.1,
-        ease: smoothEase,
-      },
-    },
-  };
-
-  const descVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: 0.2,
-        ease: smoothEase,
-      },
-    },
-  };
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
     <section
       ref={sectionRef}
-      id="features"
-      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
+      id="how-it-works"
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden"
     >
-      {/* Soft gradient background */}
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
-        {/* Base gradient */}
+        <div className="absolute inset-0 dark:bg-slate-900/60" />
         <div
-          className="absolute inset-0"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] opacity-30"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(248, 250, 252, 0.5) 0%, rgba(241, 245, 249, 0.8) 50%, rgba(248, 250, 252, 0.5) 100%)",
-          }}
-        />
-        
-        {/* Light diffusion orbs */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-40"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(99, 102, 241, 0.08) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse, rgba(99,102,241,0.1) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
-        <div
-          className="absolute bottom-0 right-1/4 w-[500px] h-[500px] opacity-30"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-
-        {/* Dark mode gradient */}
-        <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-slate-900/50 dark:via-slate-900/80 dark:to-slate-900/50" />
       </div>
 
       {/* Top divider */}
       <motion.div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent)",
-        }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.25), transparent)" }}
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
+        animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
         transition={{ duration: 1.2, ease: smoothEase }}
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+
+        {/* â”€â”€ Section header â”€â”€ */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 lg:mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          className="text-center max-w-3xl mx-auto mb-12 lg:mb-14"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-5"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-            Simple Process
+            How It Works
           </motion.span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-5">
-            How{" "}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+            From zero to{" "}
             <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
-              InterviewAI
+              interview-ready
             </span>{" "}
-            Works
+            in 3 steps
           </h2>
 
           <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Master your interview skills in three simple steps. Our AI-powered platform
-            guides you from preparation to perfection.
+            A structured, AI-powered process that mirrors the real interview experience â€”
+            so when the actual day comes, you're already comfortable.
           </motion.p>
         </motion.div>
 
-        {/* Steps Container */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative"
-        >
-          {/* Connecting Line - Desktop */}
-          <div className="hidden lg:block absolute top-[140px] left-[20%] right-[20%] h-px z-0">
-            <motion.div
-              className="h-full w-full"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3) 20%, rgba(139, 92, 246, 0.3) 50%, rgba(168, 85, 247, 0.3) 80%, transparent)",
-              }}
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-              transition={{ duration: 1.5, delay: 0.5, ease: smoothEase }}
-            />
-            {/* Animated dot traveling along line */}
-            <motion.div
-              className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo-500"
-              style={{ boxShadow: "0 0 12px rgba(99, 102, 241, 0.6)" }}
-              initial={{ left: "0%", opacity: 0 }}
-              animate={isInView ? { left: "100%", opacity: [0, 1, 1, 0] } : { left: "0%", opacity: 0 }}
-              transition={{ duration: 2.5, delay: 1, ease: "easeInOut" }}
-            />
-          </div>
-
-          {/* Steps Grid */}
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {steps.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  variants={cardVariants}
-                  className="relative group"
-                >
-                  {/* Arrow connector - between cards on desktop */}
-                  {idx < steps.length - 1 && (
-                    <div className="hidden lg:flex absolute -right-6 top-[140px] z-10">
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                        transition={{ duration: 0.5, delay: 0.8 + idx * 0.2, ease: smoothEase }}
-                      >
-                        <ArrowRight className="w-5 h-5 text-indigo-400/60" />
-                      </motion.div>
-                    </div>
-                  )}
-
-                  {/* Card */}
+        {/* â”€â”€ Steps â”€â”€ */}
+        <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-6 xl:gap-8">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 32 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.65, delay: 0.15 + idx * 0.12, ease: smoothEase }}
+                className="relative group"
+              >
+                {/* Arrow between cards â€” desktop only */}
+                {idx < steps.length - 1 && (
                   <motion.div
-                    className="relative h-full p-8 lg:p-10 rounded-2xl bg-white/70 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 backdrop-blur-sm shadow-lg shadow-slate-200/50 dark:shadow-slate-900/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-indigo-500/10 group-hover:-translate-y-1 group-hover:border-indigo-200/50 dark:group-hover:border-indigo-500/30"
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.3 }}
+                    className="hidden lg:flex absolute -right-4 xl:-right-5 top-10 z-20 items-center justify-center w-8 h-8 rounded-full bg-background border border-border/60 shadow-sm"
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.5 + idx * 0.15 }}
                   >
-                    {/* Step Number Badge */}
-                    <motion.div
-                      variants={stepNumberVariants}
-                      className="relative mb-6"
-                    >
-                      <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white font-bold text-lg shadow-lg shadow-indigo-500/30 relative overflow-hidden">
-                        {step.step}
-                        {/* Shimmer effect */}
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                          animate={{ x: ["-100%", "100%"] }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            repeatDelay: 3,
-                            ease: "easeInOut",
-                          }}
-                        />
-                      </div>
-                    </motion.div>
-
-                    {/* Icon */}
-                    <motion.div
-                      className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 border border-slate-200/50 dark:border-slate-600/50 group-hover:from-indigo-50 group-hover:to-violet-50 dark:group-hover:from-indigo-900/30 dark:group-hover:to-violet-900/30 group-hover:border-indigo-200 dark:group-hover:border-indigo-500/30 transition-all duration-300"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Icon className="w-6 h-6 text-slate-600 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300" />
-                    </motion.div>
-
-                    {/* Title */}
-                    <motion.h3
-                      variants={titleVariants}
-                      className="text-xl lg:text-2xl font-semibold text-foreground mb-3"
-                    >
-                      {step.title}
-                    </motion.h3>
-
-                    {/* Description */}
-                    <motion.p
-                      variants={descVariants}
-                      className="text-muted-foreground leading-relaxed text-[15px]"
-                    >
-                      {step.description}
-                    </motion.p>
-
-                    {/* Hover accent line */}
-                    <motion.div
-                      className="absolute bottom-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
                   </motion.div>
+                )}
 
-                  {/* Mobile step connector */}
-                  {idx < steps.length - 1 && (
-                    <div className="flex md:hidden justify-center my-4">
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-                        transition={{ duration: 0.5, delay: 0.5 + idx * 0.2 }}
-                        className="flex flex-col items-center gap-1"
-                      >
-                        <div className="w-px h-6 bg-gradient-to-b from-indigo-400 to-violet-400" />
-                        <ArrowRight className="w-4 h-4 text-indigo-400/60 rotate-90" />
-                      </motion.div>
+                {/* Card */}
+                <div className="h-full bg-card border border-border/50 rounded-2xl p-6 xl:p-7 flex flex-col gap-5 hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group-hover:-translate-y-1">
+
+                  {/* Top row â€” step pill + icon */}
+                  <div className="flex items-center justify-between">
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r ${step.color} shadow-md ${step.glow}`}>
+                      <span className="text-white text-xs font-bold tracking-widest">STEP {step.number}</span>
                     </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
+                    <div className={`w-11 h-11 rounded-xl ${step.bg} ring-1 ${step.ring} flex items-center justify-center`}>
+                      <Icon className="w-5 h-5 text-foreground/70" />
+                    </div>
+                  </div>
 
-        {/* Bottom CTA - Professional with breathing effect */}
+                  {/* Label + title + headline + description */}
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/50 mb-1">{step.label}</p>
+                    <h3 className="text-xl font-bold text-foreground leading-snug mb-2">{step.title}</h3>
+                    <p className={`text-sm font-semibold bg-gradient-to-r ${step.color} bg-clip-text text-transparent mb-3 leading-snug`}>
+                      {step.headline}
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-px bg-border/60" />
+
+                  {/* Detail bullets */}
+                  <div className="space-y-2.5">
+                    {step.details.map((detail, dIdx) => {
+                      const DIcon = detail.icon;
+                      return (
+                        <div key={dIdx} className="flex items-center gap-2.5">
+                          <div className={`w-7 h-7 rounded-lg ${step.bg} flex items-center justify-center flex-shrink-0`}>
+                            <DIcon className="w-3.5 h-3.5 text-foreground/60" />
+                          </div>
+                          <span className="text-xs text-muted-foreground">{detail.text}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Bottom accent line on hover */}
+                  <div className={`h-0.5 w-0 group-hover:w-full rounded-full bg-gradient-to-r ${step.color} transition-all duration-500 mt-auto`} />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* â”€â”€ Bottom CTA banner â”€â”€ */}
         <motion.div
-          className="mt-16 lg:mt-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 1, ease: smoothEase }}
+          className="mt-10 lg:mt-12"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.55, ease: smoothEase }}
         >
-          <div className="relative max-w-2xl mx-auto">
-            {/* Breathing glow background */}
-            <div className="absolute inset-0 -m-4 sm:-m-8">
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-3xl blur-2xl animate-pulse"
-                style={{ animationDuration: '3s' }}
-              />
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-violet-500/10 rounded-3xl blur-3xl"
-                style={{ 
-                  animation: 'breathe 4s ease-in-out infinite',
-                }}
-              />
-            </div>
+          <div className="relative overflow-hidden rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-slate-900 via-indigo-950/60 to-slate-900 px-6 sm:px-10 py-8 sm:py-10">
 
-            {/* Card container */}
-            <div className="relative bg-gradient-to-br from-slate-900/90 via-slate-900/95 to-indigo-950/90 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950 rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-indigo-500/20 shadow-2xl shadow-indigo-500/10 overflow-hidden">
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-2xl sm:rounded-3xl p-px overflow-hidden">
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 opacity-30"
-                  style={{
-                    animation: 'rotate 8s linear infinite',
-                    transformOrigin: 'center',
-                  }}
-                />
-              </div>
+            {/* Subtle grid overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(99,102,241,1) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,1) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
+              }}
+            />
+            {/* Glow orbs */}
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
 
-              {/* Floating particles */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-1 h-1 bg-indigo-400/40 rounded-full"
-                    style={{
-                      left: `${15 + i * 15}%`,
-                      top: `${20 + (i % 3) * 25}%`,
-                      animation: `float ${3 + i * 0.5}s ease-in-out infinite`,
-                      animationDelay: `${i * 0.3}s`,
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 text-center space-y-4 sm:space-y-6">
-                {/* Breathing icon */}
-                <div className="inline-flex items-center justify-center">
-                  <div 
-                    className="relative w-14 h-14 sm:w-16 sm:h-16"
-                    style={{ animation: 'breathe 3s ease-in-out infinite' }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl rotate-3" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-violet-500 rounded-2xl flex items-center justify-center">
-                      <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                  </div>
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+              {/* Left text */}
+              <div className="text-center sm:text-left space-y-1.5">
+                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-semibold text-emerald-400 tracking-wide uppercase">Free to start â€” no card needed</span>
                 </div>
-
-                {/* Text */}
-                <div className="space-y-2">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">
-                    Ready to Transform Your Interview Skills?
-                  </h3>
-                  <p className="text-sm sm:text-base text-slate-400 max-w-md mx-auto">
-                    Join thousands of successful candidates who aced their interviews with AI-powered practice
-                  </p>
-                </div>
-
-                {/* CTA Button with breathing effect */}
-                <a href="/setup" className="inline-block group">
-                  <div 
-                    className="relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl overflow-hidden"
-                    style={{ animation: 'breathe 3s ease-in-out infinite' }}
-                  >
-                    {/* Button glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
-                        style={{
-                          animation: 'shimmer 2s infinite',
-                        }}
-                      />
-                    </div>
-
-                    <span className="relative flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
-                      Begin Your First Interview
-                      <svg 
-                        className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor" 
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-
-                {/* Trust indicator */}
-                <p className="text-xs text-slate-500 flex items-center justify-center gap-2">
-                  <span className="inline-flex items-center">
-                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse" />
-                    Free to start
-                  </span>
-                  <span className="text-slate-600">•</span>
-                  <span>No credit card required</span>
+                <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                  Your first mock interview is waiting.
+                </h3>
+                <p className="text-sm text-slate-400 max-w-md">
+                  Set up in 60 seconds. Practice today. Walk into your real interview with confidence.
                 </p>
               </div>
+
+              {/* Right CTA */}
+              <div className="flex flex-col items-center gap-2.5 flex-shrink-0">
+                <Link to="/setup">
+                  <motion.button
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative group px-7 py-3.5 rounded-xl text-sm font-semibold text-white overflow-hidden flex items-center gap-2"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="relative">Start Your Free Interview</span>
+                    <ArrowRight className="relative w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+                  </motion.button>
+                </Link>
+                <p className="text-xs text-slate-500">50,000+ interviews completed Â· Rated 4.9/5</p>
+              </div>
             </div>
           </div>
-
-          {/* CSS Keyframes */}
-          <style>{`
-            @keyframes breathe {
-              0%, 100% { transform: scale(1); opacity: 1; }
-              50% { transform: scale(1.02); opacity: 0.9; }
-            }
-            @keyframes float {
-              0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
-              50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
-            }
-            @keyframes shimmer {
-              0% { transform: translateX(-100%) skewX(-12deg); }
-              100% { transform: translateX(200%) skewX(-12deg); }
-            }
-            @keyframes rotate {
-              from { transform: rotate(0deg); }
-              to { transform: rotate(360deg); }
-            }
-          `}</style>
         </motion.div>
       </div>
 
       {/* Bottom divider */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.15), transparent)",
-        }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.15), transparent)" }}
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-        transition={{ duration: 1.2, delay: 0.3, ease: smoothEase }}
+        animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
+        transition={{ duration: 1.2, delay: 0.4, ease: smoothEase }}
       />
     </section>
   );

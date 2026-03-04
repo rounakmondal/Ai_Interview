@@ -19,6 +19,7 @@ interface VoiceInputControllerProps {
   autoMode?: boolean; // Auto-listen after TTS, auto-submit after silence
   onAutoModeChange?: (enabled: boolean) => void;
   onStopSpeaking?: () => void; // Stop TTS before listening
+  answerTimeLimit?: number; // Max seconds student can speak per answer (default: 120)
 }
 
 const VoiceInputController: FC<VoiceInputControllerProps> = ({
@@ -37,14 +38,19 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   autoMode = true,
   onAutoModeChange,
   onStopSpeaking,
+  answerTimeLimit = 120,
 }) => {
   const [manualAnswer, setManualAnswer] = useState("");
   const [useManualInput, setUseManualInput] = useState(false);
   const [localAutoMode, setLocalAutoMode] = useState(autoMode);
+  const [answerTimeLeft, setAnswerTimeLeft] = useState<number | null>(null);
   const wasListeningRef = useRef(false);
   const wasSpeakingRef = useRef(false);
   const autoSubmitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const autoListenTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const answerTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const onStopListeningRef = useRef(onStopListening);
+  useEffect(() => { onStopListeningRef.current = onStopListening; }, [onStopListening]);
 
   // Keep localAutoMode in sync with prop
   useEffect(() => {
@@ -62,6 +68,38 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   useEffect(() => { isListeningRef.current = isListening; }, [isListening]);
   useEffect(() => { isSubmittingRef.current = isSubmitting; }, [isSubmitting]);
   useEffect(() => { onStartListeningRef.current = onStartListening; }, [onStartListening]);
+
+  // Answer time limit countdown - starts when student starts speaking
+  useEffect(() => {
+    if (isListening && !useManualInput && answerTimeLimit > 0) {
+      setAnswerTimeLeft(answerTimeLimit);
+      answerTimerRef.current = setInterval(() => {
+        setAnswerTimeLeft(prev => {
+          if (prev === null || prev <= 1) {
+            clearInterval(answerTimerRef.current!);
+            answerTimerRef.current = null;
+            console.log("Answer time limit reached - stopping listening");
+            onStopListeningRef.current();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (answerTimerRef.current) {
+        clearInterval(answerTimerRef.current);
+        answerTimerRef.current = null;
+      }
+      setAnswerTimeLeft(null);
+    }
+
+    return () => {
+      if (answerTimerRef.current) {
+        clearInterval(answerTimerRef.current);
+        answerTimerRef.current = null;
+      }
+    };
+  }, [isListening, useManualInput, answerTimeLimit]);
 
   // Auto-start listening when TTS finishes speaking
   useEffect(() => {
@@ -257,18 +295,44 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
 
           {/* Listening indicator */}
           {isListening && (
-            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-1">
-                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse delay-100" />
-                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse delay-200" />
+            <div className={`border rounded-lg p-4 ${
+              answerTimeLeft !== null && answerTimeLeft <= answerTimeLimit * 0.25
+                ? "bg-red-50 dark:bg-red-950/30 border-red-300 dark:border-red-800"
+                : answerTimeLeft !== null && answerTimeLeft <= answerTimeLimit * 0.5
+                ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800"
+                : "bg-accent/10 border-accent/20"
+            }`}>
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse delay-100" />
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse delay-200" />
+                  </div>
+                  <p className={`text-sm font-medium ${
+                    answerTimeLeft !== null && answerTimeLeft <= answerTimeLimit * 0.25
+                      ? "text-red-600 dark:text-red-400"
+                      : answerTimeLeft !== null && answerTimeLeft <= answerTimeLimit * 0.5
+                      ? "text-amber-600 dark:text-amber-400"
+                      : "text-accent"
+                  }`}>
+                    {localAutoMode 
+                      ? "🎤 Recording... (stops 2s after you finish speaking)" 
+                      : "Listening... (auto-stops after silence)"}
+                  </p>
                 </div>
-                <p className="text-sm text-accent font-medium">
-                  {localAutoMode 
-                    ? "🎤 Recording... (stops 2s after you finish speaking)" 
-                    : "Listening... (auto-stops after silence)"}
-                </p>
+                {answerTimeLeft !== null && (
+                  <div className={`flex items-center gap-1.5 text-sm font-mono font-bold px-2.5 py-1 rounded-md ${
+                    answerTimeLeft <= answerTimeLimit * 0.25
+                      ? "bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300"
+                      : answerTimeLeft <= answerTimeLimit * 0.5
+                      ? "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300"
+                      : "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300"
+                  }`}>
+                    <span>⏱</span>
+                    <span>{Math.floor(answerTimeLeft / 60).toString().padStart(2, "0")}:{(answerTimeLeft % 60).toString().padStart(2, "0")}</span>
+                  </div>
+                )}
               </div>
             </div>
           )}

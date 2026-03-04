@@ -584,6 +584,7 @@ export default function InterviewRoom() {
                     autoMode={autoMode}
                     onAutoModeChange={setAutoMode}
                     onStopSpeaking={audio.stopPlayback}
+                    answerTimeLimit={120}
                   />
                 </div>
               </div>
@@ -593,7 +594,7 @@ export default function InterviewRoom() {
             <div className="hidden md:block w-32 lg:w-44 flex-shrink-0 order-3">
               <div className="lg:sticky lg:top-8 shadow-lg rounded-lg overflow-hidden w-full">
                 <CameraPanel
-                  videoRef={camera.videoRef}
+                  stream={camera.stream}
                   isActive={camera.isActive}
                   isLoading={camera.isLoading}
                   error={camera.error}
@@ -607,7 +608,7 @@ export default function InterviewRoom() {
           {/* Mobile Camera - Fixed bottom on mobile only */}
           <div className="fixed bottom-4 right-4 w-24 h-32 md:hidden z-50 shadow-xl rounded-lg overflow-hidden border-2 border-background">
             <CameraPanel
-              videoRef={camera.videoRef}
+              stream={camera.stream}
               isActive={camera.isActive}
               isLoading={camera.isLoading}
               error={camera.error}

@@ -108,7 +108,7 @@ export default function PremiumFeatures() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden"
     >
       {/* Soft gradient background with light diffusion */}
       <div className="absolute inset-0 -z-10">
@@ -151,7 +151,7 @@ export default function PremiumFeatures() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
+          className="text-center max-w-3xl mx-auto mb-8 lg:mb-10"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, ease: smoothEase }}

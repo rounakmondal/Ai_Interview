@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Video, VideoOff, AlertCircle } from "lucide-react";
 
 interface CameraPanelProps {
-  videoRef: React.RefObject<HTMLVideoElement>;
+  stream: MediaStream | null;
   isActive: boolean;
   isLoading: boolean;
   error: string | null;
@@ -13,19 +13,28 @@ interface CameraPanelProps {
 }
 
 const CameraPanel: FC<CameraPanelProps> = ({
-  videoRef,
+  stream,
   isActive,
   isLoading,
   error,
   onStartCamera,
   onStopCamera,
 }) => {
-  // Auto-play video when active
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Attach stream to this instance's own video element
   useEffect(() => {
-    if (videoRef.current && isActive) {
-      videoRef.current.play();
+    const video = videoRef.current;
+    if (!video) return;
+    if (stream) {
+      video.srcObject = stream;
+      video.play().catch(err => {
+        if (err.name !== "AbortError") console.warn("CameraPanel play error:", err);
+      });
+    } else {
+      video.srcObject = null;
     }
-  }, [isActive, videoRef]);
+  }, [stream]);
 
   return (
     <Card className="bg-gradient-to-br from-card to-card/50 border-border/40 overflow-hidden space-y-4 p-4">

@@ -5,6 +5,11 @@ import PremiumCTA from "@/components/premium/PremiumCTA";
 import PremiumFeatures from "@/components/premium/PremiumFeatures";
 import PremiumHowItWorks from "@/components/premium/PremiumHowItWorks";
 import PremiumContact from "@/components/premium/PremiumContact";
+import PremiumTestimonials from "@/components/premium/PremiumTestimonials";
+import PremiumPricing from "@/components/premium/PremiumPricing";
+import PremiumStats from "@/components/premium/PremiumStats";
+import PremiumFAQ from "@/components/premium/PremiumFAQ";
+import PremiumInterviewTypes from "@/components/premium/PremiumInterviewTypes";
 
 export default function PremiumLanding() {
   return (
@@ -15,11 +20,26 @@ export default function PremiumLanding() {
       {/* Hero Section */}
       <PremiumHero />
 
+      {/* Social-proof numbers */}
+      <PremiumStats />
+
       {/* How It Works Section */}
       <PremiumHowItWorks />
 
+      {/* Interview Categories */}
+      <PremiumInterviewTypes />
+
       {/* Premium Features Section */}
       <PremiumFeatures />
+
+      {/* Testimonials */}
+      <PremiumTestimonials />
+
+      {/* Pricing */}
+      <PremiumPricing />
+
+      {/* FAQ */}
+      <PremiumFAQ />
 
       {/* Contact Section */}
       <PremiumContact />
@@ -32,3 +52,4 @@ export default function PremiumLanding() {
     </div>
   );
 }
+

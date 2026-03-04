@@ -126,8 +126,17 @@ export default function Footer() {
               </div>
 
               {/* Copyright */}
-              <p className="text-white/60 text-sm pt-4">
-                © 2024 InterviewAI. All rights reserved.
+              <p className="text-white/60 text-sm pt-2">
+                © 2026 InterviewAI. All rights reserved.
+              </p>
+              <p className="text-white/50 text-xs">
+                Built by{" "}
+                <a
+                  href="mailto:rounakmondal198@gmail.com"
+                  className="text-white/70 hover:text-white underline underline-offset-2 transition-colors"
+                >
+                  Ranjan Mondal
+                </a>
               </p>
             </div>
 

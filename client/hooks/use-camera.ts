@@ -11,6 +11,7 @@ export const useCamera = (options: UseCameraOptions = {}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const [isActive, setIsActive] = useState(false);
+  const [stream, setStream] = useState<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,20 +40,7 @@ export const useCamera = (options: UseCameraOptions = {}) => {
       });
 
       streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        
-        // Wait for video to be ready before playing
-        try {
-          await videoRef.current.play();
-        } catch (playErr) {
-          // AbortError is expected if play is interrupted - ignore it
-          if (playErr instanceof Error && playErr.name !== 'AbortError') {
-            console.warn("Video play warning:", playErr);
-          }
-        }
-      }
+      setStream(stream);
 
       setIsActive(true);
       setIsLoading(false);
@@ -71,10 +59,7 @@ export const useCamera = (options: UseCameraOptions = {}) => {
       streamRef.current = null;
     }
 
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-
+    setStream(null);
     setIsActive(false);
     setError(null);
   }, []);
@@ -96,6 +81,7 @@ export const useCamera = (options: UseCameraOptions = {}) => {
 
   return {
     videoRef,
+    stream,
     isActive,
     isLoading,
     error,
