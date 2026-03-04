@@ -18,17 +18,41 @@ async function extractTextFromPDF(file: File): Promise<string> {
     for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
       const page = await pdf.getPage(pageNum);
       const textContent = await page.getTextContent();
+      
+      // Extract text from items, handling both 'str' and 'text' properties
       const pageText = textContent.items
-        .map((item: any) => item.str)
+        .map((item: any) => {
+          // Handle both TextItem and TextMarkedContent
+          if ('str' in item) {
+            return item.str;
+          } else if ('text' in item) {
+            return item.text;
+          }
+          return '';
+        })
+        .filter((text: string) => text.trim().length > 0)
         .join(" ");
-      textParts.push(pageText);
+      
+      if (pageText.trim()) {
+        textParts.push(pageText);
+      }
     }
     
-    return textParts.join("\n\n").trim();
+    const extractedText = textParts.join("\n\n").trim();
+    
+    // Validate that we got meaningful content (not just metadata)
+    if (extractedText.length < 50 || 
+        extractedText.includes("(app.flowcv.com") ||
+        extractedText.startsWith("Title (") ||
+        extractedText.startsWith("Creator (") ||
+        extractedText.startsWith("Producer (")) {
+      throw new Error("Extracted content appears to be metadata only");
+    }
+    
+    return extractedText;
   } catch (error) {
     console.error("PDF.js extraction failed:", error);
-    // Fallback: try basic text extraction
-    return extractTextBasic(file);
+    throw new Error("Could not extract text from PDF. The file may be image-based or password-protected.");
   }
 }
 
