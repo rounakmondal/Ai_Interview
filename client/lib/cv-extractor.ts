@@ -1,8 +1,10 @@
 import mammoth from "mammoth";
 import * as pdfjsLib from "pdfjs-dist";
+import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
-// Configure PDF.js worker - use public folder worker file
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+// Configure PDF.js worker - Vite bundles this to the correct hashed asset path
+// so it works in both local dev and production (avoids MIME type issues on Netlify)
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 /**
  * Extract text from a PDF file
