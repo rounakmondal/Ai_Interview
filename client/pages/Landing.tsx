@@ -100,12 +100,12 @@ export default function LandingPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border/40">
                 <div>
-                  <div className="text-2xl font-bold text-primary">10K+</div>
-                  <p className="text-sm text-muted-foreground">Active Users</p>
+                  <div className="text-2xl font-bold text-primary">Free</div>
+                  <p className="text-sm text-muted-foreground">To Get Started</p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-secondary">95%</div>
-                  <p className="text-sm text-muted-foreground">Success Rate</p>
+                  <div className="text-2xl font-bold text-secondary">AI</div>
+                  <p className="text-sm text-muted-foreground">Powered Feedback</p>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-accent">24/7</div>

@@ -1,39 +1,38 @@
-import { motion, useInView, useMotionValue, useSpring, animate } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { TrendingUp, Users, Award, Clock } from "lucide-react";
 
 const stats = [
   {
     icon: Users,
-    value: 50000,
-    suffix: "+",
-    label: "Interviews Completed",
-    sub: "by candidates across India",
+    display: "Free",
+    suffix: "",
+    label: "Free to Start",
+    sub: "no credit card required",
     color: "from-indigo-500 to-blue-600",
     bg: "bg-indigo-500/10",
   },
   {
     icon: TrendingUp,
-    value: 95,
-    suffix: "%",
-    label: "Interview Success Rate",
-    sub: "of users report improved confidence",
+    display: "AI",
+    suffix: "",
+    label: "Powered Feedback",
+    sub: "instant, personalized coaching",
     color: "from-emerald-500 to-teal-600",
     bg: "bg-emerald-500/10",
   },
   {
     icon: Award,
-    value: 4.9,
-    suffix: "/5",
-    isDecimal: true,
-    label: "Average User Rating",
-    sub: "across 12,400+ verified reviews",
+    display: "4",
+    suffix: "+",
+    label: "Languages Supported",
+    sub: "English, Hindi, Bengali, Telugu",
     color: "from-amber-500 to-orange-600",
     bg: "bg-amber-500/10",
   },
   {
     icon: Clock,
-    value: 24,
+    display: "24",
     suffix: "/7",
     label: "Always Available",
     sub: "practice any time, anywhere",
@@ -42,26 +41,8 @@ const stats = [
   },
 ];
 
-function AnimatedNumber({ target, suffix, isDecimal }: { target: number; suffix: string; isDecimal?: boolean }) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const controls = animate(0, target, {
-      duration: 2,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplay(isDecimal ? parseFloat(v.toFixed(1)) : Math.round(v)),
-    });
-    return controls.stop;
-  }, [isInView, target, isDecimal]);
-
-  return (
-    <span ref={ref}>
-      {isDecimal ? display.toFixed(1) : display.toLocaleString()}{suffix}
-    </span>
-  );
+function StatDisplay({ display, suffix }: { display: string; suffix: string }) {
+  return <span>{display}{suffix}</span>;
 }
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -107,9 +88,9 @@ export default function PremiumStats() {
           transition={{ duration: 0.6, ease: smoothEase }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-            Results that{" "}
+            Built to help you{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              speak for themselves
+              succeed
             </span>
           </h2>
         </motion.div>
@@ -129,7 +110,7 @@ export default function PremiumStats() {
                   <Icon className={`w-6 h-6 bg-gradient-to-br ${stat.color} bg-clip-text`} style={{ color: "hsl(var(--indigo-500, 239 84% 67%))" }} />
                 </div>
                 <div className={`text-3xl lg:text-4xl font-extrabold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}>
-                  <AnimatedNumber target={stat.value} suffix={stat.suffix} isDecimal={stat.isDecimal} />
+                  <StatDisplay display={stat.display} suffix={stat.suffix} />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground">{stat.label}</p>

@@ -225,17 +225,16 @@ export default function PremiumHero() {
               <div>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-foreground ml-1">4.9</span>
                 </div>
-                <p className="text-xs text-muted-foreground">from 50K+ interviews</p>
+                <p className="text-xs text-muted-foreground">Loved by early users</p>
               </div>
             </motion.div>
 
             {/* Stats */}
             <motion.div variants={item} className="grid grid-cols-3 gap-4 pt-5 border-t border-border/40">
               {[
-                { value: "50K+", label: "Candidates" },
-                { value: "95%", label: "Success Rate" },
+                { value: "Free", label: "To Get Started" },
+                { value: "AI", label: "Powered Feedback" },
                 { value: "4", label: "Languages" },
               ].map((s, i) => (
                 <div key={i}>

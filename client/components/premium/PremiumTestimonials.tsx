@@ -2,56 +2,57 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Star, Quote } from "lucide-react";
 
+// Note: These are illustrative example testimonials showing how the platform helps candidates.
 const testimonials = [
   {
-    name: "Priya Sharma",
+    name: "Priya S.",
     role: "Software Engineer",
-    company: "Infosys",
+    company: "IT Industry",
     avatar: "PS",
     color: "from-indigo-500 to-blue-600",
     rating: 5,
-    text: "InterviewAI completely transformed my interview preparation. The AI gave me realistic follow-up questions I never expected, and after 2 weeks of practice I cracked my dream job at Infosys!",
+    text: "InterviewAI completely transformed my interview preparation. The AI gave me realistic follow-up questions I never expected. After 2 weeks of practice I felt so much more confident going into real interviews!",
   },
   {
-    name: "Rahul Verma",
-    role: "Government Bank Officer",
-    company: "SBI",
+    name: "Rahul V.",
+    role: "Banking Aspirant",
+    company: "IBPS Preparation",
     avatar: "RV",
     color: "from-violet-500 to-purple-600",
     rating: 5,
-    text: "Practicing IBPS interviews with InterviewAI was a game-changer. The Hindi language support made it feel completely natural. I cleared my SBI PO interview on the first attempt.",
+    text: "Practicing IBPS interview questions with InterviewAI was a game-changer. The Hindi language support made it feel completely natural. I felt fully prepared going into my bank exam interview.",
   },
   {
-    name: "Ananya Patel",
-    role: "Marketing Manager",
-    company: "HCL Technologies",
+    name: "Ananya P.",
+    role: "Marketing Professional",
+    company: "Private Sector",
     avatar: "AP",
     color: "from-pink-500 to-rose-600",
     rating: 5,
-    text: "The detailed performance metrics showed exactly where I was going wrong. My confidence score went from 62% to 91% in just 10 practice sessions. Absolutely worth it.",
+    text: "The detailed performance metrics showed exactly where I was going wrong. My confidence improved dramatically after just a few practice sessions. Absolutely worth it.",
   },
   {
-    name: "Arjun Nair",
+    name: "Arjun N.",
     role: "Data Analyst",
-    company: "TCS",
+    company: "Tech Sector",
     avatar: "AN",
     color: "from-emerald-500 to-teal-600",
     rating: 5,
     text: "What sets this apart is the real-time voice interaction. It feels like a real interview, not a quiz. The personalized feedback on technical skills was spot on for my analytics role.",
   },
   {
-    name: "Deepika Rao",
+    name: "Deepika R.",
     role: "HR Professional",
-    company: "Wipro",
+    company: "Corporate HR",
     avatar: "DR",
     color: "from-amber-500 to-orange-600",
     rating: 5,
-    text: "I recommend InterviewAI to all our new hires at Wipro as preparation. The 24/7 availability means candidates can practice at midnight before their morning interview. Brilliant tool.",
+    text: "I recommend InterviewAI to job seekers as preparation. The 24/7 availability means candidates can practice at midnight before their morning interview. Brilliant tool.",
   },
   {
-    name: "Vikram Singh",
-    role: "Civil Services",
-    company: "IAS (2025 Batch)",
+    name: "Vikram S.",
+    role: "Civil Services Aspirant",
+    company: "UPSC Preparation",
     avatar: "VS",
     color: "from-cyan-500 to-blue-600",
     rating: 5,
@@ -122,9 +123,9 @@ export default function PremiumTestimonials() {
           </motion.span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Trusted by{" "}
+            What users{" "}
             <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              thousands of candidates
+              are saying
             </span>
           </h2>
 
@@ -134,23 +135,19 @@ export default function PremiumTestimonials() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           >
-            Join 50,000+ professionals who have landed their dream jobs using InterviewAI.
+            Illustrative examples of how InterviewAI helps candidates prepare for interviews.
           </motion.p>
 
-          {/* Aggregate rating */}
+          {/* CTA nudge */}
           <motion.div
             className="flex items-center justify-center gap-2 mt-6"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: smoothEase }}
           >
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
-              ))}
-            </div>
-            <span className="font-bold text-foreground">4.9/5</span>
-            <span className="text-muted-foreground text-sm">from 12,400+ reviews</span>
+            <span className="text-sm text-muted-foreground px-4 py-1.5 rounded-full border border-border/50 bg-muted/50">
+              ✦ Illustrative examples · Real practice, real progress
+            </span>
           </motion.div>
         </motion.div>
 
