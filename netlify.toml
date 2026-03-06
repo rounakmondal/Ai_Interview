@@ -5,7 +5,7 @@
 
 
 [functions]
-  external_node_modules = ["express"]
+  external_node_modules = ["express", "pdfjs-dist"]
   node_bundler = "esbuild"
 
 [[headers]]

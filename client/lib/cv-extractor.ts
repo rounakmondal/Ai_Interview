@@ -1,83 +1,33 @@
 import mammoth from "mammoth";
-import * as pdfjsLib from "pdfjs-dist";
-
-// Hardcoded jsDelivr CDN URL — version literal avoids template resolution issues
-// in production bundles where pdfjsLib.version may be undefined after tree-shaking.
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs";
 
 /**
- * Extract text from a PDF file
+ * Extract text from a PDF by sending it to the server-side API.
+ * This avoids ALL browser Worker / MIME-type issues with pdfjs-dist.
  */
 async function extractTextFromPDF(file: File): Promise<string> {
+  // Read file → base64
   const arrayBuffer = await file.arrayBuffer();
-  
-  try {
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    
-    const textParts: string[] = [];
-    
-    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-      const page = await pdf.getPage(pageNum);
-      const textContent = await page.getTextContent();
-      
-      // Extract text from items, handling both 'str' and 'text' properties
-      const pageText = textContent.items
-        .map((item: any) => {
-          // Handle both TextItem and TextMarkedContent
-          if ('str' in item) {
-            return item.str;
-          } else if ('text' in item) {
-            return item.text;
-          }
-          return '';
-        })
-        .filter((text: string) => text.trim().length > 0)
-        .join(" ");
-      
-      if (pageText.trim()) {
-        textParts.push(pageText);
-      }
-    }
-    
-    const extractedText = textParts.join("\n\n").trim();
-    
-    // Validate that we got meaningful content (not just metadata)
-    if (extractedText.length < 50 || 
-        extractedText.includes("(app.flowcv.com") ||
-        extractedText.startsWith("Title (") ||
-        extractedText.startsWith("Creator (") ||
-        extractedText.startsWith("Producer (")) {
-      throw new Error("Extracted content appears to be metadata only");
-    }
-    
-    return extractedText;
-  } catch (error) {
-    // Re-throw with the real underlying error message so it's visible in logs
-    const msg = error instanceof Error ? error.message : String(error);
-    console.error("PDF.js extraction failed:", msg);
-    throw new Error(`PDF extraction failed: ${msg}`);
-  }
-}
+  const bytes = new Uint8Array(arrayBuffer);
+  let binary = "";
+  for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+  const base64 = btoa(binary);
 
-/**
- * Basic text extraction fallback
- */
-async function extractTextBasic(file: File): Promise<string> {
-  const text = await file.text();
-  // Filter out binary garbage and extract readable text
-  const cleanText = text
-    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  
-  // Extract any readable strings (basic heuristic)
-  const readable = cleanText.match(/[\w\s@.,;:!?()-]{10,}/g);
-  if (readable && readable.length > 0) {
-    return readable.join(" ").trim();
+  const res = await fetch("/api/extract-pdf", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: base64 }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Unknown server error" }));
+    throw new Error(err.error ?? `Server returned ${res.status}`);
   }
-  
-  throw new Error("Could not extract text from PDF. Please try a different file or format.");
+
+  const { text } = await res.json();
+  if (!text || text.trim().length < 30) {
+    throw new Error("Could not extract readable text. The PDF may be image-based or scanned.");
+  }
+  return text.trim();
 }
 
 /**
@@ -122,12 +72,7 @@ export async function extractCVText(file: File): Promise<string> {
   try {
     switch (extension) {
       case "pdf":
-        try {
-          return await extractTextFromPDF(file);
-        } catch (pdfError) {
-          console.warn("PDF.js failed, trying basic fallback:", pdfError);
-          return await extractTextBasic(file);
-        }
+        return await extractTextFromPDF(file);
       case "docx":
         return await extractTextFromDOCX(file);
       case "doc":

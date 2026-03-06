@@ -9,6 +9,7 @@ import {
   handleNextQuestion, 
   handleFinishInterview 
 } from "./routes/interview";
+import { handleExtractPdf } from "./routes/extractPdf";
 
 export function createServer() {
   const app = express();
@@ -56,6 +57,13 @@ export function createServer() {
   // Sends email via SMTP to site owner + auto-reply to sender
   // ─────────────────────────────────────────────────────────────────────
   app.post("/api/contact", handleContact);
+
+  // ── PDF Text Extraction ───────────────────────────────────────────────
+  // POST /api/extract-pdf
+  // Body: { data: string }  — base64-encoded PDF
+  // Returns: { text: string }
+  // ─────────────────────────────────────────────────────────────────────
+  app.post("/api/extract-pdf", handleExtractPdf);
 
   return app;
 }
