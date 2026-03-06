@@ -23,10 +23,9 @@ export default function PremiumNavbar() {
     { label: "How It Works", href: "#features" },
     { label: "Features", href: "#features" },
     { label: "Interview Types", href: "#interview-types" },
-    { label: "Testimonials", href: "#testimonials" },
     { label: "Pricing", href: "#pricing" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/about", isRoute: true },
+    { label: "Contact", href: "/contact", isRoute: true },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -73,7 +72,7 @@ export default function PremiumNavbar() {
             {/* Center Section - Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item, idx) => (
-                item.label === "Build Your Resume" || item.label === "Career Mentor" ? (
+                item.isRoute ? (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, y: -10 }}
@@ -82,7 +81,7 @@ export default function PremiumNavbar() {
                   >
                     <Link
                       to={item.href}
-                      className={`relative px-4 py-2 text-[14px] font-semibold transition-colors duration-200 group ${isDark ? "text-indigo-300 hover:text-white" : "text-indigo-700 hover:text-indigo-900"
+                      className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
                         }`}
                     >
                       {item.label}
@@ -206,7 +205,7 @@ export default function PremiumNavbar() {
             >
               <div className="p-4 space-y-1">
                 {navItems.map((item, idx) => (
-                  item.label === "Build Your Resume" || item.label === "Career Mentor" ? (
+                  item.isRoute ? (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -20 }}
@@ -216,9 +215,9 @@ export default function PremiumNavbar() {
                       <Link
                         to={item.href}
                         onClick={() => setIsMobileOpen(false)}
-                        className={`block px-4 py-3 text-[15px] font-semibold rounded-lg transition-colors duration-200 ${isDark
-                          ? "text-indigo-300 hover:text-white hover:bg-white/5"
-                          : "text-indigo-700 hover:text-indigo-900 hover:bg-slate-100"
+                        className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark
+                          ? "text-white/80 hover:text-white hover:bg-white/5"
+                          : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                           }`}
                       >
                         {item.label}

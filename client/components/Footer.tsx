@@ -25,22 +25,24 @@ const InterviewAILogo = () => (
 export default function Footer() {
   const footerLinks = {
     resources: [
-      { label: "Compare", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "About Us", href: "/about", isRoute: true },
+      { label: "Blog", href: "#", isRoute: false },
     ],
     company: [
-      { label: "Book a demo", href: "#contact" },
-      { label: "Contact Us", href: "#contact" },
+      { label: "About", href: "/about", isRoute: true },
+      { label: "Contact Us", href: "/contact", isRoute: true },
     ],
     product: [
-      { label: "AI Interviewer", href: "/setup" },
+      { label: "AI Interviewer", href: "/setup", isRoute: true },
+      { label: "Resume Builder", href: "/resume", isRoute: true },
+      { label: "Career Mentor", href: "/career-mentor", isRoute: true },
     ],
     location: [
-      { label: "India", href: "#" },
+      { label: "India", href: "#", isRoute: false },
     ],
     legal: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
+      { label: "Privacy Policy", href: "/privacy-policy", isRoute: true },
+      { label: "Terms of Service", href: "/terms-of-service", isRoute: true },
     ],
   };
 
@@ -148,12 +150,15 @@ export default function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.resources.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-white/70 hover:text-white text-sm transition-colors"
-                      >
-                        {link.label}
-                      </a>
+                      {link.isRoute ? (
+                        <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -165,12 +170,15 @@ export default function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.company.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-white/70 hover:text-white text-sm transition-colors"
-                      >
-                        {link.label}
-                      </a>
+                      {link.isRoute ? (
+                        <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -211,12 +219,12 @@ export default function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.legal.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
+                      <Link
+                        to={link.href}
                         className="text-white/70 hover:text-white text-sm transition-colors"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
