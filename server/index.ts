@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleCareerMentor } from "./routes/careerMentor";
+import { handleContact } from "./routes/contact";
 import { 
   handleStartInterview, 
   handleNextQuestion, 
@@ -48,6 +49,13 @@ export function createServer() {
   app.post("/api/interview/start", handleStartInterview);
   app.post("/api/interview/next-question", handleNextQuestion);
   app.post("/api/interview/finish", handleFinishInterview);
+
+  // ── Contact Form ──────────────────────────────────────────────────────
+  // POST /api/contact
+  // Body: { name, email, subject, category, message }
+  // Sends email via SMTP to site owner + auto-reply to sender
+  // ─────────────────────────────────────────────────────────────────────
+  app.post("/api/contact", handleContact);
 
   return app;
 }

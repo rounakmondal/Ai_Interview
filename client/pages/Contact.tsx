@@ -23,24 +23,40 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    // In production, you'd send this to your backend API
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24-48 hours.",
-    });
+      const data = await res.json();
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      category: "general",
-      message: "",
-    });
-    setIsSubmitting(false);
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message.");
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24–48 hours. Check your inbox for a confirmation email.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        category: "general",
+        message: "",
+      });
+    } catch (err: unknown) {
+      toast({
+        title: "Failed to Send",
+        description: err instanceof Error ? err.message : "Something went wrong. Please try again or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -177,20 +193,20 @@ export default function Contact() {
               <CardContent className="space-y-4">
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">Email</p>
-                  <a href="mailto:support@aiinterview.com" className="text-primary hover:underline">
-                    support@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">General Inquiries</p>
-                  <a href="mailto:info@aiinterview.com" className="text-primary hover:underline">
-                    info@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">Business & Partnerships</p>
-                  <a href="mailto:partnerships@aiinterview.com" className="text-primary hover:underline">
-                    partnerships@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
               </CardContent>
@@ -288,8 +304,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     For data privacy requests, legal matters, or compliance inquiries:
                   </p>
-                  <a href="mailto:legal@aiinterview.com" className="text-primary hover:underline text-sm">
-                    legal@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
                 <div>
@@ -297,8 +313,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Journalists and media inquiries:
                   </p>
-                  <a href="mailto:press@aiinterview.com" className="text-primary hover:underline text-sm">
-                    press@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
                 <div>
@@ -306,8 +322,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Interested in joining our team?
                   </p>
-                  <a href="mailto:careers@aiinterview.com" className="text-primary hover:underline text-sm">
-                    careers@aiinterview.com
+                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
+                    aiinterview0@gmail.com
                   </a>
                 </div>
               </div>
