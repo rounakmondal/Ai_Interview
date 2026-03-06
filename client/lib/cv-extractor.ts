@@ -1,9 +1,10 @@
 import mammoth from "mammoth";
 import * as pdfjsLib from "pdfjs-dist";
 
-// Use unpkg CDN worker - this is the most reliable approach for production deployments.
-// Avoids all MIME type / bundler / Netlify CDN issues with local .mjs worker files.
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+// Hardcoded jsDelivr CDN URL — version literal avoids template resolution issues
+// in production bundles where pdfjsLib.version may be undefined after tree-shaking.
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs";
 
 /**
  * Extract text from a PDF file
@@ -52,8 +53,10 @@ async function extractTextFromPDF(file: File): Promise<string> {
     
     return extractedText;
   } catch (error) {
-    console.error("PDF.js extraction failed:", error);
-    throw new Error("Could not extract text from PDF. The file may be image-based or password-protected.");
+    // Re-throw with the real underlying error message so it's visible in logs
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error("PDF.js extraction failed:", msg);
+    throw new Error(`PDF extraction failed: ${msg}`);
   }
 }
 
@@ -119,7 +122,12 @@ export async function extractCVText(file: File): Promise<string> {
   try {
     switch (extension) {
       case "pdf":
-        return await extractTextFromPDF(file);
+        try {
+          return await extractTextFromPDF(file);
+        } catch (pdfError) {
+          console.warn("PDF.js failed, trying basic fallback:", pdfError);
+          return await extractTextBasic(file);
+        }
       case "docx":
         return await extractTextFromDOCX(file);
       case "doc":
