@@ -9,15 +9,12 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 5000,
     fs: {
-      allow: ["./client", "./shared", "./node_modules/pdfjs-dist"],
+      allow: ["./client", "./shared"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
   build: {
     outDir: "dist/spa",
-  },
-  optimizeDeps: {
-    include: ["pdfjs-dist"],
   },
   plugins: [react(), expressPlugin()],
   resolve: {
