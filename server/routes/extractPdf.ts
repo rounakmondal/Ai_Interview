@@ -1,11 +1,12 @@
 import { RequestHandler } from "express";
+import { PDFParse } from "pdf-parse";
 
 /**
  * POST /api/extract-pdf
  * Body: { data: string }  — base64-encoded PDF bytes
  * Returns: { text: string }
  *
- * Runs pdfjs-dist entirely in Node.js — no browser Worker, no MIME issues.
+ * Uses pdf-parse which runs natively in Node.js / serverless — no worker, no MIME issues.
  */
 export const handleExtractPdf: RequestHandler = async (req, res) => {
   try {
@@ -15,30 +16,13 @@ export const handleExtractPdf: RequestHandler = async (req, res) => {
       return;
     }
 
-    // Decode base64 → Uint8Array
+    // Decode base64 → Buffer
     const buffer = Buffer.from(data, "base64");
-    const uint8 = new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength);
 
-    // Use the Node.js-compatible legacy build — no worker required
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs" as any);
-    // Disable worker completely in Node.js context
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "";
+    const parser = new PDFParse({ data: buffer });
+    const result = await parser.getText();
+    const text = result.text.trim();
 
-    const pdf = await pdfjsLib.getDocument({ data: uint8, useWorkerFetch: false, isEvalSupported: false, useSystemFonts: true }).promise;
-
-    const parts: string[] = [];
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const content = await page.getTextContent();
-      const pageText = content.items
-        .map((item: any) => ("str" in item ? item.str : ""))
-        .filter((s: string) => s.trim().length > 0)
-        .join(" ");
-      if (pageText.trim()) parts.push(pageText);
-    }
-
-    const text = parts.join("\n\n").trim();
     if (text.length < 30) {
       res.status(422).json({ error: "Could not extract readable text. The PDF may be image-based or scanned." });
       return;
