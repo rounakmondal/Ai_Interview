@@ -10,6 +10,13 @@ import {
   handleFinishInterview 
 } from "./routes/interview";
 import { handleExtractPdf } from "./routes/extractPdf";
+import {
+  handleGetQuestions,
+  handleGetPrevYearQuestions,
+  handleGetCurrentAffairs,
+  handleGetLeaderboard,
+  handleGetDashboard,
+} from "./routes/govtExam";
 
 export function createServer() {
   const app = express();
@@ -64,6 +71,19 @@ export function createServer() {
   // Returns: { text: string }
   // ─────────────────────────────────────────────────────────────────────
   app.post("/api/extract-pdf", handleExtractPdf);
+
+  // ── Government Exam Practice API ──────────────────────────────────────
+  // GET /api/govt/questions?exam=&subject=&difficulty=&count=
+  // GET /api/govt/prev-year-questions?exam=&year=&subject=
+  // GET /api/govt/current-affairs
+  // GET /api/govt/leaderboard?filter=weekly|monthly
+  // GET /api/govt/dashboard
+  // ─────────────────────────────────────────────────────────────────────
+  app.get("/api/govt/questions", handleGetQuestions);
+  app.get("/api/govt/prev-year-questions", handleGetPrevYearQuestions);
+  app.get("/api/govt/current-affairs", handleGetCurrentAffairs);
+  app.get("/api/govt/leaderboard", handleGetLeaderboard);
+  app.get("/api/govt/dashboard", handleGetDashboard);
 
   return app;
 }

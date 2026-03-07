@@ -177,3 +177,78 @@ export interface InterviewEvaluation extends FinishInterviewResponse {
   sessionId: string;
   completedAt: string;
 }
+
+// ─────────────────────────────────────────────
+// Government Exam Practice Types
+// ─────────────────────────────────────────────
+
+export type ExamType = "WBCS" | "SSC" | "Railway" | "Banking" | "Police";
+export type Subject = "History" | "Geography" | "Polity" | "Reasoning" | "Math" | "Current Affairs";
+export type Difficulty = "Easy" | "Medium" | "Hard";
+
+export interface GovtQuestion {
+  id: number;
+  exam: ExamType;
+  subject: Subject;
+  difficulty: Difficulty;
+  year?: number;
+  question: string;
+  options: [string, string, string, string];
+  correctIndex: number;
+  explanation: string;
+  explanationBn?: string;
+}
+
+export interface NewsItem {
+  id: number;
+  date: string;
+  headline: string;
+  summary: string;
+  tags: string[];
+  importance: "high" | "medium" | "low";
+}
+
+export interface WeeklyQuizItem {
+  id: number;
+  week: string;
+  question: string;
+  options: [string, string, string, string];
+  correctIndex: number;
+  explanation: string;
+}
+
+export interface MonthlyTopic {
+  title: string;
+  description: string;
+  keyPoints: string[];
+  relevantExams: ExamType[];
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  name: string;
+  district: string;
+  state: string;
+  avatar: string;
+  weeklyScore: number;
+  monthlyScore: number;
+  totalTests: number;
+  badge: "gold" | "silver" | "bronze" | "standard";
+}
+
+export interface DashboardStats {
+  totalTests: number;
+  averageScore: number;
+  weeklyTests: number;
+  strongSubjects: Subject[];
+  weakSubjects: Subject[];
+  recentTests: { date: string; exam: string; score: number; total: number }[];
+  subjectScores: { subject: Subject; score: number; tests: number }[];
+  progressData: { week: string; score: number }[];
+}
+
+export interface CurrentAffairsResponse {
+  news: NewsItem[];
+  weeklyQuiz: WeeklyQuizItem[];
+  monthlyTopics: MonthlyTopic[];
+}

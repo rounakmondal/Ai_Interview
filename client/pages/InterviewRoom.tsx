@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Phone, AlertCircle, CheckCircle2, Mic, Brain, Sparkles, Video, Shield } from "lucide-react";
+import { Phone, AlertCircle, CheckCircle2, Mic, Brain, Sparkles, Video, Shield, MicOff, VideoOff, Check } from "lucide-react";
 import { useCamera } from "@/hooks/use-camera";
 import { useImprovedSpeech } from "@/hooks/use-improved-speech";
 import { useEnhancedAudio } from "@/hooks/use-enhanced-audio";
@@ -55,6 +55,8 @@ export default function InterviewRoom() {
   const [timeRemaining, setTimeRemaining] = useState<number>(0); // in seconds
   const [showEndDialog, setShowEndDialog] = useState(false);
   const [autoMode, setAutoMode] = useState(true); // Auto-listen and auto-submit
+  const [enableCamera, setEnableCamera] = useState(true);
+  const [enableVoice, setEnableVoice] = useState(true);
 
   // Media hooks with enhanced quality
   const camera = useCamera();
@@ -292,15 +294,15 @@ export default function InterviewRoom() {
     try {
       setError(null);
 
-      // Audio will auto-initialize on first use
+      // Request camera only if enabled
+      if (enableCamera) {
+        await camera.startCamera();
+      }
 
-      // Request camera
-      await camera.startCamera();
-
-      // Check speech recognition support
-      if (!speech.isSupported) {
+      // Warn if voice disabled (will use text input instead)
+      if (enableVoice && !speech.isSupported) {
         setError(
-          "Voice input not supported. Please use text input or update your browser.",
+          "Voice input not supported in this browser. Switching to text input.",
         );
       }
 
@@ -311,7 +313,7 @@ export default function InterviewRoom() {
         err instanceof Error ? err.message : "Failed to start interview";
       setError(message);
     }
-  }, [camera, speech.isSupported, initializeInterview, audio]);
+  }, [camera, enableCamera, enableVoice, speech.isSupported, initializeInterview]);
 
   // Handle end interview
   const handleEndInterview = () => {
@@ -385,7 +387,7 @@ export default function InterviewRoom() {
   // Setup phase - request permissions
   if (phase === "setup" && !permissionsGranted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-background/50">
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -397,75 +399,100 @@ export default function InterviewRoom() {
               </span>
             </div>
             <Link to="/setup">
-              <Button variant="outline" size="sm">
-                Cancel
-              </Button>
+              <Button variant="outline" size="sm">Cancel</Button>
             </Link>
           </div>
         </header>
 
-        <main className="container px-4 sm:px-6 py-8 sm:py-12">
-          <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8">
-            <div className="space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold">Prepare for Interview</h2>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                We need access to your camera and microphone for the interview.
+        <main className="container px-4 sm:px-6 py-10 sm:py-16">
+          <div className="max-w-xl mx-auto space-y-8">
+            {/* Heading */}
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-3">
+                <Brain className="w-8 h-8 text-primary" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold">Ready to start?</h2>
+              <p className="text-muted-foreground">
+                Configure your interview experience — both options are optional.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {/* Camera setup */}
-              <Card className="p-6 border-border/40 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path d="M23 7l-7 5 7 5V7z" />
-                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                  </svg>
+            {/* Toggle Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Camera card */}
+              <button
+                type="button"
+                onClick={() => setEnableCamera((v) => !v)}
+                className={`relative flex flex-col gap-4 p-6 rounded-2xl border-2 text-left transition-all duration-200 ${
+                  enableCamera
+                    ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
+                    : "border-muted-foreground/20 bg-muted/30 opacity-70 hover:opacity-90"
+                }`}
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+                  enableCamera ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"
+                }`}>
+                  {enableCamera ? <Video className="w-6 h-6" /> : <VideoOff className="w-6 h-6" />}
                 </div>
-                <h3 className="font-bold text-lg">Camera</h3>
-                <p className="text-sm text-muted-foreground">
-                  We'll access your camera so the interviewer can see you.
-                </p>
-              </Card>
+                <div>
+                  <p className="font-semibold text-base">Camera</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    {enableCamera ? "Your camera will be active during the interview." : "Interview without video — audio only."}
+                  </p>
+                </div>
+                <span className={`absolute top-4 right-4 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                  enableCamera ? "bg-primary border-primary" : "border-muted-foreground/30"
+                }`}>
+                  {enableCamera && <Check className="w-3 h-3 text-primary-foreground" />}
+                </span>
+              </button>
 
-              {/* Microphone setup */}
-              <Card className="p-6 border-border/40 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path d="M12 1a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                    <line x1="12" y1="19" x2="12" y2="23" />
-                    <line x1="8" y1="23" x2="16" y2="23" />
-                  </svg>
+              {/* Voice card */}
+              <button
+                type="button"
+                onClick={() => setEnableVoice((v) => !v)}
+                className={`relative flex flex-col gap-4 p-6 rounded-2xl border-2 text-left transition-all duration-200 ${
+                  enableVoice
+                    ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
+                    : "border-muted-foreground/20 bg-muted/30 opacity-70 hover:opacity-90"
+                }`}
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+                  enableVoice ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"
+                }`}>
+                  {enableVoice ? <Mic className="w-6 h-6" /> : <MicOff className="w-6 h-6" />}
                 </div>
-                <h3 className="font-bold text-lg">Microphone</h3>
-                <p className="text-sm text-muted-foreground">
-                  We'll record your voice for the interview.
-                </p>
-              </Card>
+                <div>
+                  <p className="font-semibold text-base">Voice Input</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    {enableVoice ? "Speak your answers — auto-submits after silence." : "Type your answers manually instead."}
+                  </p>
+                </div>
+                <span className={`absolute top-4 right-4 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                  enableVoice ? "bg-primary border-primary" : "border-muted-foreground/30"
+                }`}>
+                  {enableVoice && <Check className="w-3 h-3 text-primary-foreground" />}
+                </span>
+              </button>
+            </div>
+
+            {/* Summary badge */}
+            <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/40 border border-border/40">
+              <Shield className="w-5 h-5 text-primary flex-shrink-0" />
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">Selected: </span>
+                {[enableCamera && "Camera", enableVoice && "Voice"].filter(Boolean).join(" + ") || "Text-only mode"}
+                {" "}&mdash; you can change this any time before starting.
+              </p>
             </div>
 
             {/* Error display */}
             {error && (
-              <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg p-4 flex gap-3">
+              <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-xl p-4 flex gap-3">
                 <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-red-900 dark:text-red-300">
-                    Setup Error
-                  </p>
-                  <p className="text-xs text-red-800 dark:text-red-400 mt-1">
-                    {error}
-                  </p>
+                  <p className="text-sm font-medium text-red-900 dark:text-red-300">Setup Error</p>
+                  <p className="text-xs text-red-800 dark:text-red-400 mt-1">{error}</p>
                 </div>
               </div>
             )}
@@ -474,18 +501,18 @@ export default function InterviewRoom() {
             <Button
               onClick={handleStartInterview}
               disabled={camera.isLoading}
-              className="w-full gradient-primary text-base font-semibold py-6"
+              className="w-full h-14 text-base font-semibold gradient-primary shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
             >
-              {camera.isLoading ? "Initializing..." : "Continue to Interview"}
+              {camera.isLoading ? (
+                <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Initializing...</span>
+              ) : (
+                <span className="flex items-center gap-2"><Sparkles className="w-5 h-5" /> Begin Interview</span>
+              )}
             </Button>
 
-            {/* Info */}
-            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4">
-              <p className="text-xs text-blue-900 dark:text-blue-300">
-                💡 Make sure you're in a quiet, well-lit room for the best
-                interview experience.
-              </p>
-            </div>
+            <p className="text-center text-xs text-muted-foreground">
+              💡 Find a quiet, well-lit space for the best experience.
+            </p>
           </div>
         </main>
       </div>
@@ -595,48 +622,52 @@ export default function InterviewRoom() {
                     transcript={speech.transcript}
                     interimTranscript={speech.interimTranscript}
                     error={speech.error}
-                    isSupported={speech.isSupported}
+                    isSupported={enableVoice ? speech.isSupported : false}
                     onStartListening={speech.startListening}
                     onStopListening={speech.stopListening}
                     onResetTranscript={speech.resetTranscript}
                     onSubmit={handleAnswerSubmit}
                     isSubmitting={isSubmittingAnswer}
                     isSpeaking={audio.isPlaying}
-                    autoMode={autoMode}
+                    autoMode={enableVoice ? autoMode : false}
                     onAutoModeChange={setAutoMode}
                     onStopSpeaking={audio.stop}
-                    answerTimeLimit={120}
+                    answerTimeLimit={questionNumber === 1 ? 60 : 40}
                   />
                 </div>
               </div>
             </div>
 
             {/* Right: Camera - Hidden on mobile, small on tablet, normal on desktop */}
-            <div className="hidden md:block w-32 lg:w-44 flex-shrink-0 order-3">
-              <div className="lg:sticky lg:top-8 shadow-lg rounded-lg overflow-hidden w-full">
-                <CameraPanel
-                  stream={camera.stream}
-                  isActive={camera.isActive}
-                  isLoading={camera.isLoading}
-                  error={camera.error}
-                  onStartCamera={camera.startCamera}
-                  onStopCamera={camera.stopCamera}
-                />
+            {enableCamera && (
+              <div className="hidden md:block w-32 lg:w-44 flex-shrink-0 order-3">
+                <div className="lg:sticky lg:top-8 shadow-lg rounded-lg overflow-hidden w-full">
+                  <CameraPanel
+                    stream={camera.stream}
+                    isActive={camera.isActive}
+                    isLoading={camera.isLoading}
+                    error={camera.error}
+                    onStartCamera={camera.startCamera}
+                    onStopCamera={camera.stopCamera}
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Mobile Camera - Fixed bottom on mobile only */}
-          <div className="fixed bottom-4 right-4 w-24 h-32 md:hidden z-50 shadow-xl rounded-lg overflow-hidden border-2 border-background">
-            <CameraPanel
-              stream={camera.stream}
-              isActive={camera.isActive}
-              isLoading={camera.isLoading}
-              error={camera.error}
-              onStartCamera={camera.startCamera}
-              onStopCamera={camera.stopCamera}
-            />
-          </div>
+          {enableCamera && (
+            <div className="fixed bottom-4 right-4 w-24 h-32 md:hidden z-50 shadow-xl rounded-lg overflow-hidden border-2 border-background">
+              <CameraPanel
+                stream={camera.stream}
+                isActive={camera.isActive}
+                isLoading={camera.isLoading}
+                error={camera.error}
+                onStartCamera={camera.startCamera}
+                onStopCamera={camera.stopCamera}
+              />
+            </div>
+          )}
         </main>
       </div>
     );

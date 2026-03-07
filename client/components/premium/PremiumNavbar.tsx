@@ -21,11 +21,10 @@ export default function PremiumNavbar() {
 
   const navItems = [
     { label: "How It Works", href: "#features" },
-    { label: "Features", href: "#features" },
-    { label: "Interview Types", href: "#interview-types" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Govt Practice", href: "/govt-practice", isRoute: true },
+    { label: "AI Chat", href: "/chatbot", isRoute: true },
+    { label: "Study", href: "/study-with-me", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
-    { label: "Contact", href: "/contact", isRoute: true },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;

@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import jsPDF from "jspdf";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -23,6 +24,8 @@ import {
   Rocket,
   GraduationCap,
   MessageSquareText,
+  Copy,
+  Check,
 } from "lucide-react";
 import type { FinishInterviewResponse, PracticeQuestion, WeakArea, ImprovementPlan } from "@shared/api";
 
@@ -245,6 +248,7 @@ export default function EvaluationPage() {
 
   // LinkedIn login state and handlers (single declaration)
   const [isLinkedInLoggedIn, setIsLinkedInLoggedIn] = useState(false);
+  const [copied, setCopied] = useState(false);
   useEffect(() => {
     const state = location.state as EvaluationLocationState | null;
     if (!state?.evaluation) {
@@ -294,6 +298,168 @@ export default function EvaluationPage() {
     return "Poor";
   };
 
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const M = 15;
+    const CW = pageW - M * 2;
+    let y = 20;
+
+    const checkPage = (needed = 10) => {
+      if (y + needed > pageH - 15) {
+        doc.addPage();
+        y = 20;
+      }
+    };
+
+    const addLine = (
+      text: string,
+      fontSize: number,
+      bold = false,
+      r = 30, g = 30, b = 30,
+      xOffset = 0
+    ) => {
+      doc.setFontSize(fontSize);
+      doc.setFont("helvetica", bold ? "bold" : "normal");
+      doc.setTextColor(r, g, b);
+      const lines = doc.splitTextToSize(text, CW - xOffset);
+      checkPage(lines.length * fontSize * 0.45 + 4);
+      doc.text(lines, M + xOffset, y);
+      y += lines.length * fontSize * 0.45 + 3;
+    };
+
+    const hr = () => {
+      doc.setDrawColor(210, 210, 210);
+      doc.line(M, y, pageW - M, y);
+      y += 5;
+    };
+
+    // Header band
+    doc.setFillColor(79, 70, 229);
+    doc.rect(0, 0, pageW, 38, "F");
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255, 255, 255);
+    doc.text("InterviewSathi", M, 16);
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text("AI Mock Interview Report", M, 27);
+    const dateStr = new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" });
+    doc.setFontSize(9);
+    doc.text(dateStr, pageW - M, 16, { align: "right" });
+    if (evaluation.interviewType) {
+      doc.text(evaluation.interviewType, pageW - M, 25, { align: "right" });
+    }
+    y = 52;
+
+    // Scores
+    addLine("Performance Scores", 15, true, 79, 70, 229);
+    hr();
+    const scoreItems = [
+      { label: "Overall Score", value: scores.overall },
+      { label: "Communication", value: scores.communication },
+      { label: "Technical / Subject Knowledge", value: scores.technical },
+      { label: "Confidence", value: scores.confidence },
+    ];
+    scoreItems.forEach(item => {
+      checkPage(18);
+      const vr = item.value >= 8 ? 22 : item.value >= 6 ? 202 : 220;
+      const vg = item.value >= 8 ? 163 : item.value >= 6 ? 138 : 38;
+      const vb = item.value >= 8 ? 74 : item.value >= 6 ? 4 : 38;
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(30, 30, 30);
+      doc.text(`${item.label}:`, M, y);
+      doc.setTextColor(vr, vg, vb);
+      doc.text(`${item.value.toFixed(1)} / 10  (${getScoreLabel(item.value)})`, pageW - M, y, { align: "right" });
+      y += 7;
+      doc.setFillColor(230, 230, 230);
+      doc.rect(M, y, CW, 2.5, "F");
+      doc.setFillColor(vr, vg, vb);
+      doc.rect(M, y, (item.value / 10) * CW, 2.5, "F");
+      y += 9;
+    });
+    y += 4;
+
+    // Strengths
+    if (evaluation.strengths && evaluation.strengths.length > 0) {
+      addLine("Strengths", 14, true, 22, 163, 74);
+      hr();
+      evaluation.strengths.forEach(s => addLine(`• ${s}`, 10, false, 40, 40, 40));
+      y += 4;
+    }
+
+    // Weak Areas
+    if (evaluation.weakAreas && evaluation.weakAreas.length > 0) {
+      addLine("Areas for Improvement", 14, true, 202, 138, 4);
+      hr();
+      evaluation.weakAreas.forEach(w => {
+        addLine(w.area, 11, true, 30, 30, 30);
+        addLine(`Issue: ${w.issue}`, 10, false, 80, 80, 80);
+        if (w.howToImprove) addLine(`Tip: ${w.howToImprove}`, 10, false, 79, 70, 229);
+        y += 3;
+      });
+      y += 4;
+    }
+
+    // Detailed Feedback
+    if (evaluation.detailedFeedback) {
+      addLine("Detailed Feedback", 14, true, 79, 70, 229);
+      hr();
+      addLine(evaluation.detailedFeedback, 10, false, 40, 40, 40);
+      y += 4;
+    }
+
+    // Improvement Plan
+    if (evaluation.improvementPlan) {
+      addLine("Your Improvement Plan", 14, true, 79, 70, 229);
+      hr();
+      if (evaluation.improvementPlan.immediateActions.length > 0) {
+        addLine("Do Now:", 11, true, 220, 38, 38);
+        evaluation.improvementPlan.immediateActions.forEach((a, i) => addLine(`${i + 1}. ${a}`, 10, false, 40, 40, 40, 4));
+        y += 3;
+      }
+      if (evaluation.improvementPlan.resourcesToStudy.length > 0) {
+        addLine("Study Resources:", 11, true, 37, 99, 235);
+        evaluation.improvementPlan.resourcesToStudy.forEach((r, i) => addLine(`${i + 1}. ${r}`, 10, false, 40, 40, 40, 4));
+        y += 3;
+      }
+      if (evaluation.improvementPlan.practiceStrategy) {
+        addLine("Practice Strategy:", 11, true, 22, 163, 74);
+        addLine(evaluation.improvementPlan.practiceStrategy, 10, false, 40, 40, 40);
+      }
+      y += 5;
+    }
+
+    // Practice Questions (first 15)
+    if (evaluation.practiceQuestions && evaluation.practiceQuestions.length > 0) {
+      addLine("Practice Questions", 14, true, 79, 70, 229);
+      hr();
+      evaluation.practiceQuestions.slice(0, 15).forEach((q, i) => {
+        addLine(`Q${i + 1}. ${q.question}`, 10, true, 30, 30, 30);
+        if (q.suggestedAnswer) addLine(`    A: ${q.suggestedAnswer}`, 9, false, 80, 80, 80, 4);
+        y += 2;
+      });
+    }
+
+    // Footer on all pages
+    const pageCount = doc.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text(
+        `Generated by InterviewSathi.online  |  Page ${i} of ${pageCount}`,
+        pageW / 2,
+        pageH - 8,
+        { align: "center" }
+      );
+    }
+
+    doc.save(`interview-report-${new Date().toISOString().split("T")[0]}.pdf`);
+  };
+
   // ...existing code...
 
   return (
@@ -310,7 +476,7 @@ export default function EvaluationPage() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-3">
+            <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-3" onClick={downloadPDF}>
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Download</span>
             </Button>
@@ -693,6 +859,101 @@ export default function EvaluationPage() {
                   {scores.confidence.toFixed(1)}
                 </p>
               </div>
+            </div>
+          </Card>
+
+          {/* Share Your Results */}
+          <Card className="p-6 sm:p-8 border-border/40 space-y-5">
+            <div className="flex items-center gap-3">
+              <Share2 className="w-6 h-6 text-primary" />
+              <div>
+                <h2 className="text-2xl font-bold">Share Your Results</h2>
+                <p className="text-sm text-muted-foreground">Let the world know how you performed!</p>
+              </div>
+            </div>
+
+            {/* Score preview card */}
+            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 rounded-xl p-5 space-y-3">
+              <p className="font-semibold text-sm text-foreground">🎯 AI Mock Interview Results — InterviewSathi</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { label: "Overall", value: scores.overall, color: "text-primary" },
+                  { label: "Communication", value: scores.communication, color: "text-blue-600 dark:text-blue-400" },
+                  { label: "Technical", value: scores.technical, color: "text-purple-600 dark:text-purple-400" },
+                  { label: "Confidence", value: scores.confidence, color: "text-green-600 dark:text-green-400" },
+                ].map((s) => (
+                  <div key={s.label} className="text-center p-3 bg-background/70 rounded-lg border border-border/40">
+                    <p className={`text-2xl font-bold ${s.color}`}>{s.value.toFixed(1)}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Platform buttons */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {/* LinkedIn */}
+              <button
+                onClick={() => {
+                  const text = `🎯 Just completed my AI Mock Interview on InterviewSathi!\n\n📊 Overall: ${scores.overall.toFixed(1)}/10\n✅ Communication: ${scores.communication.toFixed(1)}/10\n💻 Technical: ${scores.technical.toFixed(1)}/10\n💪 Confidence: ${scores.confidence.toFixed(1)}/10\n\nPractice your interview skills → https://interviewsathi.online\n#InterviewPrep #CareerGrowth #InterviewSathi`;
+                  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://interviewsathi.online")}&summary=${encodeURIComponent(text)}`, "_blank");
+                }}
+                className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border/40 bg-[#0A66C2]/5 hover:bg-[#0A66C2]/15 transition"
+              >
+                <svg className="w-7 h-7 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                <span className="text-xs font-semibold text-[#0A66C2]">LinkedIn</span>
+              </button>
+
+              {/* Twitter / X */}
+              <button
+                onClick={() => {
+                  const text = `🎯 Just completed my AI Mock Interview on InterviewSathi!\n\n📊 Overall: ${scores.overall.toFixed(1)}/10 | 💻 Technical: ${scores.technical.toFixed(1)}/10 | 💪 Confidence: ${scores.confidence.toFixed(1)}/10\n\nhttps://interviewsathi.online\n#InterviewPrep #CareerGrowth`;
+                  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+                }}
+                className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border/40 bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition"
+              >
+                <svg className="w-7 h-7 dark:fill-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                <span className="text-xs font-semibold">X (Twitter)</span>
+              </button>
+
+              {/* WhatsApp */}
+              <button
+                onClick={() => {
+                  const text = `🎯 AI Mock Interview Results — InterviewSathi\n\nOverall: ${scores.overall.toFixed(1)}/10\nCommunication: ${scores.communication.toFixed(1)}/10\nTechnical: ${scores.technical.toFixed(1)}/10\nConfidence: ${scores.confidence.toFixed(1)}/10\n\nTry it free: https://interviewsathi.online`;
+                  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+                }}
+                className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border/40 bg-[#25D366]/5 hover:bg-[#25D366]/15 transition"
+              >
+                <svg className="w-7 h-7 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                </svg>
+                <span className="text-xs font-semibold text-[#25D366]">WhatsApp</span>
+              </button>
+
+              {/* Copy */}
+              <button
+                onClick={() => {
+                  const text = `🎯 AI Mock Interview Results — InterviewSathi\n\nOverall: ${scores.overall.toFixed(1)}/10\nCommunication: ${scores.communication.toFixed(1)}/10\nTechnical: ${scores.technical.toFixed(1)}/10\nConfidence: ${scores.confidence.toFixed(1)}/10\n\nhttps://interviewsathi.online`;
+                  navigator.clipboard.writeText(text).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2500);
+                  });
+                }}
+                className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border/40 bg-muted/50 hover:bg-muted transition"
+              >
+                {copied ? (
+                  <Check className="w-7 h-7 text-green-600" />
+                ) : (
+                  <Copy className="w-7 h-7 text-muted-foreground" />
+                )}
+                <span className={`text-xs font-semibold ${copied ? "text-green-600" : "text-muted-foreground"}`}>
+                  {copied ? "Copied!" : "Copy Text"}
+                </span>
+              </button>
             </div>
           </Card>
 

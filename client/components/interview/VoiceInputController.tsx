@@ -45,6 +45,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   const [useManualInput, setUseManualInput] = useState(false);
   const [localAutoMode, setLocalAutoMode] = useState(autoMode);
   const [answerTimeLeft, setAnswerTimeLeft] = useState<number | null>(null);
+  const [pendingAutoSubmit, setPendingAutoSubmit] = useState(false);
   const wasListeningRef = useRef(false);
   const wasSpeakingRef = useRef(false);
   const autoSubmitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -141,17 +142,24 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
     if (localAutoMode && !useManualInput) {
       // Just stopped listening and have transcript
       if (wasListeningRef.current && !isListening && transcript.trim() && !isSubmitting) {
-        console.log("Auto-mode: Stopped listening, auto-submitting transcript in 500ms...");
-        // Small delay to ensure transcript is complete
+        setPendingAutoSubmit(true);
         autoSubmitTimeoutRef.current = setTimeout(() => {
+          setPendingAutoSubmit(false);
           if (transcript.trim()) {
             onSubmit(transcript);
           }
-        }, 500);
+        }, 400);
+      } else if (isListening) {
+        // User is speaking again — cancel any pending auto-submit
+        if (autoSubmitTimeoutRef.current) {
+          clearTimeout(autoSubmitTimeoutRef.current);
+          autoSubmitTimeoutRef.current = null;
+        }
+        setPendingAutoSubmit(false);
       }
     }
     wasListeningRef.current = isListening;
-    
+
     return () => {
       if (autoSubmitTimeoutRef.current) {
         clearTimeout(autoSubmitTimeoutRef.current);
@@ -326,8 +334,8 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
                       ? "text-amber-600 dark:text-amber-400"
                       : "text-accent"
                   }`}>
-                    {localAutoMode 
-                      ? "🎤 Recording... (stops 2s after you finish speaking)" 
+                    {localAutoMode
+                      ? "🎤 Recording — auto-submits after 3s silence"
                       : "Listening... (auto-stops after silence)"}
                   </p>
                 </div>
@@ -347,18 +355,21 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
             </div>
           )}
 
-          {/* Transcript display */}
-          {(transcript || interimTranscript) && (
-            <div className="bg-muted/50 rounded-lg p-4 space-y-2">
-              <p className="text-xs text-muted-foreground">Your transcript:</p>
-              <p className="text-base text-foreground">
-                {transcript}
-                {interimTranscript && (
-                  <span className="text-muted-foreground italic">
-                    {interimTranscript}
-                  </span>
-                )}
-              </p>
+          {/* Pending auto-submit indicator — shown briefly when answer is captured */}
+          {pendingAutoSubmit && (
+            <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <MicOff className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-foreground">Answer captured</p>
+                <p className="text-xs text-muted-foreground">Submitting your response...</p>
+              </div>
+              <div className="flex gap-1">
+                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              </div>
             </div>
           )}
 
@@ -375,18 +386,6 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
                 </p>
               </div>
             </div>
-          )}
-
-          {/* Clear transcript button */}
-          {transcript && (
-            <Button
-              onClick={onResetTranscript}
-              variant="outline"
-              size="sm"
-              className="text-xs"
-            >
-              Clear Transcript
-            </Button>
           )}
         </div>
       )}
@@ -417,8 +416,8 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
         </div>
       )}
 
-      {/* Submit button - always visible, but in auto mode it's optional */}
-      {(!localAutoMode || useManualInput || transcript.trim()) && (
+      {/* Submit button — in auto+voice mode only shown when transcript ready for early manual submit */}
+      {(!localAutoMode || useManualInput || (transcript.trim() && !pendingAutoSubmit)) && (
         <Button
           onClick={handleSubmit}
           disabled={!finalAnswer.trim() || isSubmitting}
@@ -435,7 +434,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
           ) : (
             <>
               <Send className="w-5 h-5" />
-              {localAutoMode && !useManualInput ? "Submit Now (or wait for auto)" : "Submit Answer"}
+              {localAutoMode && !useManualInput ? "Submit Now" : "Submit Answer"}
             </>
           )}
         </Button>
@@ -446,8 +445,8 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
         {useManualInput
           ? "Type your response and click submit when done."
           : localAutoMode
-            ? "Auto mode: Listening starts after question, submits automatically when you stop speaking."
-            : "Click the microphone to start speaking. Your answer will be recorded automatically."}
+            ? "Listening starts automatically. Stop talking — answer submits after 3 seconds of silence."
+            : "Click the microphone to start speaking. Your answer submits when you stop."}
       </p>
     </Card>
   );

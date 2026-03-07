@@ -32,8 +32,7 @@ const languages = [
 ];
 
 const steps = [
-  { id: "type", label: "Role", icon: Briefcase },
-  { id: "language", label: "Language", icon: Globe },
+  { id: "type", label: "Role & Language", icon: Briefcase },
   { id: "cv", label: "Resume", icon: FileText },
   { id: "timer", label: "Duration", icon: Clock },
 ];
@@ -42,7 +41,7 @@ export default function InterviewSetup() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [step, setStep] = useState<"type" | "language" | "cv" | "timer">("type");
+  const [step, setStep] = useState<"type" | "cv" | "timer">("type");
   const [interviewRole, setInterviewRole] = useState(""); // Free text interview role/type
   const [jobDescription, setJobDescription] = useState(""); // Optional job description
   const [selectedLanguage, setSelectedLanguage] =
@@ -354,38 +353,68 @@ export default function InterviewSetup() {
           </div>
         )}
 
-        {/* STEP 1 - Role */}
+        {/* STEP 1 - Role + Language combined */}
         {step === "type" && (
           <div className="space-y-8">
             <div className="text-center space-y-2">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
                 <Target className="w-8 h-8 text-primary" />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Define Your Target Role</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">Set Up Your Interview</h1>
               <p className="text-muted-foreground max-w-md mx-auto">
-                Tell us about the position you're preparing for to receive tailored interview questions
+                Tell us what role you're targeting and your preferred language
               </p>
             </div>
 
             <Card className="p-6 sm:p-8 shadow-lg border-0 bg-card/50 backdrop-blur">
-              <div className="space-y-6">
+              <div className="space-y-7">
                 {/* Interview Role Input */}
-                <div className="space-y-3">
-                  <Label htmlFor="interviewRole" className="text-base font-semibold flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-primary" />
-                    Target Position
+                <div className="space-y-2">
+                  <Label htmlFor="interviewRole" className="text-sm font-semibold flex items-center gap-2">
+                    <Briefcase className="w-4 h-4 text-primary" />
+                    Target Position <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="interviewRole"
                     placeholder="e.g., Software Engineer, Product Manager, Data Scientist..."
                     value={interviewRole}
                     onChange={(e) => setInterviewRole(e.target.value)}
-                    className="h-12 text-base bg-background/50 border-muted-foreground/20 focus:border-primary"
+                    className="h-11 text-base bg-background/60 border-muted-foreground/20 focus:border-primary"
                   />
-                  <p className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Lightbulb className="w-4 h-4" />
-                    Be specific – "Senior Frontend Engineer" works better than just "Developer"
+                  <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <Lightbulb className="w-3 h-3" />
+                    Be specific — &ldquo;Senior Frontend Engineer&rdquo; works better than just &ldquo;Developer&rdquo;
                   </p>
+                </div>
+
+                {/* Language Selection */}
+                <div className="space-y-3">
+                  <Label className="text-sm font-semibold flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-primary" />
+                    Interview Language <span className="text-red-500">*</span>
+                  </Label>
+                  <div className="grid grid-cols-3 gap-3">
+                    {languages.map((l) => (
+                      <button
+                        key={l.id}
+                        type="button"
+                        onClick={() => setSelectedLanguage(l.id as Language)}
+                        className={`relative flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${
+                          selectedLanguage === l.id
+                            ? "border-primary bg-primary/8 shadow-md shadow-primary/10"
+                            : "border-muted-foreground/15 hover:border-primary/40 hover:bg-muted/40 bg-background/40"
+                        }`}
+                      >
+                        <span className="text-2xl">{l.flag}</span>
+                        <span className="text-sm font-medium">{l.label}</span>
+                        {selectedLanguage === l.id && (
+                          <span className="absolute top-2 right-2 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                            <Check className="w-2.5 h-2.5 text-primary-foreground" />
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Divider */}
@@ -395,33 +424,29 @@ export default function InterviewSetup() {
                   </div>
                   <div className="relative flex justify-center">
                     <span className="bg-card px-3 text-xs text-muted-foreground uppercase tracking-wider">
-                      Optional Enhancement
+                      Optional
                     </span>
                   </div>
                 </div>
 
                 {/* Job Description */}
-                <div className="space-y-3">
-                  <Label htmlFor="jobDescription" className="text-base font-semibold flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-primary" />
+                <div className="space-y-2">
+                  <Label htmlFor="jobDescription" className="text-sm font-semibold flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-primary" />
                     Job Description
-                    <span className="ml-auto text-xs font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                      Optional
-                    </span>
+                    <span className="ml-auto text-xs font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full">optional</span>
                   </Label>
                   <Textarea
                     id="jobDescription"
-                    placeholder="Paste the full job description here for highly personalized questions that match the exact requirements..."
+                    placeholder="Paste the job description here for highly personalized questions..."
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
-                    className="min-h-[180px] text-base resize-y bg-background/50 border-muted-foreground/20 focus:border-primary"
+                    className="min-h-[130px] text-sm resize-y bg-background/60 border-muted-foreground/20 focus:border-primary"
                   />
-                  <div className="flex items-start gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
-                    <Sparkles className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">Pro tip:</span> Including a job description allows our AI to generate questions that specifically address the skills and experiences the employer is looking for.
-                    </p>
-                  </div>
+                  <p className="text-xs text-muted-foreground flex items-start gap-1.5">
+                    <Sparkles className="w-3 h-3 mt-0.5 flex-shrink-0 text-primary" />
+                    Including a JD lets AI generate questions that match the exact skills the employer wants.
+                  </p>
                 </div>
               </div>
             </Card>
@@ -429,66 +454,7 @@ export default function InterviewSetup() {
             <div className="flex justify-end">
               <Button
                 size="lg"
-                disabled={!interviewRole.trim()}
-                onClick={() => setStep("language")}
-                className="min-w-[200px] h-12 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
-              >
-                Continue
-                <ChevronRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 2 - Language */}
-        {step === "language" && (
-          <div className="space-y-8">
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
-                <Globe className="w-8 h-8 text-primary" />
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Select Your Language</h1>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                Choose the language you'd like to conduct your interview in
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {languages.map((l) => (
-                <Card
-                  key={l.id}
-                  className={`p-6 cursor-pointer text-center transition-all duration-300 hover:scale-[1.02] ${
-                    selectedLanguage === l.id
-                      ? "border-primary bg-primary/5 ring-2 ring-primary shadow-lg shadow-primary/10"
-                      : "border-muted-foreground/20 hover:border-primary/50 hover:shadow-md bg-card/50"
-                  }`}
-                  onClick={() => setSelectedLanguage(l.id as Language)}
-                >
-                  <span className="text-4xl mb-3 block">{l.flag}</span>
-                  <span className="text-lg font-semibold">{l.label}</span>
-                  {selectedLanguage === l.id && (
-                    <div className="mt-3 flex items-center justify-center gap-1 text-primary text-sm font-medium">
-                      <CheckCircle className="w-4 h-4" />
-                      Selected
-                    </div>
-                  )}
-                </Card>
-              ))}
-            </div>
-
-            <div className="flex justify-between gap-4">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => setStep("type")}
-                className="h-12 px-6"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-              <Button
-                size="lg"
-                disabled={!selectedLanguage}
+                disabled={!interviewRole.trim() || !selectedLanguage}
                 onClick={() => setStep("cv")}
                 className="min-w-[200px] h-12 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
               >
@@ -654,7 +620,7 @@ export default function InterviewSetup() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => setStep("language")}
+                onClick={() => setStep("type")}
                 className="h-12 px-6"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />

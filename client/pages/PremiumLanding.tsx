@@ -10,6 +10,8 @@ import PremiumPricing from "@/components/premium/PremiumPricing";
 import PremiumStats from "@/components/premium/PremiumStats";
 import PremiumFAQ from "@/components/premium/PremiumFAQ";
 import PremiumInterviewTypes from "@/components/premium/PremiumInterviewTypes";
+import GovtPracticeSection from "@/components/premium/GovtPracticeSection";
+import StudyToolsSection from "@/components/premium/StudyToolsSection";
 
 export default function PremiumLanding() {
   return (
@@ -28,6 +30,12 @@ export default function PremiumLanding() {
 
       {/* Interview Categories */}
       <PremiumInterviewTypes />
+
+      {/* Government Exam Practice */}
+      <GovtPracticeSection />
+
+      {/* Study Tools */}
+      <StudyToolsSection />
 
       {/* Premium Features Section */}
       <PremiumFeatures />
