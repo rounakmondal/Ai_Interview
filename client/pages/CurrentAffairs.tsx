@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,7 +17,6 @@ import {
   ClipboardList,
   TrendingUp,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import { fetchCurrentAffairs, NewsItem, WeeklyQuizItem, MonthlyTopic, ExamType } from "@/lib/govt-practice-data";
 
 const importanceColor = {
@@ -107,21 +106,21 @@ export default function CurrentAffairs() {
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
-                Showing latest {DAILY_NEWS.length} stories
+                Showing latest {news.length} stories
               </p>
             </div>
-            {DAILY_NEWS.map((news) => (
-              <Card key={news.id} className="p-5 border-border/40 space-y-3 hover:border-primary/30 transition-colors">
+            {news.map((item) => (
+              <Card key={item.id} className="p-5 border-border/40 space-y-3 hover:border-primary/30 transition-colors">
                 <div className="flex flex-wrap items-start gap-2">
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${importanceColor[news.importance]}`}>
-                    {news.importance === "high" ? "🔴 High Priority" : news.importance === "medium" ? "🟡 Medium" : "🟢 Low"}
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${importanceColor[item.importance]}`}>
+                    {item.importance === "high" ? "🔴 High Priority" : item.importance === "medium" ? "🟡 Medium" : "🟢 Low"}
                   </span>
-                  <span className="text-xs text-muted-foreground ml-auto">{formatDate(news.date)}</span>
+                  <span className="text-xs text-muted-foreground ml-auto">{formatDate(item.date)}</span>
                 </div>
-                <h3 className="text-sm sm:text-base font-semibold leading-snug">{news.headline}</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{news.summary}</p>
+                <h3 className="text-sm sm:text-base font-semibold leading-snug">{item.headline}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.summary}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {news.tags.map((tag) => (
+                  {item.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
                   ))}
                 </div>
@@ -134,17 +133,17 @@ export default function CurrentAffairs() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold text-lg">Weekly Quiz</h2>
-                <p className="text-xs text-muted-foreground">{WEEKLY_QUIZ[0].week}</p>
+                <p className="text-xs text-muted-foreground">{weeklyQuiz[0]?.week}</p>
               </div>
               {quizSubmitted && (
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-primary">{quizScore}/{WEEKLY_QUIZ.length}</p>
+                  <p className="text-2xl font-bold text-primary">{quizScore}/{weeklyQuiz.length}</p>
                   <p className="text-xs text-muted-foreground">Score</p>
                 </div>
               )}
             </div>
 
-            {WEEKLY_QUIZ.map((q, idx) => {
+            {weeklyQuiz.map((q, idx) => {
               const userAns = quizAnswers[q.id] ?? null;
               const isCorrect = userAns === q.correctIndex;
               return (
@@ -214,7 +213,7 @@ export default function CurrentAffairs() {
             <p className="text-sm text-muted-foreground">
               Important topics for <strong className="text-foreground">March 2026</strong> — highly expected in upcoming exams.
             </p>
-            {MONTHLY_TOPICS.map((topic, idx) => (
+            {monthlyTopics.map((topic, idx) => (
               <Card key={idx} className="p-5 sm:p-6 border-border/40 space-y-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1">
