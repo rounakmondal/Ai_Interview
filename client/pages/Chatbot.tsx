@@ -111,7 +111,7 @@ export default function Chatbot() {
       // 2. Prepare FormData
       const formData = new FormData();
       formData.append('message', text);
-      formData.append('conversationHistory', JSON.stringify(messages.map(m => ({ role: m.role, text: m.text }))));
+      formData.append('conversationHistory', JSON.stringify(messages.map(m => ({ role: m.role, message: m.text }))));
       if (image) {
         // Convert base64 to blob if needed, or assume image is a File
         // For now, assuming image is base64 string, need to convert to blob
@@ -136,7 +136,7 @@ export default function Chatbot() {
       const aiMsg: Message = {
         id: Date.now() + 1,
         role: "assistant",
-        text: data.reply || data.message, // Adjust based on actual response structure
+        text: data.response, // Use the correct key from the API response
         timestamp: new Date(),
       };
 
