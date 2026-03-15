@@ -32,6 +32,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 const Chatbot = lazy(() => import("./pages/Chatbot"));
 const StudyWithMe = lazy(() => import("./pages/StudyWithMe"));
+const StoryTelling = lazy(() => import("./pages/StoryTelling"));
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,7 @@ export default function App() {
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/chatbot" element={<Chatbot />} />
                 <Route path="/study-with-me" element={<StudyWithMe />} />
+                <Route path="/story-telling" element={<StoryTelling />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

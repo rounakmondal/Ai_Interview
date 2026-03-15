@@ -296,7 +296,15 @@ export default function StudyWithMe() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-700"
+            <div className="hidden sm:flex items-center gap-1 p-1 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all" style={{ background: `linear-gradient(135deg, ${cfg.from}, ${cfg.to})`, color: '#fff' }}>
+                ⏱ Pomodoro
+              </span>
+              <Link to="/story-telling" className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white/40 hover:text-white/80 hover:bg-white/5 transition-all">
+                📖 Story Telling
+              </Link>
+            </div>
+            <span className="sm:hidden flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-700"
               style={{ background: `${cfg.from}20`, color: cfg.ring1, border: `1px solid ${cfg.from}30` }}>
               {cfg.emoji} {cfg.label}
             </span>
@@ -542,6 +550,7 @@ export default function StudyWithMe() {
                 { label: "Previous Papers", href: "/prev-year-questions", emoji: "📚" },
                 { label: "Current Affairs", href: "/current-affairs", emoji: "📰" },
                 { label: "AI Chat", href: "/chatbot", emoji: "🤖" },
+                { label: "গল্প বলা (Story Telling)", href: "/story-telling", emoji: "📖" },
               ].map(l => (
                 <Link key={l.label} to={l.href}
                   className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/8 transition-all text-white/50 hover:text-white/90 group">
