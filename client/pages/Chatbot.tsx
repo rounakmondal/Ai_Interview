@@ -108,22 +108,21 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      // 2. Prepare FormData
-      const formData = new FormData();
-      formData.append('message', text);
-      formData.append('conversationHistory', JSON.stringify(messages.map(m => ({ role: m.role, message: m.text }))));
+      // 2. Prepare JSON request (matches Postman payload)
+      const payload: Record<string, any> = {
+        message: text,
+        conversationHistory: messages.map(m => ({ role: m.role, message: m.text })),
+      };
       if (image) {
-        // Convert base64 to blob if needed, or assume image is a File
-        // For now, assuming image is base64 string, need to convert to blob
-        const response = await fetch(image);
-        const blob = await response.blob();
-        formData.append('image', blob, imageName);
+        // Send image as base64 string (server can choose to ignore if not supported)
+        payload.image = image;
       }
 
       // 3. Make API call to the new endpoint
       const response = await fetch('/api/study/chat', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
