@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
@@ -10,6 +10,8 @@ export default function PremiumNavbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,8 +21,27 @@ export default function PremiumNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Smooth scroll to the "How It Works" section, navigating to home first if needed
+  const handleHowItWorksClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileOpen(false);
+    const scrollToSection = () => {
+      const el = document.getElementById("how-it-works");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation + render before scrolling
+      setTimeout(scrollToSection, 400);
+    } else {
+      scrollToSection();
+    }
+  };
+
   const navItems = [
-    { label: "How It Works", href: "#features" },
+    { label: "How It Works", href: "#how-it-works", onClick: handleHowItWorksClick },
     { label: "Govt Practice", href: "/govt-practice", isRoute: true },
     { label: "AI Chat", href: "/chatbot", isRoute: true },
     { label: "Study", href: "/study-with-me", isRoute: true },
@@ -91,10 +112,11 @@ export default function PremiumNavbar() {
                   <motion.a
                     key={idx}
                     href={item.href}
+                    onClick={item.onClick}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15 + idx * 0.05, duration: 0.4, ease: smoothEase }}
-                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group cursor-pointer ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
                       }`}
                   >
                     {item.label}
@@ -229,8 +251,8 @@ export default function PremiumNavbar() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.05 }}
-                      onClick={() => setIsMobileOpen(false)}
-                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark
+                      onClick={item.onClick ?? (() => setIsMobileOpen(false))}
+                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 cursor-pointer ${isDark
                         ? "text-white/80 hover:text-white hover:bg-white/5"
                         : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                         }`}
