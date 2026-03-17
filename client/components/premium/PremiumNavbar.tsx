@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, User } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
+import { isLoggedIn, getSession } from "@/lib/auth-api";
+import ProfileButton from "../ProfileButton";
 
 export default function PremiumNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,6 +44,7 @@ export default function PremiumNavbar() {
 
   const navItems = [
     { label: "How It Works", href: "#how-it-works", onClick: handleHowItWorksClick },
+    { label: "Daily Tasks", href: "/daily-tasks", isRoute: true },
     { label: "Govt Practice", href: "/govt-practice", isRoute: true },
     { label: "AI Chat", href: "/chatbot", isRoute: true },
     { label: "Study", href: "/study-with-me", isRoute: true },
@@ -74,18 +77,18 @@ export default function PremiumNavbar() {
           <div className="h-14 sm:h-16 flex items-center justify-between">
             {/* Left Section - Logo */}
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-              <motion.div
+              <motion.img
+                src="/photo_6183770845247900874_y.jpg"
+                alt="InterviewSathi"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/20"
-              >
-                AI
-              </motion.div>
+                className="w-9 h-9 rounded-lg object-cover shadow-lg shadow-indigo-500/20"
+              />
               <span
                 className={`font-semibold text-[15px] hidden sm:inline tracking-tight transition-colors duration-300 ${isDark ? "text-white/95" : "text-slate-900"
                   }`}
               >
-                InterviewAI
+                InterviewSathi
               </span>
             </Link>
 
@@ -125,37 +128,51 @@ export default function PremiumNavbar() {
                 )
               ))}
             </div>
+                <ProfileButton />
 
             {/* Right Section - Auth */}
             <div className="hidden md:flex items-center gap-4">
               {/* Theme Toggle */}
               <ThemeToggle />
 
-              {/* Get Started Button */}
-              <Link to="/setup">
-                <motion.button
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45, duration: 0.4, ease: smoothEase }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="relative group px-5 py-2.5 rounded-full text-[14px] font-semibold text-white overflow-hidden"
-                >
-                  {/* Button background gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300" />
-
-                  {/* Hover glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {/* Glow shadow on hover */}
-                  <div className="absolute -inset-1 bg-indigo-500/30 rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10" />
-
-                  <span className="relative flex items-center gap-2">
-                    Get Started
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
-                  </span>
-                </motion.button>
-              </Link>
+              {isLoggedIn() ? (
+                <Link to="/profile">
+                  <motion.button
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45, duration: 0.4, ease: smoothEase }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative group px-4 py-2.5 rounded-full text-[14px] font-semibold text-white overflow-hidden flex items-center gap-2"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="relative flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      {getSession()?.user.name.split(" ")[0] || "Profile"}
+                    </span>
+                  </motion.button>
+                </Link>
+              ) : (
+                <Link to="/auth">
+                  <motion.button
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45, duration: 0.4, ease: smoothEase }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative group px-5 py-2.5 rounded-full text-[14px] font-semibold text-white overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -inset-1 bg-indigo-500/30 rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10" />
+                    <span className="relative flex items-center gap-2">
+                      Get Started
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+                    </span>
+                  </motion.button>
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -264,32 +281,48 @@ export default function PremiumNavbar() {
               </div>
 
               <div className={`p-4 pt-2 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
-                <motion.a
-                  href="#features"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  onClick={() => setIsMobileOpen(false)}
-                  className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 mb-2 ${isDark
-                    ? "text-white/60 hover:text-white hover:bg-white/5"
-                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
-                    }`}
-                >
-                  Sign In
-                </motion.a>
-
-                <Link to="/setup" onClick={() => setIsMobileOpen(false)}>
-                  <motion.button
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
-                  >
-                    Get Started
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
-                </Link>
+                {isLoggedIn() ? (
+                  <Link to="/profile" onClick={() => setIsMobileOpen(false)}>
+                    <motion.button
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
+                    >
+                      <User className="w-4 h-4" />
+                      {getSession()?.user.name.split(" ")[0] || "Profile"}
+                    </motion.button>
+                  </Link>
+                ) : (
+                  <>
+                    <Link to="/auth" onClick={() => setIsMobileOpen(false)}>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 mb-2 text-center ${isDark
+                          ? "text-white/60 hover:text-white hover:bg-white/5"
+                          : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+                          }`}
+                      >
+                        Sign In
+                      </motion.div>
+                    </Link>
+                    <Link to="/auth" onClick={() => setIsMobileOpen(false)}>
+                      <motion.button
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
+                      >
+                        Get Started
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.button>
+                    </Link>
+                  </>
+                )}
               </div>
             </motion.div>
           </>

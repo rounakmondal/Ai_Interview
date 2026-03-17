@@ -20,43 +20,15 @@ interface Message {
   timestamp: Date;
 }
 
-// ─── ElevenLabs Bengali TTS ───────────────────────────────────────────────────
-const ELEVENLABS_API_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY as
-  | string
-  | undefined;
-
-// "Adam" voice — deep, warm, perfect for storytelling with eleven_multilingual_v2
-// Swap this voice ID with a native Bengali ElevenLabs voice from your voice library
-// e.g. search "Bengali" in https://elevenlabs.io/voice-library for native speakers
-const BENGALI_STORY_VOICE_ID =
-  (import.meta.env.VITE_ELEVENLABS_BENGALI_VOICE_ID as string | undefined) ??
-  "pNInz6obpgDQGcFmaJgB";
-
+// ─── AWS Polly Bengali TTS (via server) ───────────────────────────────────────
 async function speakBengali(text: string): Promise<HTMLAudioElement | null> {
-  if (!ELEVENLABS_API_KEY) return null;
+  const res = await fetch("/api/tts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, language: "bn-IN" }),
+  });
 
-  const res = await fetch(
-    `https://api.elevenlabs.io/v1/text-to-speech/${BENGALI_STORY_VOICE_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "xi-api-key": ELEVENLABS_API_KEY,
-      },
-      body: JSON.stringify({
-        text,
-        model_id: "eleven_multilingual_v2",
-        voice_settings: {
-          stability: 0.55,
-          similarity_boost: 0.8,
-          style: 0.45,          // expressive storytelling
-          use_speaker_boost: true,
-        },
-      }),
-    }
-  );
-
-  if (!res.ok) throw new Error(`ElevenLabs error: ${res.status}`);
+  if (!res.ok) throw new Error(`Polly TTS error: ${res.status}`);
 
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);

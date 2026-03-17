@@ -103,15 +103,13 @@ export default function PremiumFooter() {
             {/* Brand */}
             <motion.div variants={item} className="md:col-span-3 lg:col-span-4 space-y-4">
               <Link to="/" className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-semibold">
-                  AI
-                </div>
+                <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-9 h-9 rounded-lg object-cover" />
                 <span
                   className={`font-semibold text-lg ${
                     isDark ? "text-white" : "text-slate-900"
                   }`}
                 >
-                  InterviewAI
+                  InterviewSathi
                 </span>
               </Link>
 
@@ -190,7 +188,7 @@ export default function PremiumFooter() {
             }`}
           >
             <span className="text-xs text-slate-500">
-              © {new Date().getFullYear()} InterviewAI
+              © {new Date().getFullYear()} InterviewSathi
             </span>
 
             <div className="flex gap-4">

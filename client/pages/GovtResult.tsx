@@ -22,7 +22,10 @@ import {
   TestAnswer,
   computeScore,
   EXAM_LABELS,
+  submitScore,
 } from "@/lib/govt-practice-data";
+import { isLoggedIn } from "@/lib/auth-api";
+import { completeTask } from "@/lib/daily-tasks";
 
 interface LocationState {
   config: TestConfig;
@@ -31,6 +34,7 @@ interface LocationState {
   timeTakenSeconds: number;
   completedAt: string;
   language: "english" | "bengali";
+  dailyTaskId?: string;
 }
 
 function formatTime(seconds: number): string {
@@ -51,6 +55,34 @@ export default function GovtResult() {
       navigate("/govt-practice", { replace: true });
     }
   }, [state, navigate]);
+
+  // Submit score to leaderboard (only if logged in)
+  useEffect(() => {
+    if (!state?.questions?.length) return;
+    if (!isLoggedIn()) return;
+    const { config, questions, answers, timeTakenSeconds } = state;
+    const s = computeScore(questions, answers);
+    submitScore({
+      exam: config.exam,
+      subject: config.subject,
+      difficulty: config.difficulty,
+      totalQuestions: s.total,
+      correct: s.correct,
+      wrong: s.wrong,
+      unanswered: s.unanswered,
+      accuracy: s.accuracy,
+      timeTakenSeconds,
+    });
+  }, [state]);
+
+  // Complete daily task if this was launched from daily tasks
+  useEffect(() => {
+    if (!state?.dailyTaskId || !state?.questions?.length) return;
+    const s = computeScore(state.questions, state.answers);
+    completeTask(state.dailyTaskId, s.accuracy);
+  }, [state]);
+
+  const isDailyTask = !!state?.dailyTaskId;
 
   if (!state) return null;
 
@@ -234,18 +266,35 @@ export default function GovtResult() {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <Link to="/govt-practice" className="flex-1">
+          {isDailyTask ? (
+            <Link to="/daily-tasks" className="flex-1">
+              <Button size="lg" className="w-full gradient-primary gap-2">
+                <ArrowRight className="w-4 h-4" />
+                Back to Daily Tasks
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/govt-practice" className="flex-1">
+              <Button variant="outline" size="lg" className="w-full gap-2">
+                <RotateCcw className="w-4 h-4" />
+                New Test
+              </Button>
+            </Link>
+          )}
+          <Link to="/leaderboard" className="flex-1">
             <Button variant="outline" size="lg" className="w-full gap-2">
-              <RotateCcw className="w-4 h-4" />
-              New Test
+              <Trophy className="w-4 h-4" />
+              Leaderboard
             </Button>
           </Link>
-          <Link to="/" className="flex-1">
-            <Button size="lg" className="w-full gradient-primary gap-2">
-              <Home className="w-4 h-4" />
-              Home
-            </Button>
-          </Link>
+          {!isDailyTask && (
+            <Link to="/" className="flex-1">
+              <Button size="lg" className="w-full gradient-primary gap-2">
+                <Home className="w-4 h-4" />
+                Home
+              </Button>
+            </Link>
+          )}
         </div>
       </main>
     </div>

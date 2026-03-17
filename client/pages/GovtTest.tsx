@@ -29,6 +29,7 @@ interface LocationState {
   config: TestConfig;
   questions: GovtQuestion[];
   language: "english" | "bengali";
+  dailyTaskId?: string;
 }
 
 function formatTime(seconds: number): string {
@@ -102,6 +103,7 @@ export default function GovtTest() {
         timeTakenSeconds: elapsed,
         completedAt: new Date().toISOString(),
         language: state.language,
+        dailyTaskId: state.dailyTaskId,
       },
     });
   }, [state, questions, answers, elapsed, navigate]);

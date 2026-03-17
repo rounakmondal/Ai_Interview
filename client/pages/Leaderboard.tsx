@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ProfileButton from "@/components/ProfileButton";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -57,6 +58,7 @@ export default function Leaderboard() {
           </Link>
           <span className="text-muted-foreground">/</span>
           <span className="text-sm font-medium">Leaderboard</span>
+          <div className="ml-auto"><ProfileButton /></div>
         </div>
       </header>
 

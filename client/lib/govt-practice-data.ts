@@ -30,6 +30,7 @@ export interface TestConfig {
   subject: Subject;
   difficulty: Difficulty;
   count: 10 | 25 | 50 | 100;
+  language?: "english" | "bengali";
 }
 
 export interface TestAnswer {
@@ -487,9 +488,17 @@ export const QUESTION_BANK: GovtQuestion[] = [
 
 // ─── API fetch functions (with local fallback) ───────────────────────────────
 
-async function apiFetch<T>(url: string): Promise<T | null> {
+function getAuthToken(): string | null {
+  return localStorage.getItem("auth_token");
+}
+
+async function apiFetch<T>(url: string, options?: RequestInit): Promise<T | null> {
   try {
-    const res = await fetch(url);
+    const token = getAuthToken();
+    const headers: Record<string, string> = {};
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+    if (options?.body) headers["Content-Type"] = "application/json";
+    const res = await fetch(url, { ...options, headers: { ...headers, ...options?.headers } });
     if (!res.ok) return null;
     return res.json() as Promise<T>;
   } catch {
@@ -503,6 +512,7 @@ export async function fetchQuestions(config: TestConfig): Promise<GovtQuestion[]
     subject: config.subject,
     difficulty: config.difficulty,
     count: String(config.count),
+    ...(config.language && { language: config.language }),
   });
   const data = await apiFetch<GovtQuestion[]>(`/api/govt/questions?${params}`);
   return data ?? generateTest(config);
@@ -523,8 +533,33 @@ export async function fetchPrevYearQuestions(
 }
 
 export async function fetchCurrentAffairs() {
-  const data = await apiFetch<{ news: NewsItem[]; weeklyQuiz: WeeklyQuizItem[]; monthlyTopics: MonthlyTopic[] }>("/api/govt/current-affairs");
-  return data ?? { news: DAILY_NEWS, weeklyQuiz: WEEKLY_QUIZ, monthlyTopics: MONTHLY_TOPICS };
+  const raw = await apiFetch<any>("/api/govt/current-affairs");
+  if (!raw) return { news: DAILY_NEWS, weeklyQuiz: WEEKLY_QUIZ, monthlyTopics: MONTHLY_TOPICS };
+
+  // Transform API news → NewsItem (API uses `title` instead of `headline`, no `importance`)
+  const news: NewsItem[] = (raw.news || []).map((item: any) => ({
+    id: item.id,
+    date: item.date,
+    headline: item.headline || item.title,
+    summary: item.summary,
+    tags: item.tags || [],
+    importance: item.importance || "medium",
+  }));
+
+  // API weeklyQuiz is metadata only (topic/questionCount/duration),
+  // not actual quiz questions — use local quiz data if no `question` field
+  const weeklyQuiz: WeeklyQuizItem[] =
+    raw.weeklyQuiz?.[0]?.question ? raw.weeklyQuiz : WEEKLY_QUIZ;
+
+  // Transform API monthlyTopics → MonthlyTopic (different field names)
+  const monthlyTopics: MonthlyTopic[] = (raw.monthlyTopics || []).map((item: any) => ({
+    title: item.title || item.topic,
+    description: item.description || `Important topics in ${item.topic || item.title} for upcoming exams`,
+    keyPoints: item.keyPoints || item.subtopics || [],
+    relevantExams: item.relevantExams || item.targetExams || [],
+  }));
+
+  return { news, weeklyQuiz, monthlyTopics };
 }
 
 export async function fetchLeaderboard(filter: "weekly" | "monthly") {
@@ -535,6 +570,32 @@ export async function fetchLeaderboard(filter: "weekly" | "monthly") {
 export async function fetchDashboard() {
   const data = await apiFetch<DashboardStats>("/api/govt/dashboard");
   return data ?? MOCK_DASHBOARD;
+}
+
+export interface SubmitScorePayload {
+  exam: ExamType;
+  subject: Subject;
+  difficulty: Difficulty;
+  totalQuestions: number;
+  correct: number;
+  wrong: number;
+  unanswered: number;
+  accuracy: number;
+  timeTakenSeconds: number;
+}
+
+export interface SubmitScoreResponse {
+  success: boolean;
+  message: string;
+  newRank?: number;
+  totalTests?: number;
+}
+
+export async function submitScore(payload: SubmitScorePayload): Promise<SubmitScoreResponse | null> {
+  return apiFetch<SubmitScoreResponse>("/api/govt/submit-score", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
 }
 
 /** Filter and return questions matching config, up to `count` */

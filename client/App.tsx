@@ -1,6 +1,6 @@
 import "./global.css";
 
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/components/premium/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { isLoggedIn } from "@/lib/auth-api";
+import ExamOnboardingModal from "@/components/ExamOnboardingModal";
+import DailyTaskReminderModal from "@/components/DailyTaskReminderModal";
 import LandingPage from "./pages/Landing";
 import PremiumLanding from "./pages/PremiumLanding";
 import InterviewSetup from "./pages/InterviewSetup";
@@ -33,10 +36,25 @@ const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 const Chatbot = lazy(() => import("./pages/Chatbot"));
 const StudyWithMe = lazy(() => import("./pages/StudyWithMe"));
 const StoryTelling = lazy(() => import("./pages/StoryTelling"));
+const Auth = lazy(() => import("./pages/Auth"));
+const Profile = lazy(() => import("./pages/Profile"));
+const DailyTasks = lazy(() => import("./pages/DailyTasks"));
+const DailyQuiz = lazy(() => import("./pages/DailyQuiz"));
+const StudyPlan = lazy(() => import("./pages/StudyPlan"));
+const SyllabusTracker = lazy(() => import("./pages/SyllabusTracker"));
+const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 
 const queryClient = new QueryClient();
 
 export default function App() {
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
@@ -44,7 +62,9 @@ export default function App() {
           <TooltipProvider>
             <Toaster />
             <Sonner />
+            <ExamOnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
             <BrowserRouter>
+              {isLoggedIn() && !!localStorage.getItem("upcoming_exam") && <DailyTaskReminderModal />}
               <Suspense fallback={<div className="min-h-screen bg-background" />}>
               <Routes>
                 <Route path="/" element={<PremiumLanding />} />
@@ -69,6 +89,13 @@ export default function App() {
                 <Route path="/chatbot" element={<Chatbot />} />
                 <Route path="/study-with-me" element={<StudyWithMe />} />
                 <Route path="/story-telling" element={<StoryTelling />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/daily-tasks" element={<DailyTasks />} />
+                <Route path="/daily-quiz" element={<DailyQuiz />} />
+                <Route path="/study-plan" element={<StudyPlan />} />
+                <Route path="/syllabus" element={<SyllabusTracker />} />
+                <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -222,11 +222,9 @@ export default function InterviewSetup() {
             <span className="text-sm font-medium">Back</span>
           </Link>
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-            </div>
+            <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
             <span className="font-semibold text-sm bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              InterviewAI Setup
+              InterviewSathi Setup
             </span>
           </div>
           <div className="w-16" />

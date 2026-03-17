@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import ProfileButton from "@/components/ProfileButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -16,9 +17,19 @@ import {
   Calendar,
   ArrowRight,
   AlertCircle,
+  Flame,
+  GanttChart,
+  BookMarked,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchDashboard, MOCK_DASHBOARD, DashboardStats, SUBJECT_LABELS, Subject } from "@/lib/govt-practice-data";
+import {
+  getStudyExamPreference,
+  getExamSyllabusWithProgress,
+  getSavedAIPlan,
+} from "@/lib/exam-syllabus-data";
+import { STUDY_EXAM_LABELS } from "@shared/study-types";
+import type { StudyExamType } from "@shared/study-types";
 
 const subjectColor: Record<Subject, string> = {
   History: "bg-amber-500",
@@ -35,6 +46,34 @@ function formatDate(dateStr: string) {
 
 export default function Dashboard() {
   const [stats, setStats] = useState<DashboardStats>(MOCK_DASHBOARD);
+  const studyExam = getStudyExamPreference();
+  const aiPlan = getSavedAIPlan();
+
+  // Calculate syllabus completion %
+  const syllabusCompletion = (() => {
+    if (!studyExam) return 0;
+    const syllabus = getExamSyllabusWithProgress(studyExam);
+    let total = 0, done = 0;
+    for (const s of syllabus.subjects) {
+      for (const c of s.chapters) {
+        total++;
+        if (c.status === "done") done++;
+      }
+    }
+    return total > 0 ? Math.round((done / total) * 100) : 0;
+  })();
+
+  // Days until exam
+  const daysToExam = (() => {
+    try {
+      const raw = localStorage.getItem("upcoming_exam");
+      if (!raw) return null;
+      const { date } = JSON.parse(raw);
+      const diff = Math.ceil((new Date(date).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+      return diff > 0 ? diff : null;
+    } catch { return null; }
+  })();
+
   useEffect(() => {
     fetchDashboard().then((data) => setStats(data));
   }, []);
@@ -50,12 +89,21 @@ export default function Dashboard() {
           </Link>
           <span className="text-muted-foreground">/</span>
           <span className="text-sm font-medium">My Dashboard</span>
-          <Link to="/govt-practice" className="ml-auto">
+          <div className="ml-auto flex items-center gap-2">
+            <ProfileButton />
+            <Link to="/daily-tasks">
+              <Button size="sm" variant="outline" className="gap-1.5">
+                <Flame className="w-3.5 h-3.5 text-orange-500" />
+                Daily Tasks
+              </Button>
+            </Link>
+            <Link to="/govt-practice">
             <Button size="sm" className="gradient-primary gap-1.5">
               <Zap className="w-3.5 h-3.5" />
               Take a Test
             </Button>
           </Link>
+          </div>
         </div>
       </header>
 
@@ -65,6 +113,93 @@ export default function Dashboard() {
           <h1 className="text-2xl sm:text-3xl font-bold">My Dashboard</h1>
           <p className="text-muted-foreground text-sm">Track your preparation progress across all government exams.</p>
         </div>
+
+        {/* Exam Info Strip */}
+        {studyExam && (
+          <Card className="p-4 sm:p-5 border-border/40">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
+                  <Target className="w-5 h-5 text-indigo-500" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">{STUDY_EXAM_LABELS[studyExam]}</p>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    {daysToExam && <span>{daysToExam} days to exam</span>}
+                    <span>Syllabus: {syllabusCompletion}% complete</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Link to="/study-plan">
+                  <Button size="sm" variant="outline" className="gap-1.5 text-xs">
+                    <GanttChart className="w-3.5 h-3.5" />
+                    Study Plan
+                  </Button>
+                </Link>
+                <Link to="/syllabus">
+                  <Button size="sm" variant="outline" className="gap-1.5 text-xs">
+                    <BookMarked className="w-3.5 h-3.5" />
+                    Syllabus
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            {syllabusCompletion > 0 && (
+              <div className="mt-3">
+                <Progress value={syllabusCompletion} className="h-2" />
+              </div>
+            )}
+          </Card>
+        )}
+
+        {/* Study Plan & Syllabus Quick Cards */}
+        {studyExam && (
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Link to="/study-plan">
+              <Card className="p-5 border-border/40 hover:border-primary/30 transition-colors cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center">
+                    <GanttChart className="w-5 h-5 text-violet-500" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm">Study Plan</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {aiPlan ? `AI plan: ${aiPlan.totalWeeks} weeks` : "Generate your AI study plan"}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                </div>
+                {aiPlan ? (
+                  <Badge variant="secondary" className="text-xs">
+                    {aiPlan.hoursPerDay}h/day · {aiPlan.totalWeeks} weeks
+                  </Badge>
+                ) : (
+                  <Button size="sm" variant="outline" className="text-xs gap-1">
+                    <Zap className="w-3 h-3" /> Generate Plan
+                  </Button>
+                )}
+              </Card>
+            </Link>
+            <Link to="/syllabus">
+              <Card className="p-5 border-border/40 hover:border-primary/30 transition-colors cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                    <BookMarked className="w-5 h-5 text-emerald-500" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm">Syllabus Tracker</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {syllabusCompletion}% complete
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                </div>
+                <Progress value={syllabusCompletion} className="h-2" />
+              </Card>
+            </Link>
+          </div>
+        )}
 
         {/* KPI Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

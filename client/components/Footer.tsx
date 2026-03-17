@@ -17,9 +17,7 @@ const LinkedInIcon = () => (
 
 // InterviewAI Logo
 const InterviewAILogo = () => (
-  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white font-bold text-sm">
-    AI
-  </div>
+  <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-10 h-10 rounded-xl object-cover" />
 );
 
 export default function Footer() {
@@ -86,7 +84,7 @@ export default function Footer() {
               {/* Logo and Brand */}
               <div className="flex items-center gap-3">
                 <InterviewAILogo />
-                <span className="text-2xl font-bold text-white">InterviewAI</span>
+                <span className="text-2xl font-bold text-white">InterviewSathi</span>
               </div>
 
               {/* Tagline */}
@@ -129,7 +127,7 @@ export default function Footer() {
 
               {/* Copyright */}
               <p className="text-white/60 text-sm pt-2">
-                © 2026 InterviewAI. All rights reserved.
+                © 2026 InterviewSathi. All rights reserved.
               </p>
               <p className="text-white/50 text-xs">
                 Built by{" "}

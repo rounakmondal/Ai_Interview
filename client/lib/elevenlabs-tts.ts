@@ -1,74 +1,30 @@
 /**
- * ElevenLabs TTS Service for Natural Voice Generation
- * Provides realistic, human-like voice for interview experience
+ * AWS Polly TTS Service — calls server route /api/tts
+ * Credentials stay on the server; the client just POSTs text.
  */
 
-const ELEVENLABS_API_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY;
-const ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1";
-
-// Voice IDs for different languages (ElevenLabs pre-made voices)
-const VOICE_IDS = {
-  "en-US": "21m00Tcm4TlvDq8ikWAM", // Rachel - professional female
-  "en-GB": "N2lVS1w4EtoT3dr4eOWO", // Callum - professional male
-  "hi-IN": "21m00Tcm4TlvDq8ikWAM", // Will use English voice with Hindi (multilingual)
-  "bn-IN": "21m00Tcm4TlvDq8ikWAM", // Will use English voice with Bengali
-};
-
-interface ElevenLabsOptions {
+interface PollyTTSOptions {
   text: string;
-  voiceId?: string;
   language?: string;
-  stability?: number; // 0-1, how stable/consistent the voice is
-  similarityBoost?: number; // 0-1, how much to match the original voice
-  style?: number; // 0-1, expressiveness
-  useSpeakerBoost?: boolean;
 }
 
 /**
- * Generate speech audio using ElevenLabs API
+ * Generate speech audio using the AWS Polly backend route
  */
 export async function generateElevenLabsSpeech(
-  options: ElevenLabsOptions
+  options: PollyTTSOptions
 ): Promise<Blob> {
-  const {
-    text,
-    language = "en-US",
-    stability = 0.5,
-    similarityBoost = 0.75,
-    style = 0.3,
-    useSpeakerBoost = true,
-  } = options;
+  const { text, language = "en-US" } = options;
 
-  // Use appropriate voice for language
-  let voiceId = options.voiceId || VOICE_IDS[language as keyof typeof VOICE_IDS] || VOICE_IDS["en-US"];
-
-  if (!ELEVENLABS_API_KEY) {
-    throw new Error("ElevenLabs API key not configured");
-  }
-
-  const url = `${ELEVENLABS_API_URL}/text-to-speech/${voiceId}`;
-
-  const response = await fetch(url, {
+  const response = await fetch("/api/tts", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "xi-api-key": ELEVENLABS_API_KEY,
-    },
-    body: JSON.stringify({
-      text,
-      model_id: "eleven_multilingual_v2",
-      voice_settings: {
-        stability,
-        similarity_boost: similarityBoost,
-        style,
-        use_speaker_boost: useSpeakerBoost,
-      },
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, language }),
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`ElevenLabs API error: ${error}`);
+    const errText = await response.text();
+    throw new Error(`Polly TTS error: ${errText}`);
   }
 
   return await response.blob();
@@ -89,29 +45,8 @@ export function revokeAudioUrl(url: string): void {
 }
 
 /**
- * Check if ElevenLabs is configured and available
+ * Polly is available as long as the server is running (no client-side key needed)
  */
 export function isElevenLabsAvailable(): boolean {
-  return !!ELEVENLABS_API_KEY && ELEVENLABS_API_KEY !== "your_elevenlabs_api_key_here";
-}
-
-/**
- * Get available voices from ElevenLabs
- */
-export async function getAvailableVoices() {
-  if (!ELEVENLABS_API_KEY) {
-    throw new Error("ElevenLabs API key not configured");
-  }
-
-  const response = await fetch(`${ELEVENLABS_API_URL}/voices`, {
-    headers: {
-      "xi-api-key": ELEVENLABS_API_KEY,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch voices");
-  }
-
-  return await response.json();
+  return true;
 }

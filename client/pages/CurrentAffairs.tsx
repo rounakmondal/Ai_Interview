@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -71,6 +72,7 @@ export default function CurrentAffairs() {
           <span className="text-muted-foreground">/</span>
           <span className="text-sm font-medium">Current Affairs</span>
           <Badge variant="secondary" className="ml-1 text-xs">Updated Daily</Badge>
+          <div className="ml-auto"><ProfileButton /></div>
         </div>
       </header>
 

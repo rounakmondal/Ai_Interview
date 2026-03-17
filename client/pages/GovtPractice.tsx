@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import ProfileButton from "@/components/ProfileButton";
 import {
   BookOpen, ArrowLeft, Zap, Clock, Target, BarChart3,
   Trophy, Shield, Train, Landmark, Building2, Globe2,
@@ -51,10 +52,18 @@ const QUICK_STATS = [
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
+interface GovtPracticeState {
+  exam?: ExamType;
+  subject?: Subject;
+  dailyTaskId?: string;
+}
+
 export default function GovtPractice() {
   const navigate = useNavigate();
-  const [exam,       setExam]       = useState<ExamType>("WBCS");
-  const [subject,    setSubject]    = useState<Subject>("History");
+  const location = useLocation();
+  const incoming = location.state as GovtPracticeState | null;
+  const [exam,       setExam]       = useState<ExamType>(incoming?.exam ?? "WBCS");
+  const [subject,    setSubject]    = useState<Subject>(incoming?.subject ?? "History");
   const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
   const [count,      setCount]      = useState<10 | 25 | 50 | 100>(25);
   const [language,   setLanguage]   = useState<"english" | "bengali">("english");
@@ -68,9 +77,9 @@ export default function GovtPractice() {
     setLoading(true);
     setError(null);
     try {
-      const config: TestConfig = { exam, subject, difficulty, count };
+      const config: TestConfig = { exam, subject, difficulty, count, language };
       const questions = await fetchQuestions(config);
-      navigate("/govt-test", { state: { config, questions, language } });
+      navigate("/govt-test", { state: { config, questions, language, dailyTaskId: incoming?.dailyTaskId } });
     } catch {
       setError("Failed to load questions. Please try again.");
     } finally {
@@ -99,6 +108,7 @@ export default function GovtPractice() {
           <span className="text-sm font-semibold text-foreground">Govt Exam Practice</span>
 
           <div className="ml-auto flex items-center gap-2">
+            <ProfileButton />
             <Link to="/prev-year-questions">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border text-xs font-medium transition-all">
