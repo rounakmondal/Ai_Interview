@@ -43,6 +43,7 @@ const DailyQuiz = lazy(() => import("./pages/DailyQuiz"));
 const StudyPlan = lazy(() => import("./pages/StudyPlan"));
 const SyllabusTracker = lazy(() => import("./pages/SyllabusTracker"));
 const ChapterTest = lazy(() => import("./pages/ChapterTest"));
+const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 
 const queryClient = new QueryClient();
 
@@ -96,6 +97,7 @@ export default function App() {
                 <Route path="/study-plan" element={<StudyPlan />} />
                 <Route path="/syllabus" element={<SyllabusTracker />} />
                 <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
+                <Route path="/mock-test" element={<MockTestPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
