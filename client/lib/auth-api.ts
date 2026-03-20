@@ -1,4 +1,4 @@
-const AUTH_API = import.meta.env.VITE_AUTH_API_URL || "http://localhost:8000/api/auth";
+const AUTH_API = import.meta.env.VITE_API_URL || "/api/auth";
 
 async function authFetch<T>(endpoint: string, body: Record<string, unknown>): Promise<T> {
   const res = await fetch(`${AUTH_API}${endpoint}`, {

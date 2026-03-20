@@ -47,7 +47,7 @@ import jsPDF from "jspdf";
 // ══════════════════════════════════════════════════════════════════════════════
 
 const MOCK_API_BASE_URL: string =
-  (import.meta as any).env?.VITE_MOCK_API_URL ?? "http://localhost:8000";
+  (import.meta as any).env?.VITE_API_URL ?? "";
 
 const EXAM_DURATION_SECONDS = 60 * 60; // 60 minutes
 
