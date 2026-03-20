@@ -309,7 +309,7 @@ export default function PremiumNavbar() {
                         Sign In
                       </motion.div>
                     </Link>
-                    <Link to="/auth" onClick={() => setIsMobileOpen(false)}>
+                    <Link to="/setup" onClick={() => setIsMobileOpen(false)}>
                       <motion.button
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}

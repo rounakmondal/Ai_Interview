@@ -21,6 +21,7 @@ import AvatarPanel, { AvatarState } from "@/components/interview/AvatarPanel";
 import CameraPanel from "@/components/interview/CameraPanel";
 import VoiceInputController from "@/components/interview/VoiceInputController";
 import QuestionDisplay from "@/components/interview/QuestionDisplay";
+import ProgressIndicator from "@/components/interview/ProgressIndicator";
 import type {
   NextQuestionResponse,
   Language,
@@ -155,8 +156,8 @@ export default function InterviewRoom() {
       speech.stopListening();
       audio.stop();
 
-      // Delay to ensure clean state
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Shorter delay for smoother start (200ms instead of 500ms)
+      await new Promise(resolve => setTimeout(resolve, 200));
       
       // Play first question with natural voice
       console.log("Playing first question:", response.message);
@@ -216,8 +217,8 @@ export default function InterviewRoom() {
         speech.stopListening();
         audio.stop();
 
-        // Delay for smooth transition
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Shorter delay for smoother transition (300ms instead of 500ms)
+        await new Promise(resolve => setTimeout(resolve, 300));
         
         // Play next question with natural voice
         console.log("Playing next question:", response.message);
@@ -542,7 +543,7 @@ export default function InterviewRoom() {
           </AlertDialogContent>
         </AlertDialog>
 
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
           <div className="container px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
@@ -552,7 +553,7 @@ export default function InterviewRoom() {
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               {timeRemaining > 0 && (
-                <div className={`text-lg sm:text-2xl font-bold ${timeRemaining < 60 ? 'text-red-600' : 'text-primary'}`}>
+                <div className={`text-lg sm:text-2xl font-bold transition-colors duration-300 ${timeRemaining < 60 ? 'text-red-600 animate-pulse' : 'text-primary'}`}>
                   {formatTime(timeRemaining)}
                 </div>
               )}
@@ -560,7 +561,7 @@ export default function InterviewRoom() {
                 onClick={handleEndInterview}
                 variant="outline"
                 size="sm"
-                className="border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 gap-1 sm:gap-2 px-2 sm:px-4"
+                className="border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 gap-1 sm:gap-2 px-2 sm:px-4 transition-all duration-300"
               >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">End Interview</span>
@@ -569,7 +570,7 @@ export default function InterviewRoom() {
           </div>
         </header>
 
-        <main className="container relative px-4 sm:px-6">
+        <main className="container relative px-4 sm:px-6 animate-fade-in">
           {/* Mobile Layout: Stack vertically */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 py-4 lg:py-8">
             {/* Avatar - Full width on mobile, fixed width on desktop */}
@@ -585,6 +586,13 @@ export default function InterviewRoom() {
             {/* Center: main interview area */}
             <div className="flex-1 flex flex-col items-center order-1 lg:order-2">
               <div className="w-full max-w-2xl space-y-4 lg:space-y-6">
+                {/* Progress indicator - shows question progress */}
+                <ProgressIndicator 
+                  currentQuestion={questionNumber}
+                  totalQuestions={totalQuestions}
+                  isFollowUp={isFollowUp}
+                />
+
                 <div className="bg-transparent">
                   {currentQuestion ? (
                     <QuestionDisplay
@@ -629,6 +637,9 @@ export default function InterviewRoom() {
                     onAutoModeChange={setAutoMode}
                     onStopSpeaking={audio.stop}
                     answerTimeLimit={questionNumber === 1 ? 60 : 40}
+                    audioLevel={speech.audioLevel}
+                    isSpeechDetected={speech.isSpeechDetected}
+                    confidence={speech.confidence}
                   />
                 </div>
               </div>

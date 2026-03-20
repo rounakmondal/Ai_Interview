@@ -21,6 +21,9 @@ interface VoiceInputControllerProps {
   onAutoModeChange?: (enabled: boolean) => void;
   onStopSpeaking?: () => void; // Stop TTS before listening
   answerTimeLimit?: number; // Max seconds student can speak per answer (default: 120)
+  audioLevel?: number; // 0-1 real-time audio level for visual feedback
+  isSpeechDetected?: boolean; // True if speech is being detected
+  confidence?: number; // 0-1 confidence score
 }
 
 const VoiceInputController: FC<VoiceInputControllerProps> = ({
@@ -40,6 +43,9 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   onAutoModeChange,
   onStopSpeaking,
   answerTimeLimit = 120,
+  audioLevel = 0,
+  isSpeechDetected = false,
+  confidence = 1,
 }) => {
   const [manualAnswer, setManualAnswer] = useState("");
   const [useManualInput, setUseManualInput] = useState(false);
@@ -114,7 +120,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
     if (localAutoMode && !useManualInput && isSupported) {
       // TTS just finished speaking
       if (wasSpeakingRef.current && !isSpeaking) {
-        console.log("Auto-mode: TTS finished, starting to listen after 500ms...");
+        console.log("Auto-mode: TTS finished, starting to listen after 300ms...");
         autoListenTimeoutRef.current = setTimeout(() => {
           autoListenTimeoutRef.current = null;
           // Double-check conditions still valid before starting (using refs for current values)
@@ -124,7 +130,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
           } else {
             console.log("Auto-mode: Skipped auto-listen - already listening or submitting");
           }
-        }, 500); // Delay after TTS ends to avoid picking up echo
+        }, 300); // Reduced from 500ms to 300ms for smoother transition
       }
     }
     wasSpeakingRef.current = isSpeaking;
@@ -148,7 +154,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
           if (transcript.trim()) {
             onSubmit(transcript);
           }
-        }, 400);
+        }, 200); // Reduced from 400ms to 200ms for faster submission
       } else if (isListening) {
         // User is speaking again — cancel any pending auto-submit
         if (autoSubmitTimeoutRef.current) {
@@ -178,10 +184,10 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
     if (isSpeaking && onStopSpeaking) {
       console.log("Stopping TTS before starting to listen...");
       onStopSpeaking();
-      // Wait a bit for TTS to actually stop
+      // Wait a bit for TTS to actually stop (reduced from 200ms)
       setTimeout(() => {
         onStartListening();
-      }, 200);
+      }, 100);
     } else {
       onStartListening();
     }
@@ -252,6 +258,34 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
               hasTranscript={!!transcript.trim()}
             />
           </div>
+
+          {/* Real-time audio level meter */}
+          {isListening && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-foreground">Microphone Level</span>
+                <span className="text-muted-foreground">{Math.round(audioLevel * 100)}%</span>
+              </div>
+              <div className="h-2 bg-muted rounded-full overflow-hidden shadow-inner">
+                <div
+                  className={`h-full transition-all duration-100 ease-out rounded-full ${
+                    audioLevel > 0.7
+                      ? 'bg-red-500'
+                      : audioLevel > 0.4
+                      ? 'bg-yellow-500'
+                      : 'bg-primary'
+                  }`}
+                  style={{ width: `${audioLevel * 100}%` }}
+                />
+              </div>
+              {isSpeechDetected && (
+                <div className="flex items-center gap-2 text-xs">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-green-600 dark:text-green-400 font-medium">Speech detected</span>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* TTS playing indicator */}
           {isSpeaking && (
@@ -354,7 +388,25 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
               </div>
             </div>
           )}
-
+          {/* Confidence indicator and live transcript */}
+          {isListening && (transcript.trim() || interimTranscript.trim()) && (
+            <div className="space-y-2 p-4 bg-gradient-to-r from-primary/8 to-secondary/8 border border-primary/20 rounded-lg">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold text-foreground">Recognition Confidence</span>
+                <span className="text-xs font-bold text-primary">{Math.round(confidence * 100)}%</span>
+              </div>
+              <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-200 ease-out"
+                  style={{ width: `${confidence * 100}%` }}
+                />
+              </div>
+              <div className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                <span className="font-medium text-foreground">{transcript}</span>
+                {interimTranscript && <span className="italic opacity-60">{interimTranscript}</span>}
+              </div>
+            </div>
+          )}
           {/* Pending auto-submit indicator — shown briefly when answer is captured */}
           {pendingAutoSubmit && (
             <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center gap-3">

@@ -154,6 +154,83 @@
     animation-delay: 300ms;
   }
 
+  /* Advanced interview animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
+  }
+
+  .animate-listening-pulse {
+    animation: listeningPulse 2s ease-in-out infinite;
+  }
+
+  .transparent-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes listeningPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(235, 100, 100, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(235, 100, 100, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(235, 100, 100, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
   /* Glow effects */
   .glow-primary {
     box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
