@@ -1,6 +1,4 @@
 
-import dotenv from 'dotenv';
-dotenv.config();
 const AUTH_API = import.meta.env.VITE_APIAUTH_URL || "http://localhost:8000/api/auth";
 
 async function authFetch<T>(endpoint: string, body: Record<string, unknown>): Promise<T> {
