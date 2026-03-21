@@ -103,7 +103,7 @@ export default function PremiumFooter() {
             {/* Brand */}
             <motion.div variants={item} className="md:col-span-3 lg:col-span-4 space-y-4">
               <Link to="/" className="flex items-center gap-2">
-                <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-9 h-9 rounded-lg object-cover" />
+                <img src="/logo.png" alt="InterviewSathi" className="w-9 h-9 rounded-lg object-cover" />
                 <span
                   className={`font-semibold text-lg ${
                     isDark ? "text-white" : "text-slate-900"

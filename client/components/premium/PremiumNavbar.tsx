@@ -78,7 +78,7 @@ export default function PremiumNavbar() {
             {/* Left Section - Logo */}
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
               <motion.img
-                src="/photo_6183770845247900874_y.jpg"
+                src="/logo.png"
                 alt="InterviewSathi"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}

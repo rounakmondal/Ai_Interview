@@ -17,7 +17,7 @@ const LinkedInIcon = () => (
 
 // InterviewAI Logo
 const InterviewAILogo = () => (
-  <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-10 h-10 rounded-xl object-cover" />
+  <img src="/logo.png" alt="InterviewSathi" className="w-10 h-10 rounded-xl object-cover" />
 );
 
 export default function Footer() {

@@ -141,7 +141,7 @@ export default function ChapterTest() {
     <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container px-4 h-14 flex items-center gap-3">
         <Link to="/" className="flex items-center gap-2 mr-1">
-          <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
+          <img src="/logo.png" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
           <span className="font-bold text-sm hidden sm:block">InterviewSathi</span>
         </Link>
         <span className="text-border/60 hidden sm:block">|</span>

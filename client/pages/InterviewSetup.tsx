@@ -222,7 +222,7 @@ export default function InterviewSetup() {
             <span className="text-sm font-medium">Back</span>
           </Link>
           <div className="flex items-center gap-2">
-            <img src="/photo_6183770845247900874_y.jpg" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
+            <img src="/logo.png" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
             <span className="font-semibold text-sm bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               InterviewSathi Setup
             </span>
