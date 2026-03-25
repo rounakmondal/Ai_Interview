@@ -16,7 +16,7 @@ const trustedBy = [
 
 const chatBubbles = [
   { from: "ai", text: "Tell me about a time you handled a difficult situation at work.", delay: 0.4 },
-  { from: "user", text: "In my last role, I led a cross-functional team during a critical product launch…", delay: 1.8 },
+  { from: "user", text: "In my last role, I led a cross-functional team during a critical product launchï¿½", delay: 1.8 },
   { from: "ai", text: "Interesting! Can you elaborate on how you managed conflicting priorities?", delay: 3.4 },
 ];
 
@@ -80,7 +80,7 @@ function MockInterviewCard() {
         <div className="px-4 py-3 border-t border-border/40 bg-muted/20 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Mic className="w-3.5 h-3.5 text-red-500 animate-pulse" />
-            Listening…
+            Listeningï¿½
           </div>
           <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20">
             <BarChart3 className="w-3.5 h-3.5 text-indigo-500" />
@@ -168,7 +168,7 @@ export default function PremiumHero() {
             {/* Subtext */}
             <motion.div variants={item}>
               <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Realistic voice-driven mock interviews with instant AI feedback, resume analysis, and detailed scoring — for{" "}
+                Realistic voice-driven mock interviews with instant AI feedback, resume analysis, and detailed scoring for{" "}
                 <span className="text-foreground font-medium">Government</span>,{" "}
                 <span className="text-foreground font-medium">IT</span>,{" "}
                 <span className="text-foreground font-medium">Private</span> and{" "}
@@ -245,7 +245,7 @@ export default function PremiumHero() {
             </motion.div>
           </motion.div>
 
-          {/* Right — Live mock interview card */}
+          {/* Right ï¿½ Live mock interview card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}

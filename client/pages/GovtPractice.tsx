@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
@@ -72,6 +72,29 @@ export default function GovtPractice() {
 
   const meta = EXAM_META[exam];
   const estimatedMins = Math.round(count * 1.2);
+
+  // Set SEO meta tags
+  useEffect(() => {
+    document.title =
+      "Government Exam Practice - WBCS, SSC, Police, Banking + Corporate Jobs | InterviewSathi";
+    const updateMeta = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.content = content;
+    };
+    updateMeta(
+      "description",
+      "Practice government exams (WBCS, SSC, Police, Banking, Railway) + corporate job interviews (TCS, Infosys). Dual track preparation with 1000+ questions, mock tests & instant feedback."
+    );
+    updateMeta(
+      "keywords",
+      "government exam practice, WBCS mock test, SSC practice, police recruitment exam, government exam preparation West Bengal, corporate jobs, tech interview, WBCS tech interview mock test, SSC Infosys interview preparation, West Bengal police exam TCS recruitment, government corporate dual preparation"
+    );
+  }, []);
 
   const handleGenerate = async () => {
     setLoading(true);

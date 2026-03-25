@@ -19,6 +19,9 @@ import {
   Target,
   Lightbulb,
   Check,
+  Building2,
+  Users,
+  Cpu,
 } from "lucide-react";
 import type { Language } from "@shared/api";
 import { extractCVText } from "@/lib/cv-extractor";
@@ -35,6 +38,8 @@ export default function InterviewSetup() {
 
   const [interviewRole, setInterviewRole] = useState(""); // Free text interview role/type
   const [jobDescription, setJobDescription] = useState(""); // Optional job description
+  const [interviewCategory, setInterviewCategory] = useState<"tech" | "nontech" | "govt" | "">("");
+  const [interviewRound, setInterviewRound] = useState<"manager" | "hr" | "">("");
   const [selectedLanguage, setSelectedLanguage] =
     useState<Language | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -145,15 +150,23 @@ export default function InterviewSetup() {
   };
 
   const startInterview = () => {
-    if (!interviewRole.trim() || !selectedLanguage) {
-      setError("Please complete all steps");
+    if (!interviewRole.trim() || !selectedLanguage || !interviewCategory) {
+      setError("Please complete all required fields");
       return;
     }
+
+    // Build a rich interviewType string so AI prompt knows category + round
+    let builtType = interviewRole.trim();
+    if (interviewCategory === "tech") builtType += " | Tech Interview";
+    else if (interviewCategory === "nontech") builtType += " | Non-Tech Interview";
+    else if (interviewCategory === "govt") builtType += " | Government Interview";
+    if (interviewRound === "manager") builtType += " | Manager Round";
+    else if (interviewRound === "hr") builtType += " | HR Round";
 
     setLoading(true);
     navigate("/interview", {
       state: {
-        interviewType: interviewRole.trim(),
+        interviewType: builtType,
         language: selectedLanguage,
         timerDuration,
         cvText: cvText || undefined,
@@ -210,7 +223,8 @@ export default function InterviewSetup() {
     );
   }
 
-  const canStart = interviewRole.trim() && selectedLanguage;
+  const needsRound = false; // Round is optional
+  const canStart = interviewRole.trim() && selectedLanguage && interviewCategory;
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
@@ -271,6 +285,80 @@ export default function InterviewSetup() {
                   className="h-9 text-sm bg-background/60 border-muted-foreground/20 focus:border-primary"
                 />
               </div>
+
+              {/* Interview Category */}
+              <div className="space-y-1.5">
+                <Label className="text-xs font-semibold flex items-center gap-1.5">
+                  <Building2 className="w-3 h-3 text-primary" />
+                  Interview Type <span className="text-red-500">*</span>
+                </Label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { value: "tech",    label: "Tech",     icon: Cpu,        desc: "IT / Engineering" },
+                    { value: "nontech", label: "Non-Tech", icon: Users,      desc: "Business / Sales" },
+                    { value: "govt",    label: "Govt",     icon: Building2,  desc: "Civil / Public" },
+                  ].map(({ value, label, icon: Icon, desc }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => {
+                        setInterviewCategory(value as "tech" | "nontech" | "govt");
+                        setInterviewRound(""); // reset round when category changes
+                      }}
+                      className={`relative flex flex-col items-center gap-0.5 py-2.5 px-1 rounded-lg border-2 transition-all text-center ${
+                        interviewCategory === value
+                          ? "border-primary bg-primary/8 shadow-sm"
+                          : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 mb-0.5 ${interviewCategory === value ? "text-primary" : "text-muted-foreground"}`} />
+                      <span className="text-[11px] font-semibold">{label}</span>
+                      <span className="text-[9px] text-muted-foreground leading-tight">{desc}</span>
+                      {interviewCategory === value && (
+                        <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-primary rounded-full flex items-center justify-center">
+                          <Check className="w-2 h-2 text-primary-foreground" />
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Round selector — only for Tech / Non-Tech */}
+              {(interviewCategory === "tech" || interviewCategory === "nontech") && (
+                <div className="space-y-1.5">
+                  <Label className="text-xs font-semibold flex items-center gap-1.5">
+                    <Users className="w-3 h-3 text-primary" />
+                    Round
+                    <span className="ml-auto text-[10px] font-normal text-muted-foreground bg-muted px-1.5 py-0.5 rounded">optional</span>
+                  </Label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { value: "manager", label: "Manager Round", desc: "Leadership & strategy" },
+                      { value: "hr",      label: "HR Round",      desc: "Culture fit & career" },
+                    ].map(({ value, label, desc }) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setInterviewRound(value as "manager" | "hr")}
+                        className={`relative flex flex-col items-start gap-0.5 py-2.5 px-3 rounded-lg border-2 transition-all ${
+                          interviewRound === value
+                            ? "border-primary bg-primary/8 shadow-sm"
+                            : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
+                        }`}
+                      >
+                        <span className="text-[11px] font-semibold">{label}</span>
+                        <span className="text-[9px] text-muted-foreground">{desc}</span>
+                        {interviewRound === value && (
+                          <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-primary rounded-full flex items-center justify-center">
+                            <Check className="w-2 h-2 text-primary-foreground" />
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Language */}
               <div className="space-y-1.5">
@@ -478,7 +566,7 @@ export default function InterviewSetup() {
               </Button>
               {!canStart && (
                 <p className="text-[10px] text-muted-foreground text-center mt-1.5">
-                  Fill in position & language to start
+                  {!interviewRole.trim() ? "Enter target position" : !interviewCategory ? "Select interview type" : "Select a language"} to start
                 </p>
               )}
             </div>

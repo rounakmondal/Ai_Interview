@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, User } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
 import { isLoggedIn, getSession } from "@/lib/auth-api";
+import { useNotificationCheck } from "@/hooks/use-notification-check";
+import NotificationBell from "../NotificationBell";
 import ProfileButton from "../ProfileButton";
 
 export default function PremiumNavbar() {
@@ -12,8 +14,9 @@ export default function PremiumNavbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
-  const navigate = useNavigate();
-  const location = useLocation();
+
+  // Initialize notification check (toasts + push)
+  useNotificationCheck();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,32 +26,13 @@ export default function PremiumNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll to the "How It Works" section, navigating to home first if needed
-  const handleHowItWorksClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMobileOpen(false);
-    const scrollToSection = () => {
-      const el = document.getElementById("how-it-works");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    };
-    if (location.pathname !== "/") {
-      navigate("/");
-      // Wait for navigation + render before scrolling
-      setTimeout(scrollToSection, 400);
-    } else {
-      scrollToSection();
-    }
-  };
-
   const navItems = [
-    { label: "How It Works", href: "#how-it-works", onClick: handleHowItWorksClick },
-    { label: "Daily Tasks", href: "/daily-tasks", isRoute: true },
-    { label: "Govt Practice", href: "/govt-practice", isRoute: true },
-    { label: "AI Chat", href: "/chatbot", isRoute: true },
-    { label: "Study", href: "/study-with-me", isRoute: true },
-    { label: "About", href: "/about", isRoute: true },
+    { label: "Daily Tasks", href: "/daily-tasks" },
+    { label: "Govt Practice", href: "/govt-practice" },
+    { label: "Question Bank", href: "/question-hub" },
+    { label: "AI Chat", href: "/chatbot" },
+    { label: "Study", href: "/study-with-me" },
+    { label: "About", href: "/about" },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -60,7 +44,7 @@ export default function PremiumNavbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: smoothEase }}
-        className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? "py-2" : "py-4"
+        className={`fixed top-2 sm:top-4 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? "py-2" : "py-4"
           }`}
       >
         {/* Pill-shaped container */}
@@ -95,43 +79,28 @@ export default function PremiumNavbar() {
             {/* Center Section - Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item, idx) => (
-                item.isRoute ? (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 + idx * 0.05, duration: 0.4, ease: smoothEase }}
-                  >
-                    <Link
-                      to={item.href}
-                      className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
-                        }`}
-                    >
-                      {item.label}
-                      <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-indigo-400 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
-                    </Link>
-                  </motion.div>
-                ) : (
-                  <motion.a
-                    key={idx}
-                    href={item.href}
-                    onClick={item.onClick}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 + idx * 0.05, duration: 0.4, ease: smoothEase }}
-                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group cursor-pointer ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + idx * 0.05, duration: 0.4, ease: smoothEase }}
+                >
+                  <Link
+                    to={item.href}
+                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
                       }`}
                   >
                     {item.label}
                     <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-indigo-400 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
-                  </motion.a>
-                )
+                  </Link>
+                </motion.div>
               ))}
             </div>
-                <ProfileButton />
 
             {/* Right Section - Auth */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
+              {/* Notification Bell */}
+              <NotificationBell />
               {/* Theme Toggle */}
               <ThemeToggle />
 
@@ -176,7 +145,8 @@ export default function PremiumNavbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex items-center gap-3 md:hidden">
+            <div className="flex items-center gap-2 md:hidden">
+              <NotificationBell />
               <ThemeToggle />
               <motion.button
                 whileTap={{ scale: 0.95 }}
@@ -236,47 +206,30 @@ export default function PremiumNavbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: smoothEase }}
-              className={`fixed top-24 left-4 right-4 backdrop-blur-xl border rounded-2xl z-50 md:hidden shadow-2xl overflow-hidden ${isDark
+              className={`fixed top-28 sm:top-32 left-4 right-4 backdrop-blur-xl border rounded-2xl z-50 md:hidden shadow-2xl overflow-hidden ${isDark
                 ? "bg-slate-900/98 border-white/10 shadow-black/20"
                 : "bg-white/98 border-slate-200 shadow-slate-200/50"
                 }`}
             >
               <div className="p-4 space-y-1">
                 {navItems.map((item, idx) => (
-                  item.isRoute ? (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.05 }}
-                    >
-                      <Link
-                        to={item.href}
-                        onClick={() => setIsMobileOpen(false)}
-                        className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark
-                          ? "text-white/80 hover:text-white hover:bg-white/5"
-                          : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                          }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ) : (
-                    <motion.a
-                      key={idx}
-                      href={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.05 }}
-                      onClick={item.onClick ?? (() => setIsMobileOpen(false))}
-                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 cursor-pointer ${isDark
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                  >
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMobileOpen(false)}
+                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark
                         ? "text-white/80 hover:text-white hover:bg-white/5"
                         : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                         }`}
                     >
                       {item.label}
-                    </motion.a>
-                  )
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
 

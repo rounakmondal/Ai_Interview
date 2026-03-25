@@ -51,10 +51,9 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   const [useManualInput, setUseManualInput] = useState(false);
   const [localAutoMode, setLocalAutoMode] = useState(autoMode);
   const [answerTimeLeft, setAnswerTimeLeft] = useState<number | null>(null);
-  const [pendingAutoSubmit, setPendingAutoSubmit] = useState(false);
   const wasListeningRef = useRef(false);
   const wasSpeakingRef = useRef(false);
-  const autoSubmitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastAutoSubmittedRef = useRef<string | null>(null);
   const autoListenTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const answerTimerRef = useRef<NodeJS.Timeout | null>(null);
   const onStopListeningRef = useRef(onStopListening);
@@ -143,35 +142,27 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
     };
   }, [isSpeaking, localAutoMode, useManualInput, isSupported]);
 
-  // Auto-submit when listening stops and there's a transcript
+  // Auto-submit as soon as listening stops (no debounce — server accepts answer immediately)
   useEffect(() => {
     if (localAutoMode && !useManualInput) {
-      // Just stopped listening and have transcript
       if (wasListeningRef.current && !isListening && transcript.trim() && !isSubmitting) {
-        setPendingAutoSubmit(true);
-        autoSubmitTimeoutRef.current = setTimeout(() => {
-          setPendingAutoSubmit(false);
-          if (transcript.trim()) {
-            onSubmit(transcript);
-          }
-        }, 200); // Reduced from 400ms to 200ms for faster submission
-      } else if (isListening) {
-        // User is speaking again — cancel any pending auto-submit
-        if (autoSubmitTimeoutRef.current) {
-          clearTimeout(autoSubmitTimeoutRef.current);
-          autoSubmitTimeoutRef.current = null;
+        const text = transcript.trim();
+        if (lastAutoSubmittedRef.current !== text) {
+          lastAutoSubmittedRef.current = text;
+          void onSubmit(text);
         }
-        setPendingAutoSubmit(false);
+      } else if (isListening) {
+        lastAutoSubmittedRef.current = null;
       }
     }
     wasListeningRef.current = isListening;
-
-    return () => {
-      if (autoSubmitTimeoutRef.current) {
-        clearTimeout(autoSubmitTimeoutRef.current);
-      }
-    };
   }, [isListening, localAutoMode, useManualInput, transcript, isSubmitting, onSubmit]);
+
+  useEffect(() => {
+    if (!transcript.trim()) {
+      lastAutoSubmittedRef.current = null;
+    }
+  }, [transcript]);
 
   const toggleAutoMode = () => {
     const newValue = !localAutoMode;
@@ -207,7 +198,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
   };
 
   return (
-    <Card className="border-border/40 space-y-3 sm:space-y-4 p-4 sm:p-6">
+    <Card className="border-border/40 space-y-3 sm:space-y-4 p-4 sm:p-6 transition-all duration-300 ease-in-out">
       {/* Input mode indicator */}
       <div className="flex items-center justify-between gap-2">
         <h3 className="font-semibold text-sm sm:text-base text-foreground">
@@ -407,8 +398,8 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
               </div>
             </div>
           )}
-          {/* Pending auto-submit indicator — shown briefly when answer is captured */}
-          {pendingAutoSubmit && (
+          {/* Submitting (network) — only while answer is in flight, not during next-question TTS */}
+          {isSubmitting && !isListening && !useManualInput && (
             <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                 <MicOff className="w-5 h-5 text-primary" />
@@ -469,7 +460,7 @@ const VoiceInputController: FC<VoiceInputControllerProps> = ({
       )}
 
       {/* Submit button — in auto+voice mode only shown when transcript ready for early manual submit */}
-      {(!localAutoMode || useManualInput || (transcript.trim() && !pendingAutoSubmit)) && (
+      {(!localAutoMode || useManualInput || !!transcript.trim()) && (
         <Button
           onClick={handleSubmit}
           disabled={!finalAnswer.trim() || isSubmitting}

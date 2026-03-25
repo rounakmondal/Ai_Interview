@@ -171,6 +171,18 @@
     animation: listeningPulse 2s ease-in-out infinite;
   }
 
+  .animate-question-transition {
+    animation: questionTransition 0.4s ease-in-out;
+  }
+
+  .animate-avatar-speak {
+    animation: avatarSpeak 0.3s ease-in-out;
+  }
+
+  .animate-voice-wave {
+    animation: voiceWave 1.5s ease-in-out infinite;
+  }
+
   .transparent-smooth {
     @apply transition-all duration-300 ease-out;
   }
@@ -216,6 +228,48 @@
   }
   100% {
     box-shadow: 0 0 0 0 rgba(235, 100, 100, 0);
+  }
+}
+
+@keyframes questionTransition {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes avatarSpeak {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes voiceWave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(0.6);
+  }
+  50% {
+    transform: scaleY(1.4);
+  }
+  75% {
+    transform: scaleY(0.8);
   }
 }
 

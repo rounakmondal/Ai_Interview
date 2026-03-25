@@ -114,6 +114,7 @@ export interface ChapterTestSubmitRequest {
 
 export interface AIChapterGuideRequest {
   chapterId: string;
+  chapterName: string;
   userQuery: string;
 }
 

@@ -23,6 +23,7 @@
   "dependencies": {
     "@aws-sdk/client-polly": "^3.1010.0",
     "@capacitor/android": "^8.1.0",
+    "@capacitor/app": "^8.0.1",
     "@capacitor/cli": "^8.1.0",
     "@capacitor/core": "^8.1.0",
     "dotenv": "^17.2.1",

@@ -16,7 +16,7 @@ const ProgressIndicator: FC<ProgressIndicatorProps> = ({
   const progressPercent = (currentQuestion / totalQuestions) * 100;
 
   return (
-    <Card className="p-6 bg-gradient-to-br from-card to-card/50 border-border/40 space-y-4 animate-fade-in">
+    <Card className="p-6 bg-gradient-to-br from-card to-card/50 border-border/40 space-y-4 animate-fade-in transition-all duration-300">
       {/* Title with question count */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

@@ -50,6 +50,30 @@ const mockQuestions: Record<string, string[]> = {
     "How do you stay organized and meet deadlines?",
     "What do you know about our company?",
   ],
+  manager: [
+    "Describe your leadership philosophy and how you motivate a team.",
+    "Tell me about a time you had to make a difficult decision that affected your team. How did you handle it?",
+    "How do you set goals and measure your team's performance?",
+    "Describe a situation where you had to manage a conflict within your team.",
+    "How do you delegate responsibilities while maintaining accountability?",
+    "Tell me about a time you drove a significant process improvement or change initiative.",
+    "How do you handle an underperforming team member?",
+    "What is your approach to communicating strategy and vision to your team?",
+    "How do you balance short-term delivery pressure with long-term team development?",
+    "Describe how you build trust and psychological safety within your team.",
+  ],
+  hr: [
+    "Tell me about yourself and your career journey so far.",
+    "Why are you looking to leave your current role?",
+    "Where do you see yourself in the next 3–5 years?",
+    "What are your salary expectations?",
+    "How do you align with our company's culture and values?",
+    "Describe a situation where you had to adapt quickly to a major change at work.",
+    "What are your greatest strengths and one area you are actively working to improve?",
+    "How do you maintain a healthy work-life balance?",
+    "Tell me about a time you went above and beyond in your role.",
+    "Why do you want to join our organisation specifically?",
+  ],
 };
 
 const mockFollowUps = [
@@ -278,6 +302,52 @@ function generateContextualFollowUp(answer: string, questionType: string): strin
   ];
   
   return genericContextual[Math.floor(Math.random() * genericContextual.length)];
+}
+
+/**
+ * Pick the next question that best connects to what the candidate just talked about.
+ * Returns the index within remainingQuestions of the best match.
+ */
+function selectNextContextualQuestion(
+  userAnswer: string,
+  remainingQuestions: string[],
+): number {
+  if (remainingQuestions.length <= 1) return 0;
+
+  const lowerAnswer = userAnswer.toLowerCase();
+
+  // Pairs of [what user talked about] → [questions that continue that thread]
+  const contextPairs: Array<[RegExp, RegExp]> = [
+    [/tech|code|software|program|engineer|architect|build|develop|api|database|cloud|devops/, /technical|code|software|program|engineer|architect|build|develop|api|database|cloud|devops|debug|performance|quality/],
+    [/team|collaborat|colleague|pair|cross|cross-functional/, /team|collaborat|colleague|conflict|dynamic|communication|cross/],
+    [/project|built|develop|created|implement|delivered/, /project|built|develop|created|implement|deliver|lead|ownership/],
+    [/challenge|problem|difficult|obstacle|bug|issue|failure/, /challenge|problem|difficult|obstacle|mistake|failure|overcome|lesson/],
+    [/lead|manag|supervis|head|director/, /lead|manag|supervis|decision|priorit|delegate|coach|mentor/],
+    [/customer|client|stakeholder|user/, /customer|client|stakeholder|expectation|relationship|requirement/],
+    [/learn|growth|new skill|upskill|course|study/, /learn|grow|skill|develop|career|improve|adapt/],
+    [/deadline|pressure|urgent|crunch|stress/, /deadline|pressure|priorit|urgent|time|manage|balance/],
+    [/achieve|success|impact|result|win|exceed/, /achieve|impact|proud|greatest|significant|measur/],
+    [/conflict|disagree|tension|push back/, /conflict|disagree|feedback|difficult|conversation|handle/],
+    [/culture|values|team spirit|motivation/, /culture|value|motivat|engage|onboard|retention/],
+  ];
+
+  const scores = remainingQuestions.map((q, i) => {
+    const lowerQ = q.toLowerCase();
+    let score = 0;
+    for (const [answerPat, questionPat] of contextPairs) {
+      if (answerPat.test(lowerAnswer) && questionPat.test(lowerQ)) {
+        score += 3;
+      }
+    }
+    return { i, score };
+  });
+
+  const maxScore = Math.max(...scores.map(s => s.score));
+  // Only apply contextual pick if there's a real match; otherwise keep order
+  if (maxScore === 0) return 0;
+
+  const topMatches = scores.filter(s => s.score === maxScore);
+  return topMatches[Math.floor(Math.random() * topMatches.length)].i;
 }
 
 /**
@@ -1159,21 +1229,32 @@ export const mockApi = {
     }
     
     // Priority 3: Add generic questions based on interview type keywords
-    // Try to match the free-text interview type to our question categories
+    // The interviewType string is built as: "[role] | Tech/Non-Tech/Govt | Manager/HR Round"
     const lowerType = data.interviewType.toLowerCase();
     let genericQuestions: string[] = [];
-    
-    if (lowerType.includes("software") || lowerType.includes("developer") || lowerType.includes("engineer") || 
-        lowerType.includes("programmer") || lowerType.includes("tech") || lowerType.includes("data") ||
+
+    // Detect Manager Round — strict: must be manager round questions
+    if (lowerType.includes("manager round")) {
+      genericQuestions = [...mockQuestions.manager];
+    // Detect HR Round — strict: must be hr round questions
+    } else if (lowerType.includes("hr round")) {
+      genericQuestions = [...mockQuestions.hr];
+    // Detect Government category
+    } else if (lowerType.includes("government interview") || lowerType.includes("govt") || lowerType.includes("government") || lowerType.includes("civil") || lowerType.includes("public service")) {
+      genericQuestions = [...mockQuestions.government];
+    // Detect Tech category
+    } else if (lowerType.includes("tech interview") || lowerType.includes("software") || lowerType.includes("developer") || lowerType.includes("engineer") ||
+        lowerType.includes("programmer") || lowerType.includes("data") ||
         lowerType.includes("devops") || lowerType.includes("cloud") || lowerType.includes("backend") ||
         lowerType.includes("frontend") || lowerType.includes("fullstack")) {
       genericQuestions = [...mockQuestions.it];
-    } else if (lowerType.includes("government") || lowerType.includes("civil") || lowerType.includes("public")) {
-      genericQuestions = [...mockQuestions.government];
+    // Detect Non-Tech category
+    } else if (lowerType.includes("non-tech interview") || lowerType.includes("non-tech") || lowerType.includes("nontech")) {
+      genericQuestions = [...mockQuestions["non-it"]];
     } else {
       genericQuestions = [...mockQuestions.private];
     }
-    
+
     // Add generic questions to fill up to 8 total questions
     const targetQuestionCount = 8;
     while (questions.length < targetQuestionCount && genericQuestions.length > 0) {
@@ -1208,13 +1289,20 @@ export const mockApi = {
     saveSessionsToStorage(sessions);
 
     // Create personalized opening message
+    const lowerTypeOpening = data.interviewType.toLowerCase();
+    const isManagerRound = lowerTypeOpening.includes("manager round");
+    const isHRRound = lowerTypeOpening.includes("hr round");
+    const roundLabel = isManagerRound ? "Manager Round" : isHRRound ? "HR Round" : "";
+
     let openingMessage = shuffled[0];
     if (hasJD && hasCV) {
-      openingMessage = `I've reviewed your CV and the job description. Let's begin. ${shuffled[0]}`;
+      openingMessage = `I've reviewed your CV and the job description. ${roundLabel ? `This is your ${roundLabel}. ` : ""}Let's begin. ${shuffled[0]}`;
     } else if (hasJD) {
-      openingMessage = `I've reviewed the job description for this ${data.interviewType} position. Let's start. ${shuffled[0]}`;
+      openingMessage = `I've reviewed the job description. ${roundLabel ? `This is your ${roundLabel}. ` : ""}Let's start. ${shuffled[0]}`;
     } else if (hasCV) {
-      openingMessage = `I've reviewed your CV. ${shuffled[0]}`;
+      openingMessage = `I've reviewed your CV. ${roundLabel ? `This is your ${roundLabel}. ` : ""}${shuffled[0]}`;
+    } else if (roundLabel) {
+      openingMessage = `Welcome to your ${roundLabel}. ${shuffled[0]}`;
     }
 
     return {
@@ -1320,11 +1408,21 @@ export const mockApi = {
       };
     }
 
-    // Generate a connected question that flows from the previous answer
+    // Generate a contextually connected next question
+    const remaining = session.questions.slice(session.questionIndex);
+    const bestIdx = selectNextContextualQuestion(data.userAnswer, remaining);
+
+    // Swap the most relevant question into the next slot
+    if (bestIdx !== 0) {
+      const tmp = session.questions[session.questionIndex];
+      session.questions[session.questionIndex] = session.questions[session.questionIndex + bestIdx];
+      session.questions[session.questionIndex + bestIdx] = tmp;
+    }
+
     const baseQuestion = session.questions[session.questionIndex];
     const connectedQuestion = generateConnectedQuestion(
-      data.userAnswer, 
-      baseQuestion, 
+      data.userAnswer,
+      baseQuestion,
       session.type
     );
 

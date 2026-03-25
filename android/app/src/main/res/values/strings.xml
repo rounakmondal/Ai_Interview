@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ai-interview</string>
-    <string name="title_activity_main">ai-interview</string>
-    <string name="package_name">com.ainterview.app</string>
-    <string name="custom_url_scheme">com.ainterview.app</string>
+    <string name="app_name">InterviewSathi</string>
+    <string name="title_activity_main">InterviewSathi</string>
+    <string name="package_name">com.interviewsathi.online</string>
+    <string name="custom_url_scheme">com.interviewsathi.online</string>
 </resources>

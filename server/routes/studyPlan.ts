@@ -151,16 +151,22 @@ export const handleSubmitChapterTest: RequestHandler = (req, res) => {
 
 // ── POST /api/ai/chapter-guide — AI guide for a chapter ──────────────────────
 export const handleAIChapterGuide: RequestHandler = (req, res) => {
-  const { chapterId, userQuery } = req.body as { chapterId?: string; userQuery?: string };
+  const { chapterId, chapterName, userQuery } = req.body as {
+    chapterId?: string;
+    chapterName?: string;
+    userQuery?: string;
+  };
 
   if (!chapterId || !userQuery) {
     res.status(400).json({ error: "chapterId and userQuery are required" });
     return;
   }
 
-  // Mock AI response (in production, call Gemini/OpenAI)
+  const displayName = chapterName || chapterId;
+
+  // Mock AI response (in production, call Gemini/OpenAI using chapterName + userQuery)
   const response: AIChapterGuideResponse = {
-    answer: `## Study Guide: ${chapterId}\n\n**Your question:** ${userQuery}\n\n### Key Points\n\n1. **Start with basics** — Make sure you understand the fundamental concepts before moving to advanced topics.\n\n2. **NCERT is your best friend** — For most competitive exams, NCERT textbooks cover 70-80% of the syllabus.\n\n3. **Practice MCQs daily** — Solve at least 20-30 MCQs daily from this chapter to build speed and accuracy.\n\n4. **Previous Year Questions** — Always study PYQs from the last 5 years. They show the exam pattern clearly.\n\n5. **Make short notes** — Write key facts, dates, and formulas on flashcards for quick revision.\n\n### Recommended Resources\n- NCERT textbooks (Class 6-12)\n- Lucent's GK (for quick revision)\n- Previous year papers (last 5 years)\n- Daily current affairs for context\n\n### Exam Tips\n- Time management is crucial. Don't spend more than 1 minute per MCQ.\n- Eliminate obviously wrong options first.\n- If unsure, mark the most logical answer — don't leave blank unless there's negative marking.\n\n> 💡 **Pro Tip:** Create a revision schedule where you revisit this chapter every 7 days using spaced repetition.`,
+    answer: `## Study Guide: ${displayName}\n\n**Your question:** ${userQuery}\n\n### Key Points\n\n1. **Start with basics** — Make sure you understand the fundamental concepts before moving to advanced topics.\n\n2. **NCERT is your best friend** — For most competitive exams, NCERT textbooks cover 70-80% of the syllabus.\n\n3. **Practice MCQs daily** — Solve at least 20-30 MCQs daily from this chapter to build speed and accuracy.\n\n4. **Previous Year Questions** — Always study PYQs from the last 5 years. They show the exam pattern clearly.\n\n5. **Make short notes** — Write key facts, dates, and formulas on flashcards for quick revision.\n\n### Recommended Resources\n- NCERT textbooks (Class 6-12)\n- Lucent's GK (for quick revision)\n- Previous year papers (last 5 years)\n- Daily current affairs for context\n\n### Exam Tips\n- Time management is crucial. Don't spend more than 1 minute per MCQ.\n- Eliminate obviously wrong options first.\n- If unsure, mark the most logical answer — don't leave blank unless there's negative marking.\n\n> 💡 **Pro Tip:** Create a revision schedule where you revisit this chapter every 7 days using spaced repetition.`,
   };
 
   res.json(response);

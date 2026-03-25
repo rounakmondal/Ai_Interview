@@ -11,6 +11,11 @@ import {
   Zap, PenLine, Shield, Clock,
 } from "lucide-react";
 import jsPDF from "jspdf";
+import {
+  fetchMockTestPaper,
+  type MockPaperMeta,
+  type MockQuestion,
+} from "@/lib/mock-test-paper";
 
 // ══════════════════════════════════════════════════════════════════════════════
 // PYTHON BACKEND API CONFIGURATION
@@ -46,33 +51,9 @@ import jsPDF from "jspdf";
 // }
 // ══════════════════════════════════════════════════════════════════════════════
 
-const MOCK_API_BASE_URL: string =
-  (import.meta as any).env?.VITE_API_URL ?? "";
-
 const EXAM_DURATION_SECONDS = 60 * 60; // 60 minutes
 
 // ── Types ───────────────────────────────────────────────────────────────────
-
-interface MockQuestion {
-  id: number;
-  subject: string;
-  topic: string;
-  difficulty: "Easy" | "Medium" | "Hard";
-  question: string;
-  options: [string, string, string, string];
-  correct_index: number;
-  correct_option: string;
-  explanation: string;
-  tags: string[];
-}
-
-interface MockPaperMeta {
-  exam: string;
-  paper_title: string;
-  total_questions: number;
-  duration_minutes: number;
-  generated_at: string;
-}
 
 type Mode = "choice" | "loading" | "viewing" | "attempting" | "submitted";
 
@@ -97,6 +78,19 @@ const DIFF_CONFIG = {
 };
 
 const OPTION_LABELS = ["A", "B", "C", "D"];
+
+function hasUnicodeText(text: string): boolean {
+  return /[^\u0000-\u00ff]/.test(text);
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 function formatTime(secs: number) {
   const h = Math.floor(secs / 3600);
@@ -174,26 +168,14 @@ export default function MockTestPage() {
     setError(null);
     setLoadingMsg(0);
     try {
-      const token = localStorage.getItem("auth_token");
-      const headers: Record<string, string> = {};
-      if (token) headers["Authorization"] = `Bearer ${token}`;
-
-      const res = await fetch(
-        `${MOCK_API_BASE_URL}/api/mock/daily-paper?exam=${encodeURIComponent(examType)}`,
-        { headers },
-      );
-      if (!res.ok) throw new Error(`API error ${res.status}: ${res.statusText}`);
-      const data = await res.json();
-      if (!Array.isArray(data.questions) || data.questions.length === 0)
-        throw new Error("No questions received from server");
-
+      const data = await fetchMockTestPaper(examType);
       setQuestions(data.questions);
       setMeta({
-        exam: data.exam,
-        paper_title: data.paper_title,
-        total_questions: data.total_questions,
-        duration_minutes: data.duration_minutes,
-        generated_at: data.generated_at,
+        exam: data.meta.exam,
+        paper_title: data.meta.paper_title,
+        total_questions: data.meta.total_questions,
+        duration_minutes: data.meta.duration_minutes,
+        generated_at: data.meta.generated_at,
       });
 
       if (next === "viewing") {
@@ -243,6 +225,119 @@ export default function MockTestPage() {
   }, [questions, answers, timeLeft]);
 
   const downloadPDF = useCallback(() => {
+    const visible = subjectFilter === "All" ? questions : questions.filter((q) => q.subject === subjectFilter);
+    const containsUnicode =
+      hasUnicodeText(meta?.paper_title ?? "") ||
+      visible.some(
+        (q) =>
+          hasUnicodeText(q.question) ||
+          q.options.some((opt) => hasUnicodeText(opt)) ||
+          hasUnicodeText(q.explanation),
+      );
+
+    // jsPDF default fonts cannot render Bengali/Unicode text reliably.
+    // Use a hidden iframe + print (no new tab; avoids popup blockers).
+    // If that fails, download UTF-8 HTML — open it and use Print → Save as PDF.
+    if (containsUnicode) {
+      const generatedAt = meta?.generated_at
+        ? new Date(meta.generated_at).toLocaleDateString("en-IN")
+        : new Date().toLocaleDateString("en-IN");
+
+      const html = `
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${escapeHtml(meta?.paper_title ?? `${examType} Mock Test`)}</title>
+  <style>
+    body { font-family: "Nirmala UI", "Segoe UI", Arial, sans-serif; margin: 24px; color: #111; }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    .meta { font-size: 12px; color: #555; margin-bottom: 16px; }
+    .q { margin: 14px 0 18px; page-break-inside: avoid; }
+    .qt { font-weight: 700; margin-bottom: 8px; }
+    .opt { margin: 2px 0; }
+    .exp { font-size: 12px; color: #444; margin-top: 6px; }
+    @media print { body { margin: 16px; } }
+  </style>
+</head>
+<body>
+  <h1>${escapeHtml(meta?.paper_title ?? `${examType} Mock Test`)}</h1>
+  <div class="meta">${escapeHtml(`${visible.length} Questions | Generated: ${generatedAt}`)}</div>
+  ${visible
+    .map(
+      (q, i) => `
+    <div class="q">
+      <div class="qt">Q${i + 1}. ${escapeHtml(q.question)}</div>
+      ${q.options
+        .map((opt, oi) => `<div class="opt">${OPTION_LABELS[oi]}. ${escapeHtml(opt)}${oi === q.correct_index ? " (Correct)" : ""}</div>`)
+        .join("")}
+      <div class="exp">${escapeHtml(`Explanation: ${q.explanation}`)}</div>
+    </div>`,
+    )
+    .join("")}
+</body>
+</html>`;
+
+      const downloadHtmlFile = () => {
+        const blob = new Blob([`\ufeff${html}`], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${examType}_mock_paper_${new Date().toISOString().split("T")[0]}.html`;
+        a.rel = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+
+      const iframe = document.createElement("iframe");
+      iframe.setAttribute("aria-hidden", "true");
+      iframe.style.cssText =
+        "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0;pointer-events:none;";
+      document.body.appendChild(iframe);
+
+      const idoc = iframe.contentDocument;
+      const iwin = iframe.contentWindow;
+      if (!idoc || !iwin) {
+        iframe.remove();
+        downloadHtmlFile();
+        return;
+      }
+
+      idoc.open();
+      idoc.write(html);
+      idoc.close();
+
+      let cleaned = false;
+      const cleanup = () => {
+        if (cleaned) return;
+        cleaned = true;
+        window.clearTimeout(failsafeId);
+        try {
+          iwin.removeEventListener("afterprint", onAfterPrint);
+        } catch {
+          /* ignore */
+        }
+        iframe.remove();
+      };
+      const onAfterPrint = () => cleanup();
+      iwin.addEventListener("afterprint", onAfterPrint);
+      const failsafeId = window.setTimeout(cleanup, 120_000);
+
+      window.setTimeout(() => {
+        try {
+          iwin.focus();
+          iwin.print();
+        } catch {
+          cleanup();
+          downloadHtmlFile();
+        }
+      }, 200);
+      return;
+    }
+
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const pageH = doc.internal.pageSize.height;
     const pageW = doc.internal.pageSize.width;
@@ -283,7 +378,6 @@ export default function MockTestPage() {
     doc.text("Answer Key Included — For Study Purpose Only", margin, 33);
     y = 46;
 
-    const visible = subjectFilter === "All" ? questions : questions.filter((q) => q.subject === subjectFilter);
     visible.forEach((q, i) => {
       if (y > pageH - 55) { doc.addPage(); y = 18; }
 
@@ -584,7 +678,7 @@ export default function MockTestPage() {
             ))}
           </div>
 
-          <p className="text-xs text-slate-600">Fetching from Python API · {examType}</p>
+          <p className="text-xs text-slate-600">Fetching paper data · {examType}</p>
         </div>
       </div>
     );

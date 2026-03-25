@@ -189,6 +189,149 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* AI-Powered Exam Preparation Section */}
+      <section className="py-20 sm:py-32 border-t border-border/40 bg-gradient-to-b from-secondary/5 via-transparent to-primary/5">
+        <div className="container space-y-12 sm:space-y-16">
+          <div className="text-center space-y-4 max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              AI-Powered Exam Preparation for{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Police, WBCS, SSC & More
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Revolutionize your exam preparation with cutting-edge AI technology designed specifically for competitive exams. From police constable exams to WBCS and SSC, our AI-driven platform helps students crack their dream jobs through intelligent study recommendations, personalized mock tests, and comprehensive skill development.
+            </p>
+          </div>
+
+          {/* How AI Helps Students Crack Exams */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-2xl sm:text-3xl font-bold">
+                How AI Helps Students Crack Exams
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Personalized Study Plans</h4>
+                    <p className="text-muted-foreground">AI analyzes your performance and creates customized study schedules tailored to your strengths and weaknesses for police, WBCS, and SSC exams.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">AI-Recommended Question Papers</h4>
+                    <p className="text-muted-foreground">Get intelligent recommendations for previous year papers, mock tests, and practice questions based on exam patterns and your preparation level.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Real-time Performance Analytics</h4>
+                    <p className="text-muted-foreground">Track your progress with detailed analytics, identify weak areas, and receive AI-powered insights to improve your scores in competitive exams.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Adaptive Learning Technology</h4>
+                    <p className="text-muted-foreground">Our AI adapts to your learning style, providing challenging questions when you're ready and remedial content when you need reinforcement.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-80 sm:h-96">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
+              <div className="relative h-full bg-card rounded-2xl border border-border/40 p-8 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <Brain className="w-16 h-16 text-primary mx-auto" />
+                  <h4 className="text-xl font-bold">AI-Driven Success</h4>
+                  <p className="text-muted-foreground">
+                    Advanced algorithms analyze thousands of exam patterns to provide you with the most effective preparation strategy.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Uses of AI for Cracking Jobs */}
+          <div className="space-y-8">
+            <h3 className="text-2xl sm:text-3xl font-bold text-center">
+              Uses of AI for Cracking Jobs
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Resume Optimization",
+                  description: "AI-powered resume builder that analyzes job descriptions and optimizes your CV for ATS systems and recruiters.",
+                  icon: "📄",
+                },
+                {
+                  title: "Interview Practice",
+                  description: "Practice with AI interviewers that simulate real job interviews for police, government, and corporate positions.",
+                  icon: "🎤",
+                },
+                {
+                  title: "Skill Gap Analysis",
+                  description: "Identify missing skills and get personalized learning recommendations to bridge gaps for your target job role.",
+                  icon: "📊",
+                },
+                {
+                  title: "Mock Test Generation",
+                  description: "AI creates custom mock tests based on specific job requirements and exam patterns for WBCS, SSC, and police exams.",
+                  icon: "📝",
+                },
+                {
+                  title: "Career Guidance",
+                  description: "Get AI-powered career advice, job market insights, and personalized roadmaps for government and private sector jobs.",
+                  icon: "🎯",
+                },
+                {
+                  title: "Performance Tracking",
+                  description: "Monitor your preparation progress with detailed analytics and AI-generated improvement suggestions.",
+                  icon: "📈",
+                },
+              ].map((use, idx) => (
+                <Card key={idx} className="p-6 border border-border/40 hover:border-primary/50 transition-all hover:shadow-lg">
+                  <div className="space-y-4">
+                    <div className="text-3xl">{use.icon}</div>
+                    <h4 className="font-bold text-lg">{use.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {use.description}
+                    </p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA for Exam Preparation */}
+          <div className="text-center space-y-6 pt-8">
+            <h3 className="text-xl sm:text-2xl font-bold">
+              Ready to Crack Your Exam with AI?
+            </h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join thousands of students who are using AI to prepare for police, WBCS, SSC, and other competitive exams. Start your AI-powered preparation journey today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/study-plan">
+                <Button size="lg" className="gradient-primary text-base font-semibold">
+                  Create Study Plan
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
+              <Link to="/question-hub">
+                <Button variant="outline" size="lg" className="border-primary/20 text-base">
+                  Practice Mock Tests
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 sm:py-32 border-t border-border/40 bg-gradient-to-b from-primary/5 via-transparent to-transparent">
         <div className="container">

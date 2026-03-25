@@ -20,7 +20,7 @@ const QuestionDisplay: FC<QuestionDisplayProps> = ({
   isPlaying = false,
 }) => {
   return (
-    <div className="space-y-4 animate-fade-in-up">
+    <div className="space-y-4 animate-question-transition">
       {/* Question Card */}
       <Card className={`p-6 bg-gradient-to-br from-card to-card/50 border-border/40 space-y-4 transition-all duration-500 ${
         isPlaying ? 'shadow-lg shadow-primary/20 border-primary/30' : 'shadow-sm'

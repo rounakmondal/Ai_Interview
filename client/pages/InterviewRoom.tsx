@@ -58,6 +58,7 @@ export default function InterviewRoom() {
   const [autoMode, setAutoMode] = useState(true); // Auto-listen and auto-submit
   const [enableCamera, setEnableCamera] = useState(true);
   const [enableVoice, setEnableVoice] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false); // Smooth transitions between questions
 
   // Media hooks with enhanced quality
   const camera = useCamera();
@@ -65,7 +66,7 @@ export default function InterviewRoom() {
   // Enhanced audio with natural voice
   const audio = useEnhancedAudio({
     volume: 0.7, // Lower volume to prevent echo
-    useElevenLabs: true, // Use natural AI voices
+    useElevenLabs: false, // Use browser speech synthesis (free + smooth)
     onStartPlaying: () => {
       setAvatarState("speaking");
       // Stop listening to prevent echo
@@ -156,8 +157,8 @@ export default function InterviewRoom() {
       speech.stopListening();
       audio.stop();
 
-      // Shorter delay for smoother start (200ms instead of 500ms)
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // Minimal delay for smoother start (100ms instead of 200ms)
+      await new Promise(resolve => setTimeout(resolve, 100));
       
       // Play first question with natural voice
       console.log("Playing first question:", response.message);
@@ -184,6 +185,7 @@ export default function InterviewRoom() {
       try {
         setError(null);
         setIsSubmittingAnswer(true);
+        setIsTransitioning(true);
         setAvatarState("thinking");
 
         // Stop listening and any playback
@@ -202,25 +204,26 @@ export default function InterviewRoom() {
           response.questionNumber > response.totalQuestions
         ) {
           // Interview complete
+          setIsSubmittingAnswer(false);
+          setIsTransitioning(false);
           await finishInterview();
           return;
         }
 
-        // Update state
+        // Update state + reset voice input
         setCurrentQuestion(response.message);
         setIsFollowUp(response.isFollowUp || false);
         if (response.questionNumber) setQuestionNumber(response.questionNumber);
         if (response.totalQuestions) setTotalQuestions(response.totalQuestions);
 
-        // Reset voice input
         speech.resetTranscript();
         speech.stopListening();
         audio.stop();
 
-        // Shorter delay for smoother transition (300ms instead of 500ms)
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        // Play next question with natural voice
+        // Answer is persisted — unblock UI immediately (don't wait for TTS)
+        setIsSubmittingAnswer(false);
+
+        // Play next question; keep isTransitioning until speech ends
         console.log("Playing next question:", response.message);
         setAvatarState("speaking");
         if (response.message && response.message.trim()) {
@@ -229,13 +232,14 @@ export default function InterviewRoom() {
           setAvatarState("idle");
         }
 
-        setIsSubmittingAnswer(false);
+        setIsTransitioning(false);
       } catch (err) {
         const message =
           err instanceof Error ? err.message : "Failed to get next question";
         setError(message);
         setAvatarState("idle");
         setIsSubmittingAnswer(false);
+        setIsTransitioning(false);
       }
     },
     [sessionId, speech, audio],
@@ -334,12 +338,12 @@ export default function InterviewRoom() {
       setAvatarState("listening");
     } else if (audio.isPlaying) {
       setAvatarState("speaking");
-    } else if (isSubmittingAnswer) {
+    } else if (isSubmittingAnswer || isTransitioning) {
       setAvatarState("thinking");
     } else {
       setAvatarState("idle");
     }
-  }, [speech.isListening, audio.isPlaying, isSubmittingAnswer]);
+  }, [speech.isListening, audio.isPlaying, isSubmittingAnswer, isTransitioning]);
 
   const getLanguageCode = (): string => {
     switch (state?.language) {
@@ -572,7 +576,7 @@ export default function InterviewRoom() {
 
         <main className="container relative px-4 sm:px-6 animate-fade-in">
           {/* Mobile Layout: Stack vertically */}
-          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 py-4 lg:py-8">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 py-4 lg:py-8 transition-all duration-500 ease-in-out">
             {/* Avatar - Full width on mobile, fixed width on desktop */}
             <div className="w-full lg:w-72 xl:w-80 flex-shrink-0 order-2 lg:order-1">
               <div className="lg:sticky lg:top-8 w-full">
@@ -593,8 +597,16 @@ export default function InterviewRoom() {
                   isFollowUp={isFollowUp}
                 />
 
-                <div className="bg-transparent">
-                  {currentQuestion ? (
+                <div className="bg-transparent transition-all duration-300">
+                  {isTransitioning ? (
+                    <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-4 lg:p-6 text-center animate-pulse">
+                      <div className="flex items-center justify-center gap-3 mb-2">
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-muted-foreground font-medium">Processing your answer...</p>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Getting your next question ready</p>
+                    </div>
+                  ) : currentQuestion ? (
                     <QuestionDisplay
                       questionText={currentQuestion}
                       isFollowUp={isFollowUp}

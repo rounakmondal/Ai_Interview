@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { isLoggedIn } from "@/lib/auth-api";
+import { useAndroidBackButton } from "@/hooks/use-android-back-button";
+import { useNotificationCheck } from "@/hooks/use-notification-check";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import DailyTaskReminderModal from "@/components/DailyTaskReminderModal";
 import LandingPage from "./pages/Landing";
@@ -44,8 +46,71 @@ const StudyPlan = lazy(() => import("./pages/StudyPlan"));
 const SyllabusTracker = lazy(() => import("./pages/SyllabusTracker"));
 const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 const MockTestPage = lazy(() => import("./pages/MockTestPage"));
+const QuestionHub = lazy(() => import("./pages/QuestionHub"));
+const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
 
 const queryClient = new QueryClient();
+
+// Inner component to use hooks (must be inside BrowserRouter)
+function AppContent() {
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // Initialize Android back button handler
+  useAndroidBackButton();
+
+  // Initialize notification check system
+  useNotificationCheck();
+
+  useEffect(() => {
+    if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  return (
+    <>
+      {isLoggedIn() && !!localStorage.getItem("upcoming_exam") && <DailyTaskReminderModal />}
+      <Suspense fallback={<div className="min-h-screen bg-background" />}>
+        <Routes>
+          <Route path="/" element={<PremiumLanding />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/setup" element={<InterviewSetup />} />
+          <Route path="/interview" element={<InterviewRoom />} />
+          <Route path="/evaluation" element={<EvaluationPage />} />
+          <Route path="/resume" element={<ResumeBuilder />} />
+          <Route path="/career-mentor" element={<CareerMentorPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/govt-practice" element={<GovtPractice />} />
+          <Route path="/govt-test" element={<GovtTest />} />
+          <Route path="/govt-result" element={<GovtResult />} />
+          <Route path="/prev-year-questions" element={<PrevYearQuestions />} />
+          <Route path="/photo-solver" element={<PhotoSolver />} />
+          <Route path="/current-affairs" element={<CurrentAffairs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/study-with-me" element={<StudyWithMe />} />
+          <Route path="/story-telling" element={<StoryTelling />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/daily-tasks" element={<DailyTasks />} />
+          <Route path="/daily-quiz" element={<DailyQuiz />} />
+          <Route path="/study-plan" element={<StudyPlan />} />
+          <Route path="/syllabus" element={<SyllabusTracker />} />
+          <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
+          <Route path="/mock-test" element={<MockTestPage />} />
+          <Route path="/question-hub" element={<QuestionHub />} />
+          <Route path="/pdf-mock-test" element={<PDFMockTest />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </>
+  );
+}
 
 export default function App() {
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -65,43 +130,7 @@ export default function App() {
             <Sonner />
             <ExamOnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
             <BrowserRouter>
-              {isLoggedIn() && !!localStorage.getItem("upcoming_exam") && <DailyTaskReminderModal />}
-              <Suspense fallback={<div className="min-h-screen bg-background" />}>
-              <Routes>
-                <Route path="/" element={<PremiumLanding />} />
-                <Route path="/landing" element={<LandingPage />} />
-                <Route path="/setup" element={<InterviewSetup />} />
-                <Route path="/interview" element={<InterviewRoom />} />
-                <Route path="/evaluation" element={<EvaluationPage />} />
-                <Route path="/resume" element={<ResumeBuilder />} />
-                <Route path="/career-mentor" element={<CareerMentorPage />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-of-service" element={<TermsOfService />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/govt-practice" element={<GovtPractice />} />
-                <Route path="/govt-test" element={<GovtTest />} />
-                <Route path="/govt-result" element={<GovtResult />} />
-                <Route path="/prev-year-questions" element={<PrevYearQuestions />} />
-                <Route path="/photo-solver" element={<PhotoSolver />} />
-                <Route path="/current-affairs" element={<CurrentAffairs />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
-                <Route path="/chatbot" element={<Chatbot />} />
-                <Route path="/study-with-me" element={<StudyWithMe />} />
-                <Route path="/story-telling" element={<StoryTelling />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/daily-tasks" element={<DailyTasks />} />
-                <Route path="/daily-quiz" element={<DailyQuiz />} />
-                <Route path="/study-plan" element={<StudyPlan />} />
-                <Route path="/syllabus" element={<SyllabusTracker />} />
-                <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
-                <Route path="/mock-test" element={<MockTestPage />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              </Suspense>
+              <AppContent />
             </BrowserRouter>
           </TooltipProvider>
         </QueryClientProvider>

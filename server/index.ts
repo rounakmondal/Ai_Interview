@@ -19,6 +19,8 @@ import {
   handleGetDashboard,
 } from "./routes/govtExam";
 import { handleTTS } from "./routes/tts";
+import { listFolderQuestions, serveFolderPDF } from "./routes/questions";
+import { extractPDFQuestions, getPDFMetadata } from "./routes/pdfQuestions";
 import {
   handleGenerateAIPlan,
   handleGetStudyTemplate,
@@ -117,6 +119,25 @@ export function createServer() {
   app.get("/api/test/:chapterId/questions", handleGetChapterQuestions);
   app.post("/api/test/submit", handleSubmitChapterTest);
   app.post("/api/ai/chapter-guide", handleAIChapterGuide);
+
+  // ── Question Hub API (Police, WBCS, SSC & future exam folders) ────────────
+  // GET /api/questions/:folder        → list PDFs in public/{Folder}/
+  // GET /api/questions/:folder/:file  → serve/download a PDF
+  // Valid :folder values: police | wbcs | ssc
+  // ─────────────────────────────────────────────────────────────────────
+  app.get("/api/questions/:folder", listFolderQuestions);
+  app.get("/api/questions/:folder/:fileName", serveFolderPDF);
+
+  // ── PDF Question Extraction API ─────────────────────────────────────────
+  // GET /api/extract-pdf-questions?pdfPath=WBP%20Constable...pdf
+  // Extracts questions from PDF and structures them for mock tests
+  // Returns: { success, title, totalQuestions, duration_minutes, questions[] }
+  // 
+  // GET /api/pdf-metadata?pdfPath=filename.pdf
+  // Returns: { pages, estimatedQuestions, estimatedDuration }
+  // ─────────────────────────────────────────────────────────────────────
+  app.get("/api/extract-pdf-questions", extractPDFQuestions);
+  app.get("/api/pdf-metadata", getPDFMetadata);
 
   return app;
 }

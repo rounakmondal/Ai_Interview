@@ -10,6 +10,7 @@ import {
 
 interface AIStudyGuideProps {
   chapterId: string;
+  chapterName: string;
   onClose: () => void;
 }
 
@@ -30,7 +31,7 @@ const QUICK_PROMPTS = [
   { icon: Zap,          label: "Quick MCQs",       query: "Give me 5 practice MCQ questions with answers and explanations from this chapter." },
 ];
 
-export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) {
+export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStudyGuideProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -59,13 +60,13 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
       const res = await fetch("/api/ai/chapter-guide", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chapterId, userQuery }),
+        body: JSON.stringify({ chapterId, chapterName, userQuery }),
       });
       if (res.ok) {
         const data = await res.json();
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: data.guide || data.text || "No response received.", timestamp: new Date() },
+          { role: "assistant", content: data.answer || data.guide || data.text || "No response received.", timestamp: new Date() },
         ]);
       } else {
         setMessages((prev) => [...prev, { role: "assistant", content: getFallbackGuide(userQuery), timestamp: new Date() }]);
@@ -116,7 +117,7 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
     });
   };
 
-  const chapterLabel = chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
+  const chapterLabel = chapterName || chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
 
   return (
     <>

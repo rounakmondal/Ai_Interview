@@ -52,7 +52,7 @@ export default function SyllabusTracker() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<FilterType>("all");
   const [lang, setLang] = useState<"en" | "bn">("en");
-  const [guideChapterId, setGuideChapterId] = useState<string | null>(null);
+  const [guideChapter, setGuideChapter] = useState<{ id: string; name: string } | null>(null);
   const [quoteIdx] = useState(() => Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length));
   const [tipIdx] = useState(() => Math.floor(Math.random() * STUDY_TIPS.length));
   const [syllabus, setSyllabus] = useState(() =>
@@ -365,7 +365,7 @@ export default function SyllabusTracker() {
                               </>
                             )}
                             <Button size="sm" variant="ghost" className="h-7 px-2.5 text-xs gap-1 text-violet-600 hover:bg-violet-500/10"
-                              onClick={() => setGuideChapterId(chapter.id)}>
+                              onClick={() => setGuideChapter({ id: chapter.id, name: chapter.name })}>  
                               <Sparkles className="w-3 h-3" /><span className="hidden sm:inline">AI</span>
                             </Button>
                           </div>
@@ -420,8 +420,8 @@ export default function SyllabusTracker() {
         </div>
       </main>
 
-      {guideChapterId && (
-        <AIStudyGuide chapterId={guideChapterId} onClose={() => setGuideChapterId(null)} />
+      {guideChapter && (
+        <AIStudyGuide chapterId={guideChapter.id} chapterName={guideChapter.name} onClose={() => setGuideChapter(null)} />
       )}
     </div>
   );

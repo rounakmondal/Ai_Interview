@@ -22,7 +22,7 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
     volume = 0.8, // Default 80% to prevent echo
     onStartPlaying,
     onStopPlaying,
-    useElevenLabs = true,
+    useElevenLabs = false, // Default to browser TTS (free, fast, offline-friendly)
   } = options;
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -99,9 +99,6 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
             const audioBlob = await generateElevenLabsSpeech({
               text,
               language,
-              stability: 0.5,
-              similarityBoost: 0.75,
-              style: 0.3,
             });
             audioUrl = blobToAudioUrl(audioBlob);
             currentUrlRef.current = audioUrl;
