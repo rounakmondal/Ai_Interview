@@ -152,7 +152,7 @@ export const handleSubmitChapterTest: RequestHandler = (req, res) => {
 // ── POST /api/ai/chapter-guide — AI guide for a chapter ──────────────────────
 export const handleAIChapterGuide: RequestHandler = (req, res) => {
   const { chapterId, chapterName, userQuery } = req.body as {
-    chapterId?: string;
+    chapterId?: string | number;
     chapterName?: string;
     userQuery?: string;
   };
@@ -162,11 +162,23 @@ export const handleAIChapterGuide: RequestHandler = (req, res) => {
     return;
   }
 
-  const displayName = chapterName || chapterId;
+  // Only allow chapterId as a number or numeric string (not ch_1 etc)
+  if (
+    typeof chapterId === "string" && !/^\d+$/.test(chapterId)
+    || typeof chapterId === "number" && !Number.isInteger(chapterId)
+  ) {
+    res.status(400).json({ error: "chapterId must be a number or numeric string (e.g. '1', 2)" });
+    return;
+  }
+
+  // Always use chapterId as number for downstream logic
+  const numericChapterId = typeof chapterId === "number" ? chapterId : parseInt(chapterId, 10);
+  const displayName = chapterName || numericChapterId;
 
   // Mock AI response (in production, call Gemini/OpenAI using chapterName + userQuery)
   const response: AIChapterGuideResponse = {
     answer: `## Study Guide: ${displayName}\n\n**Your question:** ${userQuery}\n\n### Key Points\n\n1. **Start with basics** — Make sure you understand the fundamental concepts before moving to advanced topics.\n\n2. **NCERT is your best friend** — For most competitive exams, NCERT textbooks cover 70-80% of the syllabus.\n\n3. **Practice MCQs daily** — Solve at least 20-30 MCQs daily from this chapter to build speed and accuracy.\n\n4. **Previous Year Questions** — Always study PYQs from the last 5 years. They show the exam pattern clearly.\n\n5. **Make short notes** — Write key facts, dates, and formulas on flashcards for quick revision.\n\n### Recommended Resources\n- NCERT textbooks (Class 6-12)\n- Lucent's GK (for quick revision)\n- Previous year papers (last 5 years)\n- Daily current affairs for context\n\n### Exam Tips\n- Time management is crucial. Don't spend more than 1 minute per MCQ.\n- Eliminate obviously wrong options first.\n- If unsure, mark the most logical answer — don't leave blank unless there's negative marking.\n\n> 💡 **Pro Tip:** Create a revision schedule where you revisit this chapter every 7 days using spaced repetition.`,
+    chapterId: numericChapterId,
   };
 
   res.json(response);

@@ -120,4 +120,5 @@ export interface AIChapterGuideRequest {
 
 export interface AIChapterGuideResponse {
   answer: string;
+  chapterId: number;
 }
