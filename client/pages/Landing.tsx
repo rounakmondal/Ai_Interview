@@ -6,9 +6,6 @@ import HeroAvatar from "./components/HeroAvatar";
 import Footer from "@/components/Footer";
 
 
-// Sample hero text for TTS demo
-const HERO_SAMPLE = "Hello, welcome to Interview AI. I will ask you questions and provide feedback to help you improve.";
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -44,78 +41,105 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-24 overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+      <section className="relative py-14 sm:py-24 overflow-hidden">
+        {/* Background gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-transparent to-purple-50/60 pointer-events-none" />
+        <div className="absolute top-20 -left-32 w-80 h-80 rounded-full bg-indigo-100/40 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 -right-32 w-80 h-80 rounded-full bg-purple-100/40 blur-3xl pointer-events-none" />
 
         <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="space-y-6 sm:space-y-8 animate-slide-up">
-              <div className="space-y-2">
-                <div className="inline-flex items-center px-4 py-2 rounded-full border border-primary/20 bg-primary/5">
-                  <Zap className="w-4 h-4 mr-2 text-primary" />
-                  <span className="text-sm font-medium text-primary">
-                    Powered by AI
-                  </span>
-                </div>
+              {/* Badge */}
+              <div className="inline-flex items-center px-4 py-2 rounded-full border border-indigo-200 bg-indigo-50/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse mr-2" />
+                <span className="text-sm font-medium text-indigo-700">
+                  500+ students already practising
+                </span>
               </div>
 
+              {/* Headline */}
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-                  Master Your Interview with{" "}
-                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    AI-Powered Practice
+                <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1] text-slate-900">
+                  Crack Your Next Interview —{" "}
+                  <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+                    Practice Until You're Unshakable
                   </span>
                 </h1>
-                <p className="text-lg sm:text-xl text-muted-foreground max-w-lg">
-                  Practice realistic mock interviews with our professional
-                  female AI interviewer. Get instant feedback and improve your
-                  interview skills in minutes.
+                <p className="text-lg sm:text-xl text-slate-500 max-w-xl leading-relaxed">
+                  Voice-based mock interviews with instant AI feedback. Practice for{" "}
+                  <strong className="text-slate-700">WBCS, SSC, Police, IT jobs</strong> — in
+                  English or <strong className="text-indigo-600">বাংলা</strong>. Upload your resume
+                  and get personalised questions.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Link to="/setup">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto gradient-primary text-base font-semibold"
+                    className="w-full sm:w-auto gradient-primary text-base font-semibold h-12 px-7 shadow-lg shadow-indigo-200/50 hover:shadow-xl hover:shadow-indigo-300/50 transition-all"
                   >
-                    Start Mock Interview
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
+                    </svg>
+                    Start Free Mock Interview
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto border-primary/20 text-base"
-                  asChild
-                >
-                  <a href="#features">Learn More</a>
-                </Button>
+                <Link to="/setup">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto border-slate-300 text-slate-600 hover:bg-slate-50 text-base h-12 px-6"
+                  >
+                    Try 1 Question — No Login
+                  </Button>
+                </Link>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border/40">
-                <div>
-                  <div className="text-2xl font-bold text-primary">Free</div>
-                  <p className="text-sm text-muted-foreground">To Get Started</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-secondary">AI</div>
-                  <p className="text-sm text-muted-foreground">Powered Feedback</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-accent">24/7</div>
-                  <p className="text-sm text-muted-foreground">Available</p>
-                </div>
+              {/* Trust Signals Strip */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-200/80">
+                {[
+                  {
+                    icon: "✅",
+                    text: (
+                      <>
+                        <strong>500+ students</strong> improved confidence
+                      </>
+                    ),
+                  },
+                  {
+                    icon: "✅",
+                    text: (
+                      <>
+                        <strong>Real questions</strong> from WBCS, SSC & IT
+                      </>
+                    ),
+                  },
+                  {
+                    icon: "✅",
+                    text: (
+                      <>
+                        <strong>Built for WB students</strong> — বাংলা + English
+                      </>
+                    ),
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                    <span className="text-sm flex-shrink-0 mt-0.5">{item.icon}</span>
+                    <span className="leading-snug">{item.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right Visual */}
-            <div className="relative h-96 sm:h-[500px] animate-fade-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
-              <div className="relative h-full bg-gradient-to-br from-card to-card/50 rounded-2xl border border-border/40 p-8 flex items-center justify-center overflow-hidden">
+            {/* Right Visual — Interactive Interview Mock */}
+            <div className="relative h-[480px] sm:h-[530px] animate-fade-in">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-200/40 to-purple-200/40 rounded-3xl blur-3xl" />
+              <div className="relative h-full bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/80 p-5 sm:p-6 flex items-center justify-center overflow-hidden shadow-xl shadow-indigo-100/40">
                 <HeroAvatar />
               </div>
             </div>

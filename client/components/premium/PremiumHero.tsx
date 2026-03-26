@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, easeInOut } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Mic, Brain, BarChart3, CheckCircle2, Star, Sparkles } from "lucide-react";
+import { ArrowRight, Mic, Brain, BarChart3, CheckCircle2 } from "lucide-react";
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
@@ -148,9 +148,9 @@ export default function PremiumHero() {
             {/* Headline */}
             <motion.div variants={item} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">
-                Practice with an{" "}
+                Crack Your Next Interview —{" "}
                 <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 bg-clip-text text-transparent">AI Interviewer</span>
+                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 bg-clip-text text-transparent">Practice Until You're Unshakable</span>
                   <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 8" fill="none">
                     <path d="M2 6 C60 2, 120 8, 180 4 S260 2, 298 6" stroke="url(#heroUL)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     <defs>
@@ -161,18 +161,17 @@ export default function PremiumHero() {
                     </defs>
                   </svg>
                 </span>
-                {" "}&amp; land your dream job
               </h1>
             </motion.div>
 
             {/* Subtext */}
             <motion.div variants={item}>
               <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Realistic voice-driven mock interviews with instant AI feedback, resume analysis, and detailed scoring for{" "}
-                <span className="text-foreground font-medium">Government</span>,{" "}
-                <span className="text-foreground font-medium">IT</span>,{" "}
-                <span className="text-foreground font-medium">Private</span> and{" "}
-                <span className="text-foreground font-medium">Campus</span> roles.
+                Voice-based mock interviews with instant AI feedback, resume analysis, and detailed scoring for{" "}
+                <span className="text-foreground font-medium">WBCS, SSC, Police</span>,{" "}
+                <span className="text-foreground font-medium">IT</span> &{" "}
+                <span className="text-foreground font-medium">Campus</span> roles — in
+                English or <span className="text-indigo-600 dark:text-indigo-400 font-semibold">বাংলা</span>.
               </p>
             </motion.div>
 
@@ -187,47 +186,35 @@ export default function PremiumHero() {
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-violet-600" />
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative flex items-center gap-2">
-                    Start Free Interview
+                    <Mic className="w-4 h-4" />
+                    Start Free Mock Interview
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </motion.button>
               </Link>
-              <a href="#features">
+              <Link to="/setup">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold border border-border/60 hover:border-indigo-500/40 text-foreground hover:text-indigo-600 dark:hover:text-indigo-400 bg-card/80 transition-colors duration-200"
                 >
-                  See how it works
+                  Try 1 Question — No Login
                 </motion.button>
-              </a>
+              </Link>
             </motion.div>
 
-            {/* Social proof */}
-            <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
-              <div className="flex -space-x-2">
-                {[
-                  ["PS", "linear-gradient(135deg,#6366f1,#8b5cf6)"],
-                  ["RV", "linear-gradient(135deg,#8b5cf6,#a855f7)"],
-                  ["AN", "linear-gradient(135deg,#06b6d4,#6366f1)"],
-                  ["AP", "linear-gradient(135deg,#f59e0b,#ef4444)"],
-                  ["VS", "linear-gradient(135deg,#10b981,#06b6d4)"],
-                ].map(([initials, bg], i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-background flex items-center justify-center text-[10px] font-bold text-white"
-                    style={{ background: bg }}
-                  >
-                    {initials}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+            {/* Trust signals */}
+            <motion.div variants={item} className="space-y-3 pt-2">
+              {[
+                { emoji: "✅", text: <><strong>500+ students</strong> improved confidence in 2 weeks</> },
+                { emoji: "✅", text: <><strong>Real questions</strong> from WBCS, SSC, Police &amp; IT interviews</> },
+                { emoji: "✅", text: <><strong>Built for WB students</strong> — supports বাংলা + English</> },
+              ].map((t, i) => (
+                <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span className="flex-shrink-0">{t.emoji}</span>
+                  <span className="leading-snug">{t.text}</span>
                 </div>
-                <p className="text-xs text-muted-foreground">Loved by early users</p>
-              </div>
+              ))}
             </motion.div>
 
             {/* Stats */}
@@ -235,7 +222,7 @@ export default function PremiumHero() {
               {[
                 { value: "Free", label: "To Get Started" },
                 { value: "AI", label: "Powered Feedback" },
-                { value: "4", label: "Languages" },
+                { value: "বাংলা", label: "+ English" },
               ].map((s, i) => (
                 <div key={i}>
                   <div className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">{s.value}</div>

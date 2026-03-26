@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs";
 import { createServer } from "./index";
 import * as express from "express";
 
@@ -9,8 +10,17 @@ const port = process.env.PORT || 3000;
 const __dirname = import.meta.dirname;
 const distPath = path.join(__dirname, "../spa");
 
-// Serve static files
+// Serve static files from the SPA build
 app.use(express.static(distPath));
+
+// Also serve the original public/ folder (for PDF subfolders like Police/, WBCS/, SSC/)
+// In some deployments, Vite copies public/ into dist/spa/ but in others
+// (e.g. Render, Railway), the original public/ folder may still be at project root
+const publicPath = path.join(process.cwd(), "public");
+if (fs.existsSync(publicPath)) {
+  app.use(express.static(publicPath));
+  console.log(`📂 Serving additional static files from: ${publicPath}`);
+}
 
 // Handle React Router - serve index.html for all non-API routes
 app.get("*", (req, res) => {

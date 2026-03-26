@@ -2,7 +2,39 @@ import { RequestHandler } from "express";
 import path from "path";
 import fs from "fs";
 
-const PUBLIC_DIR = path.join(process.cwd(), "public");
+/**
+ * Resolve the public directory that contains PDF subfolders (Police/, WBCS/, SSC/).
+ * 
+ * In development:  process.cwd() → project root, so public/ is right there.
+ * In production:   The built server runs from dist/server/, and Vite copies
+ *                  public/ contents into dist/spa/ — so we also check there.
+ *                  Additionally, on some hosts process.cwd() is the project
+ *                  root and the original public/ still exists.
+ */
+function resolvePublicDir(): string {
+  const candidates = [
+    // 1. Standard dev: project_root/public
+    path.join(process.cwd(), "public"),
+    // 2. Production: dist/spa (Vite copies public/* here)
+    path.join(process.cwd(), "dist", "spa"),
+    // 3. Relative to this file (works for compiled dist/server/production.mjs)
+    path.resolve(import.meta.dirname ?? __dirname, "..", "spa"),
+    path.resolve(import.meta.dirname ?? __dirname, "..", "..", "public"),
+  ];
+
+  for (const dir of candidates) {
+    // Check if this dir actually contains one of our exam folders
+    if (fs.existsSync(path.join(dir, "Police")) || fs.existsSync(path.join(dir, "WBCS"))) {
+      return dir;
+    }
+  }
+
+  // Fallback to CWD/public even if the folders don't exist yet
+  return candidates[0];
+}
+
+const PUBLIC_DIR = resolvePublicDir();
+console.log(`📂 Questions API: PUBLIC_DIR resolved to ${PUBLIC_DIR}`);
 
 /** Whitelist: maps lowercase route key → actual subfolder name under public/ */
 const VALID_FOLDERS: Record<string, string> = {

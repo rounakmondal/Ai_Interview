@@ -150,7 +150,62 @@ const FOLDERS: Record<string, FolderData> = {
     publicPath: "WBCS",
     description:
       "West Bengal Civil Service (Exe.) & allied services previous year question papers for WBCS Prelims and Mains preparation",
-    files: [],
+    files: [
+      {
+        name: "WBCS Preliminary 2023",
+        path: "WBCS_Preliminary_Question_Paper_2023.pdf",
+        year: 2023,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2022",
+        path: "WBCS_Preliminary_Question_Paper_2022.pdf",
+        year: 2022,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2021",
+        path: "WBCS_Preliminary_Question_Paper_2021.pdf",
+        year: 2021,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2020",
+        path: "WBCS_Preliminary_Question_Paper_2020.pdf",
+        year: 2020,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2019",
+        path: "WBCS_Preliminary_Question_Paper_2019.pdf",
+        year: 2019,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2018",
+        path: "WBCS_Preliminary_Question_Paper_2018.pdf",
+        year: 2018,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2017",
+        path: "WBCS_Preliminary_Question_Paper_2017.pdf",
+        year: 2017,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2016",
+        path: "WBCS_Preliminary_Question_Paper_2016.pdf",
+        year: 2016,
+        type: "Prelims",
+      },
+      {
+        name: "WBCS Preliminary 2015",
+        path: "WBCS_Preliminary_Question_Paper_2015.pdf",
+        year: 2015,
+        type: "Prelims",
+      },
+    ],
   },
   ssc: {
     name: "SSC (Staff Selection Commission)",

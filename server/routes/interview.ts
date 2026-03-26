@@ -54,7 +54,7 @@ function extractSkillsFromCV(cvText: string): string[] {
   return skills;
 }
 
-// Generate CV-based questions
+// Generate CV-based questions with job-heading-first ordering
 function generateCVBasedQuestions(
   cvText: string,
   interviewType: string,
@@ -62,14 +62,41 @@ function generateCVBasedQuestions(
 ): string[] {
   const skills = extractSkillsFromCV(cvText);
   const questions: string[] = [];
+  const jd = (jobDescription || "").trim();
+  const hasCV = cvText.trim().length > 0;
 
-  // Opening question
-  questions.push(
-    `Hello! Thank you for joining. Can you start by telling me about yourself and your experience in ${interviewType}?`
-  );
+  // ── 1. FIRST QUESTION: Job Role / Heading specific ────────────────────
+  // The very first question should be directly about the role, not a generic opener.
+  if (jd) {
+    questions.push(
+      `Welcome! This interview is for a ${interviewType} position. Based on the job requirements, what specifically makes you a strong fit for this role?`
+    );
+  } else {
+    // Map interview types to role-specific openers
+    const roleOpeners: Record<string, string> = {
+      "government":     "Welcome! Government roles demand integrity, subject knowledge, and a service mindset. Why do you want to join government service, and how have you prepared?",
+      "police":         "Welcome! Policing requires discipline, quick thinking, and physical fitness. What motivates you to join the police force, and why do you believe you're the right candidate?",
+      "wbcs":           "Welcome! WBCS is highly competitive. Can you tell me about your preparation strategy and which subject areas you feel most confident in?",
+      "ssc":            "Welcome! SSC exams test a wide range of skills. What's your approach to this exam, and which subjects are your strongest?",
+      "banking":        "Welcome! Banking roles require strong analytical and customer-facing skills. What draws you to a career in banking?",
+      "it":             "Welcome! The IT industry moves fast. Can you describe the kind of technical role you're targeting and what projects or skills make you suitable for it?",
+      "software":       "Welcome! Software engineering is about problem-solving. What type of development excites you most, and what's the most complex thing you've built?",
+      "campus":         "Welcome! Campus placements require showing potential alongside skills. What have you done during your studies that makes you stand out to recruiters?",
+      "private":        "Welcome! Private sector interviews focus on impact and growth. What kind of role are you looking for, and what value do you bring to a company?",
+      "non-it":         "Welcome! Non-IT roles value domain knowledge and communication. What's the specific role you're targeting, and how does your background align?",
+    };
 
-  // Skill-based questions
-  if (skills.length > 0) {
+    const typeLower = interviewType.toLowerCase();
+    const opener = Object.entries(roleOpeners).find(([key]) => typeLower.includes(key));
+    questions.push(
+      opener
+        ? opener[1]
+        : `Welcome! This interview is for a ${interviewType} position. What interests you most about this role, and how does your background prepare you for it?`
+    );
+  }
+
+  // ── 2. USER-SPECIFIC: CV / Resume-based questions ─────────────────────
+  if (hasCV && skills.length > 0) {
     const primarySkills = skills.slice(0, 3);
     
     for (const skill of primarySkills) {
@@ -99,31 +126,41 @@ function generateCVBasedQuestions(
         );
       }
     }
+  } else if (hasCV) {
+    // CV uploaded but no tech skills extracted — ask about their experience
+    questions.push(
+      "I've reviewed your resume. Can you walk me through your most relevant experience and what you accomplished there?"
+    );
+  } else {
+    // No CV — ask a general background question
+    questions.push(
+      "Tell me about your educational background and any hands-on experience you have that's relevant to this role."
+    );
   }
 
-  // Generic questions based on job description or default
+  // ── 3. BEHAVIORAL / SITUATIONAL questions ─────────────────────────────
   questions.push(
-    "Describe a situation where you had to solve a complex problem. How did you approach it?"
+    "Describe a situation where you had to solve a complex problem under pressure. How did you approach it?"
   );
   questions.push(
-    "How do you stay updated with new technologies and best practices in your field?"
+    "How do you stay updated with new trends and best practices in your field?"
   );
   
-  if (jobDescription && jobDescription.toLowerCase().includes("senior")) {
+  if (jd && jd.toLowerCase().includes("senior")) {
     questions.push(
       "Can you describe a time when you had to make a critical decision and lead a team?"
     );
   }
 
-  // Closing questions
+  // ── 4. CLOSING questions ──────────────────────────────────────────────
   questions.push(
-    "What are your biggest strengths as a developer?"
+    "What are your biggest strengths, and how do they help you in a professional setting?"
   );
   questions.push(
     "Where do you see yourself in the next 2-3 years?"
   );
   questions.push(
-    "Do you have any questions for me about the role or company?"
+    "Do you have any questions for me about the role or organisation?"
   );
 
   return questions;
