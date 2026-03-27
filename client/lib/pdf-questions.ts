@@ -9,6 +9,8 @@ interface ExtractedQuestion {
   options: string[];
   difficulty: "Easy" | "Medium" | "Hard";
   subject: string;
+  correct_index?: number;
+  explanation?: string;
 }
 
 interface PDFTestData {

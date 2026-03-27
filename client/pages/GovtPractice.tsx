@@ -21,33 +21,33 @@ const COUNT_OPTIONS = [10, 25, 50, 100] as const;
 
 // ─── Exam config ──────────────────────────────────────────────────────────────
 const EXAM_META: Record<ExamType, { icon: React.ReactNode; color: string; glow: string; bg: string; badge: string; candidates: string }> = {
-  WBCS:    { icon: <Landmark  className="w-5 h-5" />, color: "from-violet-500 to-purple-600",  glow: "shadow-violet-500/30",  bg: "bg-violet-500/10",  badge: "border-violet-500/30 text-violet-600 dark:text-violet-400",  candidates: "1.2L+" },
-  SSC:     { icon: <Shield    className="w-5 h-5" />, color: "from-blue-500 to-indigo-600",    glow: "shadow-blue-500/30",    bg: "bg-blue-500/10",    badge: "border-blue-500/30 text-blue-600 dark:text-blue-400",         candidates: "3.5L+" },
-  Railway: { icon: <Train     className="w-5 h-5" />, color: "from-emerald-500 to-teal-600",   glow: "shadow-emerald-500/30", bg: "bg-emerald-500/10", badge: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400", candidates: "2.8L+" },
-  Banking: { icon: <Building2 className="w-5 h-5" />, color: "from-amber-500 to-orange-600",   glow: "shadow-amber-500/30",   bg: "bg-amber-500/10",   badge: "border-amber-500/30 text-amber-600 dark:text-amber-400",       candidates: "1.8L+" },
-  Police:  { icon: <Shield    className="w-5 h-5" />, color: "from-rose-500 to-pink-600",      glow: "shadow-rose-500/30",    bg: "bg-rose-500/10",    badge: "border-rose-500/30 text-rose-600 dark:text-rose-400",           candidates: "90K+" },
+  WBCS: { icon: <Landmark className="w-5 h-5" />, color: "from-violet-500 to-purple-600", glow: "shadow-violet-500/30", bg: "bg-violet-500/10", badge: "border-violet-500/30 text-violet-600 dark:text-violet-400", candidates: "1.2L+" },
+  SSC: { icon: <Shield className="w-5 h-5" />, color: "from-blue-500 to-indigo-600", glow: "shadow-blue-500/30", bg: "bg-blue-500/10", badge: "border-blue-500/30 text-blue-600 dark:text-blue-400", candidates: "3.5L+" },
+  Railway: { icon: <Train className="w-5 h-5" />, color: "from-emerald-500 to-teal-600", glow: "shadow-emerald-500/30", bg: "bg-emerald-500/10", badge: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400", candidates: "2.8L+" },
+  Banking: { icon: <Building2 className="w-5 h-5" />, color: "from-amber-500 to-orange-600", glow: "shadow-amber-500/30", bg: "bg-amber-500/10", badge: "border-amber-500/30 text-amber-600 dark:text-amber-400", candidates: "1.8L+" },
+  Police: { icon: <Shield className="w-5 h-5" />, color: "from-rose-500 to-pink-600", glow: "shadow-rose-500/30", bg: "bg-rose-500/10", badge: "border-rose-500/30 text-rose-600 dark:text-rose-400", candidates: "90K+" },
 };
 
 const SUBJECT_META: Record<Subject, { icon: React.ReactNode; color: string }> = {
-  History:         { icon: <BookOpen   className="w-4 h-4" />, color: "text-amber-500" },
-  Geography:       { icon: <Globe2     className="w-4 h-4" />, color: "text-emerald-500" },
-  Polity:          { icon: <Landmark   className="w-4 h-4" />, color: "text-blue-500" },
-  Reasoning:       { icon: <Brain      className="w-4 h-4" />, color: "text-violet-500" },
-  Math:            { icon: <BarChart3  className="w-4 h-4" />, color: "text-rose-500" },
-  "Current Affairs":{ icon: <Zap       className="w-4 h-4" />, color: "text-orange-500" },
+  History: { icon: <BookOpen className="w-4 h-4" />, color: "text-amber-500" },
+  Geography: { icon: <Globe2 className="w-4 h-4" />, color: "text-emerald-500" },
+  Polity: { icon: <Landmark className="w-4 h-4" />, color: "text-blue-500" },
+  Reasoning: { icon: <Brain className="w-4 h-4" />, color: "text-violet-500" },
+  Math: { icon: <BarChart3 className="w-4 h-4" />, color: "text-rose-500" },
+  "Current Affairs": { icon: <Zap className="w-4 h-4" />, color: "text-orange-500" },
 };
 
 const DIFFICULTY_META: Record<Difficulty, { label: string; desc: string; color: string; ring: string; bg: string }> = {
-  Easy:   { label: "Easy",   desc: "Build confidence", color: "text-emerald-600 dark:text-emerald-400", ring: "ring-emerald-500/40", bg: "bg-emerald-500/10 border-emerald-500/30" },
-  Medium: { label: "Medium", desc: "Exam-level",       color: "text-amber-600 dark:text-amber-400",    ring: "ring-amber-500/40",   bg: "bg-amber-500/10 border-amber-500/30" },
-  Hard:   { label: "Hard",   desc: "Challenge yourself", color: "text-rose-600 dark:text-rose-400",    ring: "ring-rose-500/40",    bg: "bg-rose-500/10 border-rose-500/30" },
+  Easy: { label: "Easy", desc: "Build confidence", color: "text-emerald-600 dark:text-emerald-400", ring: "ring-emerald-500/40", bg: "bg-emerald-500/10 border-emerald-500/30" },
+  Medium: { label: "Medium", desc: "Exam-level", color: "text-amber-600 dark:text-amber-400", ring: "ring-amber-500/40", bg: "bg-amber-500/10 border-amber-500/30" },
+  Hard: { label: "Hard", desc: "Challenge yourself", color: "text-rose-600 dark:text-rose-400", ring: "ring-rose-500/40", bg: "bg-rose-500/10 border-rose-500/30" },
 };
 
 const QUICK_STATS = [
-  { icon: <Users className="w-4 h-4" />,     label: "Active Aspirants", value: "50,000+",  color: "text-blue-500" },
-  { icon: <BookOpen className="w-4 h-4" />,  label: "Questions Practiced", value: "2M+",  color: "text-emerald-500" },
-  { icon: <Trophy  className="w-4 h-4" />,   label: "Avg Score Gain",   value: "+23%",     color: "text-amber-500" },
-  { icon: <Star    className="w-4 h-4" />,   label: "Platform Rating",  value: "4.9/5",    color: "text-violet-500" },
+  { icon: <Users className="w-4 h-4" />, label: "Active Aspirants", value: "50,000+", color: "text-blue-500" },
+  { icon: <BookOpen className="w-4 h-4" />, label: "Questions Practiced", value: "2M+", color: "text-emerald-500" },
+  { icon: <Trophy className="w-4 h-4" />, label: "Avg Score Gain", value: "+23%", color: "text-amber-500" },
+  { icon: <Star className="w-4 h-4" />, label: "Platform Rating", value: "4.9/5", color: "text-violet-500" },
 ];
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -62,13 +62,13 @@ export default function GovtPractice() {
   const navigate = useNavigate();
   const location = useLocation();
   const incoming = location.state as GovtPracticeState | null;
-  const [exam,       setExam]       = useState<ExamType>(incoming?.exam ?? "WBCS");
-  const [subject,    setSubject]    = useState<Subject>(incoming?.subject ?? "History");
+  const [exam, setExam] = useState<ExamType>(incoming?.exam ?? "WBCS");
+  const [subject, setSubject] = useState<Subject>(incoming?.subject ?? "History");
   const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
-  const [count,      setCount]      = useState<10 | 25 | 50 | 100>(25);
-  const [language,   setLanguage]   = useState<"english" | "bengali">("english");
-  const [loading,    setLoading]    = useState(false);
-  const [error,      setError]      = useState<string | null>(null);
+  const [count, setCount] = useState<10 | 25 | 50 | 100>(25);
+  const [language, setLanguage] = useState<"english" | "bengali">("english");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const meta = EXAM_META[exam];
   const estimatedMins = Math.round(count * 1.2);
@@ -214,11 +214,10 @@ export default function GovtPractice() {
                   return (
                     <motion.button key={e} onClick={() => setExam(e)}
                       whileTap={{ scale: 0.97 }}
-                      className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-center transition-all duration-200 ${
-                        selected
+                      className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-center transition-all duration-200 ${selected
                           ? `bg-gradient-to-br ${m.color} text-white border-transparent shadow-lg ${m.glow}`
                           : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/40 hover:text-foreground"
-                      }`}>
+                        }`}>
                       {selected && (
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
                           className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white/20 flex items-center justify-center">
@@ -262,11 +261,10 @@ export default function GovtPractice() {
                   const selected = subject === s;
                   return (
                     <motion.button key={s} onClick={() => setSubject(s)} whileTap={{ scale: 0.97 }}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${
-                        selected
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${selected
                           ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
                           : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30 hover:text-foreground"
-                      }`}>
+                        }`}>
                       <span className={selected ? sm.color : "text-muted-foreground/50"}>{sm.icon}</span>
                       <span className="text-xs font-semibold leading-tight text-left">{SUBJECT_LABELS[s]}</span>
                     </motion.button>
@@ -291,11 +289,10 @@ export default function GovtPractice() {
                     const selected = difficulty === d;
                     return (
                       <motion.button key={d} onClick={() => setDifficulty(d)} whileTap={{ scale: 0.96 }}
-                        className={`flex-1 flex flex-col items-center py-3 px-2 rounded-xl border text-center transition-all ${
-                          selected
+                        className={`flex-1 flex flex-col items-center py-3 px-2 rounded-xl border text-center transition-all ${selected
                             ? `${dm.bg} ring-2 ${dm.ring}`
                             : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30"
-                        }`}>
+                          }`}>
                         <span className={`text-xs font-bold ${selected ? dm.color : "text-muted-foreground"}`}>{dm.label}</span>
                         <span className={`text-[10px] mt-0.5 ${selected ? dm.color + "/70" : "text-muted-foreground/50"}`}>{dm.desc}</span>
                       </motion.button>
@@ -313,11 +310,10 @@ export default function GovtPractice() {
                 <div className="grid grid-cols-4 gap-2">
                   {COUNT_OPTIONS.map((n) => (
                     <motion.button key={n} onClick={() => setCount(n)} whileTap={{ scale: 0.95 }}
-                      className={`py-3 rounded-xl border text-sm font-bold transition-all ${
-                        count === n
+                      className={`py-3 rounded-xl border text-sm font-bold transition-all ${count === n
                           ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
                           : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30"
-                      }`}>
+                        }`}>
                       {n}
                     </motion.button>
                   ))}
@@ -341,11 +337,10 @@ export default function GovtPractice() {
               <div className="flex gap-3 max-w-xs">
                 {(["english", "bengali"] as const).map((l) => (
                   <motion.button key={l} onClick={() => setLanguage(l)} whileTap={{ scale: 0.97 }}
-                    className={`flex-1 py-3 rounded-xl border text-sm font-semibold transition-all ${
-                      language === l
+                    className={`flex-1 py-3 rounded-xl border text-sm font-semibold transition-all ${language === l
                         ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
                         : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border"
-                    }`}>
+                      }`}>
                     {l === "english" ? "🇬🇧 English" : "🇮🇳 বাংলা"}
                   </motion.button>
                 ))}
@@ -409,7 +404,7 @@ export default function GovtPractice() {
             </motion.button>
 
             <p className="text-center text-xs text-muted-foreground">
-              Questions are fetched from our API • Falls back to local bank if offline
+              Mock test make you perfect
             </p>
           </div>
         </motion.div>
@@ -420,8 +415,8 @@ export default function GovtPractice() {
           className="mt-6 grid grid-cols-3 gap-3">
           {[
             { label: "Previous Year Papers", sub: "2018 – 2024", icon: BookOpen, to: "/prev-year-questions", color: "from-blue-500/10 to-indigo-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
-            { label: "Current Affairs",       sub: "Daily Updates",  icon: Zap,      to: "/current-affairs",      color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },
-            { label: "Leaderboard",           sub: "Top Aspirants",  icon: Trophy,   to: "/leaderboard",          color: "from-violet-500/10 to-purple-500/10 border-violet-500/20 hover:border-violet-500/40", icon_color: "text-violet-500" },
+            { label: "Current Affairs", sub: "Daily Updates", icon: Zap, to: "/current-affairs", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },
+            { label: "Leaderboard", sub: "Top Aspirants", icon: Trophy, to: "/leaderboard", color: "from-violet-500/10 to-purple-500/10 border-violet-500/20 hover:border-violet-500/40", icon_color: "text-violet-500" },
           ].map((item) => (
             <Link key={item.to} to={item.to}>
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}

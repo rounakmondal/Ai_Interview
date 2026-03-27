@@ -3,6 +3,24 @@ import path from "path";
 import fs from "fs";
 import { PDFParse } from "pdf-parse";
 
+// Resolve public directory for both dev and prod
+function resolvePublicDir(): string {
+  const candidates = [
+    path.join(process.cwd(), "public"),
+    path.join(process.cwd(), "dist", "spa"),
+    path.resolve(__dirname, "..", "spa"),
+    path.resolve(__dirname, "..", "..", "public"),
+  ];
+  for (const dir of candidates) {
+    if (fs.existsSync(path.join(dir, "Police")) || fs.existsSync(path.join(dir, "WBCS"))) {
+      return dir;
+    }
+  }
+  return candidates[0];
+}
+
+const PUBLIC_DIR = resolvePublicDir();
+console.log(`📂 PDFQuestions API: PUBLIC_DIR resolved to ${PUBLIC_DIR}`);
 type ParsedQuestion = {
   id: number;
   question: string;
@@ -11,7 +29,7 @@ type ParsedQuestion = {
   subject: string;
 };
 
-const PUBLIC_DIR = path.join(process.cwd(), "public");
+
 
 function resolvePdfPath(encodedPdfPath: string): string {
   const decoded = decodeURIComponent(encodedPdfPath).replace(/\\/g, "/");
@@ -92,6 +110,83 @@ export const extractPDFQuestions: RequestHandler = async (req, res) => {
       return;
     }
 
+    // ── Check for corresponding JSON data first (User Request) ────────────────
+    const fileName = path.basename(filePath);
+    const folderPath = path.dirname(filePath);
+    const folderName = path.basename(folderPath); // e.g. "Police" or "WBCS"
+
+    let jsonQuestions: any[] | null = null;
+    let title = path.basename(filePath, path.extname(filePath));
+
+    const jsonSubFolder = folderName === "Police" ? "police-json-data" : folderName === "WBCS" ? "wbcs_json_data" : null;
+    if (jsonSubFolder) {
+      const jsonDataDir = path.join(folderPath, jsonSubFolder);
+      if (fs.existsSync(jsonDataDir)) {
+        const yearMatch = fileName.match(/(19|20)\d{2}/);
+        const year = yearMatch ? yearMatch[0] : null;
+
+        if (year) {
+          const jsonFiles = fs.readdirSync(jsonDataDir);
+          const matchingFile = jsonFiles.find(f => f.includes(year) && f.endsWith(".json"));
+
+          if (matchingFile) {
+            try {
+              const jsonContent = JSON.parse(fs.readFileSync(path.join(jsonDataDir, matchingFile), "utf-8"));
+              const rawQuestions = jsonContent.questions || [];
+              
+              if (Array.isArray(rawQuestions) && rawQuestions.length > 0) {
+                console.log(`🧩 Using JSON source for ${fileName}: ${matchingFile}`);
+                title = jsonContent.exam_title || title;
+                
+                jsonQuestions = rawQuestions.map((q: any, idx: number) => {
+                  // Normalize options: could be {a,b,c,d} or [s1,s2,s3,s4]
+                  let opts: string[] = [];
+                  if (Array.isArray(q.options)) {
+                    opts = q.options;
+                  } else if (typeof q.options === "object") {
+                    opts = [q.options.a || q.options.A, q.options.b || q.options.B, q.options.c || q.options.C, q.options.d || q.options.D].filter(Boolean);
+                  }
+
+                  // Normalize correct answer
+                  let correctIdx = 0;
+                  if (typeof q.answer === "string") {
+                    const char = q.answer.toLowerCase().trim();
+                    correctIdx = char === "a" ? 0 : char === "b" ? 1 : char === "c" ? 2 : char === "d" ? 3 : 0;
+                  } else if (typeof q.correctIndex === "number") {
+                    correctIdx = q.correctIndex;
+                  }
+
+                  return {
+                    id: idx + 1,
+                    question: q.question,
+                    options: opts.length >= 2 ? opts : ["Option A", "Option B", "Option C", "Option D"],
+                    difficulty: q.difficulty || "Medium",
+                    subject: q.subject || folderName,
+                    correct_index: correctIdx,
+                    explanation: q.explanation || q.answerDescription || `The correct answer is ${opts[correctIdx] || "the selected option"}.`
+                  };
+                });
+              }
+            } catch (err) {
+              console.warn(`⚠️ Failed to parse JSON for ${fileName}:`, err);
+            }
+          }
+        }
+      }
+    }
+
+    if (jsonQuestions) {
+      res.json({
+        success: true,
+        title,
+        totalQuestions: jsonQuestions.length,
+        duration_minutes: Math.max(15, Math.ceil(jsonQuestions.length * 1.2)),
+        questions: jsonQuestions,
+      });
+      return;
+    }
+
+    // ── Fallback to PDF Parsing ──────────────────────────────────────────────
     const fileBuffer = fs.readFileSync(filePath);
     const parser = new PDFParse({ data: fileBuffer });
     const parsed = await parser.getText();

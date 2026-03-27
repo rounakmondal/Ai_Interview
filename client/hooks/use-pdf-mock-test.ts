@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
 
 interface ExtractedQuestion {
@@ -7,6 +7,8 @@ interface ExtractedQuestion {
   options: string[];
   difficulty: "Easy" | "Medium" | "Hard";
   subject: string;
+  correct_index?: number;
+  explanation?: string;
 }
 
 interface UsePDFMockTestOptions {
@@ -28,16 +30,22 @@ export function usePDFMockTest(options: UsePDFMockTestOptions) {
   const [visited, setVisited] = useState<Set<number>>(new Set());
   const [submitted, setSubmitted] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0); // seconds
+  const [flagged, setFlagged] = useState<Set<number>>(new Set());
 
-  // Load PDF and extract questions
+  const loadedRef = useRef(false);
+
+  // Load PDF and extract questions – run only once
   useEffect(() => {
+    if (loadedRef.current) return;
+    loadedRef.current = true;
+
     const loadPDF = async () => {
       try {
         setLoading(true);
         setError(null);
 
         const data = await extractPDFQuestions(pdfPath);
-        
+
         setQuestions(data.questions);
         setTestTitle(data.title);
         setDuration(data.duration_minutes);
@@ -62,16 +70,23 @@ export function usePDFMockTest(options: UsePDFMockTestOptions) {
     if (pdfPath) {
       loadPDF();
     }
-  }, [pdfPath, onError]);
+  }, [pdfPath]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Timer effect
+  // Timer effect – use ref-based approach to avoid re-creating interval every second
+  const submittedRef = useRef(submitted);
+  submittedRef.current = submitted;
+  const loadingRef = useRef(loading);
+  loadingRef.current = loading;
+
   useEffect(() => {
-    if (submitted || loading || timeRemaining <= 0) return;
+    if (submittedRef.current || loadingRef.current) return;
+    if (timeRemaining <= 0) return;
 
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
           setSubmitted(true);
+          clearInterval(timer);
           return 0;
         }
         return prev - 1;
@@ -79,7 +94,7 @@ export function usePDFMockTest(options: UsePDFMockTestOptions) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [submitted, loading, timeRemaining]);
+  }, [loading, submitted]); // only re-run when loading/submitted change, NOT on every tick
 
   // Answer question
   const answerQuestion = useCallback((optionIndex: number) => {
@@ -125,8 +140,6 @@ export function usePDFMockTest(options: UsePDFMockTestOptions) {
   }, [currentQuestion, questions]);
 
   // Mark for review
-  const [flagged, setFlagged] = useState<Set<number>>(new Set());
-
   const toggleFlag = useCallback(() => {
     if (questions[currentQuestion]) {
       setFlagged((prev) => {
@@ -176,5 +189,7 @@ export function usePDFMockTest(options: UsePDFMockTestOptions) {
     clearAnswer,
     toggleFlag,
     finalize: () => setSubmitted(true),
+    setDuration: (mins: number) => { setDuration(mins); setTimeRemaining(mins * 60); },
+    setTimeRemaining,
   };
 }
