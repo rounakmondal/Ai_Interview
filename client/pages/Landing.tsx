@@ -62,9 +62,9 @@ export default function LandingPage() {
               {/* Headline */}
               <div className="space-y-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1] text-slate-900">
-                  Crack Your Next Interview —{" "}
+                 Ace Your Next Interview —{" "}
                   <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                    Practice Until You're Unshakable
+                   Practice Until You Succeed
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl text-slate-500 max-w-xl leading-relaxed">
