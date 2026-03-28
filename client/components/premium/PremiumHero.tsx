@@ -14,6 +14,10 @@ const trustedBy = [
   { name: "HCL", color: "text-cyan-600 dark:text-cyan-400" },
 ];
 
+
+
+
+
 const chatBubbles = [
   { from: "ai", text: "Tell me about a time you handled a difficult situation at work.", delay: 0.4 },
   { from: "user", text: "In my last role, I led a cross-functional team during a critical product launch�", delay: 1.8 },
@@ -22,7 +26,7 @@ const chatBubbles = [
 
 function MockInterviewCard() {
   return (
-    <div className="relative w-full max-w-sm mx-auto">
+   <div className="relative w-full  max-w-6xl mx-auto transform scale-105 transition-all duration-500">
       <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/20 via-violet-500/10 to-blue-500/20 rounded-3xl blur-2xl" />
       <div className="relative bg-card border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
@@ -30,10 +34,10 @@ function MockInterviewCard() {
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold shadow">AI</div>
             <div>
-              <p className="text-xs font-semibold text-foreground">InterviewAI</p>
+              <p className="text-xs font-semibold text-foreground">InterviewPro</p>
               <div className="flex items-center gap-1">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <p className="text-[10px] text-muted-foreground">Live session</p>
+                <p className="text-[10px] text-muted-foreground">AI Assistant</p>
               </div>
             </div>
           </div>
@@ -99,17 +103,58 @@ function MockInterviewCard() {
         <span className="text-xs font-semibold text-foreground whitespace-nowrap">AI Follow-ups</span>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: easeInOut, delay: 0.5 }}
         className="absolute -right-12 bottom-24 bg-card border border-border/60 rounded-xl px-3 py-2 shadow-lg items-center gap-2 hidden xl:flex"
       >
         <CheckCircle2 className="w-4 h-4 text-emerald-500" />
         <span className="text-xs font-semibold text-foreground whitespace-nowrap">Instant Score</span>
-      </motion.div>
+      </motion.div> */}
+
+<motion.div
+  animate={{ y: [0, 8, 0] }}
+  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute -right-16 bottom-10 w-52 bg-[#1a1a1a] border border-white/10 rounded-[2rem] p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 hidden xl:block"
+>
+  {/* Header Text */}
+  <p className="text-white text-[10px] font-bold mb-4 opacity-70 uppercase tracking-widest text-center">
+    Instant Score and Analysis
+  </p>
+  
+  <div className="relative flex flex-col items-center">
+    {/* Semi-Circle Progress Bar */}
+    <div className="relative w-32 h-16 overflow-hidden">
+      {/* Gray Background Path */}
+      <div className="absolute top-0 w-32 h-32 border-[10px] border-white/5 rounded-full"></div>
+      {/* Gradient Progress Path */}
+      <div className="absolute top-0 w-32 h-32 border-[10px] border-indigo-500 rounded-full border-b-transparent border-r-transparent -rotate-45"></div>
+      
+      {/* Score Number */}
+      <div className="absolute bottom-1 w-full text-center">
+        <span className="text-3xl font-black text-white tracking-tighter">88</span>
+      </div>
+    </div>
+    
+    <p className="text-slate-500 text-[10px] font-bold mt-2">Score: 88/100</p>
+  </div>
+
+  {/* Footer Buttons */}
+  <div className="mt-5 flex justify-center gap-3 border-t border-white/5 pt-4">
+    <button className="text-[9px] text-slate-400 hover:text-white flex items-center gap-1 transition">
+      <span className="text-xs">💬</span> Feedback
+    </button>
+    <div className="w-px h-3 bg-white/10 self-center"></div>
+    <button className="text-[9px] text-slate-400 hover:text-white flex items-center gap-1 transition">
+      <span className="text-xs">💡</span> Tips
+    </button>
+  </div>
+</motion.div>
+
+
     </div>
   );
-}
+} 
 
 export default function PremiumHero() {
   const containerRef = useRef(null);
@@ -148,16 +193,16 @@ export default function PremiumHero() {
             {/* Headline */}
             <motion.div variants={item} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">
-                Crack Your Next Interview —{" "}
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 bg-clip-text text-transparent">Practice Until You're Unshakable</span>
+                Ace Your Next Interview —{" "}
+              <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 bg-clip-text text-transparent">Practice Until You Succeed</span>
                   <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 8" fill="none">
                     <path d="M2 6 C60 2, 120 8, 180 4 S260 2, 298 6" stroke="url(#heroUL)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     <defs>
-                      <linearGradient id="heroUL" x1="0" y1="0" x2="300" y2="0">
+                      {/* <linearGradient id="heroUL" x1="0" y1="0" x2="300" y2="0">
                         <stop offset="0%" stopColor="#6366f1" />
                         <stop offset="100%" stopColor="#a855f7" />
-                      </linearGradient>
+                      </linearGradient> */}
                     </defs>
                   </svg>
                 </span>
@@ -174,6 +219,78 @@ export default function PremiumHero() {
                 English or <span className="text-indigo-600 dark:text-indigo-400 font-semibold">বাংলা</span>.
               </p>
             </motion.div>
+
+            {/* Exam Categories Section */}
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+  {/* WBCS Card */}
+  <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col items-center hover:border-purple-500 transition-all cursor-pointer">
+    <div className="w-12 h-12 mb-2 flex items-center justify-center bg-white/10 rounded-full">
+     
+<img src="\wbcs.avif" alt="WBCS Logo" className="w-full h-full rounded-full object-cover" />
+    </div>
+    <p className="text-white font-semibold text-sm">WBCS</p>
+    <p className="text-slate-500 text-xs">Prepare Now</p>
+  </div>
+  {/* ssc card */}
+  <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col items-center hover:border-purple-500 transition-all cursor-pointer">
+    <div className="w-12 h-12 mb-2 flex items-center justify-center bg-white/10 rounded-full">
+     
+<img src="\ssc.jpeg" alt="WBCS Logo" className="w-full h-full rounded-full object-cover" />
+    </div>
+    <p className="text-white font-semibold text-sm">SSC</p>
+    <p className="text-slate-500 text-xs">Prepare Now</p>
+  </div>
+
+  {/* Police Card */}
+  <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col items-center hover:border-purple-500 transition-all cursor-pointer">
+    <div className="w-12 h-12 mb-2 flex items-center justify-center bg-white/10 rounded-full">
+      <img src="\police.png" alt="Police" className="w-full h-full rounded-full object-cover" />
+    </div>
+    <p className="text-white font-semibold text-sm">Police</p>
+    <p className="text-slate-500 text-xs">Crack Exams</p>
+  </div>
+
+  {/* IT & Campus Card */}
+  <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col items-center hover:border-purple-500 transition-all cursor-pointer">
+    <div className="w-12 h-12 mb-2 flex items-center justify-center bg-white/10 rounded-full">
+      <img src="\IT.jpeg" alt="IT" className="w-full h-full rounded-full object-cover" />
+    </div>
+    <p className="text-white font-semibold text-sm">IT & Campus</p>
+    <p className="text-slate-500 text-xs">Job Ready</p>
+  </div>
+</div>
+
+
+
+
+{/* Trust signals */}
+
+<div className="space-y-4 mt-6">
+  {/* First Point */}
+  <div className="flex items-start gap-3">
+    <span className="text-xl">✅</span>
+    <p className="text-slate-300">
+      <span className="text-white font-bold">500+ students</span> improved confidence in 2 weeks
+    </p>
+  </div>
+
+  {/* Second Point */}
+  <div className="flex items-start gap-3">
+    <span className="text-xl">📚</span>
+    <p className="text-slate-300">
+      <span className="text-white font-bold">Real questions</span> from WBCS, SSC, Police & IT interviews
+    </p>
+  </div>
+
+  {/* Third Point */}
+  <div className="flex items-start gap-3">
+    <span className="text-xl">🤝</span>
+    <p className="text-slate-300">
+      <span className="text-white font-bold">Built for WB students</span> — supports বাংলা + English
+    </p>
+  </div>
+</div>
+
 
             {/* CTAs */}
             <motion.div variants={item} className="flex flex-col sm:flex-row gap-3">
@@ -204,7 +321,7 @@ export default function PremiumHero() {
             </motion.div>
 
             {/* Trust signals */}
-            <motion.div variants={item} className="space-y-3 pt-2">
+            {/* <motion.div variants={item} className="space-y-3 pt-2">
               {[
                 { emoji: "✅", text: <><strong>500+ students</strong> improved confidence in 2 weeks</> },
                 { emoji: "✅", text: <><strong>Real questions</strong> from WBCS, SSC, Police &amp; IT interviews</> },
@@ -215,7 +332,7 @@ export default function PremiumHero() {
                   <span className="leading-snug">{t.text}</span>
                 </div>
               ))}
-            </motion.div>
+            </motion.div> */}
 
             {/* Stats */}
             <motion.div variants={item} className="grid grid-cols-3 gap-4 pt-5 border-t border-border/40">
@@ -263,4 +380,3 @@ export default function PremiumHero() {
     </div>
   );
 }
-
