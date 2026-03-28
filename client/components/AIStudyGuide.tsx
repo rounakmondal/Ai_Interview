@@ -57,10 +57,10 @@ export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStud
     setLoading(true);
 
     try {
-      const res = await fetch("/api/ai/chapter-guide", {
+      const res = await fetch("http://localhost:8000/api/ai/chapter-guide", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chapterId, chapterName, userQuery }),
+        body: JSON.stringify({ chapterId: chapterId.replace(/\D/g, ""), chapterName, userQuery }),
       });
       if (res.ok) {
         const data = await res.json();

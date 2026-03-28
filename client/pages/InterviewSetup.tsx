@@ -39,7 +39,7 @@ export default function InterviewSetup() {
   const [interviewRole, setInterviewRole] = useState(""); // Free text interview role/type
   const [jobDescription, setJobDescription] = useState(""); // Optional job description
   const [interviewCategory, setInterviewCategory] = useState<"tech" | "nontech" | "govt" | "">("");
-  const [interviewRound, setInterviewRound] = useState<"manager" | "hr" | "">("");
+  const [interviewRound, setInterviewRound] = useState<"manager" | "hr" | "technical" | "">("");
   const [selectedLanguage, setSelectedLanguage] =
     useState<Language | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -162,6 +162,7 @@ export default function InterviewSetup() {
     else if (interviewCategory === "govt") builtType += " | Government Interview";
     if (interviewRound === "manager") builtType += " | Manager Round";
     else if (interviewRound === "hr") builtType += " | HR Round";
+    else if (interviewRound === "technical") builtType += " | Technical Round";
 
     setLoading(true);
     navigate("/interview", {
@@ -334,13 +335,14 @@ export default function InterviewSetup() {
                   </Label>
                   <div className="grid grid-cols-2 gap-2">
                     {[
+                      ...(interviewCategory === "tech" ? [{ value: "technical", label: "Technical Round", desc: "Coding & problem solving" }] : []),
                       { value: "manager", label: "Manager Round", desc: "Leadership & strategy" },
                       { value: "hr",      label: "HR Round",      desc: "Culture fit & career" },
                     ].map(({ value, label, desc }) => (
                       <button
                         key={value}
                         type="button"
-                        onClick={() => setInterviewRound(value as "manager" | "hr")}
+                        onClick={() => setInterviewRound(value as "manager" | "hr" | "technical")}
                         className={`relative flex flex-col items-start gap-0.5 py-2.5 px-3 rounded-lg border-2 transition-all ${
                           interviewRound === value
                             ? "border-primary bg-primary/8 shadow-sm"
