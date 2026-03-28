@@ -91,11 +91,10 @@ export default function NotificationBell() {
         onClick={() => setIsOpen((v) => !v)}
         onMouseEnter={() => setIsOpen(true)}
         whileTap={{ scale: 0.92 }}
-        className={`relative p-2 rounded-full transition-colors duration-200 ${
-          isDark
-            ? "text-white/70 hover:text-white hover:bg-white/10"
-            : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-        }`}
+        className={`relative p-2 rounded-full transition-colors duration-200 ${isDark
+          ? "text-white hover:text-white hover:bg-white/10"
+          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+          }`}
       >
         <Bell className="w-5 h-5" />
         {totalBadge > 0 && (
@@ -118,18 +117,16 @@ export default function NotificationBell() {
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
             onMouseLeave={() => setIsOpen(false)}
-            className={`absolute right-0 top-full mt-2 w-80 rounded-2xl border shadow-2xl z-[100] overflow-hidden ${
-              isDark
-                ? "bg-slate-900/98 border-white/10 shadow-black/40"
-                : "bg-white border-slate-200 shadow-slate-200/60"
-            }`}
+            className={`absolute right-0 top-full mt-2 w-80 rounded-2xl border shadow-2xl z-[100] overflow-hidden ${isDark
+              ? "bg-slate-900/98 border-white/10 shadow-black/40"
+              : "bg-white border-slate-200 shadow-slate-200/60"
+              }`}
             style={{ backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
           >
             {/* Header */}
             <div
-              className={`px-4 py-3 flex items-center justify-between border-b ${
-                isDark ? "border-white/10" : "border-slate-100"
-              }`}
+              className={`px-4 py-3 flex items-center justify-between border-b ${isDark ? "border-white/10" : "border-slate-100"
+                }`}
             >
               <div className="flex items-center gap-2">
                 <Bell className="w-4 h-4 text-indigo-400" />
@@ -157,9 +154,8 @@ export default function NotificationBell() {
                         to="/daily-tasks"
                         key={task.id}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${
-                          isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
-                        }`}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                          }`}
                       >
                         <CheckCircle2 className="w-4 h-4 text-orange-400 flex-shrink-0" />
                         <span className={`text-[13px] flex-1 truncate ${isDark ? "text-white/80" : "text-slate-700"}`}>
@@ -181,9 +177,8 @@ export default function NotificationBell() {
                   <Link
                     to="/mock-test"
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${
-                      isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
-                    }`}
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                      }`}
                   >
                     <FileText className="w-4 h-4 text-indigo-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
@@ -211,9 +206,8 @@ export default function NotificationBell() {
                         to="/mock-test"
                         key={idx}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-start gap-2.5 px-3 py-2 rounded-lg transition-colors group ${
-                          isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
-                        }`}
+                        className={`flex items-start gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                          }`}
                       >
                         <BookOpen className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                         <div className="flex-1 min-w-0">

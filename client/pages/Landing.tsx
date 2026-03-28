@@ -61,16 +61,16 @@ export default function LandingPage() {
 
               {/* Headline */}
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1] text-slate-900">
+                <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1] text-foreground">
                  Ace Your Next Interview —{" "}
                   <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
                    Practice Until You Succeed
                   </span>
                 </h1>
-                <p className="text-lg sm:text-xl text-slate-500 max-w-xl leading-relaxed">
+                <p className="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
                   Voice-based mock interviews with instant AI feedback. Practice for{" "}
-                  <strong className="text-slate-700">WBCS, SSC, Police, IT jobs</strong> — in
-                  English or <strong className="text-indigo-600">বাংলা</strong>. Upload your resume
+                  <strong className="text-foreground">WBCS, SSC, Police, IT jobs</strong> — in
+                  English or <strong className="text-primary">বাংলা</strong>. Upload your resume
                   and get personalised questions.
                 </p>
               </div>
@@ -100,46 +100,67 @@ export default function LandingPage() {
                 </Link>
               </div>
 
-              {/* Trust Signals Strip */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-200/80">
+              {/* Job Categories Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
                 {[
-                  {
-                    icon: "✅",
-                    text: (
-                      <>
-                        <strong>500+ students</strong> improved confidence
-                      </>
-                    ),
-                  },
-                  {
-                    icon: "✅",
-                    text: (
-                      <>
-                        <strong>Real questions</strong> from WBCS, SSC & IT
-                      </>
-                    ),
-                  },
-                  {
-                    icon: "✅",
-                    text: (
-                      <>
-                        <strong>Built for WB students</strong> — বাংলা + English
-                      </>
-                    ),
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="text-sm flex-shrink-0 mt-0.5">{item.icon}</span>
-                    <span className="leading-snug">{item.text}</span>
-                  </div>
+                  { label: "WBCS", key: "WBCS", icon: "🏛️", color: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-700 dark:text-amber-400", type: "govt" },
+                  { label: "SSC", key: "SSC", icon: "🏢", color: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-700 dark:text-blue-400", type: "govt" },
+                  { label: "Police", key: "Police", icon: "👮", color: "bg-red-500/10", border: "border-red-500/20", text: "text-red-700 dark:text-red-400", type: "govt" },
+                  { label: "IT Jobs", key: "it", icon: "💻", color: "bg-indigo-500/10", border: "border-indigo-500/20", text: "text-indigo-700 dark:text-indigo-400", type: "interview" }
+                ].map((cat, i) => (
+                  <Link
+                    key={i}
+                    to={cat.type === "govt" ? "/govt-practice" : "/setup"}
+                    state={cat.type === "govt" ? { exam: cat.key } : undefined}
+                    className={`flex flex-col items-center justify-center p-4 rounded-2xl border ${cat.border} ${cat.color} backdrop-blur-md transition-all hover:translate-y-[-4px] hover:shadow-lg cursor-pointer group`}
+                  >
+                    <span className="text-3xl mb-2 transition-transform group-hover:scale-110">{cat.icon}</span>
+                    <span className={`text-[12px] font-bold ${cat.text}`}>{cat.label}</span>
+                    <span className="text-[9px] font-bold opacity-60 uppercase tracking-widest mt-1">Start Now</span>
+                  </Link>
                 ))}
+              </div>
+
+              {/* Trust Signals Strip */}
+              <div className="mt-6 p-1 rounded-[2rem] bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 shadow-inner">
+                <div className="bg-background/80 backdrop-blur-xl border border-white/20 dark:border-white/5 rounded-[1.8rem] p-5 sm:p-6 shadow-2xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-border/50">
+                    {[
+                      {
+                        icon: "✨",
+                        title: "Confidence",
+                        desc: "500+ students improved in 2 weeks"
+                      },
+                      {
+                        icon: "📚",
+                        title: "Coverage",
+                        desc: "Real WBCS, SSC & Police questions"
+                      },
+                      {
+                        icon: "🤝",
+                        title: "Bilingual",
+                        desc: "Support for বাংলা + English speech"
+                      },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-4 sm:justify-center first:pt-0 pt-4 sm:pt-0 first:border-0 border-0 pl-0 sm:first:pl-0 sm:pl-4">
+                        <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl shadow-sm rotate-3 group-hover:rotate-0 transition-transform">
+                          {item.icon}
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary mb-1 underline decoration-secondary/30 underline-offset-4">{item.title}</span>
+                          <span className="text-[13px] font-extrabold text-foreground leading-tight tracking-tight">{item.desc}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Right Visual — Interactive Interview Mock */}
-            <div className="relative h-[480px] sm:h-[530px] animate-fade-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-200/40 to-purple-200/40 rounded-3xl blur-3xl" />
-              <div className="relative h-full bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/80 p-5 sm:p-6 flex items-center justify-center overflow-hidden shadow-xl shadow-indigo-100/40">
+            <div className="relative h-[480px] sm:h-[550px] lg:h-[600px] animate-fade-in group">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-[2.5rem] blur-3xl opacity-50 group-hover:opacity-70 transition-opacity" />
+              <div className="relative h-full bg-white/40 dark:bg-black/20 backdrop-blur-2xl rounded-[2rem] border border-white/40 dark:border-white/10 p-4 sm:p-7 flex items-center justify-center overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:-translate-y-2">
                 <HeroAvatar />
               </div>
             </div>
