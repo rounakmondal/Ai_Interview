@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft,
   User,
@@ -29,6 +30,9 @@ import {
   Star,
   Shield,
   CircleDot,
+  Sprout,
+  CalendarRange,
+  ArrowRight,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getSession, clearSession, AuthUser } from "@/lib/auth-api";
@@ -49,6 +53,8 @@ import { StudyExamType, STUDY_EXAM_LABELS } from "@shared/study-types";
 import {
   getStudyExamPreference,
   saveStudyExamPreference,
+  getExamSyllabusWithProgress,
+  getSavedAIPlan,
 } from "@/lib/exam-syllabus-data";
 import { BookMarked, GanttChart } from "lucide-react";
 
@@ -161,6 +167,13 @@ export default function Profile() {
   const [editingExam, setEditingExam] = useState(false);
   const [readiness, setReadiness] = useState<ExamReadiness | null>(null);
   const [studyExam, setStudyExam] = useState<StudyExamType | "">(getStudyExamPreference() ?? "");
+  const [planRefresh, setPlanRefresh] = useState(0);
+
+  useEffect(() => {
+    const onFocus = () => setPlanRefresh((t) => t + 1);
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, []);
 
   useEffect(() => {
     const session = getSession();
@@ -186,6 +199,43 @@ export default function Profile() {
       }
     });
   }, [navigate]);
+
+  const savedAiPlan = getSavedAIPlan();
+  const activeAiPlan =
+    studyExam && savedAiPlan?.examId === studyExam ? savedAiPlan : null;
+
+  let syllabusDone = 0;
+  let syllabusTotal = 0;
+  if (studyExam) {
+    const syllabus = getExamSyllabusWithProgress(studyExam);
+    for (const subj of syllabus.subjects) {
+      syllabusTotal += subj.chapters.length;
+      syllabusDone += subj.chapters.filter((c) => c.status === "done").length;
+    }
+  }
+  const syllabusPct =
+    syllabusTotal > 0 ? Math.round((syllabusDone / syllabusTotal) * 100) : 0;
+
+  const profileDaysLeft =
+    examDate && upcomingExam
+      ? Math.max(
+          0,
+          Math.ceil(
+            (new Date(examDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24),
+          ),
+        )
+      : null;
+
+  const planDaysLeft =
+    activeAiPlan?.examDate
+      ? Math.max(
+          0,
+          Math.ceil(
+            (new Date(activeAiPlan.examDate).getTime() - Date.now()) /
+              (1000 * 60 * 60 * 24),
+          ),
+        )
+      : null;
 
   const handleLogout = () => {
     clearSession();
@@ -347,13 +397,185 @@ export default function Profile() {
         </Section>
 
         {/* ═══════════════════════════════════════════════════════════
+            STUDY PLAN — high visibility, clear + sustainable habits
+        ═══════════════════════════════════════════════════════════ */}
+        <section
+          className="rounded-2xl border-2 border-primary/25 dark:border-primary/35 bg-gradient-to-br from-primary/[0.07] via-background to-violet-500/[0.06] shadow-[0_8px_30px_-12px_rgba(79,70,229,0.35)] dark:shadow-[0_8px_30px_-12px_rgba(99,102,241,0.2)] overflow-hidden"
+          data-sync={planRefresh}
+        >
+          <div className="px-5 sm:px-8 py-6 sm:py-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+              <div className="space-y-2 max-w-xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge className="bg-primary text-primary-foreground border-0 font-semibold text-xs">
+                    <GanttChart className="w-3 h-3 mr-1" />
+                    Study plan
+                  </Badge>
+                  <Badge variant="outline" className="text-xs gap-1 border-emerald-500/40 text-emerald-700 dark:text-emerald-400">
+                    <Sprout className="w-3 h-3" />
+                    Sustainable prep
+                  </Badge>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold text-[#111827] dark:text-white tracking-tight">
+                  Your week-by-week roadmap
+                </h2>
+                <p className="text-[13px] sm:text-sm text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
+                  <span className="font-medium text-[#374151] dark:text-[#d1d5db]">
+                    Same small session daily beats cramming.
+                  </span>{" "}
+                  Set your exam target below for countdown &amp; daily tasks, choose a study exam here for syllabus +
+                  AI plan — progress stays in sync when you tick chapters in Syllabus Tracker.
+                </p>
+              </div>
+              <div className="flex flex-col sm:items-end gap-2 shrink-0">
+                <Link to="/study-plan" className="w-full sm:w-auto">
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto gap-2 rounded-xl font-semibold shadow-md shadow-primary/20"
+                    disabled={!studyExam}
+                  >
+                    Open full study plan
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/syllabus" className="w-full sm:w-auto">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full sm:w-auto rounded-xl gap-1.5"
+                    disabled={!studyExam}
+                  >
+                    <BookMarked className="w-3.5 h-3.5" />
+                    Syllabus tracker
+                  </Button>
+                </Link>
+                {!studyExam && (
+                  <p className="text-[11px] text-amber-700 dark:text-amber-400 text-center sm:text-right max-w-[220px] sm:ml-auto">
+                    Pick a study exam in the next section to unlock your plan.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {studyExam ? (
+              <div className="grid sm:grid-cols-3 gap-4">
+                <div className="rounded-xl border border-[#e5e7eb] dark:border-[#374151] bg-white/80 dark:bg-[#111827]/80 p-4 space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[12px] font-semibold text-[#374151] dark:text-[#d1d5db]">
+                      Syllabus coverage
+                    </span>
+                    <span className="text-lg font-bold tabular-nums text-primary">{syllabusPct}%</span>
+                  </div>
+                  <Progress value={syllabusPct} className="h-2" />
+                  <p className="text-[11px] text-[#9ca3af]">
+                    {syllabusDone} of {syllabusTotal} chapters done ·{" "}
+                    <span className="text-[#6b7280] dark:text-[#9ca3af]">
+                      mark topics in tracker to update this
+                    </span>
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[#e5e7eb] dark:border-[#374151] bg-white/80 dark:bg-[#111827]/80 p-4 space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[12px] font-semibold text-[#374151] dark:text-[#d1d5db]">
+                      AI weekly plan
+                    </span>
+                    {activeAiPlan ? (
+                      <Badge variant="secondary" className="text-[10px]">
+                        {activeAiPlan.totalWeeks} weeks
+                      </Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-[10px] text-amber-700 border-amber-500/40">
+                        Not set
+                      </Badge>
+                    )}
+                  </div>
+                  {activeAiPlan ? (
+                    <>
+                      <p className="text-[13px] font-medium text-[#111827] dark:text-white line-clamp-2">
+                        {activeAiPlan.weeks[0]?.title ?? "Plan ready"}
+                      </p>
+                      <p className="text-[11px] text-[#9ca3af]">
+                        {activeAiPlan.hoursPerDay}h/day target · exam{" "}
+                        {formatDate(activeAiPlan.examDate)}
+                        {planDaysLeft != null && (
+                          <span className="text-primary font-medium"> · {planDaysLeft}d left</span>
+                        )}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-[12px] text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
+                      Open Study Plan, set your exam date, and generate — you&apos;ll get structured weeks + daily
+                      hours.
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-xl border border-[#e5e7eb] dark:border-[#374151] bg-white/80 dark:bg-[#111827]/80 p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <CalendarRange className="w-4 h-4 text-[#d97706]" />
+                    <span className="text-[12px] font-semibold text-[#374151] dark:text-[#d1d5db]">
+                      Exam countdown
+                    </span>
+                  </div>
+                  {profileDaysLeft != null ? (
+                    <>
+                      <p className="text-3xl font-bold tabular-nums text-[#111827] dark:text-white">
+                        {profileDaysLeft}
+                        <span className="text-sm font-semibold text-[#9ca3af] ml-1">days</span>
+                      </p>
+                      <p className="text-[11px] text-[#9ca3af]">
+                        From your <span className="font-medium text-foreground">Exam target</span> below (
+                        {upcomingExam ? EXAM_LABELS[upcomingExam as ExamType] : "—"})
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-[12px] text-[#6b7280] dark:text-[#9ca3af] leading-relaxed">
+                      Add an exam date in <strong className="text-foreground">Exam target</strong> so your prep
+                      stays time-bound and realistic.
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-dashed border-primary/30 bg-white/50 dark:bg-[#111827]/50 p-6 text-center">
+                <p className="text-[14px] font-medium text-[#374151] dark:text-[#d1d5db] mb-1">
+                  Choose your study exam to see progress &amp; plan status
+                </p>
+                <p className="text-[12px] text-[#9ca3af] mb-4">
+                  WBCS, WBPSC, Police SI, SSC — syllabus and AI plan both use this choice.
+                </p>
+              </div>
+            )}
+
+            <div className="flex flex-wrap gap-3 items-center justify-between pt-2 border-t border-[#e5e7eb]/80 dark:border-[#374151]">
+              <p className="text-[11px] text-[#9ca3af] flex items-center gap-1.5 max-w-md">
+                <Sprout className="w-3.5 h-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <span>
+                  <strong className="text-[#374151] dark:text-[#d1d5db]">Sustainable habit:</strong> 45–90 min
+                  daily + one mock weekly. Adjust hours in Study Plan when life gets busy — consistency matters more
+                  than marathon days.
+                </span>
+              </p>
+              <Link
+                to="/daily-tasks"
+                className="text-[12px] font-semibold text-primary inline-flex items-center gap-1 hover:underline underline-offset-2"
+              >
+                Today&apos;s tasks
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
             EXAM TARGET
         ═══════════════════════════════════════════════════════════ */}
         <Section className="p-6 sm:p-8">
           <SectionHeader
             icon={Target}
             title="Exam Target"
-            subtitle="Track your upcoming exam deadline"
+            subtitle="Used for daily tasks, streaks & countdown — pair with your Study plan exam above"
             action={
               !editingExam ? (
                 <button
@@ -530,44 +752,90 @@ export default function Profile() {
         <Section className="p-6 sm:p-8">
           <SectionHeader
             icon={BookMarked}
-            title="Study Exam Preference"
-            subtitle="Select your primary exam for study plan & syllabus tracking"
+            title="Study roadmap — pick your syllabus exam"
+            subtitle="One clear path: exam choice → syllabus chapters → weekly AI plan. Everything above updates when you save here."
           />
 
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-              {(Object.keys(STUDY_EXAM_LABELS) as StudyExamType[]).map((ex) => (
-                <button
-                  key={ex}
-                  onClick={() => {
-                    setStudyExam(ex);
-                    saveStudyExamPreference(ex);
-                    toast({ title: `Exam set to ${STUDY_EXAM_LABELS[ex]}` });
-                  }}
-                  className={`px-3 py-2.5 rounded-xl text-[13px] font-medium border transition-all ${
-                    studyExam === ex
-                      ? "bg-[#2563eb] text-white border-[#2563eb] shadow-md shadow-[#2563eb]/20"
-                      : "bg-[#f9fafb] dark:bg-[#1f2937] text-[#374151] dark:text-[#d1d5db] border-[#e5e7eb] dark:border-[#374151] hover:border-[#2563eb]/40"
-                  }`}
+          <div className="space-y-5">
+            <ol className="grid sm:grid-cols-3 gap-3 text-left">
+              {[
+                {
+                  step: 1,
+                  title: "Select exam",
+                  body: "WBCS, WBPSC, Police SI, SSC or Banking — sets syllabus & templates.",
+                },
+                {
+                  step: 2,
+                  title: "Track chapters",
+                  body: "Mark done in Syllabus Tracker — your % bar on this profile updates live.",
+                },
+                {
+                  step: 3,
+                  title: "Follow weekly plan",
+                  body: "Generate or refresh your plan in Study Plan; keep hours realistic.",
+                },
+              ].map((row) => (
+                <li
+                  key={row.step}
+                  className="flex gap-3 rounded-xl border border-[#e5e7eb] dark:border-[#374151] bg-[#f9fafb]/80 dark:bg-[#1f2937]/40 p-3.5"
                 >
-                  {STUDY_EXAM_LABELS[ex]}
-                </button>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary text-sm font-bold">
+                    {row.step}
+                  </span>
+                  <div>
+                    <p className="text-[13px] font-semibold text-[#111827] dark:text-white">{row.title}</p>
+                    <p className="text-[11px] text-[#6b7280] dark:text-[#9ca3af] mt-0.5 leading-relaxed">
+                      {row.body}
+                    </p>
+                  </div>
+                </li>
               ))}
+            </ol>
+
+            <div>
+              <p className="text-[12px] font-medium text-[#374151] dark:text-[#d1d5db] mb-2">
+                Your study exam
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                {(Object.keys(STUDY_EXAM_LABELS) as StudyExamType[]).map((ex) => (
+                  <button
+                    key={ex}
+                    type="button"
+                    onClick={() => {
+                      setStudyExam(ex);
+                      saveStudyExamPreference(ex);
+                      setPlanRefresh((t) => t + 1);
+                      toast({ title: `Study exam: ${STUDY_EXAM_LABELS[ex]}` });
+                    }}
+                    className={`px-3 py-2.5 rounded-xl text-[13px] font-medium border transition-all ${
+                      studyExam === ex
+                        ? "bg-[#2563eb] text-white border-[#2563eb] shadow-md shadow-[#2563eb]/20"
+                        : "bg-[#f9fafb] dark:bg-[#1f2937] text-[#374151] dark:text-[#d1d5db] border-[#e5e7eb] dark:border-[#374151] hover:border-[#2563eb]/40"
+                    }`}
+                  >
+                    {STUDY_EXAM_LABELS[ex]}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {studyExam && (
-              <div className="flex flex-wrap gap-2 pt-2">
-                <Link to="/study-plan">
-                  <button className="h-9 px-4 rounded-xl bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[13px] font-medium inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity">
-                    <GanttChart className="w-3.5 h-3.5" />
-                    Study Plan
-                  </button>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 pt-1">
+                <Link to="/study-plan" className="flex-1 min-w-[140px]">
+                  <Button
+                    size="lg"
+                    className="w-full rounded-xl gap-2 font-semibold"
+                  >
+                    <GanttChart className="w-4 h-4" />
+                    Open study plan
+                    <ArrowRight className="w-4 h-4 opacity-80" />
+                  </Button>
                 </Link>
-                <Link to="/syllabus">
-                  <button className="h-9 px-4 rounded-xl border border-[#e5e7eb] dark:border-[#374151] text-[13px] font-medium text-[#374151] dark:text-[#d1d5db] hover:bg-[#f3f4f6] dark:hover:bg-[#1f2937] transition-colors inline-flex items-center gap-1.5">
-                    <BookMarked className="w-3.5 h-3.5" />
-                    Syllabus Tracker
-                  </button>
+                <Link to="/syllabus" className="flex-1 min-w-[140px]">
+                  <Button size="lg" variant="outline" className="w-full rounded-xl gap-2 font-semibold">
+                    <BookMarked className="w-4 h-4" />
+                    Syllabus tracker
+                  </Button>
                 </Link>
               </div>
             )}
@@ -697,9 +965,9 @@ export default function Profile() {
                   <h3 className="text-[13px] font-semibold text-[#111827] dark:text-white mb-3">Quick Actions</h3>
                   <div className="space-y-0.5">
                     {[
-                      { label: "Daily Tasks", to: "/daily-tasks", icon: Flame },
                       { label: "Study Plan", to: "/study-plan", icon: GanttChart },
                       { label: "Syllabus Tracker", to: "/syllabus", icon: BookMarked },
+                      { label: "Daily Tasks", to: "/daily-tasks", icon: Flame },
                       { label: "Start Practice Test", to: "/govt-practice", icon: BookOpen },
                       { label: "View Leaderboard", to: "/leaderboard", icon: Trophy },
                       { label: "Full Dashboard", to: "/dashboard", icon: BarChart3 },

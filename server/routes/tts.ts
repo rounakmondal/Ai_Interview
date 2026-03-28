@@ -1,24 +1,31 @@
 import { RequestHandler } from "express";
 import { PollyClient, SynthesizeSpeechCommand, Engine, VoiceId } from "@aws-sdk/client-polly";
 
-// Voice mapping per language
-const VOICE_MAP: Record<string, { voiceId: VoiceId; engine: Engine }> = {
-  "en-US": { voiceId: "Joanna", engine: "neural" },
-  "en-GB": { voiceId: "Amy", engine: "neural" },
-  "hi-IN": { voiceId: "Kajal", engine: "neural" },
-  "bn-IN": { voiceId: "Kajal", engine: "neural" }, // Polly doesn't have a dedicated Bengali neural voice; Kajal (Hindi) is closest
-};
+type VoiceGender = "male" | "female";
 
-const DEFAULT_VOICE: { voiceId: VoiceId; engine: Engine } = {
-  voiceId: "Joanna",
-  engine: "neural",
-};
+// Neural voices; Hindi/Bengali have limited male neural options — Kajal used for both genders.
+function resolvePollyVoice(
+  language: string,
+  voiceGender: VoiceGender = "male",
+): { voiceId: VoiceId; engine: Engine } {
+  const male = voiceGender === "male";
+  switch (language) {
+    case "en-GB":
+      return male
+        ? { voiceId: "Brian", engine: "neural" }
+        : { voiceId: "Amy", engine: "neural" };
+    case "hi-IN":
+    case "bn-IN":
+      return { voiceId: "Kajal", engine: "neural" };
+    case "en-US":
+    default:
+      return male
+        ? { voiceId: "Matthew", engine: "neural" }
+        : { voiceId: "Joanna", engine: "neural" };
+  }
+}
 
 function getPollyClient() {
-  // AWS SDK v3 automatically reads credentials from:
-  //   1. Environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
-  //   2. Shared credentials file (~/.aws/credentials) set by `aws configure`
-  //   3. EC2/ECS instance roles
   return new PollyClient({
     region: process.env.AWS_REGION || "us-east-1",
   });
@@ -26,25 +33,26 @@ function getPollyClient() {
 
 /**
  * POST /api/tts
- * Body: { text: string, language?: string }
+ * Body: { text: string, language?: string, voiceGender?: "male" | "female" }
  * Returns: audio/mpeg binary stream
  */
 export const handleTTS: RequestHandler = async (req, res) => {
   try {
-    const { text, language = "en-US" } = req.body;
+    const { text, language = "en-US", voiceGender = "male" } = req.body;
 
     if (!text || typeof text !== "string" || text.trim().length === 0) {
       res.status(400).json({ error: "text is required" });
       return;
     }
 
-    // Limit text length to prevent abuse (Polly max is 3000 chars for neural)
     if (text.length > 3000) {
       res.status(400).json({ error: "Text too long. Max 3000 characters." });
       return;
     }
 
-    const voiceConfig = VOICE_MAP[language] || DEFAULT_VOICE;
+    const gender: VoiceGender =
+      voiceGender === "female" ? "female" : "male";
+    const voiceConfig = resolvePollyVoice(language, gender);
     const polly = getPollyClient();
 
     const command = new SynthesizeSpeechCommand({
@@ -61,13 +69,11 @@ export const handleTTS: RequestHandler = async (req, res) => {
       return;
     }
 
-    // Stream the audio back to the client
     res.set({
       "Content-Type": "audio/mpeg",
       "Cache-Control": "public, max-age=86400",
     });
 
-    // AudioStream is a Readable stream in Node.js
     const audioStream = response.AudioStream as NodeJS.ReadableStream;
     audioStream.pipe(res);
   } catch (err: any) {

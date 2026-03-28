@@ -29,6 +29,7 @@ import {
   resetPassword,
   saveSession,
 } from "@/lib/auth-api";
+import { requestPostLoginBriefing } from "@/components/PostLoginBriefingModal";
 
 type AuthMode = "login" | "signup" | "forgot";
 type Step = "email" | "otp" | "password";
@@ -117,6 +118,7 @@ export default function Auth() {
     try {
       const res = await signUp(tempToken, name, password);
       saveSession(res.token, res.user);
+      requestPostLoginBriefing();
       toast({ title: "Account created!", description: `Welcome ${res.user.name}` });
       navigate("/");
     } catch (err: any) {
@@ -140,6 +142,7 @@ export default function Auth() {
     try {
       const res = await resetPassword(tempToken, password);
       saveSession(res.token, res.user);
+      requestPostLoginBriefing();
       toast({ title: "Password reset!", description: "You're now logged in" });
       navigate("/");
     } catch (err: any) {

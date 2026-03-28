@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -33,6 +33,7 @@ interface LocationState {
   cvText?: string;
   jobDescription?: string; // Optional job description
   timerDuration?: number; // in minutes
+  interviewerVoiceGender?: "male" | "female";
 }
 
 type InterviewPhase = "setup" | "active" | "complete";
@@ -143,6 +144,7 @@ export default function InterviewRoom() {
       console.log("Setting question to:", response.message);
       
       setSessionId(response.sessionId);
+      transcriptRef.current = [];
       setCurrentQuestion(response.message || "No question received");
       setQuestionNumber(1);
       setPhase("active");
@@ -187,6 +189,11 @@ export default function InterviewRoom() {
         setIsSubmittingAnswer(true);
         setIsTransitioning(true);
         setAvatarState("thinking");
+
+        transcriptRef.current.push({
+          questionText: currentQuestion,
+          userAnswer: transcript.trim(),
+        });
 
         // Stop listening and any playback
         speech.stopListening();
@@ -242,7 +249,7 @@ export default function InterviewRoom() {
         setIsTransitioning(false);
       }
     },
-    [sessionId, speech, audio],
+    [sessionId, speech, audio, currentQuestion],
   );
 
   // Finish interview
@@ -251,8 +258,12 @@ export default function InterviewRoom() {
       setAvatarState("thinking");
       
       let evaluation;
+      const transcriptTurns = [...transcriptRef.current];
       if (sessionId) {
-        evaluation = await apiClient.finishInterview({ sessionId });
+        evaluation = await apiClient.finishInterview({
+          sessionId,
+          transcriptTurns,
+        });
       } else {
         // No sessionId - provide default evaluation
         console.warn("No sessionId, using default evaluation");
@@ -266,12 +277,12 @@ export default function InterviewRoom() {
         };
       }
 
-      // Navigate to evaluation page with results
       navigate("/evaluation", {
         state: {
           sessionId: sessionId || "no-session",
           evaluation,
           completedAt: new Date().toISOString(),
+          transcriptTurns,
         },
       });
     } catch (err) {
@@ -289,6 +300,7 @@ export default function InterviewRoom() {
             strengths: ["Completed interview attempt"],
           },
           completedAt: new Date().toISOString(),
+          transcriptTurns: [...transcriptRef.current],
         },
       });
     }

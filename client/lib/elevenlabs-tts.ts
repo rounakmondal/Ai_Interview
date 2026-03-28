@@ -6,6 +6,8 @@
 interface PollyTTSOptions {
   text: string;
   language?: string;
+  /** Mirrors Polly route: default male (Matthew en-US). */
+  voiceGender?: "male" | "female";
 }
 
 /**
@@ -14,12 +16,12 @@ interface PollyTTSOptions {
 export async function generateElevenLabsSpeech(
   options: PollyTTSOptions
 ): Promise<Blob> {
-  const { text, language = "en-US" } = options;
+  const { text, language = "en-US", voiceGender = "male" } = options;
 
   const response = await fetch("/api/tts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, language }),
+    body: JSON.stringify({ text, language, voiceGender }),
   });
 
   if (!response.ok) {

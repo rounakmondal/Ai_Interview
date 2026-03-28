@@ -10,7 +10,9 @@ export interface UseEnhancedAudioOptions {
   volume?: number;
   onStartPlaying?: () => void;
   onStopPlaying?: () => void;
-  useElevenLabs?: boolean; // Toggle between ElevenLabs and browser TTS
+  useElevenLabs?: boolean; // Polly via /api/tts vs browser SpeechSynthesis
+  /** Default male interviewer (Matthew / browser male when available). */
+  voiceGender?: "male" | "female";
 }
 
 /**
@@ -99,18 +101,18 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
             const audioBlob = await generateElevenLabsSpeech({
               text,
               language,
+              voiceGender,
             });
             audioUrl = blobToAudioUrl(audioBlob);
             currentUrlRef.current = audioUrl;
           } catch (err) {
             console.warn("ElevenLabs failed, falling back to browser TTS:", err);
             // Fall back to browser TTS
-            await playBrowserTTS(text, language);
+            await playBrowserTTS(text, language, voiceGender);
             return;
           }
         } else {
-          // Use browser TTS
-          await playBrowserTTS(text, language);
+          await playBrowserTTS(text, language, voiceGender);
           return;
         }
 
@@ -155,17 +157,16 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
         setIsPlaying(false);
       }
     },
-    [useElevenLabs, elevenLabsEnabled, onStartPlaying, onStopPlaying]
+    [useElevenLabs, elevenLabsEnabled, onStartPlaying, onStopPlaying, voiceGender]
   );
 
   /**
    * Fallback to browser TTS
    */
   const playBrowserTTS = useCallback(
-    (text: string, language: string) => {
+    (text: string, language: string, gender: "male" | "female") => {
       return new Promise<void>((resolve, reject) => {
         try {
-          // Cancel any ongoing speech
           window.speechSynthesis.cancel();
 
           const utterance = new SpeechSynthesisUtterance(text);
@@ -174,12 +175,24 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
           utterance.pitch = 1;
           utterance.volume = volume;
 
-          // Try to find a good voice
           const voices = window.speechSynthesis.getVoices();
-          const voice = voices.find((v) =>
-            v.lang.startsWith(language.split("-")[0])
-          ) || voices[0];
+          const langPrefix = language.split("-")[0];
+          const pool = voices.filter((v) => v.lang.startsWith(langPrefix));
+          const candidates = pool.length ? pool : voices;
 
+          const maleHints =
+            /male|Matthew|David|Daniel|Fred|James|John|Mark|Arthur|Google UK English Male|Microsoft George|Microsoft Ryan|Rich/i;
+          const femaleHints =
+            /female|Samantha|Victoria|Karen|Zira|Joanna|Amy|Google UK English Female|Microsoft Sonia|Jenny/i;
+
+          let voice =
+            gender === "male"
+              ? candidates.find((v) => maleHints.test(v.name)) ||
+                candidates.find((v) => !femaleHints.test(v.name))
+              : candidates.find((v) => femaleHints.test(v.name)) ||
+                candidates[0];
+
+          if (!voice) voice = candidates[0];
           if (voice) utterance.voice = voice;
 
           utterance.onstart = () => {

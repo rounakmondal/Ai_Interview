@@ -22,6 +22,7 @@ import {
   Building2,
   Users,
   Cpu,
+  Volume2,
 } from "lucide-react";
 import type { Language } from "@shared/api";
 import { extractCVText } from "@/lib/cv-extractor";
@@ -46,6 +47,7 @@ export default function InterviewSetup() {
   const [cvText, setCvText] = useState<string | null>(null);
   const [isExtracting, setIsExtracting] = useState(false);
   const [timerDuration, setTimerDuration] = useState(30);
+  const [interviewerVoiceGender, setInterviewerVoiceGender] = useState<"male" | "female">("male");
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -172,6 +174,7 @@ export default function InterviewSetup() {
         timerDuration,
         cvText: cvText || undefined,
         jobDescription: jobDescription.trim() || undefined,
+        interviewerVoiceGender,
       },
     });
   };
@@ -535,6 +538,41 @@ export default function InterviewSetup() {
                 <div className="flex justify-between text-[10px] text-muted-foreground">
                   <span>5m</span><span>30m</span><span>60m</span><span>90m</span><span>120m</span>
                 </div>
+              </div>
+
+              {/* Interviewer voice */}
+              <div className="space-y-2">
+                <Label className="text-xs font-semibold flex items-center gap-1.5">
+                  <Volume2 className="w-3 h-3 text-primary" />
+                  AI interviewer voice
+                </Label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setInterviewerVoiceGender("male")}
+                    className={`py-2.5 px-2 rounded-lg border-2 text-center text-[11px] font-semibold transition-all ${
+                      interviewerVoiceGender === "male"
+                        ? "border-primary bg-primary/8 shadow-sm"
+                        : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
+                    }`}
+                  >
+                    Male
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setInterviewerVoiceGender("female")}
+                    className={`py-2.5 px-2 rounded-lg border-2 text-center text-[11px] font-semibold transition-all ${
+                      interviewerVoiceGender === "female"
+                        ? "border-primary bg-primary/8 shadow-sm"
+                        : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
+                    }`}
+                  >
+                    Female
+                  </button>
+                </div>
+                <p className="text-[10px] text-muted-foreground leading-relaxed">
+                  Browser TTS picks a matching voice; with Polly (if enabled) English uses Matthew / Joanna.
+                </p>
               </div>
 
               {/* Quick presets */}

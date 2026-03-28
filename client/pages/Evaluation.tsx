@@ -27,12 +27,20 @@ import {
   Copy,
   Check,
 } from "lucide-react";
-import type { FinishInterviewResponse, PracticeQuestion, WeakArea, ImprovementPlan } from "@shared/api";
+import type {
+  FinishInterviewResponse,
+  PracticeQuestion,
+  WeakArea,
+  ImprovementPlan,
+  InterviewQuestionReview,
+  InterviewTranscriptTurn,
+} from "@shared/api";
 
 interface EvaluationLocationState {
   sessionId: string;
   evaluation: FinishInterviewResponse;
   completedAt: string;
+  transcriptTurns?: InterviewTranscriptTurn[];
 }
 
 // Practice Questions Component with filtering and expandable answers
@@ -244,6 +252,7 @@ export default function EvaluationPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const [evaluation, setEvaluation] = useState<FinishInterviewResponse | null>(null);
+  const [transcriptFallback, setTranscriptFallback] = useState<InterviewTranscriptTurn[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // LinkedIn login state and handlers (single declaration)
@@ -256,6 +265,7 @@ export default function EvaluationPage() {
       return;
     }
     setEvaluation(state.evaluation);
+    setTranscriptFallback(state.transcriptTurns ?? []);
     setIsLoading(false);
   }, [location, navigate]);
   const handleLinkedInLogin = () => {
@@ -618,6 +628,77 @@ export default function EvaluationPage() {
               </div>
             </div>
           </Card>
+
+          {/* Interview Q&A + stronger answers */}
+          {questionRecap.length > 0 && (
+            <Card className="p-6 sm:p-8 border-border/40 space-y-4">
+              <div className="flex items-center gap-2">
+                <MessageSquareText className="w-6 h-6 text-primary" />
+                <div>
+                  <h2 className="text-2xl font-bold">Interview recap</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Each question you were asked, your answer, and a stronger example response (from AI when your backend returns{" "}
+                    <code className="text-xs bg-muted px-1 rounded">question_reviews</code>).
+                  </p>
+                </div>
+              </div>
+              <Accordion type="single" collapsible className="space-y-3">
+                {questionRecap.map((row, idx) => (
+                  <AccordionItem
+                    key={idx}
+                    value={`recap-${idx}`}
+                    className="border border-border/50 rounded-lg px-4 data-[state=open]:bg-muted/30"
+                  >
+                    <AccordionTrigger className="hover:no-underline py-4 text-left">
+                      <div className="flex items-start gap-3 w-full pr-2">
+                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                          {idx + 1}
+                        </span>
+                        <span className="flex-1 text-sm sm:text-base font-medium line-clamp-2">
+                          {row.questionText}
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-4 space-y-4">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+                          Your answer
+                        </p>
+                        <div className="rounded-lg border border-border/60 bg-muted/20 p-4">
+                          <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
+                            {row.userAnswer || "—"}
+                          </p>
+                        </div>
+                      </div>
+                      {row.shortFeedback && (
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400 mb-1.5 flex items-center gap-1">
+                            <Lightbulb className="w-3.5 h-3.5" /> Quick feedback
+                          </p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{row.shortFeedback}</p>
+                        </div>
+                      )}
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1.5 flex items-center gap-1">
+                          <GraduationCap className="w-3.5 h-3.5" /> Stronger answer (model example)
+                        </p>
+                        <div className="rounded-lg border border-primary/25 bg-primary/5 p-4">
+                          {row.idealAnswer ? (
+                            <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">{row.idealAnswer}</p>
+                          ) : (
+                            <p className="text-sm text-muted-foreground italic">
+                              Your backend can attach ideal answers per question using the prompts in{" "}
+                              <code className="text-xs bg-background px-1 rounded">shared/interview-prompts.ts</code>.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Card>
+          )}
 
           {/* Two Column Grid */}
           <div className="grid md:grid-cols-2 gap-6">

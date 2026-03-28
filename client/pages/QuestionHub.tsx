@@ -22,6 +22,10 @@ import {
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
+import {
+  applyQuestionHubExamSeo,
+  type ExamSeoProfile,
+} from "@/lib/exam-seo";
 
 interface PDFItem {
   /** File name (or relative path) identifying the PDF */
@@ -242,9 +246,15 @@ function yearFromFilename(fileName: string): number | undefined {
   return m ? parseInt(m[0], 10) : undefined;
 }
 
-export default function QuestionHub() {
+export default function QuestionHub({
+  seoProfile = "default",
+}: {
+  seoProfile?: ExamSeoProfile;
+}) {
   const navigate = useNavigate();
-  const [selectedFolder, setSelectedFolder] = useState<string>("police");
+  const [selectedFolder, setSelectedFolder] = useState<string>(() =>
+    seoProfile === "wbcs" ? "wbcs" : "police",
+  );
   const [testNavLoading, setTestNavLoading] = useState(false);
   const [filesFromApi, setFilesFromApi] = useState<PDFItem[] | null>(null);
   const [listLoading, setListLoading] = useState(true);
@@ -253,85 +263,8 @@ export default function QuestionHub() {
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "rose"];
 
   useEffect(() => {
-    // ── SEO meta tags ──────────────────────────────────────────────────────
-    document.title =
-      "WBP & WBCS Previous Year Question Papers Free Download | SSC Mock Test | InterviewSathi";
-
-    const setMeta = (name: string, content: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
-      }
-      el.content = content;
-    };
-
-    const setProperty = (property: string, content: string) => {
-      let el = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("property", property);
-        document.head.appendChild(el);
-      }
-      el.content = content;
-    };
-
-    setMeta(
-      "description",
-      "Download WBP Constable & Lady Constable previous year question papers free PDF. WBCS Prelims & Mains old question papers. SSC CGL, CHSL previous year papers. Attempt unlimited AI-powered mock tests online for West Bengal government exam preparation."
-    );
-
-    setMeta(
-      "keywords",
-      [
-        // WBP / Police keywords
-        "WBP previous year question paper download",
-        "WBP constable question paper PDF",
-        "WBP lady constable question paper",
-        "West Bengal Police previous year question",
-        "WBP constable prelims 2021 2018 2016 2015 2013",
-        "West Bengal Police exam practice test",
-        "police constable mock test West Bengal",
-        "WBP question paper Bengali",
-        // WBCS keywords
-        "WBCS previous year question paper download",
-        "WBCS prelims question paper PDF",
-        "WBCS mains question paper free",
-        "West Bengal Civil Service question paper",
-        "WBPSC previous year question",
-        "WBCS exam preparation mock test",
-        // SSC keywords
-        "SSC CGL previous year question paper",
-        "SSC CHSL question paper PDF download",
-        "SSC MTS question paper free",
-        "Staff Selection Commission mock test",
-        // General
-        "government exam previous year question papers West Bengal",
-        "free PDF download question papers",
-        "online mock test government exam India",
-        "সরকারি চাকরির পুরনো প্রশ্নপত্র ডাউনলোড",
-        "WBP WBCS SSC প্রশ্নপত্র",
-      ].join(", ")
-    );
-
-    // Open Graph
-    setProperty("og:title", "WBP & WBCS Previous Year Question Papers Free Download | InterviewSathi");
-    setProperty(
-      "og:description",
-      "Download WBP Constable, WBCS & SSC previous year question papers as free PDFs and attempt AI-powered mock tests online. Best resource for West Bengal government exam preparation."
-    );
-    setProperty("og:type", "website");
-
-    // Canonical
-    let canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = `${window.location.origin}/question-hub`;
-  }, []);
+    applyQuestionHubExamSeo(seoProfile);
+  }, [seoProfile]);
 
   useEffect(() => {
     let cancelled = false;
@@ -567,10 +500,28 @@ export default function QuestionHub() {
           className="mb-12"
         >
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Question Hub
+            {seoProfile === "wbcs"
+              ? "WBCS Mock Test & Previous Year Papers"
+              : seoProfile === "police"
+                ? "WBP Police Mock Test & Previous Year Papers"
+                : "Question Hub"}
           </h1>
           <p className="text-lg text-muted-foreground mb-2 max-w-2xl">
-            Download <strong className="text-foreground">WBP Constable</strong>, <strong className="text-foreground">WBCS</strong> &amp; <strong className="text-foreground">SSC</strong> previous year question papers free — and attempt unlimited AI-powered mock tests online.
+            {seoProfile === "wbcs" ? (
+              <>
+                Free <strong className="text-foreground">WBCS prelims</strong> previous year question papers and{" "}
+                <strong className="text-foreground">online mock tests</strong> with timer and instant results — aligned with West Bengal Civil Service (Exe.) preparation.
+              </>
+            ) : seoProfile === "police" ? (
+              <>
+                <strong className="text-foreground">West Bengal Police (WBP)</strong> Constable &amp; Lady Constable{" "}
+                <strong className="text-foreground">previous year mock tests</strong> online — built from official-style PYP PDFs for exam practice.
+              </>
+            ) : (
+              <>
+                Download <strong className="text-foreground">WBP Constable</strong>, <strong className="text-foreground">WBCS</strong> &amp; <strong className="text-foreground">SSC</strong> previous year question papers free — and attempt unlimited AI-powered mock tests online.
+              </>
+            )}
           </p>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
             WBP Constable Prelims 2013–2021 • WBCS Prelims &amp; Mains • SSC CGL / CHSL / MTS

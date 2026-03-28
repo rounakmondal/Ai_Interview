@@ -75,8 +75,24 @@ export interface NextQuestionResponse {
   totalQuestions?: number;
 }
 
+/** One turn: what the interviewer asked (as shown) and the candidate's answer. */
+export interface InterviewTranscriptTurn {
+  questionText: string;
+  userAnswer: string;
+}
+
+/** Per-question coaching: stronger model answer aligned with the same question. */
+export interface InterviewQuestionReview {
+  questionText: string;
+  userAnswer: string;
+  idealAnswer: string;
+  shortFeedback?: string;
+}
+
 export interface FinishInterviewRequest {
   sessionId: string;
+  /** Client-collected Q&A; backend should return `questionReviews` for each turn. */
+  transcriptTurns?: InterviewTranscriptTurn[];
 }
 
 export interface EvaluationScore {
@@ -123,6 +139,10 @@ export interface FinishInterviewResponse extends EvaluationScore {
   practiceQuestions?: PracticeQuestion[];
   interviewType?: string;
   youtubeVideos?: YoutubeVideoSuggestion[];
+  /** Echo of submitted turns (optional; useful for PDF/export). */
+  transcriptTurns?: InterviewTranscriptTurn[];
+  /** One entry per transcript turn: ideal answer + brief feedback (from AI on backend). */
+  questionReviews?: InterviewQuestionReview[];
 }
 
 // Raw API response shape (snake_case from backend)
@@ -150,6 +170,16 @@ export interface RawFinishInterviewResponse {
       question: string;
       difficulty: string;
       topic: string;
+    }>;
+    transcript_turns?: Array<{
+      question_text: string;
+      user_answer: string;
+    }>;
+    question_reviews?: Array<{
+      question_text: string;
+      user_answer: string;
+      ideal_answer: string;
+      short_feedback?: string;
     }>;
     youtube_videos?: Array<{
       video_id: string;

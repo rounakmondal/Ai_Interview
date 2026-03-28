@@ -542,6 +542,8 @@ export async function fetchCurrentAffairs() {
     date: item.date,
     headline: item.headline || item.title,
     summary: item.summary,
+    headlineBn: item.headline_bn ?? item.headlineBn,
+    summaryBn: item.summary_bn ?? item.summaryBn,
     tags: item.tags || [],
     importance: item.importance || "medium",
   }));
@@ -657,8 +659,33 @@ export interface NewsItem {
   date: string;
   headline: string;
   summary: string;
+  /** Bengali headline for reels / regional UI */
+  headlineBn?: string;
+  /** Bengali summary */
+  summaryBn?: string;
   tags: string[];
   importance: "high" | "medium" | "low";
+}
+
+/** Prefer Bengali fields when present (e.g. home briefing reels). */
+export function getNewsBn(item: NewsItem): { bn: boolean; headline: string; summary: string } {
+  const bn = Boolean(item.headlineBn && item.summaryBn);
+  return {
+    bn,
+    headline: item.headlineBn ?? item.headline,
+    summary: item.summaryBn ?? item.summary,
+  };
+}
+
+/** Prefer items dated today, else latest by date (reels). */
+export function pickTodaysReelNews(news: NewsItem[], max = 6): NewsItem[] {
+  const today = new Date().toISOString().split("T")[0];
+  const sameDay = news.filter((n) => n.date === today);
+  const pool =
+    sameDay.length > 0
+      ? sameDay
+      : [...news].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  return pool.slice(0, max);
 }
 
 export const DAILY_NEWS: NewsItem[] = [
@@ -666,6 +693,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 1, date: "2026-03-08",
     headline: "India launches 7th Generation Weather Satellite INSAT-3DS",
     summary: "ISRO successfully launched the INSAT-3DS meteorological satellite to enhance weather forecasting and disaster warning capabilities across South Asia.",
+    headlineBn: "ভারত INSAT-3DS আবহাওয়া উপগ্রহ উৎক্ষেপণ করল",
+    summaryBn:
+      "ইসরো INSAT-3DS উৎক্ষেপণ করে দক্ষিণ এশিয়ায় আবহাওয়ার পূর্বাভাস ও দুর্যোগ সতর্কতা জোরদার করবে—প্রতিযোগিতামূলক পরীক্ষায় বিজ্ঞান ও প্রযুক্তি গুরুত্বপূর্ণ।",
     tags: ["ISRO", "Technology", "Space", "Science & Tech"],
     importance: "high",
   },
@@ -673,6 +703,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 2, date: "2026-03-07",
     headline: "RBI keeps repo rate unchanged at 6.25%",
     summary: "The Reserve Bank of India's Monetary Policy Committee held the repo rate steady at 6.25% citing stable inflation and growth outlook.",
+    headlineBn: "আরবিআই রেপো রেট ৬.২৫% এ অপরিবর্তিত রাখল",
+    summaryBn:
+      "ভারতীয় রিজার্ভ ব্যাঙ্কের মুদ্রানীতি কমিটি স্থিতিশীল মূল্যস্ফীতি ও প্রবৃদ্ধির কারণে রেপো রেট একই রেখেছে—অর্থনীতি বিষয়ক প্রশ্নের জন্য মূল পয়েন্ট।",
     tags: ["RBI", "Economy", "Banking", "Finance"],
     importance: "high",
   },
@@ -680,6 +713,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 3, date: "2026-03-06",
     headline: "West Bengal government launches 'Kanyashree Prakalpa' expansion",
     summary: "The West Bengal government announced an expanded Kanyashree scheme covering girls up to Class XII with increased scholarship amounts.",
+    headlineBn: "পশ্চিমবঙ্গ সরকার কন্যাশ্রী প্রকল্প সম্প্রসারণ ঘোষণা করল",
+    summaryBn:
+      "দ্বাদশ শ্রেণি পর্যন্ত ছাত্রীদের কভার ও বৃদ্ধ ভাতা—রাজ্য সরকারি পরীক্ষায় শিক্ষা ও কল্যাণমূলক প্রকল্প জরুরি।",
     tags: ["West Bengal", "Education", "Welfare", "Government Scheme"],
     importance: "high",
   },
@@ -687,6 +723,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 4, date: "2026-03-05",
     headline: "India signs trade agreement with UAE, UK in strategic partnership meet",
     summary: "India signed comprehensive trade and investment agreements with UAE and UK during a high-level summit to boost bilateral trade by $50 billion over five years.",
+    headlineBn: "ভারত সংযুক্ত আরব আমিরশাহি ও যুক্তরাজ্যের সঙ্গে বাণিজ্য চুক্তি সই করল",
+    summaryBn:
+      "উচ্চপর্যায়ের বৈঠকে বিনিয়োগ ও বাণিজ্য চুক্তি—আন্তর্জাতিক সম্পর্ক ও অর্থনীति খাতে প্রশ্নোস্তর তৈরি হয়।",
     tags: ["International Relations", "Economy", "Trade"],
     importance: "medium",
   },
@@ -694,6 +733,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 5, date: "2026-03-04",
     headline: "Kolkata East-West Metro Phase 2 construction begins",
     summary: "Construction work of the second phase of Kolkata's East-West Metro corridor extending to Barasat was inaugurated by the Railway Minister.",
+    headlineBn: "কলকাতা ইস্ট–ওয়েস্ট মেট্রোর দ্বিতীয় পর্বের নির্মাণ শুরু",
+    summaryBn:
+      "বারাসাত পর্যন্ত করিডোর সম্প্রসারণ—রেলমন্ত্রী উদ্বোধন করেছেন; পশ্চিমবঙ্গ ও অবকাঠামো বিষয়ে গুরুত্বপূর্ণ খবর।",
     tags: ["Kolkata", "Infrastructure", "Railway", "West Bengal"],
     importance: "high",
   },
@@ -701,6 +743,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 6, date: "2026-03-03",
     headline: "India wins gold in World Wrestling Championship",
     summary: "Indian wrestler Bajrang Punia won the gold medal in the 65kg freestyle category at the World Wrestling Championship held in Budapest.",
+    headlineBn: "বিশ্ব কুস্তি চ্যাম্পিয়নশিপে ভারতের স্বর্ণপদক",
+    summaryBn:
+      "৬৫ কেজি ফ्रीস্টাইলে ভারতীয় কুস্তিগীরের সাফল্য—খেলাধুলা ও সাম্প্রতিক ঘটনাবলি সেকশনে কাজে লাগবে।",
     tags: ["Sports", "Wrestling", "Achievement"],
     importance: "medium",
   },
@@ -708,6 +753,9 @@ export const DAILY_NEWS: NewsItem[] = [
     id: 7, date: "2026-03-02",
     headline: "Supreme Court verdict on Uniform Civil Code implementation",
     summary: "The Supreme Court urged the government to consider a phased approach to implementing the Uniform Civil Code respecting religious sentiments.",
+    headlineBn: "সর্বভারতীয় সিভিল আইন নিয়ে সুপ্রিম কোর্টের নির্দেশনা",
+    summaryBn:
+      "ধাপে ধাপে বাস্তবায়ন ও ধর্মীয় সংবेदনার প্রতি সম্মান—রাজনৈতিক বিজ্ঞান ও আইনি প্রশ্নের জন্য গুরুত্বপূর্ণ।",
     tags: ["Supreme Court", "Polity", "Law", "UCC"],
     importance: "high",
   },

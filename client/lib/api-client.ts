@@ -134,13 +134,29 @@ class ApiClient {
 
   // Transform snake_case API response to camelCase frontend types
   private transformEvaluation(raw: RawFinishInterviewResponse): FinishInterviewResponse {
-    // If the response already has camelCase keys (mock API), pass through
     const evalData = raw.evaluation ?? (raw as any);
 
-    // Check if data is already in camelCase format (mock API)
     if (typeof evalData.overallScore === "number") {
       return evalData as FinishInterviewResponse;
     }
+
+    const mapTranscript = (rows: any[] | undefined) =>
+      Array.isArray(rows)
+        ? rows.map((t: any) => ({
+            questionText: t.question_text ?? t.questionText ?? "",
+            userAnswer: t.user_answer ?? t.userAnswer ?? "",
+          }))
+        : undefined;
+
+    const mapReviews = (rows: any[] | undefined) =>
+      Array.isArray(rows)
+        ? rows.map((r: any) => ({
+            questionText: r.question_text ?? r.questionText ?? "",
+            userAnswer: r.user_answer ?? r.userAnswer ?? "",
+            idealAnswer: r.ideal_answer ?? r.idealAnswer ?? "",
+            shortFeedback: r.short_feedback ?? r.shortFeedback ?? undefined,
+          }))
+        : undefined;
 
     return {
       overallScore: evalData.overall_score ?? 0,
@@ -178,6 +194,10 @@ class ApiClient {
             reason: v.reason,
           }))
         : undefined,
+      strengths: Array.isArray(evalData.strengths) ? evalData.strengths : undefined,
+      interviewType: evalData.interview_type ?? evalData.interviewType,
+      transcriptTurns: mapTranscript(evalData.transcript_turns),
+      questionReviews: mapReviews(evalData.question_reviews),
     };
   }
 }

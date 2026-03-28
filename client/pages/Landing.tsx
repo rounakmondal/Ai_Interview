@@ -352,6 +352,15 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
+            <p className="text-sm text-muted-foreground flex flex-wrap justify-center gap-x-3 gap-y-1">
+              <Link to="/wbcs-mock-test" className="text-primary hover:underline font-medium">
+                WBCS mock test (previous year papers)
+              </Link>
+              <span className="text-border">|</span>
+              <Link to="/wbp-police-mock-test" className="text-primary hover:underline font-medium">
+                WBP police mock test (Constable / Lady Constable)
+              </Link>
+            </p>
           </div>
         </div>
       </section>

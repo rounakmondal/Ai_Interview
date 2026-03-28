@@ -6,6 +6,8 @@ import type {
   FinishInterviewRequest,
   FinishInterviewResponse,
   PracticeQuestion,
+  InterviewTranscriptTurn,
+  InterviewQuestionReview,
 } from "@shared/api";
 
 // Mock questions database
@@ -1182,6 +1184,50 @@ function generatePracticeQuestionsWithAnswers(
   return shuffled.slice(0, 30);
 }
 
+function mockShortFeedback(userAnswer: string): string {
+  const wc = userAnswer.trim().split(/\s+/).filter(Boolean).length;
+  if (wc < 15) {
+    return "Aim for a fuller answer (roughly 60–120 spoken words): state your point, add one example, close with impact.";
+  }
+  if (!/\d|%|percent|times|saved|reduced|increased|improved/i.test(userAnswer)) {
+    return "Add one measurable outcome (%, time, revenue, scale) so the panel can calibrate your impact.";
+  }
+  return "Good substance — sharpen the opening (direct answer first) and explicitly tie your experience to this role.";
+}
+
+function mockIdealAnswer(
+  questionText: string,
+  userAnswer: string,
+  interviewType: string,
+  jobDescription?: string,
+): string {
+  const role = interviewType.split("|")[0]?.trim() || "this role";
+  const jdHint =
+    jobDescription && jobDescription.length > 40
+      ? `\n\nAlign with the job context when you personalize: pick 1–2 requirements from the JD and name how you’ve done that before.`
+      : "";
+
+  return (
+    `Here is a strong sample structure for “${questionText.slice(0, 120)}${questionText.length > 120 ? "…" : ""}” targeting ${role}:\n\n` +
+    `Open with a one-sentence headline that answers the question. Then use STAR if it’s experience-based: Situation (brief), Task (your responsibility), Action (what *you* did, tools/process), Result (metric or lesson). If it’s technical, define the concept, trade-offs, and where you applied it.\n\n` +
+    `Example skeleton you can adapt with your real details: “In my role at [Company] as [Title], we faced [constraint]. I owned [scope]. I [steps using tools/methods], partnering with [stakeholders]. We measured success by [metric] and achieved [outcome]. I’d bring the same approach here by [tie-in to ${role}].”\n\n` +
+    `Your answer mentioned: “${userAnswer.slice(0, 100)}${userAnswer.length > 100 ? "…" : ""}” — keep that honesty, but replace vague phrases with one sharper example and one number.${jdHint}`
+  );
+}
+
+function buildMockQuestionReviews(
+  turns: InterviewTranscriptTurn[],
+  interviewType: string,
+  jobDescription?: string,
+): InterviewQuestionReview[] {
+  return turns.map((t) => ({
+    questionText: t.questionText,
+    userAnswer: t.userAnswer,
+    shortFeedback: mockShortFeedback(t.userAnswer),
+    idealAnswer: mockIdealAnswer(t.questionText, t.userAnswer, interviewType, jobDescription),
+  }));
+}
+
 // Log startup message
 if (typeof window !== "undefined") {
   console.log(
@@ -1441,7 +1487,26 @@ export const mockApi = {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const session = sessions.get(data.sessionId);
-    
+
+    let transcriptTurns: InterviewTranscriptTurn[] = data.transcriptTurns ?? [];
+    if (transcriptTurns.length === 0 && session?.answers?.length) {
+      transcriptTurns = session.answers.map((userAnswer, i) => ({
+        questionText:
+          session.questions[Math.min(i, Math.max(0, session.questions.length - 1))] ??
+          `Question ${i + 1}`,
+        userAnswer,
+      }));
+    }
+
+    const questionReviews =
+      transcriptTurns.length > 0
+        ? buildMockQuestionReviews(
+            transcriptTurns,
+            session?.type ?? "Interview",
+            session?.jobDescription,
+          )
+        : undefined;
+
     // If session not found, return default evaluation (graceful fallback)
     if (!session) {
       console.warn("Session not found, returning default evaluation");
@@ -1457,6 +1522,8 @@ export const mockApi = {
         weakAreas: [
           { area: "Session", issue: "Interview session could not be found or expired.", howToImprove: "Please restart your interview to receive personalized feedback and video suggestions." },
         ],
+        transcriptTurns: transcriptTurns.length ? transcriptTurns : undefined,
+        questionReviews,
       };
     }
 
@@ -1611,8 +1678,10 @@ export const mockApi = {
       weakAreas: weakAreas.slice(0, 3), // Limit to top 3
       improvementPlan,
       detailedFeedback: `Based on your ${answerCount} responses, you demonstrated ${strengths[0]?.toLowerCase() || "solid effort"}. ${weakAreas[0]?.issue ? `Key area to focus on: ${weakAreas[0].issue}.` : ""} With targeted practice, you can significantly improve your interview performance.`,
-      practiceQuestions, // 30 practice Q&A based on role and job description
+           practiceQuestions,
       interviewType: session.type,
+      transcriptTurns: transcriptTurns.length ? transcriptTurns : undefined,
+      questionReviews,
     };
   },
 };

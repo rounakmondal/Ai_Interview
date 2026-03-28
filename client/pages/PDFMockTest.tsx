@@ -32,6 +32,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { usePDFMockTest } from "@/hooks/use-pdf-mock-test";
+import { applyPdfMockTestSeo } from "@/lib/exam-seo";
 
 /* ─── Helpers ──────────────────────────────────────────────────────────────── */
 
@@ -195,6 +196,10 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
     const id = setInterval(() => setLoadingMsgIdx((p) => Math.min(p + 1, LOADING_MSGS.length - 1)), 1200);
     return () => clearInterval(id);
   }, [test.loading]);
+
+  useEffect(() => {
+    applyPdfMockTestSeo(folder, pdfFileName);
+  }, [folder, pdfFileName]);
 
   // Calculations for the results page
   const resultData = useMemo(() => {

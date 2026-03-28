@@ -12,7 +12,7 @@ import { isLoggedIn } from "@/lib/auth-api";
 import { useAndroidBackButton } from "@/hooks/use-android-back-button";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
-import DailyTaskReminderModal from "@/components/DailyTaskReminderModal";
+import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
 import LandingPage from "./pages/Landing";
 import PremiumLanding from "./pages/PremiumLanding";
 import InterviewSetup from "./pages/InterviewSetup";
@@ -69,7 +69,7 @@ function AppContent() {
 
   return (
     <>
-      {isLoggedIn() && !!localStorage.getItem("upcoming_exam") && <DailyTaskReminderModal />}
+      {isLoggedIn() && <PostLoginBriefingModal />}
       <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <Routes>
           <Route path="/" element={<PremiumLanding />} />
@@ -103,6 +103,12 @@ function AppContent() {
           <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
           <Route path="/mock-test" element={<MockTestPage />} />
           <Route path="/question-hub" element={<QuestionHub />} />
+          {/* SEO landing URLs — same Question Hub UI, focused meta & canonical */}
+          <Route path="/wbcs-mock-test" element={<QuestionHub seoProfile="wbcs" />} />
+          <Route
+            path="/wbp-police-mock-test"
+            element={<QuestionHub seoProfile="police" />}
+          />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
