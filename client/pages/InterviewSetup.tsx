@@ -550,28 +550,24 @@ export default function InterviewSetup() {
                   <button
                     type="button"
                     onClick={() => setInterviewerVoiceGender("male")}
-                    className={`py-2.5 px-2 rounded-lg border-2 text-center text-[11px] font-semibold transition-all ${
+                    className={`flex-1 py-2.5 px-2 rounded-lg border-2 text-center text-[11px] font-semibold transition-all ${
                       interviewerVoiceGender === "male"
                         ? "border-primary bg-primary/8 shadow-sm"
                         : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
                     }`}
                   >
-                    Male
+                    Male Voice
                   </button>
                   <button
                     type="button"
-                    onClick={() => setInterviewerVoiceGender("female")}
-                    className={`py-2.5 px-2 rounded-lg border-2 text-center text-[11px] font-semibold transition-all ${
-                      interviewerVoiceGender === "female"
-                        ? "border-primary bg-primary/8 shadow-sm"
-                        : "border-muted-foreground/15 hover:border-primary/40 bg-background/40"
-                    }`}
+                    disabled
+                    className="flex-1 py-2.5 px-2 rounded-lg border-2 border-dashed border-muted-foreground/10 bg-muted/20 text-center text-[11px] font-semibold text-muted-foreground/50 cursor-not-allowed cursor-not-allowed"
                   >
-                    Female
+                    Female (Coming Soon)
                   </button>
                 </div>
                 <p className="text-[10px] text-muted-foreground leading-relaxed">
-                  Browser TTS picks a matching voice; with Polly (if enabled) English uses Matthew / Joanna.
+                  Interviewer voice is currently restricted to Male for quality assurance.
                 </p>
               </div>
 

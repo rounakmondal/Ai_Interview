@@ -25,6 +25,7 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
     onStartPlaying,
     onStopPlaying,
     useElevenLabs = false, // Default to browser TTS (free, fast, offline-friendly)
+    voiceGender = "male",
   } = options;
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -65,6 +66,69 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
       }
     };
   }, [volume]);
+
+  /**
+   * Fallback to browser TTS (Declared before speak to avoid usage before declaration)
+   */
+  const playBrowserTTS = useCallback(
+    (text: string, language: string, gender: "male" | "female") => {
+      return new Promise<void>((resolve, reject) => {
+        try {
+          window.speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = language;
+          utterance.rate = 0.95;
+          utterance.pitch = 1;
+          utterance.volume = volume;
+
+          const voices = window.speechSynthesis.getVoices();
+          const langPrefix = language.split("-")[0];
+          const pool = voices.filter((v) => v.lang.startsWith(langPrefix));
+          const candidates = pool.length ? pool : voices;
+
+          const maleHints =
+            /male|Matthew|David|Daniel|Fred|James|John|Mark|Arthur|Google UK English Male|Microsoft George|Microsoft Ryan|Rich/i;
+          const femaleHints =
+            /female|Samantha|Victoria|Karen|Zira|Joanna|Amy|Google UK English Female|Microsoft Sonia|Jenny/i;
+
+          let voice =
+            gender === "male"
+              ? candidates.find((v) => maleHints.test(v.name)) ||
+                candidates.find((v) => !femaleHints.test(v.name))
+              : candidates.find((v) => femaleHints.test(v.name)) ||
+                candidates[0];
+
+          if (!voice) voice = candidates[0];
+          if (voice) utterance.voice = voice;
+
+          utterance.onstart = () => {
+            setIsPlaying(true);
+            setIsLoading(false);
+            onStartPlaying?.();
+          };
+
+          utterance.onend = () => {
+            setIsPlaying(false);
+            onStopPlaying?.();
+            resolve();
+          };
+
+          utterance.onerror = (e) => {
+            setError("Speech synthesis error");
+            setIsPlaying(false);
+            setIsLoading(false);
+            reject(e);
+          };
+
+          window.speechSynthesis.speak(utterance);
+        } catch (err) {
+          reject(err);
+        }
+      });
+    },
+    [volume, onStartPlaying, onStopPlaying]
+  );
 
   /**
    * Play text-to-speech with natural voice
@@ -157,70 +221,7 @@ export const useEnhancedAudio = (options: UseEnhancedAudioOptions = {}) => {
         setIsPlaying(false);
       }
     },
-    [useElevenLabs, elevenLabsEnabled, onStartPlaying, onStopPlaying, voiceGender]
-  );
-
-  /**
-   * Fallback to browser TTS
-   */
-  const playBrowserTTS = useCallback(
-    (text: string, language: string, gender: "male" | "female") => {
-      return new Promise<void>((resolve, reject) => {
-        try {
-          window.speechSynthesis.cancel();
-
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = language;
-          utterance.rate = 0.95;
-          utterance.pitch = 1;
-          utterance.volume = volume;
-
-          const voices = window.speechSynthesis.getVoices();
-          const langPrefix = language.split("-")[0];
-          const pool = voices.filter((v) => v.lang.startsWith(langPrefix));
-          const candidates = pool.length ? pool : voices;
-
-          const maleHints =
-            /male|Matthew|David|Daniel|Fred|James|John|Mark|Arthur|Google UK English Male|Microsoft George|Microsoft Ryan|Rich/i;
-          const femaleHints =
-            /female|Samantha|Victoria|Karen|Zira|Joanna|Amy|Google UK English Female|Microsoft Sonia|Jenny/i;
-
-          let voice =
-            gender === "male"
-              ? candidates.find((v) => maleHints.test(v.name)) ||
-                candidates.find((v) => !femaleHints.test(v.name))
-              : candidates.find((v) => femaleHints.test(v.name)) ||
-                candidates[0];
-
-          if (!voice) voice = candidates[0];
-          if (voice) utterance.voice = voice;
-
-          utterance.onstart = () => {
-            setIsPlaying(true);
-            setIsLoading(false);
-            onStartPlaying?.();
-          };
-
-          utterance.onend = () => {
-            setIsPlaying(false);
-            onStopPlaying?.();
-            resolve();
-          };
-
-          utterance.onerror = (e) => {
-            setError("Speech synthesis error");
-            setIsPlaying(false);
-            setIsLoading(false);
-            reject(e);
-          };
-
-          window.speechSynthesis.speak(utterance);
-        } catch (err) {
-          reject(err);
-        }
-      });
-    },
-    [volume, onStartPlaying, onStopPlaying]
+    [useElevenLabs, elevenLabsEnabled, onStartPlaying, onStopPlaying, voiceGender, playBrowserTTS]
   );
 
   /**

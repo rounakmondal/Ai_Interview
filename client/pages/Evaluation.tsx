@@ -24,6 +24,7 @@ import {
   Rocket,
   GraduationCap,
   MessageSquareText,
+  Sparkles,
   Copy,
   Check,
 } from "lucide-react";
@@ -258,6 +259,10 @@ export default function EvaluationPage() {
   // LinkedIn login state and handlers (single declaration)
   const [isLinkedInLoggedIn, setIsLinkedInLoggedIn] = useState(false);
   const [copied, setCopied] = useState(false);
+  
+  // Logic to show exactly what was asked vs answered
+  const questionRecap = evaluation?.questionReviews || evaluation?.transcriptTurns || transcriptFallback || [];
+  
   useEffect(() => {
     const state = location.state as EvaluationLocationState | null;
     if (!state?.evaluation) {
@@ -629,73 +634,79 @@ export default function EvaluationPage() {
             </div>
           </Card>
 
-          {/* Interview Q&A + stronger answers */}
+          {/* Interview Q&A Recap */}
           {questionRecap.length > 0 && (
-            <Card className="p-6 sm:p-8 border-border/40 space-y-4">
-              <div className="flex items-center gap-2">
+            <Card className="p-6 sm:p-8 border-border/40 space-y-6">
+              <div className="flex items-center gap-3">
                 <MessageSquareText className="w-6 h-6 text-primary" />
                 <div>
-                  <h2 className="text-2xl font-bold">Interview recap</h2>
-                  <p className="text-sm text-muted-foreground">
-                    Each question you were asked, your answer, and a stronger example response (from AI when your backend returns{" "}
-                    <code className="text-xs bg-muted px-1 rounded">question_reviews</code>).
-                  </p>
+                  <h2 className="text-2xl font-bold">Interview Recap</h2>
+                  <p className="text-sm text-muted-foreground">Review your responses and see how to improve them.</p>
                 </div>
               </div>
-              <Accordion type="single" collapsible className="space-y-3">
-                {questionRecap.map((row, idx) => (
-                  <AccordionItem
-                    key={idx}
-                    value={`recap-${idx}`}
-                    className="border border-border/50 rounded-lg px-4 data-[state=open]:bg-muted/30"
-                  >
-                    <AccordionTrigger className="hover:no-underline py-4 text-left">
-                      <div className="flex items-start gap-3 w-full pr-2">
-                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-                          {idx + 1}
-                        </span>
-                        <span className="flex-1 text-sm sm:text-base font-medium line-clamp-2">
-                          {row.questionText}
-                        </span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-4 space-y-4">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
-                          Your answer
-                        </p>
-                        <div className="rounded-lg border border-border/60 bg-muted/20 p-4">
-                          <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
-                            {row.userAnswer || "—"}
-                          </p>
+              
+              <Accordion type="single" collapsible className="space-y-4">
+                {questionRecap.map((turn, idx) => {
+                  // Normalize field names (from transcriptTurns or questionReviews)
+                  const q = (turn as any).questionText || (turn as any).question_text || "";
+                  const a = (turn as any).userAnswer || (turn as any).user_answer || "";
+                  const ideal = (turn as any).idealAnswer || (turn as any).ideal_answer;
+                  const feedback = (turn as any).shortFeedback || (turn as any).short_feedback;
+
+                  return (
+                    <AccordionItem 
+                      key={idx} 
+                      value={`turn-${idx}`}
+                      className="border border-border/50 rounded-xl px-4 overflow-hidden data-[state=open]:bg-muted/20 transition-all"
+                    >
+                      <AccordionTrigger className="hover:no-underline py-5 text-left group">
+                        <div className="flex items-start gap-4 pr-4">
+                          <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-xs font-bold text-primary mt-0.5 group-hover:scale-110 transition-transform">
+                            {idx + 1}
+                          </span>
+                          <span className="font-semibold text-sm sm:text-base leading-tight pt-1">
+                            {q}
+                          </span>
                         </div>
-                      </div>
-                      {row.shortFeedback && (
-                        <div>
-                          <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400 mb-1.5 flex items-center gap-1">
-                            <Lightbulb className="w-3.5 h-3.5" /> Quick feedback
-                          </p>
-                          <p className="text-sm text-muted-foreground leading-relaxed">{row.shortFeedback}</p>
-                        </div>
-                      )}
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1.5 flex items-center gap-1">
-                          <GraduationCap className="w-3.5 h-3.5" /> Stronger answer (model example)
-                        </p>
-                        <div className="rounded-lg border border-primary/25 bg-primary/5 p-4">
-                          {row.idealAnswer ? (
-                            <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">{row.idealAnswer}</p>
-                          ) : (
-                            <p className="text-sm text-muted-foreground italic">
-                              Your backend can attach ideal answers per question using the prompts in{" "}
-                              <code className="text-xs bg-background px-1 rounded">shared/interview-prompts.ts</code>.
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-6 pt-2 space-y-5">
+                        <div className="pl-12 space-y-4">
+                          {/* User Answer */}
+                          <div className="space-y-2">
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                              <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
+                              Your Answer
                             </p>
+                            <div className="bg-background/50 border border-border/50 rounded-lg p-4 text-sm text-foreground/80 leading-relaxed italic">
+                              "{a || "No response recorded"}"
+                            </div>
+                          </div>
+
+                          {/* Feedback if available */}
+                          {feedback && (
+                            <div className="flex gap-3 p-3 rounded-lg bg-amber-500/5 border border-amber-500/20">
+                              <Lightbulb className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                              <p className="text-sm text-amber-700 dark:text-amber-400 font-medium">
+                                {feedback}
+                              </p>
+                            </div>
                           )}
+
+                          {/* Better Answer / Ideal Answer */}
+                          <div className="space-y-2">
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                              <Sparkles className="w-3 h-3" />
+                              Stronger Example
+                            </p>
+                            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 text-sm text-foreground/90 leading-relaxed shadow-sm">
+                              {ideal || "Keep practicing! Our AI is generating better answers based on your unique profile."}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
               </Accordion>
             </Card>
           )}

@@ -25,6 +25,7 @@ import ProgressIndicator from "@/components/interview/ProgressIndicator";
 import type {
   NextQuestionResponse,
   Language,
+  InterviewTranscriptTurn,
 } from "@shared/api";
 
 interface LocationState {
@@ -60,6 +61,7 @@ export default function InterviewRoom() {
   const [enableCamera, setEnableCamera] = useState(true);
   const [enableVoice, setEnableVoice] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false); // Smooth transitions between questions
+  const transcriptRef = useRef<InterviewTranscriptTurn[]>([]);
 
   // Media hooks with enhanced quality
   const camera = useCamera();
@@ -76,6 +78,7 @@ export default function InterviewRoom() {
     onStopPlaying: () => {
       setAvatarState("idle");
     },
+    voiceGender: state?.interviewerVoiceGender || "male",
   });
 
   // Improved speech recognition
@@ -231,7 +234,7 @@ export default function InterviewRoom() {
         setIsSubmittingAnswer(false);
 
         // Play next question; keep isTransitioning until speech ends
-        console.log("Playing next question:", response.message);
+        console.log("Playing next question (voice gender:", state?.interviewerVoiceGender, "):", response.message);
         setAvatarState("speaking");
         if (response.message && response.message.trim()) {
           await audio.speak(response.message, getLanguageCode());
