@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, User } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "./LanguageProvider";
 import { isLoggedIn, getSession } from "@/lib/auth-api";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
 import NotificationBell from "../NotificationBell";
@@ -13,6 +15,7 @@ export default function PremiumNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { resolvedTheme } = useTheme();
+  const { t } = useLanguage();
   const isDark = resolvedTheme === "dark";
 
   // Initialize notification check (toasts + push)
@@ -27,12 +30,12 @@ export default function PremiumNavbar() {
   }, []);
 
   const navItems = [
-    { label: "Daily Tasks", href: "/daily-tasks" },
-    { label: "Govt Practice", href: "/govt-practice" },
-    { label: "Question Bank", href: "/question-hub" },
-    { label: "AI Chat", href: "/chatbot" },
-    { label: "Study", href: "/study-with-me" },
-    { label: "About", href: "/about" },
+    { label: t("dailyTasks"), href: "/daily-tasks" },
+    { label: t("govtPractice"), href: "/govt-practice" },
+    { label: t("questionBank"), href: "/question-hub" },
+    { label: t("aiChat"), href: "/chatbot" },
+    { label: t("study"), href: "/study-with-me" },
+    { label: t("about"), href: "/about" },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;
@@ -101,6 +104,8 @@ export default function PremiumNavbar() {
             <div className="hidden md:flex items-center gap-3">
               {/* Notification Bell */}
               <NotificationBell />
+              {/* Language Toggle */}
+              <LanguageToggle />
               {/* Theme Toggle */}
               <ThemeToggle />
 
@@ -118,7 +123,7 @@ export default function PremiumNavbar() {
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="relative flex items-center gap-2">
                       <User className="w-4 h-4" />
-                      {getSession()?.user.name.split(" ")[0] || "Profile"}
+                      {getSession()?.user.name.split(" ")[0] || t("profile")}
                     </span>
                   </motion.button>
                 </Link>
@@ -136,7 +141,7 @@ export default function PremiumNavbar() {
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute -inset-1 bg-indigo-500/30 rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10" />
                     <span className="relative flex items-center gap-2">
-                      Get Started
+                      {t("getStarted")}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
                     </span>
                   </motion.button>
@@ -147,6 +152,7 @@ export default function PremiumNavbar() {
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
               <NotificationBell />
+              <LanguageToggle />
               <ThemeToggle />
               <motion.button
                 whileTap={{ scale: 0.95 }}
@@ -244,7 +250,7 @@ export default function PremiumNavbar() {
                       className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
                     >
                       <User className="w-4 h-4" />
-                      {getSession()?.user.name.split(" ")[0] || "Profile"}
+                      {getSession()?.user.name.split(" ")[0] || t("profile")}
                     </motion.button>
                   </Link>
                 ) : (
@@ -259,7 +265,7 @@ export default function PremiumNavbar() {
                           : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
                           }`}
                       >
-                        Sign In
+                        {t("signIn")}
                       </motion.div>
                     </Link>
                     <Link to="/setup" onClick={() => setIsMobileOpen(false)}>
@@ -270,7 +276,7 @@ export default function PremiumNavbar() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
                       >
-                        Get Started
+                        {t("getStarted")}
                         <ArrowRight className="w-4 h-4" />
                       </motion.button>
                     </Link>

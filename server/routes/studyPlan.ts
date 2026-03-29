@@ -10,6 +10,9 @@ import type {
   ChapterQuestion,
   ChapterTestResult,
   AIChapterGuideResponse,
+  SyllabusResponse,
+  StudyTemplateResponse,
+  SyllabusProgressResponse,
 } from "@shared/study-types";
 
 // ── Valid exam IDs ────────────────────────────────────────────────────────────
@@ -84,19 +87,37 @@ export const handleGetStudyTemplate: RequestHandler = (req, res) => {
     res.status(400).json({ error: "Invalid examId" });
     return;
   }
-  // Template data is served from the client-side data file, but we mirror it here
-  res.json({ examId, message: "Use client-side STUDY_TEMPLATES for template data." });
+
+  const template = getStudyTemplate(examId as StudyExamType);
+  const response: StudyTemplateResponse = {
+    examId: examId as StudyExamType,
+    phases: template.phases,
+    totalHours: template.phases.reduce((sum, p) => {
+      const match = p.duration.match(/(\d+)/);
+      return sum + (match ? parseInt(match[1], 10) : 0);
+    }, 0)
+  };
+
+  res.json(response);
 };
 
-// ── GET /api/syllabus/:examId — Get exam syllabus ────────────────────────────
+// ── GET /api/syllabus/:examId — Get exam syllabus with all chapters ──────────
 export const handleGetSyllabus: RequestHandler = (req, res) => {
   const { examId } = req.params;
   if (!examId || !VALID_EXAMS.includes(examId as StudyExamType)) {
     res.status(400).json({ error: "Invalid examId" });
     return;
   }
-  // Syllabus is served from client data; this endpoint validates exam
-  res.json({ examId, message: "Use client-side EXAM_SYLLABUS for syllabus data." });
+
+  const syllabus = getExamSyllabus(examId as StudyExamType);
+  const response: SyllabusResponse = {
+    examId: examId as StudyExamType,
+    subjects: syllabus.subjects,
+    totalChapters: syllabus.subjects.reduce((sum, s) => sum + s.chapters.length, 0),
+    estimatedHoursPerChapter: 2
+  };
+
+  res.json(response);
 };
 
 // ── GET /api/test/:chapterId/questions — Get chapter test questions ──────────
@@ -162,18 +183,16 @@ export const handleAIChapterGuide: RequestHandler = (req, res) => {
     return;
   }
 
-  // Only allow chapterId as a number or numeric string (not ch_1 etc)
-  if (
-    typeof chapterId === "string" && !/^\d+$/.test(chapterId)
-    || typeof chapterId === "number" && !Number.isInteger(chapterId)
-  ) {
-    res.status(400).json({ error: "chapterId must be a number or numeric string (e.g. '1', 2)" });
+  // Normalize chapterId: support both "ch_1" and "1" formats
+  const normalizedChapterId = normalizeChapterId(chapterId);
+  if (!normalizedChapterId) {
+    res.status(400).json({ error: "chapterId must be numeric or in format ch_N (e.g. '1', 'ch_1', 2)" });
     return;
   }
 
-  // Always use chapterId as number for downstream logic
-  const numericChapterId = typeof chapterId === "number" ? chapterId : parseInt(chapterId, 10);
-  const displayName = chapterName || numericChapterId;
+  // Always use numericChapterId as number for downstream logic
+  const numericChapterId = normalizedChapterId;
+  const displayName = chapterName || `Chapter ${numericChapterId}`;
 
   // Mock AI response (in production, call Gemini/OpenAI using chapterName + userQuery)
   const response: AIChapterGuideResponse = {
@@ -183,6 +202,88 @@ export const handleAIChapterGuide: RequestHandler = (req, res) => {
 
   res.json(response);
 };
+
+// ── GET /api/syllabus/:examId/progress — Get user's progress in syllabus ─────
+export const handleGetSyllabusProgress: RequestHandler = (req, res) => {
+  const { examId } = req.params;
+  if (!examId || !VALID_EXAMS.includes(examId as StudyExamType)) {
+    res.status(400).json({ error: "Invalid examId" });
+    return;
+  }
+
+  // In production, fetch from database using deviceId/userId
+  // For now, calculate from client localStorage data if passed in query
+  const syllabus = getExamSyllabus(examId as StudyExamType);
+  const allChapters = syllabus.subjects.reduce((sum) => sum + 1, 0);
+
+  const response: SyllabusProgressResponse = {
+    examId: examId as StudyExamType,
+    completionPercentage: 0,  // User would update via quiz submissions
+    chaptersCompleted: 0,
+    totalChapters: syllabus.subjects.reduce((sum, s) => sum + s.chapters.length, 0),
+    subjectProgress: syllabus.subjects.map(s => ({
+      subjectId: s.id,
+      subjectName: s.name,
+      completionPercentage: 0,
+      chaptersCompleted: 0,
+      totalChapters: s.chapters.length
+    })),
+    lastUpdated: new Date().toISOString()
+  };
+
+  res.json(response);
+};
+
+// ── Helper: build complete exam syllabus ──────────────────────────────────────
+function getExamSyllabus(examId: StudyExamType) {
+  const syllabusMap: Record<StudyExamType, any> = {
+    WBCS: {
+      subjects: [
+        {
+          id: "wbcs_history",
+          name: "History",
+          nameBn: "ইতিহাস",
+          icon: "📜",
+          chapters: [
+            { id: "ch_1", name: "Ancient India", nameBn: "প্রাচীন ভারত", status: "not_started" as const, progress: 0, questionCount: 10 },
+            { id: "ch_2", name: "Medieval India", nameBn: "মধ্যযুগীয় ভারত", status: "not_started" as const, progress: 0, questionCount: 10 },
+            { id: "ch_3", name: "Modern India", nameBn: "আধুনিক ভারত", status: "not_started" as const, progress: 0, questionCount: 10 },
+            { id: "ch_4", name: "Indian National Movement", nameBn: "ভারতীয় জাতীয় আন্দোলন", status: "not_started" as const, progress: 0, questionCount: 10 },
+            { id: "ch_5", name: "World History", nameBn: "বিশ্ব ইতিহাস", status: "not_started" as const, progress: 0, questionCount: 10 },
+            { id: "ch_6", name: "Bengal Renaissance", nameBn: "বাংলার নবজাগরণ", status: "not_started" as const, progress: 0, questionCount: 10 },
+          ]
+        }
+      ]
+    },
+    WBPSC: { subjects: [] },
+    Police_SI: { subjects: [] },
+    SSC_CGL: { subjects: [] },
+    Banking: { subjects: [] }
+  };
+  return syllabusMap[examId] || syllabusMap.WBCS;
+}
+
+// ── Helper: build study plan template ─────────────────────────────────────────
+function getStudyTemplate(examId: StudyExamType) {
+  const templates: Record<StudyExamType, any> = {
+    WBCS: {
+      phases: [
+        {
+          phase: 1,
+          title: "Foundation — Core Concepts (4-6 weeks)",
+          duration: "4-6 weeks",
+          description: "Build strong foundational knowledge. Study NCERT and basic concepts.",
+          topics: [{ subject: "History", chapters: ["Ancient India"] }]
+        }
+      ]
+    },
+    WBPSC: { phases: [] },
+    Police_SI: { phases: [] },
+    SSC_CGL: { phases: [] },
+    Banking: { phases: [] }
+  };
+  return templates[examId] || templates.WBCS;
+}
 
 // ── Helper: get subjects for an exam ──────────────────────────────────────────
 function getSubjectsForExam(exam: StudyExamType): string[] {
@@ -196,9 +297,29 @@ function getSubjectsForExam(exam: StudyExamType): string[] {
   return map[exam] ?? map.WBCS;
 }
 
-// ── Helper: generate questions on server ──────────────────────────────────────
+// ── Helper: normalize chapter ID to numeric format ────────────────────────────
+function normalizeChapterId(chapterId: unknown): number | null {
+  if (typeof chapterId === "number" && Number.isInteger(chapterId) && chapterId > 0) {
+    return chapterId;
+  }
+  if (typeof chapterId === "string") {
+    // Try numeric string first
+    if (/^\d+$/.test(chapterId)) {
+      return parseInt(chapterId, 10);
+    }
+    // Try ch_N format
+    const match = chapterId.match(/^ch_(\d+)$/);
+    if (match) {
+      return parseInt(match[1], 10);
+    }
+  }
+  return null;
+}
+
+// ── Helper: generate questions on server ──────────────────────────────────
 function generateServerQuestions(chapterId: string): ChapterQuestion[] {
-  const name = chapterId.replace(/^ch_\d+$/, "Chapter");
+  const numericId = normalizeChapterId(chapterId) || 1;
+  const name = `Chapter ${numericId}`;
   return Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
     question: `Question ${i + 1} about ${name}: Which of the following is correct?`,

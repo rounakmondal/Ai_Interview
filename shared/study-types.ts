@@ -122,3 +122,33 @@ export interface AIChapterGuideResponse {
   answer: string;
   chapterId: number;
 }
+
+// ── API Response types ────────────────────────────────────────────────────────
+export interface SyllabusResponse {
+  examId: StudyExamType;
+  subjects: SyllabusSubject[];
+  totalChapters: number;
+  estimatedHoursPerChapter: number;  // avg hours to complete one chapter
+}
+
+export interface StudyTemplateResponse {
+  examId: StudyExamType;
+  phases: TemplatePhase[];
+  totalHours: number;
+  examDate?: string;
+}
+
+export interface SyllabusProgressResponse {
+  examId: StudyExamType;
+  completionPercentage: number;        // overall completion %
+  chaptersCompleted: number;
+  totalChapters: number;
+  subjectProgress: {
+    subjectId: string;
+    subjectName: string;
+    completionPercentage: number;
+    chaptersCompleted: number;
+    totalChapters: number;
+  }[];
+  lastUpdated: string;
+}

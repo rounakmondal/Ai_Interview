@@ -25,6 +25,7 @@ import {
   handleGenerateAIPlan,
   handleGetStudyTemplate,
   handleGetSyllabus,
+  handleGetSyllabusProgress,
   handleGetChapterQuestions,
   handleSubmitChapterTest,
   handleAIChapterGuide,
@@ -116,6 +117,7 @@ export function createServer() {
   app.post("/api/studyplan/ai", handleGenerateAIPlan);
   app.get("/api/studyplan/template/:examId", handleGetStudyTemplate);
   app.get("/api/syllabus/:examId", handleGetSyllabus);
+  app.get("/api/syllabus/:examId/progress", handleGetSyllabusProgress);
   app.get("/api/test/:chapterId/questions", handleGetChapterQuestions);
   app.post("/api/test/submit", handleSubmitChapterTest);
   app.post("/api/ai/chapter-guide", handleAIChapterGuide);

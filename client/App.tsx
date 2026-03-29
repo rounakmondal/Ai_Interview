@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/premium/ThemeProvider";
+import { LanguageProvider } from "@/components/premium/LanguageProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -13,18 +14,21 @@ import { useAndroidBackButton } from "@/hooks/use-android-back-button";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
+import { RouteLoader } from "@/components/RouteLoader";
 import LandingPage from "./pages/Landing";
 import PremiumLanding from "./pages/PremiumLanding";
 import InterviewSetup from "./pages/InterviewSetup";
 import InterviewRoom from "./pages/InterviewRoom";
 import EvaluationPage from "./pages/Evaluation";
 import NotFound from "./pages/NotFound";
-import ResumeBuilder from "./pages/ResumeBuilder";
-import CareerMentorPage from "./pages/CareerMentor";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+
+// Lazy-load secondary pages to reduce initial bundle size (~-60KB)
+const ResumeBuilder = lazy(() => import("./pages/ResumeBuilder"));
+const CareerMentorPage = lazy(() => import("./pages/CareerMentor"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 // Lazy-load govt exam pages to reduce initial bundle size
 const GovtPractice = lazy(() => import("./pages/GovtPractice"));
@@ -70,7 +74,7 @@ function AppContent() {
   return (
     <>
       {isLoggedIn() && <PostLoginBriefingModal />}
-      <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route path="/" element={<PremiumLanding />} />
           <Route path="/landing" element={<LandingPage />} />
@@ -129,18 +133,20 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <ExamOnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
-            <BrowserRouter>
-              <AppContent />
-            </BrowserRouter>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider defaultTheme="dark">
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <ExamOnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
+              <BrowserRouter>
+                <AppContent />
+              </BrowserRouter>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }
