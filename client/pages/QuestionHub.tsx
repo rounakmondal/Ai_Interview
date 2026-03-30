@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
@@ -307,10 +307,6 @@ function titleFromFilename(fileName: string): string {
     .trim();
 }
 
-function extFromFilename(fileName: string): string {
-  const m = fileName.match(/\.(pdf|json)$/i);
-  return m ? m[1].toUpperCase() : "FILE";
-}
 
 function yearFromFilename(fileName: string): number | undefined {
   const m = fileName.match(/(19|20)\d{2}/);
@@ -345,9 +341,13 @@ export default function QuestionHub({
   seoProfile?: ExamSeoProfile;
 }) {
   const navigate = useNavigate();
-  const [selectedFolder, setSelectedFolder] = useState<string>(() =>
-    seoProfile === "wbcs" ? "wbcs" : "police",
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedFolder, setSelectedFolder] = useState<string>(() => {
+    // Persist folder selection in URL so browser back button remembers it
+    const urlFolder = searchParams.get("tab");
+    if (urlFolder && FOLDERS[urlFolder]) return urlFolder;
+    return seoProfile === "wbcs" ? "wbcs" : "police";
+  });
   const [testNavLoading, setTestNavLoading] = useState(false);
   const [filesFromApi, setFilesFromApi] = useState<PDFItem[] | null>(null);
   const [listLoading, setListLoading] = useState(true);
@@ -684,7 +684,10 @@ export default function QuestionHub({
               return (
               <motion.button
                 key={key}
-                onClick={() => setSelectedFolder(key)}
+                onClick={() => {
+                  setSelectedFolder(key);
+                  setSearchParams({ tab: key }, { replace: true });
+                }}
                 whileHover={{ scale: 1.02 }}
                 className={`relative p-6 rounded-xl border-2 transition-all text-left ${
                   selectedFolder === key
@@ -819,9 +822,6 @@ export default function QuestionHub({
                                         {file.name}
                                       </h3>
                                       <div className="flex items-center gap-2 flex-wrap">
-                                        <span className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${extFromFilename(file.path) === "PDF" ? "bg-red-500/20 text-red-600 dark:text-red-400" : "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"}`}>
-                                          {extFromFilename(file.path)}
-                                        </span>
                                         {file.year ? (
                                           <span className="text-xs px-2.5 py-1 bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded-full font-medium">
                                             {file.year}
@@ -835,9 +835,8 @@ export default function QuestionHub({
                                       </div>
                                     </div>
 
-                                    {/* File info */}
-                                    <div className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1.5">
-                                      <span className="font-mono">{file.path}</span>
+                                    <div className="text-xs text-muted-foreground">
+                                      Previous Year Question Paper
                                     </div>
 
                                     {/* Action Buttons */}
@@ -904,9 +903,6 @@ export default function QuestionHub({
                           <h3 className="font-semibold text-foreground text-base sm:text-lg">
                             {file.name}
                           </h3>
-                          <span className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${extFromFilename(file.path) === "PDF" ? "bg-red-500/20 text-red-600 dark:text-red-400" : "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"}`}>
-                            {extFromFilename(file.path)}
-                          </span>
                           {file.year ? (
                             <span className="text-xs px-2 py-1 bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded">
                               {file.year}
@@ -919,10 +915,7 @@ export default function QuestionHub({
                           ) : null}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {currentFolder.name} — saved as{" "}
-                          <span className="font-mono text-xs opacity-80 truncate block sm:inline sm:max-w-md">
-                            {file.path}
-                          </span>
+                          {currentFolder.name} • Previous Year Question Paper
                         </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">

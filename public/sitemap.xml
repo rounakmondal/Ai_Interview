@@ -189,5 +189,74 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- Blog & SEO Content Pages -->
+  <!-- ══════════════════════════════════════════════ -->
+  <url>
+    <loc>https://interviewsathi.online/blog</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wbcs-preparation-strategy-2026</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wbcs-prelims-2023-question-paper-analysis</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wbpsc-clerkship-previous-year-papers</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wb-police-si-mock-test-free</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wb-tet-2026-syllabus-exam-pattern</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/top-50-gk-questions-wbcs-prelims-2026</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wbpsc-preparation-in-bengali</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/wb-police-constable-previous-year-paper</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/how-to-crack-wbcs-first-attempt</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://interviewsathi.online/blog/best-books-wbcs-wbpsc-wb-police-2026</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
 </urlset>

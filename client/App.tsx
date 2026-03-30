@@ -53,6 +53,19 @@ const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
 
+// Blog pages
+const BlogIndex = lazy(() => import("./pages/BlogIndex"));
+const BlogWBCSStrategy = lazy(() => import("./pages/blog/WBCSPreparationStrategy2026"));
+const BlogWBCSPrelims2023 = lazy(() => import("./pages/blog/WBCSPrelims2023Analysis"));
+const BlogWBPSCClerkship = lazy(() => import("./pages/blog/WBPSCClerkshipPYP"));
+const BlogWBPoliceSI = lazy(() => import("./pages/blog/WBPoliceSIMockTest"));
+const BlogWBTETSyllabus = lazy(() => import("./pages/blog/WBTET2026Syllabus"));
+const BlogTop50GK = lazy(() => import("./pages/blog/Top50GKQuestionsWBCS"));
+const BlogWBPSCBengali = lazy(() => import("./pages/blog/WBPSCPreparationBengali"));
+const BlogWBPoliceConstable = lazy(() => import("./pages/blog/WBPoliceConstablePYP"));
+const BlogCrackWBCS = lazy(() => import("./pages/blog/HowToCrackWBCS"));
+const BlogBestBooks = lazy(() => import("./pages/blog/BestBooksWBExams2026"));
+
 const queryClient = new QueryClient();
 
 // Inner component to use hooks (must be inside BrowserRouter)
@@ -114,6 +127,18 @@ function AppContent() {
             element={<QuestionHub seoProfile="police" />}
           />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
+          {/* Blog */}
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/wbcs-preparation-strategy-2026" element={<BlogWBCSStrategy />} />
+          <Route path="/blog/wbcs-prelims-2023-question-paper-analysis" element={<BlogWBCSPrelims2023 />} />
+          <Route path="/blog/wbpsc-clerkship-previous-year-papers" element={<BlogWBPSCClerkship />} />
+          <Route path="/blog/wb-police-si-mock-test-free" element={<BlogWBPoliceSI />} />
+          <Route path="/blog/wb-tet-2026-syllabus-exam-pattern" element={<BlogWBTETSyllabus />} />
+          <Route path="/blog/top-50-gk-questions-wbcs-prelims-2026" element={<BlogTop50GK />} />
+          <Route path="/blog/wbpsc-preparation-in-bengali" element={<BlogWBPSCBengali />} />
+          <Route path="/blog/wb-police-constable-previous-year-paper" element={<BlogWBPoliceConstable />} />
+          <Route path="/blog/how-to-crack-wbcs-first-attempt" element={<BlogCrackWBCS />} />
+          <Route path="/blog/best-books-wbcs-wbpsc-wb-police-2026" element={<BlogBestBooks />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

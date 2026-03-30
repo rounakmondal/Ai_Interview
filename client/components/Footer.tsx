@@ -24,7 +24,7 @@ export default function Footer() {
   const footerLinks = {
     resources: [
       { label: "About Us", href: "/about", isRoute: true },
-      { label: "Blog", href: "#", isRoute: false },
+      { label: "Blog", href: "/blog", isRoute: true },
     ],
     company: [
       { label: "About", href: "/about", isRoute: true },
