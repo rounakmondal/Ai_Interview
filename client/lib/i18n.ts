@@ -89,13 +89,19 @@ export interface Translations {
 
   // Landing Page
   features: string;
-  contact: string;
   studentsMonths: string;
   aceYourInterview: string;
   practiceUntilSucceed: string;
   voiceMockInterviewDesc: string;
   startFreeInterview: string;
   tryOneQuestionNoLogin: string;
+
+  // Police Exams
+  siSubInspector: string;
+  constable: string;
+  ladyConstable: string;
+  download: string;
+  mockTest: string;
 }
 
 const EN: Translations = {
@@ -179,6 +185,13 @@ const EN: Translations = {
   voiceMockInterviewDesc: "Voice-based mock interviews with instant AI feedback. Practice for WBCS, SSC, Police, IT jobs — in English or বাংলা. Upload your resume and get personalised questions.",
   startFreeInterview: "Start Free Mock Interview",
   tryOneQuestionNoLogin: "Try 1 Question — No Login",
+
+  // Police Exams
+  siSubInspector: "Sub-Inspector (SI)",
+  constable: "Constable",
+  ladyConstable: "Lady Constable",
+  download: "Download",
+  mockTest: "Mock Test",
 };
 
 const BN: Translations = {
@@ -271,6 +284,13 @@ const BN: Translations = {
   voiceMockInterviewDesc: "তাৎক্ষণিক এআই প্রতিক্রিয়া সহ ভয়েস-ভিত্তিক মক ইন্টারভিউ। WBCS, SSC, পুলিশ, আইটি চাকরির জন্য অনুশীলন করুন — ইংরেজি বা বাংলায়। আপনার রিজিউমে আপলোড করুন এবং ব্যক্তিগতকৃত প্রশ্ন পান।",
   startFreeInterview: "বিনামূল্যে মক ইন্টারভিউ শুরু করুন",
   tryOneQuestionNoLogin: "১টি প্রশ্ন চেষ্টা করুন — লগইন প্রয়োজন নেই",
+
+  // Police Exams
+  siSubInspector: "সাব-ইন্সপেক্টর (এসআই)",
+  constable: "কনস্টেবল",
+  ladyConstable: "মহিলা কনস্টেবল",
+  download: "ডাউনলোড",
+  mockTest: "মক পরীক্ষা",
 };
 
 export const translations: Record<Language, Translations> = {

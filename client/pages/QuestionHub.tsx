@@ -104,8 +104,22 @@ const FOLDERS: Record<string, FolderData> = {
     badge: "Popular",
     publicPath: "Police",
     description:
-      "West Bengal Police Constable & Lady Constable recruitment question papers - 10+ years of previous year question papers for WBP exam preparation",
+      "West Bengal Police Constable, Sub-Inspector & Lady Constable recruitment question papers - 10+ years of previous year question papers for WBP exam preparation",
     files: [
+      // SI (Sub-Inspector) Papers
+      {
+        name: "WBP SI (Sub-Inspector) 2019",
+        path: "police-json-data/SI/WBP-SI-Police-2019.json",
+        year: 2019,
+        type: "SI",
+      },
+      {
+        name: "WBP SI (Sub-Inspector) 2018",
+        path: "police-json-data/SI/WBP-SI-Police-2018.json",
+        year: 2018,
+        type: "SI",
+      },
+      // Constable Papers
       {
         name: "WBP Constable Preliminary 2021",
         path: "WBP Constable Preliminary Question Paper 2021.pdf",
@@ -225,6 +239,58 @@ const FOLDERS: Record<string, FolderData> = {
       "SSC CGL, CHSL, MTS and other Staff Selection Commission exam papers for Central Government job preparation",
     files: [],
   },
+  wbpsc: {
+    name: "WBPSC (West Bengal Public Service Commission)",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "indigo",
+    badge: "New",
+    publicPath: "WBPSC",
+    description:
+      "West Bengal Public Service Commission exam papers including Clerkship and other positions for state government job preparation",
+    files: [
+      {
+        name: "WBPSC Clerkship 2024",
+        path: "Wbpsc clerkship 2024 questions.json",
+        year: 2024,
+        type: "Clerkship",
+      },
+    ],
+  },
+  "wb-primary-tet": {
+    name: "WB Primary TET",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "amber",
+    badge: "New",
+    publicPath: "WB Primary TET Question",
+    description:
+      "West Bengal Primary TET previous year question papers for primary school teacher eligibility test preparation",
+    files: [
+      {
+        name: "WB Primary TET 2023",
+        path: "Wb primary tet 2023 questions .json",
+        year: 2023,
+        type: "Primary TET",
+      },
+      {
+        name: "WB Primary TET 2022",
+        path: "WB Primary TET 2022.json",
+        year: 2022,
+        type: "Primary TET",
+      },
+      {
+        name: "WB Primary TET 2017",
+        path: "WB Primary TET 2017 Question Paper.json",
+        year: 2017,
+        type: "Primary TET",
+      },
+      {
+        name: "WB Primary TET 2015",
+        path: "WB Primary TET 2015.json",
+        year: 2015,
+        type: "Primary TET",
+      },
+    ],
+  },
 };
 
 const STATS = [
@@ -244,6 +310,28 @@ function titleFromFilename(fileName: string): string {
 function yearFromFilename(fileName: string): number | undefined {
   const m = fileName.match(/(19|20)\d{2}/);
   return m ? parseInt(m[0], 10) : undefined;
+}
+
+// Group files by position type for Police
+function groupFilesByType(files: PDFItem[], folder: string): Record<string, PDFItem[]> {
+  if (folder !== "police") {
+    return { all: files };
+  }
+  
+  const grouped: Record<string, PDFItem[]> = {
+    SI: [],
+    Constable: [],
+    "Lady Constable": [],
+  };
+  
+  files.forEach(file => {
+    const type = file.type || "Constable";
+    if (grouped[type]) {
+      grouped[type].push(file);
+    }
+  });
+  
+  return grouped;
 }
 
 export default function QuestionHub({
@@ -629,7 +717,139 @@ export default function QuestionHub({
                 </div>
               </div>
             ) : (
-            <div className="space-y-4">
+            <>
+              {selectedFolder === "police" ? (
+                // Separate grid sections for Police: SI Inspector and Constable
+                <>
+                  {(() => {
+                    const grouped = groupFilesByType(papersForFolder, selectedFolder);
+                    return Object.entries(grouped).map(([category, files]) => {
+                      if (files.length === 0) return null;
+                      return (
+                        <motion.section
+                          key={category}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 }}
+                          className="mb-16"
+                        >
+                          {/* Category Header */}
+                          <div className="mb-8 pb-4 border-b-2 border-border/50">
+                            <div className="flex items-center gap-3 mb-2">
+                              {category === "SI" && (
+                                <>
+                                  <div className="p-3 bg-blue-500/20 rounded-lg">
+                                    <Shield className="w-6 h-6 text-blue-500" />
+                                  </div>
+                                  <div>
+                                    <h2 className="text-3xl font-bold text-foreground">
+                                      Sub-Inspector (SI) Exams
+                                    </h2>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                      Practice papers for West Bengal Police Sub-Inspector recruitment
+                                    </p>
+                                  </div>
+                                </>
+                              )}
+                              {category === "Constable" && (
+                                <>
+                                  <div className="p-3 bg-rose-500/20 rounded-lg">
+                                    {/* <Shield className="w-6 h-6 text-rose-500" /> */}
+                                  </div>
+                                  
+                                </>
+                              )}
+                              {category === "Lady Constable" && null}
+                            </div>
+                          </div>
+
+                          {/* Papers Grid */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {files
+                              .sort((a, b) => (b.year || 0) - (a.year || 0))
+                              .map((file, idx) => (
+                                <motion.div
+                                  key={file.path}
+                                  initial={{ opacity: 0, scale: 0.95 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: idx * 0.05 }}
+                                  className={`rounded-lg border p-5 transition-all hover:shadow-lg ${
+                                    category === "SI"
+                                      ? "bg-blue-500/5 border-blue-500/20 hover:border-blue-500/40"
+                                      : "bg-rose-500/5 border-rose-500/20 hover:border-rose-500/40"
+                                  }`}
+                                >
+                                  <div className="flex flex-col gap-4 h-full">
+                                    {/* Title and Year */}
+                                    <div>
+                                      <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
+                                        {file.name}
+                                      </h3>
+                                      <div className="flex items-center gap-2 flex-wrap">
+                                        {file.year ? (
+                                          <span className="text-xs px-2.5 py-1 bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded-full font-medium">
+                                            {file.year}
+                                          </span>
+                                        ) : null}
+                                        {category === "SI" && (
+                                          <span className="text-xs px-2.5 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full font-medium">
+                                            SI Exam
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+
+                                    {/* File info */}
+                                    <div className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1.5">
+                                      <span className="font-mono">{file.path}</span>
+                                    </div>
+
+                                    {/* Action Buttons */}
+                                    <div className="flex gap-2 mt-auto">
+                                      <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="flex-1 gap-1.5 text-xs"
+                                        onClick={() => handleDownload(file)}
+                                      >
+                                        <Download className="w-3.5 h-3.5" />
+                                        Download
+                                      </Button>
+                                      <Button
+                                        size="sm"
+                                        className={`flex-1 gap-1.5 text-xs text-white ${
+                                          category === "SI"
+                                            ? "bg-blue-600 hover:bg-blue-700"
+                                            : "gradient-primary"
+                                        }`}
+                                        onClick={() => handleStartTest(file)}
+                                        disabled={testNavLoading}
+                                      >
+                                        {testNavLoading ? (
+                                          <>
+                                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                            Opening…
+                                          </>
+                                        ) : (
+                                          <>
+                                            <BookOpen className="w-3.5 h-3.5" />
+                                            Test
+                                          </>
+                                        )}
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </motion.div>
+                              ))}
+                          </div>
+                        </motion.section>
+                      );
+                    });
+                  })()}
+                </>
+              ) : (
+                // Default layout for non-Police exams
+                <div className="space-y-4">
               {papersForFolder.map((file, idx) => (
                 <motion.div
                   key={file.path}
@@ -700,6 +920,8 @@ export default function QuestionHub({
                 </motion.div>
               ))}
             </div>
+              )}
+            </>
             )}
 
             {/* CTA Section */}

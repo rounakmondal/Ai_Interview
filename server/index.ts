@@ -124,11 +124,19 @@ export function createServer() {
 
   // ── Question Hub API (Police, WBCS, SSC & future exam folders) ────────────
   // GET /api/questions/:folder        → list PDFs in public/{Folder}/
-  // GET /api/questions/:folder/:file  → serve/download a PDF
+  // GET /api/questions/:folder/...    → serve/download a PDF/JSON (supports subdirs)
   // Valid :folder values: police | wbcs | ssc
   // ─────────────────────────────────────────────────────────────────────
   app.get("/api/questions/:folder", listFolderQuestions);
-  app.get("/api/questions/:folder/:fileName", serveFolderPDF);
+  // Regex route to capture paths with slashes (e.g., /api/questions/police/SI/file.json)
+  app.get(/^\/api\/questions\/([^/]+)\/(.*)$/, (req, res, next) => {
+    // Manually set params for the handler
+    const folder = req.params[0];
+    const filePath = req.params[1];
+    req.params.folder = folder;
+    req.params.path = filePath;
+    serveFolderPDF(req, res, next);
+  });
 
   // ── PDF Question Extraction API ─────────────────────────────────────────
   // GET /api/extract-pdf-questions?pdfPath=WBP%20Constable...pdf
