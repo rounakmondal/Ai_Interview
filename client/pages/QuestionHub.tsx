@@ -302,9 +302,14 @@ const STATS = [
 
 function titleFromFilename(fileName: string): string {
   return fileName
-    .replace(/\.pdf$/i, "")
+    .replace(/\.(pdf|json)$/i, "")
     .replace(/_/g, " ")
     .trim();
+}
+
+function extFromFilename(fileName: string): string {
+  const m = fileName.match(/\.(pdf|json)$/i);
+  return m ? m[1].toUpperCase() : "FILE";
 }
 
 function yearFromFilename(fileName: string): number | undefined {
@@ -814,6 +819,9 @@ export default function QuestionHub({
                                         {file.name}
                                       </h3>
                                       <div className="flex items-center gap-2 flex-wrap">
+                                        <span className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${extFromFilename(file.path) === "PDF" ? "bg-red-500/20 text-red-600 dark:text-red-400" : "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"}`}>
+                                          {extFromFilename(file.path)}
+                                        </span>
                                         {file.year ? (
                                           <span className="text-xs px-2.5 py-1 bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded-full font-medium">
                                             {file.year}
@@ -896,6 +904,9 @@ export default function QuestionHub({
                           <h3 className="font-semibold text-foreground text-base sm:text-lg">
                             {file.name}
                           </h3>
+                          <span className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${extFromFilename(file.path) === "PDF" ? "bg-red-500/20 text-red-600 dark:text-red-400" : "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"}`}>
+                            {extFromFilename(file.path)}
+                          </span>
                           {file.year ? (
                             <span className="text-xs px-2 py-1 bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded">
                               {file.year}
