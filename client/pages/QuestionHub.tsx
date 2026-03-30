@@ -359,35 +359,63 @@ export default function QuestionHub({
     setListLoading(true);
     setFilesFromApi(null);
 
-    fetch(`/api/questions/${selectedFolder}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (cancelled || !data?.success || !Array.isArray(data.files)) {
-          if (!cancelled) setFilesFromApi(null);
-          return;
-        }
-        const mapped: PDFItem[] = data.files.map(
-          (f: { name: string; path: string }) => ({
-            path: f.name,
-            name: titleFromFilename(f.name),
-            downloadHref: f.path,
-            year: yearFromFilename(f.name),
-            type:
-              selectedFolder === "police"
-                ? /lady/i.test(f.name)
+    // For police, fetch manifest.json from public folder; fallback to API for others
+    if (selectedFolder === "police") {
+      fetch(`/Police/police-json-data/manifest.json`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (cancelled || !Array.isArray(data)) {
+            if (!cancelled) setFilesFromApi(null);
+            return;
+          }
+          const mapped: PDFItem[] = data.map(
+            (f: { name: string }) => ({
+              path: `police-json-data/${f.name}`,
+              name: titleFromFilename(f.name),
+              downloadHref: `/Police/police-json-data/${encodeURIComponent(f.name)}`,
+              year: yearFromFilename(f.name),
+              type:
+                /lady/i.test(f.name)
                   ? "Lady Constable"
-                  : "Constable"
-                : undefined,
-          })
-        );
-        if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
-      })
-      .catch(() => {
-        if (!cancelled) setFilesFromApi(null);
-      })
-      .finally(() => {
-        if (!cancelled) setListLoading(false);
-      });
+                  : /si/i.test(f.name)
+                  ? "SI"
+                  : "Constable",
+            })
+          );
+          if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
+        })
+        .catch(() => {
+          if (!cancelled) setFilesFromApi(null);
+        })
+        .finally(() => {
+          if (!cancelled) setListLoading(false);
+        });
+    } else {
+      fetch(`/api/questions/${selectedFolder}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (cancelled || !data?.success || !Array.isArray(data.files)) {
+            if (!cancelled) setFilesFromApi(null);
+            return;
+          }
+          const mapped: PDFItem[] = data.files.map(
+            (f: { name: string; path: string }) => ({
+              path: f.name,
+              name: titleFromFilename(f.name),
+              downloadHref: f.path,
+              year: yearFromFilename(f.name),
+              type: undefined,
+            })
+          );
+          if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
+        })
+        .catch(() => {
+          if (!cancelled) setFilesFromApi(null);
+        })
+        .finally(() => {
+          if (!cancelled) setListLoading(false);
+        });
+    }
     return () => {
       cancelled = true;
     };
