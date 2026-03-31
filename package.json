@@ -34,6 +34,8 @@
     "pdf-parse": "^2.4.5",
     "react-speech-recognition": "^4.0.1",
     "zod": "^3.25.76"
+    ,"node-cron": "^3.0.3"
+    ,"node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@hookform/resolvers": "^5.2.1",

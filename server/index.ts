@@ -11,6 +11,7 @@ import {
   handleNextQuestion, 
   handleFinishInterview 
 } from "./routes/interview";
+import { scheduleDailyPosts } from "./dailyPostScheduler";
 import { handleExtractPdf } from "./routes/extractPdf";
 import {
   handleGetQuestions,
@@ -153,3 +154,6 @@ export function createServer() {
 
   return app;
 }
+
+// Start daily post scheduler
+scheduleDailyPosts();
