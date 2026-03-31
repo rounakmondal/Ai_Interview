@@ -282,3 +282,30 @@ export interface CurrentAffairsResponse {
   weeklyQuiz: WeeklyQuizItem[];
   monthlyTopics: MonthlyTopic[];
 }
+
+// ── Vacancy Alert Center ──────────────────────────────────────────────
+export interface Vacancy {
+  id: string;
+  title: string;
+  date: string;
+  source: string;
+  exam_name: string;
+  details_url: string;
+}
+
+export interface SubscribeRequest {
+  fcm_token: string;
+  exams: string[];
+  email?: string;
+}
+
+export interface SubscribeResponse {
+  message: string;
+  status: "success" | "error";
+}
+
+export interface VacancyMailRequest {
+  email: string;
+  vacancy_title: string;
+  vacancy_details: string;
+}

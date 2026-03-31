@@ -1,0 +1,1020 @@
+{
+  "subject": "MTS Non Tech Havaldar CBIC and CBN Examination 2023",
+  "exam_details": {
+    "date": "14/09/2023",
+    "time": "4:00 PM - 6:00 PM",
+    "venue": "Sri Balaji College Of Engineering And Technology"
+  },
+  "sections": [
+    {
+      "section_name": "Numerical and Mathematical Ability",
+      "questions": [
+        {
+          "q_no": "Q.1",
+          "question": "A square and a rhombus have the same base and the rhombus is inclined at 45°, then what will be the ratio of the area of the square to the area of the rhombus?",
+          "options": {
+            "1": "√3 : 1",
+            "2": "1 : √3",
+            "3": "√2 : √3",
+            "4": "√2 : 1"
+          },
+          "correct_answer": "4"
+        },
+        {
+          "q_no": "Q.2",
+          "question": "If A : B : C = 3 : 4 : 5, then √(A² + B²) : √(C² - B²) is:",
+          "options": {
+            "1": "5 : 3",
+            "2": "3 : 5",
+            "3": "4 : 3",
+            "4": "3 : 4"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.3",
+          "question": "A certain sum of money becomes 5,400 in 2 years and 5,940 in 3 years at compound interest. Find the rate of interest per annum.",
+          "options": {
+            "1": "10%",
+            "2": "12%",
+            "3": "15%",
+            "4": "8%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.4",
+          "question": "The average of 5 consecutive numbers is n. If the next two numbers are also included, the average will:",
+          "options": {
+            "1": "increase by 1",
+            "2": "remain the same",
+            "3": "increase by 2",
+            "4": "increase by 1.5"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.5",
+          "question": "Find the average of the first five multiples of 7.",
+          "options": {
+            "1": "21",
+            "2": "28",
+            "3": "14",
+            "4": "35"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.6",
+          "question": "A and B can complete a work in 15 days and 10 days respectively. They started the work together but after 2 days, B had to leave and A alone completed the remaining work. The whole work was completed in:",
+          "options": {
+            "1": "12 days",
+            "2": "8 days",
+            "3": "10 days",
+            "4": "15 days"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.7",
+          "question": "The difference between the length and breadth of a rectangle is 23 m. If its perimeter is 206 m, then its area is:",
+          "options": {
+            "1": "2520 m²",
+            "2": "2420 m²",
+            "3": "2480 m²",
+            "4": "2500 m²"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.8",
+          "question": "If 15% of (A + B) = 25% of (A - B), then what per cent of B is equal to A?",
+          "options": {
+            "1": "400%",
+            "2": "300%",
+            "3": "150%",
+            "4": "200%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.9",
+          "question": "A shopkeeper marks his goods 20% above the cost price and allows a discount of 15% on the marked price. His gain per cent is:",
+          "options": {
+            "1": "2%",
+            "2": "5%",
+            "3": "4%",
+            "4": "3%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.10",
+          "question": "A person covers a distance of 12 km at a speed of 3 km/h, 18 km at 9 km/h and 24 km at 4 km/h. Find the average speed for the entire journey.",
+          "options": {
+            "1": "4.5 km/h",
+            "2": "5.4 km/h",
+            "3": "3.5 km/h",
+            "4": "4.4 km/h"
+          },
+          "correct_answer": "4"
+        },
+        {
+          "q_no": "Q.11",
+          "question": "Find the value of: (0.5 x 0.5 x 0.5 + 0.6 x 0.6 x 0.6) / (0.5 x 0.5 - 0.3 + 0.6 x 0.6)",
+          "options": {
+            "1": "1.1",
+            "2": "0.1",
+            "3": "0.9",
+            "4": "1.2"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.12",
+          "question": "The speed of a boat in still water is 15 km/h and the speed of the current is 3 km/h. The distance travelled downstream in 12 minutes is:",
+          "options": {
+            "1": "3.6 km",
+            "2": "2.4 km",
+            "3": "1.8 km",
+            "4": "4.2 km"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.13",
+          "question": "The ratio of two numbers is 3 : 4 and their HCF is 4. Their LCM is:",
+          "options": {
+            "1": "48",
+            "2": "36",
+            "3": "24",
+            "4": "12"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.14",
+          "question": "A sum of money doubles itself in 8 years at simple interest. The rate of interest per annum is:",
+          "options": {
+            "1": "12.5%",
+            "2": "10%",
+            "3": "15%",
+            "4": "8%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.15",
+          "question": "If the side of a square is increased by 25%, then its area is increased by:",
+          "options": {
+            "1": "56.25%",
+            "2": "50%",
+            "3": "25%",
+            "4": "62.5%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.16",
+          "question": "A train 150 m long passes a pole in 15 seconds and another train of the same length travelling in the opposite direction in 12 seconds. The speed of the second train is:",
+          "options": {
+            "1": "15 m/s",
+            "2": "10 m/s",
+            "3": "12 m/s",
+            "4": "18 m/s"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.17",
+          "question": "The simplified value of (3/4 of 16/27) ÷ 4/9 + 7/8 is:",
+          "options": {
+            "1": "1 5/8",
+            "2": "1 3/8",
+            "3": "1 7/8",
+            "4": "1 1/8"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.18",
+          "question": "The ratio of the cost price and selling price of an article is 20 : 21. The gain per cent is:",
+          "options": {
+            "1": "5%",
+            "2": "4%",
+            "3": "10%",
+            "4": "6%"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.19",
+          "question": "Study the given pie-chart and answer the question. The pie-chart shows the distribution of students in various branches of an engineering college. If the total number of students is 2000, find the number of students in Mechanical branch (90°).",
+          "options": {
+            "1": "500",
+            "2": "450",
+            "3": "400",
+            "4": "600"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.20",
+          "question": "The sum of the digits of a two-digit number is 9. If 27 is added to the number, the digits are reversed. The number is:",
+          "options": {
+            "1": "36",
+            "2": "63",
+            "3": "45",
+            "4": "54"
+          },
+          "correct_answer": "1"
+        }
+      ]
+    },
+    {
+      "section_name": "Reasoning Ability and Problem Solving",
+      "questions": [
+        {
+          "q_no": "Q.1",
+          "question": "Find the missing number in the series: 2, 6, 12, 20, 30, ?",
+          "options": {
+            "1": "42",
+            "2": "40",
+            "3": "36",
+            "4": "44"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.2",
+          "question": "If 'PAINT' is coded as '74128' and 'EXCEL' is coded as '93596', then how will 'ACCEPT' be coded?",
+          "options": {
+            "1": "455978",
+            "2": "455968",
+            "3": "459978",
+            "4": "755978"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.3",
+          "question": "Select the option that is related to the third term in the same way as the second term is related to the first term: BIRD : WING :: CAR : ?",
+          "options": {
+            "1": "WHEEL",
+            "2": "ROAD",
+            "3": "DRIVE",
+            "4": "ENGINE"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.4",
+          "question": "Statements: All cars are buses. All buses are trains. Conclusion I: All cars are trains. Conclusion II: All trains are cars.",
+          "options": {
+            "1": "Only I follows",
+            "2": "Only II follows",
+            "3": "Both I and II follow",
+            "4": "Neither I nor II follows"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.5",
+          "question": "Choose the odd one out from the given alternatives:",
+          "options": {
+            "1": "Copper",
+            "2": "Iron",
+            "3": "Iodine",
+            "4": "Silver"
+          },
+          "correct_answer": "3"
+        },
+        {
+          "q_no": "Q.6",
+          "question": "If 'A' denotes '+', 'B' denotes '-', 'C' denotes 'x' and 'D' denotes '÷', then: 18 C 14 A 6 B 16 D 4 = ?",
+          "options": {
+            "1": "254",
+            "2": "252",
+            "3": "248",
+            "4": "256"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.7",
+          "question": "Pointing to a man in a photograph, a woman said, 'His mother's only daughter is my mother.' How is the woman related to the man?",
+          "options": {
+            "1": "Niece",
+            "2": "Sister",
+            "3": "Wife",
+            "4": "Mother"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.8",
+          "question": "Find the missing term: ACF, GIL, MOR, ?",
+          "options": {
+            "1": "SUX",
+            "2": "STW",
+            "3": "SVX",
+            "4": "SUY"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.9",
+          "question": "In a certain code language, 'COMPUTER' is written as 'RFUVQNPC'. How will 'MEDICINE' be written in that code?",
+          "options": {
+            "1": "EOJDJEFM",
+            "2": "EOJDEJFM",
+            "3": "MFEJDJOE",
+            "4": "EOJDJFME"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.10",
+          "question": "Statements: Some actors are singers. All singers are dancers. Conclusion I: Some actors are dancers. Conclusion II: No singer is an actor.",
+          "options": {
+            "1": "Only I follows",
+            "2": "Only II follows",
+            "3": "Both follow",
+            "4": "Neither follows"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.11",
+          "question": "If 1st January 2001 was a Monday, then what was the day on 1st January 2002?",
+          "options": {
+            "1": "Tuesday",
+            "2": "Wednesday",
+            "3": "Monday",
+            "4": "Sunday"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.12",
+          "question": "A man walks 5 km towards South and then turns to the right. After walking 3 km he turns to the left and walks 5 km. Now in which direction is he from the starting place?",
+          "options": {
+            "1": "South-West",
+            "2": "South",
+            "3": "West",
+            "4": "North-East"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.13",
+          "question": "Arrange the following words in a meaningful sequence: 1. Poverty, 2. Population, 3. Death, 4. Unemployment, 5. Disease",
+          "options": {
+            "1": "2, 4, 1, 5, 3",
+            "2": "1, 2, 3, 4, 5",
+            "3": "2, 3, 4, 5, 1",
+            "4": "4, 3, 2, 5, 1"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.14",
+          "question": "Select the correct mirror image of the given figure when the mirror is placed at MN.",
+          "options": {
+            "1": "Option 1",
+            "2": "Option 2",
+            "3": "Option 3",
+            "4": "Option 4"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.15",
+          "question": "Find the number of triangles in the given figure.",
+          "options": {
+            "1": "12",
+            "2": "10",
+            "3": "14",
+            "4": "16"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.16",
+          "question": "Which of the following diagrams indicates the best relation between Travelers, Train and Bus?",
+          "options": {
+            "1": "Diagram 1",
+            "2": "Diagram 2",
+            "3": "Diagram 3",
+            "4": "Diagram 4"
+          },
+          "correct_answer": "3"
+        },
+        {
+          "q_no": "Q.17",
+          "question": "If 'White' is called 'Blue', 'Blue' is called 'Red', 'Red' is called 'Yellow', 'Yellow' is called 'Green', 'Green' is called 'Black', 'Black' is called 'Violet' and 'Violet' is called 'Orange', what would be the color of human blood?",
+          "options": {
+            "1": "Yellow",
+            "2": "Red",
+            "3": "Blue",
+            "4": "Green"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.18",
+          "question": "Find the missing number: 8, 12, 18, 27, ?",
+          "options": {
+            "1": "40.5",
+            "2": "40",
+            "3": "36",
+            "4": "42"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.19",
+          "question": "A, B, C, D and E are sitting on a bench. A is sitting next to B, C is sitting next to D, D is not sitting with E who is on the left end of the bench. C is on the second position from the right. A is to the right of B and E. A and C are sitting together. In which position is A sitting?",
+          "options": {
+            "1": "Between B and C",
+            "2": "Between B and D",
+            "3": "Between C and D",
+            "4": "Between C and E"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.20",
+          "question": "Select the combination of letters that when sequentially placed in the blanks will complete the series: a _ b a _ b b _ a b _ b",
+          "options": {
+            "1": "baba",
+            "2": "abab",
+            "3": "baab",
+            "4": "abba"
+          },
+          "correct_answer": "1"
+        }
+      ]
+    },
+    {
+      "section_name": "General Awareness",
+      "questions": [
+        {
+          "q_no": "Q.1",
+          "question": "Who was the founder of the Brahmo Samaj?",
+          "options": {
+            "1": "Raja Ram Mohan Roy",
+            "2": "Swami Dayanand Saraswati",
+            "3": "Swami Vivekananda",
+            "4": "Ishwar Chandra Vidyasagar"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.2",
+          "question": "The Battle of Plassey was fought in the year:",
+          "options": {
+            "1": "1757",
+            "2": "1764",
+            "3": "1761",
+            "4": "1770"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.3",
+          "question": "Which planet is known as the Red Planet?",
+          "options": {
+            "1": "Mars",
+            "2": "Venus",
+            "3": "Saturn",
+            "4": "Jupiter"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.4",
+          "question": "Who is the ex-officio Chairman of the Rajya Sabha?",
+          "options": {
+            "1": "Vice President of India",
+            "2": "President of India",
+            "3": "Prime Minister of India",
+            "4": "Speaker of Lok Sabha"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.5",
+          "question": "The currency of Japan is:",
+          "options": {
+            "1": "Yen",
+            "2": "Won",
+            "3": "Yuan",
+            "4": "Ringgit"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.6",
+          "question": "Which vitamin deficiency causes Scurvy?",
+          "options": {
+            "1": "Vitamin C",
+            "2": "Vitamin A",
+            "3": "Vitamin B",
+            "4": "Vitamin D"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.7",
+          "question": "The 'Dandi March' was started by Mahatma Gandhi from:",
+          "options": {
+            "1": "Sabarmati Ashram",
+            "2": "Wardha",
+            "3": "Champaran",
+            "4": "Dandi"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.8",
+          "question": "Which is the largest gland in the human body?",
+          "options": {
+            "1": "Liver",
+            "2": "Pancreas",
+            "3": "Thyroid",
+            "4": "Pituitary"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.9",
+          "question": "Fundamental Rights in the Indian Constitution are inspired by the Constitution of:",
+          "options": {
+            "1": "USA",
+            "2": "UK",
+            "3": "Canada",
+            "4": "Ireland"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.10",
+          "question": "The capital of Australia is:",
+          "options": {
+            "1": "Canberra",
+            "2": "Sydney",
+            "3": "Melbourne",
+            "4": "Perth"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.11",
+          "question": "Who wrote the book 'Discovery of India'?",
+          "options": {
+            "1": "Jawaharlal Nehru",
+            "2": "Mahatma Gandhi",
+            "3": "Subhash Chandra Bose",
+            "4": "Sardar Patel"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.12",
+          "question": "Which state has the longest coastline in India?",
+          "options": {
+            "1": "Gujarat",
+            "2": "Andhra Pradesh",
+            "3": "Tamil Nadu",
+            "4": "Maharashtra"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.13",
+          "question": "The Ozone layer protects the earth from:",
+          "options": {
+            "1": "Ultraviolet rays",
+            "2": "Infrared rays",
+            "3": "X-rays",
+            "4": "Gamma rays"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.14",
+          "question": "Pankaj Advani is associated with which sport?",
+          "options": {
+            "1": "Billiards and Snooker",
+            "2": "Tennis",
+            "3": "Badminton",
+            "4": "Golf"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.15",
+          "question": "Who was the first Indian woman to win an Olympic medal?",
+          "options": {
+            "1": "Karnam Malleswari",
+            "2": "Saina Nehwal",
+            "3": "Mary Kom",
+            "4": "P.V. Sindhu"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.16",
+          "question": "The headquarters of SAARC is located in:",
+          "options": {
+            "1": "Kathmandu",
+            "2": "New Delhi",
+            "3": "Dhaka",
+            "4": "Colombo"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.17",
+          "question": "Which acid is present in lemon?",
+          "options": {
+            "1": "Citric acid",
+            "2": "Lactic acid",
+            "3": "Tartaric acid",
+            "4": "Acetic acid"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.18",
+          "question": "The 'Preamble' of the Indian Constitution was amended for the first time by which Amendment Act?",
+          "options": {
+            "1": "42nd",
+            "2": "44th",
+            "3": "24th",
+            "4": "52nd"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.19",
+          "question": "Which dance form is associated with the state of Kerala?",
+          "options": {
+            "1": "Kathakali",
+            "2": "Bharatanatyam",
+            "3": "Kuchipudi",
+            "4": "Odissi"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.20",
+          "question": "Who is known as the 'Nightingale of India'?",
+          "options": {
+            "1": "Sarojini Naidu",
+            "2": "Lata Mangeshkar",
+            "3": "Indira Gandhi",
+            "4": "M.S. Subbulakshmi"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.21",
+          "question": "The first Five Year Plan was launched in the year:",
+          "options": {
+            "1": "1951",
+            "2": "1950",
+            "3": "1947",
+            "4": "1956"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.22",
+          "question": "Who invented the telephone?",
+          "options": {
+            "1": "Alexander Graham Bell",
+            "2": "Thomas Edison",
+            "3": "James Watt",
+            "4": "Marconi"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.23",
+          "question": "Which animal is the national animal of India?",
+          "options": {
+            "1": "Tiger",
+            "2": "Lion",
+            "3": "Elephant",
+            "4": "Peacock"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.24",
+          "question": "The largest ocean in the world is:",
+          "options": {
+            "1": "Pacific Ocean",
+            "2": "Atlantic Ocean",
+            "3": "Indian Ocean",
+            "4": "Arctic Ocean"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.25",
+          "question": "Which gas is known as Laughing Gas?",
+          "options": {
+            "1": "Nitrous Oxide",
+            "2": "Nitrogen",
+            "3": "Carbon Dioxide",
+            "4": "Methane"
+          },
+          "correct_answer": "1"
+        }
+      ]
+    },
+    {
+      "section_name": "English Language and Comprehension",
+      "questions": [
+        {
+          "q_no": "Q.1",
+          "question": "Select the most appropriate synonym of the given word: BENEVOLENT",
+          "options": {
+            "1": "Kind",
+            "2": "Cruel",
+            "3": "Selfish",
+            "4": "Greedy"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.2",
+          "question": "Select the most appropriate antonym of the given word: OPAQUE",
+          "options": {
+            "1": "Transparent",
+            "2": "Cloudy",
+            "3": "Dull",
+            "4": "Bright"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.3",
+          "question": "Identify the segment that contains a grammatical error: She is more taller than her brother.",
+          "options": {
+            "1": "more taller",
+            "2": "than her",
+            "3": "brother",
+            "4": "She is"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.4",
+          "question": "Select the most appropriate meaning of the given idiom: A bolt from the blue",
+          "options": {
+            "1": "An unexpected event",
+            "2": "A lucky break",
+            "3": "A heavy rain",
+            "4": "A sudden storm"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.5",
+          "question": "Select the option that can be used as a one-word substitute for the given group of words: A person who writes the story of his own life",
+          "options": {
+            "1": "Autobiographer",
+            "2": "Biographer",
+            "3": "Author",
+            "4": "Historian"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.6",
+          "question": "Select the most appropriate option to fill in the blank: The teacher was ____ with the students' performance.",
+          "options": {
+            "1": "pleased",
+            "2": "please",
+            "3": "pleasing",
+            "4": "pleasantly"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.7",
+          "question": "Select the INCORRECTLY spelt word:",
+          "options": {
+            "1": "Accomodate",
+            "2": "Receive",
+            "3": "Separate",
+            "4": "Definitely"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.8",
+          "question": "Select the most appropriate meaning of the underlined idiom: He is a chip off the old block.",
+          "options": {
+            "1": "Resembling his father",
+            "2": "Working hard",
+            "3": "Being very smart",
+            "4": "Creating trouble"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.9",
+          "question": "Select the option that can be used as a one-word substitute for the underlined group of words: A place where birds are kept.",
+          "options": {
+            "1": "Aviary",
+            "2": "Apiary",
+            "3": "Zoo",
+            "4": "Aquarium"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.10",
+          "question": "Identify the segment that contains a grammatical error: Neither the students nor the teacher are present.",
+          "options": {
+            "1": "are present",
+            "2": "Neither the students",
+            "3": "nor the teacher",
+            "4": "present"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.11",
+          "question": "Select the most appropriate option to fill in the blank: He is afraid ____ dogs.",
+          "options": {
+            "1": "of",
+            "2": "with",
+            "3": "at",
+            "4": "from"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.12",
+          "question": "Select the correctly spelt word:",
+          "options": {
+            "1": "Maintenance",
+            "2": "Maintainance",
+            "3": "Maintenence",
+            "4": "Maintanence"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.13",
+          "question": "Select the most appropriate synonym of the given word: ABANDON",
+          "options": {
+            "1": "Forsake",
+            "2": "Adopt",
+            "3": "Keep",
+            "4": "Accept"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.14",
+          "question": "Select the most appropriate antonym of the given word: GIANT",
+          "options": {
+            "1": "Dwarf",
+            "2": "Large",
+            "3": "Huge",
+            "4": "Strong"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.15",
+          "question": "Select the most appropriate option to fill in the blank: She has been living here ____ five years.",
+          "options": {
+            "1": "for",
+            "2": "since",
+            "3": "from",
+            "4": "during"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.16",
+          "question": "Select the most appropriate option to fill in the blank: Each of the boys ____ been given a book.",
+          "options": {
+            "1": "has",
+            "2": "have",
+            "3": "are",
+            "4": "is"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.17",
+          "question": "Identify the segment that contains a grammatical error: If I was you, I would not go there.",
+          "options": {
+            "1": "was you",
+            "2": "If I",
+            "3": "would not",
+            "4": "go there"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.18",
+          "question": "Select the most appropriate synonym of the given word: BRIEF",
+          "options": {
+            "1": "Short",
+            "2": "Long",
+            "3": "Big",
+            "4": "Huge"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.19",
+          "question": "Select the most appropriate meaning of the given idiom: To smell a rat",
+          "options": {
+            "1": "To suspect something wrong",
+            "2": "To be very smart",
+            "3": "To see a hidden animal",
+            "4": "To smell bad"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.20",
+          "question": "Select the most appropriate option to fill in the blank: No sooner did he reach the station ____ the train left.",
+          "options": {
+            "1": "than",
+            "2": "then",
+            "3": "when",
+            "4": "that"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.21",
+          "question": "Select the most appropriate option to fill in blank number 1: Each essay is set (1) ____ against its background...",
+          "options": {
+            "1": "up",
+            "2": "out",
+            "3": "in",
+            "4": "down"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.22",
+          "question": "Select the most appropriate option to fill in blank number 2: ...and made simpler by providing (2) ____ summary and critical commentary...",
+          "options": {
+            "1": "brief",
+            "2": "long",
+            "3": "detailed",
+            "4": "large"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.23",
+          "question": "Select the most appropriate option to fill in blank number 3: ...and (3) ____ of important critical and theoretical issues under the heading essay topics.",
+          "options": {
+            "1": "discussion",
+            "2": "discuss",
+            "3": "discussing",
+            "4": "discussed"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.24",
+          "question": "Select the most appropriate option to fill in blank number 4: A (4) ____ of the most commonly used terms in the literature is given at the end...",
+          "options": {
+            "1": "figures",
+            "2": "glossary",
+            "3": "grammar",
+            "4": "index"
+          },
+          "correct_answer": "2"
+        },
+        {
+          "q_no": "Q.25",
+          "question": "Select the most appropriate option to fill in blank number 5: ...This book will cater the (5) ____ of students of literature...",
+          "options": {
+            "1": "desires",
+            "2": "needs",
+            "3": "wants",
+            "4": "hopes"
+          },
+          "correct_answer": "2"
+        }
+      ]
+    }
+  ]
+}

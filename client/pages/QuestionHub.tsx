@@ -108,6 +108,12 @@ const FOLDERS: Record<string, FolderData> = {
     files: [
       // SI (Sub-Inspector) Papers
       {
+        name: "WBP SI (Sub-Inspector) 2021",
+        path: "police-json-data/SI/WBP-SI-Police-2021.json",
+        year: 2021,
+        type: "SI",
+      },
+      {
         name: "WBP SI (Sub-Inspector) 2019",
         path: "police-json-data/SI/WBP-SI-Police-2019.json",
         year: 2019,
@@ -301,9 +307,15 @@ const STATS = [
 ];
 
 function titleFromFilename(fileName: string): string {
-  return fileName
-    .replace(/\.(pdf|json)$/i, "")
-    .replace(/_/g, " ")
+  // 1. Remove directory path if present (e.g. police-json-data/SI/WBP-SI-2019.json -> WBP-SI-2019.json)
+  const baseName = fileName.split('/').pop() || fileName;
+
+  return baseName
+    .replace(/\.(pdf|json)$/i, "") // 2. Remove file extension
+    .replace(/json[-_]data/gi, "") // 3. Remove "json-data" or "json_data"
+    .replace(/json/gi, "")        // 4. Remove the word "JSON" case-insensitive
+    .replace(/[_-]/g, " ")        // 5. Replace underscores and hyphens with spaces
+    .replace(/\s+/g, " ")         // 6. Replace multiple spaces with a single space
     .trim();
 }
 
@@ -311,6 +323,13 @@ function titleFromFilename(fileName: string): string {
 function yearFromFilename(fileName: string): number | undefined {
   const m = fileName.match(/(19|20)\d{2}/);
   return m ? parseInt(m[0], 10) : undefined;
+}
+
+function encodePathPreserveSlashes(filePath: string): string {
+  return filePath
+    .split("/")
+    .map((seg) => encodeURIComponent(seg))
+    .join("/");
 }
 
 // Group files by position type for Police
@@ -377,7 +396,7 @@ export default function QuestionHub({
             (f: { name: string }) => ({
               path: `police-json-data/${f.name}`,
               name: titleFromFilename(f.name),
-              downloadHref: `/Police/police-json-data/${encodeURIComponent(f.name)}`,
+              downloadHref: `/Police/police-json-data/${encodePathPreserveSlashes(f.name)}`,
               year: yearFromFilename(f.name),
               type:
                 /lady/i.test(f.name)
@@ -434,7 +453,7 @@ export default function QuestionHub({
   const handleDownload = async (file: PDFItem) => {
     try {
       setTestNavLoading(true);
-      const pdfPath = file.downloadHref ?? `${currentFolder.publicPath}/${encodeURIComponent(file.path)}`;
+      const pdfPath = file.downloadHref ?? `${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
       const relativePdfPath = pdfPath.replace(/^\//, "");
       
       // 1. Fetch questions (this now uses JSON source on the backend)
@@ -545,7 +564,7 @@ export default function QuestionHub({
     } catch (err) {
       console.error("Safe download failed:", err);
       // Fallback to original download if extraction fails
-      const href = file.downloadHref ?? `/${currentFolder.publicPath}/${encodeURIComponent(file.path)}`;
+      const href = file.downloadHref ?? `/${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
       const link = document.createElement("a");
       link.href = href;
       link.download = file.path;
@@ -559,7 +578,7 @@ export default function QuestionHub({
     setTestNavLoading(true);
     const pdfPath =
       file.downloadHref ??
-      `${currentFolder.publicPath}/${encodeURIComponent(file.path)}`;
+      `${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
     // Ensure the path is relative to the public folder (no leading slash)
     const relativePdfPath = pdfPath.replace(/^\//, "");
     navigate("/pdf-mock-test", {

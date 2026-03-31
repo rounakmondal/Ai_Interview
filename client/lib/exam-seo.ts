@@ -124,27 +124,33 @@ function webPageJsonLd(args: {
 }
 
 const WBCS_KEYWORDS = [
-  "WBCS mock test",
-  "WBCS mock test online free",
-  "WBCS previous year question paper mock test",
-  "WBCS prelims mock test",
-  "West Bengal Civil Service practice test",
-  "WBCS online test",
-  "WBPSC previous year paper",
-  "WBCS question paper PDF mock",
-  "WBCS preparation mock test West Bengal",
+  "WBCS mock test 2026",
+  "WBCS prelims practice paper free",
+  "WBCS previous year question paper with answers",
+  "West Bengal Civil Service online test",
+  "WBPSC prelims strategy",
+  "ডব্লিউবিসিএস মক টেস্ট",
+  "WBCS Bengali mock test",
+  "WBCS preparation online West Bengal",
 ].join(", ");
 
 const POLICE_KEYWORDS = [
-  "WBP mock test",
-  "WBP police mock test",
-  "BWP police mock test",
-  "West Bengal Police mock test online",
-  "WBP constable previous year mock test",
-  "WBP lady constable mock test",
-  "police constable mock test West Bengal",
-  "WBP prelims practice test",
-  "West Bengal Police previous year question mock test",
+  "WBP Constable mock test 2026",
+  "WBP SI mock test online",
+  "West Bengal Police recruitment practice paper",
+  "WBP lady constable previous year paper",
+  "WBP prelims mock test in Bengali",
+  "পশ্চিমবঙ্গ পুলিশ মক টেস্ট",
+  "WBP online exam practice",
+  "police job preparation West Bengal",
+].join(", ");
+
+const WBPSC_KEYWORDS = [
+  "WBPSC Clerkship mock test",
+  "WBPSC Miscellaneous practice paper",
+  "West Bengal Public Service Commission online test",
+  "WBPSC Clerkship previous year question",
+  "ক্লার্কশিপ মক টেস্ট",
 ].join(", ");
 
 /** Question Hub landing variants */
@@ -187,14 +193,16 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
 
   applyExamSeoPayload({
     title:
-      "WBP & WBCS Previous Year Question Papers Free Download | SSC Mock Test | InterviewSathi",
+      "WBP, WBCS & WBPSC Previous Year Question Papers Free Download | Online Mock Test | InterviewSathi",
     description:
-      "Download WBP Constable & Lady Constable previous year question papers free PDF. WBCS Prelims & Mains old question papers. SSC CGL, CHSL previous year papers. Attempt AI-powered mock tests online for West Bengal government exam preparation.",
+      "Download WBP Constable, WBCS & WBPSC previous year question papers free PDF. Practice online mock tests for West Bengal government exams 2026. AI-powered results and analysis.",
     keywords: [
       ...WBCS_KEYWORDS.split(", "),
       ...POLICE_KEYWORDS.split(", "),
+      ...WBPSC_KEYWORDS.split(", "),
       "SSC CGL previous year question paper",
       "সরকারি চাকরির পুরনো প্রশ্নপত্র",
+      "পশ্চিমবঙ্গ সরকারি চাকরি প্রস্তুতি",
     ].join(", "),
     canonicalPath: "/question-hub",
     jsonLd: webPageJsonLd({
@@ -208,7 +216,16 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
 
 /** Active PDF mock test screen */
 export function applyPdfMockTestSeo(folder: string, pdfFileName: string) {
-  const shortName = (pdfFileName || "Practice paper").replace(/\.pdf$/i, "").slice(0, 80);
+  // Clean name: remove path, extensions, JSON word, and limit length
+  const baseName = (pdfFileName || "Practice paper").split('/').pop() || "";
+  const shortName = baseName
+    .replace(/\.(pdf|json)$/i, "")
+    .replace(/json[-_]data/gi, "")
+    .replace(/json/gi, "")
+    .replace(/[_-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 80);
   const base = origin();
 
   if (folder === "wbcs") {

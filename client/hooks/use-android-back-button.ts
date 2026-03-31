@@ -26,17 +26,25 @@ export function useAndroidBackButton() {
       }
     };
 
-    try {
-      // Register back button handler
-      const unsubscribe = App.addListener("backButton", handleBackButton);
+    let listener: { remove: () => Promise<void> | void } | null = null;
+    let cancelled = false;
 
-      return () => {
-        // Cleanup listener
-        unsubscribe.remove();
-      };
-    } catch (error) {
-      // Silently fail if not on Capacitor (web browser)
-      console.debug("Android back button handler not available on this platform");
-    }
+    (async () => {
+      try {
+        const l = await App.addListener("backButton", handleBackButton);
+        if (cancelled) {
+          l.remove();
+          return;
+        }
+        listener = l;
+      } catch {
+        return;
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      listener?.remove();
+    };
   }, [navigate, location.pathname]);
 }

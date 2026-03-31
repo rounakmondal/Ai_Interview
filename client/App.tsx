@@ -52,6 +52,7 @@ const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
+const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
 
 // Blog pages
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
@@ -96,6 +97,7 @@ function AppContent() {
           <Route path="/evaluation" element={<EvaluationPage />} />
           <Route path="/resume" element={<ResumeBuilder />} />
           <Route path="/career-mentor" element={<CareerMentorPage />} />
+          <Route path="/vacancies" element={<VacancyAlertCenter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/about" element={<About />} />

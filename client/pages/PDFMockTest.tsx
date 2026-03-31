@@ -515,7 +515,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
               {[
                 { icon: Shield, label: "Exam Pattern", sub: "Authentic" },
-                { icon: Brain, label: "JSON Source", sub: "Accurate data" },
+                { icon: Brain, label: "Verified Data", sub: "Exam accurate" },
                 { icon: Target, label: "Scoring", sub: "Real-time" },
                 { icon: TrendingUp, label: "Analysis", sub: "Detailed results" },
               ].map(({ icon: Icon, label, sub }) => (

@@ -1,0 +1,141 @@
+{
+  "subject": "Multi Tasking (Non-Technical) Staff Examination 2019",
+  "exam_details": {
+    "test_date": "05/08/2019",
+    "test_time": "9:00 AM - 10:30 AM",
+    "venue": "Royal Solutions Online Examination Center"
+  },
+  "sections": [
+    {
+      "section_name": "General English",
+      "questions": [
+        {
+          "q_no": "Q.1",
+          "question": "Select the most appropriate option to fill in the blank. The students are in great ______ of their teachers.",
+          "options": {
+            "1": "praise",
+            "2": "awe",
+            "3": "respect",
+            "4": "评估"
+          },
+          "correct_answer": "2"
+        },
+        {
+          "q_no": "Q.2",
+          "question": "Find the part of the given sentence that has an error in it. If there is no error, choose 'No error'. The servant was beaten through his master with a stick. /No error",
+          "options": {
+            "1": "No error",
+            "2": "with a stick",
+            "3": "through his master",
+            "4": "The servant was beaten"
+          },
+          "correct_answer": "3"
+        },
+        {
+          "q_no": "Q.3",
+          "question": "Select the most appropriate option to substitute the underlined segment in the given sentence. If there is no need to substitute it, select No Improvement. Many accidents at the factory are caused of workers who don't read warning signs.",
+          "options": {
+            "1": "are caused because of",
+            "2": "is the cause of",
+            "3": "is caused by",
+            "4": "No Improvement"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.4",
+          "question": "Select the most appropriate option to fill in the blank. The origin of ice-cream dates back ______ nearly half-a-century.",
+          "options": {
+            "1": "to",
+            "2": "at",
+            "3": "from",
+            "4": "into"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.5",
+          "question": "Select the most appropriate synonym of the given word. COARSE",
+          "options": {
+            "1": "Smooth",
+            "2": "Refined",
+            "3": "Rough",
+            "4": "Polished"
+          },
+          "correct_answer": "3"
+        }
+      ]
+    },
+    {
+      "section_name": "General Awareness",
+      "questions": [
+        {
+          "q_no": "Q.20",
+          "question": "Which of the following quantities have its SI unit named after Blaise Pascal?",
+          "options": {
+            "1": "Energy",
+            "2": "Pressure",
+            "3": "Work",
+            "4": "Power"
+          },
+          "correct_answer": "2"
+        },
+        {
+          "q_no": "Q.21",
+          "question": "Who among the following presented the Union budget of India for maximum times?",
+          "options": {
+            "1": "RK Shanmukham Chetty",
+            "2": "Pranab Mukherjee",
+            "3": "Morarji Desai",
+            "4": "P. Chidambaram"
+          },
+          "correct_answer": "3"
+        },
+        {
+          "q_no": "Q.22",
+          "question": "Which of the following cell organelle contains DNA apart from nucleus?",
+          "options": {
+            "1": "Cytoplasm",
+            "2": "Golgi Apparatus",
+            "3": "Mitochondria",
+            "4": "Ribosome"
+          },
+          "correct_answer": "3"
+        },
+        {
+          "q_no": "Q.23",
+          "question": "In which of the following states Marshy/ Peaty soil is NOT predominantly found?",
+          "options": {
+            "1": "Kerala",
+            "2": "Madhya Pradesh",
+            "3": "Odisha",
+            "4": "West Bengal"
+          },
+          "correct_answer": "2"
+        },
+        {
+          "q_no": "Q.24",
+          "question": "Which of the following element found in water is responsible for cancer?",
+          "options": {
+            "1": "Arsenic",
+            "2": "Iron",
+            "3": "Fluorine",
+            "4": "Chlorine"
+          },
+          "correct_answer": "1"
+        },
+        {
+          "q_no": "Q.25",
+          "question": "Who was the eighth Sikh Guru?",
+          "options": {
+            "1": "Guru Har Krishan",
+            "2": "Guru Angad Dev",
+            "3": "Guru Tegh Bahadur",
+            "4": "Guru Har Rai"
+          },
+          "correct_answer": "1"
+        }
+      ]
+    }
+  ]
+}

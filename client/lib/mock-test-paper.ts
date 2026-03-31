@@ -242,7 +242,7 @@ export async function fetchMockTestPaper(examType: string): Promise<MockPaperRes
       questions: fallbackQuestions,
       meta: {
         exam: examType,
-        paper_title: `${examType} Mock Test (Fallback)`,
+        paper_title: `${examType} Mock Test`,
         total_questions: fallbackQuestions.length,
         duration_minutes: 60,
         generated_at: new Date().toISOString(),

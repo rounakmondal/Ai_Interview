@@ -10,6 +10,7 @@ import {
 
 interface AIStudyGuideProps {
   chapterId: string;
+  chapterName?: string;
   onClose: () => void;
 }
 
@@ -30,7 +31,7 @@ const QUICK_PROMPTS = [
   { icon: Zap,          label: "Quick MCQs",       query: "Give me 5 practice MCQ questions with answers and explanations from this chapter." },
 ];
 
-export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) {
+export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStudyGuideProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -116,7 +117,7 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
     });
   };
 
-  const chapterLabel = chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
+  const chapterLabel = chapterName?.trim() || chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
 
   return (
     <>

@@ -5,6 +5,7 @@ import { handleDemo } from "./routes/demo";
 import { handleCareerMentor } from "./routes/careerMentor";
 import { handleStoryTelling } from "./routes/storytelling";
 import { handleContact } from "./routes/contact";
+import { handleVacancyMail } from "./routes/vacancyMail";
 import { 
   handleStartInterview, 
   handleNextQuestion, 
@@ -85,6 +86,7 @@ export function createServer() {
   // Sends email via SMTP to site owner + auto-reply to sender
   // ─────────────────────────────────────────────────────────────────────
   app.post("/api/contact", handleContact);
+  app.post("/api/vacancy-mail", handleVacancyMail);
 
   // ── PDF Text Extraction ───────────────────────────────────────────────
   // POST /api/extract-pdf
