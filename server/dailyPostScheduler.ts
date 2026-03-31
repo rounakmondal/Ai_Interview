@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import cron from "node-cron";
 
 const SUBJECTS = ["police", "wbcs", "wbpsc"];
-const URL = "https://recomendengine.onrender.com/daily-post";
+const URL = "https://recomendengine-1.onrender.com/daily-post";
 
 function getRequestBody(subject: string) {
   return {
