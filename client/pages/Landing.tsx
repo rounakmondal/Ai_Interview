@@ -32,9 +32,7 @@ export default function LandingPage() {
               Contact
             </a>
             <Link to="/setup">
-              <Button variant="default" size="sm">
-                Get Started
-              </Button>
+             <Button variant="default" size="sm"> Get Started </Button>
             </Link>
           </div>
         </div>

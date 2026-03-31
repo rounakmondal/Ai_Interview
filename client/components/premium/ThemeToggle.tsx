@@ -68,22 +68,23 @@ export default function ThemeToggle() {
 
         {/* Toggle knob */}
         <motion.div
-          className="absolute top-[3px] w-[28px] h-[28px] rounded-full flex items-center justify-center"
-          animate={{
-            left: isDark ? "37px" : "3px",
-            backgroundColor: isDark
-              ? "rgba(51, 65, 85, 1)" // Dark knob: charcoal
-              : "rgba(255, 255, 255, 1)", // Light knob: pure white
-            boxShadow: isDark
-              ? "0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(139, 92, 246, 0.2), inset 0 1px 1px rgba(99, 102, 241, 0.1)"
-              : "0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)",
-          }}
-          transition={{
-            type: "tween",
-            duration: 0.35,
-            ease: smoothEase,
-          }}
-        >
+    className="absolute top-[3px] w-[28px] h-[28px] rounded-full flex items-center justify-center"
+    animate={{
+    left: isDark ? "37px" : "3px",
+    backgroundColor: isDark
+      ? "rgba(51, 65, 85, 1)" // Dark knob
+      : "rgba(255, 255, 255, 1)", // Light knob
+    boxShadow: isDark
+      ? "0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 115, 0, 0.3), inset 0 1px 1px rgba(255, 140, 0, 0.15)"
+      : "0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)",
+    }}
+    transition={{
+    type: "tween",
+    duration: 0.35,
+    ease: smoothEase,
+  }}
+
+  />
           {/* Icon container with cross-fade */}
           <AnimatePresence mode="wait" initial={false}>
             {isDark ? (
@@ -108,8 +109,7 @@ export default function ThemeToggle() {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
-
+            </div>
         {/* Hover glow effect */}
         <motion.div
           className="absolute inset-0 rounded-full pointer-events-none"
@@ -123,7 +123,7 @@ export default function ThemeToggle() {
           transition={{ duration: 0.2 }}
           style={{ opacity: 0 }}
         />
-      </div>
+     
 
       {/* Outer hover glow ring */}
       <motion.div

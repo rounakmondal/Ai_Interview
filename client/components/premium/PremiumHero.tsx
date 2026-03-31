@@ -79,9 +79,9 @@ function MockInterviewCard() {
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/30">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold shadow">
-              AI
-            </div>
+           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-xs font-bold shadow">
+             AI
+              </div>
             <div>
               <p className="text-xs font-semibold text-foreground">InterviewPro</p>
               <div className="flex items-center gap-1">
@@ -145,8 +145,11 @@ function MockInterviewCard() {
             Listening…
           </div>
           <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20">
-            <BarChart3 className="w-3.5 h-3.5 text-indigo-500" />
-            <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400">Scoring live</span>
+          <BarChart3 className="w-3.5 h-3.5 text-orange-500" />
+
+<span className="text-[10px] font-semibold bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
+  Scoring live
+</span>
           </div>
         </div>
       </div>
@@ -154,13 +157,15 @@ function MockInterviewCard() {
       {/* Floating badge */}
       <motion.div
         animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: easeInOut }}
-        className="absolute -left-12 top-16 bg-card border border-border/60 rounded-xl px-3 py-2 shadow-lg items-center gap-2 hidden xl:flex"
-      >
-        <Brain className="w-4 h-4 text-violet-500" />
-        <span className="text-xs font-semibold text-foreground whitespace-nowrap">AI Follow-ups</span>
-      </motion.div>
-    </div>
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -left-12 top-16 bg-card border border-orange-400/40 rounded-xl px-3 py-2 shadow-lg items-center gap-2 hidden xl:flex"
+        >
+        <Brain className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold text-foreground whitespace-nowrap">
+          AI Follow-ups
+          </span>
+        </motion.div>
+        </div>
   );
 }
 
@@ -202,8 +207,8 @@ export default function PremiumHero() {
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">
                 Ace Your Next Interview —{" "}
                 <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 bg-clip-text text-transparent">
-                    Practice Until You Succeed
+                  <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
+                       Practice Until You Succeed
                   </span>
 
                 </span>
@@ -216,8 +221,14 @@ export default function PremiumHero() {
                 Voice-based mock interviews with instant AI feedback, resume analysis, and detailed scoring for{" "}
                 <span className="text-foreground font-medium">WBCS, SSC, Police</span>,{" "}
                 <span className="text-foreground font-medium">IT</span> &{" "}
-                <span className="text-foreground font-medium">Campus</span> roles — in English or{" "}
-                <span className="text-indigo-600 dark:text-indigo-400 font-semibold">বাংলা</span>.
+                <span className="text-foreground font-medium">Campus</span> roles — in {" "}
+
+                <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+                       English
+                    </span> or{" "}
+                <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+                    বাংলা
+                  </span>
               </p>
             </motion.div>
 
@@ -231,7 +242,7 @@ export default function PremiumHero() {
                   className={`relative bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl flex flex-col items-center gap-2 ${cat.border} hover:shadow-lg ${cat.shadow} transition-all duration-300 cursor-pointer hover:-translate-y-1`}
                 >
                   {/* Dot accent */}
-                  <span className={`absolute top-2.5 right-2.5 w-2 h-2 rounded-full opacity-60 ${cat.dot}`} />
+            <span className={`absolute top-2.5 right-2.5 w-2 h-2 rounded-full opacity-60 ${cat.dot}`} />
 
                   {/* Icon */}
                   <div
@@ -251,29 +262,35 @@ export default function PremiumHero() {
                 </Link>
               ))}
             </motion.div>
-
+              
+                
             {/* CTA Buttons */}
-            <motion.div variants={item} className="flex flex-col sm:flex-row gap-3">
+              <motion.div variants={item} className="flex flex-col sm:flex-row gap-3">
               <Link to="/setup">
-                <motion.button
+               <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="relative group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white overflow-hidden shadow-lg shadow-indigo-500/30"
+
+
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-violet-600" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative flex items-center gap-2">
+                  <div className="absolute inset-0 bg-gradient-to-l from-orange-500 to-red-500" />
+                    <div className="absolute inset-0 bg-gradient-to-l from-orange-400 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                 <span className="relative flex items-center gap-2">
                     <Mic className="w-4 h-4" />
                     Start Free Mock Interview
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </motion.button>
-              </Link>
+                </Link>
+
+
+
               <Link to="/setup">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold border border-border/60 hover:border-indigo-500/40 text-foreground hover:text-indigo-600 dark:hover:text-indigo-400 bg-card/80 transition-colors duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold border border-border/60 hover:border-orange-400/40 text-foreground hover:text-orange-500 dark:hover:text-orange-400 bg-card/80 transition-colors duration-200"
                 >
                   Try 1 Question — No Login
                 </motion.button>
@@ -282,19 +299,19 @@ export default function PremiumHero() {
 
             {/* Stats */}
             <motion.div variants={item} className="grid grid-cols-3 gap-4 pt-5 border-t border-border/40">
-              {[
-                { value: "Free", label: "To Get Started" },
-                { value: "AI", label: "Powered Feedback" },
-                { value: "বাংলা", label: "+ English" },
+          {[
+            { value: "Free", label: "To Get Started" },
+            { value: "AI", label: "Powered Feedback" },
+            { value: "বাংলা", label: "+ English" },
               ].map((s, i) => (
-                <div key={i}>
-                  <div className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">
-                    {s.value}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
+              <div key={i}>
+          <div className="text-2xl font-extrabold bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
+            {s.value}
+          </div>
+          <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
+          </div>
+          ))}
+          </motion.div>
           </motion.div>
 
           {/* Right — Live mock interview card */}
