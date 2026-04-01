@@ -127,7 +127,7 @@ export default function Chatbot() {
 
       // 3. Make API call to the endpoint using env (works local & server)
       const apiBase = import.meta.env.VITE_API_URL || '';
-      const url = apiBase+'/api/study/chat';
+      const url = apiBase+'/study/chat';
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
