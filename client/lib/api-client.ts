@@ -25,7 +25,7 @@ class ApiClient {
     // Log API configuration
     if (typeof window !== "undefined") {
       console.log(
-        `%c InterviewAI API Client Initialized`,
+        `%c MedhaHub API Client Initialized`,
         "color: #4f46e5; font-weight: bold; font-size: 12px;",
       );
       console.log(

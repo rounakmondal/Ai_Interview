@@ -76,7 +76,7 @@ export default function GovtPractice() {
   // Set SEO meta tags
   useEffect(() => {
     document.title =
-      "Government Exam Practice - WBCS, SSC, Police, Banking + Corporate Jobs | InterviewSathi";
+      "Government Exam Practice - WBCS, SSC, Police, Banking + Corporate Jobs | MedhaHub";
     const updateMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
       if (!el) {

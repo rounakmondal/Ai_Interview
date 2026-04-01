@@ -168,7 +168,7 @@ function buildResponse(
                         {
                             week: "Week 3 – Practice Interviews",
                             tasks: [
-                                "Do 2 mock interviews using InterviewAI or Pramp",
+                                "Do 2 mock interviews using MedhaHub or Pramp",
                                 "Prepare answers to Top 20 HR questions",
                                 "Research target company (culture, tech stack, recent news)",
                                 "Apply to 10 more per day, track all in a Google Sheet",
@@ -342,7 +342,7 @@ function buildResponse(
                         {
                             week: "Week 4-6 – Interview Prep",
                             tasks: [
-                                "Practice gap explanation in mock interviews (use InterviewAI!)",
+                                "Practice gap explanation in mock interviews (use MedhaHub!)",
                                 "Prepare a 2-minute 'gap story' — gap → what you did → ready now",
                                 "Research companies known for hiring people with gaps (IBM, Accenture, Infosys all have returnship programs)",
                                 "Don't accept below-market offers just because of the gap — know your worth",
@@ -565,7 +565,7 @@ function buildResponse(
                             tasks: [
                                 "Build 2 projects total with proper README and deploy to GitHub/Vercel",
                                 "Solve 50 easy LeetCode problems (focus on arrays, strings, hashmaps)",
-                                "Practice 20 standard HR interview questions aloud or using InterviewAI",
+                                "Practice 20 standard HR interview questions aloud or using MedhaHub",
                                 "Apply for internships or junior roles to calibrate your readiness",
                             ],
                         },
@@ -598,7 +598,7 @@ function buildResponse(
                     "LinkedIn – Professional networking + jobs",
                     "AmbitionBox – Indian salary benchmarks",
                     "freeCodeCamp – Free tech courses",
-                    "InterviewAI – Practice mock interviews",
+                    "MedhaHub – Practice mock interviews",
                 ],
             };
     }

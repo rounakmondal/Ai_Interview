@@ -66,7 +66,7 @@ export default function PremiumNavbar() {
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
               <motion.img
                 src="/logo.png"
-                alt="InterviewSathi"
+                alt="MedhaHub"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
                 className="w-9 h-9 rounded-lg object-cover shadow-lg shadow-indigo-500/20"
@@ -75,7 +75,7 @@ export default function PremiumNavbar() {
                 className={`font-semibold text-[15px] hidden sm:inline tracking-tight transition-colors duration-300 ${isDark ? "text-white/95" : "text-slate-900"
                   }`}
               >
-                InterviewSathi
+                MedhaHub
               </span>
             </Link>
 

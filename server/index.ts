@@ -11,7 +11,7 @@ import {
   handleNextQuestion, 
   handleFinishInterview 
 } from "./routes/interview";
-import { scheduleDailyPosts } from "./dailyPostScheduler";
+import { scheduleDailyPosts, handleTriggerDailyPost } from "./dailyPostScheduler";
 import { handleExtractPdf } from "./routes/extractPdf";
 import {
   handleGetQuestions,
@@ -151,6 +151,9 @@ export function createServer() {
   // ─────────────────────────────────────────────────────────────────────
   app.get("/api/extract-pdf-questions", extractPDFQuestions);
   app.get("/api/pdf-metadata", getPDFMetadata);
+
+  // External cron trigger for daily posts (fallback for server sleep)
+  app.get("/api/trigger-daily-post", handleTriggerDailyPost);
 
   return app;
 }

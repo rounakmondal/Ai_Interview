@@ -30,7 +30,7 @@ export default function BlogPostLayout({
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | InterviewSathi Blog`;
+      document.title = `${post.title} | MedhaHub Blog`;
       let meta = document.querySelector('meta[name="description"]');
       if (!meta) {
         meta = document.createElement("meta");

@@ -274,7 +274,7 @@ export default function TermsOfService() {
                 If you have questions about these Terms of Service, please contact us:
               </p>
               <ul>
-                <li>Email: <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">aiinterview0@gmail.com</a></li>
+                <li>Email: <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline">medhahubfryou@gmail.com</a></li>
                 <li>Contact Page: <Link to="/contact" className="text-primary hover:underline">Visit our Contact page</Link></li>
               </ul>
             </CardContent>

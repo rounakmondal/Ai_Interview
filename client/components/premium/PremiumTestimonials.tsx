@@ -11,7 +11,7 @@ const testimonials = [
     avatar: "PS",
     color: "from-indigo-500 to-blue-600",
     rating: 5,
-    text: "InterviewAI completely transformed my interview preparation. The AI gave me realistic follow-up questions I never expected. After 2 weeks of practice I felt so much more confident going into real interviews!",
+    text: "MedhaHub completely transformed my interview preparation. The AI gave me realistic follow-up questions I never expected. After 2 weeks of practice I felt so much more confident going into real interviews!",
   },
   {
     name: "Rahul V.",
@@ -20,7 +20,7 @@ const testimonials = [
     avatar: "RV",
     color: "from-violet-500 to-purple-600",
     rating: 5,
-    text: "Practicing IBPS interview questions with InterviewAI was a game-changer. The Hindi language support made it feel completely natural. I felt fully prepared going into my bank exam interview.",
+    text: "Practicing IBPS interview questions with MedhaHub was a game-changer. The Hindi language support made it feel completely natural. I felt fully prepared going into my bank exam interview.",
   },
   {
     name: "Ananya P.",
@@ -47,7 +47,7 @@ const testimonials = [
     avatar: "DR",
     color: "from-amber-500 to-orange-600",
     rating: 5,
-    text: "I recommend InterviewAI to job seekers as preparation. The 24/7 availability means candidates can practice at midnight before their morning interview. Brilliant tool.",
+    text: "I recommend MedhaHub to job seekers as preparation. The 24/7 availability means candidates can practice at midnight before their morning interview. Brilliant tool.",
   },
   {
     name: "Vikram S.",
@@ -56,7 +56,7 @@ const testimonials = [
     avatar: "VS",
     color: "from-cyan-500 to-blue-600",
     rating: 5,
-    text: "Used InterviewAI for my UPSC personality test preparation. The AI interviewer asked surprisingly deep questions about current affairs and my essay topics. Helped me stay calm on the actual day.",
+    text: "Used MedhaHub for my UPSC personality test preparation. The AI interviewer asked surprisingly deep questions about current affairs and my essay topics. Helped me stay calm on the actual day.",
   },
 ];
 
@@ -135,7 +135,7 @@ export default function PremiumTestimonials() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           >
-            Illustrative examples of how InterviewAI helps candidates prepare for interviews.
+            Illustrative examples of how MedhaHub helps candidates prepare for interviews.
           </motion.p>
 
           {/* CTA nudge */}

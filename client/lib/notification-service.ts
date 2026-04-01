@@ -71,8 +71,8 @@ export async function sendPushNotification(
 
     // Send notification
     new Notification(title, {
-      icon: "/logo.png",
-      badge: "/logo.png",
+      icon: "/favicon.svg",
+      badge: "/favicon.svg",
       ...options,
     });
   } catch (error) {

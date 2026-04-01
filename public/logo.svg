@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MedhaHub">
+  <rect width="512" height="512" rx="120" fill="#0B0F19"/>
+  <g transform="translate(64 168)">
+    <rect x="0" y="0" width="384" height="176" rx="44" fill="#0B0F19"/>
+    <text x="0" y="112" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="78" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Medha</text>
+    <g transform="translate(242 18)">
+      <rect x="0" y="0" width="142" height="120" rx="28" fill="#FF8A00"/>
+      <text x="26" y="86" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="68" font-weight="900" fill="#0B0F19" letter-spacing="-1">Hub</text>
+    </g>
+  </g>
+</svg>

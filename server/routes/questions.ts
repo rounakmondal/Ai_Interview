@@ -24,7 +24,7 @@ function resolvePublicDir(): string {
 
   for (const dir of candidates) {
     // Check if this dir actually contains one of our exam folders
-    if (fs.existsSync(path.join(dir, "Police")) || fs.existsSync(path.join(dir, "WBCS")) || fs.existsSync(path.join(dir, "WBPSC")) || fs.existsSync(path.join(dir, "WB Primary TET Question"))) {
+    if (fs.existsSync(path.join(dir, "Police")) || fs.existsSync(path.join(dir, "WBCS")) || fs.existsSync(path.join(dir, "WBPSC")) || fs.existsSync(path.join(dir, "WB Primary TET Question")) || fs.existsSync(path.join(dir, "IBPS"))) {
       return dir;
     }
   }
@@ -43,6 +43,7 @@ const VALID_FOLDERS: Record<string, string> = {
   wbpsc: "WBPSC",
   ssc: "SSC",
   "wb-primary-tet": "WB Primary TET Question",
+  ibps: "IBPS",
 };
 
 /**

@@ -16,7 +16,7 @@ const contactInfo = [
     icon: User,
     label: "Developer",
     value: "Ranjan Mondal",
-    description: "Creator & Lead Developer, InterviewAI",
+    description: "Creator & Lead Developer, MedhaHub",
   },
   {
     icon: MapPin,
@@ -163,7 +163,7 @@ export default function PremiumContact() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           >
-            Have questions about InterviewAI? Our friendly team is always ready to help you
+            Have questions about MedhaHub? Our friendly team is always ready to help you
             succeed in your interview preparation journey.
           </motion.p>
         </motion.div>

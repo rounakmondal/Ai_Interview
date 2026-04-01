@@ -108,6 +108,12 @@ const FOLDERS: Record<string, FolderData> = {
     files: [
       // SI (Sub-Inspector) Papers
       {
+        name: "WBP SI (Sub-Inspector) 2025",
+        path: "police-json-data/SI/WBP-SI-Police-2025.json",
+        year: 2025,
+        type: "SI",
+      },
+      {
         name: "WBP SI (Sub-Inspector) 2021",
         path: "police-json-data/SI/WBP-SI-Police-2021.json",
         year: 2021,
@@ -239,11 +245,42 @@ const FOLDERS: Record<string, FolderData> = {
     name: "SSC (Staff Selection Commission)",
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "amber",
-    badge: "Coming Soon",
+    badge: "New",
     publicPath: "SSC",
     description:
-      "SSC CGL, CHSL, MTS and other Staff Selection Commission exam papers for Central Government job preparation",
-    files: [],
+      "SSC MTS previous year question papers (2019 & 2023 all shifts) for Multi Tasking Staff exam preparation",
+    files: [
+      {
+        name: "SSC MTS 14 Sep 2023 Morning Shift",
+        path: "MTS/MTS_14_09_2023_Morning_Questions.json",
+        year: 2023,
+        type: "MTS",
+      },
+      {
+        name: "SSC MTS 14 Sep 2023 Afternoon Shift",
+        path: "MTS/ssc_mts_14_09_2023_Aftertoon_Question.json",
+        year: 2023,
+        type: "MTS",
+      },
+      {
+        name: "SSC MTS 14 Sep 2023 Evening Shift",
+        path: "MTS/MTS_!4_09_2023_EveningShift_Question.json",
+        year: 2023,
+        type: "MTS",
+      },
+      {
+        name: "SSC MTS 5 Aug 2019 Non-Technical",
+        path: "MTS/MTS_05_08_2019_Non-Technical_Question.json",
+        year: 2019,
+        type: "MTS",
+      },
+      {
+        name: "SSC MTS 2019",
+        path: "MTS/ssc_mts_2019.json",
+        year: 2019,
+        type: "MTS",
+      },
+    ],
   },
   wbpsc: {
     name: "WBPSC (West Bengal Public Service Commission)",
@@ -252,12 +289,42 @@ const FOLDERS: Record<string, FolderData> = {
     badge: "New",
     publicPath: "WBPSC",
     description:
-      "West Bengal Public Service Commission exam papers including Clerkship and other positions for state government job preparation",
+      "WBPSC Clerkship previous year question papers (2019, 2020, 2024 all shifts) for West Bengal state government job preparation",
     files: [
       {
-        name: "WBPSC Clerkship 2024",
-        path: "Wbpsc clerkship 2024 questions.json",
+        name: "WBPSC Clerkship 2024 (1st Shift)",
+        path: "Wbpsc clerkship 2024 1st shift questions.json",
         year: 2024,
+        type: "Clerkship",
+      },
+      {
+        name: "WBPSC Clerkship 2024 (2nd Shift)",
+        path: "WBPSC_Clerkship_2024_Questions 2nd shift.json",
+        year: 2024,
+        type: "Clerkship",
+      },
+      {
+        name: "WBPSC Clerkship 2024 (3rd Shift)",
+        path: "WBPSC_Clerkship_Questions 3rd shift.json",
+        year: 2024,
+        type: "Clerkship",
+      },
+      {
+        name: "WBPSC Clerkship 2024 (4th Shift)",
+        path: "WBPSC_Clerkship_Questions 4th shift.json",
+        year: 2024,
+        type: "Clerkship",
+      },
+      {
+        name: "WBPSC Clerkship 2020 (Shift 2)",
+        path: "WBPSC_Clerkship_2020_Shift2_Questions.json",
+        year: 2020,
+        type: "Clerkship",
+      },
+      {
+        name: "WBPSC Clerkship 2019 (Set 2)",
+        path: "WBPSC-Clerkship-2019-Set-2.json",
+        year: 2019,
         type: "Clerkship",
       },
     ],
@@ -294,6 +361,53 @@ const FOLDERS: Record<string, FolderData> = {
         path: "WB Primary TET 2015.json",
         year: 2015,
         type: "Primary TET",
+      },
+    ],
+  },
+  ibps: {
+    name: "IBPS PO (Probationary Officer)",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "indigo",
+    badge: "New",
+    publicPath: "IBPS",
+    description:
+      "IBPS PO Prelims & Mains previous year question papers for banking exam preparation — 2021 to 2025",
+    files: [
+      {
+        name: "IBPS PO Pre 2025 (Memory Based, 23rd Aug 1st Shift)",
+        path: "IBPS PO Pre 2025 Memory Based Paper (23rd August 1st Shift).json",
+        year: 2025,
+        type: "Prelims",
+      },
+      {
+        name: "IBPS PO Prelims 2024 (Memory Based)",
+        path: "IBPS PO Prelims Memory Based 2024.json",
+        year: 2024,
+        type: "Prelims",
+      },
+      {
+        name: "IBPS PO Prelims 2023",
+        path: "IBPS PO Prelims Previous Year Paper 2023.json",
+        year: 2023,
+        type: "Prelims",
+      },
+      {
+        name: "IBPS PO Pre 2022",
+        path: "IBPS PO Pre 2022.json",
+        year: 2022,
+        type: "Prelims",
+      },
+      {
+        name: "IBPS PO Mains 2022",
+        path: "IBPS PO Mains 2022.json",
+        year: 2022,
+        type: "Mains",
+      },
+      {
+        name: "IBPS PO Mains 2021 (Memory Based)",
+        path: "IBPS PO Mains Memory Based 2021.json",
+        year: 2021,
+        type: "Mains",
       },
     ],
   },
@@ -365,7 +479,12 @@ export default function QuestionHub({
     // Persist folder selection in URL so browser back button remembers it
     const urlFolder = searchParams.get("tab");
     if (urlFolder && FOLDERS[urlFolder]) return urlFolder;
-    return seoProfile === "wbcs" ? "wbcs" : "police";
+    return seoProfile === "wbcs" ? "wbcs"
+      : seoProfile === "wbpsc-clerkship" ? "wbpsc"
+      : seoProfile === "wb-tet" ? "wb-primary-tet"
+      : seoProfile === "ssc-mts" ? "ssc"
+      : seoProfile === "ibps-po" ? "ibps"
+      : "police";
   });
   const [testNavLoading, setTestNavLoading] = useState(false);
   const [filesFromApi, setFilesFromApi] = useState<PDFItem[] | null>(null);
@@ -496,7 +615,7 @@ export default function QuestionHub({
 </head>
 <body>
   <h1>${escapeHtml(paperTitle)}</h1>
-  <div class="meta">${visible.length} Questions | Generated by InterviewSathi Safe-Extract | ${generatedAt}</div>
+  <div class="meta">${visible.length} Questions | Generated by MedhaHub Safe-Extract | ${generatedAt}</div>
   ${visible.map((q, i) => `
     <div class="q-container">
       <div class="question">Q${i + 1}. ${escapeHtml(q.question)}</div>
@@ -537,7 +656,7 @@ export default function QuestionHub({
         doc.text(paperTitle, 20, y);
         y += 15;
         doc.setFontSize(10);
-        doc.text(`Generated by InterviewSathi Safe-Extract | ${new Date().toLocaleDateString()}`, 20, y);
+        doc.text(`Generated by MedhaHub Safe-Extract | ${new Date().toLocaleDateString()}`, 20, y);
         y += 15;
 
         visible.forEach((q, i) => {
@@ -644,7 +763,15 @@ export default function QuestionHub({
               ? "WBCS Mock Test & Previous Year Papers"
               : seoProfile === "police"
                 ? "WBP Police Mock Test & Previous Year Papers"
-                : "Question Hub"}
+                : seoProfile === "wbpsc-clerkship"
+                  ? "WBPSC Clerkship Mock Test & Previous Year Papers"
+                  : seoProfile === "wb-tet"
+                    ? "WB Primary TET Mock Test & Previous Year Papers"
+                    : seoProfile === "ssc-mts"
+                      ? "SSC MTS Mock Test & Previous Year Papers"
+                      : seoProfile === "ibps-po"
+                        ? "IBPS PO Mock Test & Previous Year Papers"
+                        : "Question Hub"}
           </h1>
           <p className="text-lg text-muted-foreground mb-2 max-w-2xl">
             {seoProfile === "wbcs" ? (
@@ -657,14 +784,34 @@ export default function QuestionHub({
                 <strong className="text-foreground">West Bengal Police (WBP)</strong> Constable &amp; Lady Constable{" "}
                 <strong className="text-foreground">previous year mock tests</strong> online — built from official-style PYP PDFs for exam practice.
               </>
+            ) : seoProfile === "wbpsc-clerkship" ? (
+              <>
+                <strong className="text-foreground">WBPSC Clerkship</strong> previous year question papers (2019–2024, all shifts) as{" "}
+                <strong className="text-foreground">free online mock tests</strong> — English, GK, and Arithmetic with instant scoring.
+              </>
+            ) : seoProfile === "wb-tet" ? (
+              <>
+                <strong className="text-foreground">WB Primary TET</strong> previous year question papers (2015–2023) as{" "}
+                <strong className="text-foreground">free online mock tests</strong> — Bengali, English, Child Development, Math &amp; EVS sections.
+              </>
+            ) : seoProfile === "ssc-mts" ? (
+              <>
+                <strong className="text-foreground">SSC MTS</strong> previous year question papers (2019 &amp; 2023, all shifts) as{" "}
+                <strong className="text-foreground">free online mock tests</strong> — GK, Reasoning &amp; English sections with instant results.
+              </>
+            ) : seoProfile === "ibps-po" ? (
+              <>
+                <strong className="text-foreground">IBPS PO</strong> Prelims &amp; Mains previous year question papers (2021–2025) as{" "}
+                <strong className="text-foreground">free online mock tests</strong> — Reasoning, English, Quantitative Aptitude &amp; General Awareness with instant scoring.
+              </>
             ) : (
               <>
-                Download <strong className="text-foreground">WBP Constable</strong>, <strong className="text-foreground">WBCS</strong> &amp; <strong className="text-foreground">SSC</strong> previous year question papers free — and attempt unlimited AI-powered mock tests online.
+                Download <strong className="text-foreground">WBP Constable</strong>, <strong className="text-foreground">WBCS</strong>, <strong className="text-foreground">WBPSC Clerkship</strong>, <strong className="text-foreground">WB TET</strong>, <strong className="text-foreground">SSC</strong> &amp; <strong className="text-foreground">IBPS PO</strong> previous year question papers free — and attempt unlimited AI-powered mock tests online.
               </>
             )}
           </p>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
-            WBP Constable Prelims 2013–2021 • WBCS Prelims &amp; Mains • SSC CGL / CHSL / MTS
+            WBP Constable &amp; SI Prelims 2013–2025 • WBCS Prelims 2015–2023 • WBPSC Clerkship 2019–2024 • WB TET 2015–2023 • SSC MTS 2019–2023 • IBPS PO 2021–2025
           </p>
 
           {/* Stats */}

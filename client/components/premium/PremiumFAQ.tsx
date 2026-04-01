@@ -4,19 +4,19 @@ import { HelpCircle, ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is InterviewAI suitable for freshers or only experienced candidates?",
+    question: "Is MedhaHub suitable for freshers or only experienced candidates?",
     answer:
-      "InterviewAI is designed for everyone — from college freshers appearing in campus placements to experienced professionals targeting senior roles. You can select the interview type and difficulty that matches your level, and our AI adapts questions accordingly.",
+      "MedhaHub is designed for everyone — from college freshers appearing in campus placements to experienced professionals targeting senior roles. You can select the interview type and difficulty that matches your level, and our AI adapts questions accordingly.",
   },
   {
-    question: "Which languages does InterviewAI support?",
+    question: "Which languages does MedhaHub support?",
     answer:
       "We currently support English, Hindi, Bengali, and Telugu. More Indian regional languages are coming soon. You can select your preferred language from the interview setup screen.",
   },
   {
-    question: "Does InterviewAI support Government exam interviews like UPSC, IBPS, SSC?",
+    question: "Does MedhaHub support Government exam interviews like UPSC, IBPS, SSC?",
     answer:
-      "Yes! InterviewAI has a dedicated 'Government' interview type that covers UPSC Personality Tests, IBPS PO/SO, SSC CGL interviews, and state PSC formats. Questions are tailored to the specific exam and domain you select.",
+      "Yes! MedhaHub has a dedicated 'Government' interview type that covers UPSC Personality Tests, IBPS PO/SO, SSC CGL interviews, and state PSC formats. Questions are tailored to the specific exam and domain you select.",
   },
   {
     question: "How does the AI evaluate my performance?",
@@ -41,7 +41,7 @@ const faqs = [
   {
     question: "Does it work on mobile devices?",
     answer:
-      "Yes! InterviewAI is fully responsive and works on smartphones and tablets. We also have an Android app available. Make sure your browser allows microphone access for the best voice interaction experience.",
+      "Yes! MedhaHub is fully responsive and works on smartphones and tablets. We also have an Android app available. Make sure your browser allows microphone access for the best voice interaction experience.",
   },
 ];
 
@@ -151,7 +151,7 @@ export default function PremiumFAQ() {
           </h2>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about InterviewAI. Can't find your answer?{" "}
+            Everything you need to know about MedhaHub. Can't find your answer?{" "}
             <a href="#contact" className="text-indigo-600 dark:text-indigo-400 underline underline-offset-2 hover:no-underline">
               Contact us
             </a>.

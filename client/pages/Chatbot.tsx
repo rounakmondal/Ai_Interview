@@ -125,8 +125,10 @@ export default function Chatbot() {
         payload.image = image;
       }
 
-      // 3. Make API call to the new endpoint
-      const response = await fetch('/api/study/chat', {
+      // 3. Make API call to the endpoint using env (works local & server)
+      const apiBase = import.meta.env.VITE_API_URL || '';
+      const url = apiBase+'/api/study/chat';
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

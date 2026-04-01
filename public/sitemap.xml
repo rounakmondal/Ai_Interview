@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/</loc>
+    <loc>https://medhahub.in/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,21 +15,21 @@
   <!-- Core Exam Preparation Pages (High Priority) -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/govt-practice</loc>
+    <loc>https://medhahub.in/govt-practice</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/question-hub</loc>
+    <loc>https://medhahub.in/question-hub</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/prev-year-questions</loc>
+    <loc>https://medhahub.in/prev-year-questions</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -39,59 +39,309 @@
   <!-- SEO Landing / Exam-Specific Pages -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/wbcs-mock-test</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://medhahub.in/wbcs-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/mock-test</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://medhahub.in/wbp-police-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/wbpsc-clerkship-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/wb-tet-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/ssc-mts-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- Previous Year Question Paper Pages (High SEO) -->
+  <!-- ══════════════════════════════════════════════ -->
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2023</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2022</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2021</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2020</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2019</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2018</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2017</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2016</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbcs-prelims-2015</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-constable-2021</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-constable-2018</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-constable-2016</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-constable-2015</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-constable-2013</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-lady-constable-2018</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-si-2025</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-si-2021</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-si-2019</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbp-si-2018</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/previous-year/wbpsc-clerkship-2024</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbpsc-clerkship-2020</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wbpsc-clerkship-2019</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/previous-year/wb-tet-2023</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wb-tet-2022</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wb-tet-2017</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/wb-tet-2015</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://medhahub.in/previous-year/ssc-mts-2023</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ssc-mts-2019</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- IBPS PO Landing Page -->
+  <url>
+    <loc>https://medhahub.in/ibps-po-mock-test</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- IBPS PO Previous Year Papers -->
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-pre-2025</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-pre-2024</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-pre-2023</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-pre-2022</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-mains-2022</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://medhahub.in/previous-year/ibps-po-mains-2021</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- ══════════════════════════════════════════════ -->
   <!-- Study & Learning Tools -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/current-affairs</loc>
+    <loc>https://medhahub.in/current-affairs</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/daily-quiz</loc>
+    <loc>https://medhahub.in/daily-quiz</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/syllabus</loc>
+    <loc>https://medhahub.in/syllabus</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/study-plan</loc>
+    <loc>https://medhahub.in/study-plan</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/study-with-me</loc>
+    <loc>https://medhahub.in/study-with-me</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/photo-solver</loc>
+    <loc>https://medhahub.in/photo-solver</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -101,28 +351,28 @@
   <!-- Interview & Career Tools -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/setup</loc>
+    <loc>https://medhahub.in/setup</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/resume</loc>
+    <loc>https://medhahub.in/resume</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/career-mentor</loc>
+    <loc>https://medhahub.in/career-mentor</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/chatbot</loc>
+    <loc>https://medhahub.in/chatbot</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -132,28 +382,28 @@
   <!-- Community & Engagement -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/leaderboard</loc>
+    <loc>https://medhahub.in/leaderboard</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/daily-tasks</loc>
+    <loc>https://medhahub.in/daily-tasks</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/dashboard</loc>
+    <loc>https://medhahub.in/dashboard</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/story-telling</loc>
+    <loc>https://medhahub.in/story-telling</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -163,28 +413,28 @@
   <!-- Informational / Legal Pages -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/about</loc>
+    <loc>https://medhahub.in/about</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/contact</loc>
+    <loc>https://medhahub.in/contact</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/privacy-policy</loc>
+    <loc>https://medhahub.in/privacy-policy</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://interviewsathi.online/terms-of-service</loc>
+    <loc>https://medhahub.in/terms-of-service</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -193,67 +443,67 @@
   <!-- Blog & SEO Content Pages -->
   <!-- ══════════════════════════════════════════════ -->
   <url>
-    <loc>https://interviewsathi.online/blog</loc>
+    <loc>https://medhahub.in/blog</loc>
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wbcs-preparation-strategy-2026</loc>
+    <loc>https://medhahub.in/blog/wbcs-preparation-strategy-2026</loc>
     <lastmod>2026-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wbcs-prelims-2023-question-paper-analysis</loc>
+    <loc>https://medhahub.in/blog/wbcs-prelims-2023-question-paper-analysis</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wbpsc-clerkship-previous-year-papers</loc>
+    <loc>https://medhahub.in/blog/wbpsc-clerkship-previous-year-papers</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wb-police-si-mock-test-free</loc>
+    <loc>https://medhahub.in/blog/wb-police-si-mock-test-free</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wb-tet-2026-syllabus-exam-pattern</loc>
+    <loc>https://medhahub.in/blog/wb-tet-2026-syllabus-exam-pattern</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/top-50-gk-questions-wbcs-prelims-2026</loc>
+    <loc>https://medhahub.in/blog/top-50-gk-questions-wbcs-prelims-2026</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wbpsc-preparation-in-bengali</loc>
+    <loc>https://medhahub.in/blog/wbpsc-preparation-in-bengali</loc>
     <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/wb-police-constable-previous-year-paper</loc>
+    <loc>https://medhahub.in/blog/wb-police-constable-previous-year-paper</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/how-to-crack-wbcs-first-attempt</loc>
+    <loc>https://medhahub.in/blog/how-to-crack-wbcs-first-attempt</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://interviewsathi.online/blog/best-books-wbcs-wbpsc-wb-police-2026</loc>
+    <loc>https://medhahub.in/blog/best-books-wbcs-wbpsc-wb-police-2026</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

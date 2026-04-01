@@ -1,0 +1,479 @@
+{
+  "brand": {
+    "name": "MedhaHub",
+    "tagline": "Practice Smart, Crack Exams Faster",
+    "domain": "https://medhahub.in",
+    "logo": "/logo.png",
+    "locale": "en_IN",
+    "alternateLocale": "bn_IN"
+  },
+
+  "positioning": {
+    "primary_focus": "West Bengal Government Exams (WBCS, WBPSC, WBP, WB TET, SSC)",
+    "secondary_focus": "All India Government Exams (SSC, Railway, Banking, UPSC)",
+    "strategy": "Target long-tail, exam-specific keywords in English and Bengali. Focus on 'previous year question paper' + exam name + year combinations for organic traffic."
+  },
+
+  "homepage_meta": {
+    "title": "MedhaHub – Free Mock Tests & Previous Year Questions for Government Exams in India",
+    "description": "Practice for WBCS, WBPSC, WB Police, WB TET, SSC and other government exams with MedhaHub. Attempt free mock tests, solve previous year questions, and track your preparation daily.",
+    "keywords": "government exam mock test free, previous year question paper, WBCS mock test, WB Police mock test, WBPSC clerkship questions, WB TET question paper, SSC MTS mock test, সরকারি চাকরি প্রস্তুতি, পুরনো প্রশ্নপত্র"
+  },
+
+  "exams": {
+    "wbcs": {
+      "full_name": "West Bengal Civil Service (WBCS)",
+      "slug": "wbcs",
+      "seo_route": "/wbcs-mock-test",
+      "pyq_data_path": "/WBCS/wbcs_json_data/",
+      "pdf_path": "/WBCS/",
+      "available_years": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+      "json_files": [
+        "sample-wbcs-2015.json",
+        "sample-wbcs-2016.json",
+        "sample-wbcs-2017.json",
+        "sample-wbcs-2018.json",
+        "sample-wbcs-2019.json"
+      ],
+      "pdf_files": [
+        "WBCS_Preliminary_Question_Paper_2015.pdf",
+        "WBCS_Preliminary_Question_Paper_2016.pdf",
+        "WBCS_Preliminary_Question_Paper_2017.pdf",
+        "WBCS_Preliminary_Question_Paper_2018.pdf",
+        "WBCS_Preliminary_Question_Paper_2019.pdf",
+        "WBCS_Preliminary_Question_Paper_2020.pdf",
+        "WBCS_Preliminary_Question_Paper_2021.pdf",
+        "WBCS_Preliminary_Question_Paper_2022.pdf",
+        "WBCS_Preliminary_Question_Paper_2023.pdf"
+      ],
+      "target_keywords": [
+        "WBCS mock test 2026",
+        "WBCS prelims practice paper free",
+        "WBCS previous year question paper with answers",
+        "WBCS preliminary question paper {year}",
+        "WBCS prelims question paper PDF download",
+        "West Bengal Civil Service online test",
+        "WBPSC prelims strategy",
+        "ডব্লিউবিসিএস মক টেস্ট",
+        "WBCS Bengali mock test",
+        "WBCS preparation online West Bengal",
+        "WBCS prelims {year} question paper",
+        "WBCS GK questions with answers"
+      ],
+      "meta": {
+        "title": "WBCS Mock Test Free Online | Previous Year Question Papers {year} | MedhaHub",
+        "description": "Practice WBCS (West Bengal Civil Service) with free online mock tests built from official previous-year prelims papers ({years}). Timed MCQs, instant scoring, and PDF downloads.",
+        "og_title": "WBCS Mock Test & Previous Year Papers | MedhaHub"
+      },
+      "pyq_pages": [
+        {
+          "slug": "/previous-year/wbcs-prelims-2023",
+          "title": "WBCS Prelims 2023 Question Paper with Answers | MedhaHub",
+          "description": "Solve WBCS Preliminary Exam 2023 question paper online. 200 MCQs with answers, explanations, and performance analysis.",
+          "keywords": "WBCS prelims 2023 question paper, WBCS 2023 answers, WBCS previous year paper 2023"
+        },
+        {
+          "slug": "/previous-year/wbcs-prelims-2022",
+          "title": "WBCS Prelims 2022 Question Paper with Answers | MedhaHub",
+          "description": "Practice WBCS 2022 Preliminary question paper online with instant scoring and detailed analysis.",
+          "keywords": "WBCS prelims 2022 question paper, WBCS 2022 answers, WBCS previous year paper 2022"
+        },
+        {
+          "slug": "/previous-year/wbcs-prelims-2021",
+          "title": "WBCS Prelims 2021 Question Paper with Answers | MedhaHub",
+          "description": "WBCS 2021 Preliminary exam question paper. Practice online or download PDF with answer key.",
+          "keywords": "WBCS prelims 2021. WBCS 2021 question paper, WBCS prelims 2021 PDF"
+        }
+      ]
+    },
+
+    "wbp_police": {
+      "full_name": "West Bengal Police (WBP)",
+      "slug": "police",
+      "seo_route": "/wbp-police-mock-test",
+      "pyq_data_path": "/Police/police-json-data/",
+      "pdf_path": "/Police/",
+      "sub_exams": ["Constable", "Lady Constable", "SI (Sub-Inspector)"],
+      "available_years": {
+        "constable": [2013, 2015, 2016, 2018, 2021],
+        "lady_constable": [2018],
+        "si": [2018, 2019, 2021, 2025]
+      },
+      "json_files": {
+        "constable": [
+          "WBP Constable Preliminary Question Paper 2013.json",
+          "WBP Constable Preliminary Question Paper 2015.json",
+          "WBP Constable Preliminary Question Paper 2016.json",
+          "WBP Constable Preliminary Question Paper 2018.json",
+          "WBP CONSTABLE PYP 2021.json",
+          "sample-Constable Preliminary Question Paper 2021.json"
+        ],
+        "lady_constable": [
+          "WBP Lady Constable Preliminary Question Paper 2018.json"
+        ],
+        "si": [
+          "SI/WBP-SI-Police-2018.json",
+          "SI/WBP-SI-Police-2019.json",
+          "SI/WBP-SI-Police-2021.json",
+          "SI/WBP-SI-Police-2025.json"
+        ]
+      },
+      "target_keywords": [
+        "WBP Constable mock test 2026",
+        "WBP SI mock test online",
+        "West Bengal Police recruitment practice paper",
+        "WBP lady constable previous year paper",
+        "WBP prelims mock test in Bengali",
+        "পশ্চিমবঙ্গ পুলিশ মক টেস্ট",
+        "WBP online exam practice",
+        "police job preparation West Bengal",
+        "WBP constable previous year question paper {year}",
+        "WBP SI question paper PDF",
+        "WBP constable prelims {year}",
+        "WB Police SI previous year paper {year}"
+      ],
+      "meta": {
+        "title": "WBP Police Mock Test | Constable & SI Previous Year Papers Online | MedhaHub",
+        "description": "West Bengal Police (WBP) Constable, Lady Constable, and SI previous year question papers as free online mock tests. Timed practice, answers, and PDFs for WBP recruitment exam preparation.",
+        "og_title": "WBP Police Mock Test & Previous Year Papers | MedhaHub"
+      },
+      "pyq_pages": [
+        {
+          "slug": "/previous-year/wbp-constable-2021",
+          "title": "WBP Constable 2021 Previous Year Question Paper | MedhaHub",
+          "description": "Practice WBP Constable Preliminary 2021 question paper online with answers & scoring.",
+          "keywords": "WBP constable 2021 question paper, WB police constable prelims 2021, WBP PYP 2021"
+        },
+        {
+          "slug": "/previous-year/wbp-constable-2018",
+          "title": "WBP Constable 2018 Question Paper with Answers | MedhaHub",
+          "description": "WBP Constable Preliminary 2018 question paper. Solve online or download PDF.",
+          "keywords": "WBP constable 2018 question paper, WB police 2018 prelims paper"
+        },
+        {
+          "slug": "/previous-year/wbp-constable-2016",
+          "title": "WBP Constable 2016 Previous Year Question Paper | MedhaHub",
+          "description": "WBP Constable Preliminary 2016 question paper. Practice online with timer, instant scoring, and answer key.",
+          "keywords": "WBP constable 2016 question paper, WB police constable prelims 2016, WBP 2016 paper"
+        },
+        {
+          "slug": "/previous-year/wbp-constable-2015",
+          "title": "WBP Constable 2015 Question Paper with Answers | MedhaHub",
+          "description": "Solve WBP Constable Preliminary 2015 question paper online. Free timed mock test with detailed scoring.",
+          "keywords": "WBP constable 2015 question paper, WB police constable prelims 2015, WBP 2015 paper"
+        },
+        {
+          "slug": "/previous-year/wbp-constable-2013",
+          "title": "WBP Constable 2013 Previous Year Question Paper | MedhaHub",
+          "description": "WBP Constable Preliminary 2013 question paper. Practice online or download PDF with answer key.",
+          "keywords": "WBP constable 2013 question paper, WB police constable prelims 2013, WBP 2013 paper"
+        },
+        {
+          "slug": "/previous-year/wbp-lady-constable-2018",
+          "title": "WBP Lady Constable 2018 Previous Year Question Paper | MedhaHub",
+          "description": "WBP Lady Constable Preliminary 2018 question paper as a free online mock test with timer and instant results.",
+          "keywords": "WBP lady constable 2018 question paper, WB police lady constable prelims 2018"
+        },
+        {
+          "slug": "/previous-year/wbp-si-2025",
+          "title": "WBP SI 2025 Question Paper Online Mock Test | MedhaHub",
+          "description": "WBP Sub-Inspector (SI) 2025 question paper as a free online mock test with timer and instant results.",
+          "keywords": "WBP SI 2025 question paper, WB police SI exam 2025, WBP SI mock test 2025"
+        },
+        {
+          "slug": "/previous-year/wbp-si-2021",
+          "title": "WBP SI 2021 Previous Year Question Paper | MedhaHub",
+          "description": "Solve West Bengal Police SI 2021 paper online with detailed answers and performance tracking.",
+          "keywords": "WBP SI 2021 question paper, WB police SI prelims 2021"
+        },
+        {
+          "slug": "/previous-year/wbp-si-2019",
+          "title": "WBP SI 2019 Previous Year Question Paper | MedhaHub",
+          "description": "WBP Sub-Inspector 2019 question paper. Practice online with timer and instant scoring on MedhaHub.",
+          "keywords": "WBP SI 2019 question paper, WB police SI exam 2019"
+        },
+        {
+          "slug": "/previous-year/wbp-si-2018",
+          "title": "WBP SI 2018 Question Paper with Answers | MedhaHub",
+          "description": "WBP Sub-Inspector 2018 question paper online mock test. Solve with timer and get detailed performance analysis.",
+          "keywords": "WBP SI 2018 question paper, WB police SI prelims 2018"
+        }
+      ]
+    },
+
+    "wbpsc_clerkship": {
+      "full_name": "WBPSC Clerkship Examination",
+      "slug": "wbpsc-clerkship",
+      "seo_route": "/wbpsc-clerkship-mock-test",
+      "pyq_data_path": "/WBPSC/",
+      "available_years": [2019, 2020, 2024],
+      "json_files": [
+        "WBPSC-Clerkship-2019-Set-2.json",
+        "WBPSC_Clerkship_2020_Shift2_Questions.json",
+        "Wbpsc clerkship 2024 1st shift questions.json",
+        "WBPSC_Clerkship_2024_Questions 2nd shift.json",
+        "WBPSC_Clerkship_Questions 3rd shift.json",
+        "WBPSC_Clerkship_Questions 4th shift.json"
+      ],
+      "target_keywords": [
+        "WBPSC Clerkship mock test 2026",
+        "WBPSC Clerkship previous year question paper",
+        "WBPSC Clerkship 2024 question paper",
+        "WBPSC Clerkship 2024 all shift questions",
+        "West Bengal Public Service Commission clerkship",
+        "ক্লার্কশিপ মক টেস্ট",
+        "WBPSC Clerkship preparation online",
+        "WBPSC Clerkship syllabus",
+        "WBPSC Clerkship 2019 question paper PDF",
+        "WBPSC Clerkship 2020 question paper"
+      ],
+      "meta": {
+        "title": "WBPSC Clerkship Mock Test Free | Previous Year Question Papers (2019-2024) | MedhaHub",
+        "description": "Practice WBPSC Clerkship exam with free online mock tests from 2019, 2020, 2024 papers (all shifts). Timed MCQs covering English, GK, and Arithmetic.",
+        "og_title": "WBPSC Clerkship Mock Test & PYQ Papers | MedhaHub"
+      },
+      "pyq_pages": [
+        {
+          "slug": "/previous-year/wbpsc-clerkship-2024",
+          "title": "WBPSC Clerkship 2024 Question Paper All Shifts | MedhaHub",
+          "description": "WBPSC Clerkship 2024 question papers from all 4 shifts. Practice online with timer, scoring, and answer key.",
+          "keywords": "WBPSC clerkship 2024 question paper, WBPSC clerkship 2024 all shift, clerkship exam 2024 paper"
+        },
+        {
+          "slug": "/previous-year/wbpsc-clerkship-2020",
+          "title": "WBPSC Clerkship 2020 Question Paper with Answers | MedhaHub",
+          "description": "Solve WBPSC Clerkship 2020 Shift 2 question paper online with instant results.",
+          "keywords": "WBPSC clerkship 2020 question paper, clerkship 2020 answers"
+        },
+        {
+          "slug": "/previous-year/wbpsc-clerkship-2019",
+          "title": "WBPSC Clerkship 2019 Question Paper Set 2 | MedhaHub",
+          "description": "WBPSC Clerkship 2019 Set 2 question paper. Practice online with timer and detailed scoring.",
+          "keywords": "WBPSC clerkship 2019 question paper, clerkship 2019 set 2"
+        }
+      ]
+    },
+
+    "wb_tet": {
+      "full_name": "WB Primary TET (Teacher Eligibility Test)",
+      "slug": "wb-tet",
+      "seo_route": "/wb-tet-mock-test",
+      "pyq_data_path": "/WB Primary TET Question/",
+      "available_years": [2015, 2017, 2022, 2023],
+      "json_files": [
+        "WB Primary TET 2015.json",
+        "WB Primary TET 2017 Question Paper.json",
+        "WB Primary TET 2022.json",
+        "Wb primary tet 2023 questions .json"
+      ],
+      "target_keywords": [
+        "WB Primary TET mock test 2026",
+        "WB TET previous year question paper",
+        "WB Primary TET 2023 question paper",
+        "WB TET 2022 question paper with answers",
+        "West Bengal TET online practice",
+        "প্রাইমারি টেট মক টেস্ট",
+        "WB TET preparation online",
+        "WB Primary TET syllabus 2026",
+        "WB TET Bengali question paper",
+        "WB TET Child Development questions"
+      ],
+      "meta": {
+        "title": "WB TET Mock Test Free | Primary TET Previous Year Question Papers | MedhaHub",
+        "description": "Practice WB Primary TET with free online mock tests from 2015, 2017, 2022, 2023 papers. Bengali, English, Child Development, Math, and EVS sections with answers.",
+        "og_title": "WB Primary TET Mock Test & PYQ Papers | MedhaHub"
+      },
+      "pyq_pages": [
+        {
+          "slug": "/previous-year/wb-tet-2023",
+          "title": "WB Primary TET 2023 Question Paper with Answers | MedhaHub",
+          "description": "WB Primary TET 2023 complete question paper. Practice online with section-wise analysis and scoring.",
+          "keywords": "WB TET 2023 question paper, WB primary TET 2023 answers, WB TET 2023 PDF"
+        },
+        {
+          "slug": "/previous-year/wb-tet-2022",
+          "title": "WB Primary TET 2022 Question Paper Online | MedhaHub",
+          "description": "Solve WB Primary TET 2022 question paper online. All sections — Bengali, English, Child Dev, Math, EVS.",
+          "keywords": "WB TET 2022 question paper, WB primary TET 2022 answers"
+        },
+        {
+          "slug": "/previous-year/wb-tet-2017",
+          "title": "WB Primary TET 2017 Question Paper | MedhaHub",
+          "description": "WB Primary TET 2017 question paper as a free online mock test with answers.",
+          "keywords": "WB TET 2017 question paper, WB primary TET 2017"
+        },
+        {
+          "slug": "/previous-year/wb-tet-2015",
+          "title": "WB Primary TET 2015 Question Paper | MedhaHub",
+          "description": "Practice WB Primary TET 2015 question paper online with timer and instant results.",
+          "keywords": "WB TET 2015 question paper, WB primary TET 2015"
+        }
+      ]
+    },
+
+    "ssc_mts": {
+      "full_name": "SSC MTS (Multi Tasking Staff)",
+      "slug": "ssc-mts",
+      "seo_route": "/ssc-mts-mock-test",
+      "pyq_data_path": "/SSC/MTS/",
+      "available_years": [2019, 2023],
+      "json_files": [
+        "MTS_05_08_2019_Non-Technical_Question.json",
+        "ssc_mts_2019.json",
+        "MTS_14_09_2023_Morning_Questions.json",
+        "MTS_!4_09_2023_EveningShift_Question.json",
+        "ssc_mts_14_09_2023_Aftertoon_Question.json"
+      ],
+      "target_keywords": [
+        "SSC MTS mock test 2026",
+        "SSC MTS previous year question paper",
+        "SSC MTS 2023 question paper PDF",
+        "SSC MTS 2019 question paper with answers",
+        "SSC MTS online practice free",
+        "SSC MTS preparation online",
+        "SSC MTS non-technical paper",
+        "SSC MTS GK questions",
+        "SSC MTS reasoning questions",
+        "SSC MTS English questions"
+      ],
+      "meta": {
+        "title": "SSC MTS Mock Test Free | Previous Year Question Papers 2019 & 2023 | MedhaHub",
+        "description": "Practice SSC MTS (Multi Tasking Staff) with free online mock tests from 2019 and 2023 papers (all shifts). GK, Reasoning, English sections with answers.",
+        "og_title": "SSC MTS Mock Test & Previous Year Papers | MedhaHub"
+      },
+      "pyq_pages": [
+        {
+          "slug": "/previous-year/ssc-mts-2023",
+          "title": "SSC MTS 2023 Question Paper All Shifts | MedhaHub",
+          "description": "SSC MTS 2023 question papers — Morning, Afternoon, Evening shifts. Practice online with timer.",
+          "keywords": "SSC MTS 2023 question paper, SSC MTS 2023 all shifts, SSC MTS 2023 answers"
+        },
+        {
+          "slug": "/previous-year/ssc-mts-2019",
+          "title": "SSC MTS 2019 Question Paper with Answers | MedhaHub",
+          "description": "SSC MTS 2019 Non-Technical question paper. Solve online or download PDF with answer key.",
+          "keywords": "SSC MTS 2019 question paper, SSC MTS 2019 answers, SSC MTS 2019 PDF"
+        }
+      ]
+    }
+  },
+
+  "url_structure": {
+    "exam_landing": "/exam/{slug}",
+    "mock_test_landing": "/{slug}-mock-test",
+    "pyq_landing": "/previous-year/{exam}-{year}",
+    "blog": "/blog/{slug}",
+    "daily_quiz": "/daily-quiz",
+    "question_hub": "/question-hub",
+    "examples": [
+      "/wbcs-mock-test",
+      "/wbp-police-mock-test",
+      "/wbpsc-clerkship-mock-test",
+      "/wb-tet-mock-test",
+      "/ssc-mts-mock-test",
+      "/previous-year/wbcs-prelims-2023",
+      "/previous-year/wbp-constable-2021",
+      "/previous-year/wbpsc-clerkship-2024",
+      "/previous-year/wb-tet-2023",
+      "/previous-year/ssc-mts-2023",
+      "/blog/wbcs-preparation-strategy-2026",
+      "/blog/wbpsc-clerkship-previous-year-papers"
+    ]
+  },
+
+  "blog_strategy": {
+    "existing_blogs": [
+      "wbcs-preparation-strategy-2026",
+      "wbcs-prelims-2023-question-paper-analysis",
+      "wbpsc-clerkship-previous-year-papers",
+      "wb-police-si-mock-test-free",
+      "wb-tet-2026-syllabus-exam-pattern",
+      "top-50-gk-questions-wbcs-prelims-2026",
+      "wbpsc-preparation-in-bengali",
+      "wb-police-constable-previous-year-paper",
+      "how-to-crack-wbcs-first-attempt",
+      "best-books-wbcs-wbpsc-wb-police-2026"
+    ],
+    "planned_blogs": [
+      {
+        "slug": "wbpsc-clerkship-2024-question-paper-analysis",
+        "title": "WBPSC Clerkship 2024 Question Paper Analysis — All 4 Shifts",
+        "target_keywords": ["WBPSC clerkship 2024 analysis", "clerkship 2024 question paper review"]
+      },
+      {
+        "slug": "ssc-mts-preparation-strategy-2026",
+        "title": "SSC MTS 2026 Preparation Strategy for Beginners",
+        "target_keywords": ["SSC MTS 2026 preparation", "SSC MTS strategy"]
+      },
+      {
+        "slug": "wb-primary-tet-preparation-guide",
+        "title": "WB Primary TET 2026 Complete Preparation Guide",
+        "target_keywords": ["WB TET preparation", "WB primary TET guide 2026"]
+      },
+      {
+        "slug": "wbp-si-recruitment-2026-preparation",
+        "title": "WBP SI Recruitment 2026 — Exam Pattern & Preparation Tips",
+        "target_keywords": ["WBP SI 2026", "WB police SI preparation"]
+      },
+      {
+        "slug": "daily-current-affairs-west-bengal",
+        "title": "Daily Current Affairs for West Bengal Government Exams",
+        "target_keywords": ["daily current affairs WB", "current affairs for WBCS"]
+      },
+      {
+        "slug": "wb-govt-exam-calendar-2026",
+        "title": "West Bengal Government Exam Calendar 2026 — All Upcoming Exams",
+        "target_keywords": ["WB govt exam 2026", "west bengal exam calendar 2026"]
+      },
+      {
+        "slug": "wbcs-vs-wbpsc-clerkship-which-easier",
+        "title": "WBCS vs WBPSC Clerkship — Which Is Easier to Crack?",
+        "target_keywords": ["WBCS vs clerkship", "WBPSC easier exam"]
+      },
+      {
+        "slug": "bengali-medium-government-exam-preparation",
+        "title": "বাংলা মাধ্যমে সরকারি চাকরির প্রস্তুতি — সম্পূর্ণ গাইড",
+        "target_keywords": ["বাংলা মাধ্যম সরকারি চাকরি", "Bengali medium govt exam"]
+      }
+    ]
+  },
+
+  "technical_seo": {
+    "robots_txt": {
+      "allow": ["/", "/blog/", "/previous-year/", "/wbcs-mock-test", "/wbp-police-mock-test", "/wbpsc-clerkship-mock-test", "/wb-tet-mock-test", "/ssc-mts-mock-test", "/question-hub", "/daily-quiz", "/current-affairs", "/syllabus"],
+      "disallow": ["/auth", "/profile", "/interview", "/evaluation", "/govt-test", "/govt-result", "/pdf-mock-test", "/chapter-test/"]
+    },
+    "sitemap": "dynamic — include all exam landing pages, PYQ pages, blog posts, and core pages",
+    "structured_data": ["WebPage", "Quiz", "FAQPage", "BreadcrumbList", "Organization"],
+    "performance": {
+      "lazy_load_pages": true,
+      "image_optimization": "WebP/AVIF",
+      "core_web_vitals": "LCP < 2.5s, FID < 100ms, CLS < 0.1"
+    }
+  },
+
+  "growth_strategy": {
+    "content_pillars": [
+      "Previous year question papers (PYQ) — all WB + SSC exams",
+      "Free online mock tests with timer & scoring",
+      "Daily quiz (auto-generated for SEO freshness)",
+      "Blog content targeting long-tail keywords",
+      "Current affairs for government exams"
+    ],
+    "expansion_roadmap": [
+      "Add WBCS Mains papers",
+      "Add WB Group D papers",
+      "Add UPSC Prelims papers",
+      "Add Railway NTPC papers",
+      "Add Banking IBPS/SBI papers",
+      "Add downloadable PDF notes per subject"
+    ],
+    "engagement_features": [
+      "Daily quiz with leaderboard",
+      "Email/push notifications for daily practice",
+      "Progress tracking dashboard",
+      "Study plan generator",
+      "AI-powered doubt solver (chatbot)"
+    ]
+  }
+}

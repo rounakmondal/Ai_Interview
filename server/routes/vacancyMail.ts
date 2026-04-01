@@ -23,15 +23,16 @@ export const handleVacancyMail: RequestHandler = async (req, res) => {
 
   try {
     const transporter = createTransporter();
+    const appUrl = process.env.APP_PUBLIC_URL || "https://medhahub.in";
     
     await transporter.sendMail({
-      from: `"InterviewSathi Alerts" <${process.env.SMTP_USER}>`,
+      from: `"MedhaHub Alerts" <${process.env.SMTP_USER}>`,
       to: email,
       subject: `🔔 Vacancy Alert: ${vacancy_title}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
-          <div style="background-color: #4f46e5; padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 24px;">InterviewSathi</h1>
+          <div style="background-color: #2563eb; padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">MedhaHub</h1>
             <p style="color: #e0e7ff; margin: 10px 0 0;">New Vacancy Notification</p>
           </div>
           
@@ -43,10 +44,10 @@ export const handleVacancyMail: RequestHandler = async (req, res) => {
             
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f3f4f6;">
               <p style="font-size: 14px; color: #6b7280; text-align: center;">
-                You are receiving this because you subscribed to vacancy alerts on InterviewSathi.
+                You are receiving this because you subscribed to vacancy alerts on MedhaHub.
               </p>
               <div style="text-align: center; margin-top: 20px;">
-                <a href="https://interviewsathi.online/vacancies" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                <a href="${appUrl}/vacancies" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                   View All Vacancies
                 </a>
               </div>

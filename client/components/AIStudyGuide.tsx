@@ -140,7 +140,7 @@ export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStud
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <p className="font-bold text-sm">InterviewSathi AI</p>
+                  <p className="font-bold text-sm">MedhaHub AI</p>
                   <Badge className="text-[10px] h-4 px-1.5 bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20">
                     Study Guide
                   </Badge>
@@ -247,7 +247,7 @@ export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStud
                   </div>
                 )}
                 <span className="text-[11px] text-muted-foreground font-medium">
-                  {m.role === "assistant" ? "InterviewSathi AI" : "You"}
+                  {m.role === "assistant" ? "MedhaHub AI" : "You"}
                 </span>
                 {m.timestamp && (
                   <span className="text-[10px] text-muted-foreground/60">

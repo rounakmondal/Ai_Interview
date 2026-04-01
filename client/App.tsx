@@ -52,6 +52,7 @@ const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
+const PreviousYearPage = lazy(() => import("./pages/PreviousYearPage"));
 const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
 
 // Blog pages
@@ -128,7 +129,25 @@ function AppContent() {
             path="/wbp-police-mock-test"
             element={<QuestionHub seoProfile="police" />}
           />
+          <Route
+            path="/wbpsc-clerkship-mock-test"
+            element={<QuestionHub seoProfile="wbpsc-clerkship" />}
+          />
+          <Route
+            path="/wb-tet-mock-test"
+            element={<QuestionHub seoProfile="wb-tet" />}
+          />
+          <Route
+            path="/ssc-mts-mock-test"
+            element={<QuestionHub seoProfile="ssc-mts" />}
+          />
+          <Route
+            path="/ibps-po-mock-test"
+            element={<QuestionHub seoProfile="ibps-po" />}
+          />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
+          {/* SEO Previous Year Question Paper pages */}
+          <Route path="/previous-year/:slug" element={<PreviousYearPage />} />
           {/* Blog */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/wbcs-preparation-strategy-2026" element={<BlogWBCSStrategy />} />

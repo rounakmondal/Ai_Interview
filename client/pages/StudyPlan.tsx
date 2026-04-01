@@ -142,8 +142,8 @@ export default function StudyPlan() {
       <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="container px-4 h-14 flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2 mr-1">
-            <img src="/logo.png" alt="InterviewSathi" className="w-7 h-7 rounded-lg object-cover" />
-            <span className="font-bold text-sm hidden sm:block">InterviewSathi</span>
+            <img src="/logo.png" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
+            <span className="font-bold text-sm hidden sm:block">MedhaHub</span>
           </Link>
           <span className="text-border/60 hidden sm:block">|</span>
           <nav className="hidden md:flex items-center gap-1 text-sm">
