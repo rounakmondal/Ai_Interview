@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.interviewsathi.online',
-  appName: 'InterviewSathi',
+  appName: 'MedhaHub',
   webDir: 'dist/spa'
 };
 
