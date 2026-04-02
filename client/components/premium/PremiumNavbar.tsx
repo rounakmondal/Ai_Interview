@@ -101,11 +101,13 @@ export default function PremiumNavbar() {
             </div>
 
             {/* Right Section - Auth */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3 border border-orange-400/40 px-3 py-1 rounded-full">
               {/* Notification Bell */}
               <NotificationBell />
+              
               {/* Language Toggle */}
               <LanguageToggle />
+             
               {/* Theme Toggle */}
               <ThemeToggle />
 
@@ -119,8 +121,8 @@ export default function PremiumNavbar() {
                     whileTap={{ scale: 0.98 }}
                     className="relative group px-4 py-2.5 rounded-full text-[14px] font-semibold text-white overflow-hidden flex items-center gap-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="relative flex items-center gap-2">
                       <User className="w-4 h-4" />
                       {getSession()?.user.name.split(" ")[0] || t("profile")}
@@ -137,9 +139,9 @@ export default function PremiumNavbar() {
                     whileTap={{ scale: 0.98 }}
                     className="relative group px-5 py-2.5 rounded-full text-[14px] font-semibold text-white overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute -inset-1 bg-indigo-500/30 rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -inset-1 bg-orange-500/30 rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10" />
                     <span className="relative flex items-center gap-2">
                       {t("getStarted")}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
