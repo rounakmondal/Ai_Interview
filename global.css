@@ -1,0 +1,326 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Light mode */
+    --background: 0 0% 100%;
+    --foreground: 15 23% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 15 23% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 15 23% 12%;
+
+    /* Premium indigo primary */
+    --primary: 235 86% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Purple accent for modern tech feel */
+    --secondary: 280 85% 56%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 14% 35%;
+
+    --accent: 280 85% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 90%;
+    --input: 0 0% 100%;
+    --ring: 235 86% 52%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 15 23% 12%;
+    --sidebar-primary: 235 86% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 280 85% 56%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 14% 90%;
+    --sidebar-ring: 235 86% 52%;
+  }
+
+  .dark {
+    /* Dark mode */
+    --background: 15 23% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 15 20% 14%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 15 20% 14%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 235 86% 62%;
+    --primary-foreground: 15 23% 8%;
+
+    --secondary: 280 85% 65%;
+    --secondary-foreground: 15 23% 8%;
+
+    --muted: 220 14% 22%;
+    --muted-foreground: 220 14% 70%;
+
+    --accent: 280 85% 65%;
+    --accent-foreground: 15 23% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 22%;
+    --input: 15 20% 14%;
+    --ring: 235 86% 62%;
+
+    --sidebar-background: 15 23% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 235 86% 62%;
+    --sidebar-primary-foreground: 15 23% 8%;
+    --sidebar-accent: 280 85% 65%;
+    --sidebar-accent-foreground: 15 23% 8%;
+    --sidebar-border: 220 14% 22%;
+    --sidebar-ring: 235 86% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer utilities {
+  /* Premium gradient animations */
+  .gradient-primary,
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-br from-primary via-secondary to-accent;
+  }
+
+  /* Smooth animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s ease-in-out infinite;
+  }
+
+  /* Animation delays */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Advanced interview animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
+  }
+
+  .animate-listening-pulse {
+    animation: listeningPulse 2s ease-in-out infinite;
+  }
+
+  .animate-question-transition {
+    animation: questionTransition 0.4s ease-in-out;
+  }
+
+  .animate-avatar-speak {
+    animation: avatarSpeak 0.3s ease-in-out;
+  }
+
+  .animate-voice-wave {
+    animation: voiceWave 1.5s ease-in-out infinite;
+  }
+
+  .transparent-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes listeningPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(235, 100, 100, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(235, 100, 100, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(235, 100, 100, 0);
+  }
+}
+
+@keyframes questionTransition {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes avatarSpeak {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes voiceWave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(0.6);
+  }
+  50% {
+    transform: scaleY(1.4);
+  }
+  75% {
+    transform: scaleY(0.8);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseSubtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+}
