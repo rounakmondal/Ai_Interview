@@ -32,6 +32,16 @@ import {
   handleSubmitChapterTest,
   handleAIChapterGuide,
 } from "./routes/studyPlan";
+import {
+  handleCreateAmarPlan,
+  handleAutoAdjust,
+  handleReschedule,
+  handleCompleteTask,
+  handleSubjectProgress,
+  handlePlanStats,
+  handleShareCardData,
+  handleTodayTasks,
+} from "./routes/amarPlan";
 
 export function createServer() {
   const app = express();
@@ -124,6 +134,25 @@ export function createServer() {
   app.get("/api/test/:chapterId/questions", handleGetChapterQuestions);
   app.post("/api/test/submit", handleSubmitChapterTest);
   app.post("/api/ai/chapter-guide", handleAIChapterGuide);
+
+  // ── Amar Plan API ──────────────────────────────────────────────────────────
+  // POST /api/amar-plan/create        — Generate a personalized daily plan
+  // POST /api/amar-plan/auto-adjust    — Auto-adjust missed days (push tasks forward)
+  // POST /api/amar-plan/reschedule     — Full reschedule from today (keeps completed)
+  // POST /api/amar-plan/complete-task  — Mark a task as completed (with optional mock score)
+  // POST /api/amar-plan/subject-progress — Per-subject progress rings data
+  // POST /api/amar-plan/stats          — Plan statistics (streak, %, days remaining)
+  // POST /api/amar-plan/share-card     — Data for share card generation
+  // POST /api/amar-plan/today-tasks    — Today's tasks & pending topic for notifications
+  // ─────────────────────────────────────────────────────────────────────
+  app.post("/api/amar-plan/create", handleCreateAmarPlan);
+  app.post("/api/amar-plan/auto-adjust", handleAutoAdjust);
+  app.post("/api/amar-plan/reschedule", handleReschedule);
+  app.post("/api/amar-plan/complete-task", handleCompleteTask);
+  app.post("/api/amar-plan/subject-progress", handleSubjectProgress);
+  app.post("/api/amar-plan/stats", handlePlanStats);
+  app.post("/api/amar-plan/share-card", handleShareCardData);
+  app.post("/api/amar-plan/today-tasks", handleTodayTasks);
 
   // ── Question Hub API (Police, WBCS, SSC & future exam folders) ────────────
   // GET /api/questions/:folder        → list PDFs in public/{Folder}/

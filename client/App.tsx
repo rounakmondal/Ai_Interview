@@ -12,6 +12,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { isLoggedIn } from "@/lib/auth-api";
 import { useAndroidBackButton } from "@/hooks/use-android-back-button";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
+import { scheduleAmarPlanReminder } from "@/lib/notification-service";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
 import { RouteLoader } from "@/components/RouteLoader";
@@ -47,6 +48,7 @@ const Profile = lazy(() => import("./pages/Profile"));
 const DailyTasks = lazy(() => import("./pages/DailyTasks"));
 const DailyQuiz = lazy(() => import("./pages/DailyQuiz"));
 const StudyPlan = lazy(() => import("./pages/StudyPlan"));
+const AmarPlan = lazy(() => import("./pages/AmarPlan"));
 const SyllabusTracker = lazy(() => import("./pages/SyllabusTracker"));
 const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 const MockTestPage = lazy(() => import("./pages/MockTestPage"));
@@ -79,6 +81,11 @@ function AppContent() {
 
   // Initialize notification check system
   useNotificationCheck();
+
+  // Initialize Amar Plan daily reminder scheduler
+  useEffect(() => {
+    scheduleAmarPlanReminder();
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
@@ -119,6 +126,7 @@ function AppContent() {
           <Route path="/daily-tasks" element={<DailyTasks />} />
           <Route path="/daily-quiz" element={<DailyQuiz />} />
           <Route path="/study-plan" element={<StudyPlan />} />
+          <Route path="/amar-plan" element={<AmarPlan />} />
           <Route path="/syllabus" element={<SyllabusTracker />} />
           <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
           <Route path="/mock-test" element={<MockTestPage />} />
