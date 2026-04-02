@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="MedhaHub">
-  <rect width="64" height="64" rx="14" fill="#0B0F19"/>
-  <rect x="31" y="16" width="25" height="32" rx="8" fill="#FF8A00"/>
-  <path d="M10 42V22h6l6 10 6-10h6v20h-5V30l-7 12h-1l-7-12v12h-4z" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="MedhaHub - মে">
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a2e4a"/>
+      <stop offset="100%" stop-color="#0f1f36"/>
+    </linearGradient>
+    <linearGradient id="ff" x1="32" y1="4" x2="32" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#e8850c"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#fbg)"/>
+  <!-- Flame -->
+  <path d="M32 5 C32 5 27 14 27 18 C27 20.5 29.2 22.5 32 22.5 C34.8 22.5 37 20.5 37 18 C37 14 32 5 32 5Z" fill="url(#ff)"/>
+  <!-- Bengali মে -->
+  <text x="32" y="52" text-anchor="middle" font-family="'Noto Sans Bengali','Hind Siliguri',sans-serif" font-size="30" font-weight="700" fill="#ffffff">মে</text>
 </svg>
