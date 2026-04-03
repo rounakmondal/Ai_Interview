@@ -1,0 +1,115 @@
+import { defineConfig, Plugin } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+
+/**
+ * Stub pdfjs-dist to prevent Node.js from trying to load browser APIs during config parsing.
+ * pdfjs-dist is only used in the browser or via pdf-parse on the server (which loads it lazily).
+ */
+function stubPdfjs(): Plugin {
+  return {
+    name: "stub-pdfjs",
+    apply: "serve",
+    async resolveId(id) {
+      if (id === "pdfjs-dist" || id.startsWith("pdfjs-dist/")) {
+        // Return a module ID that will resolve to an empty stub
+        return { id: "virtual-pdfjs-stub", external: false, moduleSideEffects: false };
+      }
+    },
+    resolveId(id) {
+      if (id === "virtual-pdfjs-stub") {
+        return id;
+      }
+    },
+    load(id) {
+      if (id === "virtual-pdfjs-stub") {
+        // Return an empty module to prevent DOMMatrix errors
+        return "export default {}; export const getDocument = () => ({}); export const GlobalWorkerOptions = {};";
+      }
+    },
+  };
+}
+
+// https://vitejs.dev/config/
+export default defineConfig(({ command }) => ({
+  ssr: {
+    external: ["pdf-parse"],
+  },
+  server: {
+    host: "::",
+    port: 5000,
+    fs: {
+      allow: ["./client", "./shared"],
+      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+    },
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
+  build: {
+    outDir: "dist/spa",
+    // Manual chunk splitting for route-based code splitting
+    // Reduces LCP by separating heavy routes into their own chunks
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) return "vendor-react";
+            if (id.includes("@radix-ui")) return "vendor-radix";
+            if (id.includes("@tanstack")) return "vendor-tanstack";
+            return "vendor";
+          }
+
+          // Route-specific chunks (lazy-loaded)
+          if (id.includes("pages/GovtPractice") || id.includes("pages/GovtTest") || id.includes("pages/GovtResult")) {
+            return "chunk-govt-exam";
+          }
+          if (id.includes("pages/StudyPlan") || id.includes("pages/SyllabusTracker") || id.includes("pages/ChapterTest")) {
+            return "chunk-study";
+          }
+          if (id.includes("pages/Chatbot") || id.includes("pages/StudyWithMe") || id.includes("pages/StoryTelling")) {
+            return "chunk-social";
+          }
+          if (id.includes("pages/Dashboard") || id.includes("pages/Leaderboard") || id.includes("pages/Profile")) {
+            return "chunk-dashboard";
+          }
+          if (id.includes("pages/MockTestPage") || id.includes("pages/PDFMockTest") || id.includes("pages/QuestionHub")) {
+            return "chunk-tests";
+          }
+        }
+      }
+    }
+  },
+  plugins: [
+    react(),
+    stubPdfjs(),
+    // Only load expressPlugin during dev, not during config loading/build
+    ...(command === "serve" ? [expressPlugin()] : [])
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./client"),
+      "@shared": path.resolve(__dirname, "./shared"),
+    },
+  },
+}));
+
+function expressPlugin(): Plugin {
+  return {
+    name: "express-plugin",
+    apply: "serve", // Only apply during development (serve mode)
+    async configureServer(server) {
+      // Dynamic import so server code (and its deps like pdf-parse/pdfjs-dist)
+      // are never loaded during `vite build` — only during `vite dev`.
+      const { createServer } = await import("./server/index.ts");
+      const app = createServer();
+
+      // Add Express app as middleware to Vite dev server
+      server.middlewares.use(app);
+    },
+  };
+}

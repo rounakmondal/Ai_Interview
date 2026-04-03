@@ -1,9 +1,11 @@
-import { defineConfig, Plugin } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { fileURLToPath } from "url";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
   server: {
     host: "::",
     port: 5000,
@@ -15,25 +17,21 @@ export default defineConfig(({ mode }) => ({
       "/api": {
         target: "http://localhost:8000",
         changeOrigin: true,
+        rewrite: (path) => path, // Keep the /api path as-is when forwarding
       },
     },
   },
   build: {
     outDir: "dist/spa",
-    // Manual chunk splitting for route-based code splitting
-    // Reduces LCP by separating heavy routes into their own chunks
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunks
           if (id.includes("node_modules")) {
             if (id.includes("react")) return "vendor-react";
             if (id.includes("@radix-ui")) return "vendor-radix";
             if (id.includes("@tanstack")) return "vendor-tanstack";
             return "vendor";
           }
-
-          // Route-specific chunks (lazy-loaded)
           if (id.includes("pages/GovtPractice") || id.includes("pages/GovtTest") || id.includes("pages/GovtResult")) {
             return "chunk-govt-exam";
           }
@@ -49,31 +47,15 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("pages/MockTestPage") || id.includes("pages/PDFMockTest") || id.includes("pages/QuestionHub")) {
             return "chunk-tests";
           }
-        }
-      }
-    }
+        },
+      },
+    },
   },
-  plugins: [react(), expressPlugin()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
-}));
-
-function expressPlugin(): Plugin {
-  return {
-    name: "express-plugin",
-    apply: "serve", // Only apply during development (serve mode)
-    async configureServer(server) {
-      // Dynamic import so server code (and its deps like pdf-parse/pdfjs-dist)
-      // are never loaded during `vite build` — only during `vite dev`.
-      const { createServer } = await import("./server/index.ts");
-      const app = createServer();
-
-      // Add Express app as middleware to Vite dev server
-      server.middlewares.use(app);
-    },
-  };
-}
+});
