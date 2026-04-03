@@ -9,8 +9,8 @@ const trustedBy = [
   { name: "TCS", color: "text-blue-600 dark:text-blue-400" },
   { name: "Infosys", color: "text-indigo-600 dark:text-indigo-400" },
   { name: "Wipro", color: "text-violet-600 dark:text-violet-400" },
-  { name: "UPSC", color: "text-amber-600 dark:text-amber-400" },
-  { name: "IBPS", color: "text-emerald-600 dark:text-emerald-400" },
+  { name: "Capgemini", color: "text-amber-600 dark:text-amber-400" },
+  { name: "Accenture", color: "text-emerald-600 dark:text-emerald-400" },
   { name: "HCL", color: "text-cyan-600 dark:text-cyan-400" },
 ];
 
