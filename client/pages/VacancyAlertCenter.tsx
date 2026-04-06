@@ -85,7 +85,7 @@ export default function VacancyAlertCenter() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pb-12">
       {/* Hero Header */}
-      <div className="bg-indigo-700 text-white py-12 px-4 mb-8">
+      <div className="bg-orange-700 text-white py-12 px-4 mb-8">
         <div className="max-w-6xl mx-auto text-center">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
@@ -98,7 +98,7 @@ export default function VacancyAlertCenter() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-indigo-100 text-lg mb-8 max-w-2xl mx-auto"
+            className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto"
           >
             Stay updated with the latest recruitment notifications from WBP, WBPSC, WBCS, and more. 
             Never miss an opportunity again.
@@ -107,7 +107,7 @@ export default function VacancyAlertCenter() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 shadow-lg">
+                <Button size="lg" className="bg-white text-orange-700 hover:bg-orange-50 font-bold px-8 shadow-lg">
                   <Bell className="w-5 h-5 mr-2" />
                   Notify Me
                 </Button>
@@ -115,7 +115,7 @@ export default function VacancyAlertCenter() {
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-2xl font-bold flex items-center">
-                    <Bell className="w-6 h-6 mr-2 text-indigo-600" />
+                    <Bell className="w-6 h-6 mr-2 text-orange-600" />
                     Set Preferences
                   </DialogTitle>
                   <DialogDescription>
@@ -159,7 +159,7 @@ export default function VacancyAlertCenter() {
                 </div>
                 <DialogFooter>
                   <Button 
-                    className="w-full bg-indigo-600 hover:bg-indigo-700"
+                    className="w-full bg-orange-600 hover:bg-orange-700"
                     onClick={handleSubscribe}
                     disabled={status === "loading"}
                   >
@@ -176,8 +176,8 @@ export default function VacancyAlertCenter() {
               </DialogContent>
             </Dialog>
 
-            <div className="flex items-center bg-indigo-800/50 rounded-lg px-4 py-2 border border-indigo-500/30">
-              <span className="text-indigo-200 text-sm font-medium flex items-center">
+            <div className="flex items-center bg-orange-800/50 rounded-lg px-4 py-2 border border-orange-500/30">
+              <span className="text-orange-200 text-sm font-medium flex items-center">
                 Status: 
                 {status === "success" ? (
                   <span className="ml-2 flex items-center text-green-400">
@@ -188,7 +188,7 @@ export default function VacancyAlertCenter() {
                     <AlertCircle className="w-4 h-4 mr-1" /> Failed ❌
                   </span>
                 ) : (
-                  <span className="ml-2 text-indigo-300">Not Subscribed</span>
+                  <span className="ml-2 text-orange-300">Not Subscribed</span>
                 )}
               </span>
             </div>
@@ -209,7 +209,7 @@ export default function VacancyAlertCenter() {
               onClick={() => setSelectedExam(exam)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                 selectedExam === exam
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
+                  ? "bg-orange-600 text-white shadow-md shadow-orange-200"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
@@ -252,7 +252,7 @@ export default function VacancyAlertCenter() {
             <p className="text-slate-500 text-lg">No vacancies found for {selectedExam}.</p>
             <Button 
               variant="link" 
-              className="text-indigo-600"
+              className="text-orange-600"
               onClick={() => setSelectedExam("All")}
             >
               Clear filters and see all

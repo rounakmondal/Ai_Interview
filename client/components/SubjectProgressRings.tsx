@@ -11,13 +11,13 @@ import type { AmarPlanTask } from "@/lib/amar-plan";
 
 const RING_COLORS = [
   { stroke: "#3b82f6", bg: "bg-blue-500/10" },
-  { stroke: "#8b5cf6", bg: "bg-violet-500/10" },
+  { stroke: "#ef4444", bg: "bg-orange-500/10" },
   { stroke: "#10b981", bg: "bg-green-500/10" },
   { stroke: "#f59e0b", bg: "bg-amber-500/10" },
   { stroke: "#ef4444", bg: "bg-red-500/10" },
   { stroke: "#06b6d4", bg: "bg-cyan-500/10" },
   { stroke: "#ec4899", bg: "bg-pink-500/10" },
-  { stroke: "#6366f1", bg: "bg-indigo-500/10" },
+  { stroke: "#f97316", bg: "bg-orange-500/10" },
 ];
 
 interface ProgressRingProps {

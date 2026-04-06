@@ -57,6 +57,12 @@ const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
 const PreviousYearPage = lazy(() => import("./pages/PreviousYearPage"));
 const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
 
+// Company interview pages
+const CompanyInterviewHub = lazy(() => import("./pages/CompanyInterviewHub"));
+const CompanyInterviewQuestions = lazy(() => import("./pages/CompanyInterviewQuestions"));
+const TechSkillMatrix = lazy(() => import("./pages/TechSkillMatrix"));
+const ExamSyllabusExplorer = lazy(() => import("./pages/ExamSyllabusExplorer"));
+
 // Blog pages
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogWBCSStrategy = lazy(() => import("./pages/blog/WBCSPreparationStrategy2026"));
@@ -153,9 +159,18 @@ function AppContent() {
             path="/ibps-po-mock-test"
             element={<QuestionHub seoProfile="ibps-po" />}
           />
+          <Route
+            path="/jtet-mock-test"
+            element={<QuestionHub seoProfile="jtet" />}
+          />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
           {/* SEO Previous Year Question Paper pages */}
           <Route path="/previous-year/:slug" element={<PreviousYearPage />} />
+          {/* Company Interview Questions */}
+          <Route path="/interview-questions" element={<CompanyInterviewHub />} />
+          <Route path="/interview-questions/:slug" element={<CompanyInterviewQuestions />} />
+          <Route path="/skill-matrix" element={<TechSkillMatrix />} />
+          <Route path="/exam-syllabus" element={<ExamSyllabusExplorer />} />
           {/* Blog */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/wbcs-preparation-strategy-2026" element={<BlogWBCSStrategy />} />

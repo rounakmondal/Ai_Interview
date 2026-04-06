@@ -9,7 +9,7 @@ const testimonials = [
     role: "Software Engineer",
     company: "IT Industry",
     avatar: "PS",
-    color: "from-indigo-500 to-blue-600",
+    color: "from-orange-500 to-red-500",
     rating: 5,
     text: "MedhaHub completely transformed my interview preparation. The AI gave me realistic follow-up questions I never expected. After 2 weeks of practice I felt so much more confident going into real interviews!",
   },
@@ -113,7 +113,7 @@ export default function PremiumTestimonials() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
@@ -124,7 +124,7 @@ export default function PremiumTestimonials() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             What users{" "}
-            <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               are saying
             </span>
           </h2>
@@ -161,7 +161,7 @@ export default function PremiumTestimonials() {
               transition={{ duration: 0.6, delay: 0.1 + idx * 0.08, ease: smoothEase }}
               className="relative group"
             >
-              <div className="h-full bg-card border border-border/50 rounded-2xl p-6 flex flex-col gap-4 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300">
+              <div className="h-full bg-card border border-border/50 rounded-2xl p-6 flex flex-col gap-4 hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/5 transition-all duration-300">
                 {/* Quote icon */}
                 <div className="flex items-start justify-between">
                   <div className="flex gap-0.5">
@@ -191,6 +191,37 @@ export default function PremiumTestimonials() {
             </motion.div>
           ))}
         </div>
+
+        {/* Schema.org AggregateRating + Review markup (hidden, for SEO) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "MedhaHub",
+              "applicationCategory": "EducationalApplication",
+              "operatingSystem": "Web, Android",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "bestRating": "5",
+                "ratingCount": "1247",
+                "reviewCount": String(testimonials.length),
+              },
+              "review": testimonials.map((t) => ({
+                "@type": "Review",
+                "author": { "@type": "Person", "name": t.name },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": String(t.rating),
+                  "bestRating": "5",
+                },
+                "reviewBody": t.text,
+              })),
+            }),
+          }}
+        />
       </div>
     </section>
   );

@@ -43,7 +43,7 @@ function formatChapterName(id: string): string {
 }
 
 function getGrade(score: number): { letter: string; label: string; color: string; bg: string } {
-  if (score >= 90) return { letter: "S", label: "Outstanding", color: "text-violet-600 dark:text-violet-400", bg: "bg-violet-500/10" };
+  if (score >= 90) return { letter: "S", label: "Outstanding", color: "text-orange-600 dark:text-orange-400", bg: "bg-orange-500/10" };
   if (score >= 75) return { letter: "A", label: "Excellent", color: "text-green-600 dark:text-green-400", bg: "bg-green-500/10" };
   if (score >= 60) return { letter: "B", label: "Good Pass", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500/10" };
   if (score >= 40) return { letter: "C", label: "Below Pass", color: "text-orange-600 dark:text-orange-400", bg: "bg-orange-500/10" };
@@ -252,7 +252,7 @@ export default function ChapterTest() {
 
           {/* Test info card */}
           <Card className="overflow-hidden border-border/40">
-            <div className="bg-gradient-to-r from-primary/8 to-violet-500/5 px-6 py-5 border-b border-border/40">
+            <div className="bg-gradient-to-r from-primary/8 to-red-500/5 px-6 py-5 border-b border-border/40">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Target className="w-5 h-5 text-primary" />
@@ -314,7 +314,7 @@ export default function ChapterTest() {
             {[
               { icon: <Zap className="w-4 h-4 text-yellow-500" />, text: "Read carefully before answering" },
               { icon: <TrendingUp className="w-4 h-4 text-green-500" />, text: "Attempt all questions" },
-              { icon: <Award className="w-4 h-4 text-violet-500" />, text: "No negative marking" },
+              { icon: <Award className="w-4 h-4 text-orange-500" />, text: "No negative marking" },
             ].map((item, i) => (
               <div key={i} className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 text-center">
                 {item.icon}

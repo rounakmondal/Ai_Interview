@@ -61,7 +61,7 @@ function LoadingDots() {
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="w-2.5 h-2.5 rounded-full bg-indigo-500"
+          className="w-2.5 h-2.5 rounded-full bg-orange-500"
           animate={{ scale: [1, 1.4, 1], opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1, repeat: Infinity, delay: i * 0.15 }}
         />
@@ -155,7 +155,7 @@ export default function PDFMockTest() {
             Please select a question paper from the Question Hub to start a mock test.
           </p>
           <Link to="/question-hub">
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-indigo-200/40">
+            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-orange-200/40">
               <ArrowLeft className="w-4 h-4" />
               Go to Question Hub
             </Button>
@@ -253,7 +253,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             </Link>
             <Button
               onClick={() => window.location.reload()}
-              className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold h-12 rounded-2xl gap-2 border-0"
+              className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold h-12 rounded-2xl gap-2 border-0"
             >
               <RotateCcw className="w-4 h-4" />
               Retry
@@ -270,7 +270,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
       <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-8 relative overflow-hidden">
         {/* Ambient circles */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(99,102,241,0.06),transparent)]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-indigo-50/60 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-orange-50/60 blur-3xl pointer-events-none" />
         <div className="absolute top-20 -right-32 w-64 h-64 rounded-full bg-purple-50/60 blur-3xl pointer-events-none" />
 
         {/* Back button */}
@@ -291,13 +291,13 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                 strokeLinecap="round" strokeDasharray="301" strokeDashoffset="226" />
               <defs>
                 <linearGradient id="loader-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#6366f1" />
+                  <stop offset="0%" stopColor="#f97316" />
                   <stop offset="100%" stopColor="#a855f7" />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <Brain className="w-10 h-10 text-indigo-500" />
+              <Brain className="w-10 h-10 text-orange-500" />
             </div>
           </div>
 
@@ -309,7 +309,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
           {/* Step dots */}
           <div className="flex items-center justify-center gap-2">
             {LOADING_MSGS.map((_, i) => (
-              <div key={i} className={`rounded-full transition-all duration-500 ${i < loadingMsgIdx ? "w-2 h-2 bg-indigo-500" : i === loadingMsgIdx ? "w-3 h-3 bg-indigo-400 animate-pulse" : "w-2 h-2 bg-slate-200"
+              <div key={i} className={`rounded-full transition-all duration-500 ${i < loadingMsgIdx ? "w-2 h-2 bg-orange-500" : i === loadingMsgIdx ? "w-3 h-3 bg-orange-400 animate-pulse" : "w-2 h-2 bg-slate-200"
                 }`} />
             ))}
           </div>
@@ -338,7 +338,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             We couldn't extract questions from this file. Try another paper or contact support.
           </p>
           <Link to="/question-hub">
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-indigo-200/40">
+            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-orange-200/40">
               <ArrowLeft className="w-4 h-4" />
               Back to Question Hub
             </Button>
@@ -366,7 +366,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
         {/* Ambient background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(99,102,241,0.08),transparent)]" />
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-        <div className="absolute top-40 -left-32 w-96 h-96 rounded-full bg-indigo-100/60 blur-3xl pointer-events-none" />
+        <div className="absolute top-40 -left-32 w-96 h-96 rounded-full bg-orange-100/60 blur-3xl pointer-events-none" />
         <div className="absolute top-60 -right-32 w-96 h-96 rounded-full bg-purple-100/40 blur-3xl pointer-events-none" />
 
         {/* Header */}
@@ -389,8 +389,8 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
 
             {/* Hero */}
             <div className="text-center mb-8 sm:mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-200 text-xs text-indigo-600 mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-xs text-orange-600 mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-orange-500" />
                 Previous Year Paper · Ready
               </div>
               <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-3">
@@ -402,7 +402,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             {/* Stats Cards */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
               {[
-                { icon: BookOpen, label: "Questions", value: String(test.questions.length), color: "text-indigo-600", bg: "bg-indigo-50 border-indigo-200", iconBg: "bg-indigo-100" },
+                { icon: BookOpen, label: "Questions", value: String(test.questions.length), color: "text-orange-600", bg: "bg-orange-50 border-orange-200", iconBg: "bg-orange-100" },
                 { icon: Clock, label: "Duration", value: `${activeDuration} min`, color: "text-amber-600", bg: "bg-amber-50 border-amber-200", iconBg: "bg-amber-100" },
                 { icon: Zap, label: "Per Question", value: `${perQ}s`, color: "text-orange-600", bg: "bg-orange-50 border-orange-200", iconBg: "bg-orange-100" },
               ].map((s) => (
@@ -468,10 +468,10 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             </div>
 
             {/* Instructions Card */}
-            <div className="bg-gradient-to-br from-slate-50 to-indigo-50/30 border border-slate-200 rounded-2xl p-5 sm:p-6 mb-8">
+            <div className="bg-gradient-to-br from-slate-50 to-orange-50/30 border border-slate-200 rounded-2xl p-5 sm:p-6 mb-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center">
-                  <ListChecks className="w-5 h-5 text-indigo-600" />
+                <div className="w-9 h-9 rounded-xl bg-orange-100 flex items-center justify-center">
+                  <ListChecks className="w-5 h-5 text-orange-600" />
                 </div>
                 <h3 className="font-bold text-slate-900">Test Instructions</h3>
               </div>
@@ -480,7 +480,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                   { icon: Clock, text: `Complete all questions within ${activeDuration} minutes`, color: "text-amber-500" },
                   { icon: Flag, text: "Flag difficult questions to revisit later", color: "text-orange-500" },
                   { icon: Target, text: "Navigate freely between any question", color: "text-emerald-500" },
-                  { icon: BarChart3, text: "Get detailed results with per-question analysis", color: "text-indigo-500" },
+                  { icon: BarChart3, text: "Get detailed results with per-question analysis", color: "text-orange-500" },
                   { icon: Shield, text: "Auto-submit when time runs out", color: "text-rose-500" },
                 ].map(({ icon: Icon, text, color }) => (
                   <div key={text} className="flex items-center gap-3">
@@ -503,7 +503,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
               </Link>
               <Button
                 onClick={handleStartExam}
-                className="flex-[2] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-600 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-indigo-200/40 transition-all"
+                className="flex-[2] bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40 transition-all"
               >
                 <Zap className="w-5 h-5" />
                 Start Exam Now
@@ -625,7 +625,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                   className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm bg-white"
                 >
                   {/* Subject strip */}
-                  <div className="px-4 sm:px-5 py-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 flex items-center gap-3 flex-wrap">
+                  <div className="px-4 sm:px-5 py-3 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 flex items-center gap-3 flex-wrap">
                     <span className="text-xl sm:text-2xl font-black text-white/20 tabular-nums select-none">
                       {String(test.currentQuestion + 1).padStart(2, "0")}
                     </span>
@@ -665,21 +665,21 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                       whileTap={{ scale: 0.98 }}
                       onClick={() => test.answerQuestion(idx)}
                       className={`w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl border-2 text-left transition-all duration-150 group ${isSelected
-                        ? "bg-indigo-50 border-indigo-400 shadow-lg shadow-indigo-100/60 scale-[1.005]"
+                        ? "bg-orange-50 border-orange-400 shadow-lg shadow-orange-100/60 scale-[1.005]"
                         : "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm"
                         }`}
                     >
                       <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 transition-all ${isSelected
-                        ? "bg-indigo-500 text-white shadow-lg shadow-indigo-200"
+                        ? "bg-orange-500 text-white shadow-lg shadow-orange-200"
                         : "bg-slate-100 text-slate-500 group-hover:bg-slate-200 group-hover:text-slate-700"
                         }`}>
                         {OPTION_LABELS[idx]}
                       </div>
-                      <span className={`text-sm sm:text-[15px] leading-relaxed flex-1 transition-colors ${isSelected ? "text-indigo-700 font-semibold" : "text-slate-600 group-hover:text-slate-800"
+                      <span className={`text-sm sm:text-[15px] leading-relaxed flex-1 transition-colors ${isSelected ? "text-orange-700 font-semibold" : "text-slate-600 group-hover:text-slate-800"
                         }`}>
                         {option}
                       </span>
-                      {isSelected && <CheckCircle2 className="w-5 h-5 text-indigo-500 flex-shrink-0" />}
+                      {isSelected && <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0" />}
                     </motion.button>
                   );
                 })}
@@ -761,7 +761,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                     <button
                       key={idx}
                       onClick={() => test.goToQuestion(idx)}
-                      className={`aspect-square text-xs font-bold rounded-lg flex items-center justify-center transition-all hover:scale-105 ${idx === test.currentQuestion ? "ring-2 ring-indigo-500 ring-offset-2" : ""
+                      className={`aspect-square text-xs font-bold rounded-lg flex items-center justify-center transition-all hover:scale-105 ${idx === test.currentQuestion ? "ring-2 ring-orange-500 ring-offset-2" : ""
                         } ${answer !== null && answer !== undefined
                           ? "bg-emerald-100 text-emerald-700 border border-emerald-300"
                           : visited
@@ -836,7 +836,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                         <button
                           key={idx}
                           onClick={() => { test.goToQuestion(idx); setShowNav(false); }}
-                          className={`aspect-square text-xs font-bold rounded-lg flex items-center justify-center transition-all ${idx === test.currentQuestion ? "ring-2 ring-indigo-500" : ""
+                          className={`aspect-square text-xs font-bold rounded-lg flex items-center justify-center transition-all ${idx === test.currentQuestion ? "ring-2 ring-orange-500" : ""
                             } ${answer !== null && answer !== undefined
                               ? "bg-emerald-100 text-emerald-700 border border-emerald-300"
                               : visited
@@ -946,7 +946,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             {Object.keys(bySubject).length > 1 && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
-                  <BarChart3 className="w-5 h-5 text-indigo-500" />
+                  <BarChart3 className="w-5 h-5 text-orange-500" />
                   <h2 className="font-bold text-slate-900">Subject Breakdown</h2>
                 </div>
                 <div className="space-y-2">
@@ -974,13 +974,13 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
               <button
                 onClick={() => setShowReview(!showReview)}
-                className="w-full flex items-center justify-between px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition-colors mb-4"
+                className="w-full flex items-center justify-between px-5 py-4 rounded-2xl bg-orange-50 border border-orange-200 hover:bg-orange-100 transition-colors mb-4"
               >
                 <div className="flex items-center gap-3">
-                  <Eye className="w-5 h-5 text-indigo-500" />
-                  <span className="font-semibold text-indigo-700 text-sm">Review All Questions</span>
+                  <Eye className="w-5 h-5 text-orange-500" />
+                  <span className="font-semibold text-orange-700 text-sm">Review All Questions</span>
                 </div>
-                {showReview ? <ChevronUp className="w-5 h-5 text-indigo-400" /> : <ChevronDown className="w-5 h-5 text-indigo-400" />}
+                {showReview ? <ChevronUp className="w-5 h-5 text-orange-400" /> : <ChevronDown className="w-5 h-5 text-orange-400" />}
               </button>
 
               <AnimatePresence>
@@ -1050,7 +1050,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
               </Link>
               <Button
                 onClick={() => window.location.reload()}
-                className="flex-[2] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-600 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-indigo-200/40 transition-all"
+                className="flex-[2] bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40 transition-all"
               >
                 <RotateCcw className="w-4 h-4" />
                 Retake Test

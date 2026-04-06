@@ -59,7 +59,7 @@ const SUGGESTIONS = [
   { icon: Landmark, label: "Battle of Plassey", q: "Explain the Battle of Plassey 1757", color: "text-amber-500 bg-amber-500/10 border-amber-500/20" },
   { icon: Globe, label: "Sundarbans", q: "Tell me about Sundarbans", color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20" },
   { icon: Calculator, label: "Compound Interest", q: "Explain compound interest formula with example", color: "text-blue-500 bg-blue-500/10 border-blue-500/20" },
-  { icon: BookOpen, label: "Indian Constitution", q: "Explain fundamental rights in Indian Constitution", color: "text-violet-500 bg-violet-500/10 border-violet-500/20" },
+  { icon: BookOpen, label: "Indian Constitution", q: "Explain fundamental rights in Indian Constitution", color: "text-orange-500 bg-orange-500/10 border-orange-500/20" },
   { icon: Brain, label: "Logical Reasoning", q: "Give me a logical reasoning practice question", color: "text-rose-500 bg-rose-500/10 border-rose-500/20" },
   { icon: Zap, label: "Current Affairs", q: "Latest important current affairs for competitive exams", color: "text-orange-500 bg-orange-500/10 border-orange-500/20" },
 ];
@@ -197,7 +197,7 @@ export default function Chatbot() {
 
           <div className="flex items-center gap-2.5">
             <div className="relative">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/20">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
                 <Bot className="w-4 h-4 text-white" />
               </div>
               <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
@@ -212,9 +212,9 @@ export default function Chatbot() {
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20">
-              <Shield className="w-3 h-3 text-violet-500" />
-              <span className="text-[10px] font-semibold text-violet-600 dark:text-violet-400">Secure & Private</span>
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/10 border border-orange-500/20">
+              <Shield className="w-3 h-3 text-orange-500" />
+              <span className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">Secure & Private</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20">
               <Sparkles className="w-3 h-3 text-amber-500" />
@@ -233,7 +233,7 @@ export default function Chatbot() {
             <div className="space-y-5 pb-2">
               {/* Welcome hero */}
               <div className="text-center pt-4 pb-2">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-xl shadow-violet-500/25 mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 shadow-xl shadow-orange-500/25 mb-4">
                   <GraduationCap className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-xl font-bold text-foreground mb-1">
@@ -248,7 +248,7 @@ export default function Chatbot() {
               {/* Capabilities */}
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { icon: Brain, label: "Deep Explanations", desc: "Detailed conceptual clarity", color: "text-violet-500", bg: "bg-violet-500/10" },
+                  { icon: Brain, label: "Deep Explanations", desc: "Detailed conceptual clarity", color: "text-orange-500", bg: "bg-orange-500/10" },
                   { icon: MessageSquare, label: "Bengali + English", desc: "Bilingual responses", color: "text-blue-500", bg: "bg-blue-500/10" },
                   { icon: Zap, label: "Instant Answers", desc: "Lightning-fast AI", color: "text-amber-500", bg: "bg-amber-500/10" },
                 ].map((cap) => (
@@ -300,7 +300,7 @@ export default function Chatbot() {
             <div key={msg.id} className={`flex gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
               <div className={`w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-1 shadow-md ${
                 msg.role === "assistant"
-                  ? "bg-gradient-to-br from-violet-500 to-indigo-600 shadow-violet-500/20"
+                  ? "bg-gradient-to-br from-orange-500 to-red-500 shadow-orange-500/20"
                   : "bg-gradient-to-br from-amber-500 to-orange-500 shadow-amber-500/20"
               }`}>
                 {msg.role === "assistant" ? <Bot className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
@@ -328,15 +328,15 @@ export default function Chatbot() {
           {/* Typing indicator */}
           {loading && (
             <div className="flex gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-violet-500/20">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-orange-500/20">
                 <Bot className="w-3.5 h-3.5 text-white" />
               </div>
               <Card className="px-4 py-3 bg-card border border-border/50 rounded-2xl rounded-tl-sm">
                 <div className="flex items-center gap-1.5">
                   <div className="flex gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                   <span className="text-[10px] text-muted-foreground ml-1">Thinking…</span>
                 </div>
@@ -377,7 +377,7 @@ export default function Chatbot() {
               rows={1}
             />
             <Button
-              className="h-9 w-9 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 hover:from-violet-600 hover:to-indigo-700 shadow-md shadow-violet-500/20 flex-shrink-0"
+              className="h-9 w-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-md shadow-orange-500/20 flex-shrink-0"
               onClick={handleSend}
               disabled={loading || (!input.trim() && !image)}>
               <Send className="w-4 h-4" />

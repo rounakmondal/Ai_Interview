@@ -69,7 +69,7 @@ const QUICK_LINKS = [
   { to: "/question-hub",         labelBn: "প্রশ্ন ব্যাংক",             label: "Question Hub",    icon: BookOpen,      color: "from-violet-500 to-purple-500" },
   { to: "/wbcs-mock-test",       labelBn: "WBCS মক টেস্ট",             label: "WBCS Mock",       icon: GraduationCap, color: "from-emerald-500 to-teal-500" },
   { to: "/wbp-police-mock-test", labelBn: "পুলিশ মক টেস্ট",            label: "WBP Mock",        icon: Shield,        color: "from-rose-500 to-pink-500" },
-  { to: "/study-plan",           labelBn: "স্টাডি প্ল্যান",            label: "Study Plan",      icon: LayoutGrid,    color: "from-indigo-500 to-blue-500" },
+  { to: "/study-plan",           labelBn: "স্টাডি প্ল্যান",            label: "Study Plan",      icon: LayoutGrid,    color: "from-orange-500 to-red-500" },
 ];
 
 export function requestPostLoginBriefing() {
@@ -280,7 +280,7 @@ export default function PostLoginBriefingModal() {
           {/* ── Recommended Paper card ──────────────────────────────── */}
           <div className="relative rounded-2xl overflow-hidden">
             {/* gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-blue-700 to-violet-700" />
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-red-500 to-red-600" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,191,36,0.15),transparent_60%)]" />
             {/* subtle grid */}
             <div
@@ -567,7 +567,7 @@ export default function PostLoginBriefingModal() {
             <button
               onClick={() => handleGoRecommended(preferredExam)}
               disabled={recommendedLoading}
-              className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 text-white text-sm font-bold shadow-lg shadow-indigo-500/30 transition-all active:scale-[.97] disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white text-sm font-bold shadow-lg shadow-orange-500/30 transition-all active:scale-[.97] disabled:opacity-50"
             >
               <BookOpen className="w-4 h-4" />
               Recommended paper

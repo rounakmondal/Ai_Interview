@@ -135,7 +135,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "পুলিশ ভর্তি",
     icon: <Shield className="w-6 h-6" />,
     colorKey: "terracotta",
-    badge: "জনপ্রিয়",
+    badge: "Popular",
     publicPath: "Police",
     description:
       "West Bengal Police Constable, Sub-Inspector & Lady Constable recruitment question papers - 10+ years of previous year question papers for WBP exam preparation",
@@ -215,7 +215,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "ডব্লিউবিসিএস",
     icon: <BookOpen className="w-6 h-6" />,
     colorKey: "forest",
-    badge: "নতুন",
+    badge: "New",
     publicPath: "WBCS",
     description:
       "West Bengal Civil Service (Exe.) & allied services previous year question papers for WBCS Prelims and Mains preparation",
@@ -281,7 +281,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "এসএসসি",
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "mustard",
-    badge: "নতুন",
+    badge: "New",
     publicPath: "SSC",
     description:
       "SSC MTS previous year question papers (2019 & 2023 all shifts) for Multi Tasking Staff exam preparation",
@@ -323,7 +323,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "ডব্লিউবিপিএসসি",
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "forest",
-    badge: "নতুন",
+    badge: "New",
     publicPath: "WBPSC",
     description:
       "WBPSC Clerkship previous year question papers (2019, 2020, 2024 all shifts) for West Bengal state government job preparation",
@@ -371,7 +371,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "প্রাইমারি টেট",
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "mustard",
-    badge: "নতুন",
+    badge: "New",
     publicPath: "WB Primary TET Question",
     description:
       "West Bengal Primary TET previous year question papers for primary school teacher eligibility test preparation",
@@ -407,7 +407,7 @@ const FOLDERS: Record<string, FolderData> = {
     nameBn: "আইবিপিএস পিও",
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "terracotta",
-    badge: "নতুন",
+    badge: "New",
     publicPath: "IBPS",
     description:
       "IBPS PO Prelims & Mains previous year question papers for banking exam preparation — 2021 to 2025",
@@ -447,6 +447,24 @@ const FOLDERS: Record<string, FolderData> = {
         path: "IBPS PO Mains Memory Based 2021.json",
         year: 2021,
         type: "Mains",
+      },
+    ],
+  },
+  jtet: {
+    name: "JTET (Jharkhand TET)",
+    nameBn: "ঝাড়খণ্ড টেট",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "forest",
+    badge: "New",
+    publicPath: "JTET",
+    description:
+      "Jharkhand Teacher Eligibility Test (JTET) previous year question papers — Paper I & Paper II for primary & upper primary teacher recruitment",
+    files: [
+      {
+        name: "JTET 2012 Previous Paper - Paper I",
+        path: "JTET 2012 Previous Paper - Paper I.json",
+        year: 2012,
+        type: "Paper I",
       },
     ],
   },
@@ -858,6 +876,37 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
+        {/* 📋 Know Your Exam Syllabus Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-8"
+        >
+          <Link
+            to="/exam-syllabus"
+            className="group block rounded-xl border border-emerald-600/30 bg-gradient-to-r from-emerald-500/5 via-primary/5 to-amber-500/5 hover:border-emerald-500/50 hover:shadow-lg transition-all p-5"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
+                <GraduationCap className="w-6 h-6 text-emerald-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-base group-hover:text-emerald-600 transition-colors">
+                  📋 Know Your Exam Syllabus & Pattern
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5 font-medium">
+                  তোমার পরীক্ষার সিলেবাস জানো
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  WBCS, Police SI, SSC, Banking, UPSC, Railway, TET, JTET — complete exam pattern, rounds, topics & marks distribution
+                </p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-emerald-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+            </div>
+          </Link>
+        </motion.section>
+
         {/* Folder Selector — exam category cards with Bengali labels */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -904,10 +953,10 @@ export default function QuestionHub({
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-bold text-foreground text-sm leading-tight">
-                        {folder.nameBn}
+                        {folder.name}
                       </h3>
                     </div>
-                    <p className="text-[11px] text-muted-foreground mb-1.5">{folder.name}</p>
+                    <p className="text-[11px] text-muted-foreground mb-1.5">{folder.nameBn}</p>
                     <span className={`text-xs px-2 py-0.5 rounded-full ${fc.badge}`}>
                       {folder.badge}
                     </span>
@@ -936,25 +985,25 @@ export default function QuestionHub({
             <div className="flex items-center gap-3 mb-2">
               <div className="w-1 h-8 rounded-full bg-gradient-to-b from-amber-600 to-emerald-700" />
               <h2 className="text-2xl font-bold text-foreground">
-                {currentFolder.nameBn} — বিগত বছরের প্রশ্নপত্র
+                {currentFolder.name} — Previous Year Papers
               </h2>
             </div>
             <p className="text-sm text-muted-foreground mb-6 ml-4">
-              {currentFolder.name} • অরিজিনাল PDF ডাউনলোড করো অথবা সরাসরি মক টেস্ট দাও
+              {currentFolder.nameBn} • Download original PDFs or take mock tests directly
             </p>
 
             {listLoading ? (
               <div className="flex items-center gap-3 py-12 justify-center text-emerald-700 dark:text-emerald-400">
                 <Loader2 className="w-6 h-6 animate-spin" />
-                <span>প্রশ্নপত্র লোড হচ্ছে…</span>
+                <span>Loading question papers…</span>
               </div>
             ) : papersForFolder.length === 0 ? (
               <div className="flex flex-col items-center gap-4 py-16 text-center">
                 <AlertCircle className="w-12 h-12 text-amber-600/40 dark:text-amber-500/30" />
                 <div>
-                  <p className="font-semibold text-foreground mb-1">এখনো প্রশ্নপত্র আসেনি</p>
+                  <p className="font-semibold text-foreground mb-1">No papers available yet</p>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    {currentFolder.nameBn}-এর প্রশ্নপত্র যোগ করা হচ্ছে। শীঘ্রই আসবে!
+                    Papers for {currentFolder.name} are being added. Coming soon!
                   </p>
                 </div>
               </div>
@@ -985,10 +1034,10 @@ export default function QuestionHub({
                                   </div>
                                   <div>
                                     <h2 className="text-3xl font-bold text-foreground">
-                                      সাব-ইন্সপেক্টর (SI) পরীক্ষা
+                                      Sub-Inspector (SI) Exam
                                     </h2>
                                     <p className="text-sm text-muted-foreground mt-1">
-                                      Sub-Inspector recruitment practice papers
+                                      সাব-ইন্সপেক্টর পরীক্ষা • Practice papers
                                     </p>
                                   </div>
                                 </>
@@ -1034,14 +1083,14 @@ export default function QuestionHub({
                                         ) : null}
                                         {category === "SI" && (
                                           <span className="text-xs px-2.5 py-1 bg-emerald-800/15 text-emerald-800 dark:text-emerald-300 rounded-full font-medium">
-                                            SI পরীক্ষা
+                                            SI Exam
                                           </span>
                                         )}
                                       </div>
                                     </div>
 
                                     <div className="text-xs text-muted-foreground">
-                                      বিগত বছরের প্রশ্নপত্র
+                                      Previous year question paper
                                     </div>
 
                                     {/* Action Buttons */}
@@ -1053,7 +1102,7 @@ export default function QuestionHub({
                                         onClick={() => handleDownload(file)}
                                       >
                                         <Download className="w-3.5 h-3.5" />
-                                        ডাউনলোড
+                                        Download
                                       </Button>
                                       <Button
                                         size="sm"
@@ -1068,12 +1117,12 @@ export default function QuestionHub({
                                         {testNavLoading ? (
                                           <>
                                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                            খুলছে…
+                                            Opening…
                                           </>
                                         ) : (
                                           <>
                                             <BookOpen className="w-3.5 h-3.5" />
-                                            পরীক্ষা দাও
+                                            Take Test
                                           </>
                                         )}
                                       </Button>
@@ -1120,7 +1169,7 @@ export default function QuestionHub({
                           ) : null}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {currentFolder.nameBn} • বিগত বছরের প্রশ্নপত্র
+                          {currentFolder.name} • Previous year question paper
                         </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
@@ -1131,7 +1180,7 @@ export default function QuestionHub({
                           onClick={() => handleDownload(file)}
                         >
                           <Download className="w-4 h-4" />
-                          PDF ডাউনলোড
+                          Download PDF
                         </Button>
                         <Button
                           size="sm"
@@ -1142,12 +1191,12 @@ export default function QuestionHub({
                           {testNavLoading ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin" />
-                              খুলছে…
+                              Opening…
                             </>
                           ) : (
                             <>
                               <BookOpen className="w-4 h-4" />
-                              মক টেস্ট দাও
+                              Take Mock Test
                             </>
                           )}
                         </Button>
@@ -1188,18 +1237,18 @@ export default function QuestionHub({
               </div>
 
               <h3 className="text-2xl font-bold text-foreground mb-2">
-                প্রস্তুতি শুরু করো আজই
+                Start Your Preparation Today
               </h3>
               <p className="text-sm text-emerald-800/70 dark:text-emerald-400/60 font-medium mb-1">
-                "একটু একটু করে এগিয়ে যাও — সাফল্য আসবেই!"
+                "One step at a time — success will follow!"
               </p>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-sm">
-                আসল প্রশ্নপত্র দিয়ে অনুশীলন করো, তাৎক্ষণিক ফলাফল পাও, এবং AI-এর সাহায্যে তোমার দুর্বলতা চিনে নাও।
+                Practice with real question papers, get instant results, and identify your weak areas with AI-powered analysis.
               </p>
               <Link to="/setup">
                 <Button size="lg" className="gap-2 bg-emerald-700 hover:bg-emerald-800 text-white">
                   <Sparkles className="w-5 h-5" />
-                  AI Interview অনুশীলন শুরু করো
+                  Start AI Interview Practice
                 </Button>
               </Link>
             </motion.div>

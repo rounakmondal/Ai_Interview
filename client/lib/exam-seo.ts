@@ -2,7 +2,7 @@
  * Client-side SEO updates for exam / mock-test routes (title, meta, OG, canonical, JSON-LD).
  */
 
-export type ExamSeoProfile = "default" | "wbcs" | "police" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po";
+export type ExamSeoProfile = "default" | "wbcs" | "police" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po" | "jtet";
 
 const BRAND = "MedhaHub";
 const SITE_FALLBACK = "https://medhahub.in";
@@ -193,20 +193,62 @@ const IBPS_PO_KEYWORDS = [
   "banking exam mock test free",
 ].join(", ");
 
+const JTET_KEYWORDS = [
+  "JTET mock test 2026",
+  "JTET previous year question paper",
+  "Jharkhand TET question paper with answers",
+  "JTET Paper 1 previous year paper",
+  "JTET Paper 2 previous year paper",
+  "Jharkhand Teacher Eligibility Test online practice",
+  "JTET Child Development questions",
+  "JTET preparation online free",
+  "Jharkhand TET 2012 question paper",
+  "JTET mock test free online",
+].join(", ");
+
+const SYLLABUS_KEYWORDS = [
+  "exam syllabus 2026",
+  "exam pattern 2026",
+  "know your exam syllabus",
+  "WBCS syllabus 2026",
+  "WBCS exam pattern",
+  "SSC CGL syllabus 2026",
+  "SSC CGL exam pattern",
+  "IBPS PO syllabus 2026",
+  "IBPS PO exam pattern",
+  "UPSC syllabus 2026",
+  "WB Police SI syllabus",
+  "WB Police constable syllabus",
+  "RRB NTPC syllabus 2026",
+  "Railway Group D syllabus",
+  "CTET syllabus 2026",
+  "WB TET syllabus 2026",
+  "JTET syllabus 2026",
+  "SSC MTS syllabus 2026",
+  "SSC CHSL syllabus",
+  "WBPSC Clerkship syllabus",
+  "NDA syllabus 2026",
+  "government exam syllabus India",
+  "competitive exam pattern",
+  "exam marks distribution",
+  "exam cutoff marks",
+  "previous year cutoff",
+].join(", ");
+
 /** Question Hub landing variants */
 export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
   if (profile === "wbcs") {
     applyExamSeoPayload({
       title:
-        "WBCS Mock Test Free Online | Previous Year Question Papers | MedhaHub",
+        "WBCS Mock Test Free Online | Syllabus & Previous Year Question Papers | MedhaHub",
       description:
-        "Practice WBCS (West Bengal Civil Service) with free online mock tests built from official previous-year prelims papers. Timed MCQs, instant scoring, and downloads — ideal for WBCS and WBPSC exam preparation.",
-      keywords: WBCS_KEYWORDS,
+        "Practice WBCS (West Bengal Civil Service) with free online mock tests built from official previous-year prelims papers. Know WBCS syllabus 2026, exam pattern, marks distribution. Timed MCQs, instant scoring, and downloads — ideal for WBCS and WBPSC exam preparation.",
+      keywords: `${WBCS_KEYWORDS}, WBCS syllabus 2026, WBCS exam pattern, WBCS prelims syllabus, WBCS mains syllabus, WBCS marks distribution`,
       canonicalPath: "/wbcs-mock-test",
       jsonLd: webPageJsonLd({
-        name: "WBCS mock test & previous year papers",
+        name: "WBCS mock test, syllabus & previous year papers",
         description:
-          "Free online WBCS mock tests and West Bengal Civil Service previous year question papers for prelims practice.",
+          "Free online WBCS mock tests, complete syllabus and West Bengal Civil Service previous year question papers for prelims practice.",
         path: "/wbcs-mock-test",
       }),
     });
@@ -216,15 +258,15 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
   if (profile === "police") {
     applyExamSeoPayload({
       title:
-        "WBP Police Mock Test | Previous Year Question Papers Online | MedhaHub",
+        "WBP Police Mock Test | Syllabus & Previous Year Question Papers Online | MedhaHub",
       description:
-        "West Bengal Police (WBP) Constable and Lady Constable previous year question papers as free online mock tests. Timed practice, answers, and PDFs for WBP recruitment exam preparation.",
-      keywords: POLICE_KEYWORDS,
+        "West Bengal Police (WBP) Constable and Lady Constable previous year question papers as free online mock tests. Know WB Police SI & Constable syllabus 2026, exam pattern, cutoff marks. Timed practice, answers, and PDFs for WBP recruitment exam preparation.",
+      keywords: `${POLICE_KEYWORDS}, WB Police SI syllabus 2026, WB Police constable syllabus, WB Police exam pattern, WBP SI cutoff marks`,
       canonicalPath: "/wbp-police-mock-test",
       jsonLd: webPageJsonLd({
-        name: "WBP police mock test & previous year papers",
+        name: "WBP police mock test, syllabus & previous year papers",
         description:
-          "Free WBP Constable and Lady Constable mock tests from previous year papers.",
+          "Free WBP Constable and Lady Constable mock tests, complete syllabus and previous year papers.",
         path: "/wbp-police-mock-test",
       }),
     });
@@ -234,15 +276,15 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
   if (profile === "wbpsc-clerkship") {
     applyExamSeoPayload({
       title:
-        "WBPSC Clerkship Mock Test Free | Previous Year Question Papers (2019-2024) | MedhaHub",
+        "WBPSC Clerkship Mock Test Free | Syllabus & Previous Year Question Papers (2019-2024) | MedhaHub",
       description:
-        "Practice WBPSC Clerkship exam with free online mock tests from 2019, 2020, 2024 papers (all shifts). Timed MCQs covering English, GK, and Arithmetic with instant scoring.",
-      keywords: WBPSC_KEYWORDS,
+        "Practice WBPSC Clerkship exam with free online mock tests from 2019, 2020, 2024 papers (all shifts). Know WBPSC Clerkship syllabus 2026, exam pattern, cutoff marks. Timed MCQs covering English, GK, and Arithmetic with instant scoring.",
+      keywords: `${WBPSC_KEYWORDS}, WBPSC Clerkship syllabus 2026, WBPSC Clerkship exam pattern, WBPSC Clerkship cutoff marks`,
       canonicalPath: "/wbpsc-clerkship-mock-test",
       jsonLd: webPageJsonLd({
-        name: "WBPSC Clerkship mock test & previous year papers",
+        name: "WBPSC Clerkship mock test, syllabus & previous year papers",
         description:
-          "Free online WBPSC Clerkship mock tests from 2019, 2020, 2024 question papers (all shifts).",
+          "Free online WBPSC Clerkship mock tests, complete syllabus from 2019, 2020, 2024 question papers (all shifts).",
         path: "/wbpsc-clerkship-mock-test",
       }),
     });
@@ -252,15 +294,15 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
   if (profile === "wb-tet") {
     applyExamSeoPayload({
       title:
-        "WB TET Mock Test Free | Primary TET Previous Year Question Papers | MedhaHub",
+        "WB TET Mock Test Free | Syllabus & Primary TET Previous Year Question Papers | MedhaHub",
       description:
-        "Practice WB Primary TET with free online mock tests from 2015, 2017, 2022, 2023 papers. Bengali, English, Child Development, Math, and EVS sections with answers and scoring.",
-      keywords: WB_TET_KEYWORDS,
+        "Practice WB Primary TET with free online mock tests from 2015, 2017, 2022, 2023 papers. Know WB TET syllabus 2026, exam pattern, cutoff marks. Bengali, English, Child Development, Math, and EVS sections with answers and scoring.",
+      keywords: `${WB_TET_KEYWORDS}, WB TET syllabus 2026, WB Primary TET exam pattern, WB TET cutoff marks, WB TET marks distribution`,
       canonicalPath: "/wb-tet-mock-test",
       jsonLd: webPageJsonLd({
-        name: "WB Primary TET mock test & previous year papers",
+        name: "WB Primary TET mock test, syllabus & previous year papers",
         description:
-          "Free WB Primary TET mock tests from previous year question papers (2015–2023).",
+          "Free WB Primary TET mock tests, complete syllabus from previous year question papers (2015–2023).",
         path: "/wb-tet-mock-test",
       }),
     });
@@ -270,16 +312,34 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
   if (profile === "ssc-mts") {
     applyExamSeoPayload({
       title:
-        "SSC MTS Mock Test Free | Previous Year Question Papers 2019 & 2023 | MedhaHub",
+        "SSC MTS Mock Test Free | Syllabus & Previous Year Question Papers 2019 & 2023 | MedhaHub",
       description:
-        "Practice SSC MTS (Multi Tasking Staff) with free online mock tests from 2019 and 2023 papers (all shifts). GK, Reasoning, English sections with answers and instant scoring.",
-      keywords: SSC_MTS_KEYWORDS,
+        "Practice SSC MTS (Multi Tasking Staff) with free online mock tests from 2019 and 2023 papers (all shifts). Know SSC MTS syllabus 2026, exam pattern, cutoff marks. GK, Reasoning, English sections with answers and instant scoring.",
+      keywords: `${SSC_MTS_KEYWORDS}, SSC MTS syllabus 2026, SSC MTS exam pattern, SSC MTS cutoff marks`,
       canonicalPath: "/ssc-mts-mock-test",
       jsonLd: webPageJsonLd({
-        name: "SSC MTS mock test & previous year papers",
+        name: "SSC MTS mock test, syllabus & previous year papers",
         description:
-          "Free SSC MTS mock tests from previous year papers (2019, 2023 all shifts).",
+          "Free SSC MTS mock tests, complete syllabus from previous year papers (2019, 2023 all shifts).",
         path: "/ssc-mts-mock-test",
+      }),
+    });
+    return;
+  }
+
+  if (profile === "jtet") {
+    applyExamSeoPayload({
+      title:
+        "JTET Mock Test Free | Syllabus & Jharkhand TET Previous Year Question Papers | MedhaHub",
+      description:
+        "Practice Jharkhand TET (JTET) with free online mock tests from previous year papers. Know JTET syllabus 2026, exam pattern, cutoff marks. Paper I & Paper II — Child Development, Language, Math, EVS & Social Science sections with answers and scoring.",
+      keywords: `${JTET_KEYWORDS}, JTET syllabus 2026, JTET exam pattern, Jharkhand TET cutoff marks`,
+      canonicalPath: "/jtet-mock-test",
+      jsonLd: webPageJsonLd({
+        name: "JTET mock test, syllabus & previous year papers",
+        description:
+          "Free Jharkhand TET mock tests, complete syllabus and previous year question papers.",
+        path: "/jtet-mock-test",
       }),
     });
     return;
@@ -287,9 +347,9 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
 
   applyExamSeoPayload({
     title:
-      "WBP, WBCS, WBPSC, WB TET, SSC & IBPS PO Previous Year Question Papers Free | Online Mock Test | MedhaHub",
+      "Exam Syllabus 2026 | WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO & JTET Previous Year Papers Free | Mock Test | MedhaHub",
     description:
-      "Download WBP Constable, WBCS, WBPSC Clerkship, WB TET, SSC MTS & IBPS PO previous year question papers free. Practice online mock tests for government & banking exams 2026. AI-powered results and analysis.",
+      "Know your exam syllabus & pattern 2026 — WBCS, WB Police SI, SSC CGL, IBPS PO, UPSC, Railway, CTET, JTET. Download previous year question papers free. Practice online mock tests for government, banking & teaching exams. Complete exam pattern, marks distribution, cutoff marks & preparation tips on MedhaHub.",
     keywords: [
       ...WBCS_KEYWORDS.split(", "),
       ...POLICE_KEYWORDS.split(", "),
@@ -297,15 +357,17 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
       ...WB_TET_KEYWORDS.split(", "),
       ...SSC_MTS_KEYWORDS.split(", "),
       ...IBPS_PO_KEYWORDS.split(", "),
+      ...JTET_KEYWORDS.split(", "),
+      ...SYLLABUS_KEYWORDS.split(", "),
       "SSC CGL previous year question paper",
       "সরকারি চাকরির পুরনো প্রশ্নপত্র",
       "পশ্চিমবঙ্গ সরকারি চাকরি প্রস্তুতি",
     ].join(", "),
     canonicalPath: "/question-hub",
     jsonLd: webPageJsonLd({
-      name: "Question Hub — WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO papers",
+      name: "Question Hub — Exam Syllabus, Mock Tests & Previous Year Papers | MedhaHub",
       description:
-        "Previous year papers and mock tests for WBP, WBCS, WBPSC Clerkship, WB TET, SSC and IBPS PO on MedhaHub.",
+        "Know your exam syllabus 2026, practice mock tests, and download previous year papers for WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO & JTET on MedhaHub.",
       path: "/question-hub",
     }),
   });
@@ -387,6 +449,17 @@ export function applyPdfMockTestSeo(folder: string, pdfFileName: string) {
       keywords: `${IBPS_PO_KEYWORDS}, ${shortName}`,
       canonicalPath: "/ibps-po-mock-test",
       ogTitle: `IBPS PO mock test — ${shortName}`,
+    });
+    return;
+  }
+
+  if (folder === "jtet" || folder === "JTET") {
+    applyExamSeoPayload({
+      title: `${shortName} | JTET Mock Test Online | MedhaHub`,
+      description: `Jharkhand TET mock test: ${shortName}. Practice Child Development, Language, Math & EVS MCQs with timer and instant results on MedhaHub.`,
+      keywords: `${JTET_KEYWORDS}, ${shortName}`,
+      canonicalPath: "/jtet-mock-test",
+      ogTitle: `JTET mock test — ${shortName}`,
     });
     return;
   }

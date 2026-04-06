@@ -30,8 +30,8 @@ import { isLoggedIn } from "@/lib/auth-api";
 const SUBJECT_STYLE: Record<string, { accent: string; icon: string; dot: string; gradient: string; glow: string; bg: string; badge: string }> = {
   History:           { accent: "text-amber-600 dark:text-amber-400",   icon: "📜", dot: "bg-amber-500",   gradient: "from-amber-500 to-orange-600",   glow: "shadow-amber-500/30",   bg: "bg-amber-500/10",   badge: "border-amber-500/30 text-amber-600 dark:text-amber-400" },
   Geography:         { accent: "text-emerald-600 dark:text-emerald-400", icon: "🌍", dot: "bg-emerald-500", gradient: "from-emerald-500 to-teal-600", glow: "shadow-emerald-500/30", bg: "bg-emerald-500/10", badge: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400" },
-  Polity:            { accent: "text-blue-600 dark:text-blue-400",     icon: "⚖️", dot: "bg-blue-500",    gradient: "from-blue-500 to-indigo-600",    glow: "shadow-blue-500/30",    bg: "bg-blue-500/10",    badge: "border-blue-500/30 text-blue-600 dark:text-blue-400" },
-  Reasoning:         { accent: "text-violet-600 dark:text-violet-400", icon: "🧩", dot: "bg-violet-500",  gradient: "from-violet-500 to-purple-600",  glow: "shadow-violet-500/30",  bg: "bg-violet-500/10",  badge: "border-violet-500/30 text-violet-600 dark:text-violet-400" },
+  Polity:            { accent: "text-blue-600 dark:text-blue-400",     icon: "⚖️", dot: "bg-blue-500",    gradient: "from-orange-500 to-red-500",    glow: "shadow-orange-500/30",    bg: "bg-blue-500/10",    badge: "border-blue-500/30 text-blue-600 dark:text-blue-400" },
+  Reasoning:         { accent: "text-orange-600 dark:text-orange-400", icon: "🧩", dot: "bg-orange-500",  gradient: "from-violet-500 to-purple-600",  glow: "shadow-orange-500/30",  bg: "bg-orange-500/10",  badge: "border-orange-500/30 text-orange-600 dark:text-orange-400" },
   Math:              { accent: "text-rose-600 dark:text-rose-400",     icon: "📐", dot: "bg-rose-500",    gradient: "from-rose-500 to-pink-600",      glow: "shadow-rose-500/30",    bg: "bg-rose-500/10",    badge: "border-rose-500/30 text-rose-600 dark:text-rose-400" },
   "Current Affairs": { accent: "text-cyan-600 dark:text-cyan-400",    icon: "📰", dot: "bg-cyan-500",    gradient: "from-cyan-500 to-sky-600",       glow: "shadow-cyan-500/30",    bg: "bg-cyan-500/10",    badge: "border-cyan-500/30 text-cyan-600 dark:text-cyan-400" },
 };
@@ -378,9 +378,9 @@ export default function DailyTasks() {
           transition={{ delay: 0.55, duration: 0.5, ease: smoothEase }}
           className="mt-8 grid grid-cols-3 gap-3">
           {[
-            { label: "Question Bank", sub: "বিষয় অনুযায়ী", icon: BookOpen, to: "/govt-practice", color: "from-blue-500/10 to-indigo-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
+            { label: "Question Bank", sub: "বিষয় অনুযায়ী", icon: BookOpen, to: "/govt-practice", color: "from-orange-500/10 to-red-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
             { label: "Mock Test", sub: "পূর্ণ মক টেস্ট", icon: Target, to: "/question-hub", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },
-            { label: "Leaderboard", sub: "শীর্ষ পরীক্ষার্থী", icon: Trophy, to: "/leaderboard", color: "from-violet-500/10 to-purple-500/10 border-violet-500/20 hover:border-violet-500/40", icon_color: "text-violet-500" },
+            { label: "Leaderboard", sub: "শীর্ষ পরীক্ষার্থী", icon: Trophy, to: "/leaderboard", color: "from-orange-500/10 to-purple-500/10 border-orange-500/20 hover:border-orange-500/40", icon_color: "text-orange-500" },
           ].map((item) => (
             <Link key={item.to} to={item.to}>
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}

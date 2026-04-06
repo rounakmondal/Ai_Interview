@@ -29,17 +29,17 @@ class ApiClient {
     if (typeof window !== "undefined") {
       console.log(
         `%c MedhaHub API Client Initialized`,
-        "color: #4f46e5; font-weight: bold; font-size: 12px;",
+        "color: #ea580c; font-weight: bold; font-size: 12px;",
       );
       console.log(
         `%c Mode: ${useMock ? "Mock API" : "Real API"}`,
-        "color: #4f46e5;",
+        "color: #ea580c;",
       );
       if (!useMock) {
-        console.log(`%c Endpoint: ${baseUrl}`, "color: #4f46e5;");
+        console.log(`%c Endpoint: ${baseUrl}`, "color: #ea580c;");
         console.log(
           `%c Fallback: Using mock API if real API is unavailable`,
-          "color: #4f46e5; font-size: 11px;",
+          "color: #ea580c; font-size: 11px;",
         );
       }
     }

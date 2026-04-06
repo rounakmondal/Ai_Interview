@@ -20,21 +20,15 @@ interface Message {
   timestamp: Date;
 }
 
-// ─── AWS Polly Bengali TTS (via server) ───────────────────────────────────────
+// ─── Puter.js Free TTS (Bengali) ──────────────────────────────────────────────
+declare const puter: { ai: { txt2speech: (text: string, lang?: string | Record<string, unknown>) => Promise<HTMLAudioElement> } };
+
 async function speakBengali(text: string): Promise<HTMLAudioElement | null> {
-  const res = await fetch("/api/tts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, language: "bn-IN" }),
-  });
-
-  if (!res.ok) throw new Error(`Polly TTS error: ${res.status}`);
-
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const audio = new Audio(url);
-  audio.addEventListener("ended", () => URL.revokeObjectURL(url));
-  return audio;
+  if (typeof puter === "undefined") {
+    console.warn("Puter.js not loaded, TTS unavailable");
+    return null;
+  }
+  return puter.ai.txt2speech(text, "bn-IN");
 }
 
 // ─── Suggested prompts ────────────────────────────────────────────────────────
@@ -56,7 +50,7 @@ function SoundWave({ active }: { active: boolean }) {
           key={i}
           className="w-0.5 rounded-full transition-all duration-300"
           style={{
-            background: active ? "#a78bfa" : "rgba(167,139,250,0.3)",
+            background: active ? "#fb923c" : "rgba(167,139,250,0.3)",
             height: active ? `${8 + Math.sin(i * 1.2) * 6}px` : "3px",
             animationDuration: `${0.6 + i * 0.12}s`,
             animation: active ? "bounce 0.6s infinite alternate" : "none",
@@ -124,7 +118,8 @@ export default function StoryTelling() {
       addMessage("user", query);
 
       try {
-        const res = await fetch("/api/story", {
+        const API_BASE = import.meta.env.VITE_API_URL || "/api";
+        const res = await fetch(`${API_BASE}/story`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ topic: query }),
@@ -186,13 +181,13 @@ export default function StoryTelling() {
         />
         <div
           className="absolute w-[350px] h-[350px] rounded-full blur-[100px] opacity-[0.09]"
-          style={{ background: "#4f46e5", bottom: "-8%", right: "-5%" }}
+          style={{ background: "#ea580c", bottom: "-8%", right: "-5%" }}
         />
         {speaking && (
           <div
             className="absolute w-[300px] h-[300px] rounded-full blur-[80px] opacity-[0.07] animate-pulse"
             style={{
-              background: "#a78bfa",
+              background: "#fb923c",
               top: "40%",
               left: "50%",
               transform: "translate(-50%,-50%)",
@@ -217,11 +212,11 @@ export default function StoryTelling() {
             </Link>
             <span className="text-white/20 text-xs">›</span>
             <div className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-violet-400" />
+              <BookOpen className="w-4 h-4 text-orange-400" />
               <span className="text-sm font-semibold text-white/90">
                 গল্প বলা
               </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-300 border border-violet-500/25">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/15 text-orange-300 border border-orange-500/25">
                 BENGALI · AI
               </span>
             </div>
@@ -229,9 +224,9 @@ export default function StoryTelling() {
 
           <div className="flex items-center gap-2">
             {speaking && (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20">
                 <SoundWave active />
-                <span className="text-[10px] font-bold text-violet-300 animate-pulse">
+                <span className="text-[10px] font-bold text-orange-300 animate-pulse">
                   বলছি...
                 </span>
               </div>
@@ -274,14 +269,14 @@ export default function StoryTelling() {
                   className="w-24 h-24 rounded-3xl flex items-center justify-center text-4xl"
                   style={{
                     background:
-                      "linear-gradient(135deg, #7c3aed22, #4f46e522)",
+                      "linear-gradient(135deg, #7c3aed22, #ea580c22)",
                     border: "1px solid rgba(124,58,237,0.25)",
                     boxShadow: "0 0 60px rgba(124,58,237,0.15)",
                   }}
                 >
                   📖
                 </div>
-                <Sparkles className="absolute -top-2 -right-2 w-5 h-5 text-violet-400 animate-pulse" />
+                <Sparkles className="absolute -top-2 -right-2 w-5 h-5 text-orange-400 animate-pulse" />
               </div>
 
               <div className="space-y-3">
@@ -305,7 +300,7 @@ export default function StoryTelling() {
                     <button
                       key={s}
                       onClick={() => handleSend(s)}
-                      className="px-4 py-2 rounded-full text-sm font-medium text-violet-300 transition-all hover:scale-105 active:scale-95"
+                      className="px-4 py-2 rounded-full text-sm font-medium text-orange-300 transition-all hover:scale-105 active:scale-95"
                       style={{
                         background: "rgba(124,58,237,0.1)",
                         border: "1px solid rgba(124,58,237,0.25)",
@@ -329,7 +324,7 @@ export default function StoryTelling() {
               {msg.role === "assistant" && (
                 <div className="flex-shrink-0 w-9 h-9 rounded-2xl flex items-center justify-center mr-3 mt-1 text-base"
                   style={{
-                    background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                    background: "linear-gradient(135deg, #7c3aed, #ea580c)",
                     boxShadow: "0 4px 20px rgba(124,58,237,0.35)",
                   }}
                 >
@@ -346,7 +341,7 @@ export default function StoryTelling() {
                     msg.role === "user"
                       ? {
                           background:
-                            "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                            "linear-gradient(135deg, #7c3aed, #ea580c)",
                           color: "#fff",
                           borderBottomRightRadius: "6px",
                           boxShadow: "0 4px 20px rgba(124,58,237,0.3)",
@@ -392,7 +387,7 @@ export default function StoryTelling() {
               <div
                 className="flex-shrink-0 w-9 h-9 rounded-2xl flex items-center justify-center mr-3 text-base"
                 style={{
-                  background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                  background: "linear-gradient(135deg, #7c3aed, #ea580c)",
                 }}
               >
                 📖
@@ -405,7 +400,7 @@ export default function StoryTelling() {
                   borderBottomLeftRadius: "6px",
                 }}
               >
-                <Loader2 className="w-4 h-4 text-violet-400 animate-spin" />
+                <Loader2 className="w-4 h-4 text-orange-400 animate-spin" />
                 <span className="text-sm text-white/40">গল্প তৈরি হচ্ছে...</span>
               </div>
             </div>
@@ -453,7 +448,7 @@ export default function StoryTelling() {
               style={{
                 background:
                   input.trim() && !loading
-                    ? "linear-gradient(135deg, #7c3aed, #4f46e5)"
+                    ? "linear-gradient(135deg, #7c3aed, #ea580c)"
                     : "rgba(255,255,255,0.07)",
                 boxShadow:
                   input.trim() && !loading
@@ -472,7 +467,7 @@ export default function StoryTelling() {
           <p className="text-[10px] text-white/20 text-center mt-2">
             Enter পাঠালে গল্প শুরু হবে · Shift+Enter নতুন লাইন ·{" "}
             {audioEnabled ? (
-              <span className="text-violet-400/60">🔊 Bengali TTS চালু</span>
+              <span className="text-orange-400/60">🔊 Bengali TTS চালু</span>
             ) : (
               <span>🔇 TTS বন্ধ — হেডারে চালু করো</span>
             )}

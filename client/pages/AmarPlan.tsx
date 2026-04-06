@@ -489,7 +489,7 @@ export default function AmarPlan() {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
           <div className="flex-1 space-y-2">
             <div className="flex items-center gap-2">
-              <Badge className="bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20 text-xs">
+              <Badge className="bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 text-xs">
                 <Sparkles className="w-3 h-3 mr-1" />আমার পরিকল্পনা
               </Badge>
             </div>
@@ -506,7 +506,7 @@ export default function AmarPlan() {
               <p className="text-xs text-muted-foreground">সম্পূর্ণ</p>
             </div>
             <div className="text-center p-3 rounded-xl bg-background/80 border border-border/40">
-              <p className="text-2xl font-bold text-violet-500">{stats.completedTasks}</p>
+              <p className="text-2xl font-bold text-orange-500">{stats.completedTasks}</p>
               <p className="text-xs text-muted-foreground">Done</p>
             </div>
             <div className="text-center p-3 rounded-xl bg-background/80 border border-border/40">
@@ -534,7 +534,7 @@ export default function AmarPlan() {
 
         {/* ─── TODAY'S TASKS ─────────────────────────────────────────── */}
         <Card className="overflow-hidden border-border/40">
-          <div className="bg-gradient-to-r from-primary/10 to-violet-500/5 p-5 border-b border-border/40">
+          <div className="bg-gradient-to-r from-primary/10 to-red-500/5 p-5 border-b border-border/40">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
                 <Target className="w-5 h-5 text-primary" />
@@ -580,7 +580,7 @@ export default function AmarPlan() {
                         variant="secondary"
                         className={`text-[10px] ${
                           task.type === "mock_test"
-                            ? "bg-violet-500/10 text-violet-600 dark:text-violet-400"
+                            ? "bg-orange-500/10 text-orange-600 dark:text-orange-400"
                             : task.type === "revision"
                             ? "bg-green-500/10 text-green-600 dark:text-green-400"
                             : ""
@@ -606,7 +606,7 @@ export default function AmarPlan() {
                     <Link
                       to={`/mock-test?exam=${plan.examId.toLowerCase()}&source=amar-plan&taskId=${task.id}`}
                     >
-                      <Button size="sm" className="gap-1.5 bg-violet-600 hover:bg-violet-700">
+                      <Button size="sm" className="gap-1.5 bg-orange-600 hover:bg-violet-700">
                         <Play className="w-3.5 h-3.5" />
                         Mock দাও
                       </Button>
@@ -688,7 +688,7 @@ export default function AmarPlan() {
                   </div>
                   <div className="flex items-center gap-2">
                     {dayTasks.some((t) => t.type === "mock_test") && (
-                      <Badge className="bg-violet-500/10 text-violet-600 dark:text-violet-400 text-[10px]">
+                      <Badge className="bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px]">
                         Mock
                       </Badge>
                     )}
@@ -708,7 +708,7 @@ export default function AmarPlan() {
                             task.completed
                               ? "bg-green-500"
                               : task.type === "mock_test"
-                              ? "bg-violet-500"
+                              ? "bg-orange-500"
                               : task.isWeak
                               ? "bg-red-400"
                               : "bg-muted-foreground/40"

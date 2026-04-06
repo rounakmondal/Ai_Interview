@@ -9,8 +9,8 @@ const stats = [
     suffix: "",
     label: "Free to Start",
     sub: "no credit card required",
-    color: "from-indigo-500 to-blue-600",
-    bg: "bg-indigo-500/10",
+    color: "from-orange-500 to-red-500",
+    bg: "bg-orange-500/10",
   },
   {
     icon: TrendingUp,
@@ -37,7 +37,7 @@ const stats = [
     label: "Always Available",
     sub: "practice any time, anywhere",
     color: "from-violet-500 to-purple-600",
-    bg: "bg-violet-500/10",
+    bg: "bg-orange-500/10",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function PremiumStats() {
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Built to help you{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
               succeed
             </span>
           </h2>
@@ -104,7 +104,7 @@ export default function PremiumStats() {
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.95 }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: smoothEase }}
-                className="bg-card border border-border/50 rounded-2xl p-6 text-center flex flex-col items-center gap-3 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300"
+                className="bg-card border border-border/50 rounded-2xl p-6 text-center flex flex-col items-center gap-3 hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/5 transition-all duration-300"
               >
                 <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center`}>
                   <Icon className={`w-6 h-6 bg-gradient-to-br ${stat.color} bg-clip-text`} style={{ color: "hsl(var(--indigo-500, 239 84% 67%))" }} />

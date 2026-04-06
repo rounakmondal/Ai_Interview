@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import { BLOG_POSTS, type BlogMeta } from "./BlogIndex";
+import { blogArticleSchema, breadcrumbSchema } from "@/lib/seo-schemas";
 
 interface BlogPostLayoutProps {
   slug: string;
@@ -74,8 +75,8 @@ export default function BlogPostLayout({
       <section className="relative overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-indigo-500/8 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[100px]" />
+          <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-orange-500/8 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-orange-500/8 rounded-full blur-[100px]" />
         </div>
         <div
           className="absolute inset-0 opacity-[0.02]"
@@ -119,7 +120,7 @@ export default function BlogPostLayout({
             <Button
               variant="ghost"
               size="sm"
-              className="mb-6 gap-2 hover:bg-indigo-500/10 hover:text-indigo-500 rounded-full px-4"
+              className="mb-6 gap-2 hover:bg-orange-500/10 hover:text-orange-500 rounded-full px-4"
               onClick={() => navigate("/blog")}
             >
               <ArrowLeft className="w-4 h-4" />
@@ -135,7 +136,7 @@ export default function BlogPostLayout({
           >
             {/* Category + meta */}
             <div className="flex flex-wrap items-center gap-3 mb-5">
-              <span className="text-xs px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-500 font-semibold border border-indigo-500/20">
+              <span className="text-xs px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-500 font-semibold border border-orange-500/20">
                 {post.category}
               </span>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -169,7 +170,7 @@ export default function BlogPostLayout({
               <Button
                 variant="outline"
                 size="sm"
-                className="gap-2 rounded-full hover:bg-indigo-500/10 hover:text-indigo-500 hover:border-indigo-500/30"
+                className="gap-2 rounded-full hover:bg-orange-500/10 hover:text-orange-500 hover:border-orange-500/30"
                 onClick={handleShare}
               >
                 <Share2 className="w-4 h-4" />
@@ -203,7 +204,7 @@ export default function BlogPostLayout({
             blog-content
             [&>h2]:text-2xl [&>h2]:sm:text-3xl [&>h2]:font-extrabold [&>h2]:text-foreground
             [&>h2]:mt-12 [&>h2]:mb-5 [&>h2]:tracking-tight
-            [&>h2]:border-l-4 [&>h2]:border-indigo-500 [&>h2]:pl-4
+            [&>h2]:border-l-4 [&>h2]:border-orange-500 [&>h2]:pl-4
 
             [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-foreground
             [&>h3]:mt-8 [&>h3]:mb-3
@@ -216,7 +217,7 @@ export default function BlogPostLayout({
             [&>ul>li]:pl-6 [&>ul>li]:relative
             [&>ul>li]:before:content-[''] [&>ul>li]:before:absolute [&>ul>li]:before:left-0
             [&>ul>li]:before:top-[10px] [&>ul>li]:before:w-2 [&>ul>li]:before:h-2
-            [&>ul>li]:before:rounded-full [&>ul>li]:before:bg-indigo-500/60
+            [&>ul>li]:before:rounded-full [&>ul>li]:before:bg-orange-500/60
 
             [&>ol]:mb-6 [&>ol]:space-y-3 [&>ol]:ml-1 [&>ol]:list-none [&>ol]:counter-reset-[item]
             [&>ol>li]:text-muted-foreground [&>ol>li]:leading-relaxed
@@ -224,20 +225,20 @@ export default function BlogPostLayout({
             [&>ol>li]:before:content-[counter(item)] [&>ol>li]:before:absolute
             [&>ol>li]:before:left-0 [&>ol>li]:before:top-0
             [&>ol>li]:before:w-7 [&>ol>li]:before:h-7 [&>ol>li]:before:rounded-lg
-            [&>ol>li]:before:bg-indigo-500/10
-            [&>ol>li]:before:text-indigo-500 [&>ol>li]:before:text-sm
+            [&>ol>li]:before:bg-orange-500/10
+            [&>ol>li]:before:text-orange-500 [&>ol>li]:before:text-sm
             [&>ol>li]:before:font-bold [&>ol>li]:before:flex
             [&>ol>li]:before:items-center [&>ol>li]:before:justify-center
 
             [&_strong]:text-foreground [&_strong]:font-semibold
 
-            [&_a]:text-indigo-500 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-2
-            [&_a]:decoration-indigo-500/30 [&_a:hover]:decoration-indigo-500
+            [&_a]:text-orange-500 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-2
+            [&_a]:decoration-orange-500/30 [&_a:hover]:decoration-orange-500
 
             [&>hr]:my-10 [&>hr]:border-border/50
 
-            [&>blockquote]:my-8 [&>blockquote]:border-l-4 [&>blockquote]:border-indigo-500
-            [&>blockquote]:bg-gradient-to-r [&>blockquote]:from-indigo-500/5 [&>blockquote]:to-transparent
+            [&>blockquote]:my-8 [&>blockquote]:border-l-4 [&>blockquote]:border-orange-500
+            [&>blockquote]:bg-gradient-to-r [&>blockquote]:from-orange-500/5 [&>blockquote]:to-transparent
             [&>blockquote]:rounded-r-xl [&>blockquote]:px-6 [&>blockquote]:py-5
             [&>blockquote_p]:text-foreground/80 [&>blockquote_p]:mb-0
 
@@ -257,7 +258,7 @@ export default function BlogPostLayout({
       <section className="max-w-4xl mx-auto px-4 pb-12">
         <div className="relative rounded-2xl overflow-hidden">
           {/* Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-violet-700" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTRWMjhIMjR2Mmgxem0tMi0ydi0ySDE2djJoMTh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
 
           <div className="relative p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
@@ -283,7 +284,7 @@ export default function BlogPostLayout({
                 Question Bank
               </Button>
               <Button
-                className="bg-white text-indigo-700 hover:bg-white/90 font-semibold rounded-xl px-5"
+                className="bg-white text-orange-700 hover:bg-white/90 font-semibold rounded-xl px-5"
                 onClick={() => navigate("/govt-practice")}
               >
                 Start Practice →
@@ -306,7 +307,7 @@ export default function BlogPostLayout({
                   <ArrowLeft className="w-3 h-3" />
                   Previous Article
                 </div>
-                <h4 className="font-semibold text-foreground group-hover:text-indigo-500 transition-colors line-clamp-2 text-sm">
+                <h4 className="font-semibold text-foreground group-hover:text-orange-500 transition-colors line-clamp-2 text-sm">
                   {prevPost.title}
                 </h4>
               </Link>
@@ -322,7 +323,7 @@ export default function BlogPostLayout({
                   Next Article
                   <ArrowRight className="w-3 h-3" />
                 </div>
-                <h4 className="font-semibold text-foreground group-hover:text-indigo-500 transition-colors line-clamp-2 text-sm">
+                <h4 className="font-semibold text-foreground group-hover:text-orange-500 transition-colors line-clamp-2 text-sm">
                   {nextPost.title}
                 </h4>
               </Link>
@@ -335,8 +336,8 @@ export default function BlogPostLayout({
       {related.length > 0 && (
         <section className="max-w-4xl mx-auto px-4 pb-20">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-indigo-500/10 rounded-lg">
-              <BookOpen className="w-5 h-5 text-indigo-500" />
+            <div className="p-2 bg-orange-500/10 rounded-lg">
+              <BookOpen className="w-5 h-5 text-orange-500" />
             </div>
             <h2 className="text-xl font-bold text-foreground">
               More in {post.category}
@@ -349,9 +350,9 @@ export default function BlogPostLayout({
                 to={`/blog/${rp.slug}`}
                 className="block group"
               >
-                <div className="rounded-xl border border-border/50 bg-card p-5 hover:border-indigo-500/30 hover:shadow-md transition-all h-full flex flex-col">
+                <div className="rounded-xl border border-border/50 bg-card p-5 hover:border-orange-500/30 hover:shadow-md transition-all h-full flex flex-col">
                   <span className="text-2xl mb-3">{rp.icon}</span>
-                  <h4 className="font-bold text-sm text-foreground group-hover:text-indigo-500 transition-colors line-clamp-2 mb-2 flex-1">
+                  <h4 className="font-bold text-sm text-foreground group-hover:text-orange-500 transition-colors line-clamp-2 mb-2 flex-1">
                     {rp.title}
                   </h4>
                   <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -366,6 +367,30 @@ export default function BlogPostLayout({
       )}
 
       <Footer />
+
+      {/* SEO: BlogPosting + Breadcrumb schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: blogArticleSchema({
+            title: post.title,
+            description: post.description,
+            url: `/blog/${post.slug}`,
+            datePublished: post.date,
+            keywords: post.title.split(/[\s\-–|,]+/).filter((w) => w.length > 3),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: breadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name: "Blog", url: "/blog" },
+            { name: post.title, url: `/blog/${post.slug}` },
+          ]),
+        }}
+      />
     </div>
   );
 }

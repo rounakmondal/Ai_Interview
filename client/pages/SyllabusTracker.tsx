@@ -205,7 +205,7 @@ export default function SyllabusTracker() {
             { icon: CheckCircle2, value: doneChapters,   label: "Chapters Done",  color: "text-green-600",  bg: "bg-green-500/5" },
             { icon: Clock,        value: inProgressCount, label: "In Progress",   color: "text-amber-600",  bg: "bg-amber-500/5" },
             { icon: BookOpen,     value: totalChapters,   label: "Total Chapters", color: "text-foreground", bg: "bg-primary/5" },
-            { icon: TrendingUp,   value: `${attemptedPct}%`, label: "Attempted", color: "text-violet-600",  bg: "bg-violet-500/5" },
+            { icon: TrendingUp,   value: `${attemptedPct}%`, label: "Attempted", color: "text-orange-600",  bg: "bg-orange-500/5" },
           ].map((item) => {
             const Icon = item.icon;
             return (
@@ -222,13 +222,13 @@ export default function SyllabusTracker() {
         {overallPct >= 25 && (
           <Card className={`p-3.5 border-border/40 flex items-center gap-3 ${
             overallPct >= 75 ? "bg-green-500/5 border-green-500/20" :
-            overallPct >= 50 ? "bg-violet-500/5 border-violet-500/20" : "bg-amber-500/5 border-amber-500/20"
+            overallPct >= 50 ? "bg-orange-500/5 border-orange-500/20" : "bg-amber-500/5 border-amber-500/20"
           }`}>
             <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
-              overallPct >= 75 ? "bg-green-500/15" : overallPct >= 50 ? "bg-violet-500/15" : "bg-amber-500/15"
+              overallPct >= 75 ? "bg-green-500/15" : overallPct >= 50 ? "bg-orange-500/15" : "bg-amber-500/15"
             }`}>
               {overallPct >= 75 ? <Trophy className="w-5 h-5 text-green-500" /> :
-               overallPct >= 50 ? <Award className="w-5 h-5 text-violet-500" /> :
+               overallPct >= 50 ? <Award className="w-5 h-5 text-orange-500" /> :
                <Flame className="w-5 h-5 text-amber-500" />}
             </div>
             <div className="flex-1">
@@ -364,7 +364,7 @@ export default function SyllabusTracker() {
                                 </Button>
                               </>
                             )}
-                            <Button size="sm" variant="ghost" className="h-7 px-2.5 text-xs gap-1 text-violet-600 hover:bg-violet-500/10"
+                            <Button size="sm" variant="ghost" className="h-7 px-2.5 text-xs gap-1 text-orange-600 hover:bg-orange-500/10"
                               onClick={() => setGuideChapter({ id: chapter.id, name: chapter.name })}>  
                               <Sparkles className="w-3 h-3" /><span className="hidden sm:inline">AI</span>
                             </Button>
@@ -380,7 +380,7 @@ export default function SyllabusTracker() {
         </div>
 
         {/* ── Bottom CTA ─────────────────────────────────────────────────── */}
-        <Card className="p-5 border-border/40 bg-gradient-to-r from-primary/5 to-violet-500/5">
+        <Card className="p-5 border-border/40 bg-gradient-to-r from-primary/5 to-red-500/5">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center">

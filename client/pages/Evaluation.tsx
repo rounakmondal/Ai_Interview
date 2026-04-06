@@ -86,11 +86,11 @@ function PracticeQuestionsSection({
       case "behavioral":
         return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
       case "technical":
-        return "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400";
+        return "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-orange-400";
       case "situational":
         return "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400";
       case "leadership":
-        return "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400";
+        return "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400";
       default:
         return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
     }
@@ -969,7 +969,7 @@ export default function EvaluationPage() {
                 {[
                   { label: "Overall", value: scores.overall, color: "text-primary" },
                   { label: "Communication", value: scores.communication, color: "text-blue-600 dark:text-blue-400" },
-                  { label: "Technical", value: scores.technical, color: "text-purple-600 dark:text-purple-400" },
+                  { label: "Technical", value: scores.technical, color: "text-orange-600 dark:text-orange-400" },
                   { label: "Confidence", value: scores.confidence, color: "text-green-600 dark:text-green-400" },
                 ].map((s) => (
                   <div key={s.label} className="text-center p-3 bg-background/70 rounded-lg border border-border/40">

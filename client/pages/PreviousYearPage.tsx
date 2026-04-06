@@ -811,8 +811,8 @@ export default function PreviousYearPage() {
     <div className="min-h-screen bg-background">
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-indigo-500/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-orange-500/8 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-orange-500/8 rounded-full blur-[100px]" />
       </div>
 
       {/* ── Breadcrumb ── */}
@@ -935,7 +935,7 @@ export default function PreviousYearPage() {
               <p className="text-lg font-bold">Included</p>
             </div>
             <div className="text-center p-3 bg-muted/30 rounded-lg">
-              <Sparkles className="w-5 h-5 text-violet-500 mx-auto mb-1" />
+              <Sparkles className="w-5 h-5 text-orange-500 mx-auto mb-1" />
               <p className="text-xs text-muted-foreground">AI Analysis</p>
               <p className="text-lg font-bold">Yes</p>
             </div>
@@ -1039,7 +1039,7 @@ export default function PreviousYearPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
-          className="bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/20 rounded-xl p-8 text-center"
+          className="bg-gradient-to-r from-primary/10 to-red-500/10 border border-primary/20 rounded-xl p-8 text-center"
         >
           <h2 className="text-2xl font-bold mb-2">Ready to Practice?</h2>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto">

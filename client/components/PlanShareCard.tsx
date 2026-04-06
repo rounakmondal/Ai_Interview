@@ -105,7 +105,7 @@ export default function PlanShareCard({
               width: "40px",
               height: "40px",
               borderRadius: "12px",
-              background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+              background: "linear-gradient(135deg, #f97316, #ef4444)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -126,7 +126,7 @@ export default function PlanShareCard({
             fontSize: "20px",
             fontWeight: "bold",
             marginBottom: "16px",
-            background: "linear-gradient(90deg, #818cf8, #a78bfa)",
+            background: "linear-gradient(90deg, #818cf8, #fb923c)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -189,7 +189,7 @@ export default function PlanShareCard({
         >
           <div
             style={{
-              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa)",
+              background: "linear-gradient(90deg, #f97316, #ef4444, #fb923c)",
               height: "100%",
               width: `${percentage}%`,
               borderRadius: "8px",

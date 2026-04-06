@@ -14,6 +14,8 @@ Allow: /wbpsc-clerkship-mock-test
 Allow: /wb-tet-mock-test
 Allow: /ssc-mts-mock-test
 Allow: /ibps-po-mock-test
+Allow: /jtet-mock-test
+Allow: /exam-syllabus
 Allow: /previous-year/
 Allow: /question-hub
 Allow: /blog/
@@ -21,6 +23,20 @@ Allow: /daily-quiz
 Allow: /current-affairs
 Allow: /syllabus
 Allow: /prev-year-questions
+Allow: /interview-questions
+Allow: /interview-questions/
+Allow: /skill-matrix
+
+# Company interview pages (200+ companies)
+# Google: please crawl these frequently
+Allow: /interview-questions/tcs
+Allow: /interview-questions/infosys
+Allow: /interview-questions/wipro
+Allow: /interview-questions/google
+Allow: /interview-questions/amazon
+Allow: /interview-questions/microsoft
+Allow: /interview-questions/meta
+Allow: /interview-questions/flipkart
 
 # Disallow private/auth routes
 Disallow: /auth

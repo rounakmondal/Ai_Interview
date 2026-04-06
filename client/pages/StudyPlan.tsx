@@ -36,7 +36,7 @@ const STUDY_TIPS = [
 
 const PHASE_COLORS = [
   { border: "border-l-blue-500", badge: "bg-blue-500", text: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500/10" },
-  { border: "border-l-violet-500", badge: "bg-violet-500", text: "text-violet-600 dark:text-violet-400", bg: "bg-violet-500/10" },
+  { border: "border-l-violet-500", badge: "bg-orange-500", text: "text-orange-600 dark:text-orange-400", bg: "bg-orange-500/10" },
   { border: "border-l-green-500", badge: "bg-green-500", text: "text-green-600 dark:text-green-400", bg: "bg-green-500/10" },
   { border: "border-l-orange-500", badge: "bg-orange-500", text: "text-orange-600 dark:text-orange-400", bg: "bg-orange-500/10" },
 ];
@@ -200,7 +200,7 @@ export default function StudyPlan() {
                 <p className="text-xs text-muted-foreground">Syllabus</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-background/80 border border-border/40">
-                <p className="text-2xl font-bold text-violet-500">{doneChapters}</p>
+                <p className="text-2xl font-bold text-orange-500">{doneChapters}</p>
                 <p className="text-xs text-muted-foreground">Done</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-background/80 border border-border/40">
@@ -246,7 +246,7 @@ export default function StudyPlan() {
               tab === "ai" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-violet-500" />AI Plan
+            <Sparkles className="w-3.5 h-3.5 text-orange-500" />AI Plan
           </button>
           <button
             onClick={() => setTab("template")}
@@ -263,10 +263,10 @@ export default function StudyPlan() {
           <div className="space-y-6">
             {!aiPlan && (
               <Card className="overflow-hidden border-border/40">
-                <div className="bg-gradient-to-r from-violet-500/10 to-primary/5 px-6 py-5 border-b border-border/40">
+                <div className="bg-gradient-to-r from-orange-500/10 to-primary/5 px-6 py-5 border-b border-border/40">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center">
-                      <Sparkles className="w-5 h-5 text-violet-500" />
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-orange-500" />
                     </div>
                     <div>
                       <h2 className="font-bold">Generate Your AI Study Plan</h2>
@@ -361,10 +361,10 @@ export default function StudyPlan() {
               <div className="space-y-5">
                 {/* Plan summary */}
                 <Card className="overflow-hidden border-border/40">
-                  <div className="bg-gradient-to-r from-violet-500/10 to-primary/5 p-5 flex items-center justify-between flex-wrap gap-4">
+                  <div className="bg-gradient-to-r from-orange-500/10 to-primary/5 p-5 flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-2xl bg-violet-500/20 flex items-center justify-center">
-                        <Trophy className="w-5 h-5 text-violet-500" />
+                      <div className="w-11 h-11 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                        <Trophy className="w-5 h-5 text-orange-500" />
                       </div>
                       <div>
                         <p className="font-bold text-sm">Your Personalized AI Plan</p>
@@ -391,7 +391,7 @@ export default function StudyPlan() {
                   <div className="px-5 py-3 flex items-center gap-4 flex-wrap border-t border-border/30 bg-muted/20">
                     {[
                       { color: "bg-blue-500", label: "Foundation" },
-                      { color: "bg-violet-500", label: "Practice" },
+                      { color: "bg-orange-500", label: "Practice" },
                       { color: "bg-green-500", label: "Revision" },
                     ].map((p) => (
                       <div key={p.label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -454,7 +454,7 @@ export default function StudyPlan() {
                       <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/30 transition-colors">
                         <div className="w-24 text-xs text-muted-foreground font-mono flex-shrink-0">{item.time}</div>
                         <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                          item.type === "study" ? "bg-blue-500" : item.type === "practice" ? "bg-violet-500" : item.type === "revision" ? "bg-green-500" : "bg-orange-500"
+                          item.type === "study" ? "bg-blue-500" : item.type === "practice" ? "bg-orange-500" : item.type === "revision" ? "bg-green-500" : "bg-orange-500"
                         }`} />
                         <p className="text-sm">{item.activity}</p>
                       </div>
@@ -535,7 +535,7 @@ export default function StudyPlan() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             {
-              icon: <Brain className="w-5 h-5 text-violet-500" />,
+              icon: <Brain className="w-5 h-5 text-orange-500" />,
               title: "Spaced Repetition",
               tip: "Review topics at intervals: day 1, day 3, day 7, day 21 for 90%+ long-term retention.",
             },
@@ -590,15 +590,15 @@ export default function StudyPlan() {
             </Link>
           </Card>
           <Card className="p-5 border-border/40 flex items-center gap-4 hover:shadow-sm transition-shadow">
-            <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center flex-shrink-0">
-              <Play className="w-5 h-5 text-violet-500" />
+            <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+              <Play className="w-5 h-5 text-orange-500" />
             </div>
             <div className="flex-1">
               <p className="font-semibold text-sm">Daily Practice Quiz</p>
               <p className="text-xs text-muted-foreground">10 questions · 10 minutes</p>
             </div>
             <Link to="/daily-quiz">
-              <Button size="sm" className="gap-1 text-xs bg-violet-600 hover:bg-violet-700">
+              <Button size="sm" className="gap-1 text-xs bg-orange-600 hover:bg-violet-700">
                 Start <ArrowRight className="w-3.5 h-3.5" />
               </Button>
             </Link>

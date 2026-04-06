@@ -129,7 +129,7 @@ export default function NotificationBell() {
                 }`}
             >
               <div className="flex items-center gap-2">
-                <Bell className="w-4 h-4 text-indigo-400" />
+                <Bell className="w-4 h-4 text-orange-400" />
                 <span className={`text-[13px] font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
                   Notifications
                 </span>
@@ -180,7 +180,7 @@ export default function NotificationBell() {
                     className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
                       }`}
                   >
-                    <FileText className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                    <FileText className="w-4 h-4 text-orange-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className={`text-[13px] font-medium ${isDark ? "text-white/90" : "text-slate-800"}`}>
                         New paper available — 4 PM refresh
@@ -215,7 +215,7 @@ export default function NotificationBell() {
                             {q.question}
                           </p>
                           <div className="flex gap-1.5 mt-1">
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-indigo-500/15 text-indigo-400" : "bg-indigo-50 text-indigo-600"}`}>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-orange-500/15 text-orange-400" : "bg-orange-50 text-orange-600"}`}>
                               {q.subject}
                             </span>
                             <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-white/10 text-white/50" : "bg-slate-100 text-slate-500"}`}>
@@ -245,7 +245,7 @@ export default function NotificationBell() {
               <Link
                 to="/daily-tasks"
                 onClick={() => setIsOpen(false)}
-                className={`text-[12px] font-medium transition-colors ${isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-700"}`}
+                className={`text-[12px] font-medium transition-colors ${isDark ? "text-orange-400 hover:text-orange-300" : "text-orange-600 hover:text-orange-700"}`}
               >
                 View all tasks →
               </Link>

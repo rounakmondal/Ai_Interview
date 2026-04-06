@@ -123,7 +123,7 @@ export default function PremiumFooter() {
 
               <div className="flex gap-3 pt-2">
                 <Link to="/setup">
-                  <button className="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-500 transition">
+                  <button className="px-4 py-2 rounded-md text-sm font-medium bg-orange-600 text-white hover:bg-orange-500 transition">
                     Get Started
                   </button>
                 </Link>

@@ -66,8 +66,8 @@ const features = [
 ];
 
 const metrics = [
-  { label: "Communication", value: 85, color: "from-blue-500 to-indigo-500" },
-  { label: "Technical Knowledge", value: 78, color: "from-indigo-500 to-violet-500" },
+  { label: "Communication", value: 85, color: "from-orange-500 to-red-500" },
+  { label: "Technical Knowledge", value: 78, color: "from-orange-500 to-red-500" },
   { label: "Confidence", value: 92, color: "from-violet-500 to-purple-500" },
   { label: "Problem Solving", value: 88, color: "from-purple-500 to-pink-500" },
 ];
@@ -157,7 +157,7 @@ export default function PremiumFeatures() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
@@ -168,7 +168,7 @@ export default function PremiumFeatures() {
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Everything you need to{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               ace your interview
             </span>
           </h2>
@@ -200,7 +200,7 @@ export default function PremiumFeatures() {
                   key={idx}
                   variants={featureVariants}
                   className={`group relative flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/5 ${
-                    feature.accent ? "bg-gradient-to-r from-indigo-500/5 to-transparent border-l-2 border-indigo-500" : ""
+                    feature.accent ? "bg-gradient-to-r from-orange-500/5 to-transparent border-l-2 border-orange-500" : ""
                   }`}
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.2 }}
@@ -209,8 +209,8 @@ export default function PremiumFeatures() {
                   <motion.div
                     className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center ${
                       feature.accent 
-                        ? "bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/20" 
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/30 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"
+                        ? "bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/20" 
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 group-hover:text-orange-600 dark:group-hover:text-orange-400"
                     } transition-all duration-300`}
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.2 }}
@@ -220,7 +220,7 @@ export default function PremiumFeatures() {
                   
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <h3 className={`font-semibold text-foreground mb-0.5 ${feature.accent ? "text-indigo-700 dark:text-indigo-300" : ""}`}>
+                    <h3 className={`font-semibold text-foreground mb-0.5 ${feature.accent ? "text-orange-700 dark:text-orange-300" : ""}`}>
                       {feature.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -230,7 +230,7 @@ export default function PremiumFeatures() {
 
                   {/* Hover accent glow for highlighted features */}
                   {feature.accent && (
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/5 to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                   )}
                 </motion.div>
               );
@@ -256,12 +256,12 @@ export default function PremiumFeatures() {
               />
 
               {/* Card */}
-              <div className="relative rounded-2xl border border-white/20 dark:border-white/10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl shadow-indigo-500/10 overflow-hidden">
+              <div className="relative rounded-2xl border border-white/20 dark:border-white/10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl shadow-orange-500/10 overflow-hidden">
                 {/* Card header */}
                 <div className="px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
                         <TrendingUp className="w-5 h-5" />
                       </div>
                       <div>
@@ -311,15 +311,15 @@ export default function PremiumFeatures() {
                         />
                         <defs>
                           <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#6366f1" />
-                            <stop offset="50%" stopColor="#8b5cf6" />
+                            <stop offset="0%" stopColor="#f97316" />
+                            <stop offset="50%" stopColor="#ef4444" />
                             <stop offset="100%" stopColor="#a855f7" />
                           </linearGradient>
                         </defs>
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <motion.span 
-                          className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent"
+                          className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"
                           initial={{ opacity: 0 }}
                           animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
                           transition={{ duration: 0.5, delay: 1, ease: smoothEase }}
@@ -343,7 +343,7 @@ export default function PremiumFeatures() {
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm font-medium text-foreground">{metric.label}</span>
                           <motion.span 
-                            className="text-sm font-semibold text-indigo-600 dark:text-indigo-400"
+                            className="text-sm font-semibold text-orange-600 dark:text-orange-400"
                             initial={{ opacity: 0 }}
                             animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
                             transition={{ duration: 0.3, delay: 1 + idx * 0.1, ease: smoothEase }}
@@ -392,14 +392,14 @@ export default function PremiumFeatures() {
                 </div>
 
                 {/* Card footer */}
-                <div className="px-6 py-4 bg-gradient-to-r from-indigo-500/5 to-violet-500/5 border-t border-slate-200/50 dark:border-slate-700/50">
+                <div className="px-6 py-4 bg-gradient-to-r from-orange-500/5 to-red-500/5 border-t border-slate-200/50 dark:border-slate-700/50">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Target className="w-4 h-4 text-indigo-500" />
+                      <Target className="w-4 h-4 text-orange-500" />
                       <span className="text-xs font-medium text-muted-foreground">Improving 23% from last session</span>
                     </div>
                     <motion.button
-                      className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                      className="text-xs font-semibold text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors"
                       whileHover={{ x: 2 }}
                       transition={{ duration: 0.2 }}
                     >

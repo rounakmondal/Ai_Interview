@@ -23,8 +23,8 @@ type Mode = "choice" | "loading" | "viewing" | "attempting" | "submitted";
 const SUBJECT_PALETTE: Record<string, { gradient: string; badge: string; dot: string; barColor: string }> = {
   History:           { gradient: "from-amber-400 to-orange-400",    badge: "bg-amber-50 text-amber-700 border-amber-200",    dot: "bg-amber-400",   barColor: "#f59e0b" },
   Geography:         { gradient: "from-emerald-400 to-teal-400",    badge: "bg-emerald-50 text-emerald-700 border-emerald-200", dot: "bg-emerald-400", barColor: "#10b981" },
-  Polity:            { gradient: "from-blue-400 to-indigo-400",      badge: "bg-blue-50 text-blue-700 border-blue-200",        dot: "bg-blue-400",    barColor: "#3b82f6" },
-  Reasoning:         { gradient: "from-violet-400 to-purple-400",    badge: "bg-violet-50 text-violet-700 border-violet-200",   dot: "bg-violet-400",  barColor: "#7c3aed" },
+  Polity:            { gradient: "from-orange-400 to-red-400",      badge: "bg-blue-50 text-blue-700 border-blue-200",        dot: "bg-blue-400",    barColor: "#3b82f6" },
+  Reasoning:         { gradient: "from-violet-400 to-purple-400",    badge: "bg-orange-50 text-orange-700 border-orange-200",   dot: "bg-violet-400",  barColor: "#7c3aed" },
   Math:              { gradient: "from-rose-400 to-pink-400",        badge: "bg-rose-50 text-rose-700 border-rose-200",        dot: "bg-rose-400",    barColor: "#f43f5e" },
   "Current Affairs": { gradient: "from-cyan-400 to-sky-400",        badge: "bg-cyan-50 text-cyan-700 border-cyan-200",        dot: "bg-cyan-400",    barColor: "#06b6d4" },
   Science:           { gradient: "from-teal-400 to-green-400",       badge: "bg-teal-50 text-teal-700 border-teal-200",        dot: "bg-teal-400",    barColor: "#14b8a6" },
@@ -65,7 +65,7 @@ const STYLES = `
   .mk .lift:hover{transform:translateY(-4px);box-shadow:0 24px 56px -12px rgba(15,23,42,0.10),0 8px 20px -8px rgba(15,23,42,0.06)}
   .mk .opt-btn{transition:all 0.14s cubic-bezier(.16,1,.3,1);cursor:pointer}
   .mk .opt-btn:active{transform:scale(0.99)}
-  .mk .opt-sel{background:linear-gradient(135deg,#eef2ff,#ede9fe)!important;border-color:#6366f1!important;box-shadow:0 0 0 3px rgba(99,102,241,0.12)!important}
+  .mk .opt-sel{background:linear-gradient(135deg,#fff7ed,#fef2f2)!important;border-color:#f97316!important;box-shadow:0 0 0 3px rgba(99,102,241,0.12)!important}
   .mk .spin-arc{animation:mk-spin 1.6s linear infinite;transform-origin:center}
   .mk .gauge{transition:stroke-dashoffset 1.3s cubic-bezier(.16,1,.3,1)}
   .mk .prog-fill{transition:width 0.5s cubic-bezier(.16,1,.3,1)}
@@ -74,7 +74,7 @@ const STYLES = `
   .mk .palbtn{transition:transform 0.1s ease}
   .mk .palbtn:hover{transform:scale(1.12)}
   .mk .dot-grid{background-image:radial-gradient(circle,rgba(99,102,241,0.10) 1px,transparent 1px);background-size:24px 24px}
-  .mk .card-accent-indigo::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg,#6366f1,#8b5cf6)}
+  .mk .card-accent-brand::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg,#f97316,#ef4444)}
   .mk .card-accent-amber::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg,#f59e0b,#f97316)}
   .mk .stat-card{transition:transform 0.18s ease,box-shadow 0.18s ease}
   .mk .stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(15,23,42,0.10)}
@@ -187,7 +187,7 @@ export default function MockTestPage() {
     return(
       <div className="mk h-screen bg-white flex flex-col overflow-hidden relative">
         <div className="absolute inset-0 dot-grid pointer-events-none opacity-50"/>
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-400"/>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-red-500 to-orange-400"/>
 
         <header className="relative z-10 border-b border-slate-100 bg-white/90 backdrop-blur-sm shrink-0">
          <PremiumNavbar/>
@@ -198,7 +198,7 @@ export default function MockTestPage() {
            
             <h3 className="serif text-3xl sm:text-3xl font-extrabold text-slate-600 leading-tight tracking-tight">
               Today's Mock
-              <span className="text-indigo-600"> Test</span>
+              <span className="text-orange-600"> Test</span>
             </h3>
         
           </div>
@@ -214,11 +214,11 @@ export default function MockTestPage() {
 
             {/* View Paper */}
             <div onClick={()=>fetchPaper("viewing")}
-              className="card-accent-indigo relative rounded-3xl border border-slate-200 bg-white cursor-pointer lift overflow-hidden up2"
+              className="card-accent-brand relative rounded-3xl border border-slate-200 bg-white cursor-pointer lift overflow-hidden up2"
               style={{boxShadow:"0 4px 32px -8px rgba(99,102,241,0.10),0 2px 8px -4px rgba(0,0,0,0.04)"}}>
               <div className="p-8">
-                <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mb-7">
-                  <Eye className="w-6 h-6 text-indigo-500"/>
+                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-7">
+                  <Eye className="w-6 h-6 text-orange-500"/>
                 </div>
                 <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">Option 01</div>
                 <h2 className="serif text-2xl font-bold text-slate-900 mb-3">View Paper</h2>
@@ -230,7 +230,7 @@ export default function MockTestPage() {
                     <span key={t} className="px-3 py-1 rounded-full bg-slate-50 text-slate-500 text-[10px] font-semibold border border-slate-200">{t}</span>
                   ))}
                 </div>
-                <div className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-indigo-600 uppercase">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-orange-600 uppercase">
                   Explore Paper <ChevronRight className="w-3.5 h-3.5"/>
                 </div>
               </div>
@@ -272,7 +272,7 @@ export default function MockTestPage() {
     return(
       <div className="mk h-screen bg-white flex flex-col items-center justify-center gap-10 relative overflow-hidden">
         <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none"/>
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-400"/>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-red-500 to-orange-400"/>
         <button onClick={()=>setMode("choice")} className="absolute top-5 left-5 flex items-center gap-2 text-sm text-slate-400 hover:text-slate-700 transition-colors">
           <ArrowLeft className="w-4 h-4"/><span className="font-semibold">Back</span>
         </button>
@@ -281,9 +281,9 @@ export default function MockTestPage() {
             <div className="absolute inset-0 rounded-full border-2 border-slate-100"/>
             <svg className="w-24 h-24 spin-arc" viewBox="0 0 96 96">
               <circle cx="48" cy="48" r="40" fill="none" stroke="url(#g)" strokeWidth="5" strokeLinecap="round" strokeDasharray="251" strokeDashoffset="188"/>
-              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#6366f1"/><stop offset="100%" stopColor="#a855f7"/></linearGradient></defs>
+              <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#f97316"/><stop offset="100%" stopColor="#a855f7"/></linearGradient></defs>
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center"><Brain className="w-9 h-9 text-indigo-400"/></div>
+            <div className="absolute inset-0 flex items-center justify-center"><Brain className="w-9 h-9 text-orange-400"/></div>
           </div>
           <div>
             <h2 className="serif text-2xl font-bold text-slate-900">Generating Your Paper</h2>
@@ -291,7 +291,7 @@ export default function MockTestPage() {
           </div>
           <div className="flex items-center justify-center gap-2">
             {LOADING_MSGS.map((_,i)=>(
-              <div key={i} className={`rounded-full transition-all duration-500 ${i<loadingMsg?"w-2 h-2 bg-indigo-500":i===loadingMsg?"w-3 h-3 bg-indigo-400 animate-pulse":"w-2 h-2 bg-slate-200"}`}/>
+              <div key={i} className={`rounded-full transition-all duration-500 ${i<loadingMsg?"w-2 h-2 bg-orange-500":i===loadingMsg?"w-3 h-3 bg-orange-400 animate-pulse":"w-2 h-2 bg-slate-200"}`}/>
             ))}
           </div>
           <p className="text-[10px] text-slate-400 font-bold tracking-[0.18em] uppercase">{examType} · Daily Paper</p>
@@ -304,7 +304,7 @@ export default function MockTestPage() {
   if(mode==="viewing"){
     return(
       <div className="mk h-screen bg-slate-50 flex flex-col overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-400 z-50"/>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-red-500 to-orange-400 z-50"/>
         <header className="shrink-0 border-b border-slate-200 bg-white z-40 shadow-sm mt-[3px]">
           <div className="container px-5 max-w-5xl mx-auto">
             <div className="h-16 flex items-center gap-4">
@@ -368,13 +368,13 @@ export default function MockTestPage() {
                       })}
                     </div>
                     <button onClick={()=>setExpanded(prev=>{const n=new Set(prev);if(n.has(q.id))n.delete(q.id);else n.add(q.id);return n;})}
-                      className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-600 hover:text-indigo-500 transition-colors">
+                      className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-orange-600 hover:text-orange-500 transition-colors">
                       {isExp?<ChevronUp className="w-3.5 h-3.5"/>:<ChevronDown className="w-3.5 h-3.5"/>}
                       {isExp?"Hide":"Show"} Explanation
                     </button>
                     {isExp&&(
-                      <div className="mt-3 flex gap-3 px-4 py-3.5 rounded-xl bg-indigo-50 border border-indigo-100">
-                        <div className="w-0.5 rounded-full bg-indigo-300 flex-shrink-0 self-stretch"/>
+                      <div className="mt-3 flex gap-3 px-4 py-3.5 rounded-xl bg-orange-50 border border-orange-100">
+                        <div className="w-0.5 rounded-full bg-orange-300 flex-shrink-0 self-stretch"/>
                         <p className="text-[13px] text-slate-600 leading-relaxed">{q.explanation}</p>
                       </div>
                     )}
@@ -410,7 +410,7 @@ export default function MockTestPage() {
     return(
       <div className="mk h-screen bg-white flex flex-col overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-slate-200 z-50">
-          <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 prog-fill" style={{width:`${pct}%`}}/>
+          <div className="h-full bg-gradient-to-r from-orange-500 to-red-500 prog-fill" style={{width:`${pct}%`}}/>
         </div>
         <header className="sticky top-0 border-b border-slate-200 bg-white shrink-0 z-40 mt-[3px]">
           <div className="container px-5 max-w-7xl mx-auto h-16 flex items-center gap-3">
@@ -448,7 +448,7 @@ export default function MockTestPage() {
               <div className="flex items-center gap-2">
                 <span className="text-[11px] text-slate-500 font-semibold tabular-nums">{totalAnswered}/{questions.length}</span>
                 <div className="w-24 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-indigo-500 rounded-full prog-fill" style={{width:`${pct}%`}}/>
+                  <div className="h-full bg-orange-500 rounded-full prog-fill" style={{width:`${pct}%`}}/>
                 </div>
               </div>
             </div>
@@ -464,7 +464,7 @@ export default function MockTestPage() {
   <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${p.gradient} z-10`} />
 
   {/* MAIN CONTENT AREA: Now with Blue Gradient and White text */}
-  <div className="px-6 py-6 sm:px-8 sm:py-7 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+  <div className="px-6 py-6 sm:px-8 sm:py-7 bg-gradient-to-br from-orange-500 to-red-600 text-white">
     <div className="flex items-start gap-4">
       <div className="flex-1 min-w-0">
         
@@ -527,10 +527,10 @@ export default function MockTestPage() {
                     const isSel=curAns===oi;
                     return(
                       <button key={oi} type="button" aria-pressed={isSel} onClick={()=>setAnswers(prev=>({...prev,[currentQ.id]:oi}))}
-                        className={`opt-btn group w-full flex items-start gap-4 px-5 py-4 rounded-2xl border text-left bg-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 focus-visible:ring-offset-2 ${isSel?"opt-sel border-indigo-200 bg-indigo-50/30":"border-slate-200 hover:border-slate-300 hover:bg-slate-50"}`}>
-                        <div className={`mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center text-sm font-extrabold flex-shrink-0 transition-all ${isSel?"bg-indigo-600 text-white shadow-md shadow-indigo-200/40":"bg-slate-100 text-slate-600 group-hover:bg-slate-200"}`}>{OPTION_LABELS[oi]}</div>
-                        <span className={`text-[15px] leading-relaxed ${isSel?"text-indigo-900 font-semibold":"text-slate-700"}`}>{opt}</span>
-                        {isSel&&<CheckCircle2 className="w-5 h-5 text-indigo-600 ml-auto flex-shrink-0 mt-0.5"/>}
+                        className={`opt-btn group w-full flex items-start gap-4 px-5 py-4 rounded-2xl border text-left bg-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40 focus-visible:ring-offset-2 ${isSel?"opt-sel border-orange-200 bg-orange-50/30":"border-slate-200 hover:border-slate-300 hover:bg-slate-50"}`}>
+                        <div className={`mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center text-sm font-extrabold flex-shrink-0 transition-all ${isSel?"bg-orange-600 text-white shadow-md shadow-orange-200/40":"bg-slate-100 text-slate-600 group-hover:bg-slate-200"}`}>{OPTION_LABELS[oi]}</div>
+                        <span className={`text-[15px] leading-relaxed ${isSel?"text-orange-900 font-semibold":"text-slate-700"}`}>{opt}</span>
+                        {isSel&&<CheckCircle2 className="w-5 h-5 text-orange-600 ml-auto flex-shrink-0 mt-0.5"/>}
                       </button>
                     );
                   })}
@@ -564,7 +564,7 @@ export default function MockTestPage() {
               <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-slate-900">Question Palette</p>
               <p className="mt-1 text-sm text-slate-500 font-semibold">Jump to any question.</p>
               <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-slate-600">
-                {[{cls:"bg-indigo-600",l:"Answered"},{cls:"bg-slate-200 border border-slate-300",l:"Not visited"},{cls:"bg-amber-400",l:"Flagged"},{cls:"bg-slate-300",l:"Visited"}].map(({cls,l})=>(
+                {[{cls:"bg-orange-600",l:"Answered"},{cls:"bg-slate-200 border border-slate-300",l:"Not visited"},{cls:"bg-amber-400",l:"Flagged"},{cls:"bg-slate-300",l:"Visited"}].map(({cls,l})=>(
                   <div key={l} className="flex items-center gap-2.5"><div className={`w-3.5 h-3.5 rounded ${cls}`}/><span className="font-semibold">{l}</span></div>
                 ))}
               </div>
@@ -576,7 +576,7 @@ export default function MockTestPage() {
                 const isFlaggedQ=flagged.has(q.id);const isCurr=i===currentIdx;const isVis=i<currentIdx||isAns;
                 return(
                   <button key={q.id} type="button" onClick={()=>setCurrentIdx(i)}
-                    className={`palbtn w-full aspect-square rounded-2xl text-xs font-extrabold relative transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 focus-visible:ring-offset-2 ${isCurr?"ring-2 ring-indigo-500 ring-offset-2":""} ${isFlaggedQ&&isAns?"bg-amber-500 text-white":isFlaggedQ?"bg-amber-100 text-amber-800 border border-amber-300":isAns?"bg-indigo-600 text-white":isVis?"bg-slate-200 text-slate-800":"bg-slate-100 text-slate-400 hover:bg-slate-200"}`}>
+                    className={`palbtn w-full aspect-square rounded-2xl text-xs font-extrabold relative transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40 focus-visible:ring-offset-2 ${isCurr?"ring-2 ring-orange-500 ring-offset-2":""} ${isFlaggedQ&&isAns?"bg-amber-500 text-white":isFlaggedQ?"bg-amber-100 text-amber-800 border border-amber-300":isAns?"bg-orange-600 text-white":isVis?"bg-slate-200 text-slate-800":"bg-slate-100 text-slate-400 hover:bg-slate-200"}`}>
                     {i+1}
                     {isFlaggedQ&&<span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 ring-2 ring-white"/>}
                   </button>
@@ -588,7 +588,7 @@ export default function MockTestPage() {
               <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-slate-600 font-semibold">Answered</span>
-                  <span className="font-extrabold tabular-nums text-indigo-600">{totalAnswered}</span>
+                  <span className="font-extrabold tabular-nums text-orange-600">{totalAnswered}</span>
                 </div>
                 <div className="mt-3 flex items-center justify-between text-sm">
                   <span className="text-slate-600 font-semibold">Flagged</span>
@@ -644,7 +644,7 @@ export default function MockTestPage() {
 
     return(
       <div className="mk h-screen bg-slate-50 flex flex-col overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-400 z-50"/>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-red-500 to-orange-400 z-50"/>
         <header className="relative z-40 border-b border-slate-200 bg-white shadow-sm shrink-0 mt-[3px]">
           <div className="container px-5 h-16 flex items-center gap-3 max-w-5xl mx-auto">
             <button onClick={()=>navigate(-1)} className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-700 transition-colors">
@@ -689,7 +689,7 @@ export default function MockTestPage() {
                       {label:"Correct",val:result.correct,c:"text-emerald-600",bg:"bg-emerald-50 border-emerald-200"},
                       {label:"Wrong",val:result.wrong,c:"text-red-500",bg:"bg-red-50 border-red-200"},
                       {label:"Skipped",val:result.skipped,c:"text-slate-500",bg:"bg-slate-100 border-slate-200"},
-                      {label:"Time",val:formatTime(result.timeTaken),c:"text-indigo-600",bg:"bg-indigo-50 border-indigo-200"},
+                      {label:"Time",val:formatTime(result.timeTaken),c:"text-orange-600",bg:"bg-orange-50 border-orange-200"},
                     ].map(({label,val,c,bg})=>(
                       <div key={label} className={`stat-card rounded-2xl border p-4 text-center ${bg}`}>
                         <p className={`font-extrabold text-2xl tabular-nums ${c}`}>{val}</p>
@@ -704,8 +704,8 @@ export default function MockTestPage() {
             {/* Subject breakdown */}
             <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm up2">
               <div className="px-6 py-5 border-b border-slate-100 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-indigo-500"/>
+                <div className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-orange-500"/>
                 </div>
                 <h3 className="font-extrabold text-sm text-slate-900 uppercase tracking-wider">Subject-wise Breakdown</h3>
               </div>

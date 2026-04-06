@@ -141,7 +141,7 @@ export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStud
               <div>
                 <div className="flex items-center gap-2">
                   <p className="font-bold text-sm">MedhaHub AI</p>
-                  <Badge className="text-[10px] h-4 px-1.5 bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20">
+                  <Badge className="text-[10px] h-4 px-1.5 bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20">
                     Study Guide
                   </Badge>
                 </div>

@@ -25,10 +25,10 @@ const steps = [
     description:
       "Configure every detail of your mock interview in under 60 seconds. Choose your industry, set the difficulty, upload your CV, and specify the job role. Our AI builds a bespoke question set around your exact profile.",
     icon: Settings2,
-    color: "from-indigo-500 to-blue-600",
-    glow: "shadow-indigo-500/20",
-    ring: "ring-indigo-500/30",
-    bg: "bg-indigo-500/10",
+    color: "from-orange-500 to-red-500",
+    glow: "shadow-orange-500/20",
+    ring: "ring-orange-500/30",
+    bg: "bg-orange-500/10",
     details: [
       { icon: Globe2, text: "4 languages — English, Hindi, Bengali, Telugu" },
       { icon: FileText, text: "Upload your CV for hyper-personalised questions" },
@@ -45,9 +45,9 @@ const steps = [
       "Your AI interviewer asks targeted questions via voice, listens to your spoken answers in real-time, and fires intelligent follow-up questions — just like a live panel would. No scripts, no repetition.",
     icon: Mic2,
     color: "from-violet-500 to-purple-600",
-    glow: "shadow-violet-500/20",
-    ring: "ring-violet-500/30",
-    bg: "bg-violet-500/10",
+    glow: "shadow-orange-500/20",
+    ring: "ring-orange-500/30",
+    bg: "bg-orange-500/10",
     details: [
       { icon: Mic2, text: "Live voice recognition with 2-minute answer timer" },
       { icon: Brain, text: "Dynamic follow-up questions based on your answers" },
@@ -120,18 +120,18 @@ export default function PremiumHowItWorks() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-5"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-5"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
             How It Works
           </motion.span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             From zero to{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               interview-ready
             </span>{" "}
             in 3 steps
@@ -173,7 +173,7 @@ export default function PremiumHowItWorks() {
                 )}
 
                 {/* Card */}
-                <div className="h-full bg-card border border-border/50 rounded-2xl p-6 xl:p-7 flex flex-col gap-5 hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group-hover:-translate-y-1">
+                <div className="h-full bg-card border border-border/50 rounded-2xl p-6 xl:p-7 flex flex-col gap-5 hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300 group-hover:-translate-y-1">
 
                   {/* Top row — step pill + icon */}
                   <div className="flex items-center justify-between">
@@ -228,7 +228,7 @@ export default function PremiumHowItWorks() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.55, ease: smoothEase }}
         >
-          <div className="relative overflow-hidden rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-slate-900 via-indigo-950/60 to-slate-900 px-6 sm:px-10 py-8 sm:py-10">
+          <div className="relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-slate-900 via-indigo-950/60 to-slate-900 px-6 sm:px-10 py-8 sm:py-10">
 
             {/* Subtle grid overlay */}
             <div
@@ -240,8 +240,8 @@ export default function PremiumHowItWorks() {
               }}
             />
             {/* Glow orbs */}
-            <div className="absolute -top-20 -left-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
               {/* Left text */}
@@ -266,8 +266,8 @@ export default function PremiumHowItWorks() {
                     whileTap={{ scale: 0.97 }}
                     className="relative group px-7 py-3.5 rounded-xl text-sm font-semibold text-white overflow-hidden flex items-center gap-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-red-600" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="relative">Start Your Free Interview</span>
                     <ArrowRight className="relative w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
                   </motion.button>

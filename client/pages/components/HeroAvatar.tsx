@@ -54,15 +54,15 @@ export default function HeroAvatar() {
         }`}
       >
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
             <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6z" />
             </svg>
           </div>
-          <span className="text-xs font-semibold text-indigo-600">AI Interviewer</span>
+          <span className="text-xs font-semibold text-orange-600">AI Interviewer</span>
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200/70 rounded-xl px-4 py-3">
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-orange-200/70 rounded-xl px-4 py-3">
           <p className="text-slate-700 text-sm leading-relaxed font-medium">
             "Tell me about a time you showed leadership in a difficult situation. What was the outcome?"
           </p>
@@ -111,7 +111,7 @@ export default function HeroAvatar() {
           </p>
           <div className="space-y-2.5">
             {[
-              { label: "Confidence", value: scores.confidence, color: "from-indigo-500 to-purple-500", bg: "bg-indigo-100" },
+              { label: "Confidence", value: scores.confidence, color: "from-indigo-500 to-purple-500", bg: "bg-orange-100" },
               { label: "Communication", value: scores.communication, color: "from-amber-500 to-orange-500", bg: "bg-amber-100" },
               { label: "Clarity", value: scores.clarity, color: "from-emerald-500 to-teal-500", bg: "bg-emerald-100" },
             ].map((s) => (

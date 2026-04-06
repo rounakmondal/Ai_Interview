@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 
 const features = [
-  { icon: BookOpen, title: "Mock Tests", desc: "WBCS, SSC, Railway, Banking, Police" },
-  { icon: BookOpen, title: "Prev Year Papers", desc: "Filtered by exam, year & subject" },
-  { icon: Camera, title: "Photo Solver", desc: "Upload question image, get solution" },
-  { icon: Newspaper, title: "Current Affairs", desc: "Daily news + weekly quizzes" },
-  { icon: BarChart3, title: "Dashboard", desc: "Track progress, weak areas & trends" },
-  { icon: Medal, title: "Leaderboard", desc: "Compete with WB aspirants" },
+  { icon: BookOpen, title: "Mock Tests", desc: "WBCS, SSC, Railway, Banking, Police", href: "/question-hub" },
+  { icon: BookOpen, title: "Prev Year Papers", desc: "Filtered by exam, year & subject", href: "/prev-year-questions" },
+  { icon: Camera, title: "Photo Solver", desc: "Upload question image, get solution", href: "/photo-solver" },
+  { icon: Newspaper, title: "Current Affairs", desc: "Daily news + weekly quizzes", href: "/current-affairs" },
+  { icon: BarChart3, title: "Dashboard", desc: "Track progress, weak areas & trends", href: "/dashboard" },
+  { icon: Medal, title: "Leaderboard", desc: "Compete with WB aspirants", href: "/leaderboard" },
 ];
 
 export default function GovtPracticeSection() {
@@ -115,19 +115,48 @@ export default function GovtPracticeSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.4 }}
               >
-                <Card className="p-4 hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors cursor-default space-y-2 border-border/40">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                    <f.icon className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold">{f.title}</p>
-                    <p className="text-xs text-muted-foreground">{f.desc}</p>
-                  </div>
-                </Card>
+                <Link to={f.href}>
+                  <Card className="p-4 hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors cursor-pointer space-y-2 border-border/40">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                      <f.icon className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold">{f.title}</p>
+                      <p className="text-xs text-muted-foreground">{f.desc}</p>
+                    </div>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
         </div>
+
+        {/* Quick exam links — SEO internal linking */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-8 flex flex-wrap justify-center gap-2"
+        >
+          {[
+            { label: "WBCS Mock Test", href: "/wbcs-mock-test" },
+            { label: "WB Police Mock Test", href: "/wbp-police-mock-test" },
+            { label: "WBPSC Clerkship", href: "/wbpsc-clerkship-mock-test" },
+            { label: "WB TET Mock Test", href: "/wb-tet-mock-test" },
+            { label: "SSC MTS Mock Test", href: "/ssc-mts-mock-test" },
+            { label: "IBPS PO Mock Test", href: "/ibps-po-mock-test" },
+            { label: "Company Interviews", href: "/interview-questions" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
