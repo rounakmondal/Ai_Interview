@@ -27,6 +27,10 @@ export default defineConfig(({ mode }) => ({
         manualChunks: (id) => {
           // Vendor chunks
           if (id.includes("node_modules")) {
+            // Keep CVA/clsx/tailwind-merge co-located with UI components to avoid TDZ errors
+            if (id.includes("class-variance-authority") || id.includes("clsx") || id.includes("tailwind-merge")) {
+              return undefined;
+            }
             if (id.includes("react")) return "vendor-react";
             if (id.includes("@radix-ui")) return "vendor-radix";
             if (id.includes("@tanstack")) return "vendor-tanstack";
