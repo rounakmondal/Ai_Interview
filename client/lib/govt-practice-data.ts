@@ -2,6 +2,8 @@
 // Government Exam Practice — shared types, constants, and mock data
 // ─────────────────────────────────────────────────────────────────────────────
 
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
+
 export type ExamType = "WBCS" | "SSC" | "Railway" | "Banking" | "Police";
 export type Subject =
   | "History"
@@ -565,12 +567,12 @@ export async function fetchCurrentAffairs() {
 }
 
 export async function fetchLeaderboard(filter: "weekly" | "monthly") {
-  const data = await apiFetch<LeaderboardEntry[]>(`${import.meta.env.VITE_API_URL || "/api"}/govt/leaderboard?filter=${filter}`);
+  const data = await apiFetch<LeaderboardEntry[]>(`${API_BASE}/govt/leaderboard?filter=${filter}`);
   return data ?? LEADERBOARD_DATA;
 }
 
 export async function fetchDashboard() {
-  const data = await apiFetch<DashboardStats>(`${import.meta.env.VITE_API_URL || "/api"}/govt/dashboard`);
+  const data = await apiFetch<DashboardStats>(`${API_BASE}/govt/dashboard`);
   return data ?? MOCK_DASHBOARD;
 }
 
@@ -594,7 +596,7 @@ export interface SubmitScoreResponse {
 }
 
 export async function submitScore(payload: SubmitScorePayload): Promise<SubmitScoreResponse | null> {
-  return apiFetch<SubmitScoreResponse>(`${import.meta.env.VITE_API_URL || "/api"}/govt/submit-score`, {
+  return apiFetch<SubmitScoreResponse>(`${API_BASE}/govt/submit-score`, {
     method: "POST",
     body: JSON.stringify(payload),
   });
