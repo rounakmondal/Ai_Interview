@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
+import { QUESTIONS_API_BASE } from "@/lib/api-client";
 import {
   applyQuestionHubExamSeo,
   type ExamSeoProfile,
@@ -540,7 +541,7 @@ export default function QuestionHub({
     setListLoading(true);
     setFilesFromApi(null);
 
-    fetch(`/api/questions/${selectedFolder}`)
+    fetch(`${QUESTIONS_API_BASE}/questions/${selectedFolder}`)
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (cancelled || !data?.success || !Array.isArray(data.files)) {

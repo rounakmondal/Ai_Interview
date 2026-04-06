@@ -3,6 +3,8 @@
  * Calls server endpoints to extract and parse PDF questions
  */
 
+import { QUESTIONS_API_BASE } from "./api-client";
+
 interface ExtractedQuestion {
   id: number;
   question: string;
@@ -57,7 +59,7 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
       const segments = filePath.split("/");
       const encodedSegments = segments.map(seg => encodeURIComponent(seg));
       const encodedFilePath = encodedSegments.join("/");
-      const url = `/api/questions/${folderKey}/${encodedFilePath}`;
+      const url = `${QUESTIONS_API_BASE}/questions/${folderKey}/${encodedFilePath}`;
       
       const response = await fetch(url);
       
@@ -143,7 +145,7 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
     } else {
       // Original PDF extraction logic
       const response = await fetch(
-        `/api/extract-pdf-questions?pdfPath=${encodeURIComponent(pdfPath)}`
+        `${QUESTIONS_API_BASE}/extract-pdf-questions?pdfPath=${encodeURIComponent(pdfPath)}`
       );
 
       if (!response.ok) {

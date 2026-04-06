@@ -9,8 +9,11 @@ import {
 } from "@shared/api";
 import { mockApi } from "./mock-api";
 
-// Force all API calls to localhost:8000 (server listens on this port)
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+// API base URL from environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
+/** Base URL for question-bank endpoints (separate backend on port 8000) */
+export const QUESTIONS_API_BASE = API_BASE_URL;
 const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === "true";
 
 class ApiClient {

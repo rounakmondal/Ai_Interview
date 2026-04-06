@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Vacancy, SubscribeRequest, SubscribeResponse } from "@shared/api";
 import { useToast } from "./use-toast";
 
-const API_BASE_URL = "http://localhost:8000"; // Default FastAPI port often 8000, adjust as needed
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
 
 export function useVacancyAlert() {
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
