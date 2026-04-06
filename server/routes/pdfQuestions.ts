@@ -118,7 +118,7 @@ export const extractPDFQuestions: RequestHandler = async (req, res) => {
     let jsonQuestions: any[] | null = null;
     let title = path.basename(filePath, path.extname(filePath));
 
-    const jsonSubFolder = folderName === "Police" ? "police-json-data" : folderName === "WBCS" ? "wbcs_json_data" : null;
+    const jsonSubFolder = folderName === "WBCS" ? "wbcs_json_data" : null;
     if (jsonSubFolder) {
       const jsonDataDir = path.join(folderPath, jsonSubFolder);
       if (fs.existsSync(jsonDataDir)) {

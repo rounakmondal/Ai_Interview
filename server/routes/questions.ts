@@ -49,7 +49,6 @@ const VALID_FOLDERS: Record<string, string> = {
 /**
  * GET /api/questions/:folder
  * Returns list of PDF and JSON files from the requested public subfolder (including subfolders).
- * For Police: scans Police/police-json-data/ recursively including SI/ subfolder.
  * Returns empty array when the folder doesn't exist yet (graceful).
  */
 export const listFolderQuestions: RequestHandler = (req, res) => {
@@ -60,10 +59,7 @@ export const listFolderQuestions: RequestHandler = (req, res) => {
     return res.status(400).json({ error: "Invalid folder" });
   }
 
-  // For police, look in police-json-data subdirectory; for others, use the folder directly
-  const basePath = key === "police" 
-    ? path.join(PUBLIC_DIR, folderName, "police-json-data")
-    : path.join(PUBLIC_DIR, folderName);
+  const basePath = path.join(PUBLIC_DIR, folderName);
 
   if (!fs.existsSync(basePath)) {
     return res.json({ success: true, folder: folderName, count: 0, files: [] });
@@ -87,9 +83,7 @@ export const listFolderQuestions: RequestHandler = (req, res) => {
             const fullPath = path.join(dir, entry.name);
             filesList.push({
               name: entry.name,
-              path: key === "police"
-                ? `/${folderName}/police-json-data/${encodeURIComponent(relativePath)}`
-                : `/${folderName}/${encodeURIComponent(relativePath)}`,
+              path: `/${folderName}/${encodeURIComponent(relativePath)}`,
               size: fs.statSync(fullPath).size,
             });
           }
@@ -118,7 +112,6 @@ export const listFolderQuestions: RequestHandler = (req, res) => {
 /**
  * GET /api/questions/:folder/*filePath
  * Serves a PDF or JSON file directly from the whitelisted public subfolder.
- * For Police: looks in Police/police-json-data/ (including SI/ subfolder)
  * Supports subdirectories like SI/WBP-SI-Police-2018.json
  * 
  * The wildcard captures everything after :folder/ including slashes.
@@ -133,10 +126,7 @@ export const serveFolderPDF: RequestHandler = (req, res) => {
     return res.status(400).json({ error: "Invalid folder" });
   }
 
-  // For police, look in police-json-data subdirectory; for others, use the folder directly
-  const basePath = key === "police"
-    ? path.join(PUBLIC_DIR, folderName, "police-json-data")
-    : path.join(PUBLIC_DIR, folderName);
+  const basePath = path.join(PUBLIC_DIR, folderName);
     
   // Extract the file path from the route parameter
   let fileName = req.params.path || "";

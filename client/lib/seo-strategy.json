@@ -91,7 +91,7 @@
       "full_name": "West Bengal Police (WBP)",
       "slug": "police",
       "seo_route": "/wbp-police-mock-test",
-      "pyq_data_path": "/Police/police-json-data/",
+      "pyq_data_path": "/Police/",
       "pdf_path": "/Police/",
       "sub_exams": ["Constable", "Lady Constable", "SI (Sub-Inspector)"],
       "available_years": {

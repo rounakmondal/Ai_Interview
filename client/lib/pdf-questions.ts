@@ -30,7 +30,7 @@ interface PDFMetadata {
 /**
  * Extract questions from a PDF or JSON file
  * @param pdfPath - Full path relative to public folder 
- *   For Police: "Police/police-json-data/SI/WBP-SI-Police-2019.json"
+ *   For Police: "Police/SI/WBP-SI-Police-2019.json"
  *   For WBPSC: "WBPSC/Wbpsc clerkship 2024 questions.json"
  */
 export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData> {
@@ -48,13 +48,8 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
       };
       const folderKey = FOLDER_KEY_MAP[rawFolderKey] || rawFolderKey;
       
-      // For Police: skip "police-json-data", for others: use everything after folder
-      let filePath = "";
-      if (folderKey === "police" && parts[1] === "police-json-data") {
-        filePath = parts.slice(2).join("/"); // "SI/WBP-SI-Police-2019.json"
-      } else {
-        filePath = parts.slice(1).join("/"); // "Wbpsc clerkship 2024 questions.json"
-      }
+      // Everything after the folder name is the file path
+      const filePath = parts.slice(1).join("/");
       
       // Build URL with proper encoding: encode each path segment separately to preserve slashes
       // For "SI/WBP-SI-Police-2019.json" → "SI/WBP-SI-Police-2019.json" (no spaces, so no encoding)

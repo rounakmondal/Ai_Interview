@@ -142,25 +142,25 @@ const FOLDERS: Record<string, FolderData> = {
       // SI (Sub-Inspector) Papers
       {
         name: "WBP SI (Sub-Inspector) 2025",
-        path: "police-json-data/SI/WBP-SI-Police-2025.json",
+        path: "SI/WBP-SI-Police-2025.json",
         year: 2025,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2021",
-        path: "police-json-data/SI/WBP-SI-Police-2021.json",
+        path: "SI/WBP-SI-Police-2021.json",
         year: 2021,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2019",
-        path: "police-json-data/SI/WBP-SI-Police-2019.json",
+        path: "SI/WBP-SI-Police-2019.json",
         year: 2019,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2018",
-        path: "police-json-data/SI/WBP-SI-Police-2018.json",
+        path: "SI/WBP-SI-Police-2018.json",
         year: 2018,
         type: "SI",
       },
@@ -452,14 +452,14 @@ const FOLDERS: Record<string, FolderData> = {
 };
 
 const STATS = [
-  { icon: <FileText className="w-4 h-4" />, label: "প্রশ্নপত্র", sublabel: "Question Papers", value: "50+", color: "text-emerald-700 dark:text-emerald-400" },
-  { icon: <Users className="w-4 h-4" />, label: "পরীক্ষার্থী", sublabel: "Active Users", value: "10K+", color: "text-amber-700 dark:text-amber-400" },
-  { icon: <Trophy className="w-4 h-4" />, label: "পরীক্ষা দেওয়া হয়েছে", sublabel: "Tests Attempted", value: "100K+", color: "text-orange-700 dark:text-orange-400" },
-  { icon: <TrendingUp className="w-4 h-4" />, label: "সাফল্যের হার", sublabel: "Success Rate", value: "87%", color: "text-emerald-800 dark:text-emerald-300" },
+  { icon: <FileText className="w-4 h-4" />, label: "Question Papers", value: "50+", color: "text-emerald-700 dark:text-emerald-400" },
+  { icon: <Users className="w-4 h-4" />, label: "Active Users", value: "10K+", color: "text-amber-700 dark:text-amber-400" },
+  { icon: <Trophy className="w-4 h-4" />, label: "Tests Attempted", value: "100K+", color: "text-orange-700 dark:text-orange-400" },
+  { icon: <TrendingUp className="w-4 h-4" />, label: "Success Rate", value: "87%", color: "text-emerald-800 dark:text-emerald-300" },
 ];
 
 function titleFromFilename(fileName: string): string {
-  // 1. Remove directory path if present (e.g. police-json-data/SI/WBP-SI-2019.json -> WBP-SI-2019.json)
+  // 1. Remove directory path if present (e.g. SI/WBP-SI-2019.json -> WBP-SI-2019.json)
   const baseName = fileName.split('/').pop() || fileName;
 
   return baseName
@@ -540,63 +540,37 @@ export default function QuestionHub({
     setListLoading(true);
     setFilesFromApi(null);
 
-    // For police, fetch manifest.json from public folder; fallback to API for others
-    if (selectedFolder === "police") {
-      fetch(`/Police/police-json-data/manifest.json`)
-        .then((res) => (res.ok ? res.json() : null))
-        .then((data) => {
-          if (cancelled || !Array.isArray(data)) {
-            if (!cancelled) setFilesFromApi(null);
-            return;
-          }
-          const mapped: PDFItem[] = data.map(
-            (f: { name: string }) => ({
-              path: `police-json-data/${f.name}`,
-              name: titleFromFilename(f.name),
-              downloadHref: `/Police/police-json-data/${encodePathPreserveSlashes(f.name)}`,
-              year: yearFromFilename(f.name),
-              type:
-                /lady/i.test(f.name)
+    fetch(`/api/questions/${selectedFolder}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (cancelled || !data?.success || !Array.isArray(data.files)) {
+          if (!cancelled) setFilesFromApi(null);
+          return;
+        }
+        const mapped: PDFItem[] = data.files.map(
+          (f: { name: string; path: string }) => ({
+            path: f.name,
+            name: titleFromFilename(f.name),
+            downloadHref: f.path,
+            year: yearFromFilename(f.name),
+            type:
+              selectedFolder === "police"
+                ? /lady/i.test(f.name)
                   ? "Lady Constable"
                   : /si/i.test(f.name)
                   ? "SI"
-                  : "Constable",
-            })
-          );
-          if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
-        })
-        .catch(() => {
-          if (!cancelled) setFilesFromApi(null);
-        })
-        .finally(() => {
-          if (!cancelled) setListLoading(false);
-        });
-    } else {
-      fetch(`/api/questions/${selectedFolder}`)
-        .then((res) => (res.ok ? res.json() : null))
-        .then((data) => {
-          if (cancelled || !data?.success || !Array.isArray(data.files)) {
-            if (!cancelled) setFilesFromApi(null);
-            return;
-          }
-          const mapped: PDFItem[] = data.files.map(
-            (f: { name: string; path: string }) => ({
-              path: f.name,
-              name: titleFromFilename(f.name),
-              downloadHref: f.path,
-              year: yearFromFilename(f.name),
-              type: undefined,
-            })
-          );
-          if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
-        })
-        .catch(() => {
-          if (!cancelled) setFilesFromApi(null);
-        })
-        .finally(() => {
-          if (!cancelled) setListLoading(false);
-        });
-    }
+                  : "Constable"
+                : undefined,
+          })
+        );
+        if (!cancelled) setFilesFromApi(mapped.length > 0 ? mapped : null);
+      })
+      .catch(() => {
+        if (!cancelled) setFilesFromApi(null);
+      })
+      .finally(() => {
+        if (!cancelled) setListLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -789,10 +763,10 @@ export default function QuestionHub({
             className="flex items-center gap-1.5 text-sm text-emerald-800 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            হোম
+            Home
           </Link>
-          <span className="text-amber-700/40 dark:text-amber-500/30">•</span>
-          <span className="text-sm font-medium text-foreground">প্রশ্নভাণ্ডার</span>
+          <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
+          <span className="text-sm font-medium text-foreground">Question Hub</span>
           <div className="ml-auto">
             <ProfileButton />
           </div>
@@ -806,17 +780,7 @@ export default function QuestionHub({
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          {/* Bengali branding badge */}
-          <div className="flex items-center gap-2 mb-5">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-900/10 dark:bg-emerald-800/20 border border-emerald-900/15 dark:border-emerald-700/20">
-              <BookOpen className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
-              <span className="text-xs font-medium text-emerald-800 dark:text-emerald-300">আমাদের জন্য বানানো</span>
-            </div>
-            <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-amber-600/10 dark:bg-amber-700/15 border border-amber-600/15 dark:border-amber-600/20">
-              <Flame className="w-3 h-3 text-amber-700 dark:text-amber-400" />
-              <span className="text-xs font-medium text-amber-800 dark:text-amber-300">50+ পেপার</span>
-            </div>
-          </div>
+
 
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-2 leading-tight">
             {seoProfile === "wbcs"
@@ -831,15 +795,8 @@ export default function QuestionHub({
                       ? "SSC MTS Mock Test & Previous Year Papers"
                       : seoProfile === "ibps-po"
                         ? "IBPS PO Mock Test & Previous Year Papers"
-                        : (<>প্রশ্নভাণ্ডার<span className="text-emerald-700 dark:text-emerald-400"> — Question Hub</span></>)}
+                        : "Question Hub"}
           </h1>
-
-          {/* Warm coach-like subtitle */}
-          <p className="text-base text-emerald-800/80 dark:text-emerald-400/70 font-medium mb-4 max-w-2xl">
-            {seoProfile !== "default"
-              ? null
-              : "তোমার পরীক্ষার প্রস্তুতি শুরু করো আজই — আসল প্রশ্নপত্র দিয়ে অনুশীলন করো, নিজেকে যাচাই করো।"}
-          </p>
 
           <p className="text-lg text-muted-foreground mb-2 max-w-2xl">
             {seoProfile === "wbcs" ? (
@@ -873,9 +830,7 @@ export default function QuestionHub({
                 <strong className="text-foreground">free online mock tests</strong> — Reasoning, English, Quantitative Aptitude &amp; General Awareness with instant scoring.
               </>
             ) : (
-              <>
-                <strong className="text-emerald-700 dark:text-emerald-400">WBP Constable</strong>, <strong className="text-emerald-700 dark:text-emerald-400">WBCS</strong>, <strong className="text-emerald-700 dark:text-emerald-400">WBPSC Clerkship</strong>, <strong className="text-emerald-700 dark:text-emerald-400">WB TET</strong>, <strong className="text-emerald-700 dark:text-emerald-400">SSC</strong> &amp; <strong className="text-emerald-700 dark:text-emerald-400">IBPS PO</strong> — বিগত বছরের প্রশ্নপত্র বিনামূল্যে ডাউনলোড করো এবং অনলাইনে মক টেস্ট দাও।
-              </>
+              "Download WBP Constable, WBCS, WBPSC Clerkship, WB TET, SSC & IBPS PO previous year question papers free — and attempt unlimited AI-powered mock tests online."
             )}
           </p>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
@@ -897,7 +852,6 @@ export default function QuestionHub({
                   {stat.value}
                 </div>
                 <div className="text-xs font-medium text-foreground/80">{stat.label}</div>
-                <div className="text-[10px] text-muted-foreground">{stat.sublabel}</div>
               </motion.div>
             ))}
           </div>
@@ -914,9 +868,8 @@ export default function QuestionHub({
             <div className="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-700 to-amber-600" />
             <div>
               <h2 className="text-2xl font-bold text-foreground">
-                পরীক্ষা বেছে নাও
+                Select Exam Category
               </h2>
-              <p className="text-xs text-muted-foreground">Select Exam Category</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
