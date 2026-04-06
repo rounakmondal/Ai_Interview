@@ -22,40 +22,6 @@ export default defineConfig(({ mode }) => ({
     outDir: "dist/spa",
     // Manual chunk splitting for route-based code splitting
     // Reduces LCP by separating heavy routes into their own chunks
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          // Vendor chunks
-          if (id.includes("node_modules")) {
-            // Keep CVA/clsx/tailwind-merge co-located with UI components to avoid TDZ errors
-            if (id.includes("class-variance-authority") || id.includes("clsx") || id.includes("tailwind-merge")) {
-              return undefined;
-            }
-            if (id.includes("react")) return "vendor-react";
-            if (id.includes("@radix-ui")) return "vendor-radix";
-            if (id.includes("@tanstack")) return "vendor-tanstack";
-            return "vendor";
-          }
-
-          // Route-specific chunks (lazy-loaded)
-          if (id.includes("pages/GovtPractice") || id.includes("pages/GovtTest") || id.includes("pages/GovtResult")) {
-            return "chunk-govt-exam";
-          }
-          if (id.includes("pages/StudyPlan") || id.includes("pages/SyllabusTracker") || id.includes("pages/ChapterTest")) {
-            return "chunk-study";
-          }
-          if (id.includes("pages/Chatbot") || id.includes("pages/StudyWithMe") || id.includes("pages/StoryTelling")) {
-            return "chunk-social";
-          }
-          if (id.includes("pages/Dashboard") || id.includes("pages/Leaderboard") || id.includes("pages/Profile")) {
-            return "chunk-dashboard";
-          }
-          if (id.includes("pages/MockTestPage") || id.includes("pages/PDFMockTest") || id.includes("pages/QuestionHub")) {
-            return "chunk-tests";
-          }
-        }
-      }
-    }
   },
   plugins: [react(), expressPlugin()],
   resolve: {
