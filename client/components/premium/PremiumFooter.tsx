@@ -103,7 +103,12 @@ export default function PremiumFooter() {
             {/* Brand */}
             <motion.div variants={item} className="md:col-span-3 lg:col-span-4 space-y-4">
               <Link to="/" className="flex items-center gap-2">
-                <img src="/logo.png" alt="MedhaHub" className="w-9 h-9 rounded-lg object-cover" />
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #1e1b4b, #3730a3)" }}>
+                  <svg viewBox="0 0 36 36" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 28 L4 8 L18 20 L32 8 L32 28 L28 28 L28 12 L18 22 L8 12 L8 28 Z" fill="white"/>
+                    <circle cx="18" cy="6" r="3.5" fill="#fb923c"/>
+                  </svg>
+                </div>
                 <span
                   className={`font-semibold text-lg ${
                     isDark ? "text-white" : "text-slate-900"

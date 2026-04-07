@@ -360,7 +360,7 @@ export default function AmarPlan() {
         <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur">
           <div className="container px-4 h-14 flex items-center gap-3">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
+              <img src="/logo.svg" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
               <span className="font-bold text-sm hidden sm:block">MedhaHub</span>
             </Link>
             <div className="ml-auto"><ProfileButton /></div>
@@ -402,7 +402,7 @@ export default function AmarPlan() {
       <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="container px-4 h-14 flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2 mr-1">
-            <img src="/logo.png" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
+            <img src="/logo.svg" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
             <span className="font-bold text-sm hidden sm:block">MedhaHub</span>
           </Link>
           <span className="text-border/60 hidden sm:block">|</span>

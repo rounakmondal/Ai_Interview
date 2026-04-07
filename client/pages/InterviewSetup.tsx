@@ -240,7 +240,12 @@ export default function InterviewSetup() {
             <span className="text-sm font-medium">Back</span>
           </Link>
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #1e1b4b, #3730a3)" }}>
+              <svg viewBox="0 0 36 36" width="17" height="17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 28 L4 8 L18 20 L32 8 L32 28 L28 28 L28 12 L18 22 L8 12 L8 28 Z" fill="white"/>
+                <circle cx="18" cy="6" r="3.5" fill="#fb923c"/>
+              </svg>
+            </div>
             <span className="font-semibold text-sm bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               MedhaHub Setup
             </span>

@@ -64,13 +64,17 @@ export default function PremiumNavbar() {
           <div className="h-14 sm:h-16 flex items-center justify-between">
             {/* Left Section - Logo */}
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-              <motion.img
-                src="/logo.png"
-                alt="MedhaHub"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="w-9 h-9 rounded-lg object-cover shadow-lg shadow-orange-500/20"
-              />
+                className="w-9 h-9 rounded-lg flex items-center justify-center shadow-lg"
+                style={{ background: "linear-gradient(135deg, #1e1b4b, #3730a3)" }}
+              >
+                <svg viewBox="0 0 36 36" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 28 L4 8 L18 20 L32 8 L32 28 L28 28 L28 12 L18 22 L8 12 L8 28 Z" fill="white"/>
+                  <circle cx="18" cy="6" r="3.5" fill="#fb923c"/>
+                </svg>
+              </motion.div>
               <span
                 className={`font-semibold text-[15px] hidden sm:inline tracking-tight transition-colors duration-300 ${isDark ? "text-white/95" : "text-slate-900"
                   }`}

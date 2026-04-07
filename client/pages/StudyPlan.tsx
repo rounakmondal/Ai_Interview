@@ -142,7 +142,12 @@ export default function StudyPlan() {
       <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="container px-4 h-14 flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2 mr-1">
-            <img src="/logo.png" alt="MedhaHub" className="w-7 h-7 rounded-lg object-cover" />
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #1e1b4b, #3730a3)" }}>
+              <svg viewBox="0 0 36 36" width="17" height="17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 28 L4 8 L18 20 L32 8 L32 28 L28 28 L28 12 L18 22 L8 12 L8 28 Z" fill="white"/>
+                <circle cx="18" cy="6" r="3.5" fill="#fb923c"/>
+              </svg>
+            </div>
             <span className="font-bold text-sm hidden sm:block">MedhaHub</span>
           </Link>
           <span className="text-border/60 hidden sm:block">|</span>
