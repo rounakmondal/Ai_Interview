@@ -84,6 +84,11 @@ const BlogWBPSCBengali = lazy(() => import("./pages/blog/WBPSCPreparationBengali
 const BlogWBPoliceConstable = lazy(() => import("./pages/blog/WBPoliceConstablePYP"));
 const BlogCrackWBCS = lazy(() => import("./pages/blog/HowToCrackWBCS"));
 const BlogBestBooks = lazy(() => import("./pages/blog/BestBooksWBExams2026"));
+const BlogRRBNTPCPapers = lazy(() => import("./pages/blog/RRBNTPCPreviousYearPapers"));
+const BlogRRBNTPCSyllabus = lazy(() => import("./pages/blog/RRBNTPCSyllabus2026"));
+const BlogIBPSPOPapers = lazy(() => import("./pages/blog/IBPSPOPreviousYearPapers"));
+const BlogSSCMTSPapers = lazy(() => import("./pages/blog/SSCMTSPreviousYearPapers"));
+const BlogWBPSCClerkship2024 = lazy(() => import("./pages/blog/WBPSCClerkship2024Paper"));
 
 const queryClient = new QueryClient();
 
@@ -197,6 +202,11 @@ function AppContent() {
           <Route path="/blog/wb-police-constable-previous-year-paper" element={<BlogWBPoliceConstable />} />
           <Route path="/blog/how-to-crack-wbcs-first-attempt" element={<BlogCrackWBCS />} />
           <Route path="/blog/best-books-wbcs-wbpsc-wb-police-2026" element={<BlogBestBooks />} />
+          <Route path="/blog/rrb-ntpc-previous-year-question-papers" element={<BlogRRBNTPCPapers />} />
+          <Route path="/blog/rrb-ntpc-2026-syllabus-exam-pattern" element={<BlogRRBNTPCSyllabus />} />
+          <Route path="/blog/ibps-po-previous-year-question-papers" element={<BlogIBPSPOPapers />} />
+          <Route path="/blog/ssc-mts-previous-year-question-papers" element={<BlogSSCMTSPapers />} />
+          <Route path="/blog/wbpsc-clerkship-2024-question-paper-analysis" element={<BlogWBPSCClerkship2024 />} />
           {/* SEO Tool Pages */}
           <Route path="/cgpa-calculator" element={<CGPACalculator />} />
           <Route path="/age-calculator" element={<AgeCalculator />} />

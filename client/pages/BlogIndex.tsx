@@ -144,6 +144,65 @@ export const BLOG_POSTS: BlogMeta[] = [
     tags: ["wbcs books", "wbpsc books", "wb police books", "best books 2026"],
     icon: "📚",
   },
+  {
+    slug: "rrb-ntpc-previous-year-question-papers",
+    title: "RRB NTPC Previous Year Question Papers PDF (2015–2026) — Free Practice",
+    description:
+      "Download and practice 19 RRB NTPC previous year question papers (2015–2026) — CBT 1 & CBT 2, all shifts. Includes March 2026 paper. Free timed mock tests with instant scoring.",
+    date: "2026-04-05",
+    readTime: "11 min",
+    category: "RRB NTPC",
+    tags: ["rrb ntpc previous year paper", "rrb ntpc question paper pdf", "rrb ntpc mock test free", "railway ntpc paper"],
+    featured: true,
+    icon: "🚂",
+  },
+  {
+    slug: "rrb-ntpc-2026-syllabus-exam-pattern",
+    title: "RRB NTPC 2026 Syllabus, Exam Pattern & Vacancy Details (Official)",
+    description:
+      "Complete RRB NTPC 2026 syllabus for CBT 1 and CBT 2 — topic-wise, question count, difficulty, and what changed in the March 2026 exam. 11,558 vacancies.",
+    date: "2026-04-04",
+    readTime: "13 min",
+    category: "RRB NTPC",
+    tags: ["rrb ntpc 2026 syllabus", "rrb ntpc exam pattern", "rrb ntpc cbt 1 syllabus", "railway ntpc 2026"],
+    featured: true,
+    icon: "📋",
+  },
+  {
+    slug: "ibps-po-previous-year-question-papers",
+    title: "IBPS PO Previous Year Question Papers PDF (2021–2025) — Free Mock Test",
+    description:
+      "Practice IBPS PO Prelims & Mains previous year papers (2021–2025) free online. Topic-wise breakup, cutoff analysis, and 6-week preparation plan for banking aspirants.",
+    date: "2026-04-03",
+    readTime: "12 min",
+    category: "Banking",
+    tags: ["ibps po previous year paper", "ibps po mock test free", "ibps po prelims paper", "ibps po question paper pdf"],
+    featured: true,
+    icon: "🏦",
+  },
+  {
+    slug: "ssc-mts-previous-year-question-papers",
+    title: "SSC MTS Previous Year Question Papers PDF (2019 & 2023 All Shifts) — Free",
+    description:
+      "Practice SSC MTS 2019 & September 2023 question papers (all 3 shifts) free online. New exam pattern explained, cutoff trend, and 2-month preparation strategy included.",
+    date: "2026-04-02",
+    readTime: "10 min",
+    category: "SSC",
+    tags: ["ssc mts previous year paper", "ssc mts question paper pdf", "ssc mts 2023 paper", "ssc mts mock test"],
+    icon: "📝",
+  },
+  {
+    slug: "wbpsc-clerkship-2024-question-paper-analysis",
+    title: "WBPSC Clerkship 2024 Question Paper All Shifts — Analysis & Free Practice",
+    description:
+      "Detailed analysis of all 4 shifts of WBPSC Clerkship 2024 exam. Topic-wise breakup, difficulty comparison, West Bengal GK guide, and 3-month preparation plan.",
+    date: "2026-04-01",
+    readTime: "12 min",
+    category: "WBPSC",
+    tags: ["wbpsc clerkship 2024 question paper", "wbpsc clerkship 2024 all shifts", "wbpsc clerkship mock test", "wbpsc clerkship analysis"],
+    featured: true,
+    icon: "🏛️",
+  },
 ];
 
 const CATEGORY_STYLES: Record<
@@ -179,6 +238,24 @@ const CATEGORY_STYLES: Record<
     text: "text-emerald-500",
     border: "border-emerald-500/20",
     gradient: "from-emerald-500 to-teal-600",
+  },
+  "RRB NTPC": {
+    bg: "bg-blue-500/10",
+    text: "text-blue-500",
+    border: "border-blue-500/20",
+    gradient: "from-blue-500 to-indigo-600",
+  },
+  Banking: {
+    bg: "bg-teal-500/10",
+    text: "text-teal-500",
+    border: "border-teal-500/20",
+    gradient: "from-teal-500 to-cyan-600",
+  },
+  SSC: {
+    bg: "bg-violet-500/10",
+    text: "text-violet-500",
+    border: "border-violet-500/20",
+    gradient: "from-violet-500 to-purple-600",
   },
 };
 
