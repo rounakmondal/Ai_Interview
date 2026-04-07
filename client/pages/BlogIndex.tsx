@@ -151,15 +151,15 @@ const CATEGORY_STYLES: Record<
   { bg: string; text: string; border: string; gradient: string }
 > = {
   WBCS: {
-    bg: "bg-indigo-500/10",
-    text: "text-indigo-500",
-    border: "border-indigo-500/20",
-    gradient: "from-indigo-500 to-blue-600",
+    bg: "bg-orange-500/10",
+    text: "text-orange-500",
+    border: "border-orange-500/20",
+    gradient: "from-orange-500 to-red-500",
   },
   WBPSC: {
-    bg: "bg-violet-500/10",
-    text: "text-violet-500",
-    border: "border-violet-500/20",
+    bg: "bg-orange-500/10",
+    text: "text-orange-500",
+    border: "border-orange-500/20",
     gradient: "from-violet-500 to-purple-600",
   },
   "WB Police": {
@@ -205,9 +205,9 @@ export default function BlogIndex() {
       <section className="relative py-20 sm:py-28 overflow-hidden">
         {/* Animated gradient mesh */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[120px] animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-[120px] animate-pulse [animation-delay:1s]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[150px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[150px]" />
         </div>
 
         {/* Grid pattern overlay */}
@@ -225,14 +225,14 @@ export default function BlogIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-500/15 to-violet-500/15 border border-indigo-500/20 rounded-full text-sm font-medium text-indigo-500 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500/15 to-red-500/15 border border-orange-500/20 rounded-full text-sm font-medium text-orange-500 mb-8 backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               Exam Preparation Blog
             </div>
             <h1 className="text-4xl sm:text-6xl font-extrabold text-foreground tracking-tight mb-5 leading-[1.1]">
               Master WB Govt Exams
               <br />
-              <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-rose-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 via-red-500 to-rose-500 bg-clip-text text-transparent">
                 with Expert Guides
               </span>
             </h1>
@@ -255,7 +255,7 @@ export default function BlogIndex() {
               { label: "Practice Papers", value: "20+" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground mt-0.5">
@@ -298,7 +298,7 @@ export default function BlogIndex() {
                 <Link to={`/blog/${post.slug}`} className="block group h-full">
                   <div
                     className={`h-full rounded-2xl border ${styles.border} bg-card overflow-hidden 
-                    hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 transition-all duration-300`}
+                    hover:shadow-xl hover:shadow-orange-500/5 hover:-translate-y-1 transition-all duration-300`}
                   >
                     {/* Gradient top strip */}
                     <div
@@ -317,7 +317,7 @@ export default function BlogIndex() {
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-foreground mb-3 line-clamp-2 group-hover:text-indigo-500 transition-colors leading-snug">
+                      <h3 className="text-lg font-bold text-foreground mb-3 line-clamp-2 group-hover:text-orange-500 transition-colors leading-snug">
                         {post.title}
                       </h3>
 
@@ -340,7 +340,7 @@ export default function BlogIndex() {
                             {post.readTime}
                           </span>
                         </div>
-                        <span className="text-xs font-semibold text-indigo-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-xs font-semibold text-orange-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           Read
                           <ArrowRight className="w-3.5 h-3.5" />
                         </span>
@@ -357,8 +357,8 @@ export default function BlogIndex() {
       {/* ══ ALL POSTS ══ */}
       <section className="max-w-6xl mx-auto px-4 pb-24">
         <div className="flex items-center gap-3 mb-8">
-          <div className="p-2 bg-indigo-500/10 rounded-lg">
-            <BookOpen className="w-5 h-5 text-indigo-500" />
+          <div className="p-2 bg-orange-500/10 rounded-lg">
+            <BookOpen className="w-5 h-5 text-orange-500" />
           </div>
           <h2 className="text-2xl font-bold text-foreground">All Articles</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent ml-4" />
@@ -378,7 +378,7 @@ export default function BlogIndex() {
                 <Link to={`/blog/${post.slug}`} className="block group">
                   <div
                     className={`rounded-xl border border-border/50 bg-card p-5 sm:p-6 flex items-start gap-5
-                    hover:border-border hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-200`}
+                    hover:border-border hover:shadow-lg hover:shadow-orange-500/5 transition-all duration-200`}
                   >
                     {/* Icon */}
                     <div
@@ -408,7 +408,7 @@ export default function BlogIndex() {
                           })}
                         </span>
                       </div>
-                      <h3 className="font-bold text-foreground group-hover:text-indigo-500 transition-colors mb-1.5 leading-snug">
+                      <h3 className="font-bold text-foreground group-hover:text-orange-500 transition-colors mb-1.5 leading-snug">
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
@@ -417,8 +417,8 @@ export default function BlogIndex() {
                     </div>
 
                     {/* Arrow */}
-                    <div className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 group-hover:bg-indigo-500/10 transition-colors shrink-0 self-center">
-                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-indigo-500 transition-colors" />
+                    <div className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 group-hover:bg-orange-500/10 transition-colors shrink-0 self-center">
+                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-orange-500 transition-colors" />
                     </div>
                   </div>
                 </Link>

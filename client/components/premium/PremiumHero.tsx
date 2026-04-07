@@ -6,12 +6,12 @@ import { ArrowRight, Mic, Brain, BarChart3 } from "lucide-react";
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
 const trustedBy = [
-  { name: "TCS", color: "text-blue-600 dark:text-blue-400" },
-  { name: "Infosys", color: "text-indigo-600 dark:text-indigo-400" },
-  { name: "Wipro", color: "text-violet-600 dark:text-violet-400" },
-  { name: "UPSC", color: "text-amber-600 dark:text-amber-400" },
-  { name: "IBPS", color: "text-emerald-600 dark:text-emerald-400" },
-  { name: "HCL", color: "text-cyan-600 dark:text-cyan-400" },
+  { name: "TCS", slug: "tcs", color: "text-blue-600 dark:text-blue-400" },
+  { name: "Infosys", slug: "infosys", color: "text-orange-600 dark:text-orange-400" },
+  { name: "Wipro", slug: "wipro", color: "text-orange-600 dark:text-orange-400" },
+  { name: "Capgemini", slug: "capgemini", color: "text-amber-600 dark:text-amber-400" },
+  { name: "Accenture", slug: "accenture", color: "text-emerald-600 dark:text-emerald-400" },
+  { name: "HCL", slug: "hcl", color: "text-cyan-600 dark:text-cyan-400" },
 ];
 
 const chatBubbles = [
@@ -26,9 +26,9 @@ const examCards = [
     img: "/wbcs.avif",
     label: "WBCS",
     sub: "Prepare Now",
-    iconBg: "from-violet-100 to-indigo-100 dark:from-violet-900/40 dark:to-indigo-900/40",
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
-    border: "hover:border-violet-400 dark:hover:border-violet-500",
+    iconBg: "from-violet-100 to-indigo-100 dark:from-orange-900/40 dark:to-indigo-900/40",
+    badge: "bg-violet-100 text-orange-700 dark:bg-violet-900/40 dark:text-orange-300",
+    border: "hover:border-orange-400 dark:hover:border-orange-500",
     shadow: "hover:shadow-violet-200/60 dark:hover:shadow-violet-900/40",
     dot: "bg-violet-400",
     type: "govt"
@@ -74,8 +74,8 @@ const examCards = [
 function MockInterviewCard() {
   return (
     <div className="relative w-full max-w-6xl mx-auto transform scale-105 transition-all duration-500">
-      <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/20 via-violet-500/10 to-blue-500/20 rounded-3xl blur-2xl" />
-      <div className="relative bg-card border border-border/60 rounded-2xl shadow-2xl overflow-hidden">
+      <div className="absolute -inset-4 bg-gradient-to-br from-orange-500/20 via-red-500/10 to-orange-500/20 rounded-3xl blur-2xl" />
+      <div className="relative bg-card border border-border/60 rounded-2xl shadow-2xl overflow-hidden max-h-[600px]">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/30">
           <div className="flex items-center gap-2.5">
@@ -96,8 +96,8 @@ function MockInterviewCard() {
           </div>
         </div>
 
-        {/* Avatar — increased height from h-44 to h-72 */}
-        <div className="relative h-72 bg-gradient-to-br from-indigo-950/80 via-violet-900/40 to-slate-900/80 flex items-center justify-center overflow-hidden">
+        {/* Avatar */}
+        <div className="relative h-72 bg-gradient-to-br from-indigo-950/80 via-red-900/40 to-slate-900/80 flex items-center justify-center overflow-hidden">
           <img
             src="/Gemini_Generated_Image_9cu79a9cu79a9cu7.png"
             alt="AI Interviewer"
@@ -128,7 +128,7 @@ function MockInterviewCard() {
             >
               <div
                 className={`max-w-[80%] text-[11px] leading-relaxed px-3 py-2 rounded-xl ${b.from === "ai"
-                  ? "bg-indigo-500/10 border border-indigo-500/20 text-foreground rounded-tl-none"
+                  ? "bg-orange-500/10 border border-orange-500/20 text-foreground rounded-tl-none"
                   : "bg-muted text-muted-foreground rounded-tr-none"
                   }`}
               >
@@ -144,7 +144,7 @@ function MockInterviewCard() {
             <Mic className="w-3.5 h-3.5 text-red-500 animate-pulse" />
             Listening…
           </div>
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20">
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/20">
           <BarChart3 className="w-3.5 h-3.5 text-orange-500" />
 
 <span className="text-[10px] font-semibold bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
@@ -185,12 +185,12 @@ export default function PremiumHero() {
     <div ref={containerRef} className="relative min-h-[85vh] overflow-hidden flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0 -z-20 dark:bg-slate-950 bg-white">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-violet-500/10 blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-orange-500/10 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-orange-500/10 blur-[100px] pointer-events-none" />
         <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.07]"
           style={{
-            backgroundImage: "radial-gradient(circle, #6366f1 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #f97316 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
@@ -205,7 +205,7 @@ export default function PremiumHero() {
             {/* Headline */}
             <motion.div variants={item} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">
-                Ace Your Next Interview —{" "}
+              
                 <span className="relative inline-block">
                   <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
                        Practice Until You Succeed
@@ -270,7 +270,7 @@ export default function PremiumHero() {
                <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="relative group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white overflow-hidden shadow-lg shadow-indigo-500/30"
+                  className="relative group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-2.5 rounded-full text-sm font-semibold text-white overflow-hidden shadow-lg shadow-orange-500/30"
 
 
                 >
@@ -286,11 +286,11 @@ export default function PremiumHero() {
 
 
 
-              <Link to="/setup">
+              <Link to="/interview-questions">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold border border-border/60 hover:border-orange-400/40 text-foreground hover:text-orange-500 dark:hover:text-orange-400 bg-card/80 transition-colors duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-2.5 rounded-full text-sm font-semibold border border-border/60 hover:border-orange-400/40 text-foreground hover:text-orange-500 dark:hover:text-orange-400 bg-card/80 transition-colors duration-200"
                 >
                   Try 1 Question — No Login
                 </motion.button>
@@ -339,10 +339,20 @@ export default function PremiumHero() {
           </p>
           <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-6 gap-y-2">
             {trustedBy.map((co, i) => (
-              <span key={i} className={`text-sm font-bold ${co.color} tracking-wide`}>
+              <Link
+                key={i}
+                to={`/interview-questions/${co.slug}`}
+                className={`text-sm font-bold ${co.color} tracking-wide hover:underline underline-offset-4 transition-all`}
+              >
                 {co.name}
-              </span>
+              </Link>
             ))}
+            <Link
+              to="/interview-questions"
+              className="text-xs font-semibold text-primary hover:text-primary/80 border border-primary/30 hover:border-primary/50 rounded-full px-3 py-1 transition-all"
+            >
+              All 200+ Companies →
+            </Link>
           </div>
         </div>
       </motion.div>

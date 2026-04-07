@@ -1,32 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="MedhaHub - মে">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#8b5cf6"/>
+    <linearGradient id="fbg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a2e4a"/>
+      <stop offset="100%" stop-color="#0f1f36"/>
     </linearGradient>
-    <linearGradient id="glow" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0"/>
+    <linearGradient id="ff" x1="32" y1="4" x2="32" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#e8850c"/>
     </linearGradient>
   </defs>
-
-  <!-- Rounded square background -->
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <rect width="64" height="64" rx="14" fill="url(#glow)"/>
-
-  <!-- Microphone body -->
-  <rect x="24" y="10" width="16" height="24" rx="8" fill="white" opacity="0.95"/>
-
-  <!-- Microphone stand arc -->
-  <path d="M16 30 C16 42 48 42 48 30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
-
-  <!-- Stand pole -->
-  <line x1="32" y1="42" x2="32" y2="50" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-
-  <!-- Stand base -->
-  <line x1="24" y1="50" x2="40" y2="50" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-
-  <!-- AI spark dot on mic -->
-  <circle cx="39" cy="14" r="5" fill="#fbbf24"/>
-  <path d="M39 11.5 L39.7 13.3 L41.5 14 L39.7 14.7 L39 16.5 L38.3 14.7 L36.5 14 L38.3 13.3 Z" fill="white"/>
+  <rect width="64" height="64" rx="14" fill="url(#fbg)"/>
+  <!-- Flame -->
+  <path d="M32 5 C32 5 27 14 27 18 C27 20.5 29.2 22.5 32 22.5 C34.8 22.5 37 20.5 37 18 C37 14 32 5 32 5Z" fill="url(#ff)"/>
+  <!-- Bengali মে -->
+  <text x="32" y="52" text-anchor="middle" font-family="'Noto Sans Bengali','Hind Siliguri',sans-serif" font-size="30" font-weight="700" fill="#ffffff">মে</text>
 </svg>

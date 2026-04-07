@@ -187,7 +187,7 @@ export default function PremiumCTA() {
               
               <Link to="/setup">
                 <motion.button
-                  className="relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-lg shadow-lg shadow-blue-500/20 flex items-center gap-3 group"
+                  className="relative px-8 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-lg shadow-lg shadow-orange-500/20 flex items-center gap-3 group"
                   whileHover={{ 
                     scale: 1.02,
                     boxShadow: "0 20px 40px rgba(59, 130, 246, 0.25)",

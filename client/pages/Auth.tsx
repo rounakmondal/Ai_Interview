@@ -60,6 +60,7 @@ export default function Auth() {
     try {
       const res = await login(email, password);
       saveSession(res.token, res.user);
+      requestPostLoginBriefing();
       toast({ title: "Welcome back!", description: `Logged in as ${res.user.name}` });
       navigate("/");
     } catch (err: any) {

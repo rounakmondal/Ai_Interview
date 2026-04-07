@@ -411,9 +411,9 @@ export default function InterviewRoom() {
         <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="InterviewSathi" className="w-10 h-10 rounded-lg object-cover" />
+              <img src="/logo.png" alt="MedhaHub" className="w-10 h-10 rounded-lg object-cover" />
               <span className="font-bold text-lg text-foreground hidden sm:inline">
-                InterviewSathi
+                MedhaHub
               </span>
             </div>
             <Link to="/setup">
@@ -565,9 +565,9 @@ export default function InterviewRoom() {
         <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
           <div className="container px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="InterviewSathi" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+              <img src="/logo.png" alt="MedhaHub" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
               <span className="font-bold text-base sm:text-lg text-foreground hidden sm:inline">
-                InterviewSathi
+                MedhaHub
               </span>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">

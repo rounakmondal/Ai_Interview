@@ -119,8 +119,8 @@ export default function Dashboard() {
           <Card className="p-4 sm:p-5 border-border/40">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
-                  <Target className="w-5 h-5 text-indigo-500" />
+                <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                  <Target className="w-5 h-5 text-orange-500" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{STUDY_EXAM_LABELS[studyExam]}</p>
@@ -159,8 +159,8 @@ export default function Dashboard() {
             <Link to="/study-plan">
               <Card className="p-5 border-border/40 hover:border-primary/30 transition-colors cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center">
-                    <GanttChart className="w-5 h-5 text-violet-500" />
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                    <GanttChart className="w-5 h-5 text-orange-500" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-sm">Study Plan</h3>

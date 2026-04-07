@@ -19,7 +19,7 @@ export default function StudyToolsSection() {
     <section className="py-24 relative overflow-hidden">
       {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 -translate-y-1/2 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
@@ -33,13 +33,13 @@ export default function StudyToolsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14 space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium border border-violet-500/20">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 text-sm font-medium border border-orange-500/20">
             <Brain className="w-3.5 h-3.5" />
             Smart Study Tools — Free for All Aspirants
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
             Everything You Need to{" "}
-            <span className="bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent">Study Smarter</span>
+            <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Study Smarter</span>
           </h2>
           <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
             Two purpose-built tools designed specifically for WBCS, SSC, Railway &amp; Banking aspirants. No login required.
@@ -53,17 +53,17 @@ export default function StudyToolsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-violet-500/20 shadow-xl shadow-violet-500/5"
+            className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-orange-500/20 shadow-xl shadow-orange-500/5"
           >
             {/* Left — content */}
             <div className="bg-gradient-to-br from-violet-500/8 via-background to-background p-8 sm:p-10 flex flex-col justify-between gap-8">
               <div className="space-y-5">
                 {/* Tag + icon */}
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/25">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/25">
                     <Bot className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20">
                     AI Powered · Free
                   </span>
                 </div>
@@ -82,8 +82,8 @@ export default function StudyToolsSection() {
                     { icon: ImagePlus, label: "Image Upload" },
                     { icon: Zap, label: "Bengali Support" },
                   ].map((f) => (
-                    <div key={f.label} className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-500/8 border border-violet-500/15 rounded-lg text-xs font-medium">
-                      <f.icon className="w-3 h-3 text-violet-500" />
+                    <div key={f.label} className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-500/8 border border-orange-500/15 rounded-lg text-xs font-medium">
+                      <f.icon className="w-3 h-3 text-orange-500" />
                       {f.label}
                     </div>
                   ))}
@@ -98,7 +98,7 @@ export default function StudyToolsSection() {
                     "Available 24/7, no signup required",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-violet-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
@@ -109,7 +109,7 @@ export default function StudyToolsSection() {
                 <motion.div
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-600 text-white font-semibold text-sm shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-shadow cursor-pointer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-sm shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-shadow cursor-pointer"
                 >
                   Open AI Chat
                   <ArrowRight className="w-4 h-4" />
@@ -118,7 +118,7 @@ export default function StudyToolsSection() {
             </div>
 
             {/* Right — visual preview */}
-            <div className="bg-gradient-to-br from-violet-600/90 to-indigo-700 p-8 flex flex-col justify-center gap-4 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-orange-500/90 to-red-600 p-8 flex flex-col justify-center gap-4 relative overflow-hidden">
               {/* Decorative circles */}
               <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full" />
               <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full" />

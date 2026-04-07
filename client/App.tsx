@@ -12,6 +12,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { isLoggedIn } from "@/lib/auth-api";
 import { useAndroidBackButton } from "@/hooks/use-android-back-button";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
+import { scheduleAmarPlanReminder } from "@/lib/notification-service";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
 import { RouteLoader } from "@/components/RouteLoader";
@@ -47,11 +48,20 @@ const Profile = lazy(() => import("./pages/Profile"));
 const DailyTasks = lazy(() => import("./pages/DailyTasks"));
 const DailyQuiz = lazy(() => import("./pages/DailyQuiz"));
 const StudyPlan = lazy(() => import("./pages/StudyPlan"));
+const AmarPlan = lazy(() => import("./pages/AmarPlan"));
 const SyllabusTracker = lazy(() => import("./pages/SyllabusTracker"));
 const ChapterTest = lazy(() => import("./pages/ChapterTest"));
 const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
+const PreviousYearPage = lazy(() => import("./pages/PreviousYearPage"));
+const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
+
+// Company interview pages
+const CompanyInterviewHub = lazy(() => import("./pages/CompanyInterviewHub"));
+const CompanyInterviewQuestions = lazy(() => import("./pages/CompanyInterviewQuestions"));
+const TechSkillMatrix = lazy(() => import("./pages/TechSkillMatrix"));
+const ExamSyllabusExplorer = lazy(() => import("./pages/ExamSyllabusExplorer"));
 
 // Blog pages
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
@@ -78,6 +88,11 @@ function AppContent() {
   // Initialize notification check system
   useNotificationCheck();
 
+  // Initialize Amar Plan daily reminder scheduler
+  useEffect(() => {
+    scheduleAmarPlanReminder();
+  }, []);
+
   useEffect(() => {
     if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
       setShowOnboarding(true);
@@ -96,6 +111,7 @@ function AppContent() {
           <Route path="/evaluation" element={<EvaluationPage />} />
           <Route path="/resume" element={<ResumeBuilder />} />
           <Route path="/career-mentor" element={<CareerMentorPage />} />
+          <Route path="/vacancies" element={<VacancyAlertCenter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/about" element={<About />} />
@@ -116,6 +132,7 @@ function AppContent() {
           <Route path="/daily-tasks" element={<DailyTasks />} />
           <Route path="/daily-quiz" element={<DailyQuiz />} />
           <Route path="/study-plan" element={<StudyPlan />} />
+          <Route path="/amar-plan" element={<AmarPlan />} />
           <Route path="/syllabus" element={<SyllabusTracker />} />
           <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
           <Route path="/mock-test" element={<MockTestPage />} />
@@ -126,7 +143,34 @@ function AppContent() {
             path="/wbp-police-mock-test"
             element={<QuestionHub seoProfile="police" />}
           />
+          <Route
+            path="/wbpsc-clerkship-mock-test"
+            element={<QuestionHub seoProfile="wbpsc-clerkship" />}
+          />
+          <Route
+            path="/wb-tet-mock-test"
+            element={<QuestionHub seoProfile="wb-tet" />}
+          />
+          <Route
+            path="/ssc-mts-mock-test"
+            element={<QuestionHub seoProfile="ssc-mts" />}
+          />
+          <Route
+            path="/ibps-po-mock-test"
+            element={<QuestionHub seoProfile="ibps-po" />}
+          />
+          <Route
+            path="/jtet-mock-test"
+            element={<QuestionHub seoProfile="jtet" />}
+          />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
+          {/* SEO Previous Year Question Paper pages */}
+          <Route path="/previous-year/:slug" element={<PreviousYearPage />} />
+          {/* Company Interview Questions */}
+          <Route path="/interview-questions" element={<CompanyInterviewHub />} />
+          <Route path="/interview-questions/:slug" element={<CompanyInterviewQuestions />} />
+          <Route path="/skill-matrix" element={<TechSkillMatrix />} />
+          <Route path="/exam-syllabus" element={<ExamSyllabusExplorer />} />
           {/* Blog */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/wbcs-preparation-strategy-2026" element={<BlogWBCSStrategy />} />

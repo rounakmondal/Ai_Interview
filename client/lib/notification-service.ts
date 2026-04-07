@@ -71,8 +71,8 @@ export async function sendPushNotification(
 
     // Send notification
     new Notification(title, {
-      icon: "/logo.png",
-      badge: "/logo.png",
+      icon: "/favicon.svg",
+      badge: "/favicon.svg",
       ...options,
     });
   } catch (error) {
@@ -147,5 +147,64 @@ export async function checkAndSendNotifications(onToast?: (msg: string) => void)
     }
 
     markNotificationSent("daily_tasks");
+  }
+}
+
+// ── Amar Plan daily reminder (Bengali) ────────────────────────────────────────
+
+let _amarReminderTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Schedule a daily study reminder at the user's preferred time.
+ * Call once on app load; it recalculates tomorrow if the time has passed.
+ */
+export function scheduleAmarPlanReminder(): void {
+  if (_amarReminderTimer) clearTimeout(_amarReminderTimer);
+
+  try {
+    const raw = localStorage.getItem("upcoming_exam");
+    if (!raw) return;
+    const prefs = JSON.parse(raw);
+    const notifTime: string | undefined = prefs.notificationTime;
+    if (!notifTime || prefs.notificationEnabled === false) return;
+
+    const [hours, minutes] = notifTime.split(":").map(Number);
+    const now = new Date();
+    const target = new Date();
+    target.setHours(hours, minutes, 0, 0);
+
+    // If target time already passed today, schedule for tomorrow
+    if (target.getTime() <= now.getTime()) {
+      target.setDate(target.getDate() + 1);
+    }
+
+    const delay = target.getTime() - now.getTime();
+
+    _amarReminderTimer = setTimeout(async () => {
+      if (wasNotificationSentToday("amar_plan_reminder")) return;
+
+      // Get today's pending topic name
+      let topicName = "আজকের বিষয়";
+      try {
+        const { getPendingTopicForToday } = await import("./amar-plan");
+        const topic = getPendingTopicForToday();
+        if (topic) topicName = topic;
+      } catch { /* ignore */ }
+
+      const title = "📚 আজকের কাজ বাকি আছে";
+      const body = `আজকের কাজ বাকি আছে — ${topicName} শেষ করো!`;
+
+      await sendPushNotification(title, {
+        body,
+        tag: "amar_plan_daily_reminder",
+      });
+
+      markNotificationSent("amar_plan_reminder");
+
+      // Re-schedule for tomorrow
+      scheduleAmarPlanReminder();
+    }, delay);
+  } catch {
+    // Malformed data — skip
   }
 }

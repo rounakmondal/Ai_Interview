@@ -57,18 +57,19 @@ export const handleContact: RequestHandler = async (req, res) => {
   try {
     const transporter = createTransporter();
     const categoryLabel = categoryLabels[category] || category;
-    const toAddress = process.env.CONTACT_RECEIVER || "aiinterview0@gmail.com";
+    const toAddress = process.env.CONTACT_RECEIVER || "medhahubfryou@gmail.com";
+    const appUrl = process.env.APP_PUBLIC_URL || "https://medhahub.in";
 
     // Email to site owner
     await transporter.sendMail({
-      from: `"InterviewAI Contact Form" <${process.env.SMTP_USER}>`,
+      from: `"MedhaHub Contact" <${process.env.SMTP_USER}>`,
       to: toAddress,
       replyTo: email,
       subject: `[${categoryLabel}] ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9fafb; border-radius: 12px;">
-          <div style="background: #2F50B7; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 24px;">InterviewAI</h1>
+          <div style="background: #2563eb; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">MedhaHub</h1>
             <p style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: 14px;">New Contact Form Submission</p>
           </div>
           <div style="background: white; padding: 24px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none;">
@@ -79,7 +80,7 @@ export const handleContact: RequestHandler = async (req, res) => {
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-weight: bold; color: #374151;">Email</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #111827;"><a href="mailto:${email}" style="color: #2F50B7;">${email}</a></td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #111827;"><a href="mailto:${email}" style="color: #2563eb;">${email}</a></td>
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-weight: bold; color: #374151;">Category</td>
@@ -92,7 +93,7 @@ export const handleContact: RequestHandler = async (req, res) => {
             </table>
             <div style="margin-top: 20px;">
               <p style="font-weight: bold; color: #374151; margin: 0 0 8px;">Message</p>
-              <div style="background: #f9fafb; padding: 16px; border-radius: 8px; border-left: 4px solid #2F50B7; color: #374151; line-height: 1.6; white-space: pre-wrap;">${message}</div>
+              <div style="background: #f9fafb; padding: 16px; border-radius: 8px; border-left: 4px solid #2563eb; color: #374151; line-height: 1.6; white-space: pre-wrap;">${message}</div>
             </div>
             <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
               <p style="color: #6b7280; font-size: 13px; margin: 0;">Reply directly to this email to respond to ${name}.</p>
@@ -104,13 +105,13 @@ export const handleContact: RequestHandler = async (req, res) => {
 
     // Auto-reply to the sender
     await transporter.sendMail({
-      from: `"InterviewAI" <${process.env.SMTP_USER}>`,
+      from: `"MedhaHub" <${process.env.SMTP_USER}>`,
       to: email,
       subject: `We received your message — ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9fafb; border-radius: 12px;">
-          <div style="background: #2F50B7; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 24px;">InterviewAI</h1>
+          <div style="background: #2563eb; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">MedhaHub</h1>
             <p style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: 14px;">We got your message!</p>
           </div>
           <div style="background: white; padding: 24px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none;">
@@ -127,13 +128,13 @@ export const handleContact: RequestHandler = async (req, res) => {
               In the meantime, feel free to explore our platform and start practicing your interview skills!
             </p>
             <div style="text-align: center; margin: 28px 0;">
-              <a href="${process.env.VITE_APP_URL || "https://interviewai.in"}/setup" 
-                 style="background: #2F50B7; color: white; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 15px;">
+              <a href="${appUrl}/setup" 
+                 style="background: #2563eb; color: white; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 15px;">
                 Start Practicing
               </a>
             </div>
             <p style="color: #9ca3af; font-size: 13px; text-align: center; margin-top: 24px; border-top: 1px solid #e5e7eb; padding-top: 16px;">
-              © 2026 InterviewAI · <a href="mailto:aiinterview0@gmail.com" style="color: #2F50B7;">aiinterview0@gmail.com</a>
+              © 2026 MedhaHub · <a href="mailto:medhahubfryou@gmail.com" style="color: #2563eb;">medhahubfryou@gmail.com</a>
             </p>
           </div>
         </div>

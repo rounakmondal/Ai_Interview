@@ -60,7 +60,7 @@ import { BookMarked, GanttChart } from "lucide-react";
 
 // ── Avatar color palettes ──────────────────────────────────────────────
 const AVATAR_COLORS = [
-  "from-indigo-500 to-purple-600",
+  "from-orange-500 to-red-600",
   "from-emerald-500 to-teal-600",
   "from-orange-500 to-red-600",
   "from-pink-500 to-rose-600",

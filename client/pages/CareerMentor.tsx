@@ -45,11 +45,11 @@ const INTENT_META: Record<
 > = {
     no_job: { label: "Job Hunt", color: "bg-rose-500/15 text-rose-400 border-rose-500/30", emoji: "🔍" },
     layoff_fear: { label: "Layoff Fear", color: "bg-orange-500/15 text-orange-400 border-orange-500/30", emoji: "🛡️" },
-    ai_impact: { label: "AI & Jobs", color: "bg-violet-500/15 text-violet-400 border-violet-500/30", emoji: "🤖" },
+    ai_impact: { label: "AI & Jobs", color: "bg-orange-500/15 text-orange-400 border-orange-500/30", emoji: "🤖" },
     career_gap: { label: "Career Gap", color: "bg-amber-500/15 text-amber-400 border-amber-500/30", emoji: "📅" },
     low_salary: { label: "Salary Growth", color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30", emoji: "💰" },
     tech_confusion: { label: "Tech Choice", color: "bg-sky-500/15 text-sky-400 border-sky-500/30", emoji: "⚙️" },
-    non_it_switch: { label: "IT Switch", color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/30", emoji: "🔀" },
+    non_it_switch: { label: "IT Switch", color: "bg-orange-500/15 text-orange-400 border-orange-500/30", emoji: "🔀" },
     skill_roadmap: { label: "Skill Roadmap", color: "bg-teal-500/15 text-teal-400 border-teal-500/30", emoji: "🗺️" },
     general: { label: "Career Guide", color: "bg-primary/15 text-primary border-primary/30", emoji: "💡" },
 };

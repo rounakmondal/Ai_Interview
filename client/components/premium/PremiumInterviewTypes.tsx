@@ -29,10 +29,10 @@ const types = [
     id: "it",
     icon: Cpu,
     label: "IT / Tech",
-    color: "from-indigo-500 to-blue-600",
-    bg: "bg-indigo-500/10",
-    border: "border-indigo-500/30",
-    highlight: "text-indigo-600 dark:text-indigo-400",
+    color: "from-orange-500 to-red-500",
+    bg: "bg-orange-500/10",
+    border: "border-orange-500/30",
+    highlight: "text-orange-600 dark:text-orange-400",
     title: "IT & Tech Interviews",
     description:
       "Ace interviews at top tech companies including TCS, Infosys, Wipro, HCL, startups, and MNCs. Covers both fresher and experienced roles.",
@@ -70,9 +70,9 @@ const types = [
     icon: GraduationCap,
     label: "Campus / Fresher",
     color: "from-violet-500 to-purple-600",
-    bg: "bg-violet-500/10",
-    border: "border-violet-500/30",
-    highlight: "text-violet-600 dark:text-violet-400",
+    bg: "bg-orange-500/10",
+    border: "border-orange-500/30",
+    highlight: "text-orange-600 dark:text-orange-400",
     title: "Campus & Fresher Interviews",
     description:
       "Tailored for college students and recent graduates going through campus placement drives, aptitude rounds, and HR interviews.",
@@ -141,7 +141,7 @@ export default function PremiumInterviewTypes() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -152,7 +152,7 @@ export default function PremiumInterviewTypes() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Prep for every{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               type of interview
             </span>
           </h2>
@@ -179,7 +179,7 @@ export default function PremiumInterviewTypes() {
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
                   isActive
                     ? `bg-gradient-to-r ${t.color} text-white border-transparent shadow-md`
-                    : "bg-card border-border/50 text-muted-foreground hover:text-foreground hover:border-indigo-500/30"
+                    : "bg-card border-border/50 text-muted-foreground hover:text-foreground hover:border-orange-500/30"
                 }`}
               >
                 <TIcon className="w-4 h-4" />

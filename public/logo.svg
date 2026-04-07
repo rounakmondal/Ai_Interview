@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MedhaHub - মেধাহাব">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a2e4a"/>
+      <stop offset="100%" stop-color="#0f1f36"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="256" y1="60" x2="256" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#e8850c"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Flame -->
+  <path d="M256 62 C256 62 224 116 224 148 C224 166 238 180 256 180 C274 180 288 166 288 148 C288 116 256 62 256 62Z" fill="url(#flame)"/>
+  <path d="M256 92 C256 92 242 126 242 144 C242 152 248 158 256 158 C264 158 270 152 270 144 C270 126 256 92 256 92Z" fill="#fff" opacity="0.45"/>
+  <!-- Open book -->
+  <path d="M206 172 L256 194 L306 172 L306 186 L256 208 L206 186Z" fill="url(#flame)" opacity="0.7"/>
+  <!-- Bengali মে -->
+  <text x="256" y="380" text-anchor="middle" font-family="'Noto Sans Bengali','Hind Siliguri','Kalpurush',sans-serif" font-size="210" font-weight="700" fill="#ffffff">মে</text>
+  <!-- Accent bar -->
+  <rect x="156" y="414" width="200" height="5" rx="2.5" fill="url(#flame)" opacity="0.55"/>
+</svg>

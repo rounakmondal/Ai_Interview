@@ -66,16 +66,16 @@ export default function PremiumNavbar() {
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
               <motion.img
                 src="/logo.png"
-                alt="InterviewSathi"
+                alt="MedhaHub"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="w-9 h-9 rounded-lg object-cover shadow-lg shadow-indigo-500/20"
+                className="w-9 h-9 rounded-lg object-cover shadow-lg shadow-orange-500/20"
               />
               <span
                 className={`font-semibold text-[15px] hidden sm:inline tracking-tight transition-colors duration-300 ${isDark ? "text-white/95" : "text-slate-900"
                   }`}
               >
-                InterviewSathi
+                MedhaHub
               </span>
             </Link>
 
@@ -94,7 +94,7 @@ export default function PremiumNavbar() {
                       }`}
                   >
                     {item.label}
-                    <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-indigo-400 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-orange-400 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                   </Link>
                 </motion.div>
               ))}
@@ -249,7 +249,7 @@ export default function PremiumNavbar() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.25 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
+                      className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
                     >
                       <User className="w-4 h-4" />
                       {getSession()?.user.name.split(" ")[0] || t("profile")}
@@ -276,7 +276,7 @@ export default function PremiumNavbar() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20"
+                        className="w-full px-4 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
                       >
                         {t("getStarted")}
                         <ArrowRight className="w-4 h-4" />

@@ -13,9 +13,9 @@ export default function LandingPage() {
       <nav className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="InterviewSathi" className="w-10 h-10 rounded-lg object-cover" />
+            <img src="/logo.png" alt="MedhaHub" className="w-10 h-10 rounded-lg object-cover" />
             <span className="font-bold text-lg text-foreground hidden sm:inline">
-              InterviewSathi
+              MedhaHub
             </span>
           </div>
           <div className="flex items-center gap-6">
@@ -41,8 +41,8 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative py-14 sm:py-24 overflow-hidden">
         {/* Background gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-transparent to-purple-50/60 pointer-events-none" />
-        <div className="absolute top-20 -left-32 w-80 h-80 rounded-full bg-indigo-100/40 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/80 via-transparent to-red-50/60 pointer-events-none" />
+        <div className="absolute top-20 -left-32 w-80 h-80 rounded-full bg-orange-100/40 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 -right-32 w-80 h-80 rounded-full bg-purple-100/40 blur-3xl pointer-events-none" />
 
         <div className="container relative z-10">
@@ -50,9 +50,9 @@ export default function LandingPage() {
             {/* Left Content */}
             <div className="space-y-6 sm:space-y-8 animate-slide-up">
               {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full border border-indigo-200 bg-indigo-50/70">
+              <div className="inline-flex items-center px-4 py-2 rounded-full border border-orange-200 bg-orange-50/70">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse mr-2" />
-                <span className="text-sm font-medium text-indigo-700">
+                <span className="text-sm font-medium text-orange-700">
                   500+ students already practising
                 </span>
               </div>
@@ -61,7 +61,7 @@ export default function LandingPage() {
               <div className="space-y-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1] text-foreground">
                  Ace Your Next Interview —{" "}
-                  <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
                    Practice Until You Succeed
                   </span>
                 </h1>
@@ -78,7 +78,7 @@ export default function LandingPage() {
                 <Link to="/setup">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto gradient-primary text-base font-semibold h-12 px-7 shadow-lg shadow-indigo-200/50 hover:shadow-xl hover:shadow-indigo-300/50 transition-all"
+                    className="w-full sm:w-auto gradient-primary text-base font-semibold h-12 px-7 shadow-lg shadow-orange-200/50 hover:shadow-xl hover:shadow-orange-300/50 transition-all"
                   >
                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
@@ -104,7 +104,7 @@ export default function LandingPage() {
                   { label: "WBCS", key: "WBCS", icon: "🏛️", color: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-700 dark:text-amber-400", type: "govt" },
                   { label: "SSC", key: "SSC", icon: "🏢", color: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-700 dark:text-blue-400", type: "govt" },
                   { label: "Police", key: "Police", icon: "👮", color: "bg-red-500/10", border: "border-red-500/20", text: "text-red-700 dark:text-red-400", type: "govt" },
-                  { label: "IT Jobs", key: "it", icon: "💻", color: "bg-indigo-500/10", border: "border-indigo-500/20", text: "text-indigo-700 dark:text-indigo-400", type: "interview" }
+                  { label: "IT Jobs", key: "it", icon: "💻", color: "bg-orange-500/10", border: "border-orange-500/20", text: "text-orange-700 dark:text-orange-400", type: "interview" }
                 ].map((cat, i) => (
                   <Link
                     key={i}
@@ -174,7 +174,7 @@ export default function LandingPage() {
         <div className="container space-y-12 sm:space-y-16">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              How InterviewAI Works
+              How MedhaHub Works
             </h2>
             <p className="text-lg text-muted-foreground">
               Three simple steps to master your interview skills

@@ -10,6 +10,7 @@ import {
 
 interface AIStudyGuideProps {
   chapterId: string;
+  chapterName?: string;
   onClose: () => void;
 }
 
@@ -30,7 +31,7 @@ const QUICK_PROMPTS = [
   { icon: Zap,          label: "Quick MCQs",       query: "Give me 5 practice MCQ questions with answers and explanations from this chapter." },
 ];
 
-export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) {
+export default function AIStudyGuide({ chapterId, chapterName, onClose }: AIStudyGuideProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -116,7 +117,7 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
     });
   };
 
-  const chapterLabel = chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
+  const chapterLabel = chapterName?.trim() || chapterId.replace(/_/g, " ").replace(/ch \d+/i, "").trim() || chapterId;
 
   return (
     <>
@@ -139,8 +140,8 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <p className="font-bold text-sm">InterviewSathi AI</p>
-                  <Badge className="text-[10px] h-4 px-1.5 bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20">
+                  <p className="font-bold text-sm">MedhaHub AI</p>
+                  <Badge className="text-[10px] h-4 px-1.5 bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20">
                     Study Guide
                   </Badge>
                 </div>
@@ -246,7 +247,7 @@ export default function AIStudyGuide({ chapterId, onClose }: AIStudyGuideProps) 
                   </div>
                 )}
                 <span className="text-[11px] text-muted-foreground font-medium">
-                  {m.role === "assistant" ? "InterviewSathi AI" : "You"}
+                  {m.role === "assistant" ? "MedhaHub AI" : "You"}
                 </span>
                 {m.timestamp && (
                   <span className="text-[10px] text-muted-foreground/60">

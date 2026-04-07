@@ -74,10 +74,10 @@ const PHASE_CONFIG: Record<Phase, {
 }> = {
   work: {
     label: "Deep Focus", emoji: "🔥",
-    from: "#7c3aed", to: "#4f46e5", glow: "rgba(124,58,237,0.55)",
-    ring1: "#a78bfa", ring2: "#818cf8",
+    from: "#7c3aed", to: "#ea580c", glow: "rgba(124,58,237,0.55)",
+    ring1: "#fb923c", ring2: "#818cf8",
     bgFrom: "from-[#0d0a1a]", bgTo: "to-[#0f0d2e]",
-    particle: "bg-violet-500",
+    particle: "bg-orange-500",
   },
   "short-break": {
     label: "Short Break", emoji: "☕",

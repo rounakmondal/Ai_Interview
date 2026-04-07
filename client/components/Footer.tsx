@@ -15,9 +15,8 @@ const LinkedInIcon = () => (
   </svg>
 );
 
-// InterviewAI Logo
-const InterviewAILogo = () => (
-  <img src="/logo.png" alt="InterviewSathi" className="w-10 h-10 rounded-xl object-cover" />
+const BrandLogo = () => (
+  <img src="/logo.png" alt="MedhaHub" className="w-10 h-10 rounded-xl object-cover" />
 );
 
 export default function Footer() {
@@ -25,6 +24,8 @@ export default function Footer() {
     resources: [
       { label: "About Us", href: "/about", isRoute: true },
       { label: "Blog", href: "/blog", isRoute: true },
+      { label: "Current Affairs", href: "/current-affairs", isRoute: true },
+      { label: "Daily Quiz", href: "/daily-quiz", isRoute: true },
     ],
     company: [
       { label: "About", href: "/about", isRoute: true },
@@ -34,6 +35,17 @@ export default function Footer() {
       { label: "AI Interviewer", href: "/setup", isRoute: true },
       { label: "Resume Builder", href: "/resume", isRoute: true },
       { label: "Career Mentor", href: "/career-mentor", isRoute: true },
+      { label: "Skill Matrix", href: "/skill-matrix", isRoute: true },
+    ],
+    exams: [
+      { label: "WBCS Mock Test", href: "/wbcs-mock-test", isRoute: true },
+      { label: "WB Police Mock Test", href: "/wbp-police-mock-test", isRoute: true },
+      { label: "WBPSC Clerkship", href: "/wbpsc-clerkship-mock-test", isRoute: true },
+      { label: "WB TET Mock Test", href: "/wb-tet-mock-test", isRoute: true },
+      { label: "SSC MTS Mock Test", href: "/ssc-mts-mock-test", isRoute: true },
+      { label: "IBPS PO Mock Test", href: "/ibps-po-mock-test", isRoute: true },
+      { label: "Previous Year Papers", href: "/prev-year-questions", isRoute: true },
+      { label: "Company Interview Q&A", href: "/interview-questions", isRoute: true },
     ],
     location: [
       { label: "India", href: "#", isRoute: false },
@@ -47,10 +59,10 @@ export default function Footer() {
   return (
     <footer className="relative py-4 sm:py-6 overflow-hidden">
       {/* Background with wave patterns */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-100/50 via-indigo-100/30 to-indigo-50/20 dark:from-indigo-950/30 dark:via-indigo-950/20 dark:to-background">
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-100/50 via-orange-100/30 to-orange-50/20 dark:from-orange-950/30 dark:via-orange-950/20 dark:to-background">
         {/* Wave SVG patterns */}
         <svg
-          className="absolute bottom-0 left-0 w-full h-32 text-indigo-200/30 dark:text-indigo-900/20"
+          className="absolute bottom-0 left-0 w-full h-32 text-orange-200/30 dark:text-orange-900/20"
           viewBox="0 0 1440 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +74,7 @@ export default function Footer() {
           />
         </svg>
         <svg
-          className="absolute top-0 right-0 w-full h-24 text-indigo-200/20 dark:text-indigo-900/10 rotate-180"
+          className="absolute top-0 right-0 w-full h-24 text-orange-200/20 dark:text-orange-900/10 rotate-180"
           viewBox="0 0 1440 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -83,8 +95,8 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Logo and Brand */}
               <div className="flex items-center gap-3">
-                <InterviewAILogo />
-                <span className="text-2xl font-bold text-white">InterviewSathi</span>
+                <BrandLogo />
+                <span className="text-2xl font-bold text-white">MedhaHub</span>
               </div>
 
               {/* Tagline */}
@@ -126,9 +138,7 @@ export default function Footer() {
               </div>
 
               {/* Copyright */}
-              <p className="text-white/60 text-sm pt-2">
-                © 2026 InterviewSathi. All rights reserved.
-              </p>
+              <p className="text-white/60 text-sm pt-2">© 2026 MedhaHub. All rights reserved.</p>
               <p className="text-white/50 text-xs">
                 Built by{" "}
                 <a
@@ -141,7 +151,7 @@ export default function Footer() {
             </div>
 
             {/* Right Section - Link Columns */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
               {/* Resources */}
               <div>
                 <h4 className="text-white font-semibold mb-4">Resources</h4>
@@ -162,21 +172,15 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* Company */}
+              {/* Exams */}
               <div>
-                <h4 className="text-white font-semibold mb-4">Company</h4>
+                <h4 className="text-white font-semibold mb-4">Exams</h4>
                 <ul className="space-y-3">
-                  {footerLinks.company.map((link) => (
+                  {footerLinks.exams.map((link) => (
                     <li key={link.label}>
-                      {link.isRoute ? (
-                        <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
-                          {link.label}
-                        </Link>
-                      ) : (
-                        <a href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
-                          {link.label}
-                        </a>
-                      )}
+                      <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -201,8 +205,15 @@ export default function Footer() {
 
               {/* Location */}
               <div>
-                <h4 className="text-white font-semibold mb-4">Location</h4>
+                <h4 className="text-white font-semibold mb-4">Company</h4>
                 <ul className="space-y-3">
+                  {footerLinks.company.map((link) => (
+                    <li key={link.label}>
+                      <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
                   {footerLinks.location.map((link) => (
                     <li key={link.label}>
                       <span className="text-white/70 text-sm">
@@ -212,7 +223,7 @@ export default function Footer() {
                   ))}
                 </ul>
 
-                {/* Legal section under Location */}
+                {/* Legal section under Company */}
                 <h4 className="text-white font-semibold mt-6 mb-4">Legal</h4>
                 <ul className="space-y-3">
                   {footerLinks.legal.map((link) => (

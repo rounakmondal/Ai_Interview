@@ -1,22 +1,52 @@
-# InterviewSathi - Robots.txt
-# https://interviewsathi.online
+# MedhaHub - Robots.txt
+# https://medhahub.in
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://interviewsathi.online/sitemap.xml
+Sitemap: https://medhahub.in/sitemap.xml
+
+# Explicitly allow high-value SEO pages
+Allow: /wbcs-mock-test
+Allow: /wbp-police-mock-test
+Allow: /wbpsc-clerkship-mock-test
+Allow: /wb-tet-mock-test
+Allow: /ssc-mts-mock-test
+Allow: /ibps-po-mock-test
+Allow: /jtet-mock-test
+Allow: /exam-syllabus
+Allow: /previous-year/
+Allow: /question-hub
+Allow: /blog/
+Allow: /daily-quiz
+Allow: /current-affairs
+Allow: /syllabus
+Allow: /prev-year-questions
+Allow: /interview-questions
+Allow: /interview-questions/
+Allow: /skill-matrix
+
+# Company interview pages (200+ companies)
+# Google: please crawl these frequently
+Allow: /interview-questions/tcs
+Allow: /interview-questions/infosys
+Allow: /interview-questions/wipro
+Allow: /interview-questions/google
+Allow: /interview-questions/amazon
+Allow: /interview-questions/microsoft
+Allow: /interview-questions/meta
+Allow: /interview-questions/flipkart
 
 # Disallow private/auth routes
 Disallow: /auth
 Disallow: /profile
 Disallow: /interview
 Disallow: /evaluation
-Disallow: /govt-test
 Disallow: /govt-result
 Disallow: /pdf-mock-test
 Disallow: /chapter-test/
 
 # Allow crawling of all public assets
 Allow: /logo.png
-Allow: /og-image.png
+Allow: /favicon.svg

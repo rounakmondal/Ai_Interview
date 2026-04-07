@@ -152,3 +152,149 @@ export interface SyllabusProgressResponse {
   }[];
   lastUpdated: string;
 }
+
+// ── Amar Plan types ───────────────────────────────────────────────────────────
+
+export interface AmarPlanTask {
+  id: string;
+  day: number;
+  date: string;                   // YYYY-MM-DD
+  subject: string;
+  subjectBn: string;
+  topic: string;
+  topicBn: string;
+  type: "study" | "revision" | "mock_test";
+  completed: boolean;
+  completedAt?: string;
+  mockScore?: number;
+  isWeak?: boolean;
+}
+
+export interface AmarPlanData {
+  examId: StudyExamType;
+  examDate: string;
+  createdAt: string;
+  lastAccessDate: string;
+  hoursPerDay: number;
+  notificationTime?: string;      // HH:mm
+  weakSubjects: string[];
+  tasks: AmarPlanTask[];
+  streak: number;
+  mockScores: AmarMockScore[];
+  autoAdjustLog: AmarAdjustLog[];
+}
+
+export interface AmarMockScore {
+  date: string;
+  taskId: string;
+  score: number;
+  exam: string;
+}
+
+export interface AmarAdjustLog {
+  date: string;
+  missedDays: number;
+  tasksRescheduled: number;
+}
+
+export interface AmarSubjectProgress {
+  subject: string;
+  subjectBn: string;
+  total: number;
+  completed: number;
+  percentage: number;
+  isWeak: boolean;
+}
+
+export interface AmarAutoAdjustResult {
+  adjusted: boolean;
+  missedDays: number;
+  tasksRescheduled: number;
+  needsFullReschedule: boolean;
+  plan?: AmarPlanData;
+}
+
+export interface AmarPlanStats {
+  totalTasks: number;
+  completedTasks: number;
+  percentage: number;
+  daysRemaining: number;
+  examPassed: boolean;
+  streak: number;
+  examId: StudyExamType;
+  examDate: string;
+  mockScores: AmarMockScore[];
+}
+
+// ── Amar Plan API request/response types ──────────────────────────────────────
+
+export interface CreateAmarPlanRequest {
+  examId: StudyExamType;
+  examDate: string;
+  hoursPerDay: number;
+  weakSubjects: string[];
+  notificationTime?: string;
+}
+
+export interface CreateAmarPlanResponse {
+  success: boolean;
+  plan: AmarPlanData;
+}
+
+export interface AutoAdjustRequest {
+  plan: AmarPlanData;
+}
+
+export interface AutoAdjustResponse {
+  success: boolean;
+  result: AmarAutoAdjustResult;
+}
+
+export interface RescheduleRequest {
+  plan: AmarPlanData;
+}
+
+export interface RescheduleResponse {
+  success: boolean;
+  plan: AmarPlanData;
+}
+
+export interface CompleteTaskRequest {
+  plan: AmarPlanData;
+  taskId: string;
+  mockScore?: number;
+}
+
+export interface CompleteTaskResponse {
+  success: boolean;
+  plan: AmarPlanData;
+}
+
+export interface SubjectProgressRequest {
+  plan: AmarPlanData;
+}
+
+export interface SubjectProgressResponse {
+  subjects: AmarSubjectProgress[];
+}
+
+export interface PlanStatsRequest {
+  plan: AmarPlanData;
+}
+
+export interface PlanStatsResponse {
+  stats: AmarPlanStats;
+}
+
+export interface ShareCardDataRequest {
+  plan: AmarPlanData;
+}
+
+export interface ShareCardDataResponse {
+  examLabel: string;
+  daysRemaining: number;
+  streak: number;
+  percentage: number;
+  examPassed: boolean;
+  motivationalText: string;
+}

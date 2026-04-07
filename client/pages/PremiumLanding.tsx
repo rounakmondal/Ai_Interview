@@ -12,6 +12,7 @@ import PremiumFAQ from "@/components/premium/PremiumFAQ";
 import PremiumInterviewTypes from "@/components/premium/PremiumInterviewTypes";
 import GovtPracticeSection from "@/components/premium/GovtPracticeSection";
 import StudyToolsSection from "@/components/premium/StudyToolsSection";
+import ExamSyllabusSection from "@/components/premium/ExamSyllabusSection";
 
 export default function PremiumLanding() {
   return (
@@ -36,6 +37,9 @@ export default function PremiumLanding() {
 
       {/* Study Tools */}
       <StudyToolsSection />
+
+      {/* Exam Syllabus Explorer */}
+      <ExamSyllabusSection />
 
       {/* Premium Features Section */}
       <PremiumFeatures />

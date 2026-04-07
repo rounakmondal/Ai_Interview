@@ -9,8 +9,11 @@ import {
 } from "@shared/api";
 import { mockApi } from "./mock-api";
 
-// Force all API calls to localhost:8000 (server listens on this port)
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+// API base URL from environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
+/** Base URL for question-bank endpoints (separate backend on port 8000) */
+export const QUESTIONS_API_BASE = API_BASE_URL;
 const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === "true";
 
 class ApiClient {
@@ -25,18 +28,18 @@ class ApiClient {
     // Log API configuration
     if (typeof window !== "undefined") {
       console.log(
-        `%c InterviewAI API Client Initialized`,
-        "color: #4f46e5; font-weight: bold; font-size: 12px;",
+        `%c MedhaHub API Client Initialized`,
+        "color: #ea580c; font-weight: bold; font-size: 12px;",
       );
       console.log(
         `%c Mode: ${useMock ? "Mock API" : "Real API"}`,
-        "color: #4f46e5;",
+        "color: #ea580c;",
       );
       if (!useMock) {
-        console.log(`%c Endpoint: ${baseUrl}`, "color: #4f46e5;");
+        console.log(`%c Endpoint: ${baseUrl}`, "color: #ea580c;");
         console.log(
           `%c Fallback: Using mock API if real API is unavailable`,
-          "color: #4f46e5; font-size: 11px;",
+          "color: #ea580c; font-size: 11px;",
         );
       }
     }

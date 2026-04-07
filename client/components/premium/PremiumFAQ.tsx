@@ -4,19 +4,19 @@ import { HelpCircle, ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is InterviewAI suitable for freshers or only experienced candidates?",
+    question: "Is MedhaHub suitable for freshers or only experienced candidates?",
     answer:
-      "InterviewAI is designed for everyone — from college freshers appearing in campus placements to experienced professionals targeting senior roles. You can select the interview type and difficulty that matches your level, and our AI adapts questions accordingly.",
+      "MedhaHub is designed for everyone — from college freshers appearing in campus placements to experienced professionals targeting senior roles. You can select the interview type and difficulty that matches your level, and our AI adapts questions accordingly.",
   },
   {
-    question: "Which languages does InterviewAI support?",
+    question: "Which languages does MedhaHub support?",
     answer:
       "We currently support English, Hindi, Bengali, and Telugu. More Indian regional languages are coming soon. You can select your preferred language from the interview setup screen.",
   },
   {
-    question: "Does InterviewAI support Government exam interviews like UPSC, IBPS, SSC?",
+    question: "Does MedhaHub support Government exam interviews like UPSC, IBPS, SSC?",
     answer:
-      "Yes! InterviewAI has a dedicated 'Government' interview type that covers UPSC Personality Tests, IBPS PO/SO, SSC CGL interviews, and state PSC formats. Questions are tailored to the specific exam and domain you select.",
+      "Yes! MedhaHub has a dedicated 'Government' interview type that covers UPSC Personality Tests, IBPS PO/SO, SSC CGL interviews, and state PSC formats. Questions are tailored to the specific exam and domain you select.",
   },
   {
     question: "How does the AI evaluate my performance?",
@@ -41,7 +41,7 @@ const faqs = [
   {
     question: "Does it work on mobile devices?",
     answer:
-      "Yes! InterviewAI is fully responsive and works on smartphones and tablets. We also have an Android app available. Make sure your browser allows microphone access for the best voice interaction experience.",
+      "Yes! MedhaHub is fully responsive and works on smartphones and tablets. We also have an Android app available. Make sure your browser allows microphone access for the best voice interaction experience.",
   },
 ];
 
@@ -57,7 +57,7 @@ function FAQItem({ q, a, idx, isOpen, onToggle }: { q: string; a: string; idx: n
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay: idx * 0.06, ease: smoothEase }}
-      className={`bg-card border rounded-xl overflow-hidden transition-colors duration-200 ${isOpen ? "border-indigo-500/40" : "border-border/50 hover:border-indigo-500/20"}`}
+      className={`bg-card border rounded-xl overflow-hidden transition-colors duration-200 ${isOpen ? "border-orange-500/40" : "border-border/50 hover:border-orange-500/20"}`}
     >
       <button
         onClick={onToggle}
@@ -134,7 +134,7 @@ export default function PremiumFAQ() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -145,14 +145,14 @@ export default function PremiumFAQ() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Frequently asked{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               questions
             </span>
           </h2>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about InterviewAI. Can't find your answer?{" "}
-            <a href="#contact" className="text-indigo-600 dark:text-indigo-400 underline underline-offset-2 hover:no-underline">
+            Everything you need to know about MedhaHub. Can't find your answer?{" "}
+            <a href="/contact" className="text-orange-600 dark:text-orange-400 underline underline-offset-2 hover:no-underline">
               Contact us
             </a>.
           </p>

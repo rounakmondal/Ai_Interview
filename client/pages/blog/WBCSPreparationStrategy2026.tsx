@@ -122,7 +122,7 @@ export default function WBCSPreparationStrategy2026() {
 
       <hr />
       <p>
-        <strong>Start your WBCS 2026 journey today.</strong> Create a free account on InterviewSathi to track your progress, take daily quizzes, and access all previous year question papers.
+        <strong>Start your WBCS 2026 journey today.</strong> Create a free account on MedhaHub to track your progress, take daily quizzes, and access all previous year question papers.
       </p>
     </BlogPostLayout>
   );

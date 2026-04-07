@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">InterviewSathi</string>
-    <string name="title_activity_main">InterviewSathi</string>
+    <string name="app_name">MedhaHub</string>
+    <string name="title_activity_main">MedhaHub</string>
     <string name="package_name">com.interviewsathi.online</string>
     <string name="custom_url_scheme">com.interviewsathi.online</string>
 </resources>

@@ -16,7 +16,7 @@ const contactInfo = [
     icon: User,
     label: "Developer",
     value: "Ranjan Mondal",
-    description: "Creator & Lead Developer, InterviewAI",
+    description: "Creator & Lead Developer, MedhaHub",
   },
   {
     icon: MapPin,
@@ -141,7 +141,7 @@ export default function PremiumContact() {
           transition={{ duration: 0.7, ease: smoothEase }}
         >
           <motion.span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
@@ -152,7 +152,7 @@ export default function PremiumContact() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-5">
             Get in{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
               Touch
             </span>
           </h2>
@@ -163,7 +163,7 @@ export default function PremiumContact() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           >
-            Have questions about InterviewAI? Our friendly team is always ready to help you
+            Have questions about MedhaHub? Our friendly team is always ready to help you
             succeed in your interview preparation journey.
           </motion.p>
         </motion.div>
@@ -190,16 +190,16 @@ export default function PremiumContact() {
                     whileHover={{ x: 4 }}
                     className="group"
                   >
-                    <div className="relative p-5 rounded-xl bg-white/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-indigo-200/50 dark:hover:border-indigo-500/30 transition-all duration-300">
+                    <div className="relative p-5 rounded-xl bg-white/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-orange-200/50 dark:hover:border-orange-500/30 transition-all duration-300">
                       <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/10 to-violet-500/10 border border-indigo-200/30 dark:border-indigo-500/20 flex items-center justify-center group-hover:from-indigo-500/20 group-hover:to-violet-500/20 transition-all duration-300">
-                          <Icon className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-200/30 dark:border-orange-500/20 flex items-center justify-center group-hover:from-orange-500/20 group-hover:to-red-500/20 transition-all duration-300">
+                          <Icon className="w-5 h-5 text-orange-600 dark:text-orange-400" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-semibold text-foreground text-[15px]">
                             {contact.label}
                           </p>
-                          <p className="text-indigo-600 dark:text-indigo-400 font-medium mt-0.5">
+                          <p className="text-orange-600 dark:text-orange-400 font-medium mt-0.5">
                             {contact.value}
                           </p>
                           <p className="text-sm text-muted-foreground mt-1">
@@ -218,10 +218,10 @@ export default function PremiumContact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.6, ease: smoothEase }}
-              className="p-6 rounded-xl bg-gradient-to-br from-indigo-500/5 to-violet-500/5 border border-indigo-200/30 dark:border-indigo-500/20"
+              className="p-6 rounded-xl bg-gradient-to-br from-orange-500/5 to-red-500/5 border border-orange-200/30 dark:border-orange-500/20"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
                   <Clock className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -286,9 +286,9 @@ export default function PremiumContact() {
                         type="text"
                         placeholder="John Doe"
                         required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300"
+                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-orange-400 dark:focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
                       />
-                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
+                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-orange-500 to-red-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
                     </div>
                   </div>
 
@@ -303,9 +303,9 @@ export default function PremiumContact() {
                         type="email"
                         placeholder="john@example.com"
                         required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300"
+                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-orange-400 dark:focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
                       />
-                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
+                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-orange-500 to-red-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
                     </div>
                   </div>
 
@@ -318,7 +318,7 @@ export default function PremiumContact() {
                       <select
                         name="subject"
                         required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground focus:outline-none focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 appearance-none cursor-pointer"
+                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground focus:outline-none focus:border-orange-400 dark:focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 appearance-none cursor-pointer"
                       >
                         <option value="">Select a topic</option>
                         <option value="general">General Inquiry</option>
@@ -346,9 +346,9 @@ export default function PremiumContact() {
                         placeholder="Tell us how we can help you..."
                         rows={4}
                         required
-                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 resize-none"
+                        className="w-full px-4 py-3.5 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-700/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-orange-400 dark:focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 resize-none"
                       />
-                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
+                      <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-orange-500 to-red-500 rounded-full scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-left" />
                     </div>
                   </div>
 
@@ -369,7 +369,7 @@ export default function PremiumContact() {
 
                     <motion.button
                       type="submit"
-                      className="relative w-full px-6 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-semibold text-[15px] shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 group overflow-hidden"
+                      className="relative w-full px-6 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-[15px] shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 group overflow-hidden"
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
                       transition={{ duration: 0.2 }}
@@ -390,7 +390,7 @@ export default function PremiumContact() {
                   {/* Privacy note */}
                   <p className="text-xs text-muted-foreground text-center pt-2">
                     By submitting, you agree to our{" "}
-                    <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                    <a href="#" className="text-orange-600 dark:text-orange-400 hover:underline">
                       Privacy Policy
                     </a>
                     . We'll never share your information.

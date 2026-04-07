@@ -193,20 +193,20 @@ export default function Contact() {
               <CardContent className="space-y-4">
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">Email</p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">General Inquiries</p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-muted-foreground mb-1">Business & Partnerships</p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
               </CardContent>
@@ -304,8 +304,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     For data privacy requests, legal matters, or compliance inquiries:
                   </p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline text-sm">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
                 <div>
@@ -313,8 +313,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Journalists and media inquiries:
                   </p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline text-sm">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
                 <div>
@@ -322,8 +322,8 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Interested in joining our team?
                   </p>
-                  <a href="mailto:aiinterview0@gmail.com" className="text-primary hover:underline text-sm">
-                    aiinterview0@gmail.com
+                  <a href="mailto:medhahubfryou@gmail.com" className="text-primary hover:underline text-sm">
+                    medhahubfryou@gmail.com
                   </a>
                 </div>
               </div>
