@@ -881,7 +881,7 @@ export default function QuestionHub({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="mb-8"
+          className="mb-8 space-y-3"
         >
           <Link
             to="/exam-syllabus"
@@ -903,6 +903,26 @@ export default function QuestionHub({
                 </p>
               </div>
               <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-emerald-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+            </div>
+          </Link>
+
+          <Link
+            to="/exam-calendar"
+            className="group block rounded-xl border border-blue-600/30 bg-gradient-to-r from-blue-500/5 via-primary/5 to-violet-500/5 hover:border-blue-500/50 hover:shadow-lg transition-all p-4"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
+                <Clock className="w-5 h-5 text-blue-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-sm group-hover:text-blue-600 transition-colors">
+                  📅 Exam Calendar 2026 — Never Miss a Date
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  All exam dates, application deadlines, admit cards & results in one place
+                </p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </div>
           </Link>
         </motion.section>

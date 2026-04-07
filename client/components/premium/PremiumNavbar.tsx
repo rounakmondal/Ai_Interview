@@ -33,8 +33,8 @@ export default function PremiumNavbar() {
     { label: t("dailyTasks"), href: "/daily-tasks" },
     { label: t("govtPractice"), href: "/govt-practice" },
     { label: t("questionBank"), href: "/question-hub" },
+    { label: "Tools", href: "/tools" },
     { label: t("aiChat"), href: "/chatbot" },
-    { label: t("study"), href: "/study-with-me" },
     { label: t("about"), href: "/about" },
   ];
 

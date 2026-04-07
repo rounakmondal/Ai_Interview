@@ -62,6 +62,15 @@ const CompanyInterviewHub = lazy(() => import("./pages/CompanyInterviewHub"));
 const CompanyInterviewQuestions = lazy(() => import("./pages/CompanyInterviewQuestions"));
 const TechSkillMatrix = lazy(() => import("./pages/TechSkillMatrix"));
 const ExamSyllabusExplorer = lazy(() => import("./pages/ExamSyllabusExplorer"));
+const ExamCalendar = lazy(() => import("./pages/ExamCalendar"));
+
+// SEO tool pages
+const CGPACalculator = lazy(() => import("./pages/CGPACalculator"));
+const AgeCalculator = lazy(() => import("./pages/AgeCalculator"));
+const SalaryCalculator = lazy(() => import("./pages/SalaryCalculator"));
+const ExamEligibilityChecker = lazy(() => import("./pages/ExamEligibilityChecker"));
+const TypingSpeedTest = lazy(() => import("./pages/TypingSpeedTest"));
+const ToolsHub = lazy(() => import("./pages/ToolsHub"));
 
 // Blog pages
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
@@ -171,6 +180,7 @@ function AppContent() {
           <Route path="/interview-questions/:slug" element={<CompanyInterviewQuestions />} />
           <Route path="/skill-matrix" element={<TechSkillMatrix />} />
           <Route path="/exam-syllabus" element={<ExamSyllabusExplorer />} />
+          <Route path="/exam-calendar" element={<ExamCalendar />} />
           {/* Blog */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/wbcs-preparation-strategy-2026" element={<BlogWBCSStrategy />} />
@@ -183,6 +193,13 @@ function AppContent() {
           <Route path="/blog/wb-police-constable-previous-year-paper" element={<BlogWBPoliceConstable />} />
           <Route path="/blog/how-to-crack-wbcs-first-attempt" element={<BlogCrackWBCS />} />
           <Route path="/blog/best-books-wbcs-wbpsc-wb-police-2026" element={<BlogBestBooks />} />
+          {/* SEO Tool Pages */}
+          <Route path="/cgpa-calculator" element={<CGPACalculator />} />
+          <Route path="/age-calculator" element={<AgeCalculator />} />
+          <Route path="/salary-calculator" element={<SalaryCalculator />} />
+          <Route path="/eligibility-checker" element={<ExamEligibilityChecker />} />
+          <Route path="/typing-test" element={<TypingSpeedTest />} />
+          <Route path="/tools" element={<ToolsHub />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

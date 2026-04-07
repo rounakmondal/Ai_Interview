@@ -16,7 +16,14 @@ Allow: /ssc-mts-mock-test
 Allow: /ibps-po-mock-test
 Allow: /jtet-mock-test
 Allow: /exam-syllabus
+Allow: /exam-calendar
 Allow: /previous-year/
+Allow: /tools
+Allow: /cgpa-calculator
+Allow: /age-calculator
+Allow: /salary-calculator
+Allow: /eligibility-checker
+Allow: /typing-test
 Allow: /question-hub
 Allow: /blog/
 Allow: /daily-quiz

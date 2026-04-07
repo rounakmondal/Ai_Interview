@@ -12,6 +12,7 @@ import PremiumFAQ from "@/components/premium/PremiumFAQ";
 import PremiumInterviewTypes from "@/components/premium/PremiumInterviewTypes";
 import GovtPracticeSection from "@/components/premium/GovtPracticeSection";
 import StudyToolsSection from "@/components/premium/StudyToolsSection";
+import FreeToolsSection from "@/components/premium/FreeToolsSection";
 import ExamSyllabusSection from "@/components/premium/ExamSyllabusSection";
 
 export default function PremiumLanding() {
@@ -37,6 +38,9 @@ export default function PremiumLanding() {
 
       {/* Study Tools */}
       <StudyToolsSection />
+
+      {/* Free Student Tools (CGPA, Age, Salary, Eligibility, Typing) */}
+      <FreeToolsSection />
 
       {/* Exam Syllabus Explorer */}
       <ExamSyllabusSection />

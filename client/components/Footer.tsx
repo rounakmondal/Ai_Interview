@@ -27,6 +27,14 @@ export default function Footer() {
       { label: "Current Affairs", href: "/current-affairs", isRoute: true },
       { label: "Daily Quiz", href: "/daily-quiz", isRoute: true },
     ],
+    tools: [
+      { label: "CGPA Calculator", href: "/cgpa-calculator", isRoute: true },
+      { label: "Age Calculator", href: "/age-calculator", isRoute: true },
+      { label: "Salary Calculator", href: "/salary-calculator", isRoute: true },
+      { label: "Eligibility Checker", href: "/eligibility-checker", isRoute: true },
+      { label: "Typing Speed Test", href: "/typing-test", isRoute: true },
+      { label: "All Free Tools", href: "/tools", isRoute: true },
+    ],
     company: [
       { label: "About", href: "/about", isRoute: true },
       { label: "Contact Us", href: "/contact", isRoute: true },
@@ -151,7 +159,7 @@ export default function Footer() {
             </div>
 
             {/* Right Section - Link Columns */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
               {/* Resources */}
               <div>
                 <h4 className="text-white font-semibold mb-4">Resources</h4>
@@ -167,6 +175,20 @@ export default function Footer() {
                           {link.label}
                         </a>
                       )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Free Tools */}
+              <div>
+                <h4 className="text-white font-semibold mb-4">Free Tools</h4>
+                <ul className="space-y-3">
+                  {footerLinks.tools.map((link) => (
+                    <li key={link.label}>
+                      <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
