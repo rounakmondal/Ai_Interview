@@ -474,7 +474,7 @@ const FOLDERS: Record<string, FolderData> = {
     icon: <GraduationCap className="w-6 h-6" />,
     colorKey: "terracotta",
     badge: "New",
-    publicPath: "RRB NTPC",
+    publicPath: "RRB-NTPC",
     description:
       "RRB NTPC (Railway Recruitment Board Non-Technical Popular Categories) previous year question papers for CBT 1 & CBT 2 exam preparation",
     files: [
