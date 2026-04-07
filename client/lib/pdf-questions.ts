@@ -47,6 +47,7 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
       // Map public folder names to API route keys
       const FOLDER_KEY_MAP: Record<string, string> = {
         "wb primary tet question": "wb-primary-tet",
+        "rrb ntpc": "rrb-ntpc",
       };
       const folderKey = FOLDER_KEY_MAP[rawFolderKey] || rawFolderKey;
       

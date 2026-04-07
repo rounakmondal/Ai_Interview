@@ -24,11 +24,19 @@ export default function PremiumLanding() {
       {/* Hero Section */}
       <PremiumHero />
 
+
+ {/* Free Student Tools (CGPA, Age, Salary, Eligibility, Typing) */}
+      <FreeToolsSection />
+
+    
+        {/* Exam Syllabus Explorer */}
+      <ExamSyllabusSection />
       {/* Social-proof numbers */}
       <PremiumStats />
 
-      {/* How It Works Section */}
-      <PremiumHowItWorks />
+
+      {/*  <PremiumHowItWorks /> */}
+     
 
       {/* Interview Categories */}
       <PremiumInterviewTypes />
@@ -36,18 +44,17 @@ export default function PremiumLanding() {
       {/* Government Exam Practice */}
       <GovtPracticeSection />
 
-      {/* Study Tools */}
-      <StudyToolsSection />
 
-      {/* Free Student Tools (CGPA, Age, Salary, Eligibility, Typing) */}
-      <FreeToolsSection />
+     
 
-      {/* Exam Syllabus Explorer */}
-      <ExamSyllabusSection />
+  
 
       {/* Premium Features Section */}
       <PremiumFeatures />
 
+
+  {/* Study Tools */}
+      <StudyToolsSection />
       {/* Testimonials */}
       <PremiumTestimonials />
 
