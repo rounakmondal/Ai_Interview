@@ -172,6 +172,10 @@ function AppContent() {
             path="/jtet-mock-test"
             element={<QuestionHub seoProfile="jtet" />}
           />
+          <Route
+            path="/rrb-ntpc-mock-test"
+            element={<QuestionHub seoProfile="rrb-ntpc" />}
+          />
           <Route path="/pdf-mock-test" element={<PDFMockTest />} />
           {/* SEO Previous Year Question Paper pages */}
           <Route path="/previous-year/:slug" element={<PreviousYearPage />} />

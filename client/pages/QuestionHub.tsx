@@ -468,6 +468,30 @@ const FOLDERS: Record<string, FolderData> = {
       },
     ],
   },
+  "rrb-ntpc": {
+    name: "RRB NTPC (Railway)",
+    nameBn: "আরআরবি এনটিপিসি",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "terracotta",
+    badge: "New",
+    publicPath: "RRB NTPC",
+    description:
+      "RRB NTPC (Railway Recruitment Board Non-Technical Popular Categories) previous year question papers for CBT 1 & CBT 2 exam preparation",
+    files: [
+      {
+        name: "RRB NTPC 2026 CBT 1 (16 Mar 2026)",
+        path: "rrb_ntpc_2026_questions.json",
+        year: 2026,
+        type: "CBT 1",
+      },
+      {
+        name: "RRB NTPC 2015 (Bengali)",
+        path: "rrb_questions_bengali.json",
+        year: 2015,
+        type: "CBT 1",
+      },
+    ],
+  },
 };
 
 const STATS = [
@@ -541,6 +565,7 @@ export default function QuestionHub({
       : seoProfile === "wb-tet" ? "wb-primary-tet"
       : seoProfile === "ssc-mts" ? "ssc"
       : seoProfile === "ibps-po" ? "ibps"
+      : seoProfile === "rrb-ntpc" ? "rrb-ntpc"
       : "police";
   });
   const [testNavLoading, setTestNavLoading] = useState(false);
@@ -1011,6 +1036,27 @@ export default function QuestionHub({
             <p className="text-sm text-muted-foreground mb-6 ml-4">
               {currentFolder.nameBn} • Download original PDFs or take mock tests directly
             </p>
+
+            {/* AI Mock Test CTA */}
+            <Link
+              to={`/mock-test?exam=${encodeURIComponent(currentFolder.name.split("(")[0].trim())}`}
+              className="group block mb-8 rounded-xl border border-orange-500/30 bg-gradient-to-r from-orange-500/5 via-amber-500/5 to-yellow-500/5 hover:border-orange-500/50 hover:shadow-lg transition-all p-4"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
+                  <Zap className="w-5 h-5 text-orange-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-sm group-hover:text-orange-600 transition-colors">
+                    ⚡ Take AI-Powered Mock Test — {currentFolder.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    AI-generated question paper with timer, instant scoring &amp; subject-wise analysis
+                  </p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-orange-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+              </div>
+            </Link>
 
             {listLoading ? (
               <div className="flex items-center gap-3 py-12 justify-center text-emerald-700 dark:text-emerald-400">

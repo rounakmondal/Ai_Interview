@@ -2,7 +2,7 @@
  * Client-side SEO updates for exam / mock-test routes (title, meta, OG, canonical, JSON-LD).
  */
 
-export type ExamSeoProfile = "default" | "wbcs" | "police" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po" | "jtet";
+export type ExamSeoProfile = "default" | "wbcs" | "police" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po" | "jtet" | "rrb-ntpc";
 
 const BRAND = "MedhaHub";
 const SITE_FALLBACK = "https://medhahub.in";
@@ -206,6 +206,19 @@ const JTET_KEYWORDS = [
   "JTET mock test free online",
 ].join(", ");
 
+const RRB_NTPC_KEYWORDS = [
+  "RRB NTPC mock test 2026",
+  "RRB NTPC previous year question paper",
+  "RRB NTPC CBT 1 question paper with answers",
+  "Railway NTPC online practice free",
+  "RRB NTPC preparation online",
+  "RRB NTPC GK questions",
+  "RRB NTPC reasoning questions",
+  "RRB NTPC math questions",
+  "আরআরবি এনটিপিসি মক টেস্ট",
+  "Railway recruitment exam practice",
+].join(", ");
+
 const SYLLABUS_KEYWORDS = [
   "exam syllabus 2026",
   "exam pattern 2026",
@@ -345,6 +358,24 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
     return;
   }
 
+  if (profile === "rrb-ntpc") {
+    applyExamSeoPayload({
+      title:
+        "RRB NTPC Mock Test Free | Previous Year Question Papers CBT 1 & CBT 2 | MedhaHub",
+      description:
+        "Practice RRB NTPC (Railway Recruitment Board) with free online mock tests from previous year papers. Know RRB NTPC syllabus 2026, exam pattern, cutoff marks. GK, Reasoning, Math sections with answers and instant scoring.",
+      keywords: `${RRB_NTPC_KEYWORDS}, RRB NTPC syllabus 2026, RRB NTPC exam pattern, Railway NTPC cutoff marks`,
+      canonicalPath: "/rrb-ntpc-mock-test",
+      jsonLd: webPageJsonLd({
+        name: "RRB NTPC mock test, syllabus & previous year papers",
+        description:
+          "Free RRB NTPC mock tests, complete syllabus and previous year question papers for CBT 1 & CBT 2.",
+        path: "/rrb-ntpc-mock-test",
+      }),
+    });
+    return;
+  }
+
   applyExamSeoPayload({
     title:
       "Exam Syllabus 2026 | WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO & JTET Previous Year Papers Free | Mock Test | MedhaHub",
@@ -358,6 +389,7 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
       ...SSC_MTS_KEYWORDS.split(", "),
       ...IBPS_PO_KEYWORDS.split(", "),
       ...JTET_KEYWORDS.split(", "),
+      ...RRB_NTPC_KEYWORDS.split(", "),
       ...SYLLABUS_KEYWORDS.split(", "),
       "SSC CGL previous year question paper",
       "সরকারি চাকরির পুরনো প্রশ্নপত্র",
