@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, User } from "lucide-react";
+import { Menu, X, ArrowRight, User, BookOpen, Flame, Clock, ChevronRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
 import LanguageToggle from "./LanguageToggle";
@@ -9,40 +9,160 @@ import { useLanguage } from "./LanguageProvider";
 import { isLoggedIn, getSession } from "@/lib/auth-api";
 import { useNotificationCheck } from "@/hooks/use-notification-check";
 import NotificationBell from "../NotificationBell";
-import ProfileButton from "../ProfileButton";
+
+const TODAYS_PAPERS = [
+  { label: "WBCS Prelims 2023",    href: "/previous-year/wbcs-prelims-2023",     tag: "WBCS",       color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-300" },
+  { label: "WBP SI 2025",          href: "/previous-year/wbp-si-2025",           tag: "WB Police",  color: "bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-300" },
+  { label: "WBP Constable 2021",   href: "/previous-year/wbp-constable-2021",    tag: "WB Police",  color: "bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-300" },
+  { label: "WBPSC Clerkship 2024", href: "/previous-year/wbpsc-clerkship-2024",  tag: "WBPSC",      color: "bg-violet-50 text-violet-600 dark:bg-violet-500/15 dark:text-violet-300" },
+  { label: "WB TET 2023",          href: "/previous-year/wb-tet-2023",           tag: "WB TET",     color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-300" },
+  { label: "SSC MTS 2023",         href: "/previous-year/ssc-mts-2023",          tag: "SSC",        color: "bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-amber-300" },
+  { label: "IBPS PO Pre 2025",     href: "/previous-year/ibps-po-pre-2025",      tag: "Banking",    color: "bg-teal-50 text-teal-600 dark:bg-teal-500/15 dark:text-teal-300" },
+];
+
+function TodaysPaperModal({ onClose }: { onClose: () => void }) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const today = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" });
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+        style={{ backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", background: isDark ? "rgba(2,6,23,0.75)" : "rgba(15,23,42,0.45)" }}
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 24 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          onClick={(e) => e.stopPropagation()}
+          className={`w-full max-w-md rounded-3xl shadow-2xl overflow-hidden ${isDark ? "bg-slate-900 border border-slate-700/60" : "bg-white border border-slate-200"}`}
+        >
+          {/* Header */}
+          <div className="relative px-6 pt-6 pb-4">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+                  <p className={`text-[11px] font-semibold uppercase tracking-widest ${isDark ? "text-orange-400" : "text-orange-500"}`}>
+                    Recommended for Today
+                  </p>
+                </div>
+                <h2 className={`text-xl font-bold leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                  Today's Practice Papers
+                </h2>
+                <p className={`text-[13px] mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>{today}</p>
+              </div>
+              <button
+                onClick={onClose}
+                className={`mt-0.5 p-1.5 rounded-xl transition-colors ${isDark ? "hover:bg-white/10 text-slate-400 hover:text-white" : "hover:bg-slate-100 text-slate-400 hover:text-slate-700"}`}
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className={`mx-6 h-px ${isDark ? "bg-slate-700/60" : "bg-slate-100"}`} />
+
+          {/* Paper list */}
+          <div className="px-3 py-3 space-y-1">
+            {TODAYS_PAPERS.map((paper, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.08 + i * 0.05 }}
+              >
+                <Link
+                  to={paper.href}
+                  onClick={onClose}
+                  className={`group flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-150 ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${isDark ? "bg-slate-800" : "bg-slate-100"}`}>
+                      <BookOpen className={`w-4 h-4 ${isDark ? "text-slate-400" : "text-slate-500"}`} />
+                    </div>
+                    <span className={`text-[14px] font-medium ${isDark ? "text-slate-200 group-hover:text-white" : "text-slate-700 group-hover:text-slate-900"}`}>
+                      {paper.label}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[11px] px-2.5 py-1 rounded-full font-semibold ${paper.color}`}>{paper.tag}</span>
+                    <ChevronRight className={`w-4 h-4 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 ${isDark ? "text-slate-400" : "text-slate-400"}`} />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className={`px-6 py-4 flex items-center justify-between border-t ${isDark ? "border-slate-700/60" : "border-slate-100"}`}>
+            <div className={`flex items-center gap-1.5 text-[12px] ${isDark ? "text-slate-500" : "text-slate-400"}`}>
+              <Flame className="w-3.5 h-3.5 text-orange-400" />
+              <span>7 papers updated daily</span>
+            </div>
+            <button
+              onClick={onClose}
+              className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-colors ${isDark ? "bg-white/8 hover:bg-white/12 text-slate-300" : "bg-slate-100 hover:bg-slate-200 text-slate-600"}`}
+            >
+              Maybe later
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 export default function PremiumNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [showPaperModal, setShowPaperModal] = useState(false);
   const { resolvedTheme } = useTheme();
   const { t } = useLanguage();
   const isDark = resolvedTheme === "dark";
 
-  // Initialize notification check (toasts + push)
   useNotificationCheck();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Show modal once per session after full page load
+  useEffect(() => {
+    const shown = sessionStorage.getItem("todaysPaperModalShown");
+    if (shown) return;
+    const timer = setTimeout(() => {
+      setShowPaperModal(true);
+      sessionStorage.setItem("todaysPaperModalShown", "1");
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
   const navItems = [
-    { label: t("dailyTasks"), href: "/daily-tasks" },
+    { label: t("dailyTasks"),   href: "/daily-tasks" },
     { label: t("govtPractice"), href: "/govt-practice" },
     { label: t("questionBank"), href: "/question-hub" },
-    { label: "Blog", href: "/blog" },
-    { label: "Tools", href: "/tools" },
-    { label: t("aiChat"), href: "/chatbot" },
-    { label: t("about"), href: "/about" },
+    { label: "Tools",           href: "/tools" },
+    { label: t("aiChat"),       href: "/chatbot" },
+    { label: t("about"),        href: "/about" },
   ];
 
   const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
   return (
     <>
+      {/* Today's Paper Modal */}
+      {showPaperModal && <TodaysPaperModal onClose={() => setShowPaperModal(false)} />}
+
       {/* Navbar Container */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
@@ -95,8 +215,7 @@ export default function PremiumNavbar() {
                 >
                   <Link
                     to={item.href}
-                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"
-                      }`}
+                    className={`relative px-4 py-2 text-[14px] font-medium transition-colors duration-200 group ${isDark ? "text-white/70 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
                   >
                     {item.label}
                     <span className="absolute bottom-1 left-4 right-4 h-[2px] bg-orange-400 rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
@@ -235,10 +354,7 @@ export default function PremiumNavbar() {
                     <Link
                       to={item.href}
                       onClick={() => setIsMobileOpen(false)}
-                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark
-                        ? "text-white/80 hover:text-white hover:bg-white/5"
-                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                        }`}
+                      className={`block px-4 py-3 text-[15px] font-medium rounded-lg transition-colors duration-200 ${isDark ? "text-white/80 hover:text-white hover:bg-white/5" : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"}`}
                     >
                       {item.label}
                     </Link>

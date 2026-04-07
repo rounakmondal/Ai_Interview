@@ -932,6 +932,44 @@ export default function QuestionHub({
                         : "Question Hub"}
           </h1>
 
+          {/* Quick Action Cards — visible immediately on open */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 mt-6">
+            {/* Syllabus Card */}
+            <div className="rounded-2xl border border-emerald-600/25 bg-gradient-to-br from-emerald-500/8 to-amber-500/5 p-5 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="w-5 h-5 text-emerald-600" />
+                </div>
+                <h3 className="font-bold text-base text-foreground leading-tight">Exam Syllabus & Pattern</h3>
+              </div>
+              <div className="flex gap-2">
+                <Link to="/exam-syllabus" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[13px] font-semibold transition-colors">
+                  <BookOpen className="w-3.5 h-3.5" /> View Syllabus
+                </Link>
+                <Link to="/exam-syllabus#pattern" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-emerald-600/40 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[13px] font-semibold transition-colors">
+                  <ChevronRight className="w-3.5 h-3.5" /> Exam Pattern
+                </Link>
+              </div>
+            </div>
+            {/* Calendar Card */}
+            <div className="rounded-2xl border border-blue-600/25 bg-gradient-to-br from-blue-500/8 to-violet-500/5 p-5 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-blue-600" />
+                </div>
+                <h3 className="font-bold text-base text-foreground leading-tight">Exam Calendar 2026</h3>
+              </div>
+              <div className="flex gap-2">
+                <Link to="/exam-calendar" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold transition-colors">
+                  <Clock className="w-3.5 h-3.5" /> All Dates
+                </Link>
+                <Link to="/exam-calendar#upcoming" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-blue-600/40 hover:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-[13px] font-semibold transition-colors">
+                  <Flame className="w-3.5 h-3.5" /> Upcoming
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <p className="text-lg text-muted-foreground mb-2 max-w-2xl">
             {seoProfile === "wbcs" ? (
               <>
@@ -991,56 +1029,7 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
-        {/* 📋 Know Your Exam Syllabus Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-8 space-y-3"
-        >
-          <Link
-            to="/exam-syllabus"
-            className="group block rounded-xl border border-emerald-600/30 bg-gradient-to-r from-emerald-500/5 via-primary/5 to-amber-500/5 hover:border-emerald-500/50 hover:shadow-lg transition-all p-5"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                <GraduationCap className="w-6 h-6 text-emerald-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-base group-hover:text-emerald-600 transition-colors">
-                  📋 Know Your Exam Syllabus & Pattern
-                </h3>
-                <p className="text-xs text-muted-foreground mt-0.5 font-medium">
-                  তোমার পরীক্ষার সিলেবাস জানো
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  WBCS, Police SI, SSC, Banking, UPSC, Railway, TET, JTET — complete exam pattern, rounds, topics & marks distribution
-                </p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-emerald-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
-            </div>
-          </Link>
 
-          <Link
-            to="/exam-calendar"
-            className="group block rounded-xl border border-blue-600/30 bg-gradient-to-r from-blue-500/5 via-primary/5 to-violet-500/5 hover:border-blue-500/50 hover:shadow-lg transition-all p-4"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
-                <Clock className="w-5 h-5 text-blue-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-sm group-hover:text-blue-600 transition-colors">
-                  📅 Exam Calendar 2026 — Never Miss a Date
-                </h3>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  All exam dates, application deadlines, admit cards & results in one place
-                </p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
-            </div>
-          </Link>
-        </motion.section>
 
         {/* Folder Selector — exam category cards with Bengali labels */}
         <motion.section
