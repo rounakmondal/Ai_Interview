@@ -40,28 +40,17 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
     const isJson = pdfPath.toLowerCase().endsWith(".json");
     
     if (isJson) {
-      // For JSON files: extract the path components and construct the API URL
-      const parts = pdfPath.split("/");
-      let rawFolderKey = parts[0].toLowerCase(); // "police", "wbpsc", or "wb primary tet question"
-      
-      // Map public folder names to API route keys
-      const FOLDER_KEY_MAP: Record<string, string> = {
-        "wb primary tet question": "wb-primary-tet",
-        "rrb ntpc": "rrb-ntpc",
-      };
-      const folderKey = FOLDER_KEY_MAP[rawFolderKey] || rawFolderKey;
-      
-      // Everything after the folder name is the file path
-      const filePath = parts.slice(1).join("/");
-      
-      // Build URL with proper encoding: encode each path segment separately to preserve slashes
-      // For "SI/WBP-SI-Police-2019.json" → "SI/WBP-SI-Police-2019.json" (no spaces, so no encoding)
-      // For "Wbpsc clerkship 2024 questions.json" → "Wbpsc%20clerkship%202024%20questions.json"
-      const segments = filePath.split("/");
-      const encodedSegments = segments.map(seg => encodeURIComponent(seg));
-      const encodedFilePath = encodedSegments.join("/");
-      const url = `${QUESTIONS_API_BASE}/questions/${folderKey}/${encodedFilePath}`;
-      
+      // Fetch JSON files directly as static assets from the public folder.
+      // This works reliably on Netlify (dist/spa served as static CDN) and in
+      // dev (Vite serves public/ at root). No serverless function involved.
+      // Each path segment is decode-then-re-encode so partially-encoded segments
+      // coming from the API file-listing (downloadHref) are handled correctly.
+      const encodedPath = pdfPath
+        .split("/")
+        .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+        .join("/");
+      const url = `/${encodedPath}`;
+
       const response = await fetch(url);
       
       if (!response.ok) {
