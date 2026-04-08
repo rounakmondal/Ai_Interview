@@ -88,6 +88,8 @@ export default function ExamOnboardingModal({ open, onOpenChange }: ExamOnboardi
       "upcoming_exam",
       JSON.stringify({ exam, date, weakSubjects, notificationTime, notificationEnabled })
     );
+    // Notify other components (e.g. Profile) that exam was updated
+    window.dispatchEvent(new CustomEvent("exam-updated"));
     onOpenChange(false);
   };
 

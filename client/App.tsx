@@ -94,8 +94,6 @@ const queryClient = new QueryClient();
 
 // Inner component to use hooks (must be inside BrowserRouter)
 function AppContent() {
-  const [showOnboarding, setShowOnboarding] = useState(false);
-
   // Initialize Android back button handler
   useAndroidBackButton();
 
@@ -105,12 +103,6 @@ function AppContent() {
   // Initialize Amar Plan daily reminder scheduler
   useEffect(() => {
     scheduleAmarPlanReminder();
-  }, []);
-
-  useEffect(() => {
-    if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
-      setShowOnboarding(true);
-    }
   }, []);
 
   return (
@@ -226,9 +218,20 @@ export default function App() {
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
-      setShowOnboarding(true);
-    }
+    const checkExam = () => {
+      if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
+        setShowOnboarding(true);
+      } else if (localStorage.getItem("upcoming_exam")) {
+        setShowOnboarding(false);
+      }
+    };
+
+    // Check on mount
+    checkExam();
+
+    // Re-check when window gains focus (exam might be saved in another tab or profile)
+    window.addEventListener("focus", checkExam);
+    return () => window.removeEventListener("focus", checkExam);
   }, []);
 
   return (

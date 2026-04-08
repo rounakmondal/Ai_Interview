@@ -1,12 +1,11 @@
 [build]
-  command = "npm run build:client"
-  functions = "netlify/functions"
+  command = "pnpm build"
   publish = "dist/spa"
 
+[build.environment]
+  NODE_VERSION = "20"
 
-[functions]
-  external_node_modules = ["express", "pdf-parse"]
-  node_bundler = "esbuild"
+# ── Headers ─────────────────────────────────────────────────────────────────
 
 [[headers]]
   for = "/pdf.worker.min.mjs"
@@ -23,12 +22,29 @@
   [headers.values]
     Content-Type = "application/javascript; charset=utf-8"
 
+# Cache static assets aggressively (fonts, images, JS/CSS with hashes)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security & performance headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# ── Redirects ───────────────────────────────────────────────────────────────
+
 [[redirects]]
   force = true
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
 
+# SPA catch-all (must be last)
 [[redirects]]
   from = "/*"
   to = "/index.html"

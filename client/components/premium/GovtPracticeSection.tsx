@@ -10,11 +10,13 @@ import {
   ArrowRight,
   Medal,
   CheckCircle,
+  Play,
 } from "lucide-react";
 
 const features = [
   { icon: BookOpen, title: "Mock Tests", desc: "WBCS, SSC, Railway, Banking, Police", href: "/question-hub" },
   { icon: BookOpen, title: "Prev Year Papers", desc: "Filtered by exam, year & subject", href: "/prev-year-questions" },
+  { icon: Play, title: "Full-Length Exam Test", desc: "Complete paper with analytics", href: "/govt-practice" },
   { icon: Camera, title: "Photo Solver", desc: "Upload question image, get solution", href: "/photo-solver" },
   { icon: Newspaper, title: "Current Affairs", desc: "Daily news + weekly quizzes", href: "/current-affairs" },
   { icon: BarChart3, title: "Dashboard", desc: "Track progress, weak areas & trends", href: "/dashboard" },

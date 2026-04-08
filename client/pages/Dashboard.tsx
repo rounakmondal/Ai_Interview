@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import ProfileButton from "@/components/ProfileButton";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,8 @@ import {
   Flame,
   GanttChart,
   BookMarked,
+  Play,
+  Clock,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchDashboard, MOCK_DASHBOARD, DashboardStats, SUBJECT_LABELS, Subject } from "@/lib/govt-practice-data";
@@ -45,6 +47,7 @@ function formatDate(dateStr: string) {
 }
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats>(MOCK_DASHBOARD);
   const studyExam = getStudyExamPreference();
   const aiPlan = getSavedAIPlan();
@@ -152,6 +155,43 @@ export default function Dashboard() {
             )}
           </Card>
         )}
+
+        {/* Virtual Exam Room CTA */}
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-500/30 p-6 sm:p-8">
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, rgb(251, 146, 60) 1px, transparent 1px)",
+            backgroundSize: "20px 20px"
+          }} />
+          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <Play className="w-6 h-6 text-orange-500 animate-pulse" />
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Full-Length Mock Test</h3>
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">
+                Take unlimited full-length exams with instant feedback, detailed analytics, and personalized recommendations
+              </p>
+              <div className="flex flex-wrap gap-3 text-xs">
+                <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
+                  <CheckCircle2 className="w-4 h-4" /> Full question bank
+                </span>
+                <span className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
+                  <BarChart3 className="w-4 h-4" /> Performance matrix
+                </span>
+                <span className="flex items-center gap-1 text-purple-600 dark:text-purple-400">
+                  <Zap className="w-4 h-4" /> AI recommendations
+                </span>
+              </div>
+            </div>
+            <Button
+              onClick={() => navigate('/govt-practice', { state: { fullPaper: true } })}
+              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold gap-2 px-6 py-3 whitespace-nowrap"
+            >
+              <Play className="w-4 h-4" />
+              Start Test
+            </Button>
+          </div>
+        </div>
 
         {/* Study Plan & Syllabus Quick Cards */}
         {studyExam && (

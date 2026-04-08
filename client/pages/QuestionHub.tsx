@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,10 @@ import {
   Sparkles,
   Flame,
   Star,
+  X,
+  Info,
+  Search,
+  Play,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -661,6 +665,8 @@ export default function QuestionHub({
   const [testNavLoading, setTestNavLoading] = useState(false);
   const [filesFromApi, setFilesFromApi] = useState<PDFItem[] | null>(null);
   const [listLoading, setListLoading] = useState(true);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "rose"];
@@ -710,15 +716,38 @@ export default function QuestionHub({
     };
   }, [selectedFolder]);
 
-  const papersForFolder: PDFItem[] =
+  const allPapersForFolder: PDFItem[] =
     filesFromApi && filesFromApi.length > 0
       ? filesFromApi
       : currentFolder?.files ?? [];
 
-  const handleDownload = async (file: PDFItem) => {
+  const papersForFolder: PDFItem[] = searchQuery.trim()
+    ? allPapersForFolder.filter((f) =>
+        f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (f.type ?? "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        String(f.year ?? "").includes(searchQuery)
+      )
+    : allPapersForFolder;
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  const globalSearchResults: (PDFItem & { folderKey: string; folderName: string })[] = isSearching
+    ? Object.entries(FOLDERS).flatMap(([key, folder]) =>
+        folder.files
+          .filter(
+            (f) =>
+              f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              (f.type ?? "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+              String(f.year ?? "").includes(searchQuery)
+          )
+          .map((f) => ({ ...f, folderKey: key, folderName: folder.name }))
+      )
+    : [];
+
+  const handleDownload = async (file: PDFItem, folder: FolderData = currentFolder) => {
     try {
       setTestNavLoading(true);
-      const pdfPath = file.downloadHref ?? `${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
+      const pdfPath = file.downloadHref ?? `${folder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
       const relativePdfPath = pdfPath.replace(/^\//, "");
       
       // 1. Fetch questions (this now uses JSON source on the backend)
@@ -829,7 +858,7 @@ export default function QuestionHub({
     } catch (err) {
       console.error("Safe download failed:", err);
       // Fallback to original download if extraction fails
-      const href = file.downloadHref ?? `/${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
+      const href = file.downloadHref ?? `/${folder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
       const link = document.createElement("a");
       link.href = href;
       link.download = file.path;
@@ -839,11 +868,11 @@ export default function QuestionHub({
     }
   };
 
-  const handleStartTest = (file: PDFItem) => {
+  const handleStartTest = (file: PDFItem, folder: FolderData = currentFolder, fKey: string = selectedFolder) => {
     setTestNavLoading(true);
     const pdfPath =
       file.downloadHref ??
-      `${currentFolder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
+      `${folder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
     // Ensure the path is relative to the public folder (no leading slash)
     const relativePdfPath = pdfPath.replace(/^\//, "");
     navigate("/pdf-mock-test", {
@@ -851,7 +880,7 @@ export default function QuestionHub({
         pdfPath: relativePdfPath,
         pdfFileName: file.name,
         testType: "pdf",
-        folder: selectedFolder,
+        folder: fKey,
       },
     });
     setTestNavLoading(false);
@@ -901,137 +930,144 @@ export default function QuestionHub({
           </Link>
           <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
           <span className="text-sm font-medium text-foreground">Question Hub</span>
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-2">
+            <Link to="/govt-practice" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
+              <Play className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Full Exam Test</span>
+            </Link>
             <ProfileButton />
           </div>
         </div>
       </header>
 
-      <main className="container px-4 py-12 max-w-5xl mx-auto">
-        {/* Hero Section — Bengali cultural feel */}
+      <main className="container px-4 py-10 max-w-5xl mx-auto">
+
+        {/* Info Modal */}
+        <AnimatePresence>
+          {showInfoModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+              style={{ backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", background: "rgba(15,23,42,0.5)" }}
+              onClick={() => setShowInfoModal(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-md rounded-3xl bg-background border border-border shadow-2xl overflow-hidden"
+              >
+                <div className="flex items-center justify-between px-6 pt-5 pb-4">
+                  <h2 className="text-lg font-bold text-foreground">Quick Links</h2>
+                  <button onClick={() => setShowInfoModal(false)} className="p-1.5 rounded-xl hover:bg-muted transition-colors text-muted-foreground">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="px-4 pb-5 space-y-3">
+                  {/* Syllabus Card */}
+                  <div className="rounded-2xl border border-emerald-600/25 bg-gradient-to-br from-emerald-500/8 to-amber-500/5 p-4 flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+                        <GraduationCap className="w-5 h-5 text-emerald-600" />
+                      </div>
+                      <h3 className="font-bold text-sm text-foreground">Exam Syllabus & Pattern</h3>
+                    </div>
+                    <div className="flex gap-2">
+                      <Link to="/exam-syllabus" onClick={() => setShowInfoModal(false)} className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[13px] font-semibold transition-colors">
+                        <BookOpen className="w-3.5 h-3.5" /> View Syllabus
+                      </Link>
+                      <Link to="/exam-syllabus#pattern" onClick={() => setShowInfoModal(false)} className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-emerald-600/40 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[13px] font-semibold transition-colors">
+                        <ChevronRight className="w-3.5 h-3.5" /> Exam Pattern
+                      </Link>
+                    </div>
+                  </div>
+                  {/* Calendar Card */}
+                  <div className="rounded-2xl border border-blue-600/25 bg-gradient-to-br from-blue-500/8 to-violet-500/5 p-4 flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+                        <Clock className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="font-bold text-sm text-foreground">Exam Calendar 2026</h3>
+                    </div>
+                    <div className="flex gap-2">
+                      <Link to="/exam-calendar" onClick={() => setShowInfoModal(false)} className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold transition-colors">
+                        <Clock className="w-3.5 h-3.5" /> All Dates
+                      </Link>
+                      <Link to="/exam-calendar#upcoming" onClick={() => setShowInfoModal(false)} className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-blue-600/40 hover:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-[13px] font-semibold transition-colors">
+                        <Flame className="w-3.5 h-3.5" /> Upcoming
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Hero — heading only */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-10"
         >
-
-
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-2 leading-tight">
-            {seoProfile === "wbcs"
-              ? "WBCS Mock Test & Previous Year Papers"
-              : seoProfile === "police"
-                ? "WBP Police Mock Test & Previous Year Papers"
-                : seoProfile === "wbpsc-clerkship"
-                  ? "WBPSC Clerkship Mock Test & Previous Year Papers"
-                  : seoProfile === "wb-tet"
-                    ? "WB Primary TET Mock Test & Previous Year Papers"
-                    : seoProfile === "ssc-mts"
-                      ? "SSC MTS Mock Test & Previous Year Papers"
-                      : seoProfile === "ibps-po"
-                        ? "IBPS PO Mock Test & Previous Year Papers"
-                        : "Question Hub"}
-          </h1>
-
-          {/* Quick Action Cards — visible immediately on open */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 mt-6">
-            {/* Syllabus Card */}
-            <div className="rounded-2xl border border-emerald-600/25 bg-gradient-to-br from-emerald-500/8 to-amber-500/5 p-5 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
-                  <GraduationCap className="w-5 h-5 text-emerald-600" />
-                </div>
-                <h3 className="font-bold text-base text-foreground leading-tight">Exam Syllabus & Pattern</h3>
-              </div>
-              <div className="flex gap-2">
-                <Link to="/exam-syllabus" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[13px] font-semibold transition-colors">
-                  <BookOpen className="w-3.5 h-3.5" /> View Syllabus
-                </Link>
-                <Link to="/exam-syllabus#pattern" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-emerald-600/40 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[13px] font-semibold transition-colors">
-                  <ChevronRight className="w-3.5 h-3.5" /> Exam Pattern
-                </Link>
-              </div>
-            </div>
-            {/* Calendar Card */}
-            <div className="rounded-2xl border border-blue-600/25 bg-gradient-to-br from-blue-500/8 to-violet-500/5 p-5 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                </div>
-                <h3 className="font-bold text-base text-foreground leading-tight">Exam Calendar 2026</h3>
-              </div>
-              <div className="flex gap-2">
-                <Link to="/exam-calendar" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold transition-colors">
-                  <Clock className="w-3.5 h-3.5" /> All Dates
-                </Link>
-                <Link to="/exam-calendar#upcoming" className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-blue-600/40 hover:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-[13px] font-semibold transition-colors">
-                  <Flame className="w-3.5 h-3.5" /> Upcoming
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <p className="text-lg text-muted-foreground mb-2 max-w-2xl">
-            {seoProfile === "wbcs" ? (
-              <>
-                Free <strong className="text-foreground">WBCS prelims</strong> previous year question papers and{" "}
-                <strong className="text-foreground">online mock tests</strong> with timer and instant results — aligned with West Bengal Civil Service (Exe.) preparation.
-              </>
-            ) : seoProfile === "police" ? (
-              <>
-                <strong className="text-foreground">West Bengal Police (WBP)</strong> Constable &amp; Lady Constable{" "}
-                <strong className="text-foreground">previous year mock tests</strong> online — built from official-style PYP PDFs for exam practice.
-              </>
-            ) : seoProfile === "wbpsc-clerkship" ? (
-              <>
-                <strong className="text-foreground">WBPSC Clerkship</strong> previous year question papers (2019–2024, all shifts) as{" "}
-                <strong className="text-foreground">free online mock tests</strong> — English, GK, and Arithmetic with instant scoring.
-              </>
-            ) : seoProfile === "wb-tet" ? (
-              <>
-                <strong className="text-foreground">WB Primary TET</strong> previous year question papers (2015–2023) as{" "}
-                <strong className="text-foreground">free online mock tests</strong> — Bengali, English, Child Development, Math &amp; EVS sections.
-              </>
-            ) : seoProfile === "ssc-mts" ? (
-              <>
-                <strong className="text-foreground">SSC MTS</strong> previous year question papers (2019 &amp; 2023, all shifts) as{" "}
-                <strong className="text-foreground">free online mock tests</strong> — GK, Reasoning &amp; English sections with instant results.
-              </>
-            ) : seoProfile === "ibps-po" ? (
-              <>
-                <strong className="text-foreground">IBPS PO</strong> Prelims &amp; Mains previous year question papers (2021–2025) as{" "}
-                <strong className="text-foreground">free online mock tests</strong> — Reasoning, English, Quantitative Aptitude &amp; General Awareness with instant scoring.
-              </>
-            ) : (
-              "Download WBP Constable, WBCS, WBPSC Clerkship, WB TET, SSC & IBPS PO previous year question papers free — and attempt unlimited AI-powered mock tests online."
-            )}
-          </p>
-          <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
-            WBP Constable &amp; SI Prelims 2013–2025 • WBCS Prelims 2015–2023 • WBPSC Clerkship 2019–2024 • WB TET 2015–2023 • SSC MTS 2019–2023 • IBPS PO 2021–2025
-          </p>
-
-          {/* Stats — earthy warm cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {STATS.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-card/80 border border-emerald-900/8 dark:border-emerald-800/15 rounded-xl p-4 hover:border-amber-600/20 transition-colors"
-              >
-                <div className={`${stat.color} mb-2`}>{stat.icon}</div>
-                <div className="text-2xl font-bold text-foreground">
-                  {stat.value}
-                </div>
-                <div className="text-xs font-medium text-foreground/80">{stat.label}</div>
-              </motion.div>
-            ))}
+          <div className="flex items-start justify-between gap-4 mb-8">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight">
+              {seoProfile === "wbcs"
+                ? "WBCS Mock Test & Previous Year Papers"
+                : seoProfile === "police"
+                  ? "WBP Police Mock Test & Previous Year Papers"
+                  : seoProfile === "wbpsc-clerkship"
+                    ? "WBPSC Clerkship Mock Test & Previous Year Papers"
+                    : seoProfile === "wb-tet"
+                      ? "WB Primary TET Mock Test & Previous Year Papers"
+                      : seoProfile === "ssc-mts"
+                        ? "SSC MTS Mock Test & Previous Year Papers"
+                        : seoProfile === "ibps-po"
+                          ? "IBPS PO Mock Test & Previous Year Papers"
+                          : "Question Hub"}
+            </h1>
+            <button
+              onClick={() => setShowInfoModal(true)}
+              className="mt-2 flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-600/30 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[13px] font-medium transition-colors"
+            >
+              <Info className="w-3.5 h-3.5" /> Syllabus & Dates
+            </button>
           </div>
         </motion.div>
 
-
+        {/* Search Box */}
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-8"
+        >
+          <div className="relative max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search papers, year, type…"
+              className="w-full pl-8 pr-8 py-2 text-sm rounded-xl border border-border/60 bg-muted/20 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </motion.div>
 
         {/* Folder Selector — exam category cards with Bengali labels */}
+        {!isSearching && (
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1097,9 +1133,115 @@ export default function QuestionHub({
             })}
           </div>
         </motion.section>
+        )}
+
+        {/* Global Search Results */}
+        {isSearching && (
+          <motion.section
+            key={`search-${searchQuery}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mb-12"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-700 to-amber-600" />
+              <div>
+                <h2 className="text-2xl font-bold text-foreground">
+                  {globalSearchResults.length > 0
+                    ? `${globalSearchResults.length} result${globalSearchResults.length !== 1 ? "s" : ""} for "${searchQuery}"`
+                    : `No results for "${searchQuery}"`}
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1">Searching across all exam categories</p>
+              </div>
+            </div>
+
+            {globalSearchResults.length === 0 ? (
+              <div className="flex flex-col items-center gap-4 py-16 text-center">
+                <Search className="w-12 h-12 text-muted-foreground/30" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">No papers found</p>
+                  <p className="text-sm text-muted-foreground">Try a different keyword, year (e.g. 2023), or exam type</p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {globalSearchResults.map((file, idx) => {
+                  const fdata = FOLDERS[file.folderKey];
+                  const fc = FOLDER_COLORS[fdata.colorKey];
+                  return (
+                    <motion.div
+                      key={`${file.folderKey}-${file.path}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.04 }}
+                      className="bg-card/80 border border-emerald-900/8 dark:border-emerald-800/15 rounded-xl p-5 hover:border-amber-600/20 transition-all"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                        <div className={`p-3 bg-gradient-to-br ${fc.fileIconBg} rounded-lg shrink-0 self-start`}>
+                          <FileText className={`w-5 h-5 ${fc.fileIconText}`} />
+                        </div>
+                        <div className="flex-1 min-w-0 space-y-3">
+                          <div>
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <h3 className="font-semibold text-foreground text-base">
+                                {file.name}
+                              </h3>
+                              {file.year ? (
+                                <span className="text-xs px-2 py-1 bg-amber-700/15 text-amber-800 dark:text-amber-300 rounded-full">
+                                  {file.year}
+                                </span>
+                              ) : null}
+                              {file.type ? (
+                                <span className="text-xs px-2 py-1 bg-emerald-800/12 text-emerald-800 dark:text-emerald-300 rounded-full">
+                                  {file.type}
+                                </span>
+                              ) : null}
+                              <span className={`text-xs px-2 py-1 rounded-full ${fc.badge}`}>
+                                {fdata.name.split("(")[0].trim()}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="gap-2 w-full sm:w-auto justify-center border-emerald-800/15 dark:border-emerald-700/20 hover:bg-emerald-900/5"
+                              onClick={() => handleDownload(file, fdata)}
+                            >
+                              <Download className="w-4 h-4" />
+                              Download PDF
+                            </Button>
+                            <Button
+                              size="sm"
+                              className="gap-2 w-full sm:w-auto justify-center bg-emerald-700 hover:bg-emerald-800 text-white"
+                              onClick={() => handleStartTest(file, fdata, file.folderKey)}
+                              disabled={testNavLoading}
+                            >
+                              {testNavLoading ? (
+                                <>
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  Opening…
+                                </>
+                              ) : (
+                                <>
+                                  <BookOpen className="w-4 h-4" />
+                                  Take Mock Test
+                                </>
+                              )}
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+          </motion.section>
+        )}
 
         {/* Files List */}
-        {currentFolder && (
+        {!isSearching && currentFolder && (
           <motion.section
             key={selectedFolder}
             initial={{ opacity: 0 }}
@@ -1390,7 +1532,7 @@ export default function QuestionHub({
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-sm">
                 Practice with real question papers, get instant results, and identify your weak areas with AI-powered analysis.
               </p>
-              <Link to="/setup">
+              <Link to="/govt-practice">
                 <Button size="lg" className="gap-2 bg-emerald-700 hover:bg-emerald-800 text-white">
                   <Sparkles className="w-5 h-5" />
                   Start AI Interview Practice

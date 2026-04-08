@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, ArrowRight, CheckCircle2, Mail, Phone, MapPin, ChevronLeft, ChevronRight, BookOpenCheck, Users, TrendingUp } from "lucide-react";
+import { Brain, ArrowRight, CheckCircle2, Mail, Phone, MapPin, ChevronLeft, ChevronRight, BookOpenCheck, Users, TrendingUp, Play, Sparkles, Briefcase } from "lucide-react";
 import HeroAvatar from "./components/HeroAvatar";
 import Footer from "@/components/Footer";
 
@@ -273,6 +274,107 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ─── Interview Questions Feature Section ─── */}
+      <section className="py-16 sm:py-24 border-t border-border/40 bg-gradient-to-b from-blue-50/60 via-transparent to-transparent dark:from-blue-950/20">
+        <div className="container space-y-12">
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-widest">
+              <Sparkles className="w-3.5 h-3.5" />
+              Interview Mastery
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+              Practice Real Interview Questions from{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                200+ Top Companies
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Get access to authentic interview questions asked by TCS, Infosys, Google, Amazon, and 200+ other companies. 
+              Learn what to expect, how to answer, and boost your confidence before your big interview.
+            </p>
+          </div>
+
+          {/* Why Interview Questions Matter */}
+          <div className="grid md:grid-cols-3 gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+            >
+              <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
+                <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="font-bold text-sm mb-2">Company-Specific Questions</h3>
+              <p className="text-sm text-muted-foreground">
+                Real questions from technical, HR, and aptitude rounds — tailored for each company's hiring process
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+            >
+              <div className="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-4">
+                <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <h3 className="font-bold text-sm mb-2">Expert Answers & Tips</h3>
+              <p className="text-sm text-muted-foreground">
+                Detailed solutions with best practices — learn the "why" behind each answer
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+            >
+              <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center mb-4">
+                <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              </div>
+              <h3 className="font-bold text-sm mb-2">Track Your Progress</h3>
+              <p className="text-sm text-muted-foreground">
+                Mark difficult questions, track weak areas, and improve your interview success rate
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">200+</div>
+              <div className="text-xs text-muted-foreground mt-1">Companies</div>
+            </div>
+            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
+              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">5000+</div>
+              <div className="text-xs text-muted-foreground mt-1">Interview Questions</div>
+            </div>
+            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
+              <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">1L+</div>
+              <div className="text-xs text-muted-foreground mt-1">Active Users</div>
+            </div>
+            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
+              <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">2026</div>
+              <div className="text-xs text-muted-foreground mt-1">Updated</div>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="flex justify-center pt-4">
+            <Link to="/interview-questions">
+              <Button size="lg" className="gradient-primary font-bold text-base px-8 shadow-lg shadow-blue-200/40 hover:shadow-xl hover:shadow-blue-300/50 transition-all gap-2 h-12">
+                Start Practicing Interview Questions
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─── 200+ Company Interview Questions Carousel ─── */}
       <section className="py-16 sm:py-24 border-t border-border/40 bg-gradient-to-b from-slate-50/80 via-transparent to-transparent dark:from-slate-900/40">
         <div className="container space-y-10">
@@ -436,6 +538,51 @@ export default function LandingPage() {
                   </div>
                 </Card>
               ))}
+            </div>
+          </div>
+
+          {/* CTA for Exam Preparation */}
+          <div className="mt-12 pt-8">
+            <div className="relative rounded-3xl border border-orange-500/30 bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent p-8 sm:p-12 overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-orange-500/5 -z-10 blur-3xl" />
+              
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-bold uppercase tracking-widest mb-4">
+                  <Play className="w-4 h-4" />
+                  Full-Length Mock Tests
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl font-bold mb-3">
+                  Take Full-Length Virtual Exams
+                </h3>
+                
+                <p className="text-muted-foreground mb-6 text-lg">
+                  Experience realistic full-length mock tests with detailed performance analysis, subject-wise breakdowns, and AI-powered recommendations to improve your score.
+                </p>
+                
+                <div className="grid sm:grid-cols-3 gap-4 mb-8">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
+                    <span className="text-sm font-medium">Unlimited questions</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
+                    <span className="text-sm font-medium">Performance matrix</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
+                    <span className="text-sm font-medium">AI recommendations</span>
+                  </div>
+                </div>
+                
+                <Link to="/govt-practice">
+                  <Button size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white gap-2">
+                    Start Your First Virtual Exam
+                    <Play className="w-5 h-5" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 

@@ -8,7 +8,7 @@ import ProfileButton from "@/components/ProfileButton";
 import {
   ArrowLeft, Zap, Flame, Star, Trophy, BookOpen,
   CheckCircle2, ChevronRight, Target, Brain,
-  Award, TrendingUp, Shield, Sparkles, Users,
+  Award, TrendingUp, Shield, Sparkles, Users, Play,
 } from "lucide-react";
 import {
   getDailyTasks,
@@ -126,6 +126,13 @@ export default function DailyTasks() {
 
           <div className="ml-auto flex items-center gap-2">
             <ProfileButton />
+            <Link to="/govt-practice">
+              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
+                <Play className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Full Exam Test</span>
+              </motion.button>
+            </Link>
             <Link to="/govt-practice">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border text-xs font-medium transition-all">

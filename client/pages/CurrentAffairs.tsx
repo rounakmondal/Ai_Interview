@@ -17,6 +17,7 @@ import {
   Newspaper,
   ClipboardList,
   TrendingUp,
+  Play,
 } from "lucide-react";
 import { fetchCurrentAffairs, NewsItem, WeeklyQuizItem, MonthlyTopic, ExamType } from "@/lib/govt-practice-data";
 
@@ -72,7 +73,13 @@ export default function CurrentAffairs() {
           <span className="text-muted-foreground">/</span>
           <span className="text-sm font-medium">Current Affairs</span>
           <Badge variant="secondary" className="ml-1 text-xs">Updated Daily</Badge>
-          <div className="ml-auto"><ProfileButton /></div>
+          <div className="ml-auto flex items-center gap-2">
+            <Link to="/govt-practice" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
+              <Play className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Full Exam Test</span>
+            </Link>
+            <ProfileButton />
+          </div>
         </div>
       </header>
 

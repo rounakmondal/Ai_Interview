@@ -29,10 +29,12 @@ export interface GovtQuestion {
 
 export interface TestConfig {
   exam: ExamType;
-  subject: Subject;
+  customExam?: string;       // free-text exam if user types their own
+  subject: Subject | null;   // null = full paper (no subject filter)
   difficulty: Difficulty;
   count: 10 | 25 | 50 | 100;
   language?: "english" | "bengali";
+  fullPaper?: boolean;       // true = return whole paper across all subjects
 }
 
 export interface TestAnswer {
@@ -509,11 +511,13 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T | null
 }
 
 export async function fetchQuestions(config: TestConfig): Promise<GovtQuestion[]> {
+  const examValue = config.customExam?.trim() || config.exam;
   const params = new URLSearchParams({
-    exam: config.exam,
-    subject: config.subject,
+    exam: examValue,
     difficulty: config.difficulty,
     count: String(config.count),
+    ...(config.subject && !config.fullPaper && { subject: config.subject }),
+    ...(config.fullPaper && { fullPaper: "true" }),
     ...(config.language && { language: config.language }),
   });
   const data = await apiFetch<GovtQuestion[]>(`/api/govt/questions?${params}`);
@@ -602,26 +606,50 @@ export async function submitScore(payload: SubmitScorePayload): Promise<SubmitSc
   });
 }
 
+const ALL_SUBJECTS: Subject[] = ["History", "Geography", "Polity", "Reasoning", "Math", "Current Affairs"];
+
 /** Filter and return questions matching config, up to `count` */
 export function generateTest(config: TestConfig): GovtQuestion[] {
-  const pool = QUESTION_BANK.filter(
-    (q) =>
-      q.exam === config.exam &&
-      q.subject === config.subject &&
-      q.difficulty === config.difficulty
+  const shuffle = <T>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
+
+  // ── Full Paper: distribute evenly across all subjects ──
+  if (config.fullPaper) {
+    const perSubject = Math.max(1, Math.floor(config.count / ALL_SUBJECTS.length));
+    const result: GovtQuestion[] = [];
+    for (const subj of ALL_SUBJECTS) {
+      let subPool = QUESTION_BANK.filter(
+        (q) => q.exam === config.exam && q.subject === subj && q.difficulty === config.difficulty
+      );
+      if (subPool.length < perSubject) {
+        subPool = QUESTION_BANK.filter((q) => q.exam === config.exam && q.subject === subj);
+      }
+      if (subPool.length === 0) {
+        subPool = QUESTION_BANK.filter((q) => q.subject === subj);
+      }
+      result.push(...shuffle(subPool).slice(0, perSubject));
+    }
+    // fill remainder
+    const remaining = config.count - result.length;
+    if (remaining > 0) {
+      const usedIds = new Set(result.map((q) => q.id));
+      result.push(...shuffle(QUESTION_BANK.filter((q) => !usedIds.has(q.id))).slice(0, remaining));
+    }
+    return shuffle(result);
+  }
+
+  // ── Single subject mode ──
+  let pool = QUESTION_BANK.filter(
+    (q) => q.exam === config.exam && q.subject === config.subject && q.difficulty === config.difficulty
   );
+  if (pool.length < config.count) {
+    pool = QUESTION_BANK.filter((q) => q.exam === config.exam && q.subject === config.subject);
+  }
+  if (pool.length === 0) {
+    pool = QUESTION_BANK.filter((q) => q.subject === config.subject);
+  }
+  if (pool.length === 0) pool = QUESTION_BANK;
 
-  // If not enough exact matches, relax difficulty
-  const fallback = QUESTION_BANK.filter(
-    (q) => q.exam === config.exam && q.subject === config.subject
-  );
-
-  const source = pool.length >= config.count ? pool : fallback.length > 0 ? fallback : QUESTION_BANK.filter(q => q.subject === config.subject);
-  const final = source.length > 0 ? source : QUESTION_BANK;
-
-  // Shuffle and pick
-  const shuffled = [...final].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, config.count);
+  return shuffle(pool).slice(0, config.count);
 }
 
 /** Compute score from answers */

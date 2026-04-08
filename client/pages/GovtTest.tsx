@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   Circle,
   AlertTriangle,
+  ArrowLeft,
 } from "lucide-react";
 import { GovtQuestion, TestConfig, TestAnswer } from "@/lib/govt-practice-data";
 
@@ -118,28 +119,53 @@ export default function GovtTest() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top bar */}
-      <header className="border-b border-border/40 bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="container px-4 h-14 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs">{state.config.exam}</Badge>
-            <Badge variant="outline" className="text-xs">{state.config.subject}</Badge>
-            <Badge variant="outline" className="text-xs">{state.config.difficulty}</Badge>
-          </div>
-          <div className="ml-auto flex items-center gap-4">
-            <span className="text-xs text-muted-foreground hidden sm:inline">
-              {answered}/{questions.length} answered
-            </span>
-            <div className={`flex items-center gap-1.5 font-mono text-sm font-bold px-3 py-1 rounded-lg ${isTimeWarning ? "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 animate-pulse" : "bg-muted text-foreground"}`}>
-              <Clock className="w-3.5 h-3.5" />
-              {formatTime(timeLeft)}
+      <header className="border-b border-border/40 bg-background/95 backdrop-blur sticky top-0 z-50 shadow-sm">
+        <div className="container px-4 py-4 flex flex-col gap-3">
+          {/* First row: Back button and exam title */}
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/govt-practice", { replace: true })}
+                className="gap-1.5 -ml-2 h-auto py-1 px-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-xs hidden sm:inline">Back</span>
+              </Button>
+              <div className="flex flex-col gap-0.5">
+                <h1 className="text-sm font-bold text-foreground">{state.config.exam} Exam</h1>
+                <p className="text-xs text-muted-foreground">
+                  {state.config.fullPaper ? "Full Paper" : state.config.subject} • {state.config.difficulty}
+                </p>
+              </div>
             </div>
             <Button
               variant="destructive"
               size="sm"
               onClick={() => setShowSubmitDialog(true)}
+              className="gap-1.5"
             >
-              Submit Test
+              <span className="hidden sm:inline">Submit Test</span>
+              <span className="sm:hidden">Submit</span>
             </Button>
+          </div>
+
+          {/* Second row: Progress and stats */}
+          <div className="flex items-center justify-between gap-4 text-xs">
+            <div className="flex items-center gap-3">
+              <span className="text-muted-foreground">
+                <span className="font-semibold text-foreground">{current + 1}</span>/<span>{questions.length}</span> Questions
+              </span>
+              <span className="w-px h-4 bg-border/40" />
+              <span className="text-muted-foreground">
+                Answered: <span className="font-semibold text-foreground">{answered}</span>
+              </span>
+            </div>
+            <div className={`flex items-center gap-1.5 font-mono text-sm font-bold px-3 py-1.5 rounded-lg ${isTimeWarning ? "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 animate-pulse" : "bg-muted text-foreground"}`}>
+              <Clock className="w-3.5 h-3.5" />
+              {formatTime(timeLeft)}
+            </div>
           </div>
         </div>
       </header>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -12,6 +13,7 @@ import {
   BookMarked,
 } from "lucide-react";
 import Footer from "@/components/Footer";
+import { applyExamSeoPayload } from "@/lib/exam-seo";
 
 export interface BlogMeta {
   slug: string;
@@ -275,6 +277,28 @@ const getCategoryIcon = (cat: string) => {
 export default function BlogIndex() {
   const featured = BLOG_POSTS.filter((p) => p.featured);
   const rest = BLOG_POSTS.filter((p) => !p.featured);
+
+  useEffect(() => {
+    applyExamSeoPayload({
+      title: "Exam Preparation Blog – WBCS, WBPSC, WB Police, TET Tips & Strategy | MedhaHub",
+      description:
+        "Expert articles on WBCS preparation strategy, previous year paper analysis, WB Police SI mock tests, TET syllabus & more. Updated for 2026 exams.",
+      keywords:
+        "WBCS preparation blog, WBPSC exam tips, WB Police SI strategy, WB TET syllabus 2026, govt exam blog, previous year paper analysis, exam preparation tips Bengal",
+      canonicalPath: "/blog",
+      ogTitle: "MedhaHub Blog – WB Govt Exam Preparation Tips & Strategy",
+      ogDescription:
+        "Read expert articles on WBCS, WBPSC, WB Police & TET exam preparation. Strategy guides, paper analysis & study tips for 2026.",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "MedhaHub Exam Preparation Blog",
+        description: "Expert articles and guides for West Bengal government exam preparation.",
+        url: "https://medhahub.in/blog",
+        publisher: { "@type": "Organization", name: "MedhaHub", url: "https://medhahub.in" },
+      },
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

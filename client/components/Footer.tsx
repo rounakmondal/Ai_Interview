@@ -155,7 +155,7 @@ export default function Footer() {
               <p className="text-white/50 text-xs">
                 Built by{" "}
                 <a
-                  href="mailto:rounakmondal198@gmail.com"
+                  href="mailto:medhahubfryou@gmail.com"
                   className="text-white/70 hover:text-white underline underline-offset-2 transition-colors"
                 >
                   Ranjan Mondal

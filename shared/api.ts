@@ -309,3 +309,92 @@ export interface VacancyMailRequest {
   vacancy_title: string;
   vacancy_details: string;
 }
+
+// ─────────────────────────────────────────────
+// Virtual Exam Types
+// ─────────────────────────────────────────────
+
+export type QuestionStatus = "not-attempted" | "attempted" | "correct" | "wrong" | "marked";
+
+export interface VirtualExamQuestion {
+  id: string;
+  questionNumber: number;
+  text: string;
+  options?: string[];
+  correctAnswer: string | number;
+  explanation?: string;
+  subject?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  audioUrl?: string;
+  imageUrl?: string;
+}
+
+export interface VirtualExamAttempt {
+  questionId: string;
+  userAnswer: string | number | null;
+  status: QuestionStatus;
+  timeTaken: number;
+  isMarkedForReview: boolean;
+}
+
+export interface VirtualExamQuestionsRequest {
+  exam: string;
+  subject: string;
+  language: Language;
+  limit: number;
+  offset: number;
+}
+
+export interface VirtualExamQuestionsResponse {
+  questions: VirtualExamQuestion[];
+  totalQuestions: number;
+  totalTime?: number;
+  success: boolean;
+}
+
+export interface VirtualExamSubjectAnalysis {
+  subject: string;
+  correct: number;
+  total: number;
+  percentage: number;
+}
+
+export interface VirtualExamDifficultyAnalysis {
+  difficulty: string;
+  correct: number;
+  total: number;
+  percentage: number;
+}
+
+export interface VirtualExamTimeAnalysis {
+  averageTimePerQuestion: number;
+  fastestQuestion: number;
+  slowestQuestion: number;
+}
+
+export interface VirtualExamResultRequest {
+  exam: string;
+  subject: string;
+  language: Language;
+  attempts: VirtualExamAttempt[];
+  totalTime: number;
+}
+
+export interface VirtualExamResult {
+  totalScore: number;
+  totalMarks: number;
+  accuracy: number;
+  subjectWiseAnalysis: VirtualExamSubjectAnalysis[];
+  difficultyAnalysis: VirtualExamDifficultyAnalysis[];
+  timeAnalysis: VirtualExamTimeAnalysis;
+  strengths: string[];
+  weakAreas: string[];
+  recommendations: string[];
+  languageBasedTips?: string[];
+}
+
+export interface VirtualExamResultResponse {
+  result: VirtualExamResult;
+  success: boolean;
+  message?: string;
+}

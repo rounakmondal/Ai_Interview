@@ -6,7 +6,7 @@ import {
   BookOpen, ArrowLeft, Zap, Clock, Target, BarChart3,
   Trophy, Shield, Train, Landmark, Building2, Globe2,
   CheckCircle2, ChevronRight, Flame, Star, Users, TrendingUp,
-  Loader2, Sparkles, Award, Brain,
+  Loader2, Sparkles, Award, Brain, ChevronDown, LayoutList,
 } from "lucide-react";
 import {
   ExamType, Subject, Difficulty, TestConfig,
@@ -19,6 +19,21 @@ const SUBJECT_OPTIONS: Subject[] = ["History", "Geography", "Polity", "Reasoning
 const DIFFICULTY_OPTIONS: Difficulty[] = ["Easy", "Medium", "Hard"];
 const COUNT_OPTIONS = [10, 25, 50, 100] as const;
 
+// Full paper question counts based on exam and difficulty
+const FULL_PAPER_COUNTS: Record<ExamType, Record<Difficulty, 10 | 25 | 50 | 100>> = {
+  WBCS: { Easy: 100, Medium: 200, Hard: 250 },
+  SSC: { Easy: 80, Medium: 100, Hard: 120 },
+  Railway: { Easy: 100, Medium: 150, Hard: 180 },
+  Banking: { Easy: 100, Medium: 120, Hard: 150 },
+  Police: { Easy: 100, Medium: 120, Hard: 150 },
+};
+
+// Extra exams not in the main grid
+const EXTRA_EXAMS = [
+  "UPSC", "JTET", "WBTET", "IBPS Clerk", "SBI PO", "SBI Clerk",
+  "RRB Group D", "RRB JE", "WBP Lady Constable", "WBP Constable",
+  "WBPSC Clerkship", "WBCS (Mains)", "NDA", "CDS", "CAPF",
+];
 // ─── Exam config ──────────────────────────────────────────────────────────────
 const EXAM_META: Record<ExamType, { icon: React.ReactNode; color: string; glow: string; bg: string; badge: string; candidates: string }> = {
   WBCS: { icon: <Landmark className="w-5 h-5" />, color: "from-violet-500 to-purple-600", glow: "shadow-orange-500/30", bg: "bg-orange-500/10", badge: "border-orange-500/30 text-orange-600 dark:text-orange-400", candidates: "1.2L+" },
@@ -63,7 +78,10 @@ export default function GovtPractice() {
   const location = useLocation();
   const incoming = location.state as GovtPracticeState | null;
   const [exam, setExam] = useState<ExamType>(incoming?.exam ?? "WBCS");
-  const [subject, setSubject] = useState<Subject>(incoming?.subject ?? "History");
+  const [customExam, setCustomExam] = useState("");
+  const [showExtraExams, setShowExtraExams] = useState(false);
+  const [subject, setSubject] = useState<Subject | null>(incoming?.subject ?? "History");
+  const [fullPaper, setFullPaper] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
   const [count, setCount] = useState<10 | 25 | 50 | 100>(25);
   const [language, setLanguage] = useState<"english" | "bengali">("english");
@@ -96,11 +114,27 @@ export default function GovtPractice() {
     );
   }, []);
 
+  // Auto-set question count when fullPaper is toggled
+  useEffect(() => {
+    if (fullPaper) {
+      const fullPaperCount = FULL_PAPER_COUNTS[exam]?.[difficulty] || 100;
+      setCount(fullPaperCount as 10 | 25 | 50 | 100);
+    }
+  }, [fullPaper, exam, difficulty]);
+
   const handleGenerate = async () => {
     setLoading(true);
     setError(null);
     try {
-      const config: TestConfig = { exam, subject, difficulty, count, language };
+      const config: TestConfig = {
+        exam,
+        customExam: customExam.trim() || undefined,
+        subject: fullPaper ? null : subject,
+        difficulty,
+        count,
+        language,
+        fullPaper,
+      };
       const questions = await fetchQuestions(config);
       navigate("/govt-test", { state: { config, questions, language, dailyTaskId: incoming?.dailyTaskId } });
     } catch {
@@ -128,9 +162,17 @@ export default function GovtPractice() {
             <span className="text-sm font-medium">Home</span>
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
-          <span className="text-sm font-semibold text-foreground">Govt Exam Practice</span>
+          <span className="text-sm font-semibold text-foreground">Exam Room</span>
 
           <div className="ml-auto flex items-center gap-2">
+            <button
+              onClick={() => navigate('/virtual-exam')}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+            >
+              <Target className="w-4 h-4" />
+              <span className="hidden sm:inline">Full Length Test</span>
+              <span className="sm:hidden">Test</span>
+            </button>
             <ProfileButton />
             <Link to="/prev-year-questions">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
@@ -210,9 +252,9 @@ export default function GovtPractice() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {EXAM_OPTIONS.map((e) => {
                   const m = EXAM_META[e];
-                  const selected = exam === e;
+                  const selected = exam === e && !customExam;
                   return (
-                    <motion.button key={e} onClick={() => setExam(e)}
+                    <motion.button key={e} onClick={() => { setExam(e); setCustomExam(""); }}
                       whileTap={{ scale: 0.97 }}
                       className={`relative flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-center transition-all duration-200 ${selected
                           ? `bg-gradient-to-br ${m.color} text-white border-transparent shadow-lg ${m.glow}`
@@ -236,12 +278,61 @@ export default function GovtPractice() {
                 })}
               </div>
 
+              {/* More Exams dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowExtraExams(!showExtraExams)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-sm font-medium transition-all ${customExam
+                    ? "border-primary bg-primary/10 text-foreground"
+                    : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:text-foreground"}`}
+                >
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showExtraExams ? "rotate-180" : ""}`} />
+                  {customExam ? customExam : "More Exams…"}
+                </button>
+                <AnimatePresence>
+                  {showExtraExams && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-1.5 z-30 w-64 bg-card border border-border rounded-2xl shadow-xl overflow-hidden"
+                    >
+                      <div className="p-2 max-h-56 overflow-y-auto space-y-0.5">
+                        {EXTRA_EXAMS.map((ex) => (
+                          <button
+                            key={ex}
+                            onClick={() => { setCustomExam(ex); setShowExtraExams(false); }}
+                            className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${customExam === ex
+                              ? "bg-primary/10 text-foreground"
+                              : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+                          >
+                            {ex}
+                          </button>
+                        ))}
+                        {/* Custom free-text */}
+                        <div className="px-3 py-2 border-t border-border/40 mt-1">
+                          <p className="text-[10px] text-muted-foreground mb-1.5 font-semibold uppercase tracking-wide">Type Custom Exam</p>
+                          <input
+                            type="text"
+                            value={customExam}
+                            onChange={(e) => setCustomExam(e.target.value)}
+                            placeholder="e.g. JTET 2026"
+                            className="w-full text-sm bg-muted/40 border border-border rounded-lg px-3 py-1.5 outline-none focus:border-primary text-foreground placeholder:text-muted-foreground/50"
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <AnimatePresence mode="wait">
-                <motion.p key={exam} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                <motion.p key={customExam || exam} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 8 }} transition={{ duration: 0.2 }}
                   className={`text-xs font-medium border rounded-lg px-3 py-1.5 inline-flex items-center gap-1.5 ${meta.badge}`}>
                   <Award className="w-3 h-3" />
-                  {EXAM_LABELS[exam]}
+                  {customExam ? customExam : EXAM_LABELS[exam]}
                 </motion.p>
               </AnimatePresence>
             </div>
@@ -250,27 +341,63 @@ export default function GovtPractice() {
 
             {/* ── STEP 2: Subject ──────────────────────────────────────────── */}
             <div className="space-y-3">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">2</div>
-                <p className="text-sm font-semibold text-foreground">Select Subject</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">2</div>
+                  <p className="text-sm font-semibold text-foreground">Select Subject</p>
+                </div>
+                {/* Full Paper toggle */}
+                <button
+                  onClick={() => setFullPaper(!fullPaper)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${fullPaper
+                    ? "border-orange-500/50 bg-orange-500/10 text-orange-600 dark:text-orange-400"
+                    : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:text-foreground"}`}
+                >
+                  <LayoutList className="w-3.5 h-3.5" />
+                  Full Paper {fullPaper ? "✓" : "(All Subjects)"}
+                </button>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                {SUBJECT_OPTIONS.map((s) => {
-                  const sm = SUBJECT_META[s];
-                  const selected = subject === s;
-                  return (
-                    <motion.button key={s} onClick={() => setSubject(s)} whileTap={{ scale: 0.97 }}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${selected
-                          ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
-                          : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30 hover:text-foreground"
-                        }`}>
-                      <span className={selected ? sm.color : "text-muted-foreground/50"}>{sm.icon}</span>
-                      <span className="text-xs font-semibold leading-tight text-left">{SUBJECT_LABELS[s]}</span>
-                    </motion.button>
-                  );
-                })}
-              </div>
+              <AnimatePresence mode="wait">
+                {fullPaper ? (
+                  <motion.div
+                    key="full-paper-mode"
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl border border-orange-500/30 bg-orange-500/10"
+                  >
+                    <LayoutList className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Full Paper Mode</p>
+                      <p className="text-xs text-muted-foreground">Questions from all subjects mixed — just like the real exam</p>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="subject-grid"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-2.5"
+                  >
+                    {SUBJECT_OPTIONS.map((s) => {
+                      const sm = SUBJECT_META[s];
+                      const selected = subject === s;
+                      return (
+                        <motion.button key={s} onClick={() => setSubject(s)} whileTap={{ scale: 0.97 }}
+                          className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${selected
+                              ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
+                              : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30 hover:text-foreground"
+                            }`}>
+                          <span className={selected ? sm.color : "text-muted-foreground/50"}>{sm.icon}</span>
+                          <span className="text-xs font-semibold leading-tight text-left">{SUBJECT_LABELS[s]}</span>
+                        </motion.button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <div className="h-px bg-border/40" />
@@ -306,18 +433,26 @@ export default function GovtPractice() {
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">4</div>
                   <p className="text-sm font-semibold text-foreground">Questions</p>
+                  {fullPaper && <span className="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/30">Auto-selected</span>}
                 </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {COUNT_OPTIONS.map((n) => (
-                    <motion.button key={n} onClick={() => setCount(n)} whileTap={{ scale: 0.95 }}
-                      className={`py-3 rounded-xl border text-sm font-bold transition-all ${count === n
-                          ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
-                          : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30"
-                        }`}>
-                      {n}
-                    </motion.button>
-                  ))}
-                </div>
+                {!fullPaper ? (
+                  <div className="grid grid-cols-4 gap-2">
+                    {COUNT_OPTIONS.map((n) => (
+                      <motion.button key={n} onClick={() => setCount(n)} whileTap={{ scale: 0.95 }}
+                        className={`py-3 rounded-xl border text-sm font-bold transition-all ${count === n
+                            ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
+                            : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:bg-muted/30"
+                          }`}>
+                        {n}
+                      </motion.button>
+                    ))}
+                  </div>
+                ) : (
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="py-3 px-4 rounded-xl border border-primary/30 bg-primary/5 text-center">
+                    <p className="text-lg font-bold text-foreground">{count}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{EXAM_LABELS[exam]} Full Paper</p>
+                  </motion.div>
+                )}
                 <p className="text-xs text-muted-foreground flex items-center gap-1.5">
                   <Clock className="w-3 h-3" />
                   ~{estimatedMins} minutes to complete
@@ -353,7 +488,7 @@ export default function GovtPractice() {
               <div className="flex flex-wrap gap-2">
                 {[
                   { label: exam, icon: <Target className="w-3 h-3" /> },
-                  { label: subject, icon: SUBJECT_META[subject].icon },
+                  { label: fullPaper ? "Full Paper" : (subject ?? "All Subjects"), icon: fullPaper ? <LayoutList className="w-3 h-3" /> : subject ? SUBJECT_META[subject].icon : <LayoutList className="w-3 h-3" /> },
                   { label: difficulty, icon: <TrendingUp className="w-3 h-3" /> },
                   { label: `${count} Questions`, icon: <BookOpen className="w-3 h-3" /> },
                   { label: `~${estimatedMins} min`, icon: <Clock className="w-3 h-3" /> },

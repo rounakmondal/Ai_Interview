@@ -42,9 +42,9 @@ function upsertLink(rel: string, href: string, extra?: Record<string, string>) {
 // ── Hub page SEO ─────────────────────────────────────────────────────────────
 
 export function applyHubSeo(companyCount: number) {
-  const title = `Company Interview Questions 2026 | TCS, Infosys, Wipro, Google, Amazon & ${companyCount}+ Companies | ${BRAND}`;
-  const description = `Prepare for interviews at ${companyCount}+ top companies — TCS, Infosys, Wipro, Google, Amazon, Microsoft, Apple, Netflix, Flipkart, Razorpay, Swiggy, CRED, Goldman Sachs, McKinsey & more. Free interview questions with expert answers for 2026.`;
-  const keywords = "company interview questions 2026, TCS interview questions, Infosys interview questions, Google interview questions, Amazon interview questions, Wipro interview preparation, Microsoft interview, Apple interview, Netflix interview, Flipkart interview, Razorpay interview, CRED interview, Goldman Sachs interview, McKinsey interview, Adobe interview, Zoho interview, Swiggy interview, Zomato interview, Paytm interview, NVIDIA interview, Salesforce interview, Meta interview, FAANG interview preparation, IT company interview questions and answers, top 200 company interview questions, campus placement interview questions, fresher interview preparation 2026, MedhaHub";
+  const title = `${companyCount}+ Company Interview Questions 2026 | TCS, Google, HDFC Bank, HubSpot, Synopsys & More | ${BRAND}`;
+  const description = `Prepare for interviews at ${companyCount}+ top companies — TCS, Google, Amazon, Microsoft, HDFC Bank, ICICI Bank, SBI, Physics Wallah, Ather Energy, HubSpot, Synopsys, ARM, DoorDash, Hugging Face, Scale AI, CockroachDB & many more. Free interview questions with expert answers for 2026.`;
+  const keywords = "company interview questions 2026, TCS interview questions, Infosys interview questions, Google interview questions, Amazon interview questions, Wipro interview preparation, Microsoft interview, Apple interview, Netflix interview, Flipkart interview, Razorpay interview, CRED interview, Goldman Sachs interview, McKinsey interview, Adobe interview, Zoho interview, Swiggy interview, Zomato interview, Paytm interview, NVIDIA interview, Salesforce interview, Meta interview, FAANG interview preparation, HDFC Bank interview questions, ICICI Bank interview questions, Axis Bank interview questions, SBI interview questions, Physics Wallah interview questions, Vedantu interview questions, Ather Energy interview questions, ClearTax interview questions, NoBroker interview questions, HubSpot interview questions, Zendesk interview questions, DoorDash interview questions, Pinterest interview questions, Reddit interview questions, Discord interview questions, Zoom interview questions, Dropbox interview questions, Duolingo interview questions, Synopsys interview questions, Cadence interview questions, ARM interview questions, Broadcom interview questions, Hugging Face interview questions, Scale AI interview questions, CockroachDB interview questions, ClickHouse interview questions, Grammarly interview questions, Asana interview questions, New Relic interview questions, IT company interview questions and answers, top 300 company interview questions, campus placement interview questions, fresher interview preparation 2026, MedhaHub";
   const url = `${SITE}/interview-questions`;
 
   document.title = title;
@@ -58,7 +58,7 @@ export function applyHubSeo(companyCount: number) {
   // Open Graph
   upsertMeta("property", "og:type", "website");
   upsertMeta("property", "og:url", url);
-  upsertMeta("property", "og:title", `Company Interview Questions 2026 | ${companyCount}+ Companies | ${BRAND}`);
+  upsertMeta("property", "og:title", `${companyCount}+ Company Interview Questions 2026 | ${BRAND}`);
   upsertMeta("property", "og:description", description);
   upsertMeta("property", "og:image", OG_IMAGE);
   upsertMeta("property", "og:site_name", BRAND);
@@ -67,7 +67,7 @@ export function applyHubSeo(companyCount: number) {
 
   // Twitter
   upsertMeta("name", "twitter:card", "summary_large_image");
-  upsertMeta("name", "twitter:title", `${companyCount}+ Company Interview Questions 2026 | ${BRAND}`);
+  upsertMeta("name", "twitter:title", `${companyCount}+ Companies Interview Questions 2026 | TCS, Google, HDFC Bank & More | ${BRAND}`);
   upsertMeta("name", "twitter:description", description);
   upsertMeta("name", "twitter:image", OG_IMAGE);
 
@@ -101,7 +101,7 @@ export function applyCompanySeo(company: CompanyInfo) {
   upsertMeta("property", "og:locale:alternate", "bn_IN");
   upsertMeta("property", "article:section", "Interview Preparation");
   upsertMeta("property", "article:tag", `${company.shortName} Interview`);
-  upsertMeta("property", "article:modified_time", "2026-04-06T00:00:00+05:30");
+  upsertMeta("property", "article:modified_time", "2026-04-08T00:00:00+05:30");
 
   // Twitter
   upsertMeta("name", "twitter:card", "summary_large_image");

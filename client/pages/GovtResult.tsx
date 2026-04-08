@@ -24,7 +24,7 @@ import {
   EXAM_LABELS,
   submitScore,
 } from "@/lib/govt-practice-data";
-import { isLoggedIn } from "@/lib/auth-api";
+import { isLoggedIn, getSession } from "@/lib/auth-api";
 import { completeTask } from "@/lib/daily-tasks";
 
 interface LocationState {
@@ -80,6 +80,72 @@ export default function GovtResult() {
     if (!state?.dailyTaskId || !state?.questions?.length) return;
     const s = computeScore(state.questions, state.answers);
     completeTask(state.dailyTaskId, s.accuracy);
+  }, [state]);
+
+  // Send test result email if logged in
+  useEffect(() => {
+    if (!state?.questions?.length) return;
+    if (!isLoggedIn()) return;
+
+    const sendResultEmail = async () => {
+      try {
+        const { config, questions, answers, timeTakenSeconds } = state;
+        const s = computeScore(questions, answers);
+        
+        // Calculate weak areas  
+        const subjectPerformance: Record<string, { correct: number; total: number }> = {};
+        questions.forEach((q) => {
+          const ans = answers.find((a) => a.questionId === q.id);
+          const userIdx = ans?.selectedIndex ?? null;
+          const isCorrect = userIdx === q.correctIndex;
+          const subject = q.subject || "General";
+          
+          if (!subjectPerformance[subject]) {
+            subjectPerformance[subject] = { correct: 0, total: 0 };
+          }
+          subjectPerformance[subject].total += 1;
+          if (isCorrect) subjectPerformance[subject].correct += 1;
+        });
+
+        const weakAreas = Object.entries(subjectPerformance)
+          .map(([subject, { correct, total }]) => ({
+            name: subject,
+            accuracy: Math.round((correct / total) * 100),
+          }))
+          .filter((a) => a.accuracy < 70)
+          .sort((a, b) => a.accuracy - b.accuracy);
+
+        // Get user email from session
+        const session = getSession();
+        if (!session?.user?.email) return;
+
+        // Format time taken
+        const mins = Math.floor(timeTakenSeconds / 60);
+        const secs = timeTakenSeconds % 60;
+        const timeTaken = `${mins}m ${secs}s`;
+
+        // Send email
+        await fetch("/api/test-result-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: session.user.email,
+            name: session.user.name || "Student",
+            exam: config.exam,
+            subject: config.subject || "Mixed",
+            accuracy: s.accuracy,
+            correct: s.correct,
+            total: s.total,
+            weakAreas,
+            timeTaken,
+          }),
+        });
+      } catch (err) {
+        console.error("Failed to send result email:", err);
+      }
+    };
+
+    sendResultEmail();
   }, [state]);
 
   const isDailyTask = !!state?.dailyTaskId;
@@ -172,6 +238,73 @@ export default function GovtResult() {
             </div>
           </div>
         </Card>
+
+        {/* Weak Areas Analysis */}
+        {(() => {
+          // Calculate weak areas by subject
+          const subjectPerformance: Record<string, { correct: number; total: number }> = {};
+          questions.forEach((q, idx) => {
+            const ans = answers.find((a) => a.questionId === q.id);
+            const userIdx = ans?.selectedIndex ?? null;
+            const isCorrect = userIdx === q.correctIndex;
+            const subject = q.subject || "General";
+            
+            if (!subjectPerformance[subject]) {
+              subjectPerformance[subject] = { correct: 0, total: 0 };
+            }
+            subjectPerformance[subject].total += 1;
+            if (isCorrect) subjectPerformance[subject].correct += 1;
+          });
+
+          const weakAreas = Object.entries(subjectPerformance)
+            .map(([subject, { correct, total }]) => ({
+              subject,
+              correct,
+              total,
+              accuracy: Math.round((correct / total) * 100),
+            }))
+            .filter((a) => a.accuracy < 70) // Show subjects with < 70% accuracy
+            .sort((a, b) => a.accuracy - b.accuracy);
+
+          if (weakAreas.length > 0) {
+            return (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Target className="w-5 h-5 text-amber-500" />
+                  Areas to Improve
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {weakAreas.map((area) => (
+                    <Card key={area.subject} className="p-4 border-amber-500/30 bg-amber-500/5">
+                      <div className="flex items-center justify-between mb-3">
+                        <p className="font-semibold text-foreground">{area.subject}</p>
+                        <Badge variant="outline" className="text-amber-600 bg-amber-50 dark:bg-amber-900/30 border-amber-500/25">
+                          {area.accuracy}%
+                        </Badge>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-muted-foreground">Correct: {area.correct}/{area.total}</span>
+                          <span className="text-muted-foreground">Accuracy: {area.accuracy}%</span>
+                        </div>
+                        <div className="h-2 bg-muted rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-amber-500 transition-all"
+                            style={{ width: `${area.accuracy}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          💡 Focus on this subject to improve your overall score
+                        </p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
 
         {/* Question Review */}
         <div className="space-y-4">

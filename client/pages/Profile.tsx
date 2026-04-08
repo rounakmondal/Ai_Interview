@@ -33,6 +33,7 @@ import {
   Sprout,
   CalendarRange,
   ArrowRight,
+  Play,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getSession, clearSession, AuthUser } from "@/lib/auth-api";
@@ -106,7 +107,16 @@ function getUpcomingExam(): { exam: ExamType; date: string } | null {
 }
 
 function saveUpcomingExam(exam: ExamType, date: string) {
-  localStorage.setItem("upcoming_exam", JSON.stringify({ exam, date }));
+  // Preserve existing data (weakSubjects, notificationTime, notificationEnabled) from previous saves
+  const existing = localStorage.getItem("upcoming_exam");
+  const existingData = existing ? JSON.parse(existing) : {};
+  localStorage.setItem("upcoming_exam", JSON.stringify({ 
+    exam, 
+    date,
+    weakSubjects: existingData.weakSubjects || [],
+    notificationTime: existingData.notificationTime || "08:00",
+    notificationEnabled: existingData.notificationEnabled || false
+  }));
 }
 
 // ── Clean Section Card ────────────────────────────────────────────────
@@ -169,10 +179,20 @@ export default function Profile() {
   const [studyExam, setStudyExam] = useState<StudyExamType | "">(getStudyExamPreference() ?? "");
   const [planRefresh, setPlanRefresh] = useState(0);
 
+  // Re-sync exam state when localStorage is updated (e.g. from ExamOnboardingModal)
   useEffect(() => {
-    const onFocus = () => setPlanRefresh((t) => t + 1);
-    window.addEventListener("focus", onFocus);
-    return () => window.removeEventListener("focus", onFocus);
+    const syncExam = () => {
+      setPlanRefresh((t) => t + 1);
+      const saved = getUpcomingExam();
+      if (saved?.exam) setUpcomingExam(saved.exam);
+      if (saved?.date) setExamDate(saved.date);
+    };
+    window.addEventListener("focus", syncExam);
+    window.addEventListener("exam-updated", syncExam);
+    return () => {
+      window.removeEventListener("focus", syncExam);
+      window.removeEventListener("exam-updated", syncExam);
+    };
   }, []);
 
   useEffect(() => {
@@ -263,6 +283,8 @@ export default function Profile() {
   const handleSaveExam = () => {
     if (upcomingExam && examDate) {
       saveUpcomingExam(upcomingExam, examDate);
+      // Ensure state is persisted (state already has values from form)
+      // No need to explicitly set as they're already in state from form inputs
       setEditingExam(false);
       toast({ title: "Exam target saved!" });
     }
@@ -871,6 +893,7 @@ export default function Profile() {
                       { label: "Syllabus Tracker", to: "/syllabus", icon: BookMarked },
                       { label: "Daily Tasks", to: "/daily-tasks", icon: Flame },
                       { label: "Start Practice Test", to: "/govt-practice", icon: BookOpen },
+                      { label: "Full-Length Exam Test", to: "/govt-practice", icon: Play },
                       { label: "View Leaderboard", to: "/leaderboard", icon: Trophy },
                       { label: "Full Dashboard", to: "/dashboard", icon: BarChart3 },
                       { label: "Current Affairs", to: "/current-affairs", icon: Zap },
