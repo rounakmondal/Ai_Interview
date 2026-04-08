@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { applyExamSeoPayload } from "@/lib/exam-seo";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -42,6 +43,15 @@ export default function CurrentAffairs() {
   const [weeklyQuiz, setWeeklyQuiz] = useState<WeeklyQuizItem[]>([]);
   const [monthlyTopics, setMonthlyTopics] = useState<MonthlyTopic[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    applyExamSeoPayload({
+      title: "Current Affairs 2026 \u2014 Daily GK, Weekly Quiz & Monthly Topics for WBCS, SSC, Banking | MedhaHub",
+      description: "Daily current affairs, weekly GK quiz, and monthly important topics for WBCS, SSC CGL, IBPS PO, WB Police & Railway aspirants. Updated daily. Free on MedhaHub.",
+      keywords: "current affairs 2026, daily current affairs, GK quiz, WBCS current affairs, SSC current affairs, banking current affairs, monthly current affairs",
+      canonicalPath: "/current-affairs",
+    });
+  }, []);
 
   useEffect(() => {
     fetchCurrentAffairs().then((data) => {
