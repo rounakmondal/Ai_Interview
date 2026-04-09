@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,7 +26,6 @@ import {
   Info,
   Search,
   Play,
-  ChevronsUpDown,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -34,13 +34,6 @@ import {
   applyQuestionHubExamSeo,
   type ExamSeoProfile,
 } from "@/lib/exam-seo";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 
 interface PDFItem {
   /** File name (or relative path) identifying the PDF */
@@ -651,6 +644,73 @@ function groupFilesByType(files: PDFItem[], folder: string): Record<string, PDFI
   return grouped;
 }
 
+const exams = [
+  "WBCS",
+  "SSC",
+  "Railway",
+  "Banking",
+  "Police",
+  "JTET",
+  "WBPSC",
+  "IBPS PO"
+];
+
+function ExamSelector({ onSelect }: { onSelect: (exam: string) => void }) {
+  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState("Police Recruitment (WBP)");
+  const ref = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const handleSelect = (exam: string) => {
+    setSelected(exam);
+    setOpen(false);
+    onSelect(exam);
+  };
+
+  return (
+    <div className="w-full max-w-md relative" ref={ref}>
+      <h3 className="text-2xl font-bold mb-2 text-foreground">
+        Select Exam Category
+      </h3>
+
+      <div
+        onClick={() => setOpen(!open)}
+        className="bg-card/80 border border-emerald-900/12 dark:border-emerald-800/20 rounded-xl px-4 py-3 cursor-pointer flex justify-between items-center hover:border-amber-600/40 transition-all text-foreground shadow-sm"
+      >
+        <span className="font-medium">{selected}</span>
+        <span className="text-amber-700 dark:text-amber-400">▼</span>
+      </div>
+
+      {open && (
+        <div className="absolute mt-2 w-full bg-card/95 backdrop-blur border border-emerald-900/12 dark:border-emerald-800/20 rounded-xl shadow-xl shadow-black/20 max-h-60 overflow-y-auto z-50">
+          {exams.map((exam) => (
+            <div
+              key={exam}
+              onClick={() => handleSelect(exam)}
+              className={`px-4 py-2 cursor-pointer transition-colors text-sm ${
+                selected === exam
+                  ? "bg-amber-700/20 text-amber-800 dark:text-amber-300"
+                  : "text-foreground hover:bg-emerald-900/10 dark:hover:bg-emerald-800/15"
+              }`}
+            >
+              {exam}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Demo Mock Questions per Exam ─────────────────────────────────────────────
 interface MockDemoQuestion {
   question: string;
@@ -787,7 +847,6 @@ export default function QuestionHub({
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isExamDrawerOpen, setIsExamDrawerOpen] = useState(false);
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "terracotta"];
@@ -1010,7 +1069,21 @@ export default function QuestionHub({
   const handleSelectFolder = (folderKey: string) => {
     setSelectedFolder(folderKey);
     setSearchParams({ tab: folderKey }, { replace: true });
-    setIsExamDrawerOpen(false);
+  };
+
+  const handleExamSelect = (exam: string) => {
+    const examToFolderKey: Record<string, string> = {
+      WBCS: "wbcs",
+      SSC: "ssc",
+      Railway: "rrb-ntpc",
+      Banking: "ibps",
+      Police: "police",
+      JTET: "jtet",
+      WBPSC: "wbpsc",
+      "IBPS PO": "ibps",
+    };
+    const folderKey = examToFolderKey[exam] ?? "police";
+    handleSelectFolder(folderKey);
   };
 
   return (
@@ -1193,7 +1266,7 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
-        {/* Folder Selector — compact trigger + drawer list */}
+        {/* Folder Selector — compact dropdown selector */}
         {!isSearching && (
         <motion.section
           initial={{ opacity: 0 }}
@@ -1201,74 +1274,7 @@ export default function QuestionHub({
           transition={{ delay: 0.2 }}
           className="mb-12"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-700 to-amber-600" />
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">
-                Select Exam
-              </h2>
-            </div>
-          </div>
-          <div className="max-w-xl">
-            <button
-              onClick={() => setIsExamDrawerOpen(true)}
-              className="w-full flex items-center justify-between gap-3 rounded-2xl border border-emerald-900/10 dark:border-emerald-800/20 bg-card/70 hover:bg-card px-4 py-3.5 transition-colors"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className={`p-2.5 bg-gradient-to-br ${colors.iconBg} rounded-lg shrink-0`}>
-                  {currentFolder.icon}
-                </div>
-                <div className="text-left min-w-0">
-                  <p className="text-xs text-muted-foreground">Current exam</p>
-                  <p className="font-semibold text-foreground truncate">{currentFolder.name}</p>
-                </div>
-              </div>
-              <ChevronsUpDown className="w-4 h-4 text-muted-foreground shrink-0" />
-            </button>
-          </div>
-
-          <Drawer open={isExamDrawerOpen} onOpenChange={setIsExamDrawerOpen}>
-            <DrawerContent className="max-h-[85vh]">
-              <DrawerHeader className="text-left">
-                <DrawerTitle>Select Exam Category</DrawerTitle>
-                <DrawerDescription>
-                  Choose one exam to load relevant question papers.
-                </DrawerDescription>
-              </DrawerHeader>
-              <div className="px-4 pb-5 overflow-y-auto">
-                <div className="space-y-2">
-                  {Object.entries(FOLDERS).map(([key, folder]) => {
-                    const fc = FOLDER_COLORS[folder.colorKey];
-                    const isSelected = selectedFolder === key;
-                    return (
-                      <button
-                        key={key}
-                        onClick={() => handleSelectFolder(key)}
-                        className={`w-full text-left rounded-xl border p-3.5 transition-all ${
-                          isSelected
-                            ? fc.selectedBorder
-                            : "border-emerald-900/10 dark:border-emerald-800/20 bg-card/60 hover:bg-card"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2.5 bg-gradient-to-br ${fc.iconBg} rounded-lg shrink-0`}>
-                            {folder.icon}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-sm text-foreground truncate">{folder.name}</p>
-                            <p className="text-xs text-muted-foreground truncate">{folder.nameBn}</p>
-                          </div>
-                          {isSelected ? (
-                            <ChevronRight className={`w-4 h-4 ${fc.chevron} shrink-0`} />
-                          ) : null}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </DrawerContent>
-          </Drawer>
+          <ExamSelector onSelect={handleExamSelect} />
         </motion.section>
         )}
 
