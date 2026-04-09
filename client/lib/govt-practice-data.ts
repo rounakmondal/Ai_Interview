@@ -519,9 +519,54 @@ export async function fetchQuestions(config: TestConfig): Promise<GovtQuestion[]
     ...(config.subject && !config.fullPaper && { subject: config.subject }),
     ...(config.fullPaper && { fullPaper: "true" }),
     ...(config.language && { language: config.language }),
+    stream: "true", // Enable streaming
   });
-  const data = await apiFetch<GovtQuestion[]>(`/api/govt/questions?${params}`);
-  return data ?? generateTest(config);
+
+  return new Promise((resolve, reject) => {
+    const questions: GovtQuestion[] = [];
+const eventSource = new EventSource(`${API_BASE}/govt/questions?${params}`);
+
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (Array.isArray(data)) {
+          // This is a batch of questions
+          questions.push(...data);
+        } else if (data.error) {
+          // Error occurred
+          eventSource.close();
+          reject(new Error(data.error));
+        }
+      } catch (err) {
+        console.warn('Failed to parse SSE data:', event.data);
+      }
+    };
+
+    eventSource.addEventListener('end', () => {
+      eventSource.close();
+      resolve(questions);
+    });
+
+    eventSource.addEventListener('error', (event) => {
+      eventSource.close();
+      if (questions.length > 0) {
+        // If we have some questions, resolve with what we have
+        resolve(questions);
+      } else {
+        reject(new Error('Failed to load questions'));
+      }
+    });
+
+    // Timeout after 30 seconds
+    setTimeout(() => {
+      eventSource.close();
+      if (questions.length > 0) {
+        resolve(questions);
+      } else {
+        reject(new Error('Request timed out'));
+      }
+    }, 30000);
+  });
 }
 
 export async function fetchPrevYearQuestions(
