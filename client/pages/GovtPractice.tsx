@@ -531,7 +531,7 @@ export default function GovtPractice() {
                 ) : (
                   <>
                     <Sparkles className="w-5 h-5" />
-                    Start Mock Test — {count} Questions
+                    Start Mock Test 
                     <ChevronRight className="w-4 h-4" />
                   </>
                 )}
