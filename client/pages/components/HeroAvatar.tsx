@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { memo, useState, useEffect } from "react";
 
 /**
  * Interactive interview mock UI for the hero section.
  * Shows an AI question, voice waveform animation, and live scoring bars.
  */
-export default function HeroAvatar() {
+function HeroAvatar() {
   const [barsState, setBarsState] = useState<number[]>(Array(14).fill(3));
   const [scores, setScores] = useState({ confidence: 0, communication: 0, clarity: 0 });
   const [questionVisible, setQuestionVisible] = useState(false);
@@ -142,3 +142,5 @@ export default function HeroAvatar() {
     </div>
   );
 }
+
+export default memo(HeroAvatar);
