@@ -25,6 +25,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { GovtQuestion, TestConfig, TestAnswer } from "@/lib/govt-practice-data";
+import { getGovtPracticeSession, subscribeGovtPracticeSession } from "@/lib/govt-practice-store";
 
 interface LocationState {
   config: TestConfig;
@@ -43,21 +44,56 @@ export default function GovtTest() {
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state as LocationState | null;
+  const initialSession = getGovtPracticeSession();
 
+  const [questions, setQuestions] = useState<GovtQuestion[]>(
+    state?.questions ?? initialSession?.questions ?? []
+  );
+  const [config, setConfig] = useState<TestConfig | null>(
+    state?.config ?? initialSession?.config ?? null
+  );
+  const [language, setLanguage] = useState<"english" | "bengali">(
+    state?.language ?? initialSession?.language ?? "english"
+  );
+  const [dailyTaskId, setDailyTaskId] = useState(state?.dailyTaskId ?? initialSession?.dailyTaskId);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<TestAnswer[]>([]);
   const [elapsed, setElapsed] = useState(0);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [flagged, setFlagged] = useState<Set<number>>(new Set());
 
-  // Redirect if no state
   useEffect(() => {
-    if (!state?.questions?.length) {
+    const sessionUnsubscribe = subscribeGovtPracticeSession((session) => {
+      if (!session) return;
+      setConfig((currentConfig) => currentConfig ?? session.config);
+      setLanguage((currentLanguage) => currentLanguage ?? session.language);
+      setDailyTaskId((currentId) => currentId ?? session.dailyTaskId);
+      if (session.questions.length > 0) {
+        setQuestions(session.questions);
+      }
+    });
+
+    return () => sessionUnsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!config && questions.length === 0) {
       navigate("/govt-practice", { replace: true });
-    } else {
-      setAnswers(state.questions.map((q) => ({ questionId: q.id, selectedIndex: null })));
+      return;
     }
-  }, [state, navigate]);
+
+    setAnswers((prev) => {
+      const next = [...prev];
+      const extra = questions.length - next.length;
+      if (extra > 0) {
+        return [
+          ...next,
+          ...questions.slice(next.length).map((q) => ({ questionId: q.id, selectedIndex: null })),
+        ];
+      }
+      return next.slice(0, questions.length);
+    });
+  }, [config, navigate, questions]);
 
   // Timer
   useEffect(() => {
@@ -65,8 +101,7 @@ export default function GovtTest() {
     return () => clearInterval(interval);
   }, []);
 
-  const questions = state?.questions ?? [];
-  const totalTime = (state?.config.count ?? 25) * 72; // ~72s per question
+  const totalTime = ((config?.count ?? 25) * 72);
   const timeLeft = Math.max(0, totalTime - elapsed);
   const isTimeWarning = timeLeft < 120;
 
@@ -95,21 +130,21 @@ export default function GovtTest() {
   };
 
   const handleSubmit = useCallback(() => {
-    if (!state) return;
+    if (!config) return;
     navigate("/govt-result", {
       state: {
-        config: state.config,
+        config,
         questions,
         answers,
         timeTakenSeconds: elapsed,
         completedAt: new Date().toISOString(),
-        language: state.language,
-        dailyTaskId: state.dailyTaskId,
+        language,
+        dailyTaskId,
       },
     });
-  }, [state, questions, answers, elapsed, navigate]);
+  }, [config, questions, answers, elapsed, language, dailyTaskId, navigate]);
 
-  if (!state || questions.length === 0) return null;
+  if (!config || questions.length === 0) return null;
 
   const q = questions[current];
   const currentAnswer = answers[current];
@@ -176,6 +211,9 @@ export default function GovtTest() {
           className="h-full bg-primary transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
+      </div>
+      <div className="bg-muted/20 border-t border-border/40 text-xs text-muted-foreground py-2 px-4">
+        Loaded {questions.length} / {config.count} questions. More questions are added in the background as they arrive.
       </div>
 
       <main className="flex-1 container px-4 py-8 max-w-5xl mx-auto">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
@@ -9,9 +9,12 @@ import {
   Loader2, Sparkles, Award, Brain, ChevronDown, LayoutList,
 } from "lucide-react";
 import {
-  ExamType, Subject, Difficulty, TestConfig,
-  EXAM_LABELS, SUBJECT_LABELS, fetchQuestions,
+  ExamType, Subject, Difficulty, TestConfig, GovtQuestion,
+  EXAM_LABELS, SUBJECT_LABELS,
 } from "@/lib/govt-practice-data";
+import { startGovtPracticeSession } from "@/lib/govt-practice-store";
+
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 const EXAM_OPTIONS: ExamType[] = ["WBCS", "SSC", "Railway", "Banking", "Police"];
@@ -87,6 +90,9 @@ export default function GovtPractice() {
   const [language, setLanguage] = useState<"english" | "bengali">("english");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loadingQuestions, setLoadingQuestions] = useState<GovtQuestion[]>([]);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const hasNavigated = useRef(false);
 
   const meta = EXAM_META[exam];
   const estimatedMins = Math.round(count * 1.2);
@@ -122,26 +128,43 @@ export default function GovtPractice() {
     }
   }, [fullPaper, exam, difficulty]);
 
-  const handleGenerate = async () => {
+  const handleGenerate = () => {
     setLoading(true);
     setError(null);
-    try {
-      const config: TestConfig = {
-        exam,
-        customExam: customExam.trim() || undefined,
-        subject: fullPaper ? null : subject,
-        difficulty,
-        count,
-        language,
-        fullPaper,
-      };
-      const questions = await fetchQuestions(config);
-      navigate("/govt-test", { state: { config, questions, language, dailyTaskId: incoming?.dailyTaskId } });
-    } catch {
-      setError("Failed to load questions. Please try again.");
-    } finally {
+    setLoadingQuestions([]);
+    setIsStreaming(true);
+    hasNavigated.current = false;
+
+    const config: TestConfig = {
+      exam,
+      customExam: customExam.trim() || undefined,
+      subject: fullPaper ? null : subject,
+      difficulty,
+      count,
+      language,
+      fullPaper,
+    };
+
+    const navigateToTest = (items: GovtQuestion[]) => {
+      if (hasNavigated.current || items.length === 0) return;
+      hasNavigated.current = true;
       setLoading(false);
-    }
+      navigate("/govt-test", {
+        state: {
+          config,
+          questions: items,
+          language,
+          dailyTaskId: incoming?.dailyTaskId,
+        },
+      });
+    };
+
+    startGovtPracticeSession(config, language, incoming?.dailyTaskId, (session) => {
+      setLoadingQuestions(session.questions);
+      if (session.questions.length > 0 && !hasNavigated.current) {
+        navigateToTest(session.questions);
+      }
+    });
   };
 
   return (
@@ -512,6 +535,7 @@ export default function GovtPractice() {
               )}
             </AnimatePresence>
 
+<<<<<<< HEAD
             {/* ── Generate Button ──────────────────────────────────────────── */}
             <motion.button
               onClick={handleGenerate}
@@ -537,6 +561,60 @@ export default function GovtPractice() {
                 )}
               </span>
             </motion.button>
+=======
+            {/* ── Generate Button / Progressive Loading ────────────────────── */}
+            {isStreaming ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full bg-card border border-border rounded-xl p-4 space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin text-primary" />
+                    <span className="text-sm font-medium">
+                      Preparing questions in the background…
+                    </span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    {loadingQuestions.length} / {count} loaded
+                  </span>
+                </div>
+
+                <div className="w-full bg-muted rounded-full h-2">
+                  <div
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(loadingQuestions.length / count) * 100}%` }}
+                  />
+                </div>
+              </motion.div>
+            ) : (
+              <motion.button
+                onClick={handleGenerate}
+                disabled={loading}
+                whileHover={loading ? {} : { scale: 1.01 }}
+                whileTap={loading ? {} : { scale: 0.98 }}
+                className={`relative w-full h-14 rounded-xl font-bold text-base text-white overflow-hidden flex items-center justify-center gap-2.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg ${meta.glow}`}>
+                <div className={`absolute inset-0 bg-gradient-to-r ${meta.color}`} />
+                <div className={`absolute inset-0 bg-gradient-to-r ${meta.color} opacity-0 hover:opacity-80 transition-opacity`}
+                  style={{ filter: "brightness(1.1)" }} />
+                <span className="relative flex items-center gap-2">
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Loading questions from API…
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5" />
+                      Start Mock Test — {count} Questions
+                      <ChevronRight className="w-4 h-4" />
+                    </>
+                  )}
+                </span>
+              </motion.button>
+            )}
+>>>>>>> 93a7dc92fe6f913253f4c85559f26dcf6361878c
 
             <p className="text-center text-xs text-muted-foreground">
               Mock test make you perfect
