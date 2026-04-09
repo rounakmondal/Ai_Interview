@@ -535,33 +535,6 @@ export default function GovtPractice() {
               )}
             </AnimatePresence>
 
-<<<<<<< HEAD
-            {/* ── Generate Button ──────────────────────────────────────────── */}
-            <motion.button
-              onClick={handleGenerate}
-              disabled={loading}
-              whileHover={loading ? {} : { scale: 1.01 }}
-              whileTap={loading ? {} : { scale: 0.98 }}
-              className={`relative w-full h-14 rounded-xl font-bold text-base text-white overflow-hidden flex items-center justify-center gap-2.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg ${meta.glow}`}>
-              <div className={`absolute inset-0 bg-gradient-to-r ${meta.color}`} />
-              <div className={`absolute inset-0 bg-gradient-to-r ${meta.color} opacity-0 hover:opacity-80 transition-opacity`}
-                style={{ filter: "brightness(1.1)" }} />
-              <span className="relative flex items-center gap-2">
-                {loading ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Loading questions from API…
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="w-5 h-5" />
-                    Start Mock Test 
-                    <ChevronRight className="w-4 h-4" />
-                  </>
-                )}
-              </span>
-            </motion.button>
-=======
             {/* ── Generate Button / Progressive Loading ────────────────────── */}
             {isStreaming ? (
               <motion.div
@@ -614,7 +587,6 @@ export default function GovtPractice() {
                 </span>
               </motion.button>
             )}
->>>>>>> 93a7dc92fe6f913253f4c85559f26dcf6361878c
 
             <p className="text-center text-xs text-muted-foreground">
               Mock test make you perfect
