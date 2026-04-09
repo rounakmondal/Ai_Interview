@@ -397,7 +397,7 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
     ].join(", "),
     canonicalPath: "/question-hub",
     jsonLd: webPageJsonLd({
-      name: "Question Hub — Exam Syllabus, Mock Tests & Previous Year Papers | MedhaHub",
+      name: "Previous Question Set — Exam Syllabus, Mock Tests & Previous Year Papers | MedhaHub",
       description:
         "Know your exam syllabus 2026, practice mock tests, and download previous year papers for WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO & JTET on MedhaHub.",
       path: "/question-hub",

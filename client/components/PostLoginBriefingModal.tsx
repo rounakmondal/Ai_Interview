@@ -66,7 +66,7 @@ function isAnotherDialogOpen(): boolean {
 const QUICK_LINKS = [
   { to: "/current-affairs",      labelBn: "সাম্প্রতিক ঘটনা",          label: "Current Affairs", icon: Newspaper,     color: "from-blue-500 to-cyan-500" },
   { to: "/daily-tasks",          labelBn: "আজকের টাস্ক",               label: "Daily Tasks",     icon: ClipboardList, color: "from-orange-500 to-amber-500" },
-  { to: "/question-hub",         labelBn: "প্রশ্ন ব্যাংক",             label: "Question Hub",    icon: BookOpen,      color: "from-violet-500 to-purple-500" },
+  { to: "/question-hub",         labelBn: "প্রশ্ন ব্যাংক",             label: "Previous Question Set",    icon: BookOpen,      color: "from-violet-500 to-purple-500" },
   { to: "/wbcs-mock-test",       labelBn: "WBCS মক টেস্ট",             label: "WBCS Mock",       icon: GraduationCap, color: "from-emerald-500 to-teal-500" },
   { to: "/wbp-police-mock-test", labelBn: "পুলিশ মক টেস্ট",            label: "WBP Mock",        icon: Shield,        color: "from-rose-500 to-pink-500" },
   { to: "/study-plan",           labelBn: "স্টাডি প্ল্যান",            label: "Study Plan",      icon: LayoutGrid,    color: "from-orange-500 to-red-500" },

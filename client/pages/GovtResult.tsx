@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,8 @@ import {
   BookOpen,
   Target,
   TrendingUp,
+  Download,
+  Loader2,
 } from "lucide-react";
 import {
   GovtQuestion,
@@ -150,6 +152,8 @@ export default function GovtResult() {
 
   const isDailyTask = !!state?.dailyTaskId;
 
+  const [pdfLoading, setPdfLoading] = useState(false);
+
   if (!state) return null;
 
   const { config, questions, answers, timeTakenSeconds, language } = state;
@@ -157,6 +161,180 @@ export default function GovtResult() {
   const passed = score.accuracy >= PASS_THRESHOLD;
 
   const { correct, wrong, unanswered, total, accuracy } = score;
+
+  const handleDownloadPdf = async () => {
+    setPdfLoading(true);
+    try {
+      const { jsPDF } = await import("jspdf");
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      const marginL = 15;
+      const marginR = 15;
+      const contentW = pageW - marginL - marginR;
+      let y = 15;
+
+      const checkPage = (needed: number) => {
+        if (y + needed > pageH - 15) {
+          doc.addPage();
+          y = 15;
+        }
+      };
+
+      // ── Header ─────────────────────────────────────
+      doc.setFillColor(30, 41, 59);
+      doc.rect(0, 0, pageW, 32, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(18);
+      doc.setFont("helvetica", "bold");
+      doc.text("MedhaHub — Test Result", marginL, 14);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text(
+        `${config.exam} | ${config.fullPaper ? "Full Paper" : config.subject || "Mixed"} | ${config.difficulty}`,
+        marginL, 22
+      );
+      doc.text(`Date: ${new Date(state.completedAt).toLocaleDateString("en-IN")}`, marginL, 28);
+      y = 40;
+
+      // ── Score Summary ──────────────────────────────
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "bold");
+      doc.text("Score Summary", marginL, y);
+      y += 8;
+
+      doc.setFillColor(passed ? 220 : 254, passed ? 252 : 243, passed ? 231 : 199);
+      doc.roundedRect(marginL, y, contentW, 28, 3, 3, "F");
+
+      doc.setFontSize(28);
+      doc.setTextColor(passed ? 22 : 180, passed ? 163 : 83, passed ? 74 : 9);
+      doc.text(`${accuracy}%`, marginL + 8, y + 18);
+
+      doc.setFontSize(10);
+      doc.setTextColor(80, 80, 80);
+      const stats = [
+        `Correct: ${correct}/${total}`,
+        `Wrong: ${wrong}`,
+        `Unanswered: ${unanswered}`,
+        `Time: ${formatTime(timeTakenSeconds)}`,
+      ];
+      stats.forEach((s, i) => {
+        doc.text(s, marginL + 55 + i * 35, y + 12);
+      });
+
+      doc.setFontSize(11);
+      doc.setTextColor(passed ? 22 : 180, passed ? 163 : 83, passed ? 74 : 9);
+      doc.setFont("helvetica", "bold");
+      doc.text(passed ? "PASSED" : "NEEDS IMPROVEMENT", marginL + 55, y + 22);
+      doc.setFont("helvetica", "normal");
+
+      y += 36;
+
+      // ── Questions ──────────────────────────────────
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "bold");
+      doc.text("Question Review", marginL, y);
+      y += 8;
+
+      questions.forEach((q, idx) => {
+        const ans = answers.find((a) => a.questionId === q.id);
+        const userIdx = ans?.selectedIndex ?? null;
+        const isCorrect = userIdx === q.correctIndex;
+        const isUnanswered = userIdx === null;
+
+        // Estimate height needed
+        const qLines = doc.splitTextToSize(q.question, contentW - 12);
+        const explText = language === "bengali" && q.explanationBn ? q.explanationBn : q.explanation;
+        const explLines = doc.splitTextToSize(`Explanation: ${explText}`, contentW - 12);
+        const needed = 14 + qLines.length * 5 + q.options.length * 6 + 6 + explLines.length * 4.5 + 8;
+        checkPage(needed);
+
+        // Question box
+        if (isUnanswered) {
+          doc.setFillColor(245, 245, 245);
+        } else if (isCorrect) {
+          doc.setFillColor(220, 252, 231);
+        } else {
+          doc.setFillColor(254, 226, 226);
+        }
+
+        const boxH = needed - 4;
+        doc.roundedRect(marginL, y, contentW, boxH, 2, 2, "F");
+        doc.setDrawColor(200, 200, 200);
+        doc.roundedRect(marginL, y, contentW, boxH, 2, 2, "S");
+
+        y += 6;
+        // Q number + status
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(30, 41, 59);
+        const status = isUnanswered ? "Unanswered" : isCorrect ? "Correct" : `Wrong (Ans: ${String.fromCharCode(65 + q.correctIndex)})`;
+        doc.text(`Q${idx + 1}. [${status}]`, marginL + 4, y);
+        y += 5;
+
+        // Question text
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(40, 40, 40);
+        qLines.forEach((line: string) => {
+          doc.text(line, marginL + 4, y);
+          y += 4.5;
+        });
+        y += 2;
+
+        // Options
+        doc.setFontSize(9);
+        q.options.forEach((opt, oi) => {
+          const letter = String.fromCharCode(65 + oi);
+          const isAnswer = oi === q.correctIndex;
+          const isUser = oi === userIdx;
+
+          if (isAnswer) {
+            doc.setTextColor(22, 163, 74);
+            doc.setFont("helvetica", "bold");
+          } else if (isUser) {
+            doc.setTextColor(220, 38, 38);
+            doc.setFont("helvetica", "bold");
+          } else {
+            doc.setTextColor(80, 80, 80);
+            doc.setFont("helvetica", "normal");
+          }
+
+          const marker = isAnswer ? " ✓" : isUser ? " ✗" : "";
+          doc.text(`  ${letter}. ${opt}${marker}`, marginL + 4, y);
+          y += 5;
+        });
+
+        // Explanation
+        y += 1;
+        doc.setFontSize(8.5);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont("helvetica", "italic");
+        explLines.forEach((line: string) => {
+          doc.text(line, marginL + 4, y);
+          y += 4;
+        });
+        doc.setFont("helvetica", "normal");
+
+        y += 6;
+      });
+
+      // ── Footer ─────────────────────────────────────
+      checkPage(12);
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text("Generated by MedhaHub — medhahub.in", marginL, y + 4);
+
+      const filename = `MedhaHub_${config.exam}_${config.subject || "FullPaper"}_${accuracy}pct.pdf`;
+      doc.save(filename);
+    } catch (err) {
+      console.error("PDF generation failed:", err);
+    } finally {
+      setPdfLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -399,6 +577,16 @@ export default function GovtResult() {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <Button
+            variant="outline"
+            size="lg"
+            className="w-full sm:flex-1 gap-2"
+            onClick={handleDownloadPdf}
+            disabled={pdfLoading}
+          >
+            {pdfLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            {pdfLoading ? "Generating…" : "Download PDF"}
+          </Button>
           {isDailyTask ? (
             <Link to="/daily-tasks" className="flex-1">
               <Button size="lg" className="w-full gradient-primary gap-2">

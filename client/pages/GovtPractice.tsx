@@ -28,7 +28,7 @@ const FULL_PAPER_COUNTS: Record<ExamType, Record<Difficulty, 10 | 25 | 50 | 100>
   SSC: { Easy: 80, Medium: 100, Hard: 120 },
   Railway: { Easy: 100, Medium: 150, Hard: 180 },
   Banking: { Easy: 100, Medium: 120, Hard: 150 },
-  Police: { Easy: 100, Medium: 120, Hard: 150 },
+  Police: { Easy: 100, Medium: 100, Hard: 100 },
 };
 
 // Extra exams not in the main grid
@@ -38,12 +38,12 @@ const EXTRA_EXAMS = [
   "WBPSC Clerkship", "WBCS (Mains)", "NDA", "CDS", "CAPF",
 ];
 // ─── Exam config ──────────────────────────────────────────────────────────────
-const EXAM_META: Record<ExamType, { icon: React.ReactNode; color: string; glow: string; bg: string; badge: string; candidates: string }> = {
+const EXAM_META: Record<ExamType, { icon: React.ReactNode; color: string; glow: string; bg: string; badge: string; candidates: string; tooltip?: string }> = {
   WBCS: { icon: <Landmark className="w-5 h-5" />, color: "from-violet-500 to-purple-600", glow: "shadow-orange-500/30", bg: "bg-orange-500/10", badge: "border-orange-500/30 text-orange-600 dark:text-orange-400", candidates: "1.2L+" },
   SSC: { icon: <Shield className="w-5 h-5" />, color: "from-orange-500 to-red-500", glow: "shadow-orange-500/30", bg: "bg-blue-500/10", badge: "border-blue-500/30 text-blue-600 dark:text-blue-400", candidates: "3.5L+" },
   Railway: { icon: <Train className="w-5 h-5" />, color: "from-emerald-500 to-teal-600", glow: "shadow-emerald-500/30", bg: "bg-emerald-500/10", badge: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400", candidates: "2.8L+" },
   Banking: { icon: <Building2 className="w-5 h-5" />, color: "from-amber-500 to-orange-600", glow: "shadow-amber-500/30", bg: "bg-amber-500/10", badge: "border-amber-500/30 text-amber-600 dark:text-amber-400", candidates: "1.8L+" },
-  Police: { icon: <Shield className="w-5 h-5" />, color: "from-rose-500 to-pink-600", glow: "shadow-rose-500/30", bg: "bg-rose-500/10", badge: "border-rose-500/30 text-rose-600 dark:text-rose-400", candidates: "90K+" },
+  Police: { icon: <Shield className="w-5 h-5" />, color: "from-rose-500 to-pink-600", glow: "shadow-rose-500/30", bg: "bg-rose-500/10", badge: "border-rose-500/30 text-rose-600 dark:text-rose-400", candidates: "90K+", tooltip: "Includes SI, Constable & Lady Constable — applicable for all state police exams" },
 };
 
 const SUBJECT_META: Record<Subject, { icon: React.ReactNode; color: string }> = {
@@ -123,10 +123,12 @@ export default function GovtPractice() {
   // Auto-set question count when fullPaper is toggled
   useEffect(() => {
     if (fullPaper) {
-      const fullPaperCount = FULL_PAPER_COUNTS[exam]?.[difficulty] || 100;
+      const fullPaperCount = customExam
+        ? 100
+        : FULL_PAPER_COUNTS[exam]?.[difficulty] || 100;
       setCount(fullPaperCount as 10 | 25 | 50 | 100);
     }
-  }, [fullPaper, exam, difficulty]);
+  }, [fullPaper, exam, customExam, difficulty]);
 
   const handleGenerate = () => {
     setLoading(true);
@@ -188,14 +190,6 @@ export default function GovtPractice() {
           <span className="text-sm font-semibold text-foreground">Exam Room</span>
 
           <div className="ml-auto flex items-center gap-2">
-            <button
-              onClick={() => navigate('/virtual-exam')}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
-            >
-              <Target className="w-4 h-4" />
-              <span className="hidden sm:inline">Full Length Test</span>
-              <span className="sm:hidden">Test</span>
-            </button>
             <ProfileButton />
             <Link to="/prev-year-questions">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
@@ -473,7 +467,7 @@ export default function GovtPractice() {
                 ) : (
                   <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="py-3 px-4 rounded-xl border border-primary/30 bg-primary/5 text-center">
                     <p className="text-lg font-bold text-foreground">{count}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{EXAM_LABELS[exam]} Full Paper</p>
+                    <p className="text-xs text-muted-foreground mt-1">{customExam || EXAM_LABELS[exam]} Full Paper</p>
                   </motion.div>
                 )}
                 <p className="text-xs text-muted-foreground flex items-center gap-1.5">

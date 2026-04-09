@@ -169,7 +169,7 @@ export default function RRBNTPCPreviousYearPapers() {
 
       <h3>Month 2: Intensive Practice</h3>
       <ul>
-        <li>Start solving previous year papers: attempt 2 papers per week from <Link to="/rrb-ntpc-mock-test">our Question Hub</Link></li>
+        <li>Start solving previous year papers: attempt 2 papers per week from <Link to="/rrb-ntpc-mock-test">our Previous Question Set</Link></li>
         <li>Daily current affairs: 30 min every morning</li>
         <li>Maintain Railways-specific GK notes (zones, trains, records)</li>
         <li>Mathematics DI: practice 1 data interpretation set daily</li>

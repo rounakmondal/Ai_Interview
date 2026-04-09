@@ -688,7 +688,7 @@ export default function ExamCalendar() {
           <div className="flex flex-wrap gap-2 pt-2">
             {[
               { label: "Exam Syllabus Explorer", href: "/exam-syllabus" },
-              { label: "Question Hub", href: "/question-hub" },
+              { label: "Previous Question Set", href: "/question-hub" },
               { label: "WBCS Mock Test", href: "/wbcs-mock-test" },
               { label: "WB Police Mock Test", href: "/wbp-police-mock-test" },
               { label: "SSC MTS Mock Test", href: "/ssc-mts-mock-test" },

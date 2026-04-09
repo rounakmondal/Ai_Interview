@@ -721,7 +721,7 @@ export default function ExamSyllabusExplorer() {
                   { label: "WB TET Mock Test", href: "/wb-tet-mock-test" },
                   { label: "JTET Mock Test", href: "/jtet-mock-test" },
                   { label: "WBPSC Clerkship Mock Test", href: "/wbpsc-clerkship-mock-test" },
-                  { label: "Question Hub", href: "/question-hub" },
+                  { label: "Previous Question Set", href: "/question-hub" },
                   { label: "Company Interview Questions", href: "/interview-questions" },
                 ].map((link) => (
                   <a key={link.href} href={link.href} className="text-primary/60 hover:text-primary underline">
@@ -739,7 +739,7 @@ export default function ExamSyllabusExplorer() {
           dangerouslySetInnerHTML={{
             __html: breadcrumbSchema([
               { name: "Home", url: "/" },
-              { name: "Question Hub", url: "/question-hub" },
+              { name: "Previous Question Set", url: "/question-hub" },
               { name: "Exam Syllabus 2026", url: "/exam-syllabus" },
             ]),
           }}

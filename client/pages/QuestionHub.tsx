@@ -25,6 +25,7 @@ import {
   Info,
   Search,
   Play,
+  ChevronDown,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -643,6 +644,118 @@ function groupFilesByType(files: PDFItem[], folder: string): Record<string, PDFI
   return grouped;
 }
 
+// ─── Demo Mock Questions per Exam ─────────────────────────────────────────────
+interface MockDemoQuestion {
+  question: string;
+  options: string[];
+  correctIndex: number;
+  subject: string;
+  difficulty: "Easy" | "Medium" | "Hard";
+}
+
+interface MockExamGroup {
+  exam: string;
+  examBn: string;
+  icon: string;
+  bgClass: string;
+  practiceExam: string;
+  questions: MockDemoQuestion[];
+}
+
+const MOCK_DEMO_QUESTIONS: MockExamGroup[] = [
+  {
+    exam: "WB Police (SI / Constable)",
+    examBn: "পুলিশ ভর্তি",
+    icon: "🛡️",
+    bgClass: "bg-orange-500/10",
+    practiceExam: "Police",
+    questions: [
+      { question: "Which Article of the Indian Constitution deals with the Right to Equality?", options: ["Article 12", "Article 14", "Article 19", "Article 21"], correctIndex: 1, subject: "Polity", difficulty: "Easy" },
+      { question: "The Headquarters of the National Investigation Agency (NIA) is located in?", options: ["Mumbai", "Kolkata", "New Delhi", "Hyderabad"], correctIndex: 2, subject: "Current Affairs", difficulty: "Easy" },
+      { question: "What is the SI unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correctIndex: 2, subject: "Math", difficulty: "Easy" },
+      { question: "Who founded the Indian National Army (INA)?", options: ["Subhas Chandra Bose", "Bhagat Singh", "Rashbehari Bose", "Surya Sen"], correctIndex: 0, subject: "History", difficulty: "Medium" },
+    ],
+  },
+  {
+    exam: "WBCS (Civil Service)",
+    examBn: "ডব্লিউবিসিএস",
+    icon: "🏛️",
+    bgClass: "bg-emerald-500/10",
+    practiceExam: "WBCS",
+    questions: [
+      { question: "The Permanent Settlement was introduced in Bengal by?", options: ["Lord Cornwallis", "Lord Wellesley", "Lord Hastings", "Lord Dalhousie"], correctIndex: 0, subject: "History", difficulty: "Medium" },
+      { question: "Which river forms the boundary between India and Bangladesh in West Bengal?", options: ["Hooghly", "Teesta", "Ichamati", "Damodar"], correctIndex: 2, subject: "Geography", difficulty: "Medium" },
+      { question: "The 73rd Constitutional Amendment is related to?", options: ["Panchayati Raj", "Municipalities", "Fundamental Rights", "Emergency Provisions"], correctIndex: 0, subject: "Polity", difficulty: "Easy" },
+      { question: "Who was the first Chief Minister of West Bengal?", options: ["Bidhan Chandra Roy", "Prafulla Chandra Ghosh", "Jyoti Basu", "Ajoy Mukherjee"], correctIndex: 1, subject: "History", difficulty: "Hard" },
+    ],
+  },
+  {
+    exam: "SSC (MTS / CGL)",
+    examBn: "এসএসসি",
+    icon: "📋",
+    bgClass: "bg-amber-500/10",
+    practiceExam: "SSC",
+    questions: [
+      { question: "If the cost price of an article is ₹200 and the selling price is ₹250, what is the profit percentage?", options: ["20%", "25%", "30%", "15%"], correctIndex: 1, subject: "Math", difficulty: "Easy" },
+      { question: "Choose the correct synonym of 'Abundant':", options: ["Scarce", "Plentiful", "Meagre", "Rare"], correctIndex: 1, subject: "Reasoning", difficulty: "Easy" },
+      { question: "The Tropic of Cancer passes through how many Indian states?", options: ["6", "7", "8", "9"], correctIndex: 2, subject: "Geography", difficulty: "Medium" },
+      { question: "A train 150m long passes a pole in 15 seconds. What is its speed in km/h?", options: ["36 km/h", "45 km/h", "54 km/h", "72 km/h"], correctIndex: 0, subject: "Math", difficulty: "Medium" },
+    ],
+  },
+  {
+    exam: "RRB NTPC (Railway)",
+    examBn: "আরআরবি এনটিপিসি",
+    icon: "🚂",
+    bgClass: "bg-blue-500/10",
+    practiceExam: "Railway",
+    questions: [
+      { question: "Indian Railways is divided into how many zones?", options: ["16", "17", "18", "19"], correctIndex: 2, subject: "Current Affairs", difficulty: "Easy" },
+      { question: "The first railway line in India ran between?", options: ["Delhi to Agra", "Bombay to Thane", "Calcutta to Delhi", "Madras to Bangalore"], correctIndex: 1, subject: "History", difficulty: "Easy" },
+      { question: "Find the missing number: 2, 6, 12, 20, ?", options: ["28", "30", "32", "36"], correctIndex: 1, subject: "Reasoning", difficulty: "Medium" },
+      { question: "Which is the longest railway platform in India?", options: ["Gorakhpur", "Kharagpur", "Hubballi", "Kollam"], correctIndex: 0, subject: "Current Affairs", difficulty: "Medium" },
+    ],
+  },
+  {
+    exam: "IBPS PO (Banking)",
+    examBn: "আইবিপিএস পিও",
+    icon: "🏦",
+    bgClass: "bg-violet-500/10",
+    practiceExam: "Banking",
+    questions: [
+      { question: "What is the full form of NEFT?", options: ["National Electronic Funds Transfer", "National Emergency Fund Transfer", "New Electronic Fund Transaction", "National E-Fund Transfer"], correctIndex: 0, subject: "Current Affairs", difficulty: "Easy" },
+      { question: "A sum of ₹5000 is deposited at 10% simple interest. What is the interest after 3 years?", options: ["₹1000", "₹1500", "₹2000", "₹1200"], correctIndex: 1, subject: "Math", difficulty: "Easy" },
+      { question: "Who is the current Governor of the Reserve Bank of India (as of 2026)?", options: ["Shaktikanta Das", "Sanjay Malhotra", "Raghuram Rajan", "Urjit Patel"], correctIndex: 1, subject: "Current Affairs", difficulty: "Medium" },
+      { question: "In a certain code, 'BANK' is written as 'DCPM'. How is 'LOAN' written?", options: ["NQCP", "NPCQ", "MQBP", "MPCO"], correctIndex: 0, subject: "Reasoning", difficulty: "Hard" },
+    ],
+  },
+  {
+    exam: "WBPSC Clerkship",
+    examBn: "ডব্লিউবিপিএসসি",
+    icon: "📝",
+    bgClass: "bg-teal-500/10",
+    practiceExam: "WBCS",
+    questions: [
+      { question: "Who wrote 'Gitanjali'?", options: ["Bankim Chandra Chattopadhyay", "Rabindranath Tagore", "Sarat Chandra Chattopadhyay", "Kazi Nazrul Islam"], correctIndex: 1, subject: "History", difficulty: "Easy" },
+      { question: "Kolkata is situated on the banks of which river?", options: ["Ganga", "Hooghly", "Damodar", "Brahmaputra"], correctIndex: 1, subject: "Geography", difficulty: "Easy" },
+      { question: "The Fundamental Duties are mentioned in which part of the Constitution?", options: ["Part III", "Part IV", "Part IVA", "Part V"], correctIndex: 2, subject: "Polity", difficulty: "Medium" },
+      { question: "If 15% of a number is 45, what is the number?", options: ["200", "250", "300", "350"], correctIndex: 2, subject: "Math", difficulty: "Easy" },
+    ],
+  },
+  {
+    exam: "WB Primary TET",
+    examBn: "প্রাইমারি টেট",
+    icon: "🎓",
+    bgClass: "bg-pink-500/10",
+    practiceExam: "WBCS",
+    questions: [
+      { question: "According to Piaget, which stage of cognitive development involves 'conservation'?", options: ["Sensorimotor", "Pre-operational", "Concrete operational", "Formal operational"], correctIndex: 2, subject: "Reasoning", difficulty: "Medium" },
+      { question: "The Right to Education Act was enacted in which year?", options: ["2005", "2009", "2010", "2012"], correctIndex: 1, subject: "Polity", difficulty: "Easy" },
+      { question: "Which of the following is NOT a primary color?", options: ["Red", "Blue", "Green", "Yellow"], correctIndex: 2, subject: "Reasoning", difficulty: "Easy" },
+      { question: "Vygotsky's Zone of Proximal Development (ZPD) refers to?", options: ["Tasks a child does alone", "Tasks beyond reach", "Tasks done with guidance", "Innate abilities"], correctIndex: 2, subject: "Reasoning", difficulty: "Hard" },
+    ],
+  },
+];
+
 export default function QuestionHub({
   seoProfile = "default",
 }: {
@@ -667,6 +780,23 @@ export default function QuestionHub({
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<"previous-year" | "mock">(() => {
+    const view = searchParams.get("view");
+    return view === "mock" ? "mock" : "previous-year";
+  });
+  const [mockExamFilter, setMockExamFilter] = useState<string>("all");
+  const [showMockExamDropdown, setShowMockExamDropdown] = useState(false);
+
+  const switchTab = (tab: "previous-year" | "mock") => {
+    setActiveTab(tab);
+    const next = new URLSearchParams(searchParams);
+    if (tab === "mock") {
+      next.set("view", "mock");
+    } else {
+      next.delete("view");
+    }
+    setSearchParams(next, { replace: true });
+  };
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "rose"];
@@ -929,7 +1059,7 @@ export default function QuestionHub({
             Home
           </Link>
           <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
-          <span className="text-sm font-medium text-foreground">Question Hub</span>
+          <span className="text-sm font-medium text-foreground">Previous Question Set</span>
           <div className="ml-auto flex items-center gap-2">
             <Link to="/govt-practice" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
               <Play className="w-3.5 h-3.5" />
@@ -1028,7 +1158,7 @@ export default function QuestionHub({
                         ? "SSC MTS Mock Test & Previous Year Papers"
                         : seoProfile === "ibps-po"
                           ? "IBPS PO Mock Test & Previous Year Papers"
-                          : "Question Hub"}
+                          : "Previous Question Set"}
             </h1>
             <button
               onClick={() => setShowInfoModal(true)}
@@ -1039,33 +1169,62 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
-        {/* Search Box */}
+        {/* Search Box + Tabs */}
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
           className="mb-8"
         >
-          <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search papers, year, type…"
-              className="w-full pl-8 pr-8 py-2 text-sm rounded-xl border border-border/60 bg-muted/20 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all"
-            />
-            {searchQuery && (
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="relative max-w-sm flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search papers, year, type…"
+                className="w-full pl-8 pr-8 py-2 text-sm rounded-xl border border-border/60 bg-muted/20 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* Tab Buttons */}
+            <div className="flex gap-2">
               <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => switchTab("previous-year")}
+                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${
+                  activeTab === "previous-year"
+                    ? "bg-red-600 text-white shadow-lg shadow-red-500/25"
+                    : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/30 hover:bg-red-500/20"
+                }`}
               >
-                <X className="w-3.5 h-3.5" />
+                Previous Year Question
               </button>
-            )}
+              <button
+                onClick={() => switchTab("mock")}
+                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${
+                  activeTab === "mock"
+                    ? "bg-violet-600 text-white shadow-lg shadow-violet-500/25"
+                    : "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/30 hover:bg-violet-500/20"
+                }`}
+              >
+                Mock Question
+              </button>
+            </div>
           </div>
         </motion.div>
 
+        {/* ═══ PREVIOUS YEAR TAB ═══ */}
+        {activeTab === "previous-year" && (
+        <>
         {/* Folder Selector — exam category cards with Bengali labels */}
         {!isSearching && (
         <motion.section
@@ -1540,6 +1699,204 @@ export default function QuestionHub({
               </Link>
             </motion.div>
           </motion.section>
+        )}
+        </>
+        )}
+
+        {/* ═══ MOCK QUESTION TAB ═══ */}
+        {activeTab === "mock" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Header + Exam Dropdown Filter */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-1 h-8 rounded-full bg-gradient-to-b from-violet-600 to-purple-500" />
+                <h2 className="text-2xl font-bold text-foreground">Mock Question Papers</h2>
+              </div>
+
+              <div className="relative inline-block">
+                <button
+                  onClick={() => setShowMockExamDropdown(!showMockExamDropdown)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-violet-500/30 bg-violet-500/5 text-foreground text-sm font-medium hover:bg-violet-500/10 transition-all"
+                >
+                  <GraduationCap className="w-4 h-4 text-violet-500" />
+                  {mockExamFilter === "all" ? "All Exams" : MOCK_DEMO_QUESTIONS.find(e => e.exam === mockExamFilter)?.exam ?? "All Exams"}
+                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${showMockExamDropdown ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {showMockExamDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-1.5 z-30 w-72 bg-card border border-border rounded-2xl shadow-xl overflow-hidden"
+                    >
+                      <div className="p-2 max-h-64 overflow-y-auto space-y-0.5">
+                        <button
+                          onClick={() => { setMockExamFilter("all"); setShowMockExamDropdown(false); }}
+                          className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                            mockExamFilter === "all"
+                              ? "bg-violet-500/10 text-foreground"
+                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          }`}
+                        >
+                          All Exams
+                        </button>
+                        {MOCK_DEMO_QUESTIONS.map((examGroup) => (
+                          <button
+                            key={examGroup.exam}
+                            onClick={() => { setMockExamFilter(examGroup.exam); setShowMockExamDropdown(false); }}
+                            className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 ${
+                              mockExamFilter === examGroup.exam
+                                ? "bg-violet-500/10 text-foreground"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            }`}
+                          >
+                            <span>{examGroup.icon}</span>
+                            <span>{examGroup.exam}</span>
+                            <span className="ml-auto text-xs text-muted-foreground">{examGroup.questions.length} Q</span>
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Demo Question Cards by Exam */}
+            {MOCK_DEMO_QUESTIONS
+              .filter((g) => mockExamFilter === "all" || g.exam === mockExamFilter)
+              .map((examGroup) => (
+                <motion.section
+                  key={examGroup.exam}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-10"
+                >
+                  {/* Exam Section Header */}
+                  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-violet-500/10">
+                    <div className={`p-2.5 rounded-lg ${examGroup.bgClass}`}>
+                      <span className="text-lg">{examGroup.icon}</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-foreground">{examGroup.exam}</h3>
+                      <p className="text-xs text-muted-foreground">{examGroup.examBn} • {examGroup.questions.length} sample questions</p>
+                    </div>
+                    <Link
+                      to={`/govt-practice`}
+                      state={{ exam: examGroup.practiceExam }}
+                      className="text-xs font-medium text-violet-600 dark:text-violet-400 hover:underline flex items-center gap-1"
+                    >
+                      Full Mock Test <ChevronRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+
+                  {/* Question Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {examGroup.questions.map((q, qi) => (
+                      <motion.div
+                        key={`${examGroup.exam}-${qi}`}
+                        initial={{ opacity: 0, scale: 0.97 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: qi * 0.04 }}
+                        className="rounded-xl border border-violet-500/15 bg-card/80 hover:border-violet-500/30 hover:shadow-md transition-all overflow-hidden"
+                      >
+                        <div className="h-1 w-full bg-gradient-to-r from-violet-500 to-purple-500" />
+                        <div className="p-5 space-y-3">
+                          {/* Meta badges */}
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-xs font-bold text-violet-600 dark:text-violet-400">Q{qi + 1}</span>
+                            <span className="text-xs px-2 py-0.5 bg-violet-500/10 text-violet-700 dark:text-violet-300 rounded-full font-medium">{q.subject}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                              q.difficulty === "Easy"
+                                ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                                : q.difficulty === "Medium"
+                                ? "bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                                : "bg-rose-500/10 text-rose-700 dark:text-rose-400"
+                            }`}>{q.difficulty}</span>
+                          </div>
+
+                          {/* Question */}
+                          <p className="text-sm font-medium text-foreground leading-relaxed">{q.question}</p>
+
+                          {/* Options */}
+                          <div className="grid grid-cols-1 gap-1.5">
+                            {q.options.map((opt, oi) => (
+                              <div
+                                key={oi}
+                                className="px-3 py-2 rounded-lg text-xs border border-border/40 bg-muted/20 text-muted-foreground flex items-center gap-2"
+                              >
+                                <span className="font-bold text-foreground/60 w-5">{String.fromCharCode(65 + oi)}.</span>
+                                <span>{opt}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Actions */}
+                          <div className="flex gap-2 pt-1">
+                            <Button
+                              size="sm"
+                              className="flex-1 gap-1.5 text-xs bg-violet-600 hover:bg-violet-700 text-white"
+                              onClick={() => {
+                                navigate("/govt-practice", { state: { exam: examGroup.practiceExam, subject: q.subject } });
+                              }}
+                            >
+                              <Play className="w-3.5 h-3.5" />
+                              Attempt Mock Test
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="gap-1.5 text-xs border-violet-500/20 hover:bg-violet-500/5"
+                              onClick={() => {
+                                // Generate a printable single-question view
+                                const html = `<!doctype html><html><head><meta charset="UTF-8"><title>Mock Question - ${examGroup.exam}</title><style>body{font-family:system-ui,sans-serif;margin:40px;color:#111;line-height:1.6}h1{font-size:20px;border-bottom:2px solid #e2e8f0;padding-bottom:8px}.q{font-weight:700;font-size:16px;margin:20px 0 12px}.opt{margin:6px 0 6px 16px;font-size:14px}.ans{color:#059669;font-weight:600;margin-top:16px;background:#ecfdf5;padding:6px 12px;border-radius:6px;display:inline-block;font-size:13px}</style></head><body><h1>${examGroup.exam} — Mock Question</h1><div class="q">Q. ${q.question}</div>${q.options.map((o,i)=>`<div class="opt">${String.fromCharCode(65+i)}. ${o}</div>`).join("")}<div class="ans">Correct Answer: ${String.fromCharCode(65 + q.correctIndex)}</div></body></html>`;
+                                const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement("a");
+                                a.href = url; a.download = `Mock_Q${qi+1}_${examGroup.exam.replace(/\s+/g,"_")}.html`; a.click();
+                                URL.revokeObjectURL(url);
+                              }}
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                            </Button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.section>
+              ))}
+
+            {/* Link to Govt Practice for AI Mock Tests */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mt-10 rounded-xl border border-violet-500/20 bg-gradient-to-r from-violet-500/5 via-purple-500/5 to-fuchsia-500/5 p-6 text-center"
+            >
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-violet-500/15 flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-violet-500" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground">Want AI-Generated Mock Tests?</h3>
+                <p className="text-sm text-muted-foreground max-w-md">
+                  Create custom mock tests with AI — choose your exam, subject, difficulty, and question count for a personalized practice experience.
+                </p>
+                <Link to="/govt-practice">
+                  <Button className="gap-2 bg-violet-600 hover:bg-violet-700 text-white mt-2">
+                    <Zap className="w-4 h-4" />
+                    Go to Govt Practice — AI Mock Tests
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </main>
     </div>

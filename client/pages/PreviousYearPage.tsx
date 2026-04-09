@@ -823,7 +823,7 @@ export default function PreviousYearPage() {
           </li>
           <ChevronRight className="w-3 h-3" />
           <li>
-            <Link to="/question-hub" className="hover:text-foreground transition-colors">Question Hub</Link>
+            <Link to="/question-hub" className="hover:text-foreground transition-colors">Previous Question Set</Link>
           </li>
           <ChevronRight className="w-3 h-3" />
           <li>

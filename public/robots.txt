@@ -10,6 +10,7 @@ Sitemap: https://medhahub.in/sitemap.xml
 # Explicitly allow high-value SEO pages
 Allow: /wbcs-mock-test
 Allow: /wbp-police-mock-test
+Allow: /wbp-mock-test
 Allow: /wbpsc-clerkship-mock-test
 Allow: /wb-tet-mock-test
 Allow: /ssc-mts-mock-test

@@ -152,12 +152,12 @@ export default function PDFMockTest() {
             No PDF Selected
           </h1>
           <p className="text-slate-500 mb-8 leading-relaxed">
-            Please select a question paper from the Question Hub to start a mock test.
+            Please select a question paper from the Previous Question Set to start a mock test.
           </p>
           <Link to="/question-hub">
             <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-orange-200/40">
               <ArrowLeft className="w-4 h-4" />
-              Go to Question Hub
+              Go to Previous Question Set
             </Button>
           </Link>
         </motion.div>
@@ -340,7 +340,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
           <Link to="/question-hub">
             <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold h-12 px-8 rounded-2xl gap-2 border-0 shadow-lg shadow-orange-200/40">
               <ArrowLeft className="w-4 h-4" />
-              Back to Question Hub
+              Back to Previous Question Set
             </Button>
           </Link>
         </motion.div>
@@ -374,7 +374,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
           <div className="container px-4 h-14 flex items-center gap-3 max-w-6xl mx-auto">
             <Link to="/question-hub" className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Question Hub
+              Previous Question Set
             </Link>
             <div className="w-px h-4 bg-slate-200" />
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Mock Test</span>
@@ -882,7 +882,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
           <div className="container px-4 h-14 flex items-center gap-3 max-w-6xl mx-auto">
             <Link to="/question-hub" className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Question Hub
+              Previous Question Set
             </Link>
             <div className="w-px h-4 bg-slate-200" />
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Results</span>

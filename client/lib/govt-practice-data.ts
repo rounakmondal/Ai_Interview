@@ -492,6 +492,44 @@ export const QUESTION_BANK: GovtQuestion[] = [
 
 // ─── API fetch functions (with local fallback) ───────────────────────────────
 
+const ANSWER_LETTER_MAP: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
+
+/** Normalise a raw question (Bengali or English keys) into GovtQuestion */
+function normalizeRawQuestion(raw: any): GovtQuestion {
+  if (raw.question && Array.isArray(raw.options) && typeof raw.correctIndex === "number") {
+    return raw as GovtQuestion;
+  }
+
+  const question = raw.question || raw["প্রশ্ন"] || raw["proshno"] || "";
+  const rawOpts: string[] = raw.options || raw["বিকল্প"] || raw["bikalpa"] || [];
+  const strip = (s: string) => s.replace(/^[A-Da-d][.):\s-]+\s*/, "").trim();
+  const options: [string, string, string, string] = [
+    strip(rawOpts[0] || ""), strip(rawOpts[1] || ""),
+    strip(rawOpts[2] || ""), strip(rawOpts[3] || ""),
+  ];
+
+  let correctIndex = 0;
+  if (typeof raw.correctIndex === "number") {
+    correctIndex = raw.correctIndex;
+  } else {
+    const letter = (raw.answer || raw["উত্তর"] || raw["uttor"] || "A").trim().toUpperCase();
+    correctIndex = ANSWER_LETTER_MAP[letter] ?? 0;
+  }
+
+  return {
+    id: raw.id ?? Date.now() + Math.random(),
+    exam: raw.exam || "WBCS",
+    subject: raw.subject || "History",
+    difficulty: raw.difficulty || "Medium",
+    year: raw.year,
+    question,
+    options,
+    correctIndex,
+    explanation: raw.explanation || raw["ব্যাখ্যা"] || raw["bakhya"] || "",
+    explanationBn: raw.explanationBn || raw["ব্যাখ্যা"] || undefined,
+  };
+}
+
 function getAuthToken(): string | null {
   return localStorage.getItem("auth_token");
 }
@@ -530,12 +568,12 @@ const eventSource = new EventSource(`${API_BASE}/govt/questions?${params}`);
       try {
         const data = JSON.parse(event.data);
         if (Array.isArray(data)) {
-          // This is a batch of questions
-          questions.push(...data);
+          questions.push(...data.map(normalizeRawQuestion));
         } else if (data.error) {
-          // Error occurred
           eventSource.close();
           reject(new Error(data.error));
+        } else if (data && typeof data === "object") {
+          questions.push(normalizeRawQuestion(data));
         }
       } catch (err) {
         console.warn('Failed to parse SSE data:', event.data);

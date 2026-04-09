@@ -150,6 +150,10 @@ function AppContent() {
             element={<QuestionHub seoProfile="police" />}
           />
           <Route
+            path="/wbp-mock-test"
+            element={<QuestionHub seoProfile="police" />}
+          />
+          <Route
             path="/wbpsc-clerkship-mock-test"
             element={<QuestionHub seoProfile="wbpsc-clerkship" />}
           />

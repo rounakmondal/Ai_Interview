@@ -169,9 +169,9 @@ export default function GovtTest() {
                 <span className="text-xs hidden sm:inline">Back</span>
               </Button>
               <div className="flex flex-col gap-0.5">
-                <h1 className="text-sm font-bold text-foreground">{state.config.exam} Exam</h1>
+                <h1 className="text-sm font-bold text-foreground">{config.exam} Exam</h1>
                 <p className="text-xs text-muted-foreground">
-                  {state.config.fullPaper ? "Full Paper" : state.config.subject} • {state.config.difficulty}
+                  {config.fullPaper ? "Full Paper" : config.subject} • {config.difficulty}
                 </p>
               </div>
             </div>
