@@ -790,7 +790,7 @@ export default function QuestionHub({
   const [isExamDrawerOpen, setIsExamDrawerOpen] = useState(false);
 
   const currentFolder = FOLDERS[selectedFolder];
-  const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "rose"];
+  const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "terracotta"];
 
   useEffect(() => {
     applyQuestionHubExamSeo(seoProfile);
@@ -1166,15 +1166,14 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
-        {/* Search Box + Tabs */}
+        {/* Search Box */}
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
           className="mb-8"
         >
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="relative max-w-sm flex-1">
+          <div className="relative max-w-sm">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
               <input
                 type="text"
@@ -1191,31 +1190,6 @@ export default function QuestionHub({
                   <X className="w-3.5 h-3.5" />
                 </button>
               )}
-            </div>
-
-            {/* Tab Buttons */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => switchTab("previous-year")}
-                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${
-                  activeTab === "previous-year"
-                    ? "bg-red-600 text-white shadow-lg shadow-red-500/25"
-                    : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/30 hover:bg-red-500/20"
-                }`}
-              >
-                Previous Year Question
-              </button>
-              <button
-                onClick={() => switchTab("mock")}
-                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${
-                  activeTab === "mock"
-                    ? "bg-violet-600 text-white shadow-lg shadow-violet-500/25"
-                    : "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/30 hover:bg-violet-500/20"
-                }`}
-              >
-                Mock Question
-              </button>
-            </div>
           </div>
         </motion.div>
 
@@ -1703,204 +1677,6 @@ export default function QuestionHub({
               </Link>
             </motion.div>
           </motion.section>
-        )}
-        </>
-        )}
-
-        {/* ═══ MOCK QUESTION TAB ═══ */}
-        {activeTab === "mock" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Header + Exam Dropdown Filter */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-1 h-8 rounded-full bg-gradient-to-b from-violet-600 to-purple-500" />
-                <h2 className="text-2xl font-bold text-foreground">Mock Question Papers</h2>
-              </div>
-
-              <div className="relative inline-block">
-                <button
-                  onClick={() => setShowMockExamDropdown(!showMockExamDropdown)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-violet-500/30 bg-violet-500/5 text-foreground text-sm font-medium hover:bg-violet-500/10 transition-all"
-                >
-                  <GraduationCap className="w-4 h-4 text-violet-500" />
-                  {mockExamFilter === "all" ? "All Exams" : MOCK_DEMO_QUESTIONS.find(e => e.exam === mockExamFilter)?.exam ?? "All Exams"}
-                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${showMockExamDropdown ? "rotate-180" : ""}`} />
-                </button>
-                <AnimatePresence>
-                  {showMockExamDropdown && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1.5 z-30 w-72 bg-card border border-border rounded-2xl shadow-xl overflow-hidden"
-                    >
-                      <div className="p-2 max-h-64 overflow-y-auto space-y-0.5">
-                        <button
-                          onClick={() => { setMockExamFilter("all"); setShowMockExamDropdown(false); }}
-                          className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                            mockExamFilter === "all"
-                              ? "bg-violet-500/10 text-foreground"
-                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                          }`}
-                        >
-                          All Exams
-                        </button>
-                        {MOCK_DEMO_QUESTIONS.map((examGroup) => (
-                          <button
-                            key={examGroup.exam}
-                            onClick={() => { setMockExamFilter(examGroup.exam); setShowMockExamDropdown(false); }}
-                            className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 ${
-                              mockExamFilter === examGroup.exam
-                                ? "bg-violet-500/10 text-foreground"
-                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                            }`}
-                          >
-                            <span>{examGroup.icon}</span>
-                            <span>{examGroup.exam}</span>
-                            <span className="ml-auto text-xs text-muted-foreground">{examGroup.questions.length} Q</span>
-                          </button>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* Demo Question Cards by Exam */}
-            {MOCK_DEMO_QUESTIONS
-              .filter((g) => mockExamFilter === "all" || g.exam === mockExamFilter)
-              .map((examGroup) => (
-                <motion.section
-                  key={examGroup.exam}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-10"
-                >
-                  {/* Exam Section Header */}
-                  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-violet-500/10">
-                    <div className={`p-2.5 rounded-lg ${examGroup.bgClass}`}>
-                      <span className="text-lg">{examGroup.icon}</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-foreground">{examGroup.exam}</h3>
-                      <p className="text-xs text-muted-foreground">{examGroup.examBn} • {examGroup.questions.length} sample questions</p>
-                    </div>
-                    <Link
-                      to={`/govt-practice`}
-                      state={{ exam: examGroup.practiceExam }}
-                      className="text-xs font-medium text-violet-600 dark:text-violet-400 hover:underline flex items-center gap-1"
-                    >
-                      Full Mock Test <ChevronRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-
-                  {/* Question Cards Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {examGroup.questions.map((q, qi) => (
-                      <motion.div
-                        key={`${examGroup.exam}-${qi}`}
-                        initial={{ opacity: 0, scale: 0.97 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: qi * 0.04 }}
-                        className="rounded-xl border border-violet-500/15 bg-card/80 hover:border-violet-500/30 hover:shadow-md transition-all overflow-hidden"
-                      >
-                        <div className="h-1 w-full bg-gradient-to-r from-violet-500 to-purple-500" />
-                        <div className="p-5 space-y-3">
-                          {/* Meta badges */}
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-xs font-bold text-violet-600 dark:text-violet-400">Q{qi + 1}</span>
-                            <span className="text-xs px-2 py-0.5 bg-violet-500/10 text-violet-700 dark:text-violet-300 rounded-full font-medium">{q.subject}</span>
-                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                              q.difficulty === "Easy"
-                                ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                                : q.difficulty === "Medium"
-                                ? "bg-amber-500/10 text-amber-700 dark:text-amber-400"
-                                : "bg-rose-500/10 text-rose-700 dark:text-rose-400"
-                            }`}>{q.difficulty}</span>
-                          </div>
-
-                          {/* Question */}
-                          <p className="text-sm font-medium text-foreground leading-relaxed">{q.question}</p>
-
-                          {/* Options */}
-                          <div className="grid grid-cols-1 gap-1.5">
-                            {q.options.map((opt, oi) => (
-                              <div
-                                key={oi}
-                                className="px-3 py-2 rounded-lg text-xs border border-border/40 bg-muted/20 text-muted-foreground flex items-center gap-2"
-                              >
-                                <span className="font-bold text-foreground/60 w-5">{String.fromCharCode(65 + oi)}.</span>
-                                <span>{opt}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Actions */}
-                          <div className="flex gap-2 pt-1">
-                            <Button
-                              size="sm"
-                              className="flex-1 gap-1.5 text-xs bg-violet-600 hover:bg-violet-700 text-white"
-                              onClick={() => {
-                                navigate("/govt-practice", { state: { exam: examGroup.practiceExam, subject: q.subject } });
-                              }}
-                            >
-                              <Play className="w-3.5 h-3.5" />
-                              Attempt Mock Test
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="gap-1.5 text-xs border-violet-500/20 hover:bg-violet-500/5"
-                              onClick={() => {
-                                // Generate a printable single-question view
-                                const html = `<!doctype html><html><head><meta charset="UTF-8"><title>Mock Question - ${examGroup.exam}</title><style>body{font-family:system-ui,sans-serif;margin:40px;color:#111;line-height:1.6}h1{font-size:20px;border-bottom:2px solid #e2e8f0;padding-bottom:8px}.q{font-weight:700;font-size:16px;margin:20px 0 12px}.opt{margin:6px 0 6px 16px;font-size:14px}.ans{color:#059669;font-weight:600;margin-top:16px;background:#ecfdf5;padding:6px 12px;border-radius:6px;display:inline-block;font-size:13px}</style></head><body><h1>${examGroup.exam} — Mock Question</h1><div class="q">Q. ${q.question}</div>${q.options.map((o,i)=>`<div class="opt">${String.fromCharCode(65+i)}. ${o}</div>`).join("")}<div class="ans">Correct Answer: ${String.fromCharCode(65 + q.correctIndex)}</div></body></html>`;
-                                const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-                                const url = URL.createObjectURL(blob);
-                                const a = document.createElement("a");
-                                a.href = url; a.download = `Mock_Q${qi+1}_${examGroup.exam.replace(/\s+/g,"_")}.html`; a.click();
-                                URL.revokeObjectURL(url);
-                              }}
-                            >
-                              <Download className="w-3.5 h-3.5" />
-                            </Button>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.section>
-              ))}
-
-            {/* Link to Govt Practice for AI Mock Tests */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="mt-10 rounded-xl border border-violet-500/20 bg-gradient-to-r from-violet-500/5 via-purple-500/5 to-fuchsia-500/5 p-6 text-center"
-            >
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-violet-500/15 flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-violet-500" />
-                </div>
-                <h3 className="text-lg font-bold text-foreground">Want AI-Generated Mock Tests?</h3>
-                <p className="text-sm text-muted-foreground max-w-md">
-                  Create custom mock tests with AI — choose your exam, subject, difficulty, and question count for a personalized practice experience.
-                </p>
-                <Link to="/govt-practice">
-                  <Button className="gap-2 bg-violet-600 hover:bg-violet-700 text-white mt-2">
-                    <Zap className="w-4 h-4" />
-                    Go to Govt Practice — AI Mock Tests
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          </motion.div>
         )}
       </main>
     </div>
