@@ -1,115 +1,26 @@
-import { useRef } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, ArrowRight, CheckCircle2, Mail, Phone, MapPin, ChevronLeft, ChevronRight, BookOpenCheck, Users, TrendingUp, Play, Sparkles, Briefcase } from "lucide-react";
-import HeroAvatar from "./components/HeroAvatar";
+import { ArrowRight, CheckCircle2, Mail, Phone, MapPin } from "lucide-react";
 import Footer from "@/components/Footer";
-
-const FEATURED_COMPANIES = [
-  { slug: "tcs", name: "Tata Consultancy Services", short: "TCS", logo: "🔵", questions: 120, pkg: "₹3.5–7 LPA", tag: "India's #1 IT", rounds: ["Aptitude", "Technical", "HR"], gradient: "from-blue-500 to-blue-700", border: "border-blue-200 dark:border-blue-800" },
-  { slug: "infosys", name: "Infosys Limited", short: "Infosys", logo: "🔷", questions: 110, pkg: "₹3.6–9 LPA", tag: "Global Leader", rounds: ["InfyTQ", "Technical", "HR"], gradient: "from-indigo-500 to-indigo-700", border: "border-indigo-200 dark:border-indigo-800" },
-  { slug: "wipro", name: "Wipro Limited", short: "Wipro", logo: "🌻", questions: 100, pkg: "₹3.5–6.5 LPA", tag: "Fortune 500", rounds: ["Online Test", "Technical", "HR"], gradient: "from-purple-500 to-purple-700", border: "border-purple-200 dark:border-purple-800" },
-  { slug: "accenture", name: "Accenture", short: "Accenture", logo: "▶️", questions: 115, pkg: "₹4.5–8 LPA", tag: "7,40,000+ Employees", rounds: ["Cognitive", "Coding", "HR"], gradient: "from-violet-500 to-violet-700", border: "border-violet-200 dark:border-violet-800" },
-  { slug: "capgemini", name: "Capgemini", short: "Capgemini", logo: "🔺", questions: 95, pkg: "₹3.8–7.5 LPA", tag: "Game-based Test", rounds: ["Game Test", "Technical", "HR"], gradient: "from-teal-500 to-teal-700", border: "border-teal-200 dark:border-teal-800" },
-  { slug: "hcl", name: "HCLTech", short: "HCL", logo: "🟦", questions: 90, pkg: "₹3.5–7 LPA", tag: "Engineering Giant", rounds: ["Online Test", "Tech Round 1", "HR"], gradient: "from-sky-500 to-sky-700", border: "border-sky-200 dark:border-sky-800" },
-  { slug: "cognizant", name: "Cognizant", short: "Cognizant", logo: "🔶", questions: 105, pkg: "₹4–7 LPA", tag: "GenC Program", rounds: ["GenC Test", "Technical", "HR"], gradient: "from-amber-500 to-amber-700", border: "border-amber-200 dark:border-amber-800" },
-  { slug: "tech-mahindra", name: "Tech Mahindra", short: "Tech M", logo: "🔴", questions: 85, pkg: "₹3.5–6.5 LPA", tag: "Telecom & IT", rounds: ["Aptitude", "Technical", "HR"], gradient: "from-red-500 to-red-700", border: "border-red-200 dark:border-red-800" },
-  { slug: "amazon", name: "Amazon", short: "Amazon", logo: "📦", questions: 130, pkg: "₹12–45 LPA", tag: "Top Product Co.", rounds: ["OA", "System Design", "Bar Raiser"], gradient: "from-orange-500 to-orange-700", border: "border-orange-200 dark:border-orange-800" },
-  { slug: "microsoft", name: "Microsoft", short: "Microsoft", logo: "🪟", questions: 125, pkg: "₹20–60 LPA", tag: "MAANG", rounds: ["OA", "Coding", "Behavioral"], gradient: "from-blue-600 to-cyan-600", border: "border-cyan-200 dark:border-cyan-800" },
-  { slug: "deloitte", name: "Deloitte", short: "Deloitte", logo: "⬛", questions: 88, pkg: "₹6–14 LPA", tag: "Big Four", rounds: ["Aptitude", "Case Study", "HR"], gradient: "from-slate-600 to-slate-800", border: "border-slate-200 dark:border-slate-700" },
-  { slug: "wipro", name: "Persistent Systems", short: "Persistent", logo: "🟢", questions: 80, pkg: "₹4.5–9 LPA", tag: "Digital Eng.", rounds: ["Coding Test", "Technical", "HR"], gradient: "from-green-500 to-green-700", border: "border-green-200 dark:border-green-800" },
-];
-
-function CompanyCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 320 : -320, behavior: "smooth" });
-  };
-  return (
-    <div className="relative">
-      {/* Left arrow */}
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-3 w-10 h-10 rounded-full bg-background border border-border/60 shadow-md flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all"
-        aria-label="Scroll left"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      {/* Cards */}
-      <div
-        ref={scrollRef}
-        className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 hide-scrollbar px-1"
-      >
-        {FEATURED_COMPANIES.map((c, i) => (
-          <Link
-            key={i}
-            to={`/interview-questions/${c.slug}`}
-            className="flex-shrink-0 w-72 snap-start group"
-          >
-            <Card className={`h-full border ${c.border} hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden`}>
-              {/* Gradient top bar */}
-              <div className={`h-1.5 bg-gradient-to-r ${c.gradient}`} />
-              <div className="p-5 space-y-4">
-                {/* Header row */}
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-4xl">{c.logo}</div>
-                    <div>
-                      <p className="font-bold text-foreground leading-tight">{c.short}</p>
-                      <p className="text-[11px] text-muted-foreground font-medium">{c.tag}</p>
-                    </div>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded-full">
-                    <BookOpenCheck className="w-3 h-3" />
-                    {c.questions}Q
-                  </span>
-                </div>
-
-                {/* Package */}
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-3.5 h-3.5 text-green-600" />
-                  <span className="text-xs font-semibold text-green-700 dark:text-green-400">Avg: {c.pkg}</span>
-                </div>
-
-                {/* Rounds */}
-                <div className="flex flex-wrap gap-1.5">
-                  {c.rounds.map((r, ri) => (
-                    <span key={ri} className="text-[10px] font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
-                      {r}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <div className="pt-1">
-                  <div className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-gradient-to-r ${c.gradient} text-white text-xs font-bold group-hover:opacity-90 transition-opacity`}>
-                    View Questions <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </Link>
-        ))}
-      </div>
-
-      {/* Right arrow */}
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-3 w-10 h-10 rounded-full bg-background border border-border/60 shadow-md flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all"
-        aria-label="Scroll right"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </div>
-  );
-}
+const HeroAvatar = lazy(() => import("./components/HeroAvatar"));
+const LandingInterviewAndAiSections = lazy(
+  () => import("@/components/landing/LandingInterviewAndAiSections")
+);
 
 
 export default function LandingPage() {
+  const jobCategories = useMemo(
+    () => [
+      { label: "WBCS", key: "WBCS", icon: "🏛️", color: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-700 dark:text-amber-400", type: "govt" as const },
+      { label: "SSC", key: "SSC", icon: "🏢", color: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-700 dark:text-blue-400", type: "govt" as const },
+      { label: "Police", key: "Police", icon: "👮", color: "bg-red-500/10", border: "border-red-500/20", text: "text-red-700 dark:text-red-400", type: "govt" as const },
+      { label: "IT Jobs", key: "it", icon: "💻", color: "bg-orange-500/10", border: "border-orange-500/20", text: "text-orange-700 dark:text-orange-400", type: "interview" as const },
+    ],
+    []
+  );
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -208,12 +119,7 @@ export default function LandingPage() {
 
               {/* Job Categories Cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-                {[
-                  { label: "WBCS", key: "WBCS", icon: "🏛️", color: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-700 dark:text-amber-400", type: "govt" },
-                  { label: "SSC", key: "SSC", icon: "🏢", color: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-700 dark:text-blue-400", type: "govt" },
-                  { label: "Police", key: "Police", icon: "👮", color: "bg-red-500/10", border: "border-red-500/20", text: "text-red-700 dark:text-red-400", type: "govt" },
-                  { label: "IT Jobs", key: "it", icon: "💻", color: "bg-orange-500/10", border: "border-orange-500/20", text: "text-orange-700 dark:text-orange-400", type: "interview" }
-                ].map((cat, i) => (
+                {jobCategories.map((cat, i) => (
                   <Link
                     key={i}
                     to={cat.type === "govt" ? "/govt-practice" : "/setup"}
@@ -267,358 +173,34 @@ export default function LandingPage() {
             <div className="relative h-[480px] sm:h-[550px] lg:h-[600px] animate-fade-in group">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-[2.5rem] blur-3xl opacity-50 group-hover:opacity-70 transition-opacity" />
               <div className="relative h-full bg-white/40 dark:bg-black/20 backdrop-blur-2xl rounded-[2rem] border border-white/40 dark:border-white/10 p-4 sm:p-7 flex items-center justify-center overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:-translate-y-2">
-                <HeroAvatar />
+                <Suspense
+                  fallback={
+                    <div className="w-full h-full rounded-2xl bg-muted/25 animate-pulse" />
+                  }
+                >
+                  <HeroAvatar />
+                </Suspense>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Interview Questions Feature Section ─── */}
-      <section className="py-16 sm:py-24 border-t border-border/40 bg-gradient-to-b from-blue-50/60 via-transparent to-transparent dark:from-blue-950/20">
-        <div className="container space-y-12">
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" />
-              Interview Mastery
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-              Practice Real Interview Questions from{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                200+ Top Companies
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Get access to authentic interview questions asked by TCS, Infosys, Google, Amazon, and 200+ other companies. 
-              Learn what to expect, how to answer, and boost your confidence before your big interview.
-            </p>
-          </div>
-
-          {/* Why Interview Questions Matter */}
-          <div className="grid md:grid-cols-3 gap-6">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0 }}
-              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
-            >
-              <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
-                <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="font-bold text-sm mb-2">Company-Specific Questions</h3>
-              <p className="text-sm text-muted-foreground">
-                Real questions from technical, HR, and aptitude rounds — tailored for each company's hiring process
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
-            >
-              <div className="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-4">
-                <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-              </div>
-              <h3 className="font-bold text-sm mb-2">Expert Answers & Tips</h3>
-              <p className="text-sm text-muted-foreground">
-                Detailed solutions with best practices — learn the "why" behind each answer
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="p-6 rounded-xl border border-border/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all"
-            >
-              <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
-              </div>
-              <h3 className="font-bold text-sm mb-2">Track Your Progress</h3>
-              <p className="text-sm text-muted-foreground">
-                Mark difficult questions, track weak areas, and improve your interview success rate
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">200+</div>
-              <div className="text-xs text-muted-foreground mt-1">Companies</div>
-            </div>
-            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
-              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">5000+</div>
-              <div className="text-xs text-muted-foreground mt-1">Interview Questions</div>
-            </div>
-            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
-              <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">1L+</div>
-              <div className="text-xs text-muted-foreground mt-1">Active Users</div>
-            </div>
-            <div className="p-4 rounded-lg border border-border/60 bg-background/80 text-center">
-              <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">2026</div>
-              <div className="text-xs text-muted-foreground mt-1">Updated</div>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex justify-center pt-4">
-            <Link to="/interview-questions">
-              <Button size="lg" className="gradient-primary font-bold text-base px-8 shadow-lg shadow-blue-200/40 hover:shadow-xl hover:shadow-blue-300/50 transition-all gap-2 h-12">
-                Start Practicing Interview Questions
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 200+ Company Interview Questions Carousel ─── */}
-      <section className="py-16 sm:py-24 border-t border-border/40 bg-gradient-to-b from-slate-50/80 via-transparent to-transparent dark:from-slate-900/40">
-        <div className="container space-y-10">
-
-          {/* Section header */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-5">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest">
-                <Users className="w-3.5 h-3.5" />
-                200+ Companies
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                Crack interviews at{" "}
-                <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
-                  top companies
-                </span>
-              </h2>
-              <p className="text-muted-foreground max-w-xl">
-                Real questions asked in actual interviews — curated & updated for 2026
-              </p>
-            </div>
-            <Link to="/interview-questions" className="flex-shrink-0">
-              <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary hover:text-white gap-2 font-semibold">
-                View all 200+ companies
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-
-          {/* Carousel */}
-          <CompanyCarousel />
-
-          {/* Bottom CTA */}
-          <div className="flex flex-col items-center gap-4 pt-2">
-            <p className="text-sm text-muted-foreground">
-              Showing 12 of <strong className="text-foreground">200+</strong> companies — explore them all
-            </p>
-            <Link to="/interview-questions">
-              <Button size="lg" className="gradient-primary font-bold text-base px-8 shadow-lg shadow-orange-200/40 hover:shadow-xl hover:shadow-orange-300/50 transition-all gap-2">
-                🏢 Go to All 200+ Company Questions
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* AI-Powered Exam Preparation Section */}
-      <section className="py-20 sm:py-32 border-t border-border/40 bg-gradient-to-b from-secondary/5 via-transparent to-primary/5">
-        <div className="container space-y-12 sm:space-y-16">
-          <div className="text-center space-y-4 max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              AI-Powered Exam Preparation for{" "}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Police, WBCS, SSC & More
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Revolutionize your exam preparation with cutting-edge AI technology designed specifically for competitive exams. From police constable exams to WBCS and SSC, our AI-driven platform helps students crack their dream jobs through intelligent study recommendations, personalized mock tests, and comprehensive skill development.
-            </p>
-          </div>
-
-          {/* How AI Helps Students Crack Exams */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl sm:text-3xl font-bold">
-                How AI Helps Students Crack Exams
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Personalized Study Plans</h4>
-                    <p className="text-muted-foreground">AI analyzes your performance and creates customized study schedules tailored to your strengths and weaknesses for police, WBCS, and SSC exams.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">AI-Recommended Question Papers</h4>
-                    <p className="text-muted-foreground">Get intelligent recommendations for previous year papers, mock tests, and practice questions based on exam patterns and your preparation level.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Real-time Performance Analytics</h4>
-                    <p className="text-muted-foreground">Track your progress with detailed analytics, identify weak areas, and receive AI-powered insights to improve your scores in competitive exams.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Adaptive Learning Technology</h4>
-                    <p className="text-muted-foreground">Our AI adapts to your learning style, providing challenging questions when you're ready and remedial content when you need reinforcement.</p>
-                  </div>
-                </div>
+      <Suspense
+        fallback={
+          <section className="py-16 sm:py-24 border-t border-border/40">
+            <div className="container">
+              <div className="grid md:grid-cols-3 gap-6">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="h-48 rounded-xl border border-border/50 bg-muted/25 animate-pulse" />
+                ))}
               </div>
             </div>
-
-            <div className="relative h-80 sm:h-96">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
-              <div className="relative h-full bg-card rounded-2xl border border-border/40 p-8 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <Brain className="w-16 h-16 text-primary mx-auto" />
-                  <h4 className="text-xl font-bold">AI-Driven Success</h4>
-                  <p className="text-muted-foreground">
-                    Advanced algorithms analyze thousands of exam patterns to provide you with the most effective preparation strategy.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Uses of AI for Cracking Jobs */}
-          <div className="space-y-8">
-            <h3 className="text-2xl sm:text-3xl font-bold text-center">
-              Uses of AI for Cracking Jobs
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "Resume Optimization",
-                  description: "AI-powered resume builder that analyzes job descriptions and optimizes your CV for ATS systems and recruiters.",
-                  icon: "📄",
-                },
-                {
-                  title: "Interview Practice",
-                  description: "Practice with AI interviewers that simulate real job interviews for police, government, and corporate positions.",
-                  icon: "🎤",
-                },
-                {
-                  title: "Skill Gap Analysis",
-                  description: "Identify missing skills and get personalized learning recommendations to bridge gaps for your target job role.",
-                  icon: "📊",
-                },
-                {
-                  title: "Mock Test Generation",
-                  description: "AI creates custom mock tests based on specific job requirements and exam patterns for WBCS, SSC, and police exams.",
-                  icon: "📝",
-                },
-                {
-                  title: "Career Guidance",
-                  description: "Get AI-powered career advice, job market insights, and personalized roadmaps for government and private sector jobs.",
-                  icon: "🎯",
-                },
-                {
-                  title: "Performance Tracking",
-                  description: "Monitor your preparation progress with detailed analytics and AI-generated improvement suggestions.",
-                  icon: "📈",
-                },
-              ].map((use, idx) => (
-                <Card key={idx} className="p-6 border border-border/40 hover:border-primary/50 transition-all hover:shadow-lg">
-                  <div className="space-y-4">
-                    <div className="text-3xl">{use.icon}</div>
-                    <h4 className="font-bold text-lg">{use.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {use.description}
-                    </p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA for Exam Preparation */}
-          <div className="mt-12 pt-8">
-            <div className="relative rounded-3xl border border-orange-500/30 bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent p-8 sm:p-12 overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-orange-500/5 -z-10 blur-3xl" />
-              
-              <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-bold uppercase tracking-widest mb-4">
-                  <Play className="w-4 h-4" />
-                  Full-Length Mock Tests
-                </div>
-                
-                <h3 className="text-2xl sm:text-3xl font-bold mb-3">
-                  Take Full-Length Virtual Exams
-                </h3>
-                
-                <p className="text-muted-foreground mb-6 text-lg">
-                  Experience realistic full-length mock tests with detailed performance analysis, subject-wise breakdowns, and AI-powered recommendations to improve your score.
-                </p>
-                
-                <div className="grid sm:grid-cols-3 gap-4 mb-8">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
-                    <span className="text-sm font-medium">Unlimited questions</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
-                    <span className="text-sm font-medium">Performance matrix</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-orange-600" flexShrink={0} />
-                    <span className="text-sm font-medium">AI recommendations</span>
-                  </div>
-                </div>
-                
-                <Link to="/govt-practice">
-                  <Button size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white gap-2">
-                    Start Your First Virtual Exam
-                    <Play className="w-5 h-5" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA for Exam Preparation */}
-          <div className="text-center space-y-6 pt-8">
-            <h3 className="text-xl sm:text-2xl font-bold">
-              Ready to Crack Your Exam with AI?
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of students who are using AI to prepare for police, WBCS, SSC, and other competitive exams. Start your AI-powered preparation journey today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/study-plan">
-                <Button size="lg" className="gradient-primary text-base font-semibold">
-                  Create Study Plan
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link to="/question-hub">
-                <Button variant="outline" size="lg" className="border-primary/20 text-base">
-                  Practice Mock Tests
-                </Button>
-              </Link>
-            </div>
-            <p className="text-sm text-muted-foreground flex flex-wrap justify-center gap-x-3 gap-y-1">
-              <Link to="/wbcs-mock-test" className="text-primary hover:underline font-medium">
-                WBCS mock test (previous year papers)
-              </Link>
-              <span className="text-border">|</span>
-              <Link to="/wbp-police-mock-test" className="text-primary hover:underline font-medium">
-                WBP police mock test (Constable / Lady Constable)
-              </Link>
-            </p>
-          </div>
-        </div>
-      </section>
+          </section>
+        }
+      >
+        <LandingInterviewAndAiSections />
+      </Suspense>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 sm:py-32 border-t border-border/40 bg-gradient-to-b from-primary/5 via-transparent to-transparent">

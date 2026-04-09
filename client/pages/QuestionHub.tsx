@@ -25,7 +25,7 @@ import {
   Info,
   Search,
   Play,
-  ChevronDown,
+  ChevronsUpDown,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -34,6 +34,13 @@ import {
   applyQuestionHubExamSeo,
   type ExamSeoProfile,
 } from "@/lib/exam-seo";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 
 interface PDFItem {
   /** File name (or relative path) identifying the PDF */
@@ -780,23 +787,7 @@ export default function QuestionHub({
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"previous-year" | "mock">(() => {
-    const view = searchParams.get("view");
-    return view === "mock" ? "mock" : "previous-year";
-  });
-  const [mockExamFilter, setMockExamFilter] = useState<string>("all");
-  const [showMockExamDropdown, setShowMockExamDropdown] = useState(false);
-
-  const switchTab = (tab: "previous-year" | "mock") => {
-    setActiveTab(tab);
-    const next = new URLSearchParams(searchParams);
-    if (tab === "mock") {
-      next.set("view", "mock");
-    } else {
-      next.delete("view");
-    }
-    setSearchParams(next, { replace: true });
-  };
+  const [isExamDrawerOpen, setIsExamDrawerOpen] = useState(false);
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "rose"];
@@ -1016,6 +1007,12 @@ export default function QuestionHub({
     setTestNavLoading(false);
   };
 
+  const handleSelectFolder = (folderKey: string) => {
+    setSelectedFolder(folderKey);
+    setSearchParams({ tab: folderKey }, { replace: true });
+    setIsExamDrawerOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Ambient background — forest green + mustard warm glow */}
@@ -1222,10 +1219,7 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
-        {/* ═══ PREVIOUS YEAR TAB ═══ */}
-        {activeTab === "previous-year" && (
-        <>
-        {/* Folder Selector — exam category cards with Bengali labels */}
+        {/* Folder Selector — compact trigger + drawer list */}
         {!isSearching && (
         <motion.section
           initial={{ opacity: 0 }}
@@ -1237,60 +1231,70 @@ export default function QuestionHub({
             <div className="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-700 to-amber-600" />
             <div>
               <h2 className="text-2xl font-bold text-foreground">
-                Select Exam Category
+                Select Exam
               </h2>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {Object.entries(FOLDERS).map(([key, folder]) => {
-              const fc = FOLDER_COLORS[folder.colorKey];
-              return (
-              <motion.button
-                key={key}
-                onClick={() => {
-                  setSelectedFolder(key);
-                  setSearchParams({ tab: key }, { replace: true });
-                }}
-                whileHover={{ scale: 1.02 }}
-                className={`relative p-6 rounded-xl border-2 transition-all text-left overflow-hidden ${
-                  selectedFolder === key
-                    ? fc.selectedBorder
-                    : `border-emerald-900/8 dark:border-emerald-800/15 bg-card/60 hover:border-amber-600/30`
-                }`}
-              >
-                {/* Subtle alpona corner decoration */}
-                <div className="absolute top-0 right-0 w-16 h-16 opacity-[0.04]">
-                  <svg viewBox="0 0 60 60" className="w-full h-full text-current">
-                    <path d="M60 0 Q45 15 30 30 Q45 15 60 0" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                    <circle cx="50" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="0.8" />
-                  </svg>
+          <div className="max-w-xl">
+            <button
+              onClick={() => setIsExamDrawerOpen(true)}
+              className="w-full flex items-center justify-between gap-3 rounded-2xl border border-emerald-900/10 dark:border-emerald-800/20 bg-card/70 hover:bg-card px-4 py-3.5 transition-colors"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className={`p-2.5 bg-gradient-to-br ${colors.iconBg} rounded-lg shrink-0`}>
+                  {currentFolder.icon}
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 bg-gradient-to-br ${fc.iconBg} rounded-lg`}>
-                    {folder.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-foreground text-sm leading-tight">
-                        {folder.name}
-                      </h3>
-                    </div>
-                    <p className="text-[11px] text-muted-foreground mb-1.5">{folder.nameBn}</p>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${fc.badge}`}>
-                      {folder.badge}
-                    </span>
-                  </div>
-                  {selectedFolder === key && (
-                    <ChevronRight className={`w-5 h-5 ${fc.chevron} shrink-0`} />
-                  )}
+                <div className="text-left min-w-0">
+                  <p className="text-xs text-muted-foreground">Current exam</p>
+                  <p className="font-semibold text-foreground truncate">{currentFolder.name}</p>
                 </div>
-                <p className="text-xs text-muted-foreground mt-3 line-clamp-2">
-                  {folder.description}
-                </p>
-              </motion.button>
-              );
-            })}
+              </div>
+              <ChevronsUpDown className="w-4 h-4 text-muted-foreground shrink-0" />
+            </button>
           </div>
+
+          <Drawer open={isExamDrawerOpen} onOpenChange={setIsExamDrawerOpen}>
+            <DrawerContent className="max-h-[85vh]">
+              <DrawerHeader className="text-left">
+                <DrawerTitle>Select Exam Category</DrawerTitle>
+                <DrawerDescription>
+                  Choose one exam to load relevant question papers.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="px-4 pb-5 overflow-y-auto">
+                <div className="space-y-2">
+                  {Object.entries(FOLDERS).map(([key, folder]) => {
+                    const fc = FOLDER_COLORS[folder.colorKey];
+                    const isSelected = selectedFolder === key;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => handleSelectFolder(key)}
+                        className={`w-full text-left rounded-xl border p-3.5 transition-all ${
+                          isSelected
+                            ? fc.selectedBorder
+                            : "border-emerald-900/10 dark:border-emerald-800/20 bg-card/60 hover:bg-card"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2.5 bg-gradient-to-br ${fc.iconBg} rounded-lg shrink-0`}>
+                            {folder.icon}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-sm text-foreground truncate">{folder.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">{folder.nameBn}</p>
+                          </div>
+                          {isSelected ? (
+                            <ChevronRight className={`w-4 h-4 ${fc.chevron} shrink-0`} />
+                          ) : null}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </motion.section>
         )}
 
