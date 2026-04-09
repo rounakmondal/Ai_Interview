@@ -1,0 +1,83 @@
+{
+  "category": "WBP Constable",
+  "categoryBn": "কনস্টেবল",
+  "papers": [
+    {
+      "id": "constable-2021",
+      "title": "WBP Constable Preliminary 2021",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০২১",
+      "year": 2021,
+      "path": "Police/police-json-data/WBP CONSTABLE PYP 2021.json",
+      "type": "Constable",
+      "questions": 100,
+      "duration": 60,
+      "language": "English / Bengali"
+    },
+    {
+      "id": "constable-2021-bn",
+      "title": "WBP Constable Preliminary 2021 (Bengali Script)",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০২১ (বাংলা)",
+      "year": 2021,
+      "path": "Police/WBP-CONSTABLE-PYP-2021-BENG-2.pdf",
+      "type": "Constable",
+      "questions": 100,
+      "duration": 60,
+      "language": "Bengali"
+    },
+    {
+      "id": "lady-constable-2018",
+      "title": "WBP Lady Constable Preliminary 2018",
+      "titleBn": "ডব্লিউবিপি লেডি কনস্টেবল প্রিলিমিনারি ২০১৮",
+      "year": 2018,
+      "path": "Police/police-json-data/WBP Lady Constable Preliminary Question Paper 2018.json",
+      "type": "Lady Constable",
+      "questions": 90,
+      "duration": 60,
+      "language": "English / Bengali"
+    },
+    {
+      "id": "constable-2018",
+      "title": "WBP Constable Preliminary 2018",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০১৮",
+      "year": 2018,
+      "path": "Police/police-json-data/WBP Constable Preliminary Question Paper 2018.json",
+      "type": "Constable",
+      "questions": 90,
+      "duration": 60,
+      "language": "English / Bengali"
+    },
+    {
+      "id": "constable-2016",
+      "title": "WBP Constable Preliminary 2016",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০১৬",
+      "year": 2016,
+      "path": "Police/police-json-data/WBP Constable Preliminary Question Paper 2016.json",
+      "type": "Constable",
+      "questions": 60,
+      "duration": 60,
+      "language": "English / Bengali"
+    },
+    {
+      "id": "constable-2015",
+      "title": "WBP Constable Preliminary 2015",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০১৫",
+      "year": 2015,
+      "path": "Police/police-json-data/WBP Constable Preliminary Question Paper 2015.json",
+      "type": "Constable",
+      "questions": 90,
+      "duration": 60,
+      "language": "English / Bengali"
+    },
+    {
+      "id": "constable-2013",
+      "title": "WBP Constable Preliminary 2013",
+      "titleBn": "ডব্লিউবিপি কনস্টেবল প্রিলিমিনারি ২০১৩",
+      "year": 2013,
+      "path": "Police/police-json-data/WBP Constable Preliminary Question Paper 2013.json",
+      "type": "Constable",
+      "questions": 90,
+      "duration": 60,
+      "language": "English / Bengali"
+    }
+  ]
+}

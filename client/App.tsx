@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/premium/ThemeProvider";
 import { LanguageProvider } from "@/components/premium/LanguageProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { isLoggedIn } from "@/lib/auth-api";
 import { useAndroidBackButton } from "@/hooks/use-android-back-button";
@@ -55,6 +55,7 @@ const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
 const PreviousYearPage = lazy(() => import("./pages/PreviousYearPage"));
+const WBPConstableMock = lazy(() => import("./pages/WBPConstableMock"));
 const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
 
 // Company interview pages
@@ -143,8 +144,11 @@ function AppContent() {
           <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
           <Route path="/mock-test" element={<MockTestPage />} />
           <Route path="/question-hub" element={<QuestionHub />} />
+          <Route path="/question-hub/:examSlug" element={<QuestionHub />} />
           {/* SEO landing URLs — same Question Hub UI, focused meta & canonical */}
           <Route path="/wbcs-mock-test" element={<QuestionHub seoProfile="wbcs" />} />
+          <Route path="/wbp-constable-mock-test" element={<WBPConstableMock />} />
+          <Route path="/wbp-constable-mock" element={<Navigate to="/wbp-constable-mock-test" replace />} />
           <Route
             path="/wbp-police-mock-test"
             element={<QuestionHub seoProfile="police" />}

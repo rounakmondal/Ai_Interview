@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
@@ -644,6 +644,7 @@ function groupFilesByType(files: PDFItem[], folder: string): Record<string, PDFI
   return grouped;
 }
 
+// Exams shown in the Previous Year Questions tab
 const exams = [
   "WBCS",
   "SSC",
@@ -655,10 +656,28 @@ const exams = [
   "IBPS PO"
 ];
 
-function ExamSelector({ onSelect }: { onSelect: (exam: string) => void }) {
+// Exams shown in the All Question Papers tab
+const ALL_TAB_EXAMS = [
+  "WBP Constable",
+  "WBP SI",
+  "WBCS Prelims",
+  "SSC MTS",
+  "WBPSC Clerkship",
+  "RRB NTPC",
+  "JTET",
+  "IBPS PO",
+];
+
+function ExamSelector({ onSelect, selectedExam: controlledExam, examsList, compact }: { onSelect: (exam: string) => void; selectedExam?: string; examsList?: string[]; compact?: boolean }) {
+  const list = examsList ?? exams;
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState("Police Recruitment (WBP)");
+  const [selected, setSelected] = React.useState(controlledExam ?? list[0] ?? "");
   const ref = React.useRef<HTMLDivElement | null>(null);
+
+  // Sync if controlled value changes
+  React.useEffect(() => {
+    if (controlledExam !== undefined) setSelected(controlledExam);
+  }, [controlledExam]);
 
   React.useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -677,10 +696,12 @@ function ExamSelector({ onSelect }: { onSelect: (exam: string) => void }) {
   };
 
   return (
-    <div className="w-full max-w-md relative" ref={ref}>
-      <h3 className="text-2xl font-bold mb-2 text-foreground">
-        Select Exam Category
-      </h3>
+    <div className={compact ? "relative min-w-[220px]" : "w-full max-w-md relative"} ref={ref}>
+      {!compact && (
+        <h3 className="text-2xl font-bold mb-2 text-foreground">
+          Select Exam Category
+        </h3>
+      )}
 
       <div
         onClick={() => setOpen(!open)}
@@ -692,7 +713,7 @@ function ExamSelector({ onSelect }: { onSelect: (exam: string) => void }) {
 
       {open && (
         <div className="absolute mt-2 w-full bg-card/95 backdrop-blur border border-emerald-900/12 dark:border-emerald-800/20 rounded-xl shadow-xl shadow-black/20 max-h-60 overflow-y-auto z-50">
-          {exams.map((exam) => (
+          {list.map((exam) => (
             <div
               key={exam}
               onClick={() => handleSelect(exam)}
@@ -823,6 +844,392 @@ const MOCK_DEMO_QUESTIONS: MockExamGroup[] = [
   },
 ];
 
+// ─── Accent bar colours per folder ───────────────────────────────────────────
+const ACCENT_BAR: Record<ColorKey, string> = {
+  terracotta: "from-orange-500 via-amber-500 to-orange-400",
+  forest:     "from-emerald-600 via-green-500 to-teal-500",
+  mustard:    "from-amber-500 via-yellow-500 to-amber-400",
+};
+
+// ─── LazyPreviewCard — fetches first question from a JSON paper ───────────────
+function LazyPreviewCard({
+  file,
+  folder,
+  folderKey,
+  onStartTest,
+  onDownload,
+  navigating,
+  idx,
+}: {
+  file: PDFItem;
+  folder: FolderData;
+  folderKey: string;
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+  idx: number;
+}) {
+  const [preview, setPreview] = React.useState<{
+    question: string;
+    options: string[];
+    correctLabel: string;
+  } | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const isJson = file.path.toLowerCase().endsWith(".json");
+  const colors = FOLDER_COLORS[folder.colorKey];
+
+  React.useEffect(() => {
+    if (!isJson) { setLoading(false); return; }
+    // Prepend publicPath so the URL resolves correctly under /public/
+    const fullPath = `${folder.publicPath}/${file.path}`;
+    const encoded = fullPath.split("/").map((s) => encodeURIComponent(decodeURIComponent(s))).join("/");
+    fetch(`/${encoded}`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data) return;
+        // Support flat `questions` or nested `sections`
+        let q = data.questions?.[0];
+        if (!q && Array.isArray(data.sections)) {
+          q = data.sections.find((s: any) => Array.isArray(s.questions))?.questions?.[0];
+        }
+        if (!q) return;
+
+        let options: string[] = [];
+        if (Array.isArray(q.options)) {
+          options = q.options.map((o: string) => String(o).replace(/^[A-Da-d]\.\s*/, ""));
+        } else if (q.options && typeof q.options === "object") {
+          options = ["a","b","c","d"].map((k) => q.options[k] || q.options[k.toUpperCase()] || "");
+        }
+
+        const LABELS = ["A","B","C","D"];
+        let correctLabel = "A";
+        const ans = q.answer ?? q.correct_option ?? q.correct ?? "";
+        if (typeof ans === "number") correctLabel = LABELS[ans] ?? "A";
+        else if (typeof ans === "string") correctLabel = ans.toUpperCase().charAt(0) || "A";
+
+        setPreview({ question: q.question || q.q || "", options, correctLabel });
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [file.path]);
+
+  if (loading) {
+    return (
+      <div className="rounded-2xl border border-border/30 bg-card/60 p-5 animate-pulse flex flex-col gap-3">
+        <div className="h-4 bg-muted rounded w-1/2" />
+        <div className="h-3 bg-muted rounded w-full" />
+        <div className="h-3 bg-muted rounded w-3/4" />
+        <div className="grid grid-cols-2 gap-2 mt-1">
+          {[0,1,2,3].map((j) => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+        </div>
+        <div className="flex gap-2 mt-2">
+          <div className="flex-1 h-9 bg-muted rounded-xl" />
+          <div className="flex-1 h-9 bg-muted rounded-xl" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative flex flex-col rounded-2xl border border-border/30 bg-card/80 hover:border-primary/30 hover:shadow-xl transition-all overflow-hidden"
+    >
+      {/* Top accent bar */}
+      <div className={`h-1 w-full bg-gradient-to-r ${ACCENT_BAR[folder.colorKey]}`} />
+
+      <div className="p-5 flex flex-col gap-4 flex-1">
+        {/* Header */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${colors.fileIconBg} flex items-center justify-center shrink-0`}>
+              <FileText className={`w-4 h-4 ${colors.fileIconText}`} />
+            </div>
+            <div className="min-w-0">
+              <p className={`text-xs font-semibold uppercase tracking-wide truncate ${colors.fileIconText}`}>
+                {file.name}
+              </p>
+              <p className="text-[10px] text-muted-foreground flex items-center gap-1">
+                {file.year && <span>{file.year}</span>}
+                {file.year && file.type && <span>·</span>}
+                {file.type && <span>{file.type}</span>}
+              </p>
+            </div>
+          </div>
+          <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${colors.badge}`}>
+            {isJson ? "MCQs" : "PDF"}
+          </span>
+        </div>
+
+        {/* Preview question or PDF placeholder */}
+        <div className="flex-1">
+          {preview ? (
+            <>
+              <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">
+                Sample Question
+              </p>
+              <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">
+                {preview.question}
+              </p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {preview.options.slice(0, 4).map((opt, oi) => {
+                  const label = ["A","B","C","D"][oi];
+                  const isCorrect = label === preview.correctLabel;
+                  return (
+                    <div
+                      key={oi}
+                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs ${
+                        isCorrect
+                          ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                          : "bg-muted/50 border border-border/40 text-muted-foreground"
+                      }`}
+                    >
+                      <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                        isCorrect ? "bg-emerald-500/25 text-emerald-600" : "bg-muted text-muted-foreground"
+                      }`}>{label}</span>
+                      <span className="line-clamp-1">{opt}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-6 gap-2 text-center">
+              <FileText className="w-8 h-8 text-muted-foreground/40" />
+              <p className="text-sm text-muted-foreground">PDF question paper</p>
+              <p className="text-xs text-muted-foreground/60">Download to view questions</p>
+            </div>
+          )}
+        </div>
+
+        {/* Two action buttons */}
+        <div className="flex gap-2 pt-1 border-t border-border/30">
+          <Button
+            size="sm"
+            variant="outline"
+            className="flex-1 gap-1.5 text-xs"
+            onClick={() => onDownload(file, folder)}
+          >
+            <Download className="w-3.5 h-3.5" />
+            Download
+          </Button>
+          <Button
+            size="sm"
+            className={`flex-1 gap-1.5 text-xs text-white ${
+              folder.colorKey === "forest"
+                ? "bg-emerald-700 hover:bg-emerald-800"
+                : folder.colorKey === "mustard"
+                ? "bg-amber-600 hover:bg-amber-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
+            onClick={() => onStartTest(file, folder, folderKey)}
+            disabled={navigating}
+          >
+            {navigating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <><Play className="w-3.5 h-3.5" />Attempt Test</>}
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── WBP Constable Preview Cards (for All Question Papers tab) ───────────────
+
+interface ConstableManifestPaper {
+  id: string;
+  title: string;
+  titleBn: string;
+  path: string;
+  questions: number;
+  duration: number;
+  language: string;
+  preview?: {
+    question: string;
+    options: string[];
+    answer: string; // "A" | "B" | "C" | "D"
+  };
+}
+
+const OPTION_LABELS = ["A", "B", "C", "D"] as const;
+
+function ConstablePreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/wbp_constable/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const constableFolder = FOLDERS["police"];
+
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "Constable",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-orange-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0,1,2,3].map(j => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-orange-700/15 bg-card/80 hover:border-orange-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            {/* Top accent bar */}
+            <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400" />
+
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-orange-500/12 flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-orange-700 dark:text-orange-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-700/12 text-amber-800 dark:text-amber-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {/* Preview question */}
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">
+                    Sample Question
+                  </p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">
+                    {preview.question}
+                  </p>
+
+                  {/* Options grid */}
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex-1 flex items-center justify-center py-4">
+                  <p className="text-sm text-muted-foreground">85 questions · Bengali medium</p>
+                </div>
+              )}
+
+              {/* Stats row */}
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              {/* Two action buttons */}
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-orange-700/20 hover:bg-orange-500/8"
+                  onClick={() => onDownload(toFile(paper), constableFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-orange-600 hover:bg-orange-700 text-white"
+                  onClick={() => onStartTest(toFile(paper), constableFolder, "police")}
+                  disabled={navigating}
+                >
+                  {navigating ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    <><Play className="w-3.5 h-3.5" />Attempt Test</>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Slug ↔ exam label mapping for /question-hub/:examSlug clean URLs
+const SLUG_TO_EXAM: Record<string, string> = {
+  "wbp-constable": "WBP Constable",
+  "wbp-si":        "WBP SI",
+  "wbcs":          "WBCS Prelims",
+  "ssc-mts":       "SSC MTS",
+  "wbpsc":         "WBPSC Clerkship",
+  "rrb-ntpc":      "RRB NTPC",
+  "jtet":          "JTET",
+  "ibps-po":       "IBPS PO",
+};
+const EXAM_TO_SLUG: Record<string, string> = Object.fromEntries(
+  Object.entries(SLUG_TO_EXAM).map(([slug, exam]) => [exam, slug])
+);
+
 export default function QuestionHub({
   seoProfile = "default",
 }: {
@@ -830,6 +1237,16 @@ export default function QuestionHub({
 }) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { examSlug } = useParams<{ examSlug?: string }>();
+
+  // If a clean slug URL is used (e.g. /question-hub/wbp-si), default to All tab with that exam
+  const slugExam = examSlug ? (SLUG_TO_EXAM[examSlug] ?? null) : null;
+
+  const [activeTab, setActiveTab] = useState<"previous" | "all">(() => {
+    if (slugExam) return "all";
+    const urlTab = searchParams.get("view");
+    return urlTab === "all" ? "all" : "previous";
+  });
   const [selectedFolder, setSelectedFolder] = useState<string>(() => {
     // Persist folder selection in URL so browser back button remembers it
     const urlFolder = searchParams.get("tab");
@@ -847,6 +1264,20 @@ export default function QuestionHub({
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [allTabExam, setAllTabExam] = useState(slugExam ?? "WBP Constable");
+
+  // Map the All-tab exam label → folder key (must match ALL_TAB_EXAMS entries exactly)
+  const ALL_TAB_EXAM_TO_FOLDER: Record<string, string> = {
+    "WBP Constable": "police",   // handled specially → ConstablePreviewCards (mock manifests)
+    "WBP SI":        "police-si", // handled specially → filtered SI files from police folder
+    "WBCS Prelims":  "wbcs",
+    "SSC MTS":       "ssc",
+    "WBPSC Clerkship": "wbpsc",
+    "RRB NTPC":      "rrb-ntpc",
+    "JTET":          "jtet",
+    "IBPS PO":       "ibps",
+  };
+  const allTabFolderKey = ALL_TAB_EXAM_TO_FOLDER[allTabExam] ?? "police";
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "terracotta"];
@@ -1068,7 +1499,12 @@ export default function QuestionHub({
 
   const handleSelectFolder = (folderKey: string) => {
     setSelectedFolder(folderKey);
-    setSearchParams({ tab: folderKey }, { replace: true });
+    setSearchParams({ tab: folderKey, view: activeTab }, { replace: true });
+  };
+
+  const handleTabChange = (tab: "previous" | "all") => {
+    setActiveTab(tab);
+    setSearchParams({ tab: selectedFolder, view: tab }, { replace: true });
   };
 
   const handleExamSelect = (exam: string) => {
@@ -1129,7 +1565,7 @@ export default function QuestionHub({
             Home
           </Link>
           <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
-          <span className="text-sm font-medium text-foreground">Previous Question Set</span>
+          <span className="text-sm font-medium text-foreground">QuestionHub</span>
           <div className="ml-auto flex items-center gap-2">
             <Link to="/govt-practice" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
               <Play className="w-3.5 h-3.5" />
@@ -1228,7 +1664,7 @@ export default function QuestionHub({
                         ? "SSC MTS Mock Test & Previous Year Papers"
                         : seoProfile === "ibps-po"
                           ? "IBPS PO Mock Test & Previous Year Papers"
-                          : "Previous Question Set"}
+                          : "QuestionHub"}
             </h1>
             <button
               onClick={() => setShowInfoModal(true)}
@@ -1266,16 +1702,43 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
+        {/* Tab Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18 }}
+          className="flex gap-1 mb-8 p-1 rounded-xl bg-muted/40 border border-border/40 w-fit"
+        >
+          <button
+            onClick={() => handleTabChange("previous")}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+              activeTab === "previous"
+                ? "bg-background shadow text-foreground border border-border/60"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Previous Year Questions
+          </button>
+          <button
+            onClick={() => handleTabChange("all")}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+              activeTab === "all"
+                ? "bg-background shadow text-foreground border border-border/60"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            All Question Papers
+          </button>
+        </motion.div>
+
         {/* Folder Selector — compact dropdown selector */}
-        {!isSearching && (
+        {!isSearching && activeTab === "previous" && (
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           className="mb-12"
-        >
-          <ExamSelector onSelect={handleExamSelect} />
-        </motion.section>
+        />
         )}
 
         {/* Global Search Results */}
@@ -1383,19 +1846,22 @@ export default function QuestionHub({
           </motion.section>
         )}
 
-        {/* Files List */}
-        {!isSearching && currentFolder && (
+        {/* Files List — Previous Year tab */}
+        {!isSearching && activeTab === "previous" && currentFolder && (
           <motion.section
             key={selectedFolder}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-1 h-8 rounded-full bg-gradient-to-b from-amber-600 to-emerald-700" />
-              <h2 className="text-2xl font-bold text-foreground">
-                {currentFolder.name} — Previous Year Papers
-              </h2>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-8 rounded-full bg-gradient-to-b from-amber-600 to-emerald-700" />
+                <h2 className="text-2xl font-bold text-foreground">
+                  {currentFolder.name} — Previous Year Papers
+                </h2>
+              </div>
+              <ExamSelector onSelect={handleExamSelect} compact />
             </div>
             <p className="text-sm text-muted-foreground mb-6 ml-4">
               {currentFolder.nameBn} • Download original PDFs or take mock tests directly
@@ -1679,6 +2145,101 @@ export default function QuestionHub({
                 <Button size="lg" className="gap-2 bg-emerald-700 hover:bg-emerald-800 text-white">
                   <Sparkles className="w-5 h-5" />
                   Start AI Interview Practice
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.section>
+        )}
+
+        {/* All Question Papers tab */}
+        {activeTab === "all" && (
+          <motion.section
+            key="all-papers"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {/* Header row: title left, dropdown right */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+              <div>
+                <h2 className="text-2xl font-bold text-foreground">{allTabExam} Question Papers</h2>
+                <p className="text-sm text-muted-foreground mt-0.5">Select an exam from the dropdown to browse papers</p>
+              </div>
+              <ExamSelector
+                selectedExam={allTabExam}
+                onSelect={(exam) => {
+                  setAllTabExam(exam);
+                  const slug = EXAM_TO_SLUG[exam];
+                  if (slug) navigate(`/question-hub/${slug}`, { replace: true });
+                }}
+                examsList={ALL_TAB_EXAMS}
+                compact
+              />
+            </div>
+
+            {/* Cards grid */}
+            {allTabFolderKey === "police" ? (
+              // WBP Constable — manifest-backed mock test cards
+              <ConstablePreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
+            ) : allTabFolderKey === "police-si" ? (
+              // WBP SI — filter police folder to SI files only
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {FOLDERS["police"].files
+                  .filter((f) => f.type === "SI")
+                  .map((file, idx) => (
+                    <LazyPreviewCard
+                      key={file.path}
+                      file={file}
+                      folder={FOLDERS["police"]}
+                      folderKey="police"
+                      onStartTest={handleStartTest}
+                      onDownload={handleDownload}
+                      navigating={testNavLoading}
+                      idx={idx}
+                    />
+                  ))}
+              </div>
+            ) : FOLDERS[allTabFolderKey] ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {FOLDERS[allTabFolderKey].files.map((file, idx) => (
+                  <LazyPreviewCard
+                    key={file.path}
+                    file={file}
+                    folder={FOLDERS[allTabFolderKey]}
+                    folderKey={allTabFolderKey}
+                    onStartTest={handleStartTest}
+                    onDownload={handleDownload}
+                    navigating={testNavLoading}
+                    idx={idx}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16 text-muted-foreground">
+                <BookOpen className="w-10 h-10 mx-auto mb-3 opacity-30" />
+                <p>No papers found for this exam.</p>
+              </div>
+            )}
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/6 via-primary/4 to-transparent p-8 text-center"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-2">Try AI-Generated Mock Test</h3>
+              <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
+                Get a fresh AI-generated question paper every time — with timer, scoring and subject-wise analysis.
+              </p>
+              <Link to="/mock-test">
+                <Button size="lg" className="gap-2">
+                  <Sparkles className="w-5 h-5" />
+                  Start AI Mock Test
                 </Button>
               </Link>
             </motion.div>

@@ -1,0 +1,124 @@
+{
+    "exam": "WBP Constable Exam",
+    "total_questions": 85,
+    "language": "Bengali",
+    "sections": [
+        {
+            "name": "সাধারণ জ্ঞান (General Knowledge)",
+            "questions_count": 30
+        },
+        {
+            "name": "গণিত (Arithmetic)",
+            "questions_count": 25
+        },
+        {
+            "name": "যুক্তি (Reasoning)",
+            "questions_count": 20
+        },
+        {
+            "name": "বাংলা ভাষা (Bengali Language)",
+            "questions_count": 10
+        }
+    ],
+    "questions":[
+  {"id":1,"subject":"সাধারণ জ্ঞান ও সচেতনতা","topic":"ভারতীয় ইতিহাস","question":"ভারতের প্রথম স্বাধীনতা সংগ্রাম কোন সালে সংঘটিত হয়েছিল?","options":["A. ১৮৪২","B. ১৮৫৭","C. ১৮৬৫","D. ১৮৭৫"],"answer":"B","explanation":"১৮৫৭ সালে সিপাহী বিদ্রোহ।"},
+  {"id":2,"subject":"গণিত","topic":"সরল গণিত","question":"2 + 3 × 4 = ?","options":["A. 20","B. 14","C. 24","D. 18"],"answer":"B","explanation":"BODMAS অনুযায়ী।"},
+  {"id":3,"subject":"রিজনিং","topic":"সিরিজ","question":"5,10,20,40,?","options":["A. 60","B. 70","C. 80","D. 90"],"answer":"C","explanation":"দ্বিগুণ হচ্ছে।"},
+  {"id":4,"subject":"সাধারণ জ্ঞান","topic":"ভূগোল","question":"ভারতের দীর্ঘতম নদী কোনটি?","options":["A. গঙ্গা","B. যমুনা","C. ব্রহ্মপুত্র","D. গোদাবরী"],"answer":"A","explanation":"গঙ্গা দীর্ঘতম।"},
+  {"id":5,"subject":"গণিত","topic":"শতাংশ","question":"200 এর 15% কত?","options":["A. 25","B. 30","C. 35","D. 40"],"answer":"B","explanation":"30"},
+  {"id":6,"subject":"রিজনিং","topic":"কোডিং","question":"CAT=DBU হলে DOG=?","options":["A. EPH","B. DOH","C. EPI","D. DPH"],"answer":"A","explanation":"+1 shift"},
+  {"id":7,"subject":"GK","topic":"রাজনীতি","question":"ভারতের সংবিধান কার্যকর হয় কবে?","options":["A. 1947","B. 1950","C. 1949","D. 1952"],"answer":"B","explanation":"২৬ জানুয়ারি ১৯৫০"},
+  {"id":8,"subject":"গণিত","topic":"বর্গমূল","question":"√144 = ?","options":["A. 10","B. 11","C. 12","D. 13"],"answer":"C","explanation":"12"},
+  {"id":9,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Dog:Bark :: Cat:?","options":["A. Cry","B. Meow","C. Roar","D. Shout"],"answer":"B","explanation":"Meow"},
+  {"id":10,"subject":"বিজ্ঞান","topic":"রসায়ন","question":"জলের সংকেত কী?","options":["A. CO2","B. H2O","C. O2","D. H2"],"answer":"B","explanation":"H2O"},
+
+  {"id":11,"subject":"গণিত","topic":"লাভ-ক্ষতি","question":"100 টাকায় কিনে 120 টাকায় বিক্রি লাভ কত %?","options":["A. 10","B. 15","C. 20","D. 25"],"answer":"C","explanation":"20%"},
+  {"id":12,"subject":"রিজনিং","topic":"সিরিজ","question":"2,6,18,54,?","options":["A.108","B.162","C.150","D.200"],"answer":"B","explanation":"×3"},
+  {"id":13,"subject":"GK","topic":"খেলা","question":"ক্রিকেট দলে কয়জন?","options":["A.9","B.10","C.11","D.12"],"answer":"C","explanation":"১১ জন"},
+  {"id":14,"subject":"গণিত","topic":"ভগ্নাংশ","question":"1/2 + 1/4 = ?","options":["A.2/4","B.3/4","C.4/4","D.1/4"],"answer":"B","explanation":"3/4"},
+  {"id":15,"subject":"রিজনিং","topic":"দিক","question":"পূর্ব + দক্ষিণ = ?","options":["A.NE","B.SE","C.NW","D.SW"],"answer":"B","explanation":"SE"},
+  {"id":16,"subject":"GK","topic":"অর্থনীতি","question":"ভারতের মুদ্রা কী?","options":["A.ডলার","B.রুপি","C.ইউরো","D.ইয়েন"],"answer":"B","explanation":"রুপি"},
+  {"id":17,"subject":"গণিত","topic":"গতি","question":"100 কিমি 2 ঘন্টায় গেলে গতি কত?","options":["A.40","B.50","C.60","D.70"],"answer":"B","explanation":"50"},
+  {"id":18,"subject":"রিজনিং","topic":"বর্ণমালা","question":"A এর পরে 3য় অক্ষর?","options":["A.B","B.C","C.D","D.E"],"answer":"C","explanation":"D"},
+  {"id":19,"subject":"GK","topic":"পশু","question":"জাতীয় পশু?","options":["A.সিংহ","B.বাঘ","C.হাতি","D.ঘোড়া"],"answer":"B","explanation":"বাঘ"},
+  {"id":20,"subject":"গণিত","topic":"গড়","question":"5,10,15 গড় কত?","options":["A.10","B.12","C.15","D.8"],"answer":"A","explanation":"10"},
+
+  {"id":21,"subject":"রিজনিং","topic":"সিরিজ","question":"1,4,9,16,?","options":["A.20","B.25","C.30","D.36"],"answer":"B","explanation":"square"},
+  {"id":22,"subject":"GK","topic":"সংবিধান","question":"সংবিধান দিবস?","options":["A.26 Jan","B.26 Nov","C.15 Aug","D.2 Oct"],"answer":"B","explanation":"২৬ নভেম্বর"},
+  {"id":23,"subject":"গণিত","topic":"সরল","question":"10×10=?","options":["A.50","B.100","C.150","D.200"],"answer":"B","explanation":"100"},
+  {"id":24,"subject":"রিজনিং","topic":"কোড","question":"ABC=BCD হলে XYZ=?","options":["A.YZA","B.YZ[","C.YZA","D.YZB"],"answer":"A","explanation":"+1"},
+  {"id":25,"subject":"GK","topic":"ইতিহাস","question":"মহাত্মা গান্ধী জন্ম?","options":["A.1869","B.1870","C.1880","D.1850"],"answer":"A","explanation":"1869"},
+
+  {"id":26,"subject":"গণিত","topic":"শতাংশ","question":"50% of 80?","options":["A.20","B.30","C.40","D.50"],"answer":"C","explanation":"40"},
+  {"id":27,"subject":"রিজনিং","topic":"সিরিজ","question":"3,6,9,12,?","options":["A.14","B.15","C.16","D.18"],"answer":"B","explanation":"+3"},
+  {"id":28,"subject":"GK","topic":"বিজ্ঞান","question":"সূর্য কি?","options":["A.গ্রহ","B.উপগ্রহ","C.নক্ষত্র","D.ধূমকেতু"],"answer":"C","explanation":"নক্ষত্র"},
+  {"id":29,"subject":"গণিত","topic":"বর্গ","question":"12²=?","options":["A.124","B.144","C.154","D.134"],"answer":"B","explanation":"144"},
+  {"id":30,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Cow:Milk :: Hen:?","options":["A.Egg","B.Meat","C.Food","D.Water"],"answer":"A","explanation":"Egg"},
+
+  {"id":31,"subject":"GK","topic":"সংস্কৃতি","question":"জাতীয় সঙ্গীত কে লিখেছেন?","options":["A.রবীন্দ্রনাথ","B.নজরুল","C.গান্ধী","D.তিলক"],"answer":"A","explanation":"রবীন্দ্রনাথ"},
+  {"id":32,"subject":"গণিত","topic":"ভাগ","question":"100÷4=?","options":["A.20","B.25","C.30","D.40"],"answer":"B","explanation":"25"},
+  {"id":33,"subject":"রিজনিং","topic":"দিক","question":"উত্তর+পূর্ব=?","options":["A.NE","B.SE","C.NW","D.SW"],"answer":"A","explanation":"NE"},
+  {"id":34,"subject":"GK","topic":"অর্থনীতি","question":"RBI প্রতিষ্ঠা?","options":["A.1935","B.1947","C.1950","D.1920"],"answer":"A","explanation":"1935"},
+  {"id":35,"subject":"গণিত","topic":"লসাগু","question":"LCM of 2,3,4?","options":["A.6","B.12","C.24","D.8"],"answer":"B","explanation":"12"},
+
+  {"id":36,"subject":"রিজনিং","topic":"সিরিজ","question":"2,4,8,16,?","options":["A.24","B.30","C.32","D.64"],"answer":"C","explanation":"×2"},
+  {"id":37,"subject":"GK","topic":"ভূগোল","question":"পৃথিবীর বৃহত্তম মহাসাগর?","options":["A.আটলান্টিক","B.ইন্ডিয়ান","C.প্যাসিফিক","D.আর্টিক"],"answer":"C","explanation":"প্যাসিফিক"},
+  {"id":38,"subject":"গণিত","topic":"গড়","question":"2,4,6 গড়?","options":["A.3","B.4","C.5","D.6"],"answer":"B","explanation":"4"},
+  {"id":39,"subject":"রিজনিং","topic":"কোড","question":"A=1,B=2 হলে C=?","options":["A.1","B.2","C.3","D.4"],"answer":"C","explanation":"3"},
+  {"id":40,"subject":"GK","topic":"ইতিহাস","question":"নেতাজি জন্ম?","options":["A.1897","B.1900","C.1880","D.1910"],"answer":"A","explanation":"1897"},
+
+  {"id":41,"subject":"গণিত","topic":"শতাংশ","question":"25% of 200?","options":["A.25","B.50","C.75","D.100"],"answer":"B","explanation":"50"},
+  {"id":42,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Sun:Day :: Moon:?","options":["A.Night","B.Light","C.Star","D.Sky"],"answer":"A","explanation":"Night"},
+  {"id":43,"subject":"GK","topic":"বিজ্ঞান","question":"Oxygen symbol?","options":["A.O","B.O2","C.O3","D.Ox"],"answer":"A","explanation":"O"},
+  {"id":44,"subject":"গণিত","topic":"গুণ","question":"12×5=?","options":["A.50","B.60","C.70","D.80"],"answer":"B","explanation":"60"},
+  {"id":45,"subject":"রিজনিং","topic":"সিরিজ","question":"10,20,30,?","options":["A.35","B.40","C.45","D.50"],"answer":"B","explanation":"+10"},
+
+  {"id":46,"subject":"GK","topic":"খেলা","question":"ফুটবলে খেলোয়াড় সংখ্যা?","options":["A.9","B.10","C.11","D.12"],"answer":"C","explanation":"১১"},
+  {"id":47,"subject":"গণিত","topic":"ভাগ","question":"81÷9=?","options":["A.7","B.8","C.9","D.10"],"answer":"C","explanation":"9"},
+  {"id":48,"subject":"রিজনিং","topic":"দিক","question":"দক্ষিণ+পশ্চিম=?","options":["A.SE","B.SW","C.NE","D.NW"],"answer":"B","explanation":"SW"},
+  {"id":49,"subject":"GK","topic":"সংবিধান","question":"রাষ্ট্রপতি মেয়াদ?","options":["A.4","B.5","C.6","D.7"],"answer":"B","explanation":"5 বছর"},
+  {"id":50,"subject":"গণিত","topic":"লাভ","question":"CP=100 SP=110 লাভ %?","options":["A.5","B.10","C.15","D.20"],"answer":"B","explanation":"10%"},
+
+  {"id":51,"subject":"রিজনিং","topic":"সিরিজ","question":"7,14,21,?","options":["A.24","B.28","C.30","D.35"],"answer":"B","explanation":"+7"},
+  {"id":52,"subject":"GK","topic":"ভূগোল","question":"ভারতের রাজধানী?","options":["A.কলকাতা","B.দিল্লি","C.মুম্বাই","D.চেন্নাই"],"answer":"B","explanation":"দিল্লি"},
+  {"id":53,"subject":"গণিত","topic":"বর্গমূল","question":"√81=?","options":["A.7","B.8","C.9","D.10"],"answer":"C","explanation":"9"},
+  {"id":54,"subject":"রিজনিং","topic":"কোড","question":"A→Z হলে B→?","options":["A.Y","B.X","C.W","D.V"],"answer":"A","explanation":"reverse"},
+  {"id":55,"subject":"GK","topic":"ইতিহাস","question":"আশোকের ধর্ম?","options":["A.হিন্দু","B.বৌদ্ধ","C.জৈন","D.শিখ"],"answer":"B","explanation":"বৌদ্ধ"},
+
+  {"id":56,"subject":"গণিত","topic":"গড়","question":"10,20,30 গড়?","options":["A.10","B.20","C.30","D.40"],"answer":"B","explanation":"20"},
+  {"id":57,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Pen:Write :: Knife:?","options":["A.Cut","B.Read","C.Drink","D.Sleep"],"answer":"A","explanation":"Cut"},
+  {"id":58,"subject":"GK","topic":"বিজ্ঞান","question":"CO2 কি?","options":["A.গ্যাস","B.তরল","C.কঠিন","D.ধাতু"],"answer":"A","explanation":"গ্যাস"},
+  {"id":59,"subject":"গণিত","topic":"গুণ","question":"9×9=?","options":["A.72","B.81","C.90","D.99"],"answer":"B","explanation":"81"},
+  {"id":60,"subject":"রিজনিং","topic":"সিরিজ","question":"1,3,5,7,?","options":["A.8","B.9","C.10","D.11"],"answer":"B","explanation":"+2"},
+
+  {"id":61,"subject":"GK","topic":"অর্থনীতি","question":"GST চালু?","options":["A.2015","B.2016","C.2017","D.2018"],"answer":"C","explanation":"2017"},
+  {"id":62,"subject":"গণিত","topic":"ভাগ","question":"64÷8=?","options":["A.6","B.7","C.8","D.9"],"answer":"C","explanation":"8"},
+  {"id":63,"subject":"রিজনিং","topic":"দিক","question":"উত্তর+পশ্চিম=?","options":["A.NW","B.NE","C.SE","D.SW"],"answer":"A","explanation":"NW"},
+  {"id":64,"subject":"GK","topic":"খেলা","question":"হকি জাতীয় খেলা?","options":["A.হ্যাঁ","B.না","C.আংশিক","D.কোনোটিই নয়"],"answer":"B","explanation":"আধিকারিক নয়"},
+  {"id":65,"subject":"গণিত","topic":"শতাংশ","question":"10% of 500?","options":["A.25","B.50","C.75","D.100"],"answer":"B","explanation":"50"},
+
+  {"id":66,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Bird:Fly :: Fish:?","options":["A.Run","B.Swim","C.Jump","D.Crawl"],"answer":"B","explanation":"Swim"},
+  {"id":67,"subject":"GK","topic":"ভূগোল","question":"এভারেস্ট কোথায়?","options":["A.ভারত","B.নেপাল","C.চীন","D.ভুটান"],"answer":"B","explanation":"নেপাল"},
+  {"id":68,"subject":"গণিত","topic":"বর্গ","question":"15²=?","options":["A.200","B.225","C.250","D.275"],"answer":"B","explanation":"225"},
+  {"id":69,"subject":"রিজনিং","topic":"সিরিজ","question":"4,8,12,16,?","options":["A.18","B.20","C.22","D.24"],"answer":"B","explanation":"+4"},
+  {"id":70,"subject":"GK","topic":"সংবিধান","question":"লোকসভা সদস্য সংখ্যা?","options":["A.500","B.545","C.550","D.600"],"answer":"B","explanation":"545"},
+
+  {"id":71,"subject":"গণিত","topic":"গড়","question":"3,6,9 গড়?","options":["A.5","B.6","C.7","D.8"],"answer":"B","explanation":"6"},
+  {"id":72,"subject":"রিজনিং","topic":"কোড","question":"B=2 হলে D=?","options":["A.2","B.3","C.4","D.5"],"answer":"C","explanation":"4"},
+  {"id":73,"subject":"GK","topic":"ইতিহাস","question":"ভারত স্বাধীনতা কবে?","options":["A.1945","B.1947","C.1950","D.1952"],"answer":"B","explanation":"1947"},
+  {"id":74,"subject":"গণিত","topic":"গুণ","question":"7×8=?","options":["A.54","B.56","C.58","D.60"],"answer":"B","explanation":"56"},
+  {"id":75,"subject":"রিজনিং","topic":"দিক","question":"পূর্ব+উত্তর=?","options":["A.NE","B.SE","C.NW","D.SW"],"answer":"A","explanation":"NE"},
+
+  {"id":76,"subject":"GK","topic":"বিজ্ঞান","question":"মানবদেহে রক্তের রং কেন লাল?","options":["A.জল","B.হিমোগ্লোবিন","C.চর্বি","D.অক্সিজেন"],"answer":"B","explanation":"হিমোগ্লোবিন"},
+  {"id":77,"subject":"গণিত","topic":"ভাগ","question":"90÷10=?","options":["A.7","B.8","C.9","D.10"],"answer":"C","explanation":"9"},
+  {"id":78,"subject":"রিজনিং","topic":"সিরিজ","question":"6,12,18,24,?","options":["A.28","B.30","C.32","D.36"],"answer":"B","explanation":"+6"},
+  {"id":79,"subject":"GK","topic":"অর্থনীতি","question":"ব্যাংকের কাজ কী?","options":["A.ঋণ","B.জমা","C.উভয়","D.কোনোটিই নয়"],"answer":"C","explanation":"উভয়"},
+  {"id":80,"subject":"গণিত","topic":"শতাংশ","question":"20% of 150?","options":["A.20","B.25","C.30","D.35"],"answer":"C","explanation":"30"},
+
+  {"id":81,"subject":"রিজনিং","topic":"অ্যানালজি","question":"Teacher:School :: Doctor:?","options":["A.Bank","B.Hospital","C.Office","D.Shop"],"answer":"B","explanation":"Hospital"},
+  {"id":82,"subject":"GK","topic":"ভূগোল","question":"ভারতের বৃহত্তম রাজ্য?","options":["A.UP","B.Rajasthan","C.MP","D.Bihar"],"answer":"B","explanation":"Rajasthan"},
+  {"id":83,"subject":"গণিত","topic":"গুণ","question":"11×11=?","options":["A.111","B.121","C.131","D.141"],"answer":"B","explanation":"121"},
+  {"id":84,"subject":"রিজনিং","topic":"সিরিজ","question":"1,2,4,8,?","options":["A.12","B.14","C.16","D.18"],"answer":"C","explanation":"×2"},
+  {"id":85,"subject":"গণিত","topic":"সময় ও কাজ","question":"একজন 10 দিনে কাজ করলে 2 জনে কত দিনে?","options":["A.10","B.5","C.6","D.8"],"answer":"B","explanation":"অর্ধেক সময়"}
+]
+}

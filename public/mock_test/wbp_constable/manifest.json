@@ -1,0 +1,213 @@
+{
+  "papers": [
+    {
+      "id": "MockTestWBPConstable",
+      "title": "WBP Constable Mock Test MockTestWBPConstable",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট MockTestWBPConstable",
+      "path": "mock_test/wbp_constable/MockTestWBPConstable.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "পশ্চিমবঙ্গের রাজধানী কোনটি?",
+        "options": [
+          "দুর্গাপুর",
+          "কলকাতা",
+          "হাওড়া",
+          "আসানসোল"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MocktestWbpConstableEight",
+      "title": "WBP Constable Mock Test Eight",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Eight",
+      "path": "mock_test/wbp_constable/MocktestWbpConstableEight.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতের প্রথম স্বাধীনতা সংগ্রাম কোন সালে সংঘটিত হয়েছিল?",
+        "options": [
+          "১৮৪২",
+          "১৮৫৭",
+          "১৮৬৫",
+          "১৮৭৫"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MocktestWbpConstableEleven",
+      "title": "WBP Constable Mock Test Eleven",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Eleven",
+      "path": "mock_test/wbp_constable/MocktestWbpConstableEleven.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "পলাশীর যুদ্ধ কত সালে হয়েছিল?",
+        "options": [
+          "১৭৫৪",
+          "১৭৫৭",
+          "১৭৬০",
+          "১৭৬৪"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MocktestWbpConstableFive",
+      "title": "WBP Constable Mock Test Five",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Five",
+      "path": "mock_test/wbp_constable/MocktestWbpConstableFive.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "বক্সারের যুদ্ধ কোন সালে হয়েছিল?",
+        "options": [
+          "১৭৫৭",
+          "১৭৬৪",
+          "১৭৭২",
+          "১৭৮০"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MocktestWbpconstableFour",
+      "title": "WBP Constable Mock Test Four",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Four",
+      "path": "mock_test/wbp_constable/MocktestWbpconstableFour.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "পশ্চিমবঙ্গের বৃহত্তম জেলা কোনটি (আয়তনের দিক থেকে)?",
+        "options": [
+          "উত্তর ২৪ পরগণা",
+          "দক্ষিণ ২৪ পরগণা",
+          "পশ্চিম মেদিনীপুর",
+          "বর্ধমান"
+        ],
+        "answer": "দ"
+      }
+    },
+    {
+      "id": "MockTestWbpConstableOne",
+      "title": "WBP Constable Mock Test One",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট One",
+      "path": "mock_test/wbp_constable/MockTestWbpConstableOne.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "কোন সুলতান 'ইকতা' প্রথা বন্ধ করেছিলেন?",
+        "options": [
+          "ইলতুৎমিস",
+          "আলাউদ্দিন খিলজি",
+          "ফিরোজ শাহ তুঘলক",
+          "বলবন"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MockTestWbpConstableSeven",
+      "title": "WBP Constable Mock Test Seven",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Seven",
+      "path": "mock_test/wbp_constable/MockTestWbpConstableSeven.json",
+      "questions": 51,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "বুদ্ধচরিত কার রচনা?",
+        "options": [
+          "অশ্বঘোষ",
+          "নাগার্জুন",
+          "বসুমিত্র",
+          "বিশাখদত্ত"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "MockTestWbpConstableSix",
+      "title": "WBP Constable Mock Test Six",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Six",
+      "path": "mock_test/wbp_constable/MockTestWbpConstableSix.json",
+      "questions": 84,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "কাকে 'ভারতের নেপোলিয়ন' বলা হয়?",
+        "options": [
+          "অশোক",
+          "সমুদ্রগুপ্ত",
+          "হর্ষবর্ধন",
+          "আকবর"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MocktestWbpconstableTen",
+      "title": "WBP Constable Mock Test Ten",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Ten",
+      "path": "mock_test/wbp_constable/MocktestWbpconstableTen.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতের প্রথম স্বাধীনতা সংগ্রাম কোন সালে সংঘটিত হয়েছিল?",
+        "options": [
+          "১৮৪২",
+          "১৮৫৭",
+          "১৮৬৫",
+          "১৮৭৫"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MockTestWbpConstableThree",
+      "title": "WBP Constable Mock Test Three",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Three",
+      "path": "mock_test/wbp_constable/MockTestWbpConstableThree.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতের প্রথম স্বাধীনতা সংগ্রাম কোন সালে সংঘটিত হয়েছিল?",
+        "options": [
+          "১৮৪২",
+          "১৮৫৭",
+          "১৮৬৫",
+          "১৮৭৫"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "MockTestWbpConstableTwo",
+      "title": "WBP Constable Mock Test Two",
+      "titleBn": "পুলিশ কনস্টেবল মক টেস্ট Two",
+      "path": "mock_test/wbp_constable/MockTestWbpConstableTwo.json",
+      "questions": 85,
+      "duration": 85,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতের প্রথম স্বাধীনতা সংগ্রাম কোন সালে সংঘটিত হয়েছিল?",
+        "options": [
+          "১৮৪২",
+          "১৮৫৭",
+          "১৮৬৫",
+          "১৮৭৫"
+        ],
+        "answer": "B"
+      }
+    }
+  ]
+}

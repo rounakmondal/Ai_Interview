@@ -1,0 +1,76 @@
+{
+    "exam": "WBP Constable Exam",
+    "total_questions": 85,
+    "language": "Bengali",
+    "sections": [
+        {
+            "name": "সাধারণ জ্ঞান (General Knowledge)",
+            "questions_count": 30
+        },
+        {
+            "name": "গণিত (Arithmetic)",
+            "questions_count": 25
+        },
+        {
+            "name": "যুক্তি (Reasoning)",
+            "questions_count": 20
+        },
+        {
+            "name": "বাংলা ভাষা (Bengali Language)",
+            "questions_count": 10
+        }
+    ],
+    "questions": [
+  {"id": 1, "subject": "GK", "topic": "History", "question": "বুদ্ধচরিত কার রচনা?", "options": ["A. অশ্বঘোষ", "B. নাগার্জুন", "C. বসুমিত্র", "D. বিশাখদত্ত"], "answer": "A", "explanation": "কণিষ্কের সভাকবি অশ্বঘোষ বুদ্ধচরিত মহাকাব্যটি রচনা করেন।"},
+  {"id": 2, "subject": "GK", "topic": "Geography", "question": "ভারতের বৃহত্তম হিমবাহ কোনটি?", "options": ["A. গঙ্গোত্রী", "B. জেমু", "C. সিয়াচেন", "D. বাল্টোরো"], "answer": "C", "explanation": "সিয়াচেন হলো ভারতের দীর্ঘতম ও বৃহত্তম হিমবাহ।"},
+  {"id": 3, "subject": "Math", "topic": "Simplification", "question": "(০.২ * ০.২ * ০.২) এর মান কত?", "options": ["A. ০.৬", "B. ০.০৪", "C. ০.০০৮", "D. ০.০০৪"], "answer": "C", "explanation": "২ এর কিউব ৮, এবং তিন ঘর আগে দশমিক বসবে।"},
+  {"id": 4, "subject": "Reasoning", "topic": "Series", "question": "১, ৯, ২৫, ৪৯, ?", "options": ["A. ৬৪", "B. ৮১", "C. ১০০", "D. ১২১"], "answer": "B", "explanation": "এটি বিজোড় সংখ্যার বর্গের সিরিজ (১, ৩, ৫, ৭, ৯)।"},
+  {"id": 5, "subject": "English", "topic": "Synonym", "question": "Synonym of 'ABANDON':", "options": ["A. Keep", "B. Forsake", "C. Help", "D. Hold"], "answer": "B", "explanation": "Abandon মানে বর্জন করা বা ছেড়ে দেওয়া।"},
+  {"id": 6, "subject": "GK", "topic": "Science", "question": "পিউরিফাইড রক্ত বহন করে কোন ধমনী?", "options": ["A. পালমোনারি ধমনী", "B. মহাধমনী", "C. রেনাল ধমনী", "D. কোনোটিই নয়"], "answer": "B", "explanation": "মহাধমনী বা অ্যারোটা সারা শরীরে অক্সিজেনযুক্ত রক্ত পৌঁছে দেয়।"},
+  {"id": 7, "subject": "Math", "topic": "Percentage", "question": "আয়তক্ষেত্রের দৈর্ঘ্য ২০% বাড়লে ক্ষেত্রফল কত বাড়বে?", "options": ["A. ১০%", "B. ২০%", "C. ২৫%", "D. ৪০%"], "answer": "B", "explanation": "প্রস্থ অপরিবর্তিত থাকলে দৈর্ঘ্যের আনুপাতিক হারেই ক্ষেত্রফল বাড়ে।"},
+  {"id": 8, "subject": "Reasoning", "topic": "Coding", "question": "BAT = 23 হলে CAT = ?", "options": ["A. ২৪", "B. ২৫", "C. ২৬", "D. ২০"], "answer": "A", "explanation": "৩+১+২০ = ২৪।"},
+  {"id": 9, "subject": "GK", "topic": "Polity", "question": "ভারতের সংবিধানের অভিভাবক কে?", "options": ["A. রাষ্ট্রপতি", "B. প্রধানমন্ত্রী", "C. সুপ্রিম কোর্ট", "D. সংসদ"], "answer": "C", "explanation": "সুপ্রিম কোর্ট সংবিধানের ব্যাখ্যা ও রক্ষা করে।"},
+  {"id": 10, "subject": "GK", "topic": "Sport", "question": "রঞ্জি ট্রফি কোন খেলার সাথে যুক্ত?", "options": ["A. ফুটবল", "B. হকি", "C. ক্রিকেট", "D. কবাডি"], "answer": "C", "explanation": "এটি ভারতের ঘরোয়া প্রথম শ্রেণীর ক্রিকেট টুর্নামেন্ট।"},
+  {"id": 11, "subject": "Math", "topic": "Profit-Loss", "question": "ক্রয়মূল্য ও বিক্রয়মূল্যের অনুপাত ৫:৬ হলে লাভের হার কত?", "options": ["A. ১০%", "B. ১৫%", "C. ২০%", "D. ২৫%"], "answer": "C", "explanation": "(১/৫)*১০০ = ২০%।"},
+  {"id": 12, "subject": "Reasoning", "topic": "Analogy", "question": "পাখি : আকাশ :: মাছ : ?", "options": ["A. ডাঙা", "B. বাতাস", "C. জল", "D. গর্ত"], "answer": "C", "explanation": "বিচরণ ক্ষেত্রের ওপর ভিত্তি করে।"},
+  {"id": 13, "subject": "English", "topic": "Article", "question": "She is ___ university student.", "options": ["A. a", "B. an", "C. the", "D. no article"], "answer": "A", "explanation": "U-এর উচ্চারণ 'ইউ' এর মতো হলে 'a' বসে।"},
+  {"id": 14, "subject": "GK", "topic": "Science", "question": "ভোপাল গ্যাস দুর্ঘটনায় কোন গ্যাস লিক করেছিল?", "options": ["A. MIC", "B. CO", "C. NO2", "D. SO2"], "answer": "A", "explanation": "মিথাইল আইসোসায়ানেট (MIC) গ্যাস লিক হয়েছিল।"},
+  {"id": 15, "subject": "Math", "topic": "Average", "question": "৫, ৭, ৯, ১১, ১৩ এর গড় কত?", "options": ["A. ৭", "B. ৯", "C. ১১", "D. ৫"], "answer": "B", "explanation": "পরপর বিজোড় সংখ্যা হলে মাঝেরটি গড় হয়।"},
+  {"id": 16, "subject": "GK", "topic": "History", "question": "তরাইনের দ্বিতীয় যুদ্ধ কবে হয়?", "options": ["A. ১১৯১", "B. ১১৯২", "C. ১৫২৬", "D. ১৭৫৭"], "answer": "B", "explanation": "পৃথ্বীরাজ চৌহান ও মহম্মদ ঘোরীর মধ্যে হয়েছিল।"},
+  {"id": 17, "subject": "Math", "topic": "Ratio", "question": "৪:৯ এর দ্বিগুণানুপাত (Duplicate ratio) কত?", "options": ["A. ২:৩", "B. ১৬:৮১", "C. ৮:১৮", "D. ৯:৪"], "answer": "B", "explanation": "৪ স্কোয়ার ও ৯ স্কোয়ার।"},
+  {"id": 18, "subject": "Reasoning", "topic": "Odd One", "question": "আলাদাটি বাছুন: দই, মাখন, তেল, পনির", "options": ["A. দই", "B. মাখন", "C. তেল", "D. পনির"], "answer": "C", "explanation": "তেল বাদে বাকি সব দুগ্ধজাত দ্রব্য।"},
+  {"id": 19, "subject": "GK", "topic": "Geography", "question": "কোন শহরকে ভারতের ম্যানচেস্টার বলা হয়?", "options": ["A. কানপুর", "B. কোয়েম্বাটোর", "C. আমেদাবাদ", "D. মুম্বাই"], "answer": "C", "explanation": "গুজরাটের আমেদাবাদকে এই আখ্যা দেওয়া হয়।"},
+  {"id": 20, "subject": "English", "topic": "Antonym", "question": "Antonym of 'GUILTY':", "options": ["A. Innocent", "B. Bad", "C. Criminal", "D. Pure"], "answer": "A", "explanation": "Guilty (দোষী) এর বিপরীত Innocent (নির্দোষ)।"},
+  {"id": 21, "subject": "GK", "topic": "Polity", "question": "মুখ্যমন্ত্রীকে কে নিয়োগ করেন?", "options": ["A. রাষ্ট্রপতি", "B. রাজ্যপাল", "C. স্পিকার", "D. প্রধান বিচারপতি"], "answer": "B", "explanation": "রাজ্যপাল বিধানসভার সংখ্যাগুরু দলের নেতাকে নিয়োগ করেন।"},
+  {"id": 22, "subject": "Math", "topic": "Interest", "question": "বার্ষিক ৪% সুদে ৫০০ টাকার ২ বছরের সুদ কত?", "options": ["A. ২০", "B. ৪০", "C. ৬০", "D. ৮০"], "answer": "B", "explanation": "(৫০০*৪*২)/১০০ = ৪০।"},
+  {"id": 23, "subject": "GK", "topic": "Science", "question": "সোডার জলে কোন গ্যাস থাকে?", "options": ["A. অক্সিজেন", "B. নাইট্রোজেন", "C. কার্বন ডাই অক্সাইড", "D. হাইড্রোজেন"], "answer": "C", "explanation": "চাপ প্রয়োগ করে CO2 দ্রবীভূত করা হয়।"},
+  {"id": 24, "subject": "Reasoning", "topic": "Blood Relation", "question": "A হলো B এর ভাই, C হলো A এর মা। B এর কে হয় C?", "options": ["A. মাসি", "B. মা", "C. পিসি", "D. ঠাকুমা"], "answer": "B", "explanation": "ভাইয়ের মা নিজেরও মা।"},
+  {"id": 25, "subject": "English", "topic": "Spelling", "question": "সঠিক বানানটি বাছুন:", "options": ["A. Tommorow", "B. Tomorrow", "C. Tommorrow", "D. Tomoro"], "answer": "B", "explanation": "Tomorrow হলো সঠিক বানান।"},
+  {"id": 26, "subject": "GK", "topic": "History", "question": "হাজার দুয়ারী প্যালেস কোথায় অবস্থিত?", "options": ["A. মালদা", "B. মুর্শিদাবাদ", "C. বীরভূম", "D. নদীয়া"], "answer": "B", "explanation": "মুর্শিদাবাদ জেলায় ভাগীরথী নদীর তীরে অবস্থিত।"},
+  {"id": 27, "subject": "Math", "topic": "LCM-HCF", "question": "তিনটি সংখ্যার অনুপাত ১:২:৩, গসাগু ১২ হলে সংখ্যাগুলি কী কী?", "options": ["A. ১২, ২৪, ৩৬", "B. ১০, ২০, ৩০", "C. ৬, ১২, ১৮", "D. ২৪, ৪৮, ৭২"], "answer": "A", "explanation": "অনুপাতকে গসাগু দিয়ে গুণ করতে হয়।"},
+  {"id": 28, "subject": "Reasoning", "topic": "Direction", "question": "দক্ষিণ দিকে ৫ কিমি গিয়ে বামে ঘুরলে এখন কোন দিকে যাচ্ছ?", "options": ["A. উত্তর", "B. দক্ষিণ", "C. পূর্ব", "D. পশ্চিম"], "answer": "C", "explanation": "দক্ষিণের বামে হলো পূর্ব দিক।"},
+  {"id": 29, "subject": "GK", "topic": "Current Affairs", "question": "ভারতের বর্তমান রাষ্ট্রপতি কে?", "options": ["A. রামনাথ কোবিন্দ", "B. দ্রৌপদী মুর্মু", "C. জগদীপ ধনখড়", "D. প্রতিভা পাটিল"], "answer": "B", "explanation": "দ্রৌপদী মুর্মু ভারতের ১৫তম রাষ্ট্রপতি।"},
+  {"id": 30, "subject": "English", "topic": "Preposition", "question": "Distribute the sweets ___ the children.", "options": ["A. between", "B. among", "C. with", "D. for"], "answer": "B", "explanation": "অনেকের মধ্যে বোঝালে 'among' বসে।"},
+  {"id": 31, "subject": "GK", "topic": "Static", "question": "মানস অভয়ারণ্য কোথায় অবস্থিত?", "options": ["A. পশ্চিমবঙ্গ", "B. আসাম", "C. ওড়িশা", "D. মধ্যপ্রদেশ"], "answer": "B", "explanation": "আসাম রাজ্যে অবস্থিত।"},
+  {"id": 32, "subject": "Math", "topic": "Simplification", "question": "(৩/৪) + (১/৪) = কত?", "options": ["A. ১/২", "B. ১", "C. ৪/৮", "D. ২"], "answer": "B", "explanation": "৪/৪ = ১।"},
+  {"id": 40, "subject": "English", "topic": "One Word", "question": "A life history written by oneself:", "options": ["A. Biography", "B. Autobiography", "C. History", "D. Novel"], "answer": "B", "explanation": "নিজে লিখলে অটোবায়োগ্রাফি।"},
+  {"id": 41, "subject": "GK", "topic": "Constitution", "question": "জরুরী অবস্থা কে ঘোষণা করতে পারেন?", "options": ["A. প্রধানমন্ত্রী", "B. রাষ্ট্রপতি", "C. স্পিকার", "D. রাজ্যপাল"], "answer": "B", "explanation": "সংবিধান অনুযায়ী রাষ্ট্রপতি এটি করতে পারেন।"},
+  {"id": 42, "subject": "Math", "topic": "Time-Distance", "question": "ঘণ্টায় ৫৪ কিমি বেগে চললে ১০ সেকেন্ডে কত পথ যাবে?", "options": ["A. ১০০ মি", "B. ১৫০ মি", "C. ২০০ মি", "D. ২৫০ মি"], "answer": "B", "explanation": "১৫ মি/সে * ১০ = ১৫০ মিটার।"},
+  {"id": 43, "subject": "GK", "topic": "Science", "question": "শুষ্ক বরফ কী?", "options": ["A. কঠিন নাইট্রোজেন", "B. কঠিন CO2", "C. কঠিন অক্সিজেন", "D. বরফ"], "answer": "B", "explanation": "কঠিন কার্বন ডাই অক্সাইডকে ড্রাই আইস বলে।"},
+  {"id": 44, "subject": "Reasoning", "topic": "Series", "question": "Z, X, V, T, ?", "options": ["A. S", "B. R", "C. Q", "D. P"], "answer": "B", "explanation": "বিপরীত দিক থেকে একটি অন্তর অন্তর।"},
+  {"id": 45, "subject": "English", "topic": "Voice", "question": "Open the door. (Passive):", "options": ["A. Let the door be opened", "B. Door is opened", "C. The door opened", "D. Open it"], "answer": "A", "explanation": "Imperative sentence-এর passive rule।"},
+  {"id": 51, "subject": "GK", "topic": "West Bengal", "question": "পশ্চিমবঙ্গের রাজ্য ফুল কোনটি?", "options": ["A. পদ্ম", "B. গোলাপ", "C. শিউলি", "D. জবা"], "answer": "C", "explanation": "শিউলি বা নাইট ফ্লাওয়ারিং জেসমিন।"},
+  {"id": 52, "subject": "Math", "topic": "Discount", "question": "৫০০ টাকার ওপর ২০% ছাড় দিলে বিক্রয়মূল্য কত?", "options": ["A. ৪০০", "B. ৪৫০", "C. ৩০০", "D. ৩৮০"], "answer": "A", "explanation": "৫০০ - ১০০ = ৪০০।"},
+  {"id": 53, "subject": "GK", "topic": "Science", "question": "পিত্তরস কোথা থেকে নিঃসৃত হয়?", "options": ["A. পাকস্থলী", "B. যকৃৎ", "C. অগ্ন্যাশয়", "D. বৃক্ক"], "answer": "B", "explanation": "যকৃৎ বা লিভার থেকে পিত্তরস বের হয়।"},
+  {"id": 61, "subject": "GK", "topic": "History", "question": "বক্সারের যুদ্ধ কত সালে হয়?", "options": ["A. ১৭৫৭", "B. ১৭৬৪", "C. ১৮৫৭", "D. ১৫২৬"], "answer": "B", "explanation": "মীর কাসিমের সাথে ব্রিটিশদের যুদ্ধ হয়।"},
+  {"id": 62, "subject": "Math", "topic": "Age", "question": "পিতা ও পুত্রের বর্তমান বয়সের যোগফল ৫০, ৫ বছর আগে কত ছিল?", "options": ["A. ৪৫", "B. ৪০", "C. ৩৫", "D. ৩০"], "answer": "B", "explanation": "দুজনেরই ৫ বছর করে কমবে (৫০-১০=৪০)।"},
+  {"id": 71, "subject": "English", "topic": "Collective", "question": "A group of sheep is called a ___.", "options": ["A. Herd", "B. Flock", "C. Pack", "D. Pride"], "answer": "B", "explanation": "ভেড়ার দলকে ফ্লক বলা হয়।"},
+  {"id": 72, "subject": "GK", "topic": "Science", "question": "মানুষের হৃৎপিণ্ডে কয়টি প্রকোষ্ঠ থাকে?", "options": ["A. ২", "B. ৩", "C. ৪", "D. ৫"], "answer": "C", "explanation": "দুটি অলিন্দ ও দুটি নিলয় থাকে।"},
+  {"id": 80, "subject": "Reasoning", "topic": "Calendar", "question": "লিপ ইয়ার বর্ষে ফেব্রুয়ারী মাসে কত দিন থাকে?", "options": ["A. ২৮", "B. ২৯", "C. ৩০", "D. ২৭"], "answer": "B", "explanation": "লিপ ইয়ারে একদিন বাড়ে।"},
+  {"id": 81, "subject": "English", "topic": "Gender", "question": "Masculine of 'Bee' is:", "options": ["A. Drone", "B. Bull", "C. Dog", "D. Horse"], "answer": "A", "explanation": "পুরুষ মৌমাছিকে ড্রোন বলে।"},
+  {"id": 82, "subject": "GK", "topic": "Polity", "question": "ভোট দেওয়ার ন্যূনতম বয়স কত?", "options": ["A. ২১", "B. ১৮", "C. ২৫", "D. ৩০"], "answer": "B", "explanation": "৬১তম সংশোধনীর মাধ্যমে ২১ থেকে কমিয়ে ১৮ করা হয়।"},
+  {"id": 83, "subject": "Math", "topic": "Simplification", "question": "√০.০৯ = কত?", "options": ["A. ০.৩", "B. ০.০৩", "C. ৩", "D. ০.০০০৩"], "answer": "A", "explanation": "০.৩ * ০.৩ = ০.০৯।"},
+  {"id": 84, "subject": "GK", "topic": "Science", "question": "জলের রাসায়নিক সংকেত কোনটি?", "options": ["A. H2O2", "B. H2O", "C. HO2", "D. OH"], "answer": "B", "explanation": "দুটি হাইড্রোজেন ও একটি অক্সিজেন পরমাণু।"},
+  {"id": 85, "subject": "Reasoning", "topic": "Alphabet", "question": "B, D, F, H, ?", "options": ["A. I", "B. J", "C. K", "D. L"], "answer": "B", "explanation": "সব জোড় অবস্থানের বর্ণ।"}
+]
+}
