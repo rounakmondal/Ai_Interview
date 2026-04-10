@@ -74,8 +74,8 @@ export default function DailyTasks() {
             <div className="w-16 h-16 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center">
               <Target className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold mb-2 mt-4">আগে পরীক্ষা সেট করুন</h1>
-            <p className="text-muted-foreground text-sm">Daily tasks আনলক করতে প্রোফাইলে upcoming exam সেট করুন।</p>
+            <h1 className="text-2xl font-bold mb-2 mt-4">Set Your Exam First</h1>
+            <p className="text-muted-foreground text-sm">Set your upcoming exam in your profile to unlock daily tasks.</p>
           </motion.div>
           <Link to="/profile">
             <Button className="gap-1.5"><Target className="w-4 h-4" />Go to Profile</Button>
@@ -122,7 +122,7 @@ export default function DailyTasks() {
             <span className="text-sm font-medium">Home</span>
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
-          <span className="text-sm font-semibold text-foreground">দৈনিক চ্যালেঞ্জ</span>
+          <span className="text-sm font-semibold text-foreground">Daily Challenge</span>
 
           <div className="ml-auto flex items-center gap-2">
             <ProfileButton />
@@ -160,17 +160,17 @@ export default function DailyTasks() {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-semibold mb-4">
             <Flame className="w-3.5 h-3.5" />
-            {new Date().toLocaleDateString("bn-IN", { weekday: "long", day: "numeric", month: "long" })} — {EXAM_LABELS[taskState.exam]}
+            {new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })} — {EXAM_LABELS[taskState.exam]}
           </motion.div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-3">
-            আজকের{" "}
+            Today's{"\ "}
             <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
-              মিশন
+              Mission
             </span>
           </h1>
           <p className="text-muted-foreground max-w-lg mx-auto text-base leading-relaxed">
-            প্রতিদিন অভ্যাস করুন, streak বাড়ান — সব task শেষ করে <span className="text-primary font-semibold">{maxDaily} XP</span> অর্জন করুন।
+            Practice every day, grow your streak — complete all tasks and earn <span className="text-primary font-semibold">{maxDaily} XP</span>.
           </p>
         </motion.div>
 
@@ -179,10 +179,10 @@ export default function DailyTasks() {
           transition={{ delay: 0.2, duration: 0.5, ease: smoothEase }}
           className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {[
-            { icon: <Flame className="w-4 h-4" />,  label: "দিনের ধারা", value: `${streak} দিন`, color: "text-orange-500" },
-            { icon: <Trophy className="w-4 h-4" />,  label: "মোট XP",  value: `${totalPts}`,    color: "text-amber-500" },
-            { icon: <Star className="w-4 h-4" />,    label: "আজকের XP", value: `${taskState.totalPointsEarned}/${maxDaily}`, color: "text-primary" },
-            { icon: <Users className="w-4 h-4" />,   label: "সম্পন্ন",  value: `${completedCount}/${taskState.tasks.length}`, color: "text-emerald-500" },
+            { icon: <Flame className="w-4 h-4" />,  label: "Streak",    value: `${streak} days`, color: "text-orange-500" },
+            { icon: <Trophy className="w-4 h-4" />,  label: "Total XP",  value: `${totalPts}`,    color: "text-amber-500" },
+            { icon: <Star className="w-4 h-4" />,    label: "Today's XP", value: `${taskState.totalPointsEarned}/${maxDaily}`, color: "text-primary" },
+            { icon: <Users className="w-4 h-4" />,   label: "Completed",  value: `${completedCount}/${taskState.tasks.length}`, color: "text-emerald-500" },
           ].map((s, i) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 + i * 0.05 }}
@@ -205,11 +205,11 @@ export default function DailyTasks() {
           <div className="p-5 sm:p-6">
             <div className="flex items-center gap-2 mb-3">
               <Target className="w-4 h-4 text-primary" />
-              <p className="text-sm font-semibold text-foreground">দৈনিক অগ্রগতি</p>
+              <p className="text-sm font-semibold text-foreground">Daily Progress</p>
               <span className="text-xs text-muted-foreground ml-auto font-medium">{progressPct}%</span>
             </div>
             <Progress value={progressPct} className="h-2.5 mb-2" />
-            <p className="text-xs text-muted-foreground">{taskState.totalPointsEarned} / {maxDaily} XP আজ অর্জিত</p>
+            <p className="text-xs text-muted-foreground">{taskState.totalPointsEarned} / {maxDaily} XP earned today</p>
           </div>
         </motion.div>
 
@@ -219,10 +219,10 @@ export default function DailyTasks() {
             transition={{ delay: 0.35, duration: 0.6, ease: smoothEase }} className="mb-8">
 
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">১</div>
-              <p className="text-sm font-semibold text-foreground">আজকের প্রস্তাবিত পেপার</p>
+              <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">1</div>
+              <p className="text-sm font-semibold text-foreground">Today's Recommended Paper</p>
               {mockTest.completed && (
-                <Badge className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30 ml-auto">সম্পন্ন ✓</Badge>
+                <Badge className="text-xs bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30 ml-auto">Done ✓</Badge>
               )}
             </div>
 
@@ -257,10 +257,10 @@ export default function DailyTasks() {
                     {/* Feature chips */}
                     <div className="flex flex-wrap gap-2 mb-5">
                       {[
-                        { icon: Brain,      text: "AI দ্বারা তৈরি" },
-                        { icon: Shield,     text: "পরীক্ষার প্যাটার্ন" },
-                        { icon: TrendingUp, text: "ফলাফল বিশ্লেষণ" },
-                        { icon: BookOpen,   text: `${mockTest.questionCount} প্রশ্ন` },
+                        { icon: Brain,      text: "AI-generated" },
+                        { icon: Shield,     text: "Exam pattern" },
+                        { icon: TrendingUp, text: "Result analysis" },
+                        { icon: BookOpen,   text: `${mockTest.questionCount} questions` },
                       ].map(({ icon: Icon, text }) => (
                         <div key={text} className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-xs text-muted-foreground">
                           <Icon className="w-3 h-3 text-amber-500" />
@@ -272,7 +272,7 @@ export default function DailyTasks() {
                     {mockTest.completed ? (
                       <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
                         <CheckCircle2 className="w-4 h-4" />
-                        সম্পন্ন — স্কোর: {mockTest.score ?? 0}%
+                        Completed — Score: {mockTest.score ?? 0}%
                       </div>
                     ) : (
                       <motion.button
@@ -282,7 +282,7 @@ export default function DailyTasks() {
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500" />
                         <span className="relative flex items-center gap-2">
                           <BookOpen className="w-4 h-4" />
-                          Mock Test শুরু করুন
+                          Start Mock Test
                           <ChevronRight className="w-4 h-4" />
                         </span>
                       </motion.button>
@@ -299,12 +299,12 @@ export default function DailyTasks() {
           transition={{ delay: 0.4, duration: 0.6, ease: smoothEase }}>
 
           <div className="flex items-center gap-2 mb-5">
-            <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">২</div>
-            <p className="text-sm font-semibold text-foreground">বিষয়ভিত্তিক কুইজ</p>
-            <span className="text-xs text-muted-foreground">প্রতিটি ১০ প্রশ্ন</span>
+              <div className="w-6 h-6 rounded-full bg-foreground/5 border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground">2</div>
+            <p className="text-sm font-semibold text-foreground">Subject Quizzes</p>
+            <span className="text-xs text-muted-foreground">10 questions each</span>
             <div className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground">
               <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
-              {quizzes.filter((q) => q.completed).length}/{quizzes.length} সম্পন্ন
+              {quizzes.filter((q) => q.completed).length}/{quizzes.length} done
             </div>
           </div>
 
@@ -357,7 +357,7 @@ export default function DailyTasks() {
                     {quiz.completed ? (
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
-                          <span className="text-muted-foreground">স্কোর</span>
+                          <span className="text-muted-foreground">Score</span>
                           <span className={`font-semibold tabular-nums ${
                             (quiz.score ?? 0) >= 70 ? "text-green-600 dark:text-green-400"
                             : (quiz.score ?? 0) >= 40 ? "text-amber-600 dark:text-amber-400"
@@ -369,7 +369,7 @@ export default function DailyTasks() {
                     ) : (
                       <div className={`flex items-center gap-1.5 text-xs font-semibold ${sty.accent}`}>
                         <Sparkles className="w-3 h-3" />
-                        কুইজ শুরু করুন
+                        Start Quiz
                         <ChevronRight className="w-3.5 h-3.5 ml-auto" />
                       </div>
                     )}
@@ -385,9 +385,9 @@ export default function DailyTasks() {
           transition={{ delay: 0.55, duration: 0.5, ease: smoothEase }}
           className="mt-8 grid grid-cols-3 gap-3">
           {[
-            { label: "Question Bank", sub: "বিষয় অনুযায়ী", icon: BookOpen, to: "/govt-practice", color: "from-orange-500/10 to-red-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
-            { label: "Mock Test", sub: "পূর্ণ মক টেস্ট", icon: Target, to: "/question-hub", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },
-            { label: "Leaderboard", sub: "শীর্ষ পরীক্ষার্থী", icon: Trophy, to: "/leaderboard", color: "from-orange-500/10 to-purple-500/10 border-orange-500/20 hover:border-orange-500/40", icon_color: "text-orange-500" },
+            { label: "Question Bank", sub: "By subject", icon: BookOpen, to: "/govt-practice", color: "from-orange-500/10 to-red-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
+            { label: "Mock Test", sub: "Full practice test", icon: Target, to: "/question-hub", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },
+            { label: "Leaderboard", sub: "Top scorers", icon: Trophy, to: "/leaderboard", color: "from-orange-500/10 to-purple-500/10 border-orange-500/20 hover:border-orange-500/40", icon_color: "text-orange-500" },
           ].map((item) => (
             <Link key={item.to} to={item.to}>
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}
@@ -414,9 +414,9 @@ export default function DailyTasks() {
                   <Trophy className="w-7 h-7 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">সব টাস্ক সম্পন্ন! 🎉</h3>
+                  <h3 className="font-bold text-lg">All tasks done! 🎉</h3>
                   <p className="text-sm text-muted-foreground mt-0.5">
-                    আজ <span className="text-green-600 dark:text-green-400 font-semibold">{maxDaily} XP</span> অর্জন করেছেন। কাল আবার এসে streak ধরে রাখুন!
+                    You earned <span className="text-green-600 dark:text-green-400 font-semibold">{maxDaily} XP</span> today. Come back tomorrow to keep your streak!
                   </p>
                 </div>
               </div>
@@ -432,13 +432,13 @@ export default function DailyTasks() {
             <Flame className="w-5 h-5 text-amber-400" />
           </div>
           <div className="text-center sm:text-left">
-            <p className="text-sm font-bold text-white">আপনি আজ আপনার ভবিষ্যৎ গড়ে তুলছেন 🚀</p>
-            <p className="text-xs text-slate-400 mt-0.5">প্রতিদিন ধারাবাহিক অভ্যাস সরকারি পরীক্ষায় সাফল্যের সবচেয়ে বড় চাবিকাঠি। এমনকি দিনে ৩০ মিনিটও বিশাল পার্থক্য আনে।</p>
+            <p className="text-sm font-bold text-white">You are building your future today 🚀</p>
+            <p className="text-xs text-slate-400 mt-0.5">Consistent daily practice is the biggest key to success in government exams. Even 30 minutes a day makes a massive difference.</p>
           </div>
           <Link to="/govt-practice" className="flex-shrink-0 ml-auto hidden sm:block">
             <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
               className="px-4 py-2 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-semibold hover:bg-amber-500/30 transition-colors">
-              অভ্যাস শুরু করুন
+              Start Practising
             </motion.button>
           </Link>
         </motion.div>

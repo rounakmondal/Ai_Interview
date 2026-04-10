@@ -55,7 +55,7 @@ const MockTestPage = lazy(() => import("./pages/MockTestPage"));
 const QuestionHub = lazy(() => import("./pages/QuestionHub"));
 const PDFMockTest = lazy(() => import("./pages/PDFMockTest"));
 const PreviousYearPage = lazy(() => import("./pages/PreviousYearPage"));
-const WBPConstableMock = lazy(() => import("./pages/WBPConstableMock"));
+
 const VacancyAlertCenter = lazy(() => import("./pages/VacancyAlertCenter"));
 
 // Company interview pages
@@ -144,10 +144,11 @@ function AppContent() {
           <Route path="/chapter-test/:chapterId" element={<ChapterTest />} />
           <Route path="/mock-test" element={<MockTestPage />} />
           <Route path="/question-hub" element={<QuestionHub />} />
-          <Route path="/question-hub/:examSlug" element={<QuestionHub />} />
+          {/* All Question Papers tab — clean exam URLs */}
+          <Route path="/wbp-si-mock-test" element={<QuestionHub seoProfile="police-si" defaultAllExam="WBP SI" />} />
           {/* SEO landing URLs — same Question Hub UI, focused meta & canonical */}
           <Route path="/wbcs-mock-test" element={<QuestionHub seoProfile="wbcs" />} />
-          <Route path="/wbp-constable-mock-test" element={<WBPConstableMock />} />
+          <Route path="/wbp-constable-mock-test" element={<QuestionHub seoProfile="police-constable" defaultAllExam="WBP Constable" />} />
           <Route path="/wbp-constable-mock" element={<Navigate to="/wbp-constable-mock-test" replace />} />
           <Route
             path="/wbp-police-mock-test"

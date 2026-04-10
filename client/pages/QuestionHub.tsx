@@ -1215,7 +1215,179 @@ function ConstablePreviewCards({
   );
 }
 
-// Slug ↔ exam label mapping for /question-hub/:examSlug clean URLs
+// ─── WBP SI Preview Cards (for All Question Papers tab) ────────────────────
+
+function SIPreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/wbp_si/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Use the police folder config for folder-level actions (download path, etc.)
+  const siFolder: FolderData = {
+    label: "WBP SI",
+    publicPath: "mock_test/wbp_si",
+    colorKey: "terracotta",
+    files: papers.map((p) => ({
+      path: p.path,
+      name: p.title,
+      downloadHref: `/${p.path}`,
+      type: "SI" as const,
+    })),
+  };
+
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "SI",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-blue-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0,1,2,3].map(j => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-blue-700/15 bg-card/80 hover:border-blue-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            {/* Top accent bar */}
+            <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-400" />
+
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/12 flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-blue-700 dark:text-blue-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-700/12 text-blue-800 dark:text-blue-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {/* Preview question */}
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">
+                    Sample Question
+                  </p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">
+                    {preview.question}
+                  </p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex-1 flex items-center justify-center py-4">
+                  <p className="text-sm text-muted-foreground">100 questions · Bengali medium</p>
+                </div>
+              )}
+
+              {/* Stats row */}
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-blue-700/20 hover:bg-blue-500/8"
+                  onClick={() => onDownload(toFile(paper), siFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white"
+                  onClick={() => onStartTest(toFile(paper), siFolder, "police-si")}
+                  disabled={navigating}
+                >
+                  {navigating ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    <><Play className="w-3.5 h-3.5" />Attempt Test</>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Slug ↔ exam label mapping (used only for back-compat URL reading)
 const SLUG_TO_EXAM: Record<string, string> = {
   "wbp-constable": "WBP Constable",
   "wbp-si":        "WBP SI",
@@ -1226,24 +1398,36 @@ const SLUG_TO_EXAM: Record<string, string> = {
   "jtet":          "JTET",
   "ibps-po":       "IBPS PO",
 };
-const EXAM_TO_SLUG: Record<string, string> = Object.fromEntries(
-  Object.entries(SLUG_TO_EXAM).map(([slug, exam]) => [exam, slug])
-);
+
+// Each exam → its dedicated clean URL (used when navigating from dropdown)
+const EXAM_TO_URL: Record<string, string> = {
+  "WBP Constable":    "/wbp-constable-mock-test",
+  "WBP SI":           "/wbp-si-mock-test",
+  "WBCS Prelims":     "/wbcs-mock-test",
+  "SSC MTS":          "/ssc-mts-mock-test",
+  "WBPSC Clerkship":  "/wbpsc-clerkship-mock-test",
+  "RRB NTPC":         "/rrb-ntpc-mock-test",
+  "JTET":             "/jtet-mock-test",
+  "IBPS PO":          "/ibps-po-mock-test",
+};
 
 export default function QuestionHub({
   seoProfile = "default",
+  defaultAllExam,
 }: {
   seoProfile?: ExamSeoProfile;
+  defaultAllExam?: string;
 }) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { examSlug } = useParams<{ examSlug?: string }>();
 
-  // If a clean slug URL is used (e.g. /question-hub/wbp-si), default to All tab with that exam
+  // Resolve exam from: explicit prop > URL slug param > searchParams
   const slugExam = examSlug ? (SLUG_TO_EXAM[examSlug] ?? null) : null;
+  const resolvedDefaultExam = defaultAllExam ?? slugExam;
 
   const [activeTab, setActiveTab] = useState<"previous" | "all">(() => {
-    if (slugExam) return "all";
+    if (resolvedDefaultExam) return "all";
     const urlTab = searchParams.get("view");
     return urlTab === "all" ? "all" : "previous";
   });
@@ -1264,7 +1448,7 @@ export default function QuestionHub({
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [allTabExam, setAllTabExam] = useState(slugExam ?? "WBP Constable");
+  const [allTabExam, setAllTabExam] = useState(resolvedDefaultExam ?? "WBP Constable");
 
   // Map the All-tab exam label → folder key (must match ALL_TAB_EXAMS entries exactly)
   const ALL_TAB_EXAM_TO_FOLDER: Record<string, string> = {
@@ -2169,8 +2353,8 @@ export default function QuestionHub({
                 selectedExam={allTabExam}
                 onSelect={(exam) => {
                   setAllTabExam(exam);
-                  const slug = EXAM_TO_SLUG[exam];
-                  if (slug) navigate(`/question-hub/${slug}`, { replace: true });
+                  const url = EXAM_TO_URL[exam];
+                  if (url) navigate(url, { replace: true });
                 }}
                 examsList={ALL_TAB_EXAMS}
                 compact
@@ -2186,23 +2370,12 @@ export default function QuestionHub({
                 navigating={testNavLoading}
               />
             ) : allTabFolderKey === "police-si" ? (
-              // WBP SI — filter police folder to SI files only
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {FOLDERS["police"].files
-                  .filter((f) => f.type === "SI")
-                  .map((file, idx) => (
-                    <LazyPreviewCard
-                      key={file.path}
-                      file={file}
-                      folder={FOLDERS["police"]}
-                      folderKey="police"
-                      onStartTest={handleStartTest}
-                      onDownload={handleDownload}
-                      navigating={testNavLoading}
-                      idx={idx}
-                    />
-                  ))}
-              </div>
+              // WBP SI — manifest-backed cards from /mock_test/wbp_si/
+              <SIPreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
             ) : FOLDERS[allTabFolderKey] ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {FOLDERS[allTabFolderKey].files.map((file, idx) => (

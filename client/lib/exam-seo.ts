@@ -2,7 +2,7 @@
  * Client-side SEO updates for exam / mock-test routes (title, meta, OG, canonical, JSON-LD).
  */
 
-export type ExamSeoProfile = "default" | "wbcs" | "police" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po" | "jtet" | "rrb-ntpc";
+export type ExamSeoProfile = "default" | "wbcs" | "police" | "police-constable" | "police-si" | "wbpsc-clerkship" | "wb-tet" | "ssc-mts" | "ibps-po" | "jtet" | "rrb-ntpc";
 
 const BRAND = "MedhaHub";
 const SITE_FALLBACK = "https://medhahub.in";
@@ -264,6 +264,127 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
           "Free online WBCS mock tests, complete syllabus and West Bengal Civil Service previous year question papers for prelims practice.",
         path: "/wbcs-mock-test",
       }),
+    });
+    return;
+  }
+
+  if (profile === "police-si") {
+    applyExamSeoPayload({
+      title: "WBP SI Mock Test 2026 Free Online | পুলিশ সাব-ইন্সপেক্টর মক টেস্ট | MedhaHub",
+      description:
+        "Free WBP Sub-Inspector (SI) mock test 2026 online. Full-length practice sets based on actual WBP SI exam pattern — 100 MCQs, instant scoring, Bengali medium. পশ্চিমবঙ্গ পুলিশ সাব-ইন্সপেক্টর মক টেস্ট।",
+      keywords: [
+        "WBP SI mock test 2026",
+        "WBP SI mock test free online",
+        "West Bengal Police SI mock test",
+        "WBP Sub Inspector previous year question paper",
+        "WBP SI preliminary question paper",
+        "WBP SI 2025 mock test",
+        "WBP SI 2024 question paper",
+        "WBP SI practice set Bengali",
+        "পশ্চিমবঙ্গ পুলিশ সাব ইন্সপেক্টর মক টেস্ট",
+        "পুলিশ এসআই প্র্যাকটিস সেট",
+        "WBP SI online practice free",
+        "WB Police SI exam preparation",
+        "WBP SI exam pattern 2026",
+        "WBP SI syllabus 2026",
+        "WBP SI cutoff marks",
+        "medhahub wbp si",
+        "WB Police Sub Inspector online test",
+      ].join(", "),
+      canonicalPath: "/wbp-si-mock-test",
+      ogTitle: "WBP SI Mock Test 2026 Free | পুলিশ সাব-ইন্সপেক্টর প্র্যাকটিস সেট | MedhaHub",
+      ogDescription:
+        "Free WBP SI mock tests online. 100 MCQs · Bengali medium · Instant scoring. Start your WBP Sub-Inspector preparation today.",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://medhahub.in/wbp-si-mock-test",
+            name: "WBP SI Mock Test 2026 Free Online",
+            description:
+              "Free full-length WBP Sub-Inspector mock tests with instant scoring, timer and Bengali medium — based on actual exam pattern.",
+            url: "https://medhahub.in/wbp-si-mock-test",
+            inLanguage: ["en", "bn"],
+            isPartOf: { "@type": "WebSite", name: "MedhaHub", url: "https://medhahub.in" },
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://medhahub.in" },
+                { "@type": "ListItem", position: 2, name: "Question Hub", item: "https://medhahub.in/question-hub" },
+                { "@type": "ListItem", position: 3, name: "WBP SI Mock Test", item: "https://medhahub.in/wbp-si-mock-test" },
+              ],
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              { "@type": "Question", name: "Is the WBP SI mock test free on MedhaHub?", acceptedAnswer: { "@type": "Answer", text: "Yes. All WBP SI mock tests on MedhaHub are completely free. No registration required to attempt the tests." } },
+              { "@type": "Question", name: "What is the WBP SI exam pattern?", acceptedAnswer: { "@type": "Answer", text: "The WBP Sub-Inspector Preliminary exam has 100 MCQs: General Knowledge & Current Affairs (50), Reasoning & Logical Analysis (25), Mathematics (15), English Language (10). Duration is 90 minutes." } },
+              { "@type": "Question", name: "Are WBP SI questions available in Bengali?", acceptedAnswer: { "@type": "Answer", text: "Yes. WBP SI mock tests on MedhaHub are bilingual — questions and options are available in Bengali, matching the actual exam format." } },
+              { "@type": "Question", name: "What is the WBP SI eligibility criteria?", acceptedAnswer: { "@type": "Answer", text: "Candidates must hold a Bachelor's degree from a recognised university. Age limit is 20–27 years (with relaxation for reserved categories). Physical standards and medical fitness tests also apply." } },
+            ],
+          },
+        ],
+      },
+    });
+    return;
+  }
+
+  if (profile === "police-constable") {
+    applyExamSeoPayload({
+      title: "WBP Constable Mock Test 2026 Free Online | পুলিশ কনস্টেবল মক টেস্ট | MedhaHub",
+      description:
+        "Free WBP Constable mock test 2026 online. 12 full-length practice sets based on actual WBP exam pattern — 85 MCQs, instant scoring, Bengali medium. পশ্চিমবঙ্গ পুলিশ কনস্টেবল মক টেস্ট।",
+      keywords: [
+        "WBP Constable mock test 2026", "WBP Constable mock test free", "WBP Constable mock test online",
+        "West Bengal Police Constable mock test", "WBP Constable previous year question paper",
+        "WBP Constable preliminary question paper", "WBP Constable 2025 mock test",
+        "WBP Constable 2024 question paper", "WBP Constable 2021 question paper",
+        "WBP Constable practice set Bengali", "পশ্চিমবঙ্গ পুলিশ কনস্টেবল মক টেস্ট",
+        "পুলিশ কনস্টেবল প্র্যাকটিস সেট", "WBP Constable online practice free",
+        "WB Police Constable exam preparation", "WBP Lady Constable previous year paper",
+        "WBP Constable exam pattern 2026", "medhahub wbp constable",
+      ].join(", "),
+      canonicalPath: "/wbp-constable-mock-test",
+      ogTitle: "WBP Constable Mock Test 2026 Free | পুলিশ কনস্টেবল প্র্যাকটিস সেট | MedhaHub",
+      ogDescription:
+        "12 free WBP Constable mock tests online. 85 MCQs · Bengali medium · Instant scoring. Start your WBP Constable preparation today.",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://medhahub.in/wbp-constable-mock-test",
+            name: "WBP Constable Mock Test 2026 Free Online",
+            description:
+              "12 free full-length WBP Constable mock tests with instant scoring, timer and Bengali medium — based on actual exam pattern.",
+            url: "https://medhahub.in/wbp-constable-mock-test",
+            inLanguage: ["en", "bn"],
+            isPartOf: { "@type": "WebSite", name: "MedhaHub", url: "https://medhahub.in" },
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://medhahub.in" },
+                { "@type": "ListItem", position: 2, name: "Question Hub", item: "https://medhahub.in/question-hub" },
+                { "@type": "ListItem", position: 3, name: "WBP Constable Mock Test", item: "https://medhahub.in/wbp-constable-mock-test" },
+              ],
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              { "@type": "Question", name: "Is WBP Constable mock test free on MedhaHub?", acceptedAnswer: { "@type": "Answer", text: "Yes. All WBP Constable mock tests on MedhaHub are completely free. No registration required to attempt the tests." } },
+              { "@type": "Question", name: "How many WBP Constable mock tests are available?", acceptedAnswer: { "@type": "Answer", text: "MedhaHub offers 12 full-length WBP Constable mock tests based on the actual exam pattern — 85 questions each covering GK, Arithmetic, Reasoning and Bengali Language." } },
+              { "@type": "Question", name: "What is the WBP Constable exam pattern?", acceptedAnswer: { "@type": "Answer", text: "The WBP Constable Preliminary exam has 85 MCQ questions for 85 marks: General Knowledge (40), Arithmetic (20), Reasoning (15), Bengali Language (10). Duration is 85 minutes." } },
+              { "@type": "Question", name: "Are the questions in Bengali medium?", acceptedAnswer: { "@type": "Answer", text: "Yes. All WBP Constable mock tests on MedhaHub are bilingual — questions and options are available in Bengali, matching the actual exam format." } },
+            ],
+          },
+        ],
+      },
     });
     return;
   }

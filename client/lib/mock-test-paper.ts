@@ -180,7 +180,7 @@ function shouldFetchFromApi(cache: CachedPaper | null): boolean {
 }
 
 async function fetchFromApi(examType: string): Promise<MockPaperResponse> {
-  const endpoint = `https://recomendengine.onrender.com/recommend`;
+  const endpoint = `https://recomendengine-1.onrender.com/recommend`;
   const res = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
