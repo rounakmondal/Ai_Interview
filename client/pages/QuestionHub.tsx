@@ -1387,6 +1387,146 @@ function SIPreviewCards({
   );
 }
 
+function MTSPreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/ssc_mts/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const mtsFolder = FOLDERS["ssc"];
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "MTS",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-amber-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0, 1, 2, 3].map((j) => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-amber-700/15 bg-card/80 hover:border-amber-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400" />
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/12 flex items-center justify-center">
+                    <GraduationCap className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-700/12 text-amber-800 dark:text-amber-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">Sample Question</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">{preview.question}</p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-amber-700/20 hover:bg-amber-500/8"
+                  onClick={() => onDownload(toFile(paper), mtsFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-amber-600 hover:bg-amber-700 text-white"
+                  onClick={() => onStartTest(toFile(paper), mtsFolder, "ssc")}
+                  disabled={navigating}
+                >
+                  {navigating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <><Play className="w-3.5 h-3.5" />Attempt Test</>}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 // Slug ↔ exam label mapping (used only for back-compat URL reading)
 const SLUG_TO_EXAM: Record<string, string> = {
   "wbp-constable": "WBP Constable",
@@ -2372,6 +2512,12 @@ export default function QuestionHub({
             ) : allTabFolderKey === "police-si" ? (
               // WBP SI — manifest-backed cards from /mock_test/wbp_si/
               <SIPreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
+            ) : allTabFolderKey === "ssc" && allTabExam === "SSC MTS" ? (
+              <MTSPreviewCards
                 onStartTest={handleStartTest}
                 onDownload={handleDownload}
                 navigating={testNavLoading}

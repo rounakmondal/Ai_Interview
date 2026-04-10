@@ -1,0 +1,1195 @@
+{
+  "exam": "SSC MTS Exam",
+  "total_questions": 90,
+  "language": "English",
+  "sections": [
+    {
+      "name": "General Intelligence & Reasoning",
+      "questions_count": 25
+    },
+    {
+      "name": "Numerical Aptitude",
+      "questions_count": 25
+    },
+    {
+      "name": "General English",
+      "questions_count": 20
+    },
+    {
+      "name": "General Awareness",
+      "questions_count": 20
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "section": "General Intelligence & Reasoning",
+      "question": "Find missing: AZ, BY, CX, ?",
+      "options": [
+        "A. DW",
+        "B. DV",
+        "C. EW",
+        "D. EX"
+      ],
+      "answer": "A",
+      "explanation": "First letter increments, second decrements."
+    },
+    {
+      "id": 2,
+      "section": "General Intelligence & Reasoning",
+      "question": "If SOUTH is written as HTUOS, NORTH is:",
+      "options": [
+        "A. HTRON",
+        "B. NROTH",
+        "C. HTRNO",
+        "D. ONRTH"
+      ],
+      "answer": "A",
+      "explanation": "Reverse of NORTH is HTRON."
+    },
+    {
+      "id": 3,
+      "section": "General Intelligence & Reasoning",
+      "question": "Clock shows 3:00. Angle between hands is:",
+      "options": [
+        "A. 60°",
+        "B. 75°",
+        "C. 90°",
+        "D. 120°"
+      ],
+      "answer": "C",
+      "explanation": "At 3:00 hands are perpendicular."
+    },
+    {
+      "id": 4,
+      "section": "General Intelligence & Reasoning",
+      "question": "How many months have 28 days?",
+      "options": [
+        "A. 1",
+        "B. 2",
+        "C. 11",
+        "D. 12"
+      ],
+      "answer": "D",
+      "explanation": "All months have at least 28 days."
+    },
+    {
+      "id": 5,
+      "section": "General Intelligence & Reasoning",
+      "question": "Mirror image of 'b' is:",
+      "options": [
+        "A. d",
+        "B. p",
+        "C. q",
+        "D. b"
+      ],
+      "answer": "A",
+      "explanation": "Basic mirror symmetry in lowercase forms."
+    },
+    {
+      "id": 6,
+      "section": "General Intelligence & Reasoning",
+      "question": "Series: 1, 4, 9, 16, ?",
+      "options": [
+        "A. 20",
+        "B. 24",
+        "C. 25",
+        "D. 36"
+      ],
+      "answer": "C",
+      "explanation": "Squares: 1^2,2^2,3^2,4^2,5^2."
+    },
+    {
+      "id": 7,
+      "section": "General Intelligence & Reasoning",
+      "question": "Choose related pair: Book : Author :: Song : ?",
+      "options": [
+        "A. Singer",
+        "B. Poet",
+        "C. Listener",
+        "D. Tune"
+      ],
+      "answer": "A",
+      "explanation": "Song is associated with singer."
+    },
+    {
+      "id": 8,
+      "section": "General Intelligence & Reasoning",
+      "question": "If MONDAY=123456, then DAY=?",
+      "options": [
+        "A. 456",
+        "B. 465",
+        "C. 354",
+        "D. 246"
+      ],
+      "answer": "A",
+      "explanation": "D=4,A=5,Y=6 from mapping."
+    },
+    {
+      "id": 9,
+      "section": "General Intelligence & Reasoning",
+      "question": "Odd one out:",
+      "options": [
+        "A. Rose",
+        "B. Lotus",
+        "C. Lily",
+        "D. Potato"
+      ],
+      "answer": "D",
+      "explanation": "Potato is not a flower."
+    },
+    {
+      "id": 10,
+      "section": "General Intelligence & Reasoning",
+      "question": "If 8+4=96 and 7+3=70 then 6+2=?",
+      "options": [
+        "A. 48",
+        "B. 50",
+        "C. 52",
+        "D. 54"
+      ],
+      "answer": "A",
+      "explanation": "Pattern a+b => a*(a+b): 8*12=96, 7*10=70, 6*8=48."
+    },
+    {
+      "id": 11,
+      "section": "General Intelligence & Reasoning",
+      "question": "Find missing number: 5, 10, 20, 40, ?",
+      "options": [
+        "A. 60",
+        "B. 70",
+        "C. 80",
+        "D. 90"
+      ],
+      "answer": "C",
+      "explanation": "Doubles each step."
+    },
+    {
+      "id": 12,
+      "section": "General Intelligence & Reasoning",
+      "question": "In a code, BLUE=25, RED=27, then GREEN=?",
+      "options": [
+        "A. 49",
+        "B. 50",
+        "C. 51",
+        "D. 52"
+      ],
+      "answer": "A",
+      "explanation": "Using letter positions grouped style gives 49 in this pattern."
+    },
+    {
+      "id": 13,
+      "section": "General Intelligence & Reasoning",
+      "question": "A man walks 10m north, 10m east, 10m south. Where is he from start?",
+      "options": [
+        "A. 10m East",
+        "B. 10m West",
+        "C. 10m North",
+        "D. At start"
+      ],
+      "answer": "A",
+      "explanation": "North and south cancel, remains 10m east."
+    },
+    {
+      "id": 14,
+      "section": "General Intelligence & Reasoning",
+      "question": "Which differs from others?",
+      "options": [
+        "A. January",
+        "B. March",
+        "C. May",
+        "D. June"
+      ],
+      "answer": "D",
+      "explanation": "June has 30 days; others listed have 31."
+    },
+    {
+      "id": 15,
+      "section": "General Intelligence & Reasoning",
+      "question": "If all cats are animals and some animals are pets, then:",
+      "options": [
+        "A. All cats are pets",
+        "B. Some cats are pets",
+        "C. All pets are cats",
+        "D. No definite conclusion"
+      ],
+      "answer": "D",
+      "explanation": "No direct link between cats and pets is guaranteed."
+    },
+    {
+      "id": 16,
+      "section": "General Intelligence & Reasoning",
+      "question": "Complete: B, E, H, K, ?",
+      "options": [
+        "A. M",
+        "B. N",
+        "C. O",
+        "D. P"
+      ],
+      "answer": "B",
+      "explanation": "+3 alphabet jumps: B,E,H,K,N."
+    },
+    {
+      "id": 17,
+      "section": "General Intelligence & Reasoning",
+      "question": "Odd one:",
+      "options": [
+        "A. CPU",
+        "B. RAM",
+        "C. ROM",
+        "D. MOUSE"
+      ],
+      "answer": "D",
+      "explanation": "Mouse is input device, others are memory/processing components."
+    },
+    {
+      "id": 18,
+      "section": "General Intelligence & Reasoning",
+      "question": "If A=1, B=2, then BAD=?",
+      "options": [
+        "A. 7",
+        "B. 8",
+        "C. 9",
+        "D. 10"
+      ],
+      "answer": "A",
+      "explanation": "B(2)+A(1)+D(4)=7."
+    },
+    {
+      "id": 19,
+      "section": "General Intelligence & Reasoning",
+      "question": "Find missing in pattern: 3, 8, 15, 24, ?",
+      "options": [
+        "A. 33",
+        "B. 35",
+        "C. 37",
+        "D. 39"
+      ],
+      "answer": "B",
+      "explanation": "Differences: 5,7,9, next 11 => 35."
+    },
+    {
+      "id": 20,
+      "section": "General Intelligence & Reasoning",
+      "question": "A cube has how many faces?",
+      "options": [
+        "A. 4",
+        "B. 6",
+        "C. 8",
+        "D. 12"
+      ],
+      "answer": "B",
+      "explanation": "Cube has 6 faces."
+    },
+    {
+      "id": 21,
+      "section": "General Intelligence & Reasoning",
+      "question": "Choose Venn relation for Apple, Fruit, Food",
+      "options": [
+        "A. Apple inside Fruit inside Food",
+        "B. Fruit inside Apple",
+        "C. Food inside Apple",
+        "D. No relation"
+      ],
+      "answer": "A",
+      "explanation": "Apple is a fruit; fruit is food."
+    },
+    {
+      "id": 22,
+      "section": "General Intelligence & Reasoning",
+      "question": "Find the next term: 2, 6, 12, 20, 30, ?",
+      "options": [
+        "A. 40",
+        "B. 42",
+        "C. 44",
+        "D. 46"
+      ],
+      "answer": "B",
+      "explanation": "Pattern is n(n+1): 1x2,2x3,... so next is 6x7=42."
+    },
+    {
+      "id": 23,
+      "section": "General Intelligence & Reasoning",
+      "question": "If CAT is coded as DBU, DOG is coded as:",
+      "options": [
+        "A. EPH",
+        "B. CNG",
+        "C. FQI",
+        "D. DOH"
+      ],
+      "answer": "A",
+      "explanation": "Each letter is shifted by +1."
+    },
+    {
+      "id": 24,
+      "section": "General Intelligence & Reasoning",
+      "question": "Odd one out:",
+      "options": [
+        "A. Square",
+        "B. Rectangle",
+        "C. Triangle",
+        "D. Circle"
+      ],
+      "answer": "C",
+      "explanation": "Triangle has 3 sides; others have 4 or curved shape logic often grouped differently, but here it is unique polygon count."
+    },
+    {
+      "id": 25,
+      "section": "General Intelligence & Reasoning",
+      "question": "A is taller than B, B is taller than C. Who is shortest?",
+      "options": [
+        "A. A",
+        "B. B",
+        "C. C",
+        "D. Cannot be determined"
+      ],
+      "answer": "C",
+      "explanation": "Given order A>B>C, C is shortest."
+    },
+    {
+      "id": 26,
+      "section": "Numerical Aptitude",
+      "question": "Simple interest on 1000 at 10% for 2 years:",
+      "options": [
+        "A. 100",
+        "B. 150",
+        "C. 200",
+        "D. 250"
+      ],
+      "answer": "C",
+      "explanation": "SI=P*R*T/100=200."
+    },
+    {
+      "id": 27,
+      "section": "Numerical Aptitude",
+      "question": "HCF of 24 and 36:",
+      "options": [
+        "A. 6",
+        "B. 8",
+        "C. 10",
+        "D. 12"
+      ],
+      "answer": "D",
+      "explanation": "Highest common factor is 12."
+    },
+    {
+      "id": 28,
+      "section": "Numerical Aptitude",
+      "question": "LCM of 12 and 15:",
+      "options": [
+        "A. 45",
+        "B. 50",
+        "C. 55",
+        "D. 60"
+      ],
+      "answer": "D",
+      "explanation": "LCM is 60."
+    },
+    {
+      "id": 29,
+      "section": "Numerical Aptitude",
+      "question": "3/5 of 250:",
+      "options": [
+        "A. 120",
+        "B. 130",
+        "C. 140",
+        "D. 150"
+      ],
+      "answer": "D",
+      "explanation": "(3/5)*250=150."
+    },
+    {
+      "id": 30,
+      "section": "Numerical Aptitude",
+      "question": "Profit% if CP=400, SP=460:",
+      "options": [
+        "A. 10%",
+        "B. 12%",
+        "C. 15%",
+        "D. 18%"
+      ],
+      "answer": "C",
+      "explanation": "Profit 60; 60/400*100=15%."
+    },
+    {
+      "id": 31,
+      "section": "Numerical Aptitude",
+      "question": "Square root of 144:",
+      "options": [
+        "A. 10",
+        "B. 11",
+        "C. 12",
+        "D. 13"
+      ],
+      "answer": "C",
+      "explanation": "12x12=144."
+    },
+    {
+      "id": 32,
+      "section": "Numerical Aptitude",
+      "question": "12.5% of 800:",
+      "options": [
+        "A. 80",
+        "B. 90",
+        "C. 100",
+        "D. 120"
+      ],
+      "answer": "C",
+      "explanation": "1/8 of 800 = 100."
+    },
+    {
+      "id": 33,
+      "section": "Numerical Aptitude",
+      "question": "Ratio 3:2, boys=30, girls=",
+      "options": [
+        "A. 18",
+        "B. 20",
+        "C. 24",
+        "D. 26"
+      ],
+      "answer": "B",
+      "explanation": "One part=10, girls=20."
+    },
+    {
+      "id": 34,
+      "section": "Numerical Aptitude",
+      "question": "Speed if 120 km in 2 h:",
+      "options": [
+        "A. 50",
+        "B. 55",
+        "C. 60",
+        "D. 65"
+      ],
+      "answer": "C",
+      "explanation": "120/2=60 km/h."
+    },
+    {
+      "id": 35,
+      "section": "Numerical Aptitude",
+      "question": "Area of rectangle l=8, b=5:",
+      "options": [
+        "A. 35",
+        "B. 40",
+        "C. 45",
+        "D. 50"
+      ],
+      "answer": "B",
+      "explanation": "Area=l*b=40."
+    },
+    {
+      "id": 36,
+      "section": "Numerical Aptitude",
+      "question": "Perimeter of square side 7:",
+      "options": [
+        "A. 21",
+        "B. 24",
+        "C. 28",
+        "D. 35"
+      ],
+      "answer": "C",
+      "explanation": "4x7=28."
+    },
+    {
+      "id": 37,
+      "section": "Numerical Aptitude",
+      "question": "0.75 as fraction:",
+      "options": [
+        "A. 1/2",
+        "B. 2/3",
+        "C. 3/4",
+        "D. 4/5"
+      ],
+      "answer": "C",
+      "explanation": "0.75 = 3/4."
+    },
+    {
+      "id": 38,
+      "section": "Numerical Aptitude",
+      "question": "12% of 250:",
+      "options": [
+        "A. 25",
+        "B. 30",
+        "C. 35",
+        "D. 40"
+      ],
+      "answer": "B",
+      "explanation": "0.12x250=30."
+    },
+    {
+      "id": 39,
+      "section": "Numerical Aptitude",
+      "question": "If x:y=4:5 and x=20, y=",
+      "options": [
+        "A. 22",
+        "B. 24",
+        "C. 25",
+        "D. 28"
+      ],
+      "answer": "C",
+      "explanation": "Scale factor 5; y=25."
+    },
+    {
+      "id": 40,
+      "section": "Numerical Aptitude",
+      "question": "Discount % if marked 500 sold 450:",
+      "options": [
+        "A. 8%",
+        "B. 9%",
+        "C. 10%",
+        "D. 12%"
+      ],
+      "answer": "C",
+      "explanation": "Discount 50 on 500 = 10%."
+    },
+    {
+      "id": 41,
+      "section": "Numerical Aptitude",
+      "question": "70% of 90:",
+      "options": [
+        "A. 56",
+        "B. 63",
+        "C. 67",
+        "D. 70"
+      ],
+      "answer": "B",
+      "explanation": "0.7x90=63."
+    },
+    {
+      "id": 42,
+      "section": "Numerical Aptitude",
+      "question": "2^5 equals:",
+      "options": [
+        "A. 16",
+        "B. 24",
+        "C. 32",
+        "D. 64"
+      ],
+      "answer": "C",
+      "explanation": "2 multiplied 5 times = 32."
+    },
+    {
+      "id": 43,
+      "section": "Numerical Aptitude",
+      "question": "1 km equals:",
+      "options": [
+        "A. 10 m",
+        "B. 100 m",
+        "C. 1000 m",
+        "D. 10000 m"
+      ],
+      "answer": "C",
+      "explanation": "1 km = 1000 m."
+    },
+    {
+      "id": 44,
+      "section": "Numerical Aptitude",
+      "question": "1.2 + 2.8 =",
+      "options": [
+        "A. 3.8",
+        "B. 4.0",
+        "C. 4.2",
+        "D. 4.4"
+      ],
+      "answer": "B",
+      "explanation": "Sum is 4.0."
+    },
+    {
+      "id": 45,
+      "section": "Numerical Aptitude",
+      "question": "If 5 pens cost 75, cost of 1 pen:",
+      "options": [
+        "A. 10",
+        "B. 12",
+        "C. 15",
+        "D. 18"
+      ],
+      "answer": "C",
+      "explanation": "75/5=15."
+    },
+    {
+      "id": 46,
+      "section": "Numerical Aptitude",
+      "question": "(18/3)+4*2 =",
+      "options": [
+        "A. 12",
+        "B. 14",
+        "C. 16",
+        "D. 18"
+      ],
+      "answer": "B",
+      "explanation": "6+8=14."
+    },
+    {
+      "id": 47,
+      "section": "Numerical Aptitude",
+      "question": "15% of 360 is:",
+      "options": [
+        "A. 48",
+        "B. 54",
+        "C. 60",
+        "D. 72"
+      ],
+      "answer": "B",
+      "explanation": "0.15 x 360 = 54."
+    },
+    {
+      "id": 48,
+      "section": "Numerical Aptitude",
+      "question": "If 8x=96, x=",
+      "options": [
+        "A. 10",
+        "B. 11",
+        "C. 12",
+        "D. 13"
+      ],
+      "answer": "C",
+      "explanation": "96/8=12."
+    },
+    {
+      "id": 49,
+      "section": "Numerical Aptitude",
+      "question": "Average of 10,20,30 is:",
+      "options": [
+        "A. 15",
+        "B. 20",
+        "C. 25",
+        "D. 30"
+      ],
+      "answer": "B",
+      "explanation": "Sum 60 / 3 = 20."
+    },
+    {
+      "id": 50,
+      "section": "Numerical Aptitude",
+      "question": "25% of 640 is:",
+      "options": [
+        "A. 120",
+        "B. 140",
+        "C. 160",
+        "D. 180"
+      ],
+      "answer": "C",
+      "explanation": "One-fourth of 640 is 160."
+    },
+    {
+      "id": 51,
+      "section": "General English",
+      "question": "Plural of 'Child':",
+      "options": [
+        "A. Childs",
+        "B. Childes",
+        "C. Children",
+        "D. Childrens"
+      ],
+      "answer": "C",
+      "explanation": "Irregular plural is children."
+    },
+    {
+      "id": 52,
+      "section": "General English",
+      "question": "Fill blank: I have been waiting ___ two hours.",
+      "options": [
+        "A. since",
+        "B. from",
+        "C. for",
+        "D. by"
+      ],
+      "answer": "C",
+      "explanation": "For duration."
+    },
+    {
+      "id": 53,
+      "section": "General English",
+      "question": "Synonym of 'Brave':",
+      "options": [
+        "A. Cowardly",
+        "B. Timid",
+        "C. Bold",
+        "D. Weak"
+      ],
+      "answer": "C",
+      "explanation": "Bold means brave."
+    },
+    {
+      "id": 54,
+      "section": "General English",
+      "question": "Antonym of 'Expand':",
+      "options": [
+        "A. Enlarge",
+        "B. Stretch",
+        "C. Contract",
+        "D. Increase"
+      ],
+      "answer": "C",
+      "explanation": "Contract is opposite."
+    },
+    {
+      "id": 55,
+      "section": "General English",
+      "question": "Fill blank: They ___ completed the work.",
+      "options": [
+        "A. has",
+        "B. have",
+        "C. haves",
+        "D. is"
+      ],
+      "answer": "B",
+      "explanation": "Plural subject takes have."
+    },
+    {
+      "id": 56,
+      "section": "General English",
+      "question": "One-word: person who writes poems",
+      "options": [
+        "A. Novelist",
+        "B. Poet",
+        "C. Singer",
+        "D. Editor"
+      ],
+      "answer": "B",
+      "explanation": "Poet writes poems."
+    },
+    {
+      "id": 57,
+      "section": "General English",
+      "question": "Identify noun: 'Honesty is the best policy.'",
+      "options": [
+        "A. Honesty",
+        "B. Best",
+        "C. Is",
+        "D. Policy"
+      ],
+      "answer": "A",
+      "explanation": "Honesty is abstract noun."
+    },
+    {
+      "id": 58,
+      "section": "General English",
+      "question": "Correct sentence:",
+      "options": [
+        "A. He don't like tea.",
+        "B. He doesn't likes tea.",
+        "C. He doesn't like tea.",
+        "D. He not like tea."
+      ],
+      "answer": "C",
+      "explanation": "Proper auxiliary + base verb."
+    },
+    {
+      "id": 59,
+      "section": "General English",
+      "question": "Past tense of 'go' is:",
+      "options": [
+        "A. goed",
+        "B. gone",
+        "C. went",
+        "D. goes"
+      ],
+      "answer": "C",
+      "explanation": "Past tense is went."
+    },
+    {
+      "id": 60,
+      "section": "General English",
+      "question": "Choose article: ___ honest man",
+      "options": [
+        "A. A",
+        "B. An",
+        "C. The",
+        "D. No article"
+      ],
+      "answer": "B",
+      "explanation": "Honest starts with vowel sound."
+    },
+    {
+      "id": 61,
+      "section": "General English",
+      "question": "Choose conjunction: I was tired, ___ I finished the work.",
+      "options": [
+        "A. but",
+        "B. or",
+        "C. so",
+        "D. yet"
+      ],
+      "answer": "A",
+      "explanation": "Contrast is shown by but."
+    },
+    {
+      "id": 62,
+      "section": "General English",
+      "question": "Choose pronoun: This book belongs to ___",
+      "options": [
+        "A. I",
+        "B. me",
+        "C. my",
+        "D. mine"
+      ],
+      "answer": "B",
+      "explanation": "Object pronoun 'me'."
+    },
+    {
+      "id": 63,
+      "section": "General English",
+      "question": "Plural of 'mouse' is:",
+      "options": [
+        "A. mouses",
+        "B. mouse",
+        "C. mice",
+        "D. mices"
+      ],
+      "answer": "C",
+      "explanation": "Irregular plural mice."
+    },
+    {
+      "id": 64,
+      "section": "General English",
+      "question": "Fill blank: The sun ___ in the east.",
+      "options": [
+        "A. rise",
+        "B. rises",
+        "C. rose",
+        "D. rising"
+      ],
+      "answer": "B",
+      "explanation": "Simple present: rises."
+    },
+    {
+      "id": 65,
+      "section": "General English",
+      "question": "Opposite of 'Victory':",
+      "options": [
+        "A. Success",
+        "B. Defeat",
+        "C. Triumph",
+        "D. Win"
+      ],
+      "answer": "B",
+      "explanation": "Defeat is antonym."
+    },
+    {
+      "id": 66,
+      "section": "General English",
+      "question": "Choose adjective:",
+      "options": [
+        "A. run",
+        "B. beautiful",
+        "C. quickly",
+        "D. was"
+      ],
+      "answer": "B",
+      "explanation": "Beautiful is adjective."
+    },
+    {
+      "id": 67,
+      "section": "General English",
+      "question": "Choose synonym of 'Rapid'.",
+      "options": [
+        "A. Slow",
+        "B. Quick",
+        "C. Weak",
+        "D. Calm"
+      ],
+      "answer": "B",
+      "explanation": "Rapid means quick."
+    },
+    {
+      "id": 68,
+      "section": "General English",
+      "question": "Fill blank: She ___ to school every day.",
+      "options": [
+        "A. go",
+        "B. goes",
+        "C. going",
+        "D. gone"
+      ],
+      "answer": "B",
+      "explanation": "Subject-verb agreement: she goes."
+    },
+    {
+      "id": 69,
+      "section": "General English",
+      "question": "Correct spelling:",
+      "options": [
+        "A. Enviroment",
+        "B. Environment",
+        "C. Environmant",
+        "D. Environmint"
+      ],
+      "answer": "B",
+      "explanation": "Environment is correct."
+    },
+    {
+      "id": 70,
+      "section": "General English",
+      "question": "Antonym of 'Ancient':",
+      "options": [
+        "A. Old",
+        "B. Modern",
+        "C. Antique",
+        "D. Historic"
+      ],
+      "answer": "B",
+      "explanation": "Modern is opposite."
+    },
+    {
+      "id": 71,
+      "section": "General Awareness",
+      "question": "Who discovered gravity?",
+      "options": [
+        "A. Galileo",
+        "B. Newton",
+        "C. Einstein",
+        "D. Edison"
+      ],
+      "answer": "B",
+      "explanation": "Newton formulated gravitation."
+    },
+    {
+      "id": 72,
+      "section": "General Awareness",
+      "question": "SI unit of force:",
+      "options": [
+        "A. Joule",
+        "B. Newton",
+        "C. Pascal",
+        "D. Watt"
+      ],
+      "answer": "B",
+      "explanation": "Force measured in Newton."
+    },
+    {
+      "id": 73,
+      "section": "General Awareness",
+      "question": "Gas most abundant in atmosphere:",
+      "options": [
+        "A. Oxygen",
+        "B. CO2",
+        "C. Nitrogen",
+        "D. Hydrogen"
+      ],
+      "answer": "C",
+      "explanation": "Nitrogen around 78%."
+    },
+    {
+      "id": 74,
+      "section": "General Awareness",
+      "question": "UNESCO headquarters:",
+      "options": [
+        "A. Geneva",
+        "B. Paris",
+        "C. New York",
+        "D. London"
+      ],
+      "answer": "B",
+      "explanation": "UNESCO HQ is Paris."
+    },
+    {
+      "id": 75,
+      "section": "General Awareness",
+      "question": "River called lifeline of Egypt:",
+      "options": [
+        "A. Amazon",
+        "B. Nile",
+        "C. Danube",
+        "D. Thames"
+      ],
+      "answer": "B",
+      "explanation": "Nile is lifeline."
+    },
+    {
+      "id": 76,
+      "section": "General Awareness",
+      "question": "Who is Father of the Nation (India)?",
+      "options": [
+        "A. Nehru",
+        "B. Gandhi",
+        "C. Patel",
+        "D. Bose"
+      ],
+      "answer": "B",
+      "explanation": "Mahatma Gandhi."
+    },
+    {
+      "id": 77,
+      "section": "General Awareness",
+      "question": "Capital of Assam:",
+      "options": [
+        "A. Shillong",
+        "B. Dispur",
+        "C. Guwahati",
+        "D. Agartala"
+      ],
+      "answer": "B",
+      "explanation": "Dispur is capital."
+    },
+    {
+      "id": 78,
+      "section": "General Awareness",
+      "question": "Capital of India:",
+      "options": [
+        "A. Mumbai",
+        "B. Kolkata",
+        "C. New Delhi",
+        "D. Chennai"
+      ],
+      "answer": "C",
+      "explanation": "New Delhi is capital."
+    },
+    {
+      "id": 79,
+      "section": "General Awareness",
+      "question": "Instrument to measure earthquakes:",
+      "options": [
+        "A. Thermometer",
+        "B. Barometer",
+        "C. Seismograph",
+        "D. Hygrometer"
+      ],
+      "answer": "C",
+      "explanation": "Seismograph records quakes."
+    },
+    {
+      "id": 80,
+      "section": "General Awareness",
+      "question": "Photosynthesis mainly occurs in:",
+      "options": [
+        "A. Roots",
+        "B. Stem",
+        "C. Leaves",
+        "D. Flowers"
+      ],
+      "answer": "C",
+      "explanation": "Chlorophyll-rich leaves."
+    },
+    {
+      "id": 81,
+      "section": "General Awareness",
+      "question": "Red Planet:",
+      "options": [
+        "A. Venus",
+        "B. Mars",
+        "C. Jupiter",
+        "D. Saturn"
+      ],
+      "answer": "B",
+      "explanation": "Mars appears red."
+    },
+    {
+      "id": 82,
+      "section": "General Awareness",
+      "question": "First Prime Minister of India:",
+      "options": [
+        "A. Gandhi",
+        "B. Patel",
+        "C. Nehru",
+        "D. Rajendra Prasad"
+      ],
+      "answer": "C",
+      "explanation": "Jawaharlal Nehru."
+    },
+    {
+      "id": 83,
+      "section": "General Awareness",
+      "question": "National animal of India:",
+      "options": [
+        "A. Lion",
+        "B. Tiger",
+        "C. Elephant",
+        "D. Peacock"
+      ],
+      "answer": "B",
+      "explanation": "Royal Bengal Tiger."
+    },
+    {
+      "id": 84,
+      "section": "General Awareness",
+      "question": "How many states are there in India (current GK context)?",
+      "options": [
+        "A. 26",
+        "B. 27",
+        "C. 28",
+        "D. 29"
+      ],
+      "answer": "C",
+      "explanation": "India has 28 states."
+    },
+    {
+      "id": 85,
+      "section": "General Awareness",
+      "question": "World Environment Day is on:",
+      "options": [
+        "A. 5 June",
+        "B. 15 July",
+        "C. 22 April",
+        "D. 1 May"
+      ],
+      "answer": "A",
+      "explanation": "Observed on 5 June."
+    },
+    {
+      "id": 86,
+      "section": "General Awareness",
+      "question": "Constitution of India came into effect on:",
+      "options": [
+        "A. 15 Aug 1947",
+        "B. 26 Jan 1950",
+        "C. 26 Nov 1949",
+        "D. 2 Oct 1950"
+      ],
+      "answer": "B",
+      "explanation": "It came into force on 26 Jan 1950."
+    },
+    {
+      "id": 87,
+      "section": "General Awareness",
+      "question": "Which is the largest planet?",
+      "options": [
+        "A. Earth",
+        "B. Jupiter",
+        "C. Mars",
+        "D. Saturn"
+      ],
+      "answer": "B",
+      "explanation": "Jupiter is largest."
+    },
+    {
+      "id": 88,
+      "section": "General Awareness",
+      "question": "National Song 'Vande Mataram' was written by:",
+      "options": [
+        "A. Tagore",
+        "B. Bankim Chandra",
+        "C. Subhas Bose",
+        "D. Nehru"
+      ],
+      "answer": "B",
+      "explanation": "Written by Bankim Chandra Chattopadhyay."
+    },
+    {
+      "id": 89,
+      "section": "General Awareness",
+      "question": "Currency of Japan:",
+      "options": [
+        "A. Dollar",
+        "B. Won",
+        "C. Yen",
+        "D. Euro"
+      ],
+      "answer": "C",
+      "explanation": "Japan uses Yen."
+    },
+    {
+      "id": 90,
+      "section": "General Awareness",
+      "question": "Longest river in India:",
+      "options": [
+        "A. Yamuna",
+        "B. Godavari",
+        "C. Ganga",
+        "D. Narmada"
+      ],
+      "answer": "C",
+      "explanation": "Ganga is longest in India."
+    }
+  ]
+}

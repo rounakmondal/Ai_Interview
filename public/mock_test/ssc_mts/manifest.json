@@ -1,0 +1,194 @@
+{
+  "papers": [
+    {
+      "id": "ssc_mts_01",
+      "title": "SSC MTS Mock Test 01",
+      "titleBn": "এসএসসি এমটিএস মক টেস্ট 01",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_01.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ?",
+        "options": [
+          "40",
+          "42",
+          "44",
+          "46"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_mts_02",
+      "title": "SSC MTS Mock Test 02",
+      "titleBn": "এসএসসি এমটিএস মক টেস্ট 02",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_02.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "If CAT is coded as DBU, DOG is coded as:",
+        "options": [
+          "EPH",
+          "CNG",
+          "FQI",
+          "DOH"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_mts_03",
+      "title": "SSC MTS Mock Test 03",
+      "titleBn": "এসএসসি এমটিএস মক টেস্ট 03",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_03.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Odd one out:",
+        "options": [
+          "Square",
+          "Rectangle",
+          "Triangle",
+          "Circle"
+        ],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_mts_04",
+      "title": "SSC MTS Mock Test 04",
+      "titleBn": "এসএসসি এমটিএস মক টেস্ট 04",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_04.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "A is taller than B, B is taller than C. Who is shortest?",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "Cannot be determined"
+        ],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_mts_05",
+      "title": "SSC MTS Mock Test 05",
+      "titleBn": "এসএসসি এমটিএস মক টেস্ট 05",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_05.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find missing: AZ, BY, CX, ?",
+        "options": [
+          "DW",
+          "DV",
+          "EW",
+          "EX"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_mts_06",
+      "title": "SSC MTS Mock Test 06",
+      "titleBn": "?????? ?????? ?? ????? 06",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_06.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ? [Set 06]",
+        "options": [
+          "42",
+          "44",
+          "46",
+          "40"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_mts_07",
+      "title": "SSC MTS Mock Test 07",
+      "titleBn": "?????? ?????? ?? ????? 07",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_07.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ? [Set 07]",
+        "options": [
+          "44",
+          "46",
+          "40",
+          "42"
+        ],
+        "answer": "D"
+      }
+    },
+    {
+      "id": "ssc_mts_08",
+      "title": "SSC MTS Mock Test 08",
+      "titleBn": "?????? ?????? ?? ????? 08",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_08.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ? [Set 08]",
+        "options": [
+          "46",
+          "40",
+          "42",
+          "44"
+        ],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_mts_09",
+      "title": "SSC MTS Mock Test 09",
+      "titleBn": "?????? ?????? ?? ????? 09",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_09.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ? [Set 09]",
+        "options": [
+          "40",
+          "42",
+          "44",
+          "46"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_mts_10",
+      "title": "SSC MTS Mock Test 10",
+      "titleBn": "?????? ?????? ?? ????? 10",
+      "path": "mock_test/ssc_mts/MTS_Mock_Test_10.json",
+      "questions": 90,
+      "duration": 90,
+      "language": "English",
+      "preview": {
+        "question": "Find the next term: 2, 6, 12, 20, 30, ? [Set 10]",
+        "options": [
+          "42",
+          "44",
+          "46",
+          "40"
+        ],
+        "answer": "A"
+      }
+    }
+  ]
+}

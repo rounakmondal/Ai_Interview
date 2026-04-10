@@ -540,7 +540,7 @@ export default function GovtPractice() {
                   <div className="flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin text-primary" />
                     <span className="text-sm font-medium">
-                      Preparing questions in the background…
+                      Preparing questions for you...
                     </span>
                   </div>
                   <span className="text-xs text-muted-foreground">
