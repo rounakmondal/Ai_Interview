@@ -142,14 +142,14 @@
       "duration": 90,
       "language": "Bengali",
       "preview": {
-        "question": "ভারতের সংবিধানের কোন তফসিলে ভাষার তালিকা রয়েছে ?",
+        "question": "পশ্চিমবঙ্গের বর্তমান মুখ্যমন্ত্রী কে?",
         "options": [
-          "৬ষ্ঠ তফসিল",
-          "৭ম তফসিল",
-          "৮ম তফসিল",
-          "৯ম তফসিল"
+          "বুদ্ধদেব ভট্টাচার্য",
+          "মমতা বন্দ্যোপাধ্যায়",
+          "জ্যোতি বসু",
+          "অধীর রঞ্জন চৌধুরী"
         ],
-        "answer": "C"
+        "answer": "B"
       }
     },
     {
@@ -172,62 +172,41 @@
       }
     },
     {
-      "id": "wbp_SI-Two",
-      "title": "WBP SI Mock Test Two",
-      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Two",
+      "id": "wbp_sI-Four",
+      "title": "WBP SI Mock Test Four",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Four",
+      "path": "mock_test/wbp_si/wbp_sI-Four.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "হরপ্পা সভ্যতা কোন নদীর তীরে গড়ে উঠেছিল?",
+        "options": [
+          "গঙ্গা",
+          "যমুনা",
+          "সিন্ধু",
+          "সরস্বতী"
+        ],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "wbp_sI-Three",
+      "title": "WBP SI Mock Test Three",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Three",
       "path": "mock_test/wbp_si/wbp_sI-Three.json",
       "questions": 100,
       "duration": 90,
       "language": "Bengali",
       "preview": {
-        "question": "একজন ছাত্র ৫৫০ নম্বরের মধ্যে ৪১২.৫ পেলে তার শতকরা নম্বর কত? ",
+        "question": "ভারতীয় সংবিধানে মোট কতটি অনুচ্ছেদ আছে?",
         "options": [
-          "৭৫%",
-          "৭৫.৫%",
-          "৭৬%",
-          "৭৬.৫%"
+          "৩৫০",
+          "৩৯৫",
+          "৪৪৮",
+          "৪৫০"
         ],
-        "answer": "A"
-      }
-    },
-    {
-      "id": "wbp_SI-Two",
-      "title": "WBP SI Mock Test Two",
-      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Two",
-      "path": "mock_test/wbp_si/wbp_sI-Four.json.json",
-      "questions": 100,
-      "duration": 90,
-      "language": "Bengali",
-      "preview": {
-        "question": "একটি দোকানদার ১০% লাভে একটি পণ্য বিক্রি করে। যদি পণ্যটির ক্রয়মূল্য ৪৫০ টাকা হয়, তাহলে বিক্রয়মূল্য কত?",
-        "options": [
-          "৪৮৫ টাকা",
-          "৫০০ টাকা",
-          "৫৫০ টাকা",
-          "৪৯৫ টাকা"
-        ],
-        "answer": "D"
-      }
-    },
-    {
-      "id": "wbp_SI-Two",
-      "title": "WBP SI Mock Test Two",
-      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Two",
-      "path": "mock_test/wbp_si/wbp_sI-Four.json.json",
-      "questions": 100,
-      "duration": 90,
-      "language": "Bengali",
-      "preview": {
-        "question": "ভারতের কোন বিপ্লবী 'শেরেপাঞ্জাব' নামে পরিচিত?",
-        "options": [
-          " লালা লাজপৎ রাই",
-          "ভগৎ সিং",
-          "সুখদেব",
-          "চন্দ্রশেখর আজাদ",
-          "সুভাষ চন্দ্র বসু",
-          "রবীন্দ্রনাথ ঠাকুর"
-        ],
-        "answer": "A"
+        "answer": "C"
       }
     }
   ]

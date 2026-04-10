@@ -1,0 +1,1617 @@
+{
+  "exam": "WBCS Preliminary Full-Length Mock Test - Set 7",
+  "total_questions": 200,
+  "language": "Bengali & English",
+  "sections": [
+    { "name": "English Composition", "range": "1-25" },
+    { "name": "General Science", "range": "26-50" },
+    { "name": "Current Affairs (2024-25)", "range": "51-75" },
+    { "name": "History of India", "range": "76-100" },
+    { "name": "Geography of India & WB", "range": "101-125" },
+    { "name": "Indian Polity & Economy", "range": "126-150" },
+    { "name": "Indian National Movement", "range": "151-175" },
+    { "name": "General Mental Ability", "range": "176-200" }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "section": "English Composition",
+      "question": "Choose the correct synonym for 'Laconic':",
+      "options": ["A. Talkative", "B. Brief", "C. Angry", "D. Wealthy"],
+      "answer": "B",
+      "explanation": "'Laconic' means using very few words; concise or brief."
+    },
+    {
+      "id": 2,
+      "section": "English Composition",
+      "question": "Choose the most appropriate meaning of 'To kick the bucket':",
+      "options": ["A. To start a quarrel", "B. To die", "C. To clean the floor", "D. To be very happy"],
+      "answer": "B",
+      "explanation": "This is an idiom which means 'to die'."
+    },
+    {
+      "id": 3,
+      "section": "English Composition",
+      "question": "Select the correct antonym of 'Supercilious':",
+      "options": ["A. Humble", "B. Haughty", "C. Clever", "D. Proud"],
+      "answer": "A",
+      "explanation": "'Supercilious' means behaving as if one is superior; arrogant. Its antonym is 'Humble'."
+    },
+    {
+      "id": 4,
+      "section": "English Composition",
+      "question": "Substitute with one word: 'A person who is cent per cent sure about something'.",
+      "options": ["A. Skeptic", "B. Cocksure", "C. Pessimist", "D. Optimist"],
+      "answer": "B",
+      "explanation": "'Cocksure' means being feeling perfect certainty or overconfident."
+    },
+    {
+      "id": 5,
+      "section": "English Composition",
+      "question": "Fill in the blank: The police are looking _____ the murder case.",
+      "options": ["A. through", "B. into", "C. after", "D. on"],
+      "answer": "B",
+      "explanation": "'Look into' is a phrasal verb meaning 'to investigate'."
+    },
+    {
+      "id": 6,
+      "section": "English Composition",
+      "question": "Change the voice: 'He has worked out the sum.'",
+      "options": ["A. The sum has worked out by him.", "B. The sum has been worked out by him.", "C. The sum was worked out by him.", "D. The sum had been worked out by him."],
+      "answer": "B",
+      "explanation": "Present perfect active 'has + V3' changes to 'has been + V3' in passive."
+    },
+    {
+      "id": 7,
+      "section": "English Composition",
+      "question": "Identify the correctly spelt word:",
+      "options": ["A. Questionnaire", "B. Questionaire", "C. Questionair", "D. Questionairre"],
+      "answer": "A",
+      "explanation": "The correct spelling is 'Questionnaire' (double 'n')."
+    },
+    {
+      "id": 8,
+      "section": "English Composition",
+      "question": "Choose the correct collective noun: A _____ of wolves.",
+      "options": ["A. Pack", "B. Herd", "C. Pride", "D. School"],
+      "answer": "A",
+      "explanation": "A group of wolves or dogs is called a 'Pack'."
+    },
+    {
+      "id": 9,
+      "section": "English Composition",
+      "question": "Meaning of 'To lead by the nose':",
+      "options": ["A. To follow someone closely", "B. To control someone completely", "C. To show the path", "D. To be very curious"],
+      "answer": "B",
+      "explanation": "It means to dominate or control someone totally."
+    },
+    {
+      "id": 10,
+      "section": "English Composition",
+      "question": "Fill in: You must abide _____ the rules.",
+      "options": ["A. for", "B. by", "C. in", "D. with"],
+      "answer": "B",
+      "explanation": "The correct preposition is 'Abide by', meaning to obey."
+    },
+    {
+      "id": 11,
+      "section": "English Composition",
+      "question": "What is 'A bibliophile'?",
+      "options": ["A. A lover of books", "B. A writer", "C. A publisher", "D. A thief"],
+      "answer": "A",
+      "explanation": "A bibliophile is a person who collects or has a great love of books."
+    },
+    {
+      "id": 12,
+      "section": "English Composition",
+      "question": "Identify the part of speech of 'Beautifully' in: 'She sings beautifully.'",
+      "options": ["A. Adjective", "B. Adverb", "C. Noun", "D. Verb"],
+      "answer": "B",
+      "explanation": "It describes the verb 'sings', so it is an Adverb."
+    },
+    {
+      "id": 13,
+      "section": "English Composition",
+      "question": "Select the correct plural of 'Radius':",
+      "options": ["A. Radiuses", "B. Radii", "C. Radium", "D. Radii-es"],
+      "answer": "B",
+      "explanation": "The Latin plural of 'Radius' is 'Radii'."
+    },
+    {
+      "id": 14,
+      "section": "English Composition",
+      "question": "Convert into Indirect speech: He said, 'Honesty is the best policy.'",
+      "options": ["A. He said that honesty was the best policy.", "B. He said that honesty is the best policy.", "C. He told that honesty is the best policy.", "D. He said honesty had been the best policy."],
+      "answer": "B",
+      "explanation": "For universal truths, the tense does not change in indirect speech."
+    },
+    {
+      "id": 15,
+      "section": "English Composition",
+      "question": "Meaning of 'A bolt from the blue':",
+      "options": ["A. A thunderstorm", "B. An unexpected disaster", "C. A clear sky", "D. A fast runner"],
+      "answer": "B",
+      "explanation": "It refers to a sudden and unexpected event or shock."
+    },
+    {
+      "id": 16,
+      "section": "English Composition",
+      "question": "What is the young one of a 'Goat' called?",
+      "options": ["A. Calf", "B. Kid", "C. Cub", "D. Lamb"],
+      "answer": "B",
+      "explanation": "A baby goat is called a Kid."
+    },
+    {
+      "id": 17,
+      "section": "English Composition",
+      "question": "Select the correctly spelt word:",
+      "options": ["A. Occurrence", "B. Ocurence", "C. Occurence", "D. Ocurance"],
+      "answer": "A",
+      "explanation": "The correct spelling is 'Occurrence' (double 'c', double 'r')."
+    },
+    {
+      "id": 18,
+      "section": "English Composition",
+      "question": "Antonym of 'Abundant':",
+      "options": ["A. Plentiful", "B. Scarce", "C. Huge", "D. Rich"],
+      "answer": "B",
+      "explanation": "'Abundant' means plenty; its opposite is 'Scarce'."
+    },
+    {
+      "id": 19,
+      "section": "English Composition",
+      "question": "Choose the word meaning 'A collection of poems':",
+      "options": ["A. Anthology", "B. Dictionary", "C. Atlas", "D. Catalogue"],
+      "answer": "A",
+      "explanation": "An anthology is a collection of literary pieces, poems, etc."
+    },
+    {
+      "id": 20,
+      "section": "English Composition",
+      "question": "Choose the correct prefix for 'Fortune':",
+      "options": ["A. Un", "B. Mis", "C. Dis", "D. In"],
+      "answer": "B",
+      "explanation": "The antonym formed is 'Misfortune'."
+    },
+    {
+      "id": 21,
+      "section": "English Composition",
+      "question": "Fill in: Death is preferable _____ dishonour.",
+      "options": ["A. than", "B. to", "C. for", "D. over"],
+      "answer": "B",
+      "explanation": "'Preferable' is always followed by the preposition 'to'."
+    },
+    {
+      "id": 22,
+      "section": "English Composition",
+      "question": "Meaning of 'Once in a blue moon':",
+      "options": ["A. Every month", "B. Very rarely", "C. Very often", "D. At night"],
+      "answer": "B",
+      "explanation": "It signifies an event that happens very seldom."
+    },
+    {
+      "id": 23,
+      "section": "English Composition",
+      "question": "Substitute with one word: 'Fear of closed places'.",
+      "options": ["A. Claustrophobia", "B. Acrophobia", "C. Hydrophobia", "D. Xenophobia"],
+      "answer": "A",
+      "explanation": "Claustrophobia is the fear of confined spaces."
+    },
+    {
+      "id": 24,
+      "section": "English Composition",
+      "question": "Find the synonym of 'Benevolent':",
+      "options": ["A. Cruel", "B. Kind", "C. Mean", "D. Selfish"],
+      "answer": "B",
+      "explanation": "'Benevolent' means well-meaning and kindly."
+    },
+    {
+      "id": 25,
+      "section": "English Composition",
+      "question": "What is the study of weather called?",
+      "options": ["A. Meteorology", "B. Geology", "C. Zoology", "D. Astrology"],
+      "answer": "A",
+      "explanation": "Meteorology is the science of atmospheric phenomena and weather."
+    },
+    {
+      "id": 26,
+      "section": "General Science",
+      "question": "শব্দের গতিবেগ সবচেয়ে বেশি কোন মাধ্যমে?",
+      "options": ["A. গ্যাসীয়", "B. তরল", "C. কঠিন", "D. শূন্য মাধ্যম"],
+      "answer": "C",
+      "explanation": "অণুগুলো কাছাকাছি থাকায় কঠিন মাধ্যমে শব্দ সবচেয়ে দ্রুত চলে।"
+    },
+    {
+      "id": 27,
+      "section": "General Science",
+      "question": "পরমাণুর কোন কণাটি নিস্তড়িৎ?",
+      "options": ["A. প্রোটন", "B. ইলেকট্রন", "C. নিউট্রন", "D. পজিট্রন"],
+      "answer": "C",
+      "explanation": "নিউট্রনের কোনো বৈদ্যুতিক আধান নেই।"
+    },
+    {
+      "id": 28,
+      "section": "General Science",
+      "question": "সবচেয়ে হালকা ধাতু কোনটি?",
+      "options": ["A. সোডিয়াম", "B. ম্যাগনেসিয়াম", "C. লিথিয়াম", "D. পটাশিয়াম"],
+      "answer": "C",
+      "explanation": "লিথিয়াম হলো পর্যায় সারণীর সবচেয়ে হালকা কঠিন মৌল।"
+    },
+    {
+      "id": 29,
+      "section": "General Science",
+      "question": "মানুষের শরীরে পাঁজরের হাড়ের (Ribs) সংখ্যা কত?",
+      "options": ["A. ১২ জোড়া", "B. ২৪ জোড়া", "C. ১০ জোড়া", "D. ২০ জোড়া"],
+      "answer": "B",
+      "explanation": "মানুষের বক্ষগহ্বরে মোট ২৪টি বা ১২ জোড়া পাঁজরের হাড় থাকে।"
+    },
+    {
+      "id": 30,
+      "section": "General Science",
+      "question": "কোন এসিডকে 'অম্লরাজ' তৈরিতে ব্যবহার করা হয়?",
+      "options": ["A. HCl ও HNO3", "B. H2SO4 ও HCl", "C. HNO3 ও H2SO4", "D. শুধু HCl"],
+      "answer": "A",
+      "explanation": "৩ ভাগ গাঢ় HCl ও ১ ভাগ গাঢ় HNO3-এর মিশ্রণকে একোয়া রেজিয়া বা অম্লরাজ বলে।"
+    },
+    {
+      "id": 31,
+      "section": "General Science",
+      "question": "ভিটামিন C-এর রাসায়নিক নাম কী?",
+      "options": ["A. রেটিনল", "B. ক্যালসিফেরল", "C. অ্যাসকরবিক এসিড", "D. টোকোফেরল"],
+      "answer": "C",
+      "explanation": "অ্যাসকরবিক এসিড হলো ভিটামিন সি-র রাসায়নিক নাম।"
+    },
+    {
+      "id": 32,
+      "section": "General Science",
+      "question": "দৃশ্যমান আলোর কোন রঙের তরঙ্গদৈর্ঘ্য সবচেয়ে কম?",
+      "options": ["A. লাল", "B. বেগুনি", "C. নীল", "D. সবুজ"],
+      "answer": "B",
+      "explanation": "বেগুনি আলোর তরঙ্গদৈর্ঘ্য সবচেয়ে কম এবং লাল আলোর সবচেয়ে বেশি।"
+    },
+    {
+      "id": 33,
+      "section": "General Science",
+      "question": "পেনিসিলিন কে আবিষ্কার করেন?",
+      "options": ["A. আলেকজান্ডার ফ্লেমিং", "B. লুই পাস্তুর", "C. রবার্ট হুক", "D. মেন্ডেল"],
+      "answer": "A",
+      "explanation": "১৯২৮ সালে তিনি প্রথম অ্যান্টিবায়োটিক পেনিসিলিন আবিষ্কার করেন।"
+    },
+    {
+      "id": 34,
+      "section": "General Science",
+      "question": "মানবদেহের বৃহত্তম অভ্যন্তরীণ অঙ্গ কোনটি?",
+      "options": ["A. যকৃৎ", "B. পাকস্থলী", "C. বৃক্ক", "D. ফুসফুস"],
+      "answer": "A",
+      "explanation": "যকৃৎ বা লিভার হলো মানুষের শরীরের বৃহত্তম অভ্যন্তরীণ গ্রন্থি ও অঙ্গ।"
+    },
+    {
+      "id": 35,
+      "section": "General Science",
+      "question": "শুষ্ক বরফ (Dry Ice) আসলে কী?",
+      "options": ["A. কঠিন নাইট্রোজেন", "B. কঠিন কার্বন ডাই অক্সাইড", "C. জমানো জল", "D. কঠিন মিথেন"],
+      "answer": "B",
+      "explanation": "কঠিন CO2 সরাসরি গ্যাসে রূপান্তরিত হয় বলে একে শুষ্ক বরফ বলা হয়।"
+    },
+    {
+      "id": 36,
+      "section": "General Science",
+      "question": "নিউটনের কোন গতিসূত্র থেকে বলের সংজ্ঞা পাওয়া যায়?",
+      "options": ["A. প্রথম সূত্র", "B. দ্বিতীয় সূত্র", "C. তৃতীয় সূত্র", "D. মহাকর্ষ সূত্র"],
+      "answer": "A",
+      "explanation": "প্রথম সূত্র থেকে বলের সংজ্ঞা এবং দ্বিতীয় সূত্র থেকে বলের পরিমাপ জানা যায়।"
+    },
+    {
+      "id": 37,
+      "section": "General Science",
+      "question": "ব্রোঞ্জ কোন কোন ধাতুর সংকর?",
+      "options": ["A. তামা ও দস্তা", "B. তামা ও টিন", "C. তামা ও নিকেল", "D. দস্তা ও লোহা"],
+      "answer": "B",
+      "explanation": "ব্রোঞ্জ তামা (প্রায় ৯০%) ও টিন (১০%) এর মিশ্রণে তৈরি।"
+    },
+    {
+      "id": 38,
+      "section": "General Science",
+      "question": "রক্তের লোহিত কণিকা কোথায় তৈরি হয়?",
+      "options": ["A. যকৃৎ", "B. বৃক্ক", "C. অস্থিমজ্জা", "D. ফুসফুস"],
+      "answer": "C",
+      "explanation": "হাড়ের ভেতর থাকা লাল অস্থিমজ্জা বা Bone Marrow থেকে এটি উৎপন্ন হয়।"
+    },
+    {
+      "id": 39,
+      "section": "General Science",
+      "question": "কোন মৌলটিকে 'কুইকসিলভার' বলা হয়?",
+      "options": ["A. রুপো", "B. পারদ", "C. প্লাটিনাম", "D. সোডিয়াম"],
+      "answer": "B",
+      "explanation": "পারদ বা মার্কারির উজ্জ্বল তরল অবস্থার জন্য একে কুইকসিলভার বলে।"
+    },
+    {
+      "id": 40,
+      "section": "General Science",
+      "question": "কোষের 'শক্তিঘর' কাকে বলা হয়?",
+      "options": ["A. নিউক্লিয়াস", "B. মাইটোকন্ড্রিয়া", "C. রাইবোজোম", "D. লাইসোজোম"],
+      "answer": "B",
+      "explanation": "মাইটোকন্ড্রিয়া কোষের সমস্ত কাজের জন্য ATP শক্তি তৈরি করে।"
+    },
+    {
+      "id": 41,
+      "section": "General Science",
+      "question": "উদ্ভিদের বৃদ্ধি পরিমাপক যন্ত্রের নাম কী?",
+      "options": ["A. ব্যারোমিটার", "B. হাইগ্রোমিটার", "C. ক্রেসকোগ্রাফ", "D. অ্যামিটার"],
+      "answer": "C",
+      "explanation": "আচার্য জগদীশচন্দ্র বসু এটি আবিষ্কার করেছিলেন।"
+    },
+    {
+      "id": 42,
+      "section": "General Science",
+      "question": "পিটুইটারি গ্রন্থি মানবদেহের কোথায় থাকে?",
+      "options": ["A. গলায়", "B. মস্তিষ্কে", "C. পাকস্থলীতে", "D. হৃদপিণ্ডে"],
+      "answer": "B",
+      "explanation": "এটি মস্তিষ্কের নিচের অংশে অবস্থিত এবং একে মাস্টার গ্ল্যান্ড বলে।"
+    },
+    {
+      "id": 43,
+      "section": "General Science",
+      "question": "কোন ভিটামিনের অভাবে স্কার্ভি রোগ হয়?",
+      "options": ["A. ভিটামিন A", "B. ভিটামিন B", "C. ভিটামিন C", "D. ভিটামিন D"],
+      "answer": "C",
+      "explanation": "অ্যাসকরবিক এসিড বা ভিটামিন সি-র অভাবে মাড়ি ফুলে রক্ত পড়ে।"
+    },
+    {
+      "id": 44,
+      "section": "General Science",
+      "question": "তড়িৎ প্রবাহের একক কী?",
+      "options": ["A. ভোল্ট", "B. ওয়াট", "C. অ্যাম্পিয়ার", "D. ওহম"],
+      "answer": "C",
+      "explanation": "অ্যাম্পিয়ার (Ampere) হলো বিদ্যুৎ প্রবাহের SI একক।"
+    },
+    {
+      "id": 45,
+      "section": "General Science",
+      "question": "সবচেয়ে বেশি তড়িৎ ঋণাত্মক মৌল কোনটি?",
+      "options": ["A. অক্সিজেন", "B. ক্লোরিন", "C. ফ্লোরিন", "D. নাইট্রোজেন"],
+      "answer": "C",
+      "explanation": "ফ্লোরিন (Fluorine) পর্যায় সারণীর সর্বাধিক তড়িৎ ঋণাত্মক মৌল।"
+    },
+    {
+      "id": 46,
+      "section": "General Science",
+      "question": "লাফিং গ্যাসের রাসায়নিক নাম কী?",
+      "options": ["A. নাইট্রিক অক্সাইড", "B. নাইট্রাস অক্সাইড", "C. নাইট্রোজেন ডাই অক্সাইড", "D. কোনোটিই নয়"],
+      "answer": "B",
+      "explanation": "নাইট্রাস অক্সাইড (N2O) হাসির উদ্রেক করে।"
+    },
+    {
+      "id": 47,
+      "section": "General Science",
+      "question": "বায়ুর আর্দ্রতা পরিমাপক যন্ত্রের নাম কী?",
+      "options": ["A. ব্যারোমিটার", "B. হাইগ্রোমিটার", "C. হাইড্রোমিটার", "D. থার্মোমিটার"],
+      "answer": "B",
+      "explanation": "হাইগ্রোমিটার দিয়ে বাতাসের জলীয় বাষ্পের পরিমাণ মাপা হয়।"
+    },
+    {
+      "id": 48,
+      "section": "General Science",
+      "question": "পেন্সিলের সিসে কী ব্যবহার করা হয়?",
+      "options": ["A. লোহা", "B. গ্রাফাইট", "C. দস্তা", "D. কয়লা"],
+      "answer": "B",
+      "explanation": "গ্রাফাইট কার্বনের একটি রূপভেদ যা নরম ও পিচ্ছিল হওয়ায় পেন্সিলে ব্যবহৃত হয়।"
+    },
+    {
+      "id": 49,
+      "section": "General Science",
+      "question": "রক্ত তঞ্চনে (Blood Clotting) সাহায্য করে কোন ভিটামিন?",
+      "options": ["A. ভিটামিন K", "B. ভিটামিন E", "C. ভিটামিন C", "D. ভিটামিন A"],
+      "answer": "A",
+      "explanation": "ভিটামিন K রক্ত জমাট বাঁধতে সাহায্য করে।"
+    },
+    {
+      "id": 50,
+      "section": "General Science",
+      "question": "মানুষের রক্তের pH মান কত?",
+      "options": ["A. ৬.৪", "B. ৭.৪", "C. ৮.৪", "D. ৭.০"],
+      "answer": "B",
+      "explanation": "মানুষের রক্ত সামান্য ক্ষারীয় এবং এর মান ৭.৩৫ থেকে ৭.৪৫-এর মধ্যে থাকে।"
+    },
+    {
+      "id": 51,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে জি-২০ (G20) সম্মেলন কোন দেশে অনুষ্ঠিত হয়েছে?",
+      "options": ["A. ভারত", "B. ব্রাজিল", "C. ইন্দোনেশিয়া", "D. দক্ষিণ আফ্রিকা"],
+      "answer": "B",
+      "explanation": "২০২৪ সালের সম্মেলন ব্রাজিলের রিও ডি জেনিরোতে আয়োজিত হয়েছে।"
+    },
+    {
+      "id": 52,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালের ইউরো কাপ ফুটবল প্রতিযোগিতায় চ্যাম্পিয়ন হয়েছে কোন দেশ?",
+      "options": ["A. ইংল্যান্ড", "B. স্পেন", "C. জার্মানি", "D. ফ্রান্স"],
+      "answer": "B",
+      "explanation": "ফাইনালে ইংল্যান্ডকে ২-১ গোলে হারিয়ে স্পেন শিরোপা জিতেছে।"
+    },
+    {
+      "id": 53,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে ভারতের নীতি আয়োগের সিইও (CEO) কে?",
+      "options": ["A. পরমেশ্বরন আয়ার", "B. অমিতাভ কান্ত", "C. বি ভি আর সুব্রহ্মণ্যম", "D. সুমন বেরি"],
+      "answer": "C",
+      "explanation": "বি ভি আর সুব্রহ্মণ্যম বর্তমানে নীতি আয়োগের প্রধান নির্বাহী কর্মকর্তা।"
+    },
+    {
+      "id": 54,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে শান্তিতে নোবেল পুরস্কার পেয়েছেন কোন সংস্থা বা ব্যক্তি?",
+      "options": ["A. নিহন হিদানকিও (Nihon Hidankyo)", "B. বিশ্ব খাদ্য কর্মসূচি", "C. নার্গিস মহম্মদী", "D. মারিয়া রেসা"],
+      "answer": "A",
+      "explanation": "পারমাণবিক অস্ত্রমুক্ত বিশ্বের জন্য আন্দোলনের স্বীকৃতি স্বরূপ এই জাপানি সংস্থাটি পুরস্কার পেয়েছে।"
+    },
+    {
+      "id": 55,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে ভারতের নতুন নৌবাহিনী প্রধান হিসেবে কে দায়িত্ব নিয়েছেন?",
+      "options": ["A. আর হরি কুমার", "B. দীনেশ কুমার ত্রিপাঠী", "C. মনোজ পাণ্ডে", "D. অনিল চৌহান"],
+      "answer": "B",
+      "explanation": "অ্যাডমিরাল দীনেশ কুমার ত্রিপাঠী বর্তমানে নৌপ্রধান।"
+    },
+    {
+      "id": 56,
+      "section": "Current Affairs (2024-25)",
+      "question": "অস্কার ২০২৪-এ সেরা ছবির পুরস্কার পেয়েছে কোনটি?",
+      "options": ["A. বার্বি", "B. ওপেনহাইমার", "C. পোর থিংস", "D. কিলিং জোক"],
+      "answer": "B",
+      "explanation": "ক্রিস্টোফার নোলানের 'ওপেনহাইমার' ৯৬তম অ্যাকাডেমি অ্যাওয়ার্ডসে সেরা ছবি হয়েছে।"
+    },
+    {
+      "id": 57,
+      "section": "Current Affairs (2024-25)",
+      "question": "ভারতের কোন রাজ্য প্রথম ইউনিফর্ম সিভিল কোড (UCC) বিল পাস করেছে?",
+      "options": ["A. গোয়া", "B. উত্তরাখণ্ড", "C. গুজরাট", "D. উত্তরপ্রদেশ"],
+      "answer": "B",
+      "explanation": "উত্তরাখণ্ড স্বাধীনোত্তর ভারতের প্রথম রাজ্য হিসেবে UCC বিল পাস করেছে।"
+    },
+    {
+      "id": 58,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে প্যারিস অলিম্পিকে ভারত মোট কতটি পদক জিতেছে?",
+      "options": ["A. ৪টি", "B. ৫টি", "C. ৬টি", "D. ৭টি"],
+      "answer": "C",
+      "explanation": "ভারত মোট ৬টি পদক জিতেছে (১টি রুপো ও ৫টি ব্রোঞ্জ)।"
+    },
+    {
+      "id": 59,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে পশ্চিমবঙ্গের নতুন মুখ্য সচিব (Chief Secretary) কে?",
+      "options": ["A. বি পি গোপালিকা", "B. মনোজ পন্থ", "C. হরিকৃষ্ণ দ্বিবেদী", "D. আলাপন বন্দ্যোপাধ্যায়"],
+      "answer": "B",
+      "explanation": "মনোজ পন্থ বর্তমানে পশ্চিমবঙ্গ সরকারের মুখ্য সচিব।"
+    },
+    {
+      "id": 60,
+      "section": "Current Affairs (2024-25)",
+      "question": "সম্প্রতি গাজা ভূখণ্ডে ইসরায়েল ও হামাসের যুদ্ধের সময় ভারতীয়দের ফেরাতে কোন অপারেশন চালানো হয়েছিল?",
+      "options": ["A. অপারেশন গঙ্গা", "B. অপারেশন অজয়", "C. অপারেশন শক্তি", "D. অপারেশন দেবী শক্তি"],
+      "answer": "B",
+      "explanation": "ইসরায়েল থেকে ভারতীয় নাগরিকদের নিরাপদে ফেরাতে অপারেশন অজয় শুরু হয়।"
+    },
+    {
+      "id": 61,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে আইপিএল (IPL) জয়ী দল কোনটি?",
+      "options": ["A. কেকেআর (KKR)", "B. সানরাইজার্স হায়দরাবাদ", "C. চেন্নাই সুপার কিংস", "D. মুম্বাই ইন্ডিয়ান্স"],
+      "answer": "A",
+      "explanation": "শ্রেয়াস আইয়ারের নেতৃত্বে কলকাতা নাইট রাইডার্স ২০২৪ সালের আইপিএল জিতেছে।"
+    },
+    {
+      "id": 62,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে ইসরো (ISRO)-র চেয়ারম্যান কে?",
+      "options": ["A. কে সিভান", "B. এস সোমনাথ", "C. জি মাধবন নায়ার", "D. সতীশ ধবন"],
+      "answer": "B",
+      "explanation": "এস সোমনাথ বর্তমানে ইসরোর প্রধান পদে রয়েছেন।"
+    },
+    {
+      "id": 63,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালের টি-২০ বিশ্বকাপে 'প্লেয়ার অফ দ্য টুর্নামেন্ট' কে হয়েছেন?",
+      "options": ["A. বিরাট কোহলি", "B. জশপ্রীত বুমরাহ", "C. রোহিত শর্মা", "D. সূর্যকুমার যাদব"],
+      "answer": "B",
+      "explanation": "টুর্নামেন্ট জুড়ে অসাধারণ বোলিংয়ের জন্য বুমরাহ এই সম্মান পেয়েছেন।"
+    },
+    {
+      "id": 64,
+      "section": "Current Affairs (2024-25)",
+      "question": "UNESCO-এর বিশ্ব ঐতিহ্য তালিকায় অন্তর্ভুক্ত পশ্চিমবঙ্গের 'শান্তিনিকেতন' কততম ভারতীয় স্থান?",
+      "options": ["A. ৪০তম", "B. ৪১তম", "C. ৪২তম", "D. ৩৯তম"],
+      "answer": "B",
+      "explanation": "শান্তিনিকেতন ভারতের ৪১তম UNESCO ওয়ার্ল্ড হেরিটেজ সাইট।"
+    },
+    {
+      "id": 65,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে ভারতের বিদেশ মন্ত্রী কে?",
+      "options": ["A. অমিত শাহ", "B. এস জয়শঙ্কর", "C. রাজনাথ সিং", "D. নির্মলা সীতারামন"],
+      "answer": "B",
+      "explanation": "ডঃ এস জয়শঙ্কর বর্তমানে ভারতের পররাষ্ট্রমন্ত্রী।"
+    },
+    {
+      "id": 66,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে সাহিত্যে নোবেল পুরস্কার কে পেয়েছেন?",
+      "options": ["A. হান কাং (Han Kang)", "B. জন ফসে", "C. আনি এরনাক্স", "D. আব্দুলরাজাক গুনরাহ"],
+      "answer": "A",
+      "explanation": "দক্ষিণ কোরিয়ার লেখিকা হান কাং ২০২৪ সালে সাহিত্যে নোবেল পেয়েছেন।"
+    },
+    {
+      "id": 67,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে ভারতের চিফ জাস্টিস (CJI) কে?",
+      "options": ["A. ডি ওয়াই চন্দ্রচূড়", "B. সঞ্জীব খান্না", "C. এন ভি রামানা", "D. রঞ্জন গগৈ"],
+      "answer": "B",
+      "explanation": "বিচারপতি সঞ্জীব খান্না বর্তমানে ভারতের ৫১তম প্রধান বিচারপতি।"
+    },
+    {
+      "id": 68,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে ভারতরত্ন সম্মানে কতজনকে ভূষিত করা হয়েছে?",
+      "options": ["A. ৩ জন", "B. ৪ জন", "C. ৫ জন", "D. ২ জন"],
+      "answer": "C",
+      "explanation": "২০২৪ সালে ৫ জনকে (লালকৃষ্ণ আদভানি, চৌধুরী চরণ সিং, পি ভি নরসিমা রাও, কাপুর্রী ঠাকুর ও এম এস স্বামীনাথন) ভারতরত্ন দেওয়া হয়েছে।"
+    },
+    {
+      "id": 69,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে 'মিস ইউনিভার্স' শিরোপা কে জিতেছেন?",
+      "options": ["A. ভিক্টোরিয়া কেজিয়ার থেইলভিগ", "B. শেনিস প্যালাসিওস", "C. হারনাজ সান্ধু", "D. আর'বনি গ্যাব্রিয়েল"],
+      "answer": "A",
+      "explanation": "ডেনমার্কের ভিক্টোরিয়া কেজিয়ার ২০২৪ সালের মিস ইউনিভার্স হয়েছেন।"
+    },
+    {
+      "id": 70,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে বিশ্বব্যাংকের প্রেসিডেন্ট কে?",
+      "options": ["A. অজয় বঙ্গ (Ajay Banga)", "B. ডেভিড ম্যালপাস", "C. ক্রিস্টালিনা জর্জিয়েভা", "D. জিম ইয়ং কিম"],
+      "answer": "A",
+      "explanation": "ভারতীয় বংশোদ্ভূত অজয় বঙ্গ বর্তমানে বিশ্বব্যাংকের প্রধান।"
+    },
+    {
+      "id": 71,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালের প্রজাতন্ত্র দিবসে ভারতের প্রধান অতিথি কে ছিলেন?",
+      "options": ["A. জো বাইডেন", "B. ইমানুয়েল ম্যাক্রোঁ", "C. ঋষি সুনাক", "D. জাস্টিন ট্রুডো"],
+      "answer": "B",
+      "explanation": "ফ্রান্সের প্রেসিডেন্ট ম্যাক্রোঁ ২০২৪ সালের প্রজাতন্ত্র দিবসের প্রধান অতিথি ছিলেন।"
+    },
+    {
+      "id": 72,
+      "section": "Current Affairs (2024-25)",
+      "question": "ভারতের প্রথম সৌর মিশন (Solar Mission)-এর নাম কী?",
+      "options": ["A. চন্দ্রযান-৩", "B. আদিত্য-L1", "C. গগনযান", "D. মঙ্গলায়ন"],
+      "answer": "B",
+      "explanation": "আদিত্য-L1 হলো ভারতের প্রথম সফল সৌর অভিযান।"
+    },
+    {
+      "id": 73,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে ইউক্রেন যুদ্ধের কারণে কোন আন্তর্জাতিক সংস্থার সম্মেলন আলোচিত ছিল?",
+      "options": ["A. NATO", "B. SAARC", "C. ASEAN", "D. BIMSTEC"],
+      "answer": "A",
+      "explanation": "ইউক্রেন যুদ্ধের প্রেক্ষাপটে NATO-এর সম্মেলন ও সদস্যপদ নিয়ে অনেক আলোচনা হয়েছে।"
+    },
+    {
+      "id": 74,
+      "section": "Current Affairs (2024-25)",
+      "question": "বর্তমানে ভারতের ক্যাবিনেট সচিব (Cabinet Secretary) কে?",
+      "options": ["A. রাজীব গৌবা", "B. টি ভি সোমানাথন", "C. অজয় ভল্লা", "D. পি কে মিশ্র"],
+      "answer": "B",
+      "explanation": "টি ভি সোমানাথন বর্তমানে ভারতের ক্যাবিনেট সচিব।"
+    },
+    {
+      "id": 75,
+      "section": "Current Affairs (2024-25)",
+      "question": "২০২৪ সালে গ্লোবাল জেন্ডার গ্যাপ ইনডেক্স অনুযায়ী ভারতের স্থান কত?",
+      "options": ["A. ১২৭তম", "B. ১২৯তম", "C. ১৩১তম", "D. ১২৬তম"],
+      "answer": "B",
+      "explanation": "২০২৪ সালের রিপোর্টে ভারতের স্থান ১২৯তম।"
+    },
+    {
+      "id": 76,
+      "section": "History of India",
+      "question": "সিন্ধু সভ্যতার কোন স্থানে একটি ধানের তুষ পাওয়া গেছে?",
+      "options": ["A. হরপ্পা", "B. লোথাল", "C. কালীবঙ্গান", "D. বানওয়ালি"],
+      "answer": "B",
+      "explanation": "গুজরাটের লোথাল ও রংপুরে সিন্ধু সভ্যতার ধান চাষের প্রমাণ পাওয়া গেছে।"
+    },
+    {
+      "id": 77,
+      "section": "History of India",
+      "question": "গৌতম বুদ্ধের গৃহত্যাগের ঘটনাকে কী বলা হয়?",
+      "options": ["A. মহাপরিনির্বাণ", "B. ধর্মচক্র প্রবর্তন", "C. মহাভিনিষ্ক্রমণ", "D. সম্বোধি লাভ"],
+      "answer": "C",
+      "explanation": "২৯ বছর বয়সে বুদ্ধের সংসার ত্যাগ করার ঘটনাকে মহাভিনিষ্ক্রমণ বলা হয়।"
+    },
+    {
+      "id": 78,
+      "section": "History of India",
+      "question": "মৌর্য রাজবংশের প্রতিষ্ঠাতা কে ছিলেন?",
+      "options": ["A. চন্দ্রগুপ্ত মৌর্য", "B. বিন্দুসার", "C. অশোক", "D. ধনানন্দ"],
+      "answer": "A",
+      "explanation": "চন্দ্রগুপ্ত মৌর্য কৌটিল্যের সাহায্যে শেষ নন্দ রাজা ধনানন্দকে পরাজিত করে মৌর্য সাম্রাজ্য স্থাপন করেন।"
+    },
+    {
+      "id": 79,
+      "section": "History of India",
+      "question": "গুপ্ত যুগের কোন রাজাকে 'ভারতের নেপোলিয়ন' বলা হয়?",
+      "options": ["A. প্রথম চন্দ্রগুপ্ত", "B. সমুদ্রগুপ্ত", "C. দ্বিতীয় চন্দ্রগুপ্ত", "D. স্কন্দগুপ্ত"],
+      "answer": "B",
+      "explanation": "ঐতিহাসিক ভি. এ. স্মিথ সমুদ্রগুপ্তের বিশাল বিজয় অভিযানের জন্য তাঁকে এই উপাধি দেন।"
+    },
+    {
+      "id": 80,
+      "section": "History of India",
+      "question": "আইন-ই-আকবরি গ্রন্থটির রচয়িতা কে?",
+      "options": ["A. ফৈজী", "B. আবুল ফজল", "C. বীরবল", "D. বাদায়ুনী"],
+      "answer": "B",
+      "explanation": "আকবরের সভাসদ আবুল ফজল আকবরনামা ও এর তৃতীয় খণ্ড আইন-ই-আকবরি লিখেন।"
+    },
+    {
+      "id": 81,
+      "section": "History of India",
+      "question": "দিল্লি সুলতানি আমলের কোন সুলতান রাজধানী দিল্লি থেকে দৌলতাবাদে স্থানান্তরিত করেন?",
+      "options": ["A. আলাউদ্দিন খিলজি", "B. মহম্মদ বিন তুঘলক", "C. গিয়াসউদ্দিন তুঘলক", "D. ফিরোজ শাহ তুঘলক"],
+      "answer": "B",
+      "explanation": "দাক্ষিণাত্য শাসনের সুবিধার্থে তিনি রাজধানী সরিয়েছিলেন।"
+    },
+    {
+      "id": 82,
+      "section": "History of India",
+      "question": "বিখ্যাত চীনা পরিব্রাজক হিউয়েন সাং কার রাজত্বকালে ভারতে এসেছিলেন?",
+      "options": ["A. হর্ষবর্ধন", "B. চন্দ্রগুপ্ত মৌর্য", "C. সমুদ্রগুপ্ত", "D. অশোক"],
+      "answer": "A",
+      "explanation": "হর্ষবর্ধনের সময় হিউয়েন সাং নালন্দা বিশ্ববিদ্যালয়ে পড়তে ও বৌদ্ধ ধর্মতত্ত্ব জানতে আসেন।"
+    },
+    {
+      "id": 83,
+      "section": "History of India",
+      "question": "কোন মুঘল সম্রাট 'মনসবদারি' প্রথা প্রবর্তন করেন?",
+      "options": ["A. বাবর", "B. হুমায়ুন", "C. আকবর", "D. জাহাঙ্গীর"],
+      "answer": "C",
+      "explanation": "আকবর তাঁর সামরিক ও প্রশাসনিক ব্যবস্থার ভিত্তি হিসেবে মনসবদারি প্রথা চালু করেন।"
+    },
+    {
+      "id": 84,
+      "section": "History of India",
+      "question": "বিজয়নগর সাম্রাজ্যের প্রতিষ্ঠাতা কে ছিলেন?",
+      "options": ["A. কৃষ্ণদেব রায়", "B. হরিহর ও বুক্কা", "C. দেব রায়", "D. বীর নরসিংহ"],
+      "answer": "B",
+      "explanation": "১৩৩৬ সালে তুঙ্গভদ্রা নদীর তীরে হরিহর ও বুক্কা রায় এই সাম্রাজ্য স্থাপন করেন।"
+    },
+    {
+      "id": 85,
+      "section": "History of India",
+      "question": "কোন যুদ্ধের মাধ্যমে ভারতে মুঘল সাম্রাজ্যের ভিত্তি স্থাপিত হয়?",
+      "options": ["A. পানিপতের প্রথম যুদ্ধ", "B. পানিপতের দ্বিতীয় যুদ্ধ", "C. খানুয়ার যুদ্ধ", "D. হলদিঘাটির যুদ্ধ"],
+      "answer": "A",
+      "explanation": "১৫২৬ সালে বাবর ও ইব্রাহিম লোদীর এই যুদ্ধের মাধ্যমেই মুঘল শাসন শুরু হয়।"
+    },
+    {
+      "id": 86,
+      "section": "History of India",
+      "question": "ইলোরার বিখ্যাত কৈলাসনাথ মন্দির কোন রাজবংশের আমলে তৈরি হয়েছিল?",
+      "options": ["A. চালুক্য", "B. রাষ্ট্রকূট", "C. চোল", "D. পল্লব"],
+      "answer": "B",
+      "explanation": "রাষ্ট্রকূট রাজা প্রথম কৃষ্ণ পাথর কেটে এই বিশালাকার মন্দিরটি নির্মাণ করান।"
+    },
+    {
+      "id": 87,
+      "section": "History of India",
+      "question": "তৈমুর লং কত সালে ভারত আক্রমণ করেন?",
+      "options": ["A. ১২৯৮", "B. ১৩৯৮", "C. ১৪৯৮", "D. ১৫২৬"],
+      "answer": "B",
+      "explanation": "তুঘলক রাজবংশের নাসিরুদ্দিন মাহমুদের সময় তৈমুর লং দিল্লি লুণ্ঠন করেন।"
+    },
+    {
+      "id": 88,
+      "section": "History of India",
+      "question": "বিখ্যাত অজন্তা গুহাচিত্র কোন রাজবংশের আমলে সর্বাধিক বিকশিত হয়?",
+      "options": ["A. মৌর্য", "B. গুপ্ত", "C. চালুক্য", "D. রাষ্ট্রকূট"],
+      "answer": "B",
+      "explanation": "গুপ্ত যুগে অজন্তার বৌদ্ধ গুহাচিত্রগুলি তাদের শ্রেষ্ঠ রূপ পায়।"
+    },
+    {
+      "id": 89,
+      "section": "History of India",
+      "question": "কোন সুলতান বাজার দর নিয়ন্ত্রণ (Market Reforms) ব্যবস্থা চালু করেছিলেন?",
+      "options": ["A. বলবন", "B. আলাউদ্দিন খিলজি", "C. মহম্মদ বিন তুঘলক", "D. ফিরোজ শাহ তুঘলক"],
+      "answer": "B",
+      "explanation": "সৈন্যদের অল্প বেতনে জীবনযাপনের সুবিধার জন্য তিনি কঠোরভাবে বাজার নিয়ন্ত্রণ করেন।"
+    },
+    {
+      "id": 90,
+      "section": "History of India",
+      "question": "হর্ষচরিত কার রচনা?",
+      "options": ["A. হর্ষবর্ধন", "B. বানভট্ট", "C. কালিদাস", "D. অমর সিং"],
+      "answer": "B",
+      "explanation": "হর্ষবর্ধনের সভাকবি বানভট্ট তাঁর প্রভুর জীবনীর ওপর ভিত্তি করে হর্ষচরিত লিখেন।"
+    },
+    {
+      "id": 91,
+      "section": "History of India",
+      "question": "কোন মুঘল সম্রাটকে 'জিন্দা পীর' বলা হত?",
+      "options": ["A. বাবর", "B. জাহাঙ্গীর", "C. শাহজাহান", "D. ঔরঙ্গজেব"],
+      "answer": "D",
+      "explanation": "কঠোর ধর্মীয় ও অনাড়ম্বর জীবনযাপনের জন্য সাধারণ মানুষ তাঁকে জিন্দা পীর বলত।"
+    },
+    {
+      "id": 92,
+      "section": "History of India",
+      "question": "জৈন ধর্মের প্রথম তীর্থঙ্কর কে ছিলেন?",
+      "options": ["A. পার্শ্বনাথ", "B. মহাবীর", "C. ঋষভনাথ", "D. নেমিনাথ"],
+      "answer": "C",
+      "explanation": "ঋষভনাথ বা আদিনাথ ছিলেন জৈন ধর্মের প্রবর্তক ও প্রথম তীর্থঙ্কর।"
+    },
+    {
+      "id": 93,
+      "section": "History of India",
+      "question": "মুঘল সম্রাট আকবর কোথায় ফতেহপুর সিকরি স্থাপন করেন?",
+      "options": ["A. দিল্লি", "B. আগ্রা", "C. জয়পুর", "D. লাহোর"],
+      "answer": "B",
+      "explanation": "আগ্রার নিকটবর্তী স্থানে তিনি এই নতুন শহর ও রাজধানী গড়ে তোলেন।"
+    },
+    {
+      "id": 94,
+      "section": "History of India",
+      "question": "অশোকের কোন শিলালিপি থেকে কলিঙ্গ যুদ্ধের ভয়াবহতার কথা জানা যায়?",
+      "options": ["A. ৩য় শিলালিপি", "B. ১০ম শিলালিপি", "C. ১৩তম শিলালিপি", "D. ৭ম শিলালিপি"],
+      "answer": "C",
+      "explanation": "অশোকের ১৩তম প্রধান শিলালিপি থেকে তাঁর কলিঙ্গ জয় ও অনুশোচনার কথা জানা যায়।"
+    },
+    {
+      "id": 95,
+      "section": "History of India",
+      "question": "বাংলার কোন সুলতান 'গুনরাজ খান' উপাধি পেয়েছিলেন?",
+      "options": ["A. মালাধর বসু", "B. হোসেন শাহ", "C. ইলিয়াস শাহ", "D. বরবক শাহ"],
+      "answer": "A",
+      "explanation": "শ্রীকৃষ্ণবিজয় কাব্যের জন্য সুলতান রুকনুদ্দিন বরবক শাহ মালাধর বসুকে এই উপাধি দেন।"
+    },
+    {
+      "id": 96,
+      "section": "History of India",
+      "question": "কলিঙ্গ যুদ্ধ কত সালে হয়েছিল?",
+      "options": ["A. ২৬১ খ্রিস্টপূর্বাব্দ", "B. ২৭৩ খ্রিস্টপূর্বাব্দ", "C. ৩২৬ খ্রিস্টপূর্বাব্দ", "D. ২৩২ খ্রিস্টপূর্বাব্দ"],
+      "answer": "A",
+      "explanation": "সম্রাট অশোকের রাজ্যাভিষেকের অষ্টম বছরে এই রক্তক্ষয়ী যুদ্ধ হয়েছিল।"
+    },
+    {
+      "id": 97,
+      "section": "History of India",
+      "question": "বিখ্যাত আইহোল প্রশস্তি কে রচনা করেন?",
+      "options": ["A. কালিদাস", "B. রবীকীর্তি", "C. হরিসেন", "D. বানভট্ট"],
+      "answer": "B",
+      "explanation": "চালুক্য রাজা দ্বিতীয় পুলকেশীর সভাকবি রবীকীর্তি এই প্রশস্তি রচনা করেন।"
+    },
+    {
+      "id": 98,
+      "section": "History of India",
+      "question": "কাকে 'বাংলার আকবর' বলা হয়?",
+      "options": ["A. হোসেন শাহ", "B. ইলিয়াস শাহ", "C. মুর্শিদ কুলি খাঁ", "D. শশাঙ্ক"],
+      "answer": "A",
+      "explanation": "উদার ও শিল্পানুরাগী শাসক হওয়ায় আলাউদ্দিন হোসেন শাহকে বাংলার আকবর বলা হয়।"
+    },
+    {
+      "id": 99,
+      "section": "History of India",
+      "question": "মুঘল সম্রাট জাহাঙ্গীরের দরবারে আসা প্রথম ইংরেজ কে ছিলেন?",
+      "options": ["A. স্যার টমাস রো", "B. উইলিয়াম হকিন্স", "C. জেমস প্রথম", "D. রবার্ট ক্লাইভ"],
+      "answer": "B",
+      "explanation": "১৬০৮ সালে ক্যাপ্টেন উইলিয়াম হকিন্স প্রথম জাহাঙ্গীরের দরবারে আসেন।"
+    },
+    {
+      "id": 100,
+      "section": "History of India",
+      "question": "বাংলার প্রথম স্বাধীন নবাব কে ছিলেন?",
+      "options": ["A. আলিবর্দী খাঁ", "B. মুর্শিদ কুলি খাঁ", "C. সিরাজ-উদ-দৌলা", "D. মীর জাফর"],
+      "answer": "B",
+      "explanation": "মুর্শিদ কুলি খাঁ মুঘলদের থেকে বিচ্ছিন্ন হয়ে স্বাধীনভাবে বাংলা শাসন শুরু করেন।"
+    },
+    {
+      "id": 101,
+      "section": "Geography of India & WB",
+      "question": "ভারতের সর্বোচ্চ শৃঙ্গ কোনটি?",
+      "options": ["A. কাঞ্চনজঙ্ঘা", "B. নন্দাদেবী", "C. গডউইন অস্টিন (K2)", "D. ধবলগিরি"],
+      "answer": "C",
+      "explanation": "কারাকোরাম পর্বতমালার K2 ভারতের সর্বোচ্চ এবং বিশ্বের দ্বিতীয় সর্বোচ্চ শৃঙ্গ।"
+    },
+    {
+      "id": 102,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের উচ্চতম শৃঙ্গ সান্দাকফু কোন পর্বতশ্রেণীর অন্তর্গত?",
+      "options": ["A. সিঙালিলা", "B. দার্জিলিং", "C. জয়ন্তী", "D. বক্সা"],
+      "answer": "A",
+      "explanation": "সান্দাকফু (৩৬৩৬ মিটার) সিঙালিলা পর্বতশ্রেণীর সর্বোচ্চ শৃঙ্গ।"
+    },
+    {
+      "id": 103,
+      "section": "Geography of India & WB",
+      "question": "ভারতের দক্ষিণতম বিন্দু কোনটি?",
+      "options": ["A. কন্যাকুমারী", "B. ইন্দিরা পয়েন্ট", "C. ইন্দিরা কোল", "D. কিবিথু"],
+      "answer": "B",
+      "explanation": "আন্দামান ও নিকোবর দ্বীপপুঞ্জে অবস্থিত ইন্দিরা পয়েন্ট হলো ভারতের দক্ষিণতম প্রান্ত।"
+    },
+    {
+      "id": 104,
+      "section": "Geography of India & WB",
+      "question": "ভারতের কোন রাজ্যকে 'চিনির বাটি' বলা হয়?",
+      "options": ["A. মহারাষ্ট্র", "B. উত্তরপ্রদেশ", "C. পাঞ্জাব", "D. বিহার"],
+      "answer": "B",
+      "explanation": "সর্বাধিক আখ ও চিনি উৎপাদনের জন্য উত্তরপ্রদেশকে চিনির বাটি বলা হয়।"
+    },
+    {
+      "id": 105,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের কোন জেলার ওপর দিয়ে কর্কটক্রান্তি রেখা গিয়েছে?",
+      "options": ["A. নদীয়া", "B. মুর্শিদাবাদ", "C. কলকাতা", "D. জলপাইগুড়ি"],
+      "answer": "A",
+      "explanation": "কর্কটক্রান্তি রেখা নদীয়া, পূর্ব ও পশ্চিম বর্ধমান, বাঁকুড়া ও পুরুলিয়া জেলার ওপর দিয়ে গিয়েছে।"
+    },
+    {
+      "id": 106,
+      "section": "Geography of India & WB",
+      "question": "ভারতের ম্যানচেস্টার কাকে বলা হয়?",
+      "options": ["A. মুম্বাই", "B. কানপুর", "C. আমেদাবাদ", "D. কোয়েম্বাটোর"],
+      "answer": "C",
+      "explanation": "বস্ত্রশিল্পের উন্নতির কারণে গুজরাটের আমেদাবাদ শহরকে এই নাম দেওয়া হয়েছে।"
+    },
+    {
+      "id": 107,
+      "section": "Geography of India & WB",
+      "question": "ভারতের দীর্ঘতম নদী কোনটি?",
+      "options": ["A. ব্রহ্মপুত্র", "B. সিন্ধু", "C. গঙ্গা", "D. গোদাবরী"],
+      "answer": "C",
+      "explanation": "গঙ্গা ভারতের দীর্ঘতম নদী যার দৈর্ঘ্য প্রায় ২৫২৫ কিমি।"
+    },
+    {
+      "id": 108,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের সুন্দরবনকে কত সালে 'ওয়ার্ল্ড হেরিটেজ সাইট' ঘোষণা করা হয়?",
+      "options": ["A. ১৯৮৫", "B. ১৯৮৭", "C. ১৯৮৯", "D. ২০০১"],
+      "answer": "B",
+      "explanation": "ম্যানগ্রোভ অরণ্য ও জীববৈচিত্র্যের জন্য ইউনেস্কো ১৯৮৭ সালে সুন্দরবনকে এই মর্যাদা দেয়।"
+    },
+    {
+      "id": 109,
+      "section": "Geography of India & WB",
+      "question": "ভারতের প্রথম বহুমুখী নদী উপত্যকা প্রকল্প কোনটি?",
+      "options": ["A. ভাকরা নাঙ্গাল", "B. হীরাকুদ", "C. দামোদর ভ্যালি কর্পোরেশন (DVC)", "D. তেহরি"],
+      "answer": "C",
+      "explanation": "১৯৪৮ সালে স্বাধীন ভারতের প্রথম বহুমুখী নদী প্রকল্প হিসেবে DVC গড়ে ওঠে।"
+    },
+    {
+      "id": 110,
+      "section": "Geography of India & WB",
+      "question": "ভারতের কোন রাজ্যে জনঘনত্ব সর্বাধিক (২০১১ সেন্সাস অনুযায়ী)?",
+      "options": ["A. পশ্চিমবঙ্গ", "B. বিহার", "C. উত্তরপ্রদেশ", "D. কেরালা"],
+      "answer": "B",
+      "explanation": "২০১১ সালের সেন্সাস অনুযায়ী বিহারের জনঘনত্ব ভারতের মধ্যে সর্বোচ্চ (১১০৬ জন/বর্গকিমি)।"
+    },
+    {
+      "id": 111,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের বৃহত্তম জেলা কোনটি (আয়তনের বিচারে)?",
+      "options": ["A. উত্তর ২৪ পরগনা", "B. দক্ষিণ ২৪ পরগনা", "C. পশ্চিম মেদিনীপুর", "D. বর্ধমান"],
+      "answer": "B",
+      "explanation": "দক্ষিণ ২৪ পরগনা পশ্চিমবঙ্গের আয়তনে বৃহত্তম জেলা।"
+    },
+    {
+      "id": 112,
+      "section": "Geography of India & WB",
+      "question": "নাগার্জুন সাগর বাঁধ কোন নদীর ওপর নির্মিত?",
+      "options": ["A. কাবেরী", "B. কৃষ্ণা", "C. গোদাবরী", "D. নর্মদা"],
+      "answer": "B",
+      "explanation": "অন্ধ্রপ্রদেশ ও তেলেঙ্গানা সীমান্তে কৃষ্ণা নদীর ওপর এই বহুমুখী বাঁধটি অবস্থিত।"
+    },
+    {
+      "id": 113,
+      "section": "Geography of India & WB",
+      "question": "ভারতের কোন রাজ্যকে 'মসলার বাগান' বলা হয়?",
+      "options": ["A. তামিলনাড়ু", "B. কর্ণাটক", "C. কেরালা", "D. অন্ধ্রপ্রদেশ"],
+      "answer": "C",
+      "explanation": "সর্বাধিক মসলা উৎপাদনের জন্য কেরালাকে ভারতের মসলার বাগান বলা হয়।"
+    },
+    {
+      "id": 114,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের ধানের ভাণ্ডার বলা হয় কোন জেলাকে?",
+      "options": ["A. বীরভূম", "B. পূর্ব বর্ধমান", "C. মুর্শিদাবাদ", "D. নদীয়া"],
+      "answer": "B",
+      "explanation": "প্রচুর ধান উৎপাদনের জন্য পূর্ব বর্ধমানকে বাংলার শস্যভাণ্ডার বলা হয়।"
+    },
+    {
+      "id": 115,
+      "section": "Geography of India & WB",
+      "question": "ভারতের বৃহত্তম মিষ্টি জলের হ্রদ কোনটি?",
+      "options": ["A. চিল্কা", "B. উলার", "C. লোকটাক", "D. ডাল হ্রদ"],
+      "answer": "B",
+      "explanation": "কাশ্মীরের উলার হ্রদ ভারতের বৃহত্তম মিষ্টি জলের হ্রদ।"
+    },
+    {
+      "id": 116,
+      "section": "Geography of India & WB",
+      "question": "কোন প্রণালী ভারত ও শ্রীলঙ্কাকে পৃথক করেছে?",
+      "options": ["A. ১০ ডিগ্রি চ্যানেল", "B. পক প্রণালী", "C. ডানকান প্যাসেজ", "D. মালাক্কা প্রণালী"],
+      "answer": "B",
+      "explanation": "পক প্রণালী ও মান্নার উপসাগর ভারত ও শ্রীলঙ্কাকে আলাদা করেছে।"
+    },
+    {
+      "id": 117,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের কোন শহরকে 'উত্তর-পূর্ব ভারতের প্রবেশদ্বার' বলা হয়?",
+      "options": ["A. দার্জিলিং", "B. শিলিগুড়ি", "C. আলিপুরদুয়ার", "D. জলপাইগুড়ি"],
+      "answer": "B",
+      "explanation": "শিলিগুড়ি হলো উত্তর-পূর্ব ভারতে যাওয়ার প্রধান ট্রানজিট পয়েন্ট।"
+    },
+    {
+      "id": 118,
+      "section": "Geography of India & WB",
+      "question": "ভারতের প্রাচীনতম পর্বতশ্রেণী কোনটি?",
+      "options": ["A. হিমালয়", "B. আরাবল্লী", "C. বিন্ধ্য", "D. সাতপুরা"],
+      "answer": "B",
+      "explanation": "আরাবল্লী ভারতের তথা বিশ্বের অন্যতম প্রাচীন ভঙ্গিল পর্বত।"
+    },
+    {
+      "id": 119,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের চিত্তরঞ্জন কোন শিল্পের জন্য বিখ্যাত?",
+      "options": ["A. ইস্পাত", "B. রেল ইঞ্জিন", "C. সার", "D. পাট"],
+      "answer": "B",
+      "explanation": "চিত্তরঞ্জন লোকোমোটিভ ওয়ার্কস রেল ইঞ্জিন তৈরির জন্য বিখ্যাত।"
+    },
+    {
+      "id": 120,
+      "section": "Geography of India & WB",
+      "question": "ভারতের কোন রাজ্যে সর্বাধিক বনাঞ্চল আছে (আয়তনের বিচারে)?",
+      "options": ["A. অরুণাচল প্রদেশ", "B. মধ্যপ্রদেশ", "C. মিজোরাম", "D. ছত্তিশগড়"],
+      "answer": "B",
+      "explanation": "আয়তনের হিসেবে মধ্যপ্রদেশে ভারতের সবচেয়ে বড় জঙ্গল এলাকা রয়েছে।"
+    },
+    {
+      "id": 121,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের শুষ্কতম জেলা কোনটি?",
+      "options": ["A. পুরুলিয়া", "B. বাঁকুড়া", "C. বীরভূম", "D. মেদিনীপুর"],
+      "answer": "A",
+      "explanation": "পুরুলিয়া জেলায় পশ্চিমবঙ্গের সবচেয়ে কম বৃষ্টিপাত হয়।"
+    },
+    {
+      "id": 122,
+      "section": "Geography of India & WB",
+      "question": "হীরাকুদ বাঁধ কোন নদীর ওপর অবস্থিত?",
+      "options": ["A. কৃষ্ণা", "B. কাবেরী", "C. মহানদী", "D. নর্মদা"],
+      "answer": "C",
+      "explanation": "ওড়িশার মহানদীর ওপর বিশ্বের অন্যতম দীর্ঘ এই বাঁধটি অবস্থিত।"
+    },
+    {
+      "id": 123,
+      "section": "Geography of India & WB",
+      "question": "ভারতের প্রথম পারমাণবিক বিদ্যুৎ কেন্দ্রটি কোথায় স্থাপিত হয়?",
+      "options": ["A. কালপক্কম", "B. নরোরা", "C. তারাপুর", "D. কাইগা"],
+      "answer": "C",
+      "explanation": "১৯৬৯ সালে মহারাষ্ট্রের তারাপুরে ভারতের প্রথম পারমাণবিক কেন্দ্র গড়ে ওঠে।"
+    },
+    {
+      "id": 124,
+      "section": "Geography of India & WB",
+      "question": "পশ্চিমবঙ্গের তরাই অঞ্চলের প্রধান নদী কোনটি?",
+      "options": ["A. রূপনারায়ণ", "B. তিস্তা", "C. দামোদর", "D. কাসাই"],
+      "answer": "B",
+      "explanation": "তিস্তাকে উত্তরবঙ্গের বা তরাই অঞ্চলের প্রধান নদী ও 'ত্রাসের নদী' বলা হয়।"
+    },
+    {
+      "id": 125,
+      "section": "Geography of India & WB",
+      "question": "ভারতের কোন রাজ্যে শিক্ষিতের হার সর্বাধিক?",
+      "options": ["A. মিজোরাম", "B. কেরালা", "C. পশ্চিমবঙ্গ", "D. গোয়া"],
+      "answer": "B",
+      "explanation": "২০১১ সালের সেন্সাস অনুযায়ী কেরালা ভারতের সর্বাধিক শিক্ষিত রাজ্য।"
+    },
+    {
+      "id": 126,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতীয় সংবিধান কত তারিখে গৃহীত হয়েছিল?",
+      "options": ["A. ২৬শে জানুয়ারি ১৯৫০", "B. ২৬শে নভেম্বর ১৯৪৯", "C. ১৫ই আগস্ট ১৯৪৭", "D. ২৬শে জানুয়ারি ১৯৪৯"],
+      "answer": "B",
+      "explanation": "১৯৪৯ সালের ২৬শে নভেম্বর গণপরিষদে সংবিধান গৃহীত হয়, কার্যকর হয় ১৯৫০-এর ২৬শে জানুয়ারি।"
+    },
+    {
+      "id": 127,
+      "section": "Indian Polity & Economy",
+      "question": "রাজ্যসভার চেয়ারম্যান কে হন?",
+      "options": ["A. রাষ্ট্রপতি", "B. উপ-রাষ্ট্রপতি", "C. প্রধানমন্ত্রী", "D. স্পিকার"],
+      "answer": "B",
+      "explanation": "ভারতের উপ-রাষ্ট্রপতি পদাধিকার বলে রাজ্যসভার চেয়ারম্যান হিসেবে দায়িত্ব পালন করেন।"
+    },
+    {
+      "id": 128,
+      "section": "Indian Polity & Economy",
+      "question": "সংবিধানের কত নম্বর ধারাকে ডঃ আম্বেদকর 'Heart and Soul' বলেছিলেন?",
+      "options": ["A. ১৯ নম্বর", "B. ২১ নম্বর", "C. ৩২ নম্বর", "D. ৪৪ নম্বর"],
+      "answer": "C",
+      "explanation": "৩২ নম্বর ধারা (সাংবিধানিক প্রতিবিধানের অধিকার)-কে তিনি সংবিধানের আত্মা বলেছেন।"
+    },
+    {
+      "id": 129,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের পরিকল্পনা কমিশনের বর্তমান নাম কী?",
+      "options": ["A. নীতি আয়োগ (NITI Aayog)", "B. যোজনা বোর্ড", "C. ন্যাশনাল প্ল্যানিং কাউন্সিল", "D. ইন্ডিয়া ডেভেলপমেন্ট বোর্ড"],
+      "answer": "A",
+      "explanation": "১লা জানুয়ারি ২০১৫ সালে পরিকল্পনা কমিশনের বদলে নীতি আয়োগ গঠিত হয়।"
+    },
+    {
+      "id": 130,
+      "section": "Indian Polity & Economy",
+      "question": "পঞ্চায়েতি রাজ ব্যবস্থা প্রথম কোন রাজ্যে শুরু হয়েছিল?",
+      "options": ["A. পশ্চিমবঙ্গ", "B. রাজস্থান", "C. অন্ধ্রপ্রদেশ", "D. গুজরাট"],
+      "answer": "B",
+      "explanation": "১৯৫৯ সালে রাজস্থানের নাগৌর জেলায় প্রথম ত্রিস্তর পঞ্চায়েতি রাজ শুরু হয়।"
+    },
+    {
+      "id": 131,
+      "section": "Indian Polity & Economy",
+      "question": "সংবিধানের কোন সংশোধনীকে 'ক্ষুদ্র সংবিধান' বলা হয়?",
+      "options": ["A. ৪৪তম", "B. ৪২তম", "C. ৭৩তম", "D. ৮৬তম"],
+      "answer": "B",
+      "explanation": "১৯৭৬ সালের ৪২তম সংশোধনীতে সংবিধানে ব্যাপক পরিবর্তন আনা হয় বলে একে Mini-Constitution বলে।"
+    },
+    {
+      "id": 132,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের রিজার্ভ ব্যাংক (RBI) কত সালে জাতীয়করণ করা হয়?",
+      "options": ["A. ১৯৩৫", "B. ১৯৪৯", "C. ১৯৫০", "D. ১৯৫৫"],
+      "answer": "B",
+      "explanation": "RBI ১৯৩৫ সালে প্রতিষ্ঠিত হলেও ১৯৪৯ সালে এটি সরকারি মালিকানাধীন হয়।"
+    },
+    {
+      "id": 133,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতীয় সংবিধানের মৌলিক অধিকার কোন দেশ থেকে নেওয়া হয়েছে?",
+      "options": ["A. ব্রিটেন", "B. মার্কিন যুক্তরাষ্ট্র", "C. আয়ারল্যান্ড", "D. রাশিয়া"],
+      "answer": "B",
+      "explanation": "মার্কিন সংবিধানের Bill of Rights-এর আদলে ভারতীয় সংবিধানে মৌলিক অধিকার যুক্ত হয়েছে।"
+    },
+    {
+      "id": 134,
+      "section": "Indian Polity & Economy",
+      "question": "অর্থ বিল (Money Bill) কেবলমাত্র কোথায় পেশ করা যায়?",
+      "options": ["A. রাজ্যসভা", "B. লোকসভা", "C. বিধান পরিষদ", "D. সুপ্রিম কোর্ট"],
+      "answer": "B",
+      "explanation": "রাষ্ট্রপতির পূর্বানুমতি নিয়ে কেবলমাত্র লোকসভায় অর্থ বিল পেশ করা সম্ভব।"
+    },
+    {
+      "id": 135,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতে GST কত সালে চালু হয়?",
+      "options": ["A. ১লা জানুয়ারি ২০১৬", "B. ১লা জুলাই ২০১৭", "C. ১লা এপ্রিল ২০১৭", "D. ১লা অক্টোবর ২০১৮"],
+      "answer": "B",
+      "explanation": "২০১৭ সালের ১লা জুলাই থেকে দেশজুড়ে অভিন্ন কর ব্যবস্থা GST চালু হয়েছে।"
+    },
+    {
+      "id": 136,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের নির্বাচন কমিশনারদের কে নিয়োগ করেন?",
+      "options": ["A. রাষ্ট্রপতি", "B. প্রধানমন্ত্রী", "C. স্পিকার", "D. প্রধান বিচারপতি"],
+      "answer": "A",
+      "explanation": "রাষ্ট্রপতি ভারতের মুখ্য নির্বাচন কমিশনার ও অন্যান্য কমিশনারদের নিয়োগ করেন।"
+    },
+    {
+      "id": 137,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের জাতীয় আয় (National Income) প্রথম কে গণনা করেছিলেন?",
+      "options": ["A. প্রশান্ত চন্দ্র মহলানবিশ", "B. দাদাভাই নওরোজি", "C. জওহরলাল নেহরু", "D. ভি কে আর ভি রাও"],
+      "answer": "B",
+      "explanation": "১৮৬৭-৬৮ সালে দাদাভাই নওরোজি তাঁর বইতে প্রথমবার জাতীয় আয় গণনার চেষ্টা করেন।"
+    },
+    {
+      "id": 138,
+      "section": "Indian Polity & Economy",
+      "question": "সুপ্রিম কোর্টের বিচারপতিদের অবসরের বয়স কত?",
+      "options": ["A. ৬০ বছর", "B. ৬২ বছর", "C. ৬৫ বছর", "D. ৭০ বছর"],
+      "answer": "C",
+      "explanation": "সুপ্রিম কোর্টের বিচারপতিরা ৬৫ বছর বয়স পর্যন্ত পদে থাকতে পারেন।"
+    },
+    {
+      "id": 139,
+      "section": "Indian Polity & Economy",
+      "question": "সংবিধানের কত নম্বর ধারায় অস্পৃশ্যতা দূরীকরণ (Abolition of Untouchability) বর্ণিত হয়েছে?",
+      "options": ["A. ১৪ নম্বর", "B. ১৫ নম্বর", "C. ১৭ নম্বর", "D. ১৯ নম্বর"],
+      "answer": "C",
+      "explanation": "মৌলিক অধিকারের ১৭ নম্বর ধারায় অস্পৃশ্যতা আচরণ দণ্ডনীয় অপরাধ বলে ঘোষণা করা হয়েছে।"
+    },
+    {
+      "id": 140,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের কোনো রাজ্যের সীমানা পরিবর্তনের ক্ষমতা কার আছে?",
+      "options": ["A. রাষ্ট্রপতি", "B. প্রধানমন্ত্রী", "C. সংসদ (Parliament)", "D. রাজ্য বিধানসভা"],
+      "answer": "C",
+      "explanation": "সংবিধানের ৩ নম্বর ধারা অনুযায়ী সংসদ নতুন রাজ্য গঠন বা সীমানা পরিবর্তন করতে পারে।"
+    },
+    {
+      "id": 141,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতে আয়কর (Income Tax) হলো এক প্রকারের —",
+      "options": ["A. পরোক্ষ কর", "B. প্রত্যক্ষ ও প্রগতিশীল কর", "C. প্রত্যক্ষ ও সমানুপাতিক কর", "D. কোনোটিই নয়"],
+      "answer": "B",
+      "explanation": "আয়কর সরাসরি ব্যক্তি প্রদান করে (প্রত্যক্ষ) এবং আয় বাড়লে করের হার বাড়ে (প্রগতিশীল)।"
+    },
+    {
+      "id": 142,
+      "section": "Indian Polity & Economy",
+      "question": "সংবিধানের কত নম্বর ধারায় রাষ্ট্রপতির শাসন জারি করা যায়?",
+      "options": ["A. ৩৫২ নম্বর", "B. ৩৫৬ নম্বর", "C. ৩৬০ নম্বর", "D. ৩৬৮ নম্বর"],
+      "answer": "B",
+      "explanation": "৩৫৬ নম্বর ধারা অনুযায়ী কোনো রাজ্যে সাংবিধানিক অচলাবস্থা তৈরি হলে রাষ্ট্রপতি শাসন জারি হয়।"
+    },
+    {
+      "id": 143,
+      "section": "Indian Polity & Economy",
+      "question": "নীতি আয়োগের (NITI Aayog) চেয়ারম্যান কে হন?",
+      "options": ["A. রাষ্ট্রপতি", "B. প্রধানমন্ত্রী", "C. অর্থমন্ত্রী", "D. উপ-রাষ্ট্রপতি"],
+      "answer": "B",
+      "explanation": "ভারতের প্রধানমন্ত্রী পদাধিকার বলে নীতি আয়োগের চেয়ারম্যান হিসেবে দায়িত্ব পালন করেন।"
+    },
+    {
+      "id": 144,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতে 'নীল বিপ্লব' (Blue Revolution) কোনটির সাথে সম্পর্কিত?",
+      "options": ["A. নীল চাষ", "B. মহাকাশ গবেষণা", "C. মাছ উৎপাদন", "D. দুগ্ধ উৎপাদন"],
+      "answer": "C",
+      "explanation": "মাছ ও জলজ প্রাণীর উৎপাদন বৃদ্ধিকে নীল বিপ্লব বলা হয়।"
+    },
+    {
+      "id": 145,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের প্রথম পঞ্চবার্ষিকী পরিকল্পনা কোন মডেলের ওপর ভিত্তি করে তৈরি হয়েছিল?",
+      "options": ["A. মহলানবিশ মডেল", "B. হ্যারড-ডোমার মডেল", "C. গান্ধী মডেল", "D. বিশ্বেশ্বররায়া মডেল"],
+      "answer": "B",
+      "explanation": "১৯৫১-৫৬ সালের প্রথম পরিকল্পনাটি কৃষির ওপর জোর দিয়েছিল এবং এই মডেল অনুসরণ করেছিল।"
+    },
+    {
+      "id": 146,
+      "section": "Indian Polity & Economy",
+      "question": "সংবিধানের কত নম্বর অনুচ্ছেদে 'অসাম্য দূরীকরণ' ও 'আইনের চোখে সাম্য' বর্ণিত?",
+      "options": ["A. ১৪ নম্বর", "B. ১৫ নম্বর", "C. ১৬ নম্বর", "D. ২১ নম্বর"],
+      "answer": "A",
+      "explanation": "অনুচ্ছেদ ১৪ অনুযায়ী রাষ্ট্র কাউকে আইনের চোখে সমান অধিকার থেকে বঞ্চিত করবে না।"
+    },
+    {
+      "id": 147,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতে শেয়ার বাজার নিয়ন্ত্রণকারী সংস্থা কোনটি?",
+      "options": ["A. RBI", "B. SEBI", "C. IRDA", "D. NABARD"],
+      "answer": "B",
+      "explanation": "SEBI (Securities and Exchange Board of India) ভারতের পুঁজিবাজার নিয়ন্ত্রণ করে।"
+    },
+    {
+      "id": 148,
+      "section": "Indian Polity & Economy",
+      "question": "কোন সংশোধনী অনুযায়ী ভোটাধিকারের বয়স ২১ থেকে কমিয়ে ১৮ করা হয়?",
+      "options": ["A. ৪২তম", "B. ৪৪তম", "C. ৬১তম", "D. ৭৩তম"],
+      "answer": "C",
+      "explanation": "১৯৮৯ সালে ৬১তম সংবিধান সংশোধনীর মাধ্যমে ভোটের বয়স কমানো হয়।"
+    },
+    {
+      "id": 149,
+      "section": "Indian Polity & Economy",
+      "question": "ভারতের অর্থনৈতিক সংস্কার বা 'নতুন অর্থনৈতিক নীতি' কত সালে চালু হয়?",
+      "options": ["A. ১৯৮০", "B. ১৯৯১", "C. ২০০১", "D. ১৯৫১"],
+      "answer": "B",
+      "explanation": "১৯৯১ সালে নরসিমা রাও সরকারে মনমোহন সিং অর্থমন্ত্রী থাকাকালীন এটি চালু হয়।"
+    },
+    {
+      "id": 150,
+      "section": "Indian Polity & Economy",
+      "question": "মৌলিক অধিকারের অভিভাবক কাকে বলা হয়?",
+      "options": ["A. সংসদ", "B. রাষ্ট্রপতি", "C. বিচারবিভাগ (সুপ্রিম কোর্ট ও হাইকোর্ট)", "D. প্রধানমন্ত্রী"],
+      "answer": "C",
+      "explanation": "নাগরিকের মৌলিক অধিকার লঙ্ঘিত হলে আদালতের মাধ্যমে তা বলবৎ করা যায়।"
+    },
+    {
+      "id": 151,
+      "section": "Indian National Movement",
+      "question": "ভারতীয় জাতীয় কংগ্রেসের প্রথম অধিবেশন কোথায় হয়েছিল?",
+      "options": ["A. কলকাতা", "B. বোম্বে", "C. মাদ্রাজ", "D. এলাহাবাদ"],
+      "answer": "B",
+      "explanation": "১৮৮৫ সালে বোম্বের গোকুলদাস তেজপাল সংস্কৃত কলেজে প্রথম অধিবেশন হয়।"
+    },
+    {
+      "id": 152,
+      "section": "Indian National Movement",
+      "question": "'স্বরাজ আমার জন্মগত অধিকার' — উক্তিটি কার?",
+      "options": ["A. লালা লাজপত রায়", "B. বিপিনচন্দ্র পাল", "C. বালগঙ্গাধর তিলক", "D. অরবিন্দ ঘোষ"],
+      "answer": "C",
+      "explanation": "তিলক এই বিখ্যাত স্লোগানটি দিয়েছিলেন এবং তিনি চরমপন্থী আন্দোলনের নেতা ছিলেন।"
+    },
+    {
+      "id": 153,
+      "section": "Indian National Movement",
+      "question": "মহাত্মা গান্ধী দক্ষিণ আফ্রিকা থেকে ভারতে কত সালে ফিরে আসেন?",
+      "options": ["A. ১৯১১", "B. ১৯১৩", "C. ১৯১৫", "D. ১৯১৭"],
+      "answer": "C",
+      "explanation": "১৯১৫ সালের ৯ই জানুয়ারি গান্ধীজি ফিরে আসেন (দিনটি প্রবাসী ভারতীয় দিবস)।"
+    },
+    {
+      "id": 154,
+      "section": "Indian National Movement",
+      "question": "বঙ্গভঙ্গ (Partition of Bengal) কবে রদ করা হয়?",
+      "options": ["A. ১৯০৫", "B. ১৯০৭", "C. ১৯১১", "D. ১৯১৯"],
+      "answer": "C",
+      "explanation": "১৯০৫ সালে লর্ড কার্জন এটি চালু করেন এবং ১৯১১ সালে লর্ড হার্ডিঞ্জ এটি রদ করেন।"
+    },
+    {
+      "id": 155,
+      "section": "Indian National Movement",
+      "question": "জালিয়ানওয়ালাবাগ হত্যাকাণ্ড কত সালে ঘটেছিল?",
+      "options": ["A. ১৯১৭", "B. ১৯১৮", "C. ১৯১৯", "D. ১৯২০"],
+      "answer": "C",
+      "explanation": "১৯১৯ সালের ১৩ই এপ্রিল অমৃতসরে এই মর্মান্তিক হত্যাকাণ্ড ঘটে।"
+    },
+    {
+      "id": 156,
+      "section": "Indian National Movement",
+      "question": "গান্ধীজির নেতৃত্বে প্রথম সত্যাগ্রহ আন্দোলন কোনটি?",
+      "options": ["A. খেদা সত্যাগ্রহ", "B. চম্পারণ সত্যাগ্রহ", "C. আইন অমান্য আন্দোলন", "D. রাওলাট সত্যাগ্রহ"],
+      "answer": "B",
+      "explanation": "১৯১৭ সালে বিহারের চম্পারণে নীলচাষীদের স্বপক্ষে গান্ধীজি প্রথম সত্যাগ্রহ শুরু করেন।"
+    },
+    {
+      "id": 157,
+      "section": "Indian National Movement",
+      "question": "অনুশীলন সমিতি কে গঠন করেন?",
+      "options": ["A. প্রমথনাথ মিত্র", "B. বারীন্দ্র ঘোষ", "C. যতীন দাস", "D. সূর্য সেন"],
+      "answer": "A",
+      "explanation": "১৯০২ সালে প্রমথনাথ মিত্র কলকাতায় অনুশীলন সমিতি গঠন করেন।"
+    },
+    {
+      "id": 158,
+      "section": "Indian National Movement",
+      "question": "আজাদ হিন্দ ফৌজ (INA) কার মস্তিষ্কপ্রসূত?",
+      "options": ["A. সুভাষচন্দ্র বসু", "B. রাসবিহারী বসু", "C. মোহন সিং", "D. নিরঞ্জন সিং গিল"],
+      "answer": "C",
+      "explanation": "ক্যাপ্টেন মোহন সিং প্রথম INA গঠনের পরিকল্পনা করেন, পরে সুভাষচন্দ্র একে শক্তিশালী করেন।"
+    },
+    {
+      "id": 159,
+      "section": "Indian National Movement",
+      "question": "রাওলাট আইন কত সালে পাস হয়?",
+      "options": ["A. ১৯১৯", "B. ১৯১৮", "C. ১৯২০", "D. ১৯২১"],
+      "answer": "A",
+      "explanation": "এই আইনের মাধ্যমে পুলিশকে বিনা বিচারে গ্রেফতার করার ক্ষমতা দেওয়া হয় (কালা কানুন)।"
+    },
+    {
+      "id": 160,
+      "section": "Indian National Movement",
+      "question": "ডান্ডি অভিযান (Salt March) কত সালে শুরু হয়েছিল?",
+      "options": ["A. ১৯২৮", "B. ১৯৩০", "C. ১৯৩২", "D. ১৯৩৪"],
+      "answer": "B",
+      "explanation": "গান্ধীজি ১২ই মার্চ ১৯৩০ সালে সবরমতী আশ্রম থেকে ডান্ডি অভিমুখে যাত্রা শুরু করেন।"
+    },
+    {
+      "id": 161,
+      "section": "Indian National Movement",
+      "question": "ভারতীয় জাতীয় কংগ্রেসের প্রথম মহিলা সভাপতি কে ছিলেন?",
+      "options": ["A. সরোজিনী নাইডু", "B. অ্যানি বেসান্ত", "C. নেলি সেনগুপ্ত", "D. কস্তুরবা গান্ধী"],
+      "answer": "B",
+      "explanation": "অ্যানি বেসান্ত ১৯১৭ সালের কলকাতা অধিবেশনে প্রথম মহিলা সভাপতি হন।"
+    },
+    {
+      "id": 162,
+      "section": "Indian National Movement",
+      "question": "গান্ধী-আরউইন চুক্তি কত সালে স্বাক্ষরিত হয়েছিল?",
+      "options": ["A. ১৯৩০", "B. ১৯৩১", "C. ১৯৩২", "D. ১৯৩৩"],
+      "answer": "B",
+      "explanation": "৫ই মার্চ ১৯৩১ সালে দ্বিতীয় গোলটেবিল বৈঠকে যোগ দেওয়ার শর্তে এই চুক্তি হয়।"
+    },
+    {
+      "id": 163,
+      "section": "Indian National Movement",
+      "question": "সাইমন কমিশন কত সালে ভারতে এসেছিল?",
+      "options": ["A. ১৯২৭", "B. ১৯২৮", "C. ১৯২৯", "D. ১৯৩০"],
+      "answer": "B",
+      "explanation": "কমিশন গঠিত হয় ১৯২৭-এ, কিন্তু ভারতে পৌঁছায় ১৯২৮ সালে।"
+    },
+    {
+      "id": 164,
+      "section": "Indian National Movement",
+      "question": "'করেঙ্গে ইয়া মরেঙ্গে' স্লোগানটি গান্ধীজি কোন আন্দোলনের সময় দিয়েছিলেন?",
+      "options": ["A. অসহযোগ আন্দোলন", "B. আইন অমান্য আন্দোলন", "C. ভারত ছাড়ো আন্দোলন", "D. খিলাফত আন্দোলন"],
+      "answer": "C",
+      "explanation": "১৯৪২ সালের ভারত ছাড়ো আন্দোলনের সময় মুম্বাইয়ের সভায় তিনি এই ডাক দেন।"
+    },
+    {
+      "id": 165,
+      "section": "Indian National Movement",
+      "question": "কবে 'আজাদ হিন্দ সরকার' প্রতিষ্ঠিত হয়েছিল?",
+      "options": ["A. ১৯৪২", "B. ১৯৪৩", "C. ১৯৪৪", "D. ১৯৪১"],
+      "answer": "B",
+      "explanation": "সুভাষচন্দ্র বসু ১৯৪৩ সালের ২১শে অক্টোবর সিঙ্গাপুরে এই সরকার গঠন করেন।"
+    },
+    {
+      "id": 166,
+      "section": "Indian National Movement",
+      "question": "ভারতের প্রথম ভাইসরয় কে ছিলেন?",
+      "options": ["A. লর্ড ডালহৌসি", "B. লর্ড ক্যানিং", "C. লর্ড কার্জন", "D. লর্ড মাউন্টব্যাটেন"],
+      "answer": "B",
+      "explanation": "১৮৫৮ সালের ভারত শাসন আইন অনুযায়ী লর্ড ক্যানিং ভারতের প্রথম ভাইসরয় হন।"
+    },
+    {
+      "id": 167,
+      "section": "Indian National Movement",
+      "question": "হরিপুরা কংগ্রেসের অধিবেশনে সভাপতি কে ছিলেন?",
+      "options": ["A. জওহরলাল নেহরু", "B. সুভাষচন্দ্র বসু", "C. জে বি কৃপালিনী", "D. মৌলানা আজাদ"],
+      "answer": "B",
+      "explanation": "১৯ ৩৮ সালে সুভাষচন্দ্র বসু প্রথমবার কংগ্রেসের সভাপতি নির্বাচিত হন।"
+    },
+    {
+      "id": 168,
+      "section": "Indian National Movement",
+      "question": "গদর পার্টি কে প্রতিষ্ঠা করেন?",
+      "options": ["A. লালা হরদয়াল", "B. ভগৎ সিং", "C. সুখদেব", "D. বি ডি সাভারকর"],
+      "answer": "A",
+      "explanation": "১৯১৩ সালে আমেরিকার সান ফ্রান্সিসকোতে লালা হরদয়াল গদর পার্টি গঠন করেন।"
+    },
+    {
+      "id": 169,
+      "section": "Indian National Movement",
+      "question": "ভারতের স্বাধীনতা লাভের সময় ব্রিটেনের প্রধানমন্ত্রী কে ছিলেন?",
+      "options": ["A. উইনস্টন চার্চিল", "B. ক্লিমেন্ট অ্যাটলি", "C. রামসে ম্যাকডোনাল্ড", "D. টনি ব্লেয়ার"],
+      "answer": "B",
+      "explanation": "লেবার পার্টির নেতা ক্লিমেন্ট অ্যাটলি ১৯৪৭ সালে ব্রিটিশ প্রধানমন্ত্রী ছিলেন।"
+    },
+    {
+      "id": 170,
+      "section": "Indian National Movement",
+      "question": "১৮৫৭ সালের মহাবিদ্রোহে কানপুর থেকে নেতৃত্ব দিয়েছিলেন কে?",
+      "options": ["A. নানা সাহেব", "B. রানী লক্ষ্মীবাঈ", "C. কুনওয়ার সিং", "D. বেগম হযরত মহল"],
+      "answer": "A",
+      "explanation": "নানা সাহেব ও তাঁর সেনাপতি তাঁতিয়া তোপি কানপুর থেকে বিদ্রোহ পরিচালনা করেন।"
+    },
+    {
+      "id": 171,
+      "section": "Indian National Movement",
+      "question": "চৌরিচৌরা ঘটনার পর গান্ধীজি কোন আন্দোলন প্রত্যাহার করেন?",
+      "options": ["A. অসহযোগ আন্দোলন", "B. আইন অমান্য আন্দোলন", "C. চম্পারণ সত্যাগ্রহ", "D. খেদা সত্যাগ্রহ"],
+      "answer": "A",
+      "explanation": "১৯২২ সালে হিংসার কারণে গান্ধীজি অসহযোগ আন্দোলন বন্ধ করে দেন।"
+    },
+    {
+      "id": 172,
+      "section": "Indian National Movement",
+      "question": "ক্যাবিনেট মিশন কত সালে ভারতে আসে?",
+      "options": ["A. ১৯৪২", "B. ১৯৪৫", "C. ১৯৪৬", "D. ১৯৪৭"],
+      "answer": "C",
+      "explanation": "পেথিক লরেন্স, স্ট্যাফোর্ড ক্রিপস ও এভি আলেকজান্ডার এই মিশনের সদস্য ছিলেন।"
+    },
+    {
+      "id": 173,
+      "section": "Indian National Movement",
+      "question": "গান্ধীজির রাজনৈতিক গুরু কে ছিলেন?",
+      "options": ["A. গোপালকৃষ্ণ গোখলে", "B. তিলক", "C. দাদাভাই নওরোজি", "D. মেহতা"],
+      "answer": "A",
+      "explanation": "গান্ধীজি গোপালকৃষ্ণ গোখলেকে তাঁর রাজনৈতিক মেন্টর হিসেবে মানতেন।"
+    },
+    {
+      "id": 174,
+      "section": "Indian National Movement",
+      "question": "লখনউ চুক্তি (১৯১৬) কাদের মধ্যে স্বাক্ষরিত হয়?",
+      "options": ["A. চরমপন্থী ও নরমপন্থী", "B. কংগ্রেস ও মুসলিম লীগ", "C. গান্ধী ও আম্বেদকর", "D. লীগ ও হিন্দু মহাসভা"],
+      "answer": "B",
+      "explanation": "অ্যাম্বিকা চরণ মজুমদারের সভাপতিত্বে কংগ্রেস ও মুসলিম লীগ ঐক্যবদ্ধ হয়।"
+    },
+    {
+      "id": 175,
+      "section": "Indian National Movement",
+      "question": "রবীন্দ্রনাথ ঠাকুর কেন 'নাইট' উপাধি ত্যাগ করেন?",
+      "options": ["A. বঙ্গভঙ্গ", "B. জালিয়ানওয়ালাবাগ হত্যাকাণ্ড", "C. রাওলাট আইন", "D. অসহযোগ আন্দোলন"],
+      "answer": "B",
+      "explanation": "১৯১৯ সালের গণহত্যার প্রতিবাদে তিনি ব্রিটিশ সরকারের দেওয়া নাইট উপাধি বর্জন করেন।"
+    },
+    {
+      "id": 176,
+      "section": "General Mental Ability",
+      "question": "ধারাটি সম্পূর্ণ করুন: 5, 11, 23, 47, ?",
+      "options": ["A. ৯১", "B. ৯৫", "C. ৯৯", "D. ১০৫"],
+      "answer": "B",
+      "explanation": "পদ্ধতি: (n x 2) + 1. তাই (47 x 2) + 1 = 95।"
+    },
+    {
+      "id": 177,
+      "section": "General Mental Ability",
+      "question": "যদি 'APPLE' কে 'ETTPI' লেখা হয়, তবে 'DELHI' কে কী লেখা হবে?",
+      "options": ["A. HIPLM", "B. HILPM", "C. HILMQ", "D. HIMLQ"],
+      "answer": "B",
+      "explanation": "প্রতিটি অক্ষর ৪ ধাপ করে এগিয়েছে।"
+    },
+    {
+      "id": 178,
+      "section": "General Mental Ability",
+      "question": "অরুণ বলল, 'এই মেয়েটি আমার মায়ের নাতির স্ত্রী'। অরুণের সাথে মেয়েটির সম্পর্ক কী?",
+      "options": ["A. বাবা", "B. শ্বশুর", "C. স্বামী", "D. কাকা"],
+      "answer": "B",
+      "explanation": "মায়ের নাতি মানে অরুণের ছেলে। ছেলের স্ত্রী অরুণের বৌমা। তাই অরুণ শ্বশুর।"
+    },
+    {
+      "id": 179,
+      "section": "General Mental Ability",
+      "question": "বেমানান শব্দটি খুঁজে বের করুন: সোনা, রুপো, প্ল্যাটিনাম, হীরা",
+      "options": ["A. সোনা", "B. প্ল্যাটিনাম", "C. হীরা", "D. রুপো"],
+      "answer": "C",
+      "explanation": "বাকি তিনটি ধাতু, কিন্তু হীরা একটি অধাতু (কার্বনের রূপভেদ)।"
+    },
+    {
+      "id": 180,
+      "section": "General Mental Ability",
+      "question": "একটি ঘড়িতে ৪:৩০ বাজে। ঘণ্টা ও মিনিটের কাঁটার মধ্যে কোণ কত?",
+      "options": ["A. ৩০°", "B. ৪৫°", "C. ৬০°", "D. ৭৫°"],
+      "answer": "B",
+      "explanation": "সূত্র: |৩০H - ১১/২M| = |৩০x৪ - ১১/২x৩০| = |১২০ - ১৬৫| = ৪৫°।"
+    },
+    {
+      "id": 181,
+      "section": "General Mental Ability",
+      "question": "ধারাটি সম্পূর্ণ করুন: Z, W, T, Q, ?",
+      "options": ["A. N", "B. O", "C. P", "D. M"],
+      "answer": "A",
+      "explanation": "প্রতিটি অক্ষর ৩ ধাপ করে পিছিয়ে যাচ্ছে।"
+    },
+    {
+      "id": 182,
+      "section": "General Mental Ability",
+      "question": "যদি ১৫ জন লোক একটি কাজ ২০ দিনে করে, তবে ১০ জন লোক কাজটি কত দিনে করবে?",
+      "options": ["A. ২৫ দিন", "B. ৩০ দিন", "C. ৩৫ দিন", "D. ৪০ দিন"],
+      "answer": "B",
+      "explanation": "লোকসংখ্যা ও সময় ব্যস্তানুপাতে থাকে। (১৫ x ২০) / ১০ = ৩০ দিন।"
+    },
+    {
+      "id": 183,
+      "section": "General Mental Ability",
+      "question": "১০০, ৯৯, ৯৫, ৮৬, ?",
+      "options": ["A. ৭০", "B. ৭৫", "C. ৬৬", "D. ৮৪"],
+      "answer": "A",
+      "explanation": "পার্থক্যগুলি হলো ১, ৪, ৯ (বর্গ সংখ্যা)। পরবর্তী পার্থক্য হবে ১৬। ৮৬ - ১৬ = ৭০।"
+    },
+    {
+      "id": 184,
+      "section": "General Mental Ability",
+      "question": "সূর্য : দিন :: চাঁদ : ?",
+      "options": ["A. তারা", "B. রাত", "C. আকাশ", "D. অন্ধকার"],
+      "answer": "B",
+      "explanation": "সূর্য দিনের প্রতীক, চাঁদ রাতের প্রতীক।"
+    },
+    {
+      "id": 185,
+      "section": "General Mental Ability",
+      "question": "যদি 1 + 2 = 5 এবং 3 + 4 = 25 হয়, তবে 5 + 6 = কত?",
+      "options": ["A. ১১", "B. ৬০", "C. ৬১", "D. ৩০"],
+      "answer": "C",
+      "explanation": "সূত্র: a^2 + b^2। তাই ৫^২ + ৬^২ = ২৫ + ৩৬ = ৬১।"
+    },
+    {
+      "id": 186,
+      "section": "General Mental Ability",
+      "question": "নিচের কোনটি মৌলিক সংখ্যা নয়?",
+      "options": ["A. ৪১", "B. ৪৩", "C. ৪৭", "D. ৪৯"],
+      "answer": "D",
+      "explanation": "৪৯ সংখ্যাটি ৭ দিয়ে বিভাজ্য (৭ x ৭ = ৪৯)।"
+    },
+    {
+      "id": 187,
+      "section": "General Mental Ability",
+      "question": "রামের বয়স শ্যামের দ্বিগুণ। তাদের বয়সের সমষ্টি ৩৬ হলে রামের বয়স কত?",
+      "options": ["A. ১২", "B. ২৪", "C. ১৮", "D. ২০"],
+      "answer": "B",
+      "explanation": " শ্যাম x, রাম ২x। ৩x = ৩৬, x = ১২। রাম = ২ x ১২ = ২৪।"
+    },
+    {
+      "id": 188,
+      "section": "General Mental Ability",
+      "question": "একটি ছাত্র উত্তর দিকে ৫ কিমি গিয়ে ডানদিকে ঘুরল এবং ৩ কিমি গেল। এখন সে শুরুর জায়গা থেকে কোন দিকে আছে?",
+      "options": ["A. উত্তর", "B. পূর্ব", "C. উত্তর-পূর্ব", "D. দক্ষিণ-পূর্ব"],
+      "answer": "C",
+      "explanation": "উত্তর ও পূর্বের সমন্বয়ে সে এখন উত্তর-পূর্ব দিকে আছে।"
+    },
+    {
+      "id": 189,
+      "section": "General Mental Ability",
+      "question": "বেমানান সংখ্যাটি বের করুন: ৮, ২৭, ৬৪, ১০০",
+      "options": ["A. ৮", "B. ২৭", "C. ৬৪", "D. ১০০"],
+      "answer": "D",
+      "explanation": "বাকিগুলি ঘন সংখ্যা (২^৩, ৩^৩, ৪^৩), কিন্তু ১০০ হলো ১০-এর বর্গ।"
+    },
+    {
+      "id": 190,
+      "section": "General Mental Ability",
+      "question": "আজ বুধবার হলে ৯১ দিন পর কী বার হবে?",
+      "options": ["A. বুধবার", "B. বৃহস্পতিবার", "C. শুক্রবার", "D. মঙ্গলবার"],
+      "answer": "A",
+      "explanation": "৯১ সংখ্যাটি ৭ দিয়ে পুরোপুরি বিভাজ্য (১৩ সপ্তাহ)। তাই একই বার ফিরে আসবে।"
+    },
+    {
+      "id": 191,
+      "section": "General Mental Ability",
+      "question": "এক ব্যক্তি ১০০০ টাকার জিনিস ২০% ক্ষতিতে বিক্রি করল। বিক্রয়মূল্য কত?",
+      "options": ["A. ৮০০ টাকা", "B. ৯০০ টাকা", "C. ৮৫০ টাকা", "D. ৭০০ টাকা"],
+      "answer": "A",
+      "explanation": "১০০০ - (১০০০-এর ২০%) = ১০০০ - ২০০ = ৮০০ টাকা।"
+    },
+    {
+      "id": 192,
+      "section": "General Mental Ability",
+      "question": "নিচের শব্দগুলিকে অর্থ অনুযায়ী সাজান: ১. পাতা ২. ফল ৩. বীজ ৪. ফুল ৫. গাছ",
+      "options": ["A. ৩, ৫, ১, ৪, ২", "B. ৩, ১, ৫, ৪, ২", "C. ৫, ৩, ১, ২, ৪", "D. ১, ৩, ৪, ৫, ২"],
+      "answer": "A",
+      "explanation": "ক্রম: বীজ -> গাছ -> পাতা -> ফুল -> ফল।"
+    },
+    {
+      "id": 193,
+      "section": "General Mental Ability",
+      "question": "যদি A=2, B=4 হয়, তবে CAT= কত?",
+      "options": ["A. ২৪", "B. ৪৮", "C. ৪৬", "D. ৫০"],
+      "answer": "B",
+      "explanation": "প্রতিটি অক্ষরের অবস্থানের মানের দ্বিগুণ: (৩+১+২০) x ২ = ২৪ x ২ = ৪৮।"
+    },
+    {
+      "id": 194,
+      "section": "General Mental Ability",
+      "question": "১ থেকে ৫০-এর মধ্যে কতগুলি মৌলিক সংখ্যা আছে?",
+      "options": ["A. ১২টি", "B. ১৫টি", "C. ২০টি", "D. ১০টি"],
+      "answer": "B",
+      "explanation": "সংখ্যাগুলি হলো: ২, ৩, ৫, ৭, ১১, ১৩, ১৭, ১৯, ২৩, ২৯, ৩১, ৩৭, ৪১, ৪৩, ৪৭।"
+    },
+    {
+      "id": 195,
+      "section": "General Mental Ability",
+      "question": "নিচের কোনটি লিপ ইয়ার নয়?",
+      "options": ["A. ২০০০", "B. ২৪০০", "C. ১৮০০", "D. ২০১৬"],
+      "answer": "C",
+      "explanation": "শতাব্দী বছরগুলো ৪০০ দিয়ে বিভাজ্য না হলে তা লিপ ইয়ার হয় না।"
+    },
+    {
+      "id": 196,
+      "section": "General Mental Ability",
+      "question": "যদি '+' মানে 'x' এবং 'x' মানে '-' হয়, তবে 5 + 4 x 10 = কত?",
+      "options": ["A. ১০", "B. ২০", "C. ৩০", "D. ৫০"],
+      "answer": "A",
+      "explanation": "৫ x ৪ - ১০ = ২০ - ১০ = ১০।"
+    },
+    {
+      "id": 197,
+      "section": "General Mental Ability",
+      "question": "১০ জন বালকের গড় বয়স ১২। নতুন একজন আসায় গড় ১ বাড়ল। নতুনের বয়স কত?",
+      "options": ["A. ১২", "B. ১৩", "C. ২৩", "D. ২০"],
+      "answer": "C",
+      "explanation": "আগে মোট ১২০। এখন ১১ জনের গড় ১৩ হলে মোট ১৪৩। ১৪৩ - ১২০ = ২৩।"
+    },
+    {
+      "id": 198,
+      "section": "General Mental Ability",
+      "question": "একটি ছবির দিকে তাকিয়ে রাম বলল, 'ওর বাবা হলো আমার বাবার একমাত্র ছেলে'। ছবিতে থাকা ব্যক্তি রামের কে?",
+      "options": ["A. রাম নিজে", "B. রামের ছেলে", "C. রামের ভাই", "D. রামের বাবা"],
+      "answer": "B",
+      "explanation": "রামের বাবার একমাত্র ছেলে হলো রাম নিজে। তাই ছবির ব্যক্তির বাবা হলো রাম।"
+    },
+    {
+      "id": 199,
+      "section": "General Mental Ability",
+      "question": "যদি 'জল' কে 'বাতাস' বলা হয়, 'বাতাস' কে 'আগুন' বলা হয়, তবে আমরা কী পান করি?",
+      "options": ["A. জল", "B. বাতাস", "C. আগুন", "D. মাটি"],
+      "answer": "B",
+      "explanation": "আমরা জল পান করি, কিন্তু এখানে জলকে বাতাস বলা হয়েছে।"
+    },
+    {
+      "id": 200,
+      "section": "General Mental Ability",
+      "question": "একটি সারিতে ৪০ জন ছাত্র আছে। রামের স্থান সামনে থেকে ১৫তম। শেষ থেকে তার স্থান কততম?",
+      "options": ["A. ২৫তম", "B. ২৬তম", "C. ২৪তম", "D. ২৭তম"],
+      "answer": "B",
+      "explanation": "সূত্র: (মোট - অবস্থান) + ১ = (৪০ - ১৫) + ১ = ২৬।"
+    }
+  ]
+}

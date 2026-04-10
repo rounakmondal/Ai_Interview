@@ -1,0 +1,175 @@
+{
+  "papers": [
+    {
+      "id": "wbcs_mock_testEight",
+      "title": "WBCS Prelims Mock Test Eight",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Eight",
+      "path": "mock_test/wbcs/wbcs_mock_testEight.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Select the correct synonym for 'Fastidious':",
+        "options": [
+          "Careless",
+          "Choosy",
+          "Rapid",
+          "Indifferent"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testFive",
+      "title": "WBCS Prelims Mock Test Five",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Five",
+      "path": "mock_test/wbcs/wbcs_mock_testFive.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the correct synonym for 'Laconic':",
+        "options": [
+          "Talkative",
+          "Brief",
+          "Angry",
+          "Wealthy"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testFour",
+      "title": "WBCS Prelims Mock Test Four",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Four",
+      "path": "mock_test/wbcs/wbcs_mock_testFour.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the correct synonym for 'Obsequious':",
+        "options": [
+          "Defiant",
+          "Servile",
+          "Honest",
+          "Stubborn"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testNine",
+      "title": "WBCS Prelims Mock Test Nine",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Nine",
+      "path": "mock_test/wbcs/wbcs_mock_testNine.json",
+      "questions": 10,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "পলাশীর যুদ্ধ কত সালে হয়েছিল?",
+        "options": [
+          "১৭৫৭",
+          "১৭৬৪",
+          "১৮৫৭",
+          "১৫২৬"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "wbcs_mock_testOne",
+      "title": "WBCS Prelims Mock Test One",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট One",
+      "path": "mock_test/wbcs/wbcs_mock_testOne.json",
+      "questions": 199,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the word nearest in meaning to 'Emancipate':",
+        "options": [
+          "Restrict",
+          "Liberate",
+          "Correct",
+          "Oppress"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testSeven",
+      "title": "WBCS Prelims Mock Test Seven",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Seven",
+      "path": "mock_test/wbcs/wbcs_mock_testSeven.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "হরপ্পা সভ্যতার কোন কেন্দ্রে প্রথম ধান চাষের প্রমাণ পাওয়া গেছে?",
+        "options": [
+          "কালীবঙ্গান",
+          "লোথাল",
+          "বানওয়ালি",
+          "রোপার"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testSix",
+      "title": "WBCS Prelims Mock Test Six",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Six",
+      "path": "mock_test/wbcs/wbcs_mock_testSix.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the correct synonym for 'Loquacious':",
+        "options": [
+          "Silent",
+          "Talkative",
+          "Angry",
+          "Sad"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testThree",
+      "title": "WBCS Prelims Mock Test Three",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Three",
+      "path": "mock_test/wbcs/wbcs_mock_testThree.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the most appropriate meaning of the idiom: 'To throw down the gauntlet'",
+        "options": [
+          "To accept defeat",
+          "To issue a challenge",
+          "To stop working",
+          "To be humiliated"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testTwo",
+      "title": "WBCS Prelims Mock Test Two",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Two",
+      "path": "mock_test/wbcs/wbcs_mock_testTwo.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Select the correct synonym for 'Vigilant':",
+        "options": [
+          "Careless",
+          "Watchful",
+          "Innocent",
+          "Lazy"
+        ],
+        "answer": "B"
+      }
+    }
+  ]
+}
