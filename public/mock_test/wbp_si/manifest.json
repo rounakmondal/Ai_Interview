@@ -1,6 +1,139 @@
 {
   "papers": [
     {
+      "id": "WBP_Mock_Test_Eight",
+      "title": "WBP SI Mock Test Eight",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Eight",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Eight.json",
+      "questions": 10,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতীয় সংবিধানের কোন অনুচ্ছেদ অনুযায়ী রাষ্ট্রপতি জাতীয় জরুরি অবস্থা ঘোষণা করতে পারেন?",
+        "options": [
+          "৩৫২ নং অনুচ্ছেদ",
+          "৩৫৬ নং অনুচ্ছেদ",
+          "৩৬০ নং অনুচ্ছেদ",
+          "৩৭০ নং অনুচ্ছেদ"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "WBP_Mock_Test_Eleven",
+      "title": "WBP SI Mock Test Eleven",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Eleven",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Eleven.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "গৌতম বুদ্ধ তাঁর প্রথম ধর্মোপদেশ কোথায় দিয়েছিলেন?",
+        "options": [
+          "লুম্বিনি",
+          "সারনাথ",
+          "বুদ্ধগয়া",
+          "কুশিনগর"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "WBP_Mock_Test_Nine",
+      "title": "WBP SI Mock Test Nine",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Nine",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Nine.json",
+      "questions": 12,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতীয় সংবিধানের কোন তফশিল (Schedule) এ দলবদল বিরোধী আইন (Anti-Defection Law) বর্ণিত আছে?",
+        "options": [
+          "অষ্টম তফশিল",
+          "নবম তফশিল",
+          "দশম তফশিল",
+          "একাদশ তফশিল"
+        ],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "WBP_Mock_Test_Seven",
+      "title": "WBP SI Mock Test Seven",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Seven",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Seven.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতের জাতীয় কংগ্রেসের প্রথম অধিবেশন কোথায় অনুষ্ঠিত হয়েছিল?",
+        "options": [
+          "কলকাতা",
+          "বম্বে",
+          "মাদ্রাজ",
+          "দিল্লি"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "WBP_Mock_Test_Six",
+      "title": "WBP SI Mock Test Six",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Six",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Six.json",
+      "questions": 10,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "ভারতে সিভিল সার্ভিস (Civil Service)-এর জনক কাকে বলা হয়?",
+        "options": [
+          "লর্ড ডালহৌসি",
+          "লর্ড কর্নওয়ালিস",
+          "ওয়ারেন হেস্টিংস",
+          "লর্ড ওয়েলেসলি"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "WBP_Mock_Test_Ten",
+      "title": "WBP SI Mock Test Ten",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট Ten",
+      "path": "mock_test/wbp_si/WBP_Mock_Test_Ten.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "কে 'ভারতের নেপোলিয়ন' নামে পরিচিত ছিলেন?",
+        "options": [
+          "সমুদ্রগুপ্ত",
+          "চন্দ্রগুপ্ত মৌর্য",
+          "হর্ষবর্ধন",
+          "অশোক"
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "wbp-si-five",
+      "title": "WBP SI Mock Test five",
+      "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট five",
+      "path": "mock_test/wbp_si/wbp-si-five.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "আকবরের নবরত্নের মধ্যে কে বাদশাহি সভার প্রধান সঙ্গীতজ্ঞ ছিলেন?",
+        "options": [
+          "বীরবল",
+          "তানসেন",
+          "টোডরমল",
+          "আবুল ফজল"
+        ],
+        "answer": "B"
+      }
+    },
+    {
       "id": "wbp_SI-One",
       "title": "WBP SI Mock Test One",
       "titleBn": "ডব্লিউবিপি এসআই মক টেস্ট One",
