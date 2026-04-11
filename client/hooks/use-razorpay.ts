@@ -32,7 +32,7 @@ interface RazorpayPaymentResponse {
 }
 
 const SCRIPT_URL = 'https://checkout.razorpay.com/v1/checkout.js';
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/api$/, '');
 
 function loadRazorpayScript(): Promise<boolean> {
   return new Promise((resolve) => {
