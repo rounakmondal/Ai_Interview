@@ -170,6 +170,25 @@
         ],
         "answer": "B"
       }
+    },
+    {
+      "id": "wbcs_mock_testTwo",
+      "title": "WBCS Prelims Mock Test Two",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Two",
+      "path": "mock_test/wbcs/wbcs_mock_testTen.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Choose the word nearest in meaning to 'Emancipate':",
+        "options": [
+          "Restrict",
+          "Liberate",
+          "Correct",
+          "Oppress"
+        ],
+        "answer": "B"
+      }
     }
   ]
 }
