@@ -264,27 +264,4 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
       )}
     </AnimatePresence>
   );
-                      )}
-
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-muted-foreground">{plan.icon}</span>
-                        <span className="text-sm font-bold text-foreground">{plan.label}</span>
-                      </div>
-
-                      <div className="flex items-end gap-1">
-                        <span className="text-2xl font-extrabold text-foreground">{plan.price}</span>
-                        <span className="text-xs text-muted-foreground mb-0.5">{plan.period}</span>
-                      </div>
-
-                      <p className="text-xs text-muted-foreground leading-snug">{plan.description}</p>
-
-              <p className="mt-4 text-center text-xs text-muted-foreground">
-                🔒 Secure payments via Razorpay · Cancel anytime
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
 }
