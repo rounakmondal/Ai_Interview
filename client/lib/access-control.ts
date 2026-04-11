@@ -84,12 +84,22 @@ export function checkTestAccess(
       if (hasExam) {
         return { allowed: true, needsLogin: false, needsPayment: false, reason: '' };
       }
+      // Has single_exam plan but not this specific exam — show paywall
       return {
         allowed: false,
         needsLogin: false,
         needsPayment: true,
         reason: `This exam is not in your Single Exam Pass. Unlock it for ₹9 or upgrade to All Exams Pass.`,
       };
+    }
+  }
+
+  // Also check unlockedExams even if active flag is missing (defensive)
+  if (premium?.unlockedExams?.length) {
+    const examKey = examType.toLowerCase();
+    const hasExam = premium.unlockedExams.some((e) => e.toLowerCase() === examKey);
+    if (hasExam) {
+      return { allowed: true, needsLogin: false, needsPayment: false, reason: '' };
     }
   }
 

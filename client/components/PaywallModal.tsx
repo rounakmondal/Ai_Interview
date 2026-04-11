@@ -131,34 +131,34 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
 
           {/* Sheet */}
           <motion.div
-            className="relative w-full sm:max-w-2xl bg-background rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full sm:max-w-4xl max-h-[95dvh] overflow-y-auto bg-background rounded-t-3xl sm:rounded-2xl shadow-2xl"
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 60, opacity: 0 }}
             transition={{ type: "spring", stiffness: 340, damping: 30 }}
           >
             {/* Orange accent top bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-red-500 to-violet-600" />
+            <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 via-red-500 to-violet-600" />
 
             {/* Close */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 w-8 h-8 rounded-full flex items-center justify-center bg-muted hover:bg-muted/80 transition-colors z-10"
+              className="absolute right-4 top-4 w-9 h-9 rounded-full flex items-center justify-center bg-muted hover:bg-muted/80 transition-colors z-10"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <div className="px-5 sm:px-7 pt-6 pb-7">
+            <div className="px-4 sm:px-8 pt-6 pb-8">
               {/* Header */}
               <div className="flex items-start gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0">
-                  <Lock className="w-5 h-5 text-orange-500" />
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0">
+                  <Lock className="w-6 h-6 text-orange-500" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-foreground leading-tight">
+                  <h2 className="text-xl font-bold text-foreground leading-tight">
                     {context === "pdf" ? "Unlock PDF Download" : "Unlock More Tests"}
                   </h2>
-                  <p className="text-sm text-muted-foreground mt-0.5">
+                  <p className="text-sm text-muted-foreground mt-1">
                     {context === "pdf"
                       ? "PDF download is a Pro feature. Choose a plan to continue."
                       : examType
@@ -169,13 +169,13 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
               </div>
 
               {error && (
-                <div className="mb-4 px-4 py-2.5 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm border border-red-200 dark:border-red-800">
+                <div className="mb-5 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm border border-red-200 dark:border-red-800">
                   {error}
                 </div>
               )}
 
               {/* Plans grid */}
-              <div className="grid sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {PLANS.map((plan) => {
                   const isSuggested = plan.id === suggestedId;
                   const isLoading = loadingPlan === plan.id;
@@ -184,20 +184,86 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                   return (
                     <div
                       key={plan.id}
-                      className={`relative rounded-xl border-2 ${plan.color} p-4 flex flex-col gap-3 ${
-                        isSuggested ? "shadow-lg" : ""
+                      className={`relative rounded-2xl border-2 ${plan.color} p-5 flex flex-col gap-3.5 ${
+                        isSuggested ? "shadow-xl" : ""
                       }`}
                     >
                       {plan.badge && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                           <span
-                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-bold text-white ${plan.badgeBg} whitespace-nowrap shadow`}
+                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold text-white ${plan.badgeBg} whitespace-nowrap shadow`}
                           >
                             {plan.id === "monthly_pass" && <Zap className="w-3 h-3" />}
                             {plan.id === "pro_monthly" && <Star className="w-3 h-3 fill-white" />}
                             {plan.badge}
                           </span>
                         </div>
+                      )}
+
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-muted-foreground">{plan.icon}</span>
+                        <span className="font-bold text-foreground">{plan.label}</span>
+                      </div>
+
+                      <div className="flex items-end gap-1.5">
+                        <span className="text-3xl font-extrabold text-foreground">{plan.price}</span>
+                        <span className="text-sm text-muted-foreground mb-1">{plan.period}</span>
+                      </div>
+
+                      <p className="text-sm text-muted-foreground leading-snug">{plan.description}</p>
+
+                      <ul className="space-y-2 text-sm flex-1">
+                        {plan.features.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-foreground/80">
+                            <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                            {f}
+                          </li>
+                        ))}
+                        {plan.notFor.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-muted-foreground/40 line-through">
+                            <X className="w-4 h-4 mt-0.5 shrink-0" />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Button
+                        size="default"
+                        variant={plan.btnVariant}
+                        className={`w-full gap-2 mt-2 font-semibold ${plan.btnClass}`}
+                        onClick={() => handleBuy(plan.id)}
+                        disabled={disabled}
+                      >
+                        {isLoading ? (
+                          <><Loader2 className="w-4 h-4 animate-spin" /> Processing…</>
+                        ) : plan.id === "single_exam" && examType ? (
+                          <>Unlock {examType} – ₹9</>
+                        ) : (
+                          <>Get {plan.label}</>
+                        )}
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* PDF note */}
+              {context === "pdf" && (
+                <p className="mt-5 text-center text-sm text-muted-foreground flex items-center justify-center gap-1.5">
+                  <FileDown className="w-4 h-4" />
+                  PDF downloads are available only on the Pro Plan (₹99/month)
+                </p>
+              )}
+
+              <p className="mt-4 text-center text-xs text-muted-foreground">
+                🔒 Secure payments via Razorpay · Cancel anytime
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
                       )}
 
                       <div className="flex items-center gap-2 mt-1">
@@ -212,50 +278,7 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
 
                       <p className="text-xs text-muted-foreground leading-snug">{plan.description}</p>
 
-                      <ul className="space-y-1.5 text-xs">
-                        {plan.features.map((f) => (
-                          <li key={f} className="flex items-start gap-1.5 text-foreground/80">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                        {plan.notFor.map((f) => (
-                          <li key={f} className="flex items-start gap-1.5 text-muted-foreground/50 line-through">
-                            <X className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-
-                      <Button
-                        size="sm"
-                        variant={plan.btnVariant}
-                        className={`w-full gap-1.5 mt-auto text-xs font-semibold ${plan.btnClass}`}
-                        onClick={() => handleBuy(plan.id)}
-                        disabled={disabled}
-                      >
-                        {isLoading ? (
-                          <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Processing…</>
-                        ) : plan.id === "single_exam" && examType ? (
-                          <>Unlock {examType} – ₹9</>
-                        ) : (
-                          <>Get {plan.label}</>
-                        )}
-                      </Button>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* PDF note */}
-              {context === "pdf" && (
-                <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
-                  <FileDown className="w-3.5 h-3.5" />
-                  PDF downloads are available only on the Pro Plan (₹99/month)
-                </p>
-              )}
-
-              <p className="mt-3 text-center text-[11px] text-muted-foreground">
+              <p className="mt-4 text-center text-xs text-muted-foreground">
                 🔒 Secure payments via Razorpay · Cancel anytime
               </p>
             </div>
