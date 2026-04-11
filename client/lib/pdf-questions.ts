@@ -57,6 +57,11 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
         throw new Error(`Failed to fetch JSON: ${response.statusText}`);
       }
 
+      const contentType = response.headers.get("content-type") ?? "";
+      if (contentType.includes("text/html")) {
+        throw new Error(`Question file not found: ${url}. The server returned an HTML page instead of JSON.`);
+      }
+
       const jsonData = await response.json();
 
       // Flatten nested question structures:

@@ -1,8 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Check, Zap, Star, ArrowRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Check, Zap, Star, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRazorpay } from "@/hooks/use-razorpay";
+import { getSession } from "@/lib/auth-api";
+import { useToast } from "@/hooks/use-toast";
 
 const plans = [
   {
@@ -74,6 +77,39 @@ export default function PremiumPricing() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [isYearly, setIsYearly] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const session = getSession();
+
+  const { initiatePayment } = useRazorpay({
+    authToken: session?.token ?? null,
+    userEmail: session?.user?.email,
+    userName: session?.user?.name,
+    onSuccess: (plan) => {
+      setLoadingPlan(null);
+      toast({
+        title: "🎉 Premium Activated!",
+        description: `Your ${plan === "pro_yearly" ? "yearly" : "monthly"} Pro plan is now active.`,
+      });
+    },
+    onError: (message) => {
+      setLoadingPlan(null);
+      toast({ title: "Payment Failed", description: message, variant: "destructive" });
+    },
+  });
+
+  async function handleGetPro() {
+    if (!session) {
+      navigate("/auth");
+      return;
+    }
+    const plan = isYearly ? "pro_yearly" : "pro_monthly";
+    setLoadingPlan(plan);
+    await initiatePayment(plan);
+    setLoadingPlan(null);
+  }
 
   return (
     <section
@@ -202,15 +238,29 @@ export default function PremiumPricing() {
               </div>
 
               {/* CTA button */}
-              <Link to={plan.name === "Enterprise" ? "#contact" : "/setup"} className="block">
+              {plan.name === "Pro" ? (
                 <Button
-                  variant={plan.btnVariant}
+                  onClick={handleGetPro}
+                  disabled={loadingPlan !== null}
                   className={`w-full h-11 font-semibold gap-2 ${plan.btnClass}`}
                 >
-                  {plan.name === "Enterprise" ? "Contact Sales" : plan.name === "Starter" ? "Start Free" : "Get Pro"}
-                  <ArrowRight className="w-4 h-4" />
+                  {loadingPlan !== null ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Processing…</>
+                  ) : (
+                    <>Get Pro <ArrowRight className="w-4 h-4" /></>
+                  )}
                 </Button>
-              </Link>
+              ) : (
+                <Link to={plan.name === "Enterprise" ? "#contact" : "/setup"} className="block">
+                  <Button
+                    variant={plan.btnVariant}
+                    className={`w-full h-11 font-semibold gap-2 ${plan.btnClass}`}
+                  >
+                    {plan.name === "Enterprise" ? "Contact Sales" : "Start Free"}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              )}
 
               {/* Features list */}
               <div className="space-y-3 pt-2 border-t border-border/40">

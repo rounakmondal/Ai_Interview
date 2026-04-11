@@ -107,7 +107,7 @@ const FOLDER_COLORS: Record<
 
 // Alpona-inspired SVG pattern for backgrounds
 const AlponaPattern = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+   <svg className={className} width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <pattern id="alpona" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
         {/* Central motif - lotus-inspired */}
@@ -148,25 +148,25 @@ const FOLDERS: Record<string, FolderData> = {
       // SI (Sub-Inspector) Papers
       {
         name: "WBP SI (Sub-Inspector) 2025",
-        path: "SI/WBP-SI-Police-2025.json",
+        path: "police-json-data/SI/WBP-SI-Police-2025.json",
         year: 2025,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2021",
-        path: "SI/WBP-SI-Police-2021.json",
+        path: "police-json-data/SI/WBP-SI-Police-2021.json",
         year: 2021,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2019",
-        path: "SI/WBP-SI-Police-2019.json",
+        path: "police-json-data/SI/WBP-SI-Police-2019.json",
         year: 2019,
         type: "SI",
       },
       {
         name: "WBP SI (Sub-Inspector) 2018",
-        path: "SI/WBP-SI-Police-2018.json",
+        path: "police-json-data/SI/WBP-SI-Police-2018.json",
         year: 2018,
         type: "SI",
       },
@@ -1755,9 +1755,14 @@ export default function QuestionHub({
           if (!cancelled) setFilesFromApi(null);
           return;
         }
-        const mapped: PDFItem[] = data.files.map(
+        const mapped: PDFItem[] = data.files
+          .filter((f: { name: string; path: string }) => f.name !== "manifest.json")
+          .map(
           (f: { name: string; path: string }) => ({
-            path: f.name,
+            // Derive the path relative to publicPath by stripping the leading /FolderName/ segment.
+            // e.g. "/Police/police-json-data/SI/file.json" → "police-json-data/SI/file.json"
+            // This is needed for LazyPreviewCard which builds: publicPath + "/" + path
+            path: f.path.replace(/^\/[^/]+\//, ""),
             name: titleFromFilename(f.name),
             downloadHref: f.path,
             year: yearFromFilename(f.name),

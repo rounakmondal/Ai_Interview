@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useAccessGate } from "@/hooks/use-access-gate";
+import PaywallModal from "@/components/PaywallModal";
 import {
   ArrowRight,
   CheckCircle2,
@@ -154,6 +156,11 @@ export default function GovtResult() {
 
   const [pdfLoading, setPdfLoading] = useState(false);
 
+  const {
+    showPaywall, setShowPaywall, paywallContext, activeExamType,
+    requestPdfAccess, refreshPremium,
+  } = useAccessGate();
+
   if (!state) return null;
 
   const { config, questions, answers, timeTakenSeconds, language } = state;
@@ -163,6 +170,7 @@ export default function GovtResult() {
   const { correct, wrong, unanswered, total, accuracy } = score;
 
   const handleDownloadPdf = async () => {
+    if (!requestPdfAccess()) return; // blocked — shows paywall
     setPdfLoading(true);
     try {
       const { jsPDF } = await import("jspdf");
@@ -338,6 +346,15 @@ export default function GovtResult() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* PDF Paywall */}
+      <PaywallModal
+        open={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        examType={activeExamType}
+        context={paywallContext}
+        onSuccess={() => { refreshPremium(); setShowPaywall(false); }}
+      />
+
       {/* Header */}
       <header className="border-b border-border/40 sticky top-0 z-50 bg-background/95 backdrop-blur">
         <div className="container px-4 h-14 flex items-center gap-3">

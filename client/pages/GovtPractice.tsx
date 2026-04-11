@@ -2,17 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
+import { Button } from "@/components/ui/button";
 import {
   BookOpen, ArrowLeft, Zap, Clock, Target, BarChart3,
   Trophy, Shield, Train, Landmark, Building2, Globe2,
   CheckCircle2, ChevronRight, Flame, Star, Users, TrendingUp,
-  Loader2, Sparkles, Award, Brain, ChevronDown, LayoutList,
+  Loader2, Sparkles, Award, Brain, ChevronDown, LayoutList, Lock,
 } from "lucide-react";
 import {
   ExamType, Subject, Difficulty, TestConfig, GovtQuestion,
   EXAM_LABELS, SUBJECT_LABELS,
 } from "@/lib/govt-practice-data";
 import { startGovtPracticeSession } from "@/lib/govt-practice-store";
+import { useAccessGate } from "@/hooks/use-access-gate";
+import PaywallModal from "@/components/PaywallModal";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -94,6 +97,14 @@ export default function GovtPractice() {
   const [isStreaming, setIsStreaming] = useState(false);
   const hasNavigated = useRef(false);
 
+  const {
+    showPaywall, setShowPaywall,
+    needsLogin, paywallContext, activeExamType,
+    requestTestAccess, refreshPremium,
+  } = useAccessGate();
+
+  const authNavigate = navigate;
+
   const meta = EXAM_META[exam];
   const estimatedMins = Math.round(count * 1.2);
 
@@ -131,6 +142,9 @@ export default function GovtPractice() {
   }, [fullPaper, exam, customExam, difficulty]);
 
   const handleGenerate = () => {
+    const examKey = customExam.trim() || exam;
+    if (!requestTestAccess(examKey)) return; // blocked — paywall/login shown
+
     setLoading(true);
     setError(null);
     setLoadingQuestions([]);
@@ -171,6 +185,32 @@ export default function GovtPractice() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Paywall modal */}
+      <PaywallModal
+        open={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        examType={activeExamType}
+        context={paywallContext}
+        onSuccess={() => { refreshPremium(); setShowPaywall(false); }}
+      />
+
+      {/* Login redirect prompt */}
+      {needsLogin && (
+        <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-background rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center space-y-4">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-orange-500/10 flex items-center justify-center">
+              <Lock className="w-6 h-6 text-orange-500" />
+            </div>
+            <h3 className="text-lg font-bold">Log in to continue</h3>
+            <p className="text-sm text-muted-foreground">You&apos;ve used your free guest test. Log in to unlock one more free test!</p>
+            <div className="flex gap-3">
+              <Button variant="outline" className="flex-1" onClick={() => window.location.reload()}>Cancel</Button>
+              <Button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white" onClick={() => authNavigate("/auth")}>Log In</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Ambient background ────────────────────────────────────────── */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] opacity-20"

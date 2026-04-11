@@ -24,10 +24,11 @@ import {
   AlertTriangle,
   ArrowLeft,
   FileDown,
-  Lock,
 } from "lucide-react";
 import { GovtQuestion, TestConfig, TestAnswer } from "@/lib/govt-practice-data";
 import { getGovtPracticeSession, subscribeGovtPracticeSession } from "@/lib/govt-practice-store";
+import { useAccessGate } from "@/hooks/use-access-gate";
+import PaywallModal from "@/components/PaywallModal";
 
 interface LocationState {
   config: TestConfig;
@@ -63,7 +64,11 @@ export default function GovtTest() {
   const [elapsed, setElapsed] = useState(0);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [flagged, setFlagged] = useState<Set<number>>(new Set());
-  const [showPdfLockedDialog, setShowPdfLockedDialog] = useState(false);
+
+  const {
+    showPaywall, setShowPaywall, paywallContext, activeExamType,
+    requestPdfAccess, refreshPremium,
+  } = useAccessGate();
 
   useEffect(() => {
     const sessionUnsubscribe = subscribeGovtPracticeSession((session) => {
@@ -180,11 +185,10 @@ export default function GovtTest() {
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setShowPdfLockedDialog(true)}
-                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-border/60 bg-muted/40 text-muted-foreground cursor-not-allowed select-none"
-                title="Save as PDF — Coming Soon"
+                onClick={() => requestPdfAccess()}
+                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border transition-colors select-none"
+                title="Save as PDF (Pro feature)"
               >
-                <Lock className="w-3 h-3" />
                 <FileDown className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Save PDF</span>
               </button>
@@ -385,28 +389,14 @@ export default function GovtTest() {
         </div>
       </main>
 
-      {/* PDF Locked Dialog */}
-      <AlertDialog open={showPdfLockedDialog} onOpenChange={setShowPdfLockedDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2">
-              <Lock className="w-5 h-5 text-amber-500" />
-              Save as PDF — Coming Soon
-            </AlertDialogTitle>
-            <AlertDialogDescription asChild>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>The <strong className="text-foreground">Save as PDF</strong> feature lets you download this entire question paper with your answers and results as a printable PDF.</p>
-                <p className="text-amber-600 dark:text-amber-400 font-medium">This feature is currently under development and will be available in the premium plan.</p>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setShowPdfLockedDialog(false)}>
-              Got it
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {/* PDF Paywall */}
+      <PaywallModal
+        open={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        examType={activeExamType}
+        context={paywallContext}
+        onSuccess={() => { refreshPremium(); setShowPaywall(false); }}
+      />
 
       {/* Submit Confirmation Dialog */}
       <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>

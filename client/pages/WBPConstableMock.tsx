@@ -20,6 +20,8 @@ import {
 import { Button } from "@/components/ui/button";
 import ProfileButton from "@/components/ProfileButton";
 import { applyExamSeoPayload } from "@/lib/exam-seo";
+import { useAccessGate } from "@/hooks/use-access-gate";
+import PaywallModal from "@/components/PaywallModal";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -256,6 +258,11 @@ export default function WBPConstableMock() {
   const [selected, setSelected] = useState<ConstablePaper | null>(null);
   const [navigating, setNavigating] = useState(false);
 
+  const {
+    showPaywall, setShowPaywall, paywallContext, activeExamType,
+    requestPdfAccess, refreshPremium,
+  } = useAccessGate();
+
   // Load manifest once on mount
   useEffect(() => {
     applyDefaultSeo();
@@ -286,6 +293,7 @@ export default function WBPConstableMock() {
   };
 
   const handleDownload = () => {
+    if (!requestPdfAccess()) return; // blocked — shows paywall
     if (!selected) return;
     const href = `/${selected.path}`;
     const a = document.createElement("a");
@@ -303,6 +311,15 @@ export default function WBPConstableMock() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* PDF Paywall */}
+      <PaywallModal
+        open={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        examType={activeExamType}
+        context={paywallContext}
+        onSuccess={() => { refreshPremium(); setShowPaywall(false); }}
+      />
+
       {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         <div

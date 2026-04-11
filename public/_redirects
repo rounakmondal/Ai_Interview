@@ -1,0 +1,3 @@
+# Static JSON/asset files take priority over this rule automatically on Netlify.
+# This SPA fallback only fires when NO matching static file exists.
+/*    /index.html    200

@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { isLoggedIn } from "@/lib/auth-api";
+import { useAccessGate } from "@/hooks/use-access-gate";
+import PaywallModal from "@/components/PaywallModal";
 import {
   Briefcase,
   FileText,
@@ -36,6 +39,15 @@ const languages = [
 export default function InterviewSetup() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { showPaywall, setShowPaywall, paywallContext, activeExamType, requestInterviewAccess, refreshPremium } = useAccessGate();
+
+  // Redirect guests to login immediately
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/auth", { replace: true, state: { redirect: "/setup" } });
+    }
+  }, [navigate]);
 
   const [interviewRole, setInterviewRole] = useState(""); // Free text interview role/type
   const [jobDescription, setJobDescription] = useState(""); // Optional job description
@@ -156,6 +168,9 @@ export default function InterviewSetup() {
       setError("Please complete all required fields");
       return;
     }
+
+    // Access gate: login required, 1 free interview then paywall
+    if (!requestInterviewAccess()) return;
 
     // Build a rich interviewType string so AI prompt knows category + round
     let builtType = interviewRole.trim();
@@ -614,6 +629,14 @@ export default function InterviewSetup() {
           </div>
         </div>
       </main>
+
+      <PaywallModal
+        open={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        context={paywallContext}
+        examType={activeExamType}
+        onSuccess={() => { setShowPaywall(false); refreshPremium(); }}
+      />
     </div>
   );
 }
