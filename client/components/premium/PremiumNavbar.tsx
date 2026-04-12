@@ -26,8 +26,8 @@ function TodaysPaperModal({ onClose }: { onClose: () => void }) {
   const today = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" });
 
   return (
-    <AnimatePresence>
       <motion.div
+        key="todays-paper-modal"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -59,8 +59,9 @@ function TodaysPaperModal({ onClose }: { onClose: () => void }) {
                 <p className={`text-[13px] mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>{today}</p>
               </div>
               <button
-                onClick={onClose}
-                className={`mt-0.5 p-1.5 rounded-xl transition-colors ${isDark ? "hover:bg-white/10 text-slate-400 hover:text-white" : "hover:bg-slate-100 text-slate-400 hover:text-slate-700"}`}
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                className={`flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-xl transition-colors ${isDark ? "hover:bg-white/10 text-slate-400 hover:text-white" : "hover:bg-slate-100 text-slate-400 hover:text-slate-700"}`}
+                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -116,7 +117,6 @@ function TodaysPaperModal({ onClose }: { onClose: () => void }) {
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
   );
 }
 
@@ -161,7 +161,9 @@ export default function PremiumNavbar() {
   return (
     <>
       {/* Today's Paper Modal */}
-      {showPaperModal && <TodaysPaperModal onClose={() => setShowPaperModal(false)} />}
+      <AnimatePresence>
+        {showPaperModal && <TodaysPaperModal onClose={() => setShowPaperModal(false)} />}
+      </AnimatePresence>
 
       {/* Navbar Container */}
       <motion.nav

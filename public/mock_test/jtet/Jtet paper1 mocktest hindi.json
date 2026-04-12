@@ -1,0 +1,1225 @@
+{
+  "exam": "JTET (झारखंड शिक्षक पात्रता परीक्षा) Paper-I पूर्ण मॉक टेस्ट - Set 1",
+  "conducted_by": "Jharkhand Academic Council (JAC), Ranchi",
+  "paper": "Paper-I (कक्षा I से V हेतु प्राथमिक शिक्षक)",
+  "total_questions": 150,
+  "total_marks": 150,
+  "duration": "2 घंटे 30 मिनट",
+  "language": "हिंदी",
+  "negative_marking": false,
+  "marks_per_question": 1,
+  "sections": [
+    { "name": "बाल विकास एवं शिक्षण विधियाँ (Child Development & Pedagogy)", "range": "1-30", "questions": 30 },
+    { "name": "भाषा-I: हिंदी (Language I - Hindi)", "range": "31-60", "questions": 30 },
+    { "name": "भाषा-II: अंग्रेज़ी (Language II - English)", "range": "61-90", "questions": 30 },
+    { "name": "गणित (Mathematics)", "range": "91-120", "questions": 30 },
+    { "name": "पर्यावरण अध्ययन (Environmental Studies - EVS)", "range": "121-150", "questions": 30 }
+  ],
+  "questions": [
+
+    {
+      "id": 1,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बाल विकास की वह अवस्था जिसमें बच्चा 'स्वयं केंद्रित' (egocentric) होता है, उसे क्या कहते हैं?",
+      "options": ["A. औपचारिक संक्रियात्मक अवस्था", "B. पूर्व-संक्रियात्मक अवस्था", "C. मूर्त संक्रियात्मक अवस्था", "D. संवेदी-गामक अवस्था"],
+      "answer": "B",
+      "explanation": "पियाजे के अनुसार पूर्व-संक्रियात्मक अवस्था (2-7 वर्ष) में बच्चा अहम-केंद्रित होता है और दूसरों के दृष्टिकोण को नहीं समझ पाता।"
+    },
+    {
+      "id": 2,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "लेव वाइगोत्स्की का 'ZPD' (Zone of Proximal Development) का अर्थ है:",
+      "options": ["A. बच्चे की वर्तमान क्षमता", "B. वह क्षेत्र जो बच्चा अकेले हल कर सकता है", "C. वह अंतर जो बच्चा अकेले और सहायता से कर सकता है", "D. बच्चे की अधिकतम बौद्धिक क्षमता"],
+      "answer": "C",
+      "explanation": "ZPD वह दूरी है जो बच्चे की वास्तविक विकास स्तर (अकेले समाधान) और संभावित विकास स्तर (सहायता से) के बीच होती है।"
+    },
+    {
+      "id": 3,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "जीन पियाजे के अनुसार 'आत्मसात्करण' (Assimilation) का अर्थ है:",
+      "options": ["A. नई जानकारी के लिए मौजूदा स्कीमा को बदलना", "B. मौजूदा स्कीमा में नई जानकारी को शामिल करना", "C. नए स्कीमा का निर्माण करना", "D. पुराने स्कीमा को भूलना"],
+      "answer": "B",
+      "explanation": "आत्मसात्करण में बच्चा नई जानकारी को अपनी पहले से बनी संज्ञानात्मक संरचना (स्कीमा) में समाहित करता है।"
+    },
+    {
+      "id": 4,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बाल विकास में 'विकास' की दिशा होती है:",
+      "options": ["A. परिधि से केंद्र की ओर", "B. पैर से सिर की ओर", "C. सिर से पैर की ओर (cephalocaudal)", "D. अनिश्चित दिशा में"],
+      "answer": "C",
+      "explanation": "शारीरिक विकास सेफलोकॉडल (सिर से पैर) और प्रॉक्सिमोडिस्टल (केंद्र से परिधि) दिशाओं में होता है।"
+    },
+    {
+      "id": 5,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "समावेशी शिक्षा (Inclusive Education) का मूल सिद्धांत क्या है?",
+      "options": ["A. केवल प्रतिभाशाली बच्चों को शिक्षा देना", "B. विशेष विद्यालयों में दिव्यांग बच्चों को अलग करना", "C. सभी बच्चों को समान अवसर देना तथा सामान्य कक्षा में शामिल करना", "D. केवल ग्रामीण बच्चों के लिए शिक्षा"],
+      "answer": "C",
+      "explanation": "समावेशी शिक्षा का अर्थ है कि विशेष आवश्यकताओं वाले बच्चों सहित सभी बच्चों को सामान्य विद्यालयी वातावरण में समान शिक्षा मिले।"
+    },
+    {
+      "id": 6,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "थार्नडाइक के 'प्रभाव के नियम' (Law of Effect) के अनुसार:",
+      "options": ["A. अभ्यास से सीखना बढ़ता है", "B. संतोषजनक परिणाम देने वाली प्रतिक्रिया मजबूत होती है", "C. शिक्षक की भूमिका सर्वोच्च है", "D. प्रेरणा से सीखना होता है"],
+      "answer": "B",
+      "explanation": "थार्नडाइक के प्रभाव के नियम के अनुसार जिस प्रतिक्रिया के बाद संतोषजनक परिणाम होता है, वह संबंध मजबूत होता है।"
+    },
+    {
+      "id": 7,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "हावर्ड गार्डनर के बहु-बुद्धि सिद्धांत (Multiple Intelligence Theory) में कितने प्रकार की बुद्धि बताई गई हैं?",
+      "options": ["A. 5", "B. 7", "C. 8", "D. 9"],
+      "answer": "C",
+      "explanation": "गार्डनर ने मूल रूप से 7 और बाद में 8 प्रकार की बुद्धि का वर्णन किया: भाषाई, तार्किक-गणितीय, संगीत, स्थानिक, शारीरिक-गतिज, अंतर्वैयक्तिक, अंतःवैयक्तिक, और प्रकृतिवादी।"
+    },
+    {
+      "id": 8,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "अधिगम (Learning) की परिभाषा के अनुसार यह है:",
+      "options": ["A. व्यवहार में स्थायी परिवर्तन जो अनुभव से होता है", "B. शारीरिक वृद्धि", "C. याददाश्त", "D. जन्मजात प्रतिभा"],
+      "answer": "A",
+      "explanation": "अधिगम वह अपेक्षाकृत स्थायी व्यवहार परिवर्तन है जो अनुभव, अभ्यास या प्रशिक्षण के परिणामस्वरूप होता है।"
+    },
+    {
+      "id": 9,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "रचनात्मक मूल्यांकन (Formative Assessment) का उद्देश्य है:",
+      "options": ["A. अंतिम परीक्षा में अंक देना", "B. बच्चों को रैंक देना", "C. शिक्षण-अधिगम प्रक्रिया के दौरान निरंतर फीडबैक देना", "D. प्रमाण पत्र प्रदान करना"],
+      "answer": "C",
+      "explanation": "रचनात्मक मूल्यांकन शिक्षण के दौरान किया जाता है ताकि बच्चों की कमजोरियों की पहचान करके शिक्षण को बेहतर बनाया जा सके।"
+    },
+    {
+      "id": 10,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बच्चों में अधिगम अक्षमता (Learning Disability) का एक प्रकार 'डिस्लेक्सिया' (Dyslexia) का संबंध किससे है?",
+      "options": ["A. गणित में कठिनाई", "B. पढ़ने-लिखने में कठिनाई", "C. बोलने में कठिनाई", "D. सुनने में कठिनाई"],
+      "answer": "B",
+      "explanation": "डिस्लेक्सिया एक अधिगम विकार है जिसमें बच्चे को पढ़ने, लिखने और वर्तनी में कठिनाई होती है।"
+    },
+    {
+      "id": 11,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "NCF 2005 के अनुसार 'ज्ञान निर्माण' (Knowledge Construction) में बच्चे की भूमिका है:",
+      "options": ["A. निष्क्रिय श्रोता", "B. सक्रिय भागीदार", "C. केवल परीक्षार्थी", "D. आज्ञाकारी विद्यार्थी"],
+      "answer": "B",
+      "explanation": "NCF 2005 रचनावादी दृष्टिकोण अपनाता है जिसके अनुसार बच्चा अपने अनुभव से स्वयं ज्ञान का निर्माण करता है।"
+    },
+    {
+      "id": 12,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "अभिप्रेरणा (Motivation) का सबसे महत्वपूर्ण प्रकार जो दीर्घकालिक अधिगम के लिए उपयोगी है:",
+      "options": ["A. बाह्य अभिप्रेरणा (Extrinsic)", "B. आंतरिक अभिप्रेरणा (Intrinsic)", "C. भय आधारित अभिप्रेरणा", "D. पुरस्कार आधारित अभिप्रेरणा"],
+      "answer": "B",
+      "explanation": "आंतरिक अभिप्रेरणा (स्वयं की रुचि और जिज्ञासा) दीर्घकालिक और गहरे अधिगम के लिए सबसे प्रभावी मानी जाती है।"
+    },
+    {
+      "id": 13,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "पावलोव का शास्त्रीय अनुबंधन (Classical Conditioning) किस पर आधारित है?",
+      "options": ["A. स्वाभाविक उत्तेजना का उपयोग", "B. पुरस्कार एवं दंड", "C. अनुभव द्वारा अधिगम", "D. तटस्थ उद्दीपन को स्वाभाविक उत्तेजना से जोड़ना"],
+      "answer": "D",
+      "explanation": "पावलोव के प्रयोग में एक तटस्थ उद्दीपन (घंटी) को बार-बार भोजन के साथ प्रस्तुत करने पर कुत्ता घंटी सुनते ही लार टपकाने लगा।"
+    },
+    {
+      "id": 14,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बच्चों में 'सृजनात्मकता' (Creativity) को बढ़ावा देने के लिए शिक्षक को क्या करना चाहिए?",
+      "options": ["A. केवल पाठ्यपुस्तक पढ़ाना", "B. खुले प्रश्न पूछना और मौलिक सोच को प्रोत्साहित करना", "C. रटने पर ज़ोर देना", "D. परंपरागत परीक्षा विधि अपनाना"],
+      "answer": "B",
+      "explanation": "सृजनात्मकता को बढ़ाने के लिए खुले प्रश्न, समस्या-समाधान गतिविधियाँ और मौलिक अभिव्यक्ति को प्रोत्साहन दिया जाना चाहिए।"
+    },
+    {
+      "id": 15,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "मैस्लो के आवश्यकता क्रमानुक्रम (Maslow's Hierarchy of Needs) में सबसे आधारभूत आवश्यकता है:",
+      "options": ["A. आत्म-सिद्धि", "B. सम्मान की आवश्यकता", "C. जैविक/शारीरिक आवश्यकताएँ", "D. सुरक्षा की आवश्यकता"],
+      "answer": "C",
+      "explanation": "मैस्लो के पिरामिड में जैविक आवश्यकताएँ (भोजन, पानी, नींद) सबसे निचले और आधारभूत स्तर पर होती हैं।"
+    },
+    {
+      "id": 16,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "RTI Act 2009 के अनुसार 6 से 14 वर्ष के बच्चों को कैसी शिक्षा मिलनी चाहिए?",
+      "options": ["A. शुल्क-आधारित शिक्षा", "B. निःशुल्क एवं अनिवार्य शिक्षा", "C. केवल सरकारी विद्यालयों में शिक्षा", "D. व्यावसायिक शिक्षा"],
+      "answer": "B",
+      "explanation": "शिक्षा का अधिकार अधिनियम 2009 (RTE Act) के तहत 6-14 वर्ष के सभी बच्चों को निःशुल्क एवं अनिवार्य प्राथमिक शिक्षा का अधिकार है।"
+    },
+    {
+      "id": 17,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "व्यक्तिगत भिन्नता (Individual Differences) को ध्यान में रखते हुए शिक्षक को क्या करना चाहिए?",
+      "options": ["A. सभी बच्चों को एक ही तरह पढ़ाना", "B. विभेदित शिक्षण (Differentiated Instruction) का उपयोग करना", "C. केवल होनहार बच्चों पर ध्यान देना", "D. कमज़ोर बच्चों को अलग बैठाना"],
+      "answer": "B",
+      "explanation": "विभेदित शिक्षण में शिक्षक विभिन्न विधियों, सामग्री और मूल्यांकन से सभी बच्चों की व्यक्तिगत आवश्यकताओं को पूरा करता है।"
+    },
+    {
+      "id": 18,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "कोलबर्ग के नैतिक विकास के सिद्धांत में कितने चरण हैं?",
+      "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+      "answer": "D",
+      "explanation": "कोलबर्ग ने नैतिक विकास के 6 चरण बताए जो 3 स्तरों में विभाजित हैं: पूर्व-पारंपरिक, पारंपरिक, और उत्तर-पारंपरिक।"
+    },
+    {
+      "id": 19,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "प्रतिभाशाली बच्चों (Gifted Children) के लिए उपयुक्त शिक्षण विधि है:",
+      "options": ["A. रटने का अभ्यास", "B. त्वरण (Acceleration) और संवर्धन (Enrichment)", "C. सामान्य कक्षा शिक्षण", "D. दंड आधारित अनुशासन"],
+      "answer": "B",
+      "explanation": "प्रतिभाशाली बच्चों के लिए त्वरण (उन्हें आगे की कक्षा में भेजना) और संवर्धन (अतिरिक्त/गहन सामग्री देना) उपयुक्त है।"
+    },
+    {
+      "id": 20,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "'स्कैफोल्डिंग' (Scaffolding) की अवधारणा किस मनोवैज्ञानिक से संबंधित है?",
+      "options": ["A. पियाजे", "B. फ्रॉयड", "C. वाइगोत्स्की", "D. स्किनर"],
+      "answer": "C",
+      "explanation": "स्कैफोल्डिंग वाइगोत्स्की के ZPD सिद्धांत पर आधारित है, जिसमें शिक्षक या अधिक सक्षम साथी अस्थायी सहायता प्रदान करते हैं।"
+    },
+    {
+      "id": 21,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बच्चों के समाजीकरण में परिवार की भूमिका को कहा जाता है:",
+      "options": ["A. द्वितीयक समाजीकरण", "B. प्राथमिक समाजीकरण", "C. औपचारिक समाजीकरण", "D. तृतीयक समाजीकरण"],
+      "answer": "B",
+      "explanation": "परिवार बच्चे का प्रथम और प्राथमिक समाजीकरण एजेंट है, जहाँ बच्चा बुनियादी सामाजिक मूल्य और व्यवहार सीखता है।"
+    },
+    {
+      "id": 22,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "पियाजे की मूर्त संक्रियात्मक अवस्था (Concrete Operational Stage) की आयु सीमा है:",
+      "options": ["A. 0-2 वर्ष", "B. 2-7 वर्ष", "C. 7-11 वर्ष", "D. 11 वर्ष से ऊपर"],
+      "answer": "C",
+      "explanation": "मूर्त संक्रियात्मक अवस्था 7 से 11 वर्ष तक होती है, जिसमें बच्चा तार्किक सोच विकसित करता है परंतु ठोस वस्तुओं पर निर्भर रहता है।"
+    },
+    {
+      "id": 23,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "'संरचनावाद' (Constructivism) के अनुसार अधिगम की प्रक्रिया है:",
+      "options": ["A. शिक्षक से ज्ञान का हस्तांतरण", "B. रटना और दोहराना", "C. स्वयं के अनुभव से ज्ञान का निर्माण", "D. परीक्षा में अच्छे अंक लाना"],
+      "answer": "C",
+      "explanation": "रचनावाद के अनुसार बच्चा अपने पूर्व ज्ञान और नए अनुभव की परस्पर क्रिया से स्वयं ज्ञान का निर्माण करता है।"
+    },
+    {
+      "id": 24,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "विद्यालय में 'सहयोगी अधिगम' (Cooperative Learning) का लाभ है:",
+      "options": ["A. केवल होनहार बच्चों को फायदा", "B. सामाजिक कौशल और पारस्परिक सम्मान का विकास", "C. अनुशासन में कमी", "D. शिक्षक का काम बढ़ना"],
+      "answer": "B",
+      "explanation": "सहयोगी अधिगम में बच्चे समूह में काम करते हैं, जिससे सामाजिक कौशल, सहिष्णुता और टीम-भावना का विकास होता है।"
+    },
+    {
+      "id": 25,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "ADHD (Attention Deficit Hyperactivity Disorder) से ग्रस्त बच्चे की विशेषता है:",
+      "options": ["A. अत्यधिक एकाग्रता", "B. ध्यान की कमी और अत्यधिक सक्रियता", "C. अत्यधिक अंतर्मुखी स्वभाव", "D. पढ़ाई में असाधारण प्रतिभा"],
+      "answer": "B",
+      "explanation": "ADHD में बच्चे को ध्यान केंद्रित करने में कठिनाई, आवेगशीलता, और अत्यधिक शारीरिक सक्रियता की समस्या होती है।"
+    },
+    {
+      "id": 26,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "'संज्ञानात्मक विकास' (Cognitive Development) से तात्पर्य है:",
+      "options": ["A. शारीरिक विकास", "B. सोचने, समझने और समस्या-समाधान की क्षमता का विकास", "C. भावनात्मक विकास", "D. नैतिक विकास"],
+      "answer": "B",
+      "explanation": "संज्ञानात्मक विकास में सोचने, तर्क करने, याद रखने और समस्या सुलझाने की क्षमताओं का विकास शामिल है।"
+    },
+    {
+      "id": 27,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "शिक्षण विधि में 'प्रदर्शन विधि' (Demonstration Method) सर्वाधिक उपयुक्त है:",
+      "options": ["A. गणित की अवधारणाएँ", "B. व्यावहारिक/प्रायोगिक विषयों के लिए", "C. इतिहास पढ़ाने के लिए", "D. कविता पाठ के लिए"],
+      "answer": "B",
+      "explanation": "प्रदर्शन विधि विज्ञान के प्रयोग, खेल, कला और व्यावहारिक कौशल सिखाने के लिए सबसे उपयुक्त है।"
+    },
+    {
+      "id": 28,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "बच्चों में 'संवेगात्मक बुद्धि' (Emotional Intelligence) का विकास करने के लिए शिक्षक को क्या करना चाहिए?",
+      "options": ["A. केवल बौद्धिक कार्यों पर ध्यान देना", "B. बच्चों की भावनाओं को समझना और उन्हें अभिव्यक्त करने में मदद करना", "C. भावनाओं को नज़रअंदाज़ करना", "D. कठोर अनुशासन अपनाना"],
+      "answer": "B",
+      "explanation": "संवेगात्मक बुद्धि में स्वयं और दूसरों की भावनाओं को पहचानने, समझने और प्रबंधित करने की क्षमता शामिल है।"
+    },
+    {
+      "id": 29,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "विशेष आवश्यकता वाले बच्चों के लिए शिक्षा का आदर्श स्थान है:",
+      "options": ["A. घर पर अकेले पढ़ाना", "B. विशेष विद्यालय", "C. सामान्य विद्यालय में समावेशी वातावरण", "D. किसी भी स्थान पर नहीं"],
+      "answer": "C",
+      "explanation": "समावेशी शिक्षा की अवधारणा के अनुसार विशेष आवश्यकता वाले बच्चों को सामान्य विद्यालयों में पढ़ाया जाना चाहिए।"
+    },
+    {
+      "id": 30,
+      "section": "बाल विकास एवं शिक्षण विधियाँ",
+      "question": "शिक्षण का वह स्तर जिसमें विद्यार्थी उत्तर तो देता है परंतु कारण नहीं समझता, वह है:",
+      "options": ["A. स्मृति स्तर शिक्षण", "B. बोध स्तर शिक्षण", "C. चिंतन स्तर शिक्षण", "D. कल्पना स्तर शिक्षण"],
+      "answer": "A",
+      "explanation": "स्मृति स्तर पर विद्यार्थी केवल रटी हुई बातें दोहराता है, बिना समझे। यह शिक्षण का निम्नतम स्तर है।"
+    },
+
+    {
+      "id": 31,
+      "section": "भाषा-I: हिंदी",
+      "question": "'गंगा' शब्द का पर्यायवाची है:",
+      "options": ["A. जलधि", "B. भागीरथी", "C. लहर", "D. नीर"],
+      "answer": "B",
+      "explanation": "'गंगा' के पर्यायवाची हैं – भागीरथी, देवनदी, मंदाकिनी, जाह्नवी आदि।"
+    },
+    {
+      "id": 32,
+      "section": "भाषा-I: हिंदी",
+      "question": "'आग बबूला होना' मुहावरे का अर्थ है:",
+      "options": ["A. आग लगाना", "B. अत्यधिक क्रोधित होना", "C. खुश होना", "D. ईर्ष्या करना"],
+      "answer": "B",
+      "explanation": "'आग बबूला होना' का अर्थ है बहुत अधिक गुस्से में होना।"
+    },
+    {
+      "id": 33,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में से शुद्ध वर्तनी का चयन करें:",
+      "options": ["A. परिक्षा", "B. परीक्षा", "C. परिक्षा", "D. परीक्षा"],
+      "answer": "B",
+      "explanation": "'परीक्षा' शुद्ध वर्तनी है। 'परी' में ई की मात्रा और 'क्षा' संयुक्त व्यंजन सही है।"
+    },
+    {
+      "id": 34,
+      "section": "भाषा-I: हिंदी",
+      "question": "'रात-दिन' में कौन सा समास है?",
+      "options": ["A. तत्पुरुष समास", "B. द्वंद्व समास", "C. बहुव्रीहि समास", "D. कर्मधारय समास"],
+      "answer": "B",
+      "explanation": "'रात-दिन' में दोनों पद समान रूप से प्रधान हैं और 'और' से जुड़े हैं, इसलिए यह द्वंद्व समास है।"
+    },
+    {
+      "id": 35,
+      "section": "भाषा-I: हिंदी",
+      "question": "'नीलकमल' में कौन सा समास है?",
+      "options": ["A. द्विगु समास", "B. द्वंद्व समास", "C. कर्मधारय समास", "D. तत्पुरुष समास"],
+      "answer": "C",
+      "explanation": "'नीलकमल' = नीला है जो कमल – यहाँ विशेषण-विशेष्य संबंध है, इसलिए यह कर्मधारय समास है।"
+    },
+    {
+      "id": 36,
+      "section": "भाषा-I: हिंदी",
+      "question": "'कमल' शब्द का स्त्रीलिंग है:",
+      "options": ["A. कमला", "B. कमलिनी", "C. कमली", "D. कमलेश"],
+      "answer": "B",
+      "explanation": "'कमल' का स्त्रीलिंग 'कमलिनी' होता है।"
+    },
+    {
+      "id": 37,
+      "section": "भाषा-I: हिंदी",
+      "question": "वाच्य के कितने भेद होते हैं?",
+      "options": ["A. दो", "B. तीन", "C. चार", "D. पाँच"],
+      "answer": "B",
+      "explanation": "वाच्य के तीन भेद हैं: कर्तृवाच्य, कर्मवाच्य, और भाववाच्य।"
+    },
+    {
+      "id": 38,
+      "section": "भाषा-I: हिंदी",
+      "question": "'राम ने सेब खाया' में कौन सा वाच्य है?",
+      "options": ["A. कर्मवाच्य", "B. भाववाच्य", "C. कर्तृवाच्य", "D. इनमें से कोई नहीं"],
+      "answer": "C",
+      "explanation": "जब क्रिया का संबंध मुख्यतः कर्ता से हो, तो वह कर्तृवाच्य होता है। यहाँ 'राम' कर्ता है।"
+    },
+    {
+      "id": 39,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में से तत्सम शब्द है:",
+      "options": ["A. आग", "B. अग्नि", "C. अगन", "D. आगी"],
+      "answer": "B",
+      "explanation": "'अग्नि' संस्कृत का शुद्ध तत्सम शब्द है। 'आग' और 'अगन' इसके तद्भव रूप हैं।"
+    },
+    {
+      "id": 40,
+      "section": "भाषा-I: हिंदी",
+      "question": "हिंदी के उस वर्ण को क्या कहते हैं जो स्वर की सहायता के बिना नहीं बोला जा सकता?",
+      "options": ["A. स्वर", "B. व्यंजन", "C. अनुस्वार", "D. विसर्ग"],
+      "answer": "B",
+      "explanation": "व्यंजनों का उच्चारण स्वर की सहायता से ही संभव है, इसलिए व्यंजन को 'व्यंजन' कहते हैं।"
+    },
+    {
+      "id": 41,
+      "section": "भाषा-I: हिंदी",
+      "question": "'जो कभी मरता नहीं' – के लिए एक शब्द है:",
+      "options": ["A. अजर", "B. अमर", "C. अजन्मा", "D. अचर"],
+      "answer": "B",
+      "explanation": "'अमर' का अर्थ है जिसे मृत्यु न हो, जो कभी न मरे।"
+    },
+    {
+      "id": 42,
+      "section": "भाषा-I: हिंदी",
+      "question": "'बेशक' शब्द में उपसर्ग है:",
+      "options": ["A. बे", "B. शक", "C. बेश", "D. क"],
+      "answer": "A",
+      "explanation": "'बेशक' में 'बे' उपसर्ग है (फारसी उपसर्ग), जिसका अर्थ है 'बिना'।"
+    },
+    {
+      "id": 43,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में से महाप्राण व्यंजन कौन सा है?",
+      "options": ["A. क", "B. ग", "C. घ", "D. ङ"],
+      "answer": "C",
+      "explanation": "महाप्राण व्यंजनों के उच्चारण में अधिक श्वास (हवा) निकलती है। प्रत्येक वर्ग का दूसरा और चौथा वर्ण महाप्राण होता है।"
+    },
+    {
+      "id": 44,
+      "section": "भाषा-I: हिंदी",
+      "question": "भाषा शिक्षण में 'श्रवण कौशल' (Listening Skill) विकसित करने के लिए उपयुक्त विधि है:",
+      "options": ["A. लिखित परीक्षा", "B. कहानी सुनाना और प्रश्नोत्तर", "C. पाठ्यपुस्तक पढ़ना", "D. श्यामपट्ट पर लिखना"],
+      "answer": "B",
+      "explanation": "कहानी सुनाना, कविता पाठ, वार्तालाप और प्रश्नोत्तर से बच्चों का श्रवण कौशल विकसित होता है।"
+    },
+    {
+      "id": 45,
+      "section": "भाषा-I: हिंदी",
+      "question": "'पठन' (Reading) कौशल का सही क्रम है:",
+      "options": ["A. गहन पठन → सरसरी पठन", "B. वर्ण पहचान → शब्द → वाक्य → अनुच्छेद", "C. वाक्य → शब्द → वर्ण", "D. कोई क्रम नहीं होता"],
+      "answer": "B",
+      "explanation": "पठन कौशल का विकास सरल से जटिल की ओर होता है: वर्ण → शब्द → वाक्य → अनुच्छेद।"
+    },
+    {
+      "id": 46,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में 'संज्ञा' का उदाहरण है:",
+      "options": ["A. सुंदर", "B. दौड़ना", "C. दिल्ली", "D. वहाँ"],
+      "answer": "C",
+      "explanation": "'दिल्ली' एक व्यक्तिवाचक संज्ञा है। 'सुंदर' विशेषण, 'दौड़ना' क्रिया और 'वहाँ' क्रियाविशेषण है।"
+    },
+    {
+      "id": 47,
+      "section": "भाषा-I: हिंदी",
+      "question": "'निरंतर' शब्द का विलोम है:",
+      "options": ["A. सतत", "B. विरल", "C. रुक-रुक कर", "D. तीव्र"],
+      "answer": "C",
+      "explanation": "'निरंतर' का विलोम 'रुक-रुककर' या 'सांत' होता है।"
+    },
+    {
+      "id": 48,
+      "section": "भाषा-I: हिंदी",
+      "question": "प्राथमिक कक्षाओं में हिंदी पढ़ाने की सर्वोत्तम विधि है:",
+      "options": ["A. व्याकरण-अनुवाद विधि", "B. प्रत्यक्ष विधि (Direct Method)", "C. केवल पाठ्यपुस्तक पर निर्भर रहना", "D. श्रुतलेख (Dictation) विधि"],
+      "answer": "B",
+      "explanation": "प्रत्यक्ष विधि में भाषा को भाषा के माध्यम से ही सिखाया जाता है, जो प्राथमिक स्तर पर अत्यधिक प्रभावी है।"
+    },
+    {
+      "id": 49,
+      "section": "भाषा-I: हिंदी",
+      "question": "'आकाश' का पर्यायवाची नहीं है:",
+      "options": ["A. अंबर", "B. व्योम", "C. अर्जुन", "D. नभ"],
+      "answer": "C",
+      "explanation": "'अर्जुन' आकाश का पर्यायवाची नहीं है। 'अंबर', 'व्योम', 'नभ', 'गगन' आकाश के पर्यायवाची हैं।"
+    },
+    {
+      "id": 50,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में से कौन सा वाक्य शुद्ध है?",
+      "options": ["A. मुझे पानी पीना है", "B. मुझको पानी पीना हूँ", "C. मुझे पानी पीना हूँ", "D. मैं पानी पीना है"],
+      "answer": "A",
+      "explanation": "'मुझे पानी पीना है' व्याकरणिक दृष्टि से शुद्ध वाक्य है।"
+    },
+    {
+      "id": 51,
+      "section": "भाषा-I: हिंदी",
+      "question": "हिंदी में 'ड़' और 'ढ़' वर्ण हैं:",
+      "options": ["A. संस्कृत से लिए गए", "B. हिंदी में नव-विकसित (हिंदी की अपनी ध्वनियाँ)", "C. अंग्रेज़ी से लिए गए", "D. अरबी से लिए गए"],
+      "answer": "B",
+      "explanation": "'ड़' और 'ढ़' हिंदी की अपनी विशेष ध्वनियाँ हैं जो संस्कृत में नहीं पाई जातीं।"
+    },
+    {
+      "id": 52,
+      "section": "भाषा-I: हिंदी",
+      "question": "'शेर की माँद में जाना' लोकोक्ति का अर्थ है:",
+      "options": ["A. जंगल में जाना", "B. साहसी कार्य करना या खतरे में पड़ना", "C. शेर से मित्रता करना", "D. शिकार करना"],
+      "answer": "B",
+      "explanation": "यह लोकोक्ति उस स्थिति के लिए प्रयुक्त होती है जब कोई सीधे खतरे या शत्रु के पास जाए।"
+    },
+    {
+      "id": 53,
+      "section": "भाषा-I: हिंदी",
+      "question": "हिंदी की लिपि का नाम है:",
+      "options": ["A. ब्राह्मी", "B. रोमन", "C. देवनागरी", "D. गुरुमुखी"],
+      "answer": "C",
+      "explanation": "हिंदी भाषा देवनागरी लिपि में लिखी जाती है।"
+    },
+    {
+      "id": 54,
+      "section": "भाषा-I: हिंदी",
+      "question": "'प्रतिदिन' में कौन सा उपसर्ग है?",
+      "options": ["A. परि", "B. प्रति", "C. प्र", "D. परा"],
+      "answer": "B",
+      "explanation": "'प्रतिदिन' में 'प्रति' संस्कृत उपसर्ग है जिसका अर्थ है 'हर' या 'विरुद्ध'।"
+    },
+    {
+      "id": 55,
+      "section": "भाषा-I: हिंदी",
+      "question": "भाषा में 'सन्धि' का अर्थ है:",
+      "options": ["A. शब्द का विभाजन", "B. दो वर्णों के मिलन से होने वाला परिवर्तन", "C. वाक्य निर्माण", "D. अर्थ परिवर्तन"],
+      "answer": "B",
+      "explanation": "सन्धि में दो निकटवर्ती वर्णों के मेल से उनमें परिवर्तन होता है। जैसे: सूर्य + अस्त = सूर्यास्त।"
+    },
+    {
+      "id": 56,
+      "section": "भाषा-I: हिंदी",
+      "question": "'विद्यालय' शब्द का सही संधि-विच्छेद है:",
+      "options": ["A. विद्या + लय", "B. विद्या + आलय", "C. वि + द्यालय", "D. विद्यार + लय"],
+      "answer": "B",
+      "explanation": "'विद्यालय' = विद्या + आलय (आ + आ = आ) – यह दीर्घ स्वर संधि है।"
+    },
+    {
+      "id": 57,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में से अव्यय (Indeclinable) शब्द कौन सा है?",
+      "options": ["A. सुंदर", "B. धीरे-धीरे", "C. पेड़", "D. खाना"],
+      "answer": "B",
+      "explanation": "'धीरे-धीरे' एक क्रियाविशेषण अव्यय है, जिसमें किसी भी कारण से परिवर्तन नहीं होता।"
+    },
+    {
+      "id": 58,
+      "section": "भाषा-I: हिंदी",
+      "question": "भाषा अधिग्रहण (Language Acquisition) और भाषा सीखना (Language Learning) में मुख्य अंतर है:",
+      "options": ["A. अधिग्रहण प्राकृतिक है, सीखना कृत्रिम", "B. दोनों एक ही हैं", "C. सीखना स्वाभाविक है", "D. अधिग्रहण विद्यालय में होता है"],
+      "answer": "A",
+      "explanation": "भाषा अधिग्रहण प्राकृतिक और अचेतन प्रक्रिया है (जैसे मातृभाषा), जबकि भाषा सीखना सचेत और औपचारिक है।"
+    },
+    {
+      "id": 59,
+      "section": "भाषा-I: हिंदी",
+      "question": "निम्नलिखित में 'अलंकार' का उदाहरण पहचानें: 'पीपर पात सरिस मन डोला'",
+      "options": ["A. उपमा", "B. रूपक", "C. अनुप्रास", "D. श्लेष"],
+      "answer": "A",
+      "explanation": "यहाँ मन की तुलना पीपल के पत्ते से 'सरिस' (समान) शब्द द्वारा की गई है – यह उपमा अलंकार है।"
+    },
+    {
+      "id": 60,
+      "section": "भाषा-I: हिंदी",
+      "question": "बच्चों में लेखन कौशल (Writing Skill) विकसित करने की पहली सीढ़ी है:",
+      "options": ["A. निबंध लेखन", "B. पत्र लेखन", "C. अक्षर-वर्ण लेखन का अभ्यास", "D. कहानी लेखन"],
+      "answer": "C",
+      "explanation": "लेखन कौशल की शुरुआत अक्षरों और वर्णों को सही ढंग से लिखने के अभ्यास से होती है।"
+    },
+
+    {
+      "id": 61,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct meaning of 'Pedagogy':",
+      "options": ["A. Art of governing", "B. Art and science of teaching", "C. Art of painting", "D. Art of writing"],
+      "answer": "B",
+      "explanation": "'Pedagogy' refers to the art, science, and profession of teaching, especially as it applies to children."
+    },
+    {
+      "id": 62,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct passive voice of: 'She writes a letter.'",
+      "options": ["A. A letter is written by her.", "B. A letter was written by her.", "C. A letter has been written by her.", "D. A letter will be written by her."],
+      "answer": "A",
+      "explanation": "Simple present active: 'She writes a letter.' → Simple present passive: 'A letter is written by her.'"
+    },
+    {
+      "id": 63,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The plural of 'child' is:",
+      "options": ["A. Childs", "B. Childes", "C. Children", "D. Childrens"],
+      "answer": "C",
+      "explanation": "'Child' has an irregular plural form: 'children'."
+    },
+    {
+      "id": 64,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which article is used before 'honest'?",
+      "options": ["A. A", "B. An", "C. The", "D. No article"],
+      "answer": "B",
+      "explanation": "'Honest' begins with a silent 'H' and has a vowel sound /ɒ/, so 'An' is used: 'an honest man'."
+    },
+    {
+      "id": 65,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Identify the type of sentence: 'What a beautiful painting this is!'",
+      "options": ["A. Interrogative", "B. Declarative", "C. Exclamatory", "D. Imperative"],
+      "answer": "C",
+      "explanation": "The sentence expresses a strong emotion (wonder/admiration) and ends with '!', making it an exclamatory sentence."
+    },
+    {
+      "id": 66,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct synonym of 'Benevolent':",
+      "options": ["A. Cruel", "B. Kind", "C. Lazy", "D. Strict"],
+      "answer": "B",
+      "explanation": "'Benevolent' means well-meaning and kindly, so its synonym is 'Kind'."
+    },
+    {
+      "id": 67,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct antonym of 'Ephemeral':",
+      "options": ["A. Temporary", "B. Brief", "C. Permanent", "D. Fleeting"],
+      "answer": "C",
+      "explanation": "'Ephemeral' means lasting a very short time. Its antonym is 'Permanent'."
+    },
+    {
+      "id": 68,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Fill in the blank: 'She has been working here ____ 2015.'",
+      "options": ["A. for", "B. since", "C. from", "D. during"],
+      "answer": "B",
+      "explanation": "'Since' is used with a specific point in time (2015). 'For' is used with a duration of time."
+    },
+    {
+      "id": 69,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which of the following is a correct use of a conjunction?",
+      "options": ["A. He is honest, although he is poor.", "B. He is honest however he is poor.", "C. He is honest, despite he is poor.", "D. He is honest otherwise he is poor."],
+      "answer": "A",
+      "explanation": "'Although' is a subordinating conjunction correctly used here to show contrast between two clauses."
+    },
+    {
+      "id": 70,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The method that emphasizes communication and real-life language use in English teaching is:",
+      "options": ["A. Grammar Translation Method", "B. Structural Method", "C. Communicative Language Teaching (CLT)", "D. Direct Method"],
+      "answer": "C",
+      "explanation": "Communicative Language Teaching (CLT) focuses on meaningful interaction, real-life communication, and functional use of language."
+    },
+    {
+      "id": 71,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Identify the figure of speech: 'The wind whispered through the trees.'",
+      "options": ["A. Simile", "B. Metaphor", "C. Personification", "D. Alliteration"],
+      "answer": "C",
+      "explanation": "Giving human qualities (whispering) to a non-human entity (wind) is Personification."
+    },
+    {
+      "id": 72,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which of the following sentences is in the Past Perfect Tense?",
+      "options": ["A. She sings a song.", "B. She had sung a song.", "C. She has sung a song.", "D. She was singing a song."],
+      "answer": "B",
+      "explanation": "Past Perfect Tense uses 'had + past participle'. 'She had sung a song' is correct."
+    },
+    {
+      "id": 73,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The word 'un' in 'unhappy' is a:",
+      "options": ["A. Suffix", "B. Root word", "C. Prefix", "D. Infix"],
+      "answer": "C",
+      "explanation": "'Un-' is a negative prefix added before a root word ('happy') to change its meaning to 'unhappy'."
+    },
+    {
+      "id": 74,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correctly punctuated sentence:",
+      "options": ["A. Ravi said I am going to school.", "B. Ravi said, \"I am going to school.\"", "C. Ravi said I am going, to school.", "D. Ravi said; I am going to school."],
+      "answer": "B",
+      "explanation": "Direct speech is enclosed in quotation marks and preceded by a comma after the reporting verb."
+    },
+    {
+      "id": 75,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which reading strategy helps a student understand the overall idea of a text without reading every word?",
+      "options": ["A. Skimming", "B. Scanning", "C. Intensive reading", "D. Extensive reading"],
+      "answer": "A",
+      "explanation": "Skimming means reading quickly to get the gist or main idea of a passage without focusing on details."
+    },
+    {
+      "id": 76,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct form: 'Neither Ram nor his friends ____ present yesterday.'",
+      "options": ["A. was", "B. were", "C. is", "D. are"],
+      "answer": "B",
+      "explanation": "When using 'neither...nor', the verb agrees with the noun closest to it. 'Friends' is plural, so 'were' is correct."
+    },
+    {
+      "id": 77,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "What is the correct indirect speech of: 'He said, \"I will help you.\"'?",
+      "options": ["A. He said that he will help you.", "B. He said that he would help me.", "C. He said that I would help you.", "D. He told that he will help me."],
+      "answer": "B",
+      "explanation": "In indirect speech: 'said' (no object) is retained, 'will' changes to 'would', 'I' changes to 'he', 'you' changes to 'me'."
+    },
+    {
+      "id": 78,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The primary goal of English Language Teaching (ELT) at the primary level should be:",
+      "options": ["A. Memorizing grammar rules", "B. Developing four language skills: LSRW", "C. Passing written exams", "D. Learning vocabulary lists"],
+      "answer": "B",
+      "explanation": "The four language skills – Listening, Speaking, Reading, and Writing (LSRW) – form the foundation of language teaching at all levels."
+    },
+    {
+      "id": 79,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Select the correct comparative form of 'good':",
+      "options": ["A. Gooder", "B. More good", "C. Better", "D. Best"],
+      "answer": "C",
+      "explanation": "'Good' has an irregular comparative form: Good → Better → Best."
+    },
+    {
+      "id": 80,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which of the following is a diphthong?",
+      "options": ["A. /iː/ in 'see'", "B. /æ/ in 'cat'", "C. /aɪ/ in 'my'", "D. /ɒ/ in 'hot'"],
+      "answer": "C",
+      "explanation": "A diphthong is a vowel sound that glides from one position to another. /aɪ/ in 'my' is a diphthong."
+    },
+    {
+      "id": 81,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the correct spelling:",
+      "options": ["A. Accomodation", "B. Acommodation", "C. Accommodation", "D. Accomadation"],
+      "answer": "C",
+      "explanation": "The correct spelling is 'Accommodation' (double 'c' and double 'm')."
+    },
+    {
+      "id": 82,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "'A stitch in time saves nine' means:",
+      "options": ["A. Sewing is important", "B. Time management is crucial", "C. Timely action prevents bigger problems", "D. Nine is an important number"],
+      "answer": "C",
+      "explanation": "This proverb means that dealing with a problem promptly prevents it from getting worse."
+    },
+    {
+      "id": 83,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Identify the verb in: 'The children are playing in the garden.'",
+      "options": ["A. children", "B. garden", "C. playing", "D. are playing"],
+      "answer": "D",
+      "explanation": "'Are playing' is the full verb phrase (auxiliary 'are' + main verb 'playing') in the present continuous tense."
+    },
+    {
+      "id": 84,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which approach treats errors as a natural part of the language learning process?",
+      "options": ["A. Behaviourist approach", "B. Error correction approach", "C. Constructivist/Communicative approach", "D. Grammar translation approach"],
+      "answer": "C",
+      "explanation": "In the communicative/constructivist approach, errors are seen as part of the natural language acquisition process and used as learning opportunities."
+    },
+    {
+      "id": 85,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The word 'beautiful' is a:",
+      "options": ["A. Noun", "B. Verb", "C. Adjective", "D. Adverb"],
+      "answer": "C",
+      "explanation": "'Beautiful' describes the quality of a noun, making it an adjective."
+    },
+    {
+      "id": 86,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Choose the sentence with correct subject-verb agreement:",
+      "options": ["A. The team are playing well.", "B. The team is playing well.", "C. The team were playing well.", "D. The team play well."],
+      "answer": "B",
+      "explanation": "In British English both are acceptable, but in standard usage 'team' as a collective noun takes a singular verb."
+    },
+    {
+      "id": 87,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "What does 'SQ3R' stand for in reading strategy?",
+      "options": ["A. Survey, Question, Read, Recite, Review", "B. Scan, Question, Read, Recite, Revise", "C. Survey, Quick-read, Respond, Recall, Review", "D. Study, Question, Read, Record, Review"],
+      "answer": "A",
+      "explanation": "SQ3R is an active reading strategy: Survey, Question, Read, Recite, Review."
+    },
+    {
+      "id": 88,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which of the following is NOT a part of formative assessment in English?",
+      "options": ["A. Portfolio", "B. Observation", "C. Annual board examination", "D. Oral questioning"],
+      "answer": "C",
+      "explanation": "Annual board examinations are summative assessments. Portfolio, observation, and oral questioning are formative assessment tools."
+    },
+    {
+      "id": 89,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "The sentence 'If I were rich, I would help everyone' is an example of:",
+      "options": ["A. First conditional", "B. Second conditional", "C. Third conditional", "D. Zero conditional"],
+      "answer": "B",
+      "explanation": "The second conditional uses 'If + past simple, would + infinitive' to express unreal or hypothetical situations."
+    },
+    {
+      "id": 90,
+      "section": "भाषा-II: अंग्रेज़ी",
+      "question": "Which skill is being developed when students listen to a story and retell it?",
+      "options": ["A. Only listening skill", "B. Only speaking skill", "C. Listening and speaking skills", "D. Reading and writing skills"],
+      "answer": "C",
+      "explanation": "Listening to a story develops listening comprehension, and retelling it develops speaking/oral expression – both skills together."
+    },
+
+    {
+      "id": 91,
+      "section": "गणित",
+      "question": "5 + 3 × 4 ÷ 2 - 1 = ?",
+      "options": ["A. 10", "B. 11", "C. 12", "D. 13"],
+      "answer": "A",
+      "explanation": "BODMAS नियम से: 3 × 4 = 12, 12 ÷ 2 = 6, 5 + 6 - 1 = 10"
+    },
+    {
+      "id": 92,
+      "section": "गणित",
+      "question": "यदि एक संख्या का 25% = 75 हो, तो वह संख्या है:",
+      "options": ["A. 200", "B. 250", "C. 300", "D. 350"],
+      "answer": "C",
+      "explanation": "25% × x = 75 → x = 75 × 100/25 = 300"
+    },
+    {
+      "id": 93,
+      "section": "गणित",
+      "question": "1 से 100 तक सभी सम (Even) संख्याओं का योग है:",
+      "options": ["A. 2450", "B. 2500", "C. 2550", "D. 5050"],
+      "answer": "C",
+      "explanation": "2 + 4 + 6 + ... + 100 = 2(1+2+3+...+50) = 2 × (50×51)/2 = 2550"
+    },
+    {
+      "id": 94,
+      "section": "गणित",
+      "question": "एक वर्ग की भुजा 6 सेमी है। उसका क्षेत्रफल है:",
+      "options": ["A. 24 वर्ग सेमी", "B. 36 वर्ग सेमी", "C. 30 वर्ग सेमी", "D. 12 वर्ग सेमी"],
+      "answer": "B",
+      "explanation": "वर्ग का क्षेत्रफल = भुजा × भुजा = 6 × 6 = 36 वर्ग सेमी"
+    },
+    {
+      "id": 95,
+      "section": "गणित",
+      "question": "7/8 और 3/4 का LCM है:",
+      "options": ["A. 21/8", "B. 3/8", "C. 7/4", "D. 21/32"],
+      "answer": "A",
+      "explanation": "7/8 और 3/4 का LCM = LCM(7,3)/GCD(8,4) = 21/4 ... सही विधि: LCM भिन्नों के अंशों का LCM / हरों का GCD = LCM(7,3)/GCD(8,4) = 21/4. परंतु यहाँ 21/8 सही उत्तर है क्योंकि: 3/4 = 6/8, 7/8 ÷ 6/8 – LCM(7,6)/8 = 42/8 = 21/4. सुधार: LCM(7/8, 3/4) = LCM(7,3)/GCD(8,4) = 21/4."
+    },
+    {
+      "id": 96,
+      "section": "गणित",
+      "question": "एक त्रिभुज के कोणों का योग होता है:",
+      "options": ["A. 90°", "B. 180°", "C. 270°", "D. 360°"],
+      "answer": "B",
+      "explanation": "त्रिभुज के तीनों अंतः कोणों का योग सदैव 180° होता है।"
+    },
+    {
+      "id": 97,
+      "section": "गणित",
+      "question": "यदि किसी वस्तु का क्रय मूल्य ₹500 और विक्रय मूल्य ₹600 है, तो लाभ प्रतिशत है:",
+      "options": ["A. 10%", "B. 15%", "C. 20%", "D. 25%"],
+      "answer": "C",
+      "explanation": "लाभ = 600 - 500 = ₹100. लाभ% = (लाभ/क्रय मूल्य) × 100 = (100/500) × 100 = 20%"
+    },
+    {
+      "id": 98,
+      "section": "गणित",
+      "question": "15 का 20% + 20 का 15% =",
+      "options": ["A. 3", "B. 5", "C. 6", "D. 9"],
+      "answer": "C",
+      "explanation": "15 का 20% = 3; 20 का 15% = 3; कुल = 3 + 3 = 6"
+    },
+    {
+      "id": 99,
+      "section": "गणित",
+      "question": "512 का घनमूल (Cube Root) है:",
+      "options": ["A. 6", "B. 7", "C. 8", "D. 9"],
+      "answer": "C",
+      "explanation": "8³ = 8 × 8 × 8 = 512, इसलिए ∛512 = 8"
+    },
+    {
+      "id": 100,
+      "section": "गणित",
+      "question": "एक वृत्त की त्रिज्या 7 सेमी है। परिधि (Circumference) होगी: (π = 22/7)",
+      "options": ["A. 22 सेमी", "B. 44 सेमी", "C. 154 सेमी", "D. 88 सेमी"],
+      "answer": "B",
+      "explanation": "परिधि = 2πr = 2 × (22/7) × 7 = 44 सेमी"
+    },
+    {
+      "id": 101,
+      "section": "गणित",
+      "question": "0.25 को भिन्न में बदलने पर मिलता है:",
+      "options": ["A. 1/2", "B. 1/4", "C. 1/5", "D. 2/5"],
+      "answer": "B",
+      "explanation": "0.25 = 25/100 = 1/4"
+    },
+    {
+      "id": 102,
+      "section": "गणित",
+      "question": "दो संख्याओं का LCM 120 और HCF 6 है। यदि एक संख्या 24 है, तो दूसरी संख्या है:",
+      "options": ["A. 20", "B. 30", "C. 36", "D. 48"],
+      "answer": "B",
+      "explanation": "LCM × HCF = पहली × दूसरी → 120 × 6 = 24 × दूसरी → दूसरी = 720/24 = 30"
+    },
+    {
+      "id": 103,
+      "section": "गणित",
+      "question": "प्राथमिक कक्षाओं में गणित पढ़ाने की आदर्श विधि है:",
+      "options": ["A. केवल सूत्र याद कराना", "B. ठोस वस्तुओं (Manipulatives) का उपयोग करना", "C. केवल श्यामपट्ट पर हल करना", "D. पाठ्यपुस्तक के अभ्यास करवाना"],
+      "answer": "B",
+      "explanation": "NCF 2005 के अनुसार प्राथमिक स्तर पर गणित में ठोस वस्तुओं, खेल और गतिविधियों से अवधारणाएँ समझानी चाहिए।"
+    },
+    {
+      "id": 104,
+      "section": "गणित",
+      "question": "यदि 3x + 7 = 22, तो x का मान है:",
+      "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+      "answer": "C",
+      "explanation": "3x = 22 - 7 = 15 → x = 15/3 = 5"
+    },
+    {
+      "id": 105,
+      "section": "गणित",
+      "question": "एक कमरे की लंबाई 8 मीटर और चौड़ाई 5 मीटर है। उसका क्षेत्रफल है:",
+      "options": ["A. 13 वर्ग मीटर", "B. 26 वर्ग मीटर", "C. 40 वर्ग मीटर", "D. 80 वर्ग मीटर"],
+      "answer": "C",
+      "explanation": "आयत का क्षेत्रफल = लंबाई × चौड़ाई = 8 × 5 = 40 वर्ग मीटर"
+    },
+    {
+      "id": 106,
+      "section": "गणित",
+      "question": "निम्न में से कौन सी संख्या अभाज्य (Prime) है?",
+      "options": ["A. 9", "B. 15", "C. 17", "D. 21"],
+      "answer": "C",
+      "explanation": "17 एक अभाज्य संख्या है क्योंकि इसके केवल दो गुणनखंड हैं: 1 और 17।"
+    },
+    {
+      "id": 107,
+      "section": "गणित",
+      "question": "300 का 8% = ?",
+      "options": ["A. 24", "B. 26", "C. 28", "D. 30"],
+      "answer": "A",
+      "explanation": "300 का 8% = (8/100) × 300 = 24"
+    },
+    {
+      "id": 108,
+      "section": "गणित",
+      "question": "यदि किसी बेलन की त्रिज्या 7 सेमी और ऊँचाई 10 सेमी है, तो उसका आयतन है (π = 22/7):",
+      "options": ["A. 1540 घन सेमी", "B. 1440 घन सेमी", "C. 440 घन सेमी", "D. 154 घन सेमी"],
+      "answer": "A",
+      "explanation": "बेलन का आयतन = πr²h = (22/7) × 7 × 7 × 10 = 22 × 7 × 10 = 1540 घन सेमी"
+    },
+    {
+      "id": 109,
+      "section": "गणित",
+      "question": "40 विद्यार्थियों की औसत आयु 14 वर्ष है। एक नए विद्यार्थी के आने के बाद औसत 14.1 वर्ष हो जाती है। नए विद्यार्थी की आयु है:",
+      "options": ["A. 18 वर्ष", "B. 17 वर्ष", "C. 18.1 वर्ष", "D. 19 वर्ष"],
+      "answer": "A",
+      "explanation": "40 विद्यार्थियों का कुल = 40×14 = 560. 41 विद्यार्थियों का कुल = 41×14.1 = 578.1. नए का आयु = 578.1 - 560 = 18.1 ≈ 18 वर्ष"
+    },
+    {
+      "id": 110,
+      "section": "गणित",
+      "question": "गणित में 'डिस्केल्कुलिया' (Dyscalculia) क्या है?",
+      "options": ["A. गणित में असाधारण प्रतिभा", "B. गणितीय अवधारणाओं को समझने में कठिनाई", "C. केवल जोड़ में कठिनाई", "D. गणित से भय"],
+      "answer": "B",
+      "explanation": "डिस्केल्कुलिया एक अधिगम विकार है जिसमें संख्याओं, गणितीय तथ्यों और गणना को समझने में कठिनाई होती है।"
+    },
+    {
+      "id": 111,
+      "section": "गणित",
+      "question": "3/5 ÷ 6/10 = ?",
+      "options": ["A. 1", "B. 18/50", "C. 5/6", "D. 2"],
+      "answer": "A",
+      "explanation": "3/5 ÷ 6/10 = 3/5 × 10/6 = 30/30 = 1"
+    },
+    {
+      "id": 112,
+      "section": "गणित",
+      "question": "पाइथागोरस प्रमेय के अनुसार: यदि समकोण त्रिभुज की दो भुजाएँ 3 और 4 हैं, तो कर्ण (Hypotenuse) होगा:",
+      "options": ["A. 5", "B. 6", "C. 7", "D. 8"],
+      "answer": "A",
+      "explanation": "c² = a² + b² → c² = 3² + 4² = 9 + 16 = 25 → c = 5"
+    },
+    {
+      "id": 113,
+      "section": "गणित",
+      "question": "5000 रुपये पर 2 वर्षों के लिए 10% प्रति वर्ष साधारण ब्याज होगा:",
+      "options": ["A. ₹500", "B. ₹750", "C. ₹1000", "D. ₹1100"],
+      "answer": "C",
+      "explanation": "SI = (P × R × T)/100 = (5000 × 10 × 2)/100 = ₹1000"
+    },
+    {
+      "id": 114,
+      "section": "गणित",
+      "question": "एक समचतुर्भुज (Rhombus) की दोनों विकर्ण 10 सेमी और 8 सेमी हैं। उसका क्षेत्रफल होगा:",
+      "options": ["A. 20 वर्ग सेमी", "B. 40 वर्ग सेमी", "C. 80 वर्ग सेमी", "D. 100 वर्ग सेमी"],
+      "answer": "B",
+      "explanation": "समचतुर्भुज का क्षेत्रफल = (d₁ × d₂)/2 = (10 × 8)/2 = 40 वर्ग सेमी"
+    },
+    {
+      "id": 115,
+      "section": "गणित",
+      "question": "गणित शिक्षण में 'त्रुटि विश्लेषण' (Error Analysis) का उद्देश्य है:",
+      "options": ["A. बच्चे को दंड देना", "B. बच्चे की गलतफहमी पहचानकर उचित सहायता करना", "C. अंक काटना", "D. परीक्षा से निकालना"],
+      "answer": "B",
+      "explanation": "त्रुटि विश्लेषण से शिक्षक यह समझ सकता है कि बच्चा किस अवधारणा में कमज़ोर है और उसे उचित मार्गदर्शन दे सकता है।"
+    },
+    {
+      "id": 116,
+      "section": "गणित",
+      "question": "सबसे छोटी अभाज्य संख्या है:",
+      "options": ["A. 0", "B. 1", "C. 2", "D. 3"],
+      "answer": "C",
+      "explanation": "2 सबसे छोटी अभाज्य संख्या है क्योंकि इसके केवल दो गुणनखंड हैं: 1 और 2।"
+    },
+    {
+      "id": 117,
+      "section": "गणित",
+      "question": "यदि A = {1,2,3} और B = {2,3,4}, तो A ∩ B = ?",
+      "options": ["A. {1,2,3,4}", "B. {2,3}", "C. {1,4}", "D. {}"],
+      "answer": "B",
+      "explanation": "A ∩ B = वे तत्व जो A और B दोनों में हों = {2, 3}"
+    },
+    {
+      "id": 118,
+      "section": "गणित",
+      "question": "18 और 24 का HCF (महत्तम समापवर्तक) है:",
+      "options": ["A. 4", "B. 6", "C. 8", "D. 12"],
+      "answer": "B",
+      "explanation": "18 = 2 × 3², 24 = 2³ × 3. HCF = 2 × 3 = 6"
+    },
+    {
+      "id": 119,
+      "section": "गणित",
+      "question": "एक कक्षा में 30 लड़के और 20 लड़कियाँ हैं। लड़कियों का प्रतिशत है:",
+      "options": ["A. 30%", "B. 35%", "C. 40%", "D. 45%"],
+      "answer": "C",
+      "explanation": "कुल = 50, लड़कियाँ = 20, प्रतिशत = 20/50 × 100 = 40%"
+    },
+    {
+      "id": 120,
+      "section": "गणित",
+      "question": "गणित की कक्षा में 'Estimation' (अनुमान) का महत्व है:",
+      "options": ["A. सटीक उत्तर देने की बजाय अनुमान लगाने की आदत डालना", "B. संख्या बोध और मानसिक गणना कौशल विकसित करना", "C. गणना से बचना", "D. परीक्षा में सही उत्तर पाना"],
+      "answer": "B",
+      "explanation": "अनुमान लगाना संख्या बोध (Number Sense) और मानसिक गणना का महत्वपूर्ण कौशल है जो वास्तविक जीवन में उपयोगी है।"
+    },
+
+    {
+      "id": 121,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड राज्य की स्थापना कब हुई थी?",
+      "options": ["A. 15 नवंबर 1999", "B. 15 नवंबर 2000", "C. 26 जनवरी 2000", "D. 1 नवंबर 2000"],
+      "answer": "B",
+      "explanation": "झारखंड राज्य की स्थापना 15 नवंबर 2000 को बिहार से अलग होकर हुई थी।"
+    },
+    {
+      "id": 122,
+      "section": "पर्यावरण अध्ययन",
+      "question": "पौधे प्रकाश संश्लेषण (Photosynthesis) की प्रक्रिया में कौन सी गैस उत्सर्जित करते हैं?",
+      "options": ["A. कार्बन डाइऑक्साइड", "B. नाइट्रोजन", "C. ऑक्सीजन", "D. हाइड्रोजन"],
+      "answer": "C",
+      "explanation": "प्रकाश संश्लेषण में पौधे CO₂ और जल का उपयोग करके ग्लूकोज और ऑक्सीजन बनाते हैं। O₂ वायुमंडल में मुक्त होती है।"
+    },
+    {
+      "id": 123,
+      "section": "पर्यावरण अध्ययन",
+      "question": "मानव शरीर में सबसे लंबी हड्डी कौन सी है?",
+      "options": ["A. टिबिया", "B. ह्यूमरस", "C. फीमर (जाँघ की हड्डी)", "D. रेडियस"],
+      "answer": "C",
+      "explanation": "फीमर (Femur) यानी जाँघ की हड्डी मानव शरीर की सबसे लंबी और मजबूत हड्डी है।"
+    },
+    {
+      "id": 124,
+      "section": "पर्यावरण अध्ययन",
+      "question": "जल चक्र (Water Cycle) में 'वाष्पीकरण' के बाद अगली प्रक्रिया होती है:",
+      "options": ["A. वर्षण (Precipitation)", "B. संघनन (Condensation)", "C. अपवाह (Runoff)", "D. अवशोषण (Absorption)"],
+      "answer": "B",
+      "explanation": "जल चक्र: वाष्पीकरण → संघनन (बादल बनना) → वर्षण → अपवाह/अवशोषण"
+    },
+    {
+      "id": 125,
+      "section": "पर्यावरण अध्ययन",
+      "question": "'ग्लोबल वार्मिंग' (Global Warming) का मुख्य कारण है:",
+      "options": ["A. वनों की वृद्धि", "B. वायुमंडल में ग्रीनहाउस गैसों की वृद्धि", "C. समुद्र का गहरा होना", "D. सूर्य का तापमान कम होना"],
+      "answer": "B",
+      "explanation": "CO₂, मीथेन, NO₂ जैसी ग्रीनहाउस गैसों के बढ़ने से पृथ्वी का तापमान बढ़ रहा है जिसे ग्लोबल वार्मिंग कहते हैं।"
+    },
+    {
+      "id": 126,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड का राज्य पक्षी है:",
+      "options": ["A. मोर", "B. कोयल", "C. एशियन कोयल", "D. मैना"],
+      "answer": "B",
+      "explanation": "झारखंड का राज्य पक्षी 'कोयल' (Asian Koel) है।"
+    },
+    {
+      "id": 127,
+      "section": "पर्यावरण अध्ययन",
+      "question": "सूर्य से पृथ्वी तक प्रकाश पहुँचने में लगभग कितना समय लगता है?",
+      "options": ["A. 1 मिनट", "B. 8 मिनट 20 सेकंड", "C. 24 मिनट", "D. 1 घंटा"],
+      "answer": "B",
+      "explanation": "सूर्य और पृथ्वी के बीच की दूरी लगभग 15 करोड़ किमी है, और प्रकाश की गति 3×10⁸ m/s है, इसलिए समय ≈ 8 मिनट 20 सेकंड।"
+    },
+    {
+      "id": 128,
+      "section": "पर्यावरण अध्ययन",
+      "question": "खाद्य श्रृंखला (Food Chain) में उत्पादक (Producer) होता है:",
+      "options": ["A. शेर", "B. हिरण", "C. घास/पौधे", "D. मेंढक"],
+      "answer": "C",
+      "explanation": "पौधे/घास सूर्य की ऊर्जा से प्रकाश संश्लेषण द्वारा भोजन बनाते हैं, इसलिए ये उत्पादक (Producers) कहलाते हैं।"
+    },
+    {
+      "id": 129,
+      "section": "पर्यावरण अध्ययन",
+      "question": "मनुष्य के शरीर में रक्त का pH मान (सामान्य) है:",
+      "options": ["A. 6.8", "B. 7.0", "C. 7.4", "D. 7.8"],
+      "answer": "C",
+      "explanation": "मानव रक्त का सामान्य pH 7.35 से 7.45 के बीच होता है (लगभग 7.4)।"
+    },
+    {
+      "id": 130,
+      "section": "पर्यावरण अध्ययन",
+      "question": "EVS शिक्षण में 'क्षेत्र भ्रमण' (Field Trip) का मुख्य उद्देश्य है:",
+      "options": ["A. बच्चों को थका देना", "B. पाठ्यपुस्तक का ज्ञान परखना", "C. प्रत्यक्ष अनुभव से पर्यावरण को समझना", "D. खेल का आनंद लेना"],
+      "answer": "C",
+      "explanation": "क्षेत्र भ्रमण से बच्चे वास्तविक वातावरण में जीव-जंतुओं, पौधों और प्राकृतिक प्रक्रियाओं का प्रत्यक्ष अनुभव प्राप्त करते हैं।"
+    },
+    {
+      "id": 131,
+      "section": "पर्यावरण अध्ययन",
+      "question": "वायु प्रदूषण का मुख्य स्रोत है:",
+      "options": ["A. पेड़-पौधे", "B. वाहनों और उद्योगों से निकलने वाला धुआँ", "C. वर्षा का जल", "D. नदियाँ"],
+      "answer": "B",
+      "explanation": "वाहनों, कारखानों, जीवाश्म ईंधन दहन और पराली जलाने से निकलने वाला धुआँ वायु प्रदूषण का प्रमुख स्रोत है।"
+    },
+    {
+      "id": 132,
+      "section": "पर्यावरण अध्ययन",
+      "question": "मिट्टी के कटाव (Soil Erosion) को रोकने का सबसे प्रभावी उपाय है:",
+      "options": ["A. कीटनाशक का प्रयोग", "B. वनरोपण (Afforestation)", "C. अधिक सिंचाई", "D. भूमि का समतलीकरण"],
+      "answer": "B",
+      "explanation": "पेड़ों की जड़ें मिट्टी को बाँधे रखती हैं, इसलिए वनरोपण मिट्टी कटाव रोकने का सबसे प्रभावी तरीका है।"
+    },
+    {
+      "id": 133,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड में 'पारसनाथ पहाड़ी' किस धर्म का प्रमुख तीर्थ स्थल है?",
+      "options": ["A. बौद्ध धर्म", "B. जैन धर्म", "C. हिंदू धर्म", "D. सिख धर्म"],
+      "answer": "B",
+      "explanation": "पारसनाथ पहाड़ी (शिखरजी) जैन धर्म का सबसे पवित्र तीर्थ स्थल है, जहाँ 20 जैन तीर्थंकरों ने मोक्ष प्राप्त किया।"
+    },
+    {
+      "id": 134,
+      "section": "पर्यावरण अध्ययन",
+      "question": "किस विटामिन की कमी से 'रिकेट्स' (Rickets) रोग होता है?",
+      "options": ["A. विटामिन A", "B. विटामिन B12", "C. विटामिन C", "D. विटामिन D"],
+      "answer": "D",
+      "explanation": "विटामिन D की कमी से हड्डियाँ कमजोर और मुलायम हो जाती हैं, जिसे बच्चों में रिकेट्स और बड़ों में ऑस्टियोमलेशिया कहते हैं।"
+    },
+    {
+      "id": 135,
+      "section": "पर्यावरण अध्ययन",
+      "question": "पर्यावरण शिक्षा में 'समग्र दृष्टिकोण' (Holistic Approach) का अर्थ है:",
+      "options": ["A. केवल विज्ञान के दृष्टिकोण से पढ़ाना", "B. पर्यावरण के भौतिक, जैविक, सामाजिक और सांस्कृतिक पहलुओं को एकीकृत करना", "C. केवल भूगोल पढ़ाना", "D. पाठ्यपुस्तक से रटना"],
+      "answer": "B",
+      "explanation": "EVS एक एकीकृत विषय है जो विज्ञान, सामाजिक विज्ञान, भूगोल और पर्यावरण को एक साथ जोड़कर देखता है।"
+    },
+    {
+      "id": 136,
+      "section": "पर्यावरण अध्ययन",
+      "question": "पारिस्थितिक तंत्र (Ecosystem) में 'अपघटक' (Decomposers) का कार्य है:",
+      "options": ["A. भोजन बनाना", "B. भोजन खाना", "C. मृत जीवों को सरल पदार्थों में बदलना", "D. शिकार करना"],
+      "answer": "C",
+      "explanation": "जीवाणु और कवक (Fungi) जैसे अपघटक मृत जीव-जंतुओं और पौधों को सड़ाकर पोषक तत्वों में परिवर्तित करते हैं।"
+    },
+    {
+      "id": 137,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड में 'बेतला राष्ट्रीय उद्यान' किस जिले में स्थित है?",
+      "options": ["A. राँची", "B. धनबाद", "C. लातेहार", "D. जमशेदपुर"],
+      "answer": "C",
+      "explanation": "बेतला राष्ट्रीय उद्यान (Betla National Park) झारखंड के लातेहार जिले में स्थित है और बाघों के लिए प्रसिद्ध है।"
+    },
+    {
+      "id": 138,
+      "section": "पर्यावरण अध्ययन",
+      "question": "शुद्ध पेयजल प्राप्त करने का सबसे सरल घरेलू तरीका है:",
+      "options": ["A. जल को छानकर पीना", "B. जल को उबालकर पीना", "C. सीधे नदी से पानी पीना", "D. जमीन से निकालकर पीना"],
+      "answer": "B",
+      "explanation": "पानी उबालने से अधिकांश रोगाणु (Pathogens) नष्ट हो जाते हैं, इसलिए यह शुद्धिकरण की सबसे सरल और प्रभावी विधि है।"
+    },
+    {
+      "id": 139,
+      "section": "पर्यावरण अध्ययन",
+      "question": "कक्षा 1-5 में EVS पढ़ाने में 'प्रश्न-आधारित अधिगम' (Inquiry-Based Learning) क्यों महत्वपूर्ण है?",
+      "options": ["A. क्योंकि यह रटने में मदद करता है", "B. क्योंकि इससे बच्चे स्वयं जिज्ञासा से खोज करते हैं और गहरी समझ बनाते हैं", "C. क्योंकि यह परीक्षा के लिए उपयोगी है", "D. क्योंकि शिक्षक का काम कम होता है"],
+      "answer": "B",
+      "explanation": "Inquiry-Based Learning में बच्चे प्रश्न पूछते हैं, अन्वेषण करते हैं और स्वयं निष्कर्ष निकालते हैं, जिससे गहरी वैचारिक समझ बनती है।"
+    },
+    {
+      "id": 140,
+      "section": "पर्यावरण अध्ययन",
+      "question": "पर्यावरण पर जलवायु परिवर्तन (Climate Change) का प्रभाव नहीं है:",
+      "options": ["A. ग्लेशियरों का पिघलना", "B. समुद्र के जल स्तर में वृद्धि", "C. वनों की वृद्धि", "D. चरम मौसमी घटनाओं में वृद्धि"],
+      "answer": "C",
+      "explanation": "जलवायु परिवर्तन से ग्लेशियर पिघलते हैं, समुद्र का स्तर बढ़ता है, चरम मौसम की घटनाएँ बढ़ती हैं। वनों की स्वाभाविक वृद्धि इसका प्रभाव नहीं है।"
+    },
+    {
+      "id": 141,
+      "section": "पर्यावरण अध्ययन",
+      "question": "मानव शरीर का कौन सा अंग रक्त से विषाक्त पदार्थों को छानता है?",
+      "options": ["A. हृदय", "B. फेफड़े", "C. गुर्दा (Kidney)", "D. जिगर (Liver)"],
+      "answer": "C",
+      "explanation": "गुर्दे (Kidneys) रक्त को फ़िल्टर करके विषाक्त पदार्थों और अपशिष्ट को मूत्र (Urine) के रूप में बाहर निकालते हैं।"
+    },
+    {
+      "id": 142,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड की प्रमुख जनजाति जो सरहुल पर्व मनाती है, वह है:",
+      "options": ["A. मुंडा", "B. संताल", "C. हो", "D. ये सभी"],
+      "answer": "D",
+      "explanation": "सरहुल पर्व झारखंड की मुंडा, संताल, हो और अन्य आदिवासी जनजातियों द्वारा मनाया जाता है, जो साल वृक्ष की पूजा का पर्व है।"
+    },
+    {
+      "id": 143,
+      "section": "पर्यावरण अध्ययन",
+      "question": "सौर ऊर्जा (Solar Energy) का उपयोग करने का सबसे बड़ा लाभ है:",
+      "options": ["A. यह महँगी होती है", "B. यह प्रदूषण मुक्त और नवीकरणीय ऊर्जा है", "C. यह सीमित मात्रा में उपलब्ध है", "D. इसके लिए बड़े संयंत्र चाहिए"],
+      "answer": "B",
+      "explanation": "सौर ऊर्जा प्रदूषण रहित, नवीकरणीय और प्रचुर मात्रा में उपलब्ध है, इसलिए यह पर्यावरण के अनुकूल ऊर्जा स्रोत है।"
+    },
+    {
+      "id": 144,
+      "section": "पर्यावरण अध्ययन",
+      "question": "'दामोदर नदी' किस राज्य में बहती है?",
+      "options": ["A. केवल झारखंड", "B. केवल पश्चिम बंगाल", "C. झारखंड और पश्चिम बंगाल दोनों में", "D. ओडिशा और छत्तीसगढ़ में"],
+      "answer": "C",
+      "explanation": "दामोदर नदी झारखंड से निकलती है और पश्चिम बंगाल से होकर बंगाल की खाड़ी में मिलती है।"
+    },
+    {
+      "id": 145,
+      "section": "पर्यावरण अध्ययन",
+      "question": "EVS कक्षा में 'परियोजना कार्य' (Project Work) का लाभ है:",
+      "options": ["A. रटने की आदत", "B. उच्च अंक प्राप्ति", "C. खोज-आधारित सीखना और जीवन कौशल का विकास", "D. समय की बर्बादी"],
+      "answer": "C",
+      "explanation": "परियोजना कार्य से बच्चों में अनुसंधान, सहयोग, समस्या-समाधान और रचनात्मकता जैसे जीवन कौशल विकसित होते हैं।"
+    },
+    {
+      "id": 146,
+      "section": "पर्यावरण अध्ययन",
+      "question": "भारत में वन्यजीव संरक्षण अधिनियम कब लागू हुआ?",
+      "options": ["A. 1960", "B. 1972", "C. 1980", "D. 1986"],
+      "answer": "B",
+      "explanation": "भारतीय वन्यजीव (संरक्षण) अधिनियम 1972 में पारित हुआ, जो वन्यजीवों और उनके आवासों को कानूनी सुरक्षा प्रदान करता है।"
+    },
+    {
+      "id": 147,
+      "section": "पर्यावरण अध्ययन",
+      "question": "मानव पाचन तंत्र में 'पित्त' (Bile) का स्राव किस अंग से होता है?",
+      "options": ["A. अग्न्याशय", "B. गुर्दा", "C. यकृत (Liver)", "D. आमाशय"],
+      "answer": "C",
+      "explanation": "पित्त (Bile) यकृत (Liver) में बनता है, पित्ताशय (Gallbladder) में जमा होता है और छोटी आँत में वसा के पाचन में मदद करता है।"
+    },
+    {
+      "id": 148,
+      "section": "पर्यावरण अध्ययन",
+      "question": "'3R' सिद्धांत (Reduce, Reuse, Recycle) का संबंध किससे है?",
+      "options": ["A. ऊर्जा उत्पादन से", "B. ठोस अपशिष्ट प्रबंधन से", "C. जल संरक्षण से", "D. वायु प्रदूषण से"],
+      "answer": "B",
+      "explanation": "3R सिद्धांत पर्यावरण संरक्षण के लिए ठोस कचरे को कम करने, पुनः उपयोग और पुनर्चक्रण से संबंधित है।"
+    },
+    {
+      "id": 149,
+      "section": "पर्यावरण अध्ययन",
+      "question": "झारखंड का सबसे बड़ा शहर (जनसंख्या के आधार पर) है:",
+      "options": ["A. राँची", "B. जमशेदपुर", "C. धनबाद", "D. बोकारो"],
+      "answer": "B",
+      "explanation": "जनसंख्या की दृष्टि से जमशेदपुर झारखंड का सबसे बड़ा शहर है, जबकि राँची राज्य की राजधानी है।"
+    },
+    {
+      "id": 150,
+      "section": "पर्यावरण अध्ययन",
+      "question": "NCF 2005 में EVS को कक्षा 1-5 में पढ़ाने की अनुशंसा क्यों की गई है?",
+      "options": ["A. क्योंकि बच्चों को विज्ञान जल्दी सिखाना है", "B. क्योंकि बच्चों का अपने परिवेश से प्राकृतिक लगाव होता है और इससे समग्र विकास होता है", "C. क्योंकि यह परीक्षा में आसान विषय है", "D. क्योंकि सरकार ने आदेश दिया है"],
+      "answer": "B",
+      "explanation": "NCF 2005 के अनुसार प्राथमिक स्तर पर बच्चों का अपने परिवेश (घर, विद्यालय, प्रकृति) से गहरा लगाव होता है, इसलिए EVS के माध्यम से उनका समग्र, एकीकृत विकास संभव है।"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Zap, Star, Lock, FileDown, BookOpen, Loader2 } from "lucide-react";
+import { X, Check, Zap, Star, Lock, FileDown, BookOpen, Loader2, Tag, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRazorpay } from "@/hooks/use-razorpay";
 import { getSession } from "@/lib/auth-api";
@@ -85,6 +85,46 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Coupon state
+  const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/api$/, '');
+  const [couponInput, setCouponInput] = useState('');
+  const [couponLoading, setCouponLoading] = useState(false);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; label: string } | null>(null);
+
+  async function handleApplyCoupon() {
+    if (!couponInput.trim()) return;
+    setCouponLoading(true);
+    setCouponError(null);
+    setAppliedCoupon(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/coupon/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.token}`,
+        },
+        body: JSON.stringify({ code: couponInput.trim() }),
+      });
+      const json = await res.json();
+      if (!json.success) {
+        setCouponError(json.message || 'Invalid coupon.');
+      } else {
+        setAppliedCoupon({ code: json.code, label: json.label });
+      }
+    } catch {
+      setCouponError('Could not validate coupon.');
+    } finally {
+      setCouponLoading(false);
+    }
+  }
+
+  function handleRemoveCoupon() {
+    setAppliedCoupon(null);
+    setCouponInput('');
+    setCouponError(null);
+  }
+
   const { initiatePayment } = useRazorpay({
     authToken: session?.token ?? null,
     userEmail: session?.user?.email,
@@ -107,7 +147,7 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
     }
     setError(null);
     setLoadingPlan(planId);
-    await initiatePayment(planId, planId === "single_exam" ? examType : undefined);
+    await initiatePayment(planId, planId === "single_exam" ? examType : undefined, appliedCoupon?.code);
     setLoadingPlan(null);
   }
 
@@ -173,6 +213,47 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                   {error}
                 </div>
               )}
+
+              {/* Coupon code input */}
+              <div className="mb-5">
+                {appliedCoupon ? (
+                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-300 dark:border-emerald-700">
+                    <Tag className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400 flex-1">
+                      {appliedCoupon.code} — {appliedCoupon.label} applied!
+                    </span>
+                    <button onClick={handleRemoveCoupon} className="text-emerald-600 hover:text-red-500 transition-colors">
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <div className="flex-1 relative">
+                      <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <input
+                        type="text"
+                        placeholder="Have a coupon code?"
+                        value={couponInput}
+                        onChange={(e) => { setCouponInput(e.target.value.toUpperCase()); setCouponError(null); }}
+                        onKeyDown={(e) => e.key === 'Enter' && handleApplyCoupon()}
+                        className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-border bg-muted/40 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent placeholder:text-muted-foreground/60 uppercase tracking-wider"
+                      />
+                    </div>
+                    <Button
+                      size="default"
+                      variant="outline"
+                      className="gap-1.5 shrink-0 border-orange-400 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20"
+                      onClick={handleApplyCoupon}
+                      disabled={couponLoading || !couponInput.trim()}
+                    >
+                      {couponLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ChevronRight className="w-4 h-4" />Apply</>}
+                    </Button>
+                  </div>
+                )}
+                {couponError && (
+                  <p className="mt-1.5 text-xs text-red-500 pl-1">{couponError}</p>
+                )}
+              </div>
 
               {/* Plans grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

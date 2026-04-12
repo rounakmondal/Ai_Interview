@@ -65,7 +65,7 @@ export function useRazorpay({
   const rzInstanceRef = useRef<RazorpayInstance | null>(null);
 
   const initiatePayment = useCallback(
-    async (plan: 'pro_monthly' | 'pro_yearly' | 'monthly_pass' | 'single_exam', examType?: string) => {
+    async (plan: 'pro_monthly' | 'pro_yearly' | 'monthly_pass' | 'single_exam', examType?: string, couponCode?: string) => {
       if (!authToken) {
         onError?.('Please log in to continue.');
         return;
@@ -83,6 +83,7 @@ export function useRazorpay({
       try {
         const body: Record<string, string> = { plan };
         if (plan === 'single_exam' && examType) body.examType = examType;
+        if (couponCode) body.couponCode = couponCode.toUpperCase().trim();
 
         const res = await fetch(`${API_BASE}/api/payment/create-order`, {
           method: 'POST',
@@ -125,6 +126,7 @@ export function useRazorpay({
           try {
             const verifyBody: Record<string, string> = { ...response, plan };
             if (plan === 'single_exam' && examType) verifyBody.examType = examType;
+            if (couponCode) verifyBody.couponCode = couponCode.toUpperCase().trim();
 
             const verifyRes = await fetch(`${API_BASE}/api/payment/verify`, {
               method: 'POST',

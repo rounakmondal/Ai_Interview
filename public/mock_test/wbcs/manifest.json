@@ -180,12 +180,31 @@
       "duration": 150,
       "language": "English",
       "preview": {
-        "question": "Choose the word nearest in meaning to 'Emancipate':",
+        "question": "Select the correct synonym for 'Vigilant':",
         "options": [
-          "Restrict",
-          "Liberate",
-          "Correct",
-          "Oppress"
+          "Careless",
+          "Watchful",
+          "Innocent",
+          "Lazy"
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbcs_mock_testTwo",
+      "title": "WBCS Prelims Mock Test Two",
+      "titleBn": "ডব্লিউবিসিএস প্রিলিমস মক টেস্ট Two",
+      "path": "mock_test/wbcs/wbcs_mock_test_Eleven.json",
+      "questions": 200,
+      "duration": 150,
+      "language": "English",
+      "preview": {
+        "question": "Select the correct synonym for 'Vigilant':",
+        "options": [
+          "Careless",
+          "Watchful",
+          "Innocent",
+          "Lazy"
         ],
         "answer": "B"
       }

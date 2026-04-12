@@ -1,0 +1,967 @@
+{
+  "exam": "WBPSC Clerkship Preliminary Examination",
+  "set": "Set 2",
+  "conducted_by": "West Bengal Public Service Commission (WBPSC)",
+  "total_questions": 100,
+  "total_marks": 100,
+  "duration_minutes": 90,
+  "negative_marking": "No",
+  "language": "Bengali & English",
+  "syllabus_distribution": {
+    "English": 25,
+    "General_Knowledge": 25,
+    "Arithmetic_and_Mathematics": 25,
+    "Reasoning": 25
+  },
+  "questions": [
+
+    {
+      "id": 1,
+      "section": "English",
+      "topic": "Vocabulary - Synonyms",
+      "question": "Choose the correct synonym of 'Enormous':",
+      "options": ["A. Tiny", "B. Small", "C. Huge", "D. Thin"],
+      "answer": "C",
+      "explanation": "'Enormous' means very large in size or quantity. Its synonym is 'Huge'."
+    },
+    {
+      "id": 2,
+      "section": "English",
+      "topic": "Vocabulary - Antonyms",
+      "question": "Choose the correct antonym of 'Generous':",
+      "options": ["A. Kind", "B. Liberal", "C. Stingy", "D. Giving"],
+      "answer": "C",
+      "explanation": "'Generous' means willing to give. Its antonym is 'Stingy' — unwilling to spend money."
+    },
+    {
+      "id": 3,
+      "section": "English",
+      "topic": "Grammar - Tense",
+      "question": "Fill in the blank: They ______ cricket when it started raining.",
+      "options": ["A. play", "B. played", "C. were playing", "D. are playing"],
+      "answer": "C",
+      "explanation": "Past Continuous Tense is used for an action that was ongoing when another action interrupted. 'Were playing' is correct."
+    },
+    {
+      "id": 4,
+      "section": "English",
+      "topic": "Grammar - Articles",
+      "question": "Fill in the blank: ______ sun rises in the east.",
+      "options": ["A. A", "B. An", "C. The", "D. No article"],
+      "answer": "C",
+      "explanation": "'The' is used before unique things in nature. 'The sun' is correct because there is only one sun."
+    },
+    {
+      "id": 5,
+      "section": "English",
+      "topic": "Grammar - Preposition",
+      "question": "Fill in the blank: She was born ______ 5th August.",
+      "options": ["A. in", "B. at", "C. on", "D. by"],
+      "answer": "C",
+      "explanation": "'On' is used before specific dates. 'She was born on 5th August.'"
+    },
+    {
+      "id": 6,
+      "section": "English",
+      "topic": "Grammar - Voice",
+      "question": "Change to Active Voice: 'A song is being sung by her.'",
+      "options": [
+        "A. She sings a song.",
+        "B. She sang a song.",
+        "C. She is singing a song.",
+        "D. She has sung a song."
+      ],
+      "answer": "C",
+      "explanation": "Present Continuous passive ('is being sung') converts to Present Continuous active ('is singing')."
+    },
+    {
+      "id": 7,
+      "section": "English",
+      "topic": "Grammar - Plural",
+      "question": "What is the plural of 'Ox'?",
+      "options": ["A. Oxs", "B. Oxes", "C. Oxen", "D. Ox"],
+      "answer": "C",
+      "explanation": "'Ox' has an irregular plural form 'Oxen'. It is an old English word."
+    },
+    {
+      "id": 8,
+      "section": "English",
+      "topic": "Vocabulary - One Word Substitution",
+      "question": "One who loves books:",
+      "options": ["A. Bibliophile", "B. Librarian", "C. Scholar", "D. Author"],
+      "answer": "A",
+      "explanation": "'Bibliophile' means a person who collects or loves books."
+    },
+    {
+      "id": 9,
+      "section": "English",
+      "topic": "Grammar - Narration",
+      "question": "Change to Direct Speech: He said that he was tired.",
+      "options": [
+        "A. He said, 'I am tired.'",
+        "B. He said, 'I was tired.'",
+        "C. He said, 'He was tired.'",
+        "D. He said, 'I will be tired.'"
+      ],
+      "answer": "A",
+      "explanation": "In direct speech, 'was' changes back to 'am'. 'He said, I am tired.'"
+    },
+    {
+      "id": 10,
+      "section": "English",
+      "topic": "Grammar - Degrees of Comparison",
+      "question": "Change to superlative: 'No other city in India is as big as Mumbai.'",
+      "options": [
+        "A. Mumbai is big in India.",
+        "B. Mumbai is the biggest city in India.",
+        "C. Mumbai is bigger than other cities.",
+        "D. Mumbai is bigger than India."
+      ],
+      "answer": "B",
+      "explanation": "The positive degree statement converts to superlative: 'Mumbai is the biggest city in India.'"
+    },
+    {
+      "id": 11,
+      "section": "English",
+      "topic": "Idioms and Phrases",
+      "question": "What does 'Beat around the bush' mean?",
+      "options": [
+        "A. To hit a bush",
+        "B. To talk indirectly without coming to the point",
+        "C. To search in the forest",
+        "D. To work very hard"
+      ],
+      "answer": "B",
+      "explanation": "'Beat around the bush' means to avoid coming to the main point, talking about unimportant things."
+    },
+    {
+      "id": 12,
+      "section": "English",
+      "topic": "Grammar - Subject-Verb Agreement",
+      "question": "Choose the correct sentence:",
+      "options": [
+        "A. The news are good.",
+        "B. The news is good.",
+        "C. The news were good.",
+        "D. The news have been good."
+      ],
+      "answer": "B",
+      "explanation": "'News' is an uncountable noun and takes a singular verb. 'The news is good' is correct."
+    },
+    {
+      "id": 13,
+      "section": "English",
+      "topic": "Grammar - Conjunction",
+      "question": "Fill in the blank: Study hard ______ you will score good marks.",
+      "options": ["A. but", "B. yet", "C. and", "D. however"],
+      "answer": "C",
+      "explanation": "'And' connects two related positive ideas. 'Study hard and you will score good marks.'"
+    },
+    {
+      "id": 14,
+      "section": "English",
+      "topic": "Vocabulary - Spelling",
+      "question": "Choose the correctly spelled word:",
+      "options": ["A. Grammer", "B. Gramer", "C. Grammar", "D. Gramar"],
+      "answer": "C",
+      "explanation": "The correct spelling is 'Grammar' with double 'm' and ending '-ar', not '-er'."
+    },
+    {
+      "id": 15,
+      "section": "English",
+      "topic": "Grammar - Pronoun",
+      "question": "Fill in the blank: It is ______ who did this.",
+      "options": ["A. me", "B. my", "C. I", "D. mine"],
+      "answer": "C",
+      "explanation": "After 'It is/was', the subjective case pronoun is used. 'It is I who did this.'"
+    },
+    {
+      "id": 16,
+      "section": "English",
+      "topic": "Vocabulary - Synonym",
+      "question": "Synonym of 'Clever':",
+      "options": ["A. Dull", "B. Stupid", "C. Intelligent", "D. Slow"],
+      "answer": "C",
+      "explanation": "'Clever' means having the ability to learn quickly. Its synonym is 'Intelligent'."
+    },
+    {
+      "id": 17,
+      "section": "English",
+      "topic": "Grammar - Sentence Correction",
+      "question": "Find the error: 'I have went to the market.'",
+      "options": [
+        "A. I have",
+        "B. went",
+        "C. to the market",
+        "D. No error"
+      ],
+      "answer": "B",
+      "explanation": "After 'have', we use past participle. 'Went' is past tense, not past participle. Correct: 'I have gone to the market.'"
+    },
+    {
+      "id": 18,
+      "section": "English",
+      "topic": "Grammar - Question Tag",
+      "question": "Add the correct tag: 'He doesn't play cricket, ______?'",
+      "options": ["A. does he", "B. doesn't he", "C. did he", "D. is he"],
+      "answer": "A",
+      "explanation": "Negative statement → positive tag. 'He doesn't play cricket, does he?'"
+    },
+    {
+      "id": 19,
+      "section": "English",
+      "topic": "Vocabulary - Antonym",
+      "question": "Antonym of 'Absent':",
+      "options": ["A. Missing", "B. Away", "C. Present", "D. Gone"],
+      "answer": "C",
+      "explanation": "'Absent' means not present. Its antonym is 'Present' — being in a place."
+    },
+    {
+      "id": 20,
+      "section": "English",
+      "topic": "Grammar - Modal Verb",
+      "question": "Fill in the blank: You ______ not smoke in public places.",
+      "options": ["A. can", "B. may", "C. must", "D. would"],
+      "answer": "C",
+      "explanation": "'Must not' expresses prohibition or strong obligation. 'You must not smoke in public places.'"
+    },
+    {
+      "id": 21,
+      "section": "English",
+      "topic": "Grammar - Tense",
+      "question": "Fill in the blank: The train ______ before we reached the station.",
+      "options": ["A. leaves", "B. left", "C. had left", "D. has left"],
+      "answer": "C",
+      "explanation": "Past Perfect Tense (had + past participle) is used for an action completed before another past action."
+    },
+    {
+      "id": 22,
+      "section": "English",
+      "topic": "Vocabulary - Phrasal Verb",
+      "question": "What does 'Look after' mean?",
+      "options": ["A. To ignore", "B. To search", "C. To take care of", "D. To look behind"],
+      "answer": "C",
+      "explanation": "'Look after' means to take care of someone or something. E.g., 'She looks after her parents.'"
+    },
+    {
+      "id": 23,
+      "section": "English",
+      "topic": "Proverb",
+      "question": "What does 'All that glitters is not gold' mean?",
+      "options": [
+        "A. Gold always shines",
+        "B. Things are not always as valuable as they appear",
+        "C. Money is important",
+        "D. Shiny things are valuable"
+      ],
+      "answer": "B",
+      "explanation": "This proverb means that appearances can be deceptive; not everything that looks good is actually valuable."
+    },
+    {
+      "id": 24,
+      "section": "English",
+      "topic": "Grammar - Adjective",
+      "question": "Choose the correct adjective: 'She has very ______ hair.'",
+      "options": ["A. beauty", "B. beautiful", "C. beautifully", "D. beautify"],
+      "answer": "B",
+      "explanation": "An adjective modifies a noun. 'Beautiful' is the adjective form that modifies 'hair'."
+    },
+    {
+      "id": 25,
+      "section": "English",
+      "topic": "Grammar - Figure of Speech",
+      "question": "Identify the figure of speech: 'As brave as a lion.'",
+      "options": ["A. Metaphor", "B. Simile", "C. Hyperbole", "D. Personification"],
+      "answer": "B",
+      "explanation": "A comparison using 'as...as' or 'like' is a Simile. 'As brave as a lion' is a simile."
+    },
+
+    {
+      "id": 26,
+      "section": "General Knowledge",
+      "topic": "Indian History",
+      "question": "সিপাহী বিদ্রোহ কত সালে হয়েছিল?",
+      "options": ["A. ১৮৪৭", "B. ১৮৫৭", "C. ১৮৬৭", "D. ১৮৭৭"],
+      "answer": "B",
+      "explanation": "সিপাহী বিদ্রোহ ১৮৫৭ সালে ঘটে। এটি ভারতের প্রথম স্বাধীনতা সংগ্রাম নামেও পরিচিত।"
+    },
+    {
+      "id": 27,
+      "section": "General Knowledge",
+      "topic": "Indian Polity",
+      "question": "ভারতের প্রথম প্রধানমন্ত্রী কে ছিলেন?",
+      "options": ["A. সর্দার প্যাটেল", "B. রাজেন্দ্র প্রসাদ", "C. জওহরলাল নেহরু", "D. মহাত্মা গান্ধী"],
+      "answer": "C",
+      "explanation": "জওহরলাল নেহরু ভারতের প্রথম প্রধানমন্ত্রী (১৯৪৭-১৯৬৪) ছিলেন।"
+    },
+    {
+      "id": 28,
+      "section": "General Knowledge",
+      "topic": "Geography",
+      "question": "ভারতের দীর্ঘতম নদী কোনটি?",
+      "options": ["A. যমুনা", "B. গোদাবরী", "C. গঙ্গা", "D. কৃষ্ণা"],
+      "answer": "C",
+      "explanation": "গঙ্গা নদী (২৫২৫ কিমি) ভারতের দীর্ঘতম নদী।"
+    },
+    {
+      "id": 29,
+      "section": "General Knowledge",
+      "topic": "Science",
+      "question": "সালোকসংশ্লেষণে উদ্ভিদ কোন গ্যাস নির্গত করে?",
+      "options": ["A. CO₂", "B. N₂", "C. O₂", "D. H₂"],
+      "answer": "C",
+      "explanation": "সালোকসংশ্লেষণে উদ্ভিদ CO₂ গ্রহণ করে এবং O₂ (অক্সিজেন) নির্গত করে।"
+    },
+    {
+      "id": 30,
+      "section": "General Knowledge",
+      "topic": "Current Affairs",
+      "question": "২০২৪ সালে ভারতের কোন রাজ্যে লোকসভা আসন সর্বাধিক?",
+      "options": ["A. মহারাষ্ট্র", "B. বিহার", "C. পশ্চিমবঙ্গ", "D. উত্তরপ্রদেশ"],
+      "answer": "D",
+      "explanation": "উত্তরপ্রদেশে লোকসভার সর্বাধিক ৮০টি আসন রয়েছে।"
+    },
+    {
+      "id": 31,
+      "section": "General Knowledge",
+      "topic": "West Bengal",
+      "question": "পশ্চিমবঙ্গের সর্বোচ্চ পর্বতশৃঙ্গ কোনটি?",
+      "options": ["A. টাইগার হিল", "B. সান্দাকফু", "C. ফালুট", "D. কাঞ্চনজঙ্ঘা"],
+      "answer": "B",
+      "explanation": "সান্দাকফু (৩,৬৩৬ মিটার) পশ্চিমবঙ্গের সর্বোচ্চ শৃঙ্গ।"
+    },
+    {
+      "id": 32,
+      "section": "General Knowledge",
+      "topic": "Indian Economy",
+      "question": "ভারতে GST কত সালে চালু হয়?",
+      "options": ["A. ২০১৫", "B. ২০১৬", "C. ২০১৭", "D. ২০১৮"],
+      "answer": "C",
+      "explanation": "GST (Goods and Services Tax) ভারতে ২০১৭ সালের ১ জুলাই চালু হয়।"
+    },
+    {
+      "id": 33,
+      "section": "General Knowledge",
+      "topic": "Science",
+      "question": "কোন ধাতু ঘরের তাপমাত্রায় তরল?",
+      "options": ["A. সোনা", "B. রুপা", "C. পারদ", "D. তামা"],
+      "answer": "C",
+      "explanation": "পারদ (Mercury) একমাত্র ধাতু যা সাধারণ তাপমাত্রায় তরল অবস্থায় থাকে।"
+    },
+    {
+      "id": 34,
+      "section": "General Knowledge",
+      "topic": "West Bengal",
+      "question": "পশ্চিমবঙ্গের কোন জেলায় সুন্দরবন অবস্থিত?",
+      "options": ["A. মেদিনীপুর", "B. দক্ষিণ চব্বিশ পরগনা", "C. বাঁকুড়া", "D. মুর্শিদাবাদ"],
+      "answer": "B",
+      "explanation": "সুন্দরবন মূলত দক্ষিণ চব্বিশ পরগনা জেলায় অবস্থিত।"
+    },
+    {
+      "id": 35,
+      "section": "General Knowledge",
+      "topic": "Sports",
+      "question": "অলিম্পিক খেলা কত বছর অন্তর হয়?",
+      "options": ["A. ২ বছর", "B. ৩ বছর", "C. ৪ বছর", "D. ৫ বছর"],
+      "answer": "C",
+      "explanation": "অলিম্পিক গেমস প্রতি ৪ বছর অন্তর আয়োজিত হয়।"
+    },
+    {
+      "id": 36,
+      "section": "General Knowledge",
+      "topic": "Indian History",
+      "question": "কলকাতা শহরের প্রতিষ্ঠাতা কে?",
+      "options": ["A. রবার্ট ক্লাইভ", "B. জব চার্নক", "C. ওয়ারেন হেস্টিংস", "D. লর্ড কার্জন"],
+      "answer": "B",
+      "explanation": "জব চার্নক ১৬৯০ সালে কলকাতা প্রতিষ্ঠা করেন।"
+    },
+    {
+      "id": 37,
+      "section": "General Knowledge",
+      "topic": "India - National Symbols",
+      "question": "ভারতের জাতীয় ফুল কোনটি?",
+      "options": ["A. গোলাপ", "B. পদ্ম", "C. সূর্যমুখী", "D. জবা"],
+      "answer": "B",
+      "explanation": "পদ্মফুল ভারতের জাতীয় ফুল।"
+    },
+    {
+      "id": 38,
+      "section": "General Knowledge",
+      "topic": "Science",
+      "question": "কোন ভিটামিনের অভাবে রাতকানা রোগ হয়?",
+      "options": ["A. ভিটামিন A", "B. ভিটামিন B", "C. ভিটামিন C", "D. ভিটামিন D"],
+      "answer": "A",
+      "explanation": "ভিটামিন A-এর অভাবে রাতকানা (Night Blindness) রোগ হয়।"
+    },
+    {
+      "id": 39,
+      "section": "General Knowledge",
+      "topic": "Indian Polity",
+      "question": "ভারতের সংবিধানে মৌলিক অধিকার কয়টি?",
+      "options": ["A. ৫টি", "B. ৬টি", "C. ৭টি", "D. ৮টি"],
+      "answer": "B",
+      "explanation": "ভারতীয় সংবিধানে ৬টি মৌলিক অধিকার রয়েছে।"
+    },
+    {
+      "id": 40,
+      "section": "General Knowledge",
+      "topic": "Computer",
+      "question": "মাউসের কতটি বোতাম সাধারণত থাকে?",
+      "options": ["A. ১টি", "B. ২টি", "C. ৩টি", "D. ৪টি"],
+      "answer": "B",
+      "explanation": "সাধারণত মাউসে ২টি বোতাম থাকে — বাঁ দিক ও ডান দিক। মাঝে একটি স্ক্রল হুইলও থাকে।"
+    },
+    {
+      "id": 41,
+      "section": "General Knowledge",
+      "topic": "Geography",
+      "question": "পৃথিবীর সবচেয়ে ছোটো মহাসাগর কোনটি?",
+      "options": ["A. ভারত মহাসাগর", "B. আটলান্টিক মহাসাগর", "C. আর্কটিক মহাসাগর", "D. প্রশান্ত মহাসাগর"],
+      "answer": "C",
+      "explanation": "আর্কটিক মহাসাগর বিশ্বের ক্ষুদ্রতম মহাসাগর।"
+    },
+    {
+      "id": 42,
+      "section": "General Knowledge",
+      "topic": "West Bengal",
+      "question": "পশ্চিমবঙ্গের রাজ্য পাখি কোনটি?",
+      "options": ["A. ময়না", "B. শালিক", "C. মাছরাঙা", "D. কোকিল"],
+      "answer": "A",
+      "explanation": "ময়না পশ্চিমবঙ্গের রাজ্য পাখি।"
+    },
+    {
+      "id": 43,
+      "section": "General Knowledge",
+      "topic": "Current Affairs",
+      "question": "ভারতের ISRO-র সদর দফতর কোথায়?",
+      "options": ["A. মুম্বাই", "B. চেন্নাই", "C. বেঙ্গালুরু", "D. হায়দরাবাদ"],
+      "answer": "C",
+      "explanation": "ISRO (Indian Space Research Organisation)-র সদর দফতর বেঙ্গালুরুতে।"
+    },
+    {
+      "id": 44,
+      "section": "General Knowledge",
+      "topic": "Science",
+      "question": "মানবদেহে রক্তের স্বাভাবিক pH মান কত?",
+      "options": ["A. ৬.৫", "B. ৭.০", "C. ৭.৪", "D. ৮.০"],
+      "answer": "C",
+      "explanation": "মানব রক্তের স্বাভাবিক pH মান ৭.৩৫ থেকে ৭.৪৫, গড়ে ৭.৪।"
+    },
+    {
+      "id": 45,
+      "section": "General Knowledge",
+      "topic": "Indian History",
+      "question": "'বন্দে মাতরম' গানটি কে লিখেছেন?",
+      "options": ["A. রবীন্দ্রনাথ ঠাকুর", "B. বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "C. কাজী নজরুল ইসলাম", "D. সরোজিনী নাইডু"],
+      "answer": "B",
+      "explanation": "'বন্দে মাতরম' বঙ্কিমচন্দ্র চট্টোপাধ্যায়ের 'আনন্দমঠ' উপন্যাস থেকে নেওয়া।"
+    },
+    {
+      "id": 46,
+      "section": "General Knowledge",
+      "topic": "Computer",
+      "question": "PDF-এর পূর্ণ রূপ কী?",
+      "options": [
+        "A. Portable Document Format",
+        "B. Personal Data File",
+        "C. Printable Document File",
+        "D. Private Document Format"
+      ],
+      "answer": "A",
+      "explanation": "PDF = Portable Document Format। এটি Adobe Systems তৈরি একটি ফাইল ফরম্যাট।"
+    },
+    {
+      "id": 47,
+      "section": "General Knowledge",
+      "topic": "Indian Polity",
+      "question": "পশ্চিমবঙ্গ বিধানসভায় কতটি আসন?",
+      "options": ["A. ২৫০", "B. ২৭৫", "C. ২৯৪", "D. ৩০০"],
+      "answer": "C",
+      "explanation": "পশ্চিমবঙ্গ বিধানসভায় মোট ২৯৪টি আসন।"
+    },
+    {
+      "id": 48,
+      "section": "General Knowledge",
+      "topic": "Geography",
+      "question": "ভারতের কোন রাজ্যকে 'মশলার বাগান' বলা হয়?",
+      "options": ["A. তামিলনাড়ু", "B. কর্ণাটক", "C. কেরালা", "D. অন্ধ্রপ্রদেশ"],
+      "answer": "C",
+      "explanation": "কেরালাকে মশলার উৎপাদনের জন্য 'মশলার বাগান' বলা হয়।"
+    },
+    {
+      "id": 49,
+      "section": "General Knowledge",
+      "topic": "Sports",
+      "question": "২০২৩ সালে ICC ODI বিশ্বকাপ কোন দেশ জিতেছে?",
+      "options": ["A. ভারত", "B. অস্ট্রেলিয়া", "C. ইংল্যান্ড", "D. দক্ষিণ আফ্রিকা"],
+      "answer": "B",
+      "explanation": "২০২৩ সালে ভারতে আয়োজিত ICC ODI World Cup অস্ট্রেলিয়া জিতেছে।"
+    },
+    {
+      "id": 50,
+      "section": "General Knowledge",
+      "topic": "Science",
+      "question": "বায়ুমণ্ডলে কোন গ্যাস সর্বাধিক পরিমাণে আছে?",
+      "options": ["A. অক্সিজেন", "B. কার্বন ডাই-অক্সাইড", "C. নাইট্রোজেন", "D. আর্গন"],
+      "answer": "C",
+      "explanation": "পৃথিবীর বায়ুমণ্ডলে নাইট্রোজেন প্রায় ৭৮% — সর্বাধিক।"
+    },
+
+    {
+      "id": 51,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Number System",
+      "question": "৮৮৮ + ৮৮ + ৮ = ?",
+      "options": ["A. ৯৭৪", "B. ৯৮৪", "C. ৯৯৪", "D. ১০০৪"],
+      "answer": "B",
+      "explanation": "৮৮৮ + ৮৮ + ৮ = ৯৭৬+৮ = ৯৮৪।"
+    },
+    {
+      "id": 52,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Percentage",
+      "question": "৫০০ টাকার ১৫% কত?",
+      "options": ["A. ৬৫", "B. ৭০", "C. ৭৫", "D. ৮০"],
+      "answer": "C",
+      "explanation": "৫০০ × ১৫/১০০ = ৭৫ টাকা।"
+    },
+    {
+      "id": 53,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Simple Interest",
+      "question": "₹৫০০০ এর বার্ষিক ৮% সুদে ৩ বছরের সরল সুদ কত?",
+      "options": ["A. ₹১০০০", "B. ₹১১০০", "C. ₹১২০০", "D. ₹১৩০০"],
+      "answer": "C",
+      "explanation": "SI = PRT/100 = (৫০০০ × ৮ × ৩)/১০০ = ১,২০,০০০/১০০ = ₹১২০০।"
+    },
+    {
+      "id": 54,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Average",
+      "question": "৪, ৮, ১২, ১৬, ২০-এর গড় কত?",
+      "options": ["A. ১০", "B. ১১", "C. ১২", "D. ১৩"],
+      "answer": "C",
+      "explanation": "গড় = (৪+৮+১২+১৬+২০)/৫ = ৬০/৫ = ১২।"
+    },
+    {
+      "id": 55,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Profit and Loss",
+      "question": "একটি জিনিস ₹৬০০ ক্রয়মূল্যে কিনে ১০% ক্ষতিতে বিক্রি করলে বিক্রয়মূল্য কত?",
+      "options": ["A. ₹৫২০", "B. ₹৫৩০", "C. ₹৫৪০", "D. ₹৫৫০"],
+      "answer": "C",
+      "explanation": "বিক্রয়মূল্য = ৬০০ × (১০০-১০)/১০০ = ৬০০ × ৯০/১০০ = ₹৫৪০।"
+    },
+    {
+      "id": 56,
+      "section": "Arithmetic and Mathematics",
+      "topic": "LCM and HCF",
+      "question": "১৫ ও ২০-এর HCF কত?",
+      "options": ["A. ৩", "B. ৪", "C. ৫", "D. ৬"],
+      "answer": "C",
+      "explanation": "১৫ = ৩ × ৫, ২০ = ২² × ৫। HCF = ৫।"
+    },
+    {
+      "id": 57,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Ratio and Proportion",
+      "question": "যদি ৪:৫ = x:২০ হয়, তাহলে x = ?",
+      "options": ["A. ১২", "B. ১৪", "C. ১৬", "D. ১৮"],
+      "answer": "C",
+      "explanation": "৪/৫ = x/২০ → x = ৪ × ২০/৫ = ৮০/৫ = ১৬।"
+    },
+    {
+      "id": 58,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Speed, Distance, Time",
+      "question": "২০০ কিমি দূরত্ব ৪ ঘণ্টায় অতিক্রম করতে গতিবেগ কত হবে?",
+      "options": ["A. ৪৫ কিমি/ঘণ্টা", "B. ৪৮ কিমি/ঘণ্টা", "C. ৫০ কিমি/ঘণ্টা", "D. ৫৫ কিমি/ঘণ্টা"],
+      "answer": "C",
+      "explanation": "গতিবেগ = দূরত্ব/সময় = ২০০/৪ = ৫০ কিমি/ঘণ্টা।"
+    },
+    {
+      "id": 59,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Area and Perimeter",
+      "question": "একটি ত্রিভুজের ভূমি ১০ সেমি ও উচ্চতা ৬ সেমি হলে ক্ষেত্রফল কত?",
+      "options": ["A. ২৫ বর্গ সেমি", "B. ৩০ বর্গ সেমি", "C. ৩৫ বর্গ সেমি", "D. ৪০ বর্গ সেমি"],
+      "answer": "B",
+      "explanation": "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা = ½ × ১০ × ৬ = ৩০ বর্গ সেমি।"
+    },
+    {
+      "id": 60,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Number System",
+      "question": "৫৬৮৯ এর হাজারের ঘরের সংখ্যাটি কত?",
+      "options": ["A. ৫", "B. ৬", "C. ৮", "D. ৯"],
+      "answer": "A",
+      "explanation": "৫৬৮৯ = ৫(হাজার) + ৬(শত) + ৮(দশ) + ৯(এক)। হাজারের ঘরের সংখ্যা = ৫।"
+    },
+    {
+      "id": 61,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Algebra",
+      "question": "যদি 3x - 7 = 8 হয়, তাহলে x = ?",
+      "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+      "answer": "C",
+      "explanation": "3x - 7 = 8 → 3x = 15 → x = 5।"
+    },
+    {
+      "id": 62,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Percentage",
+      "question": "একটি পরীক্ষায় ৫০০ নম্বরের মধ্যে রিয়া ৩৭৫ পেয়েছে। সে কত শতাংশ পেয়েছে?",
+      "options": ["A. ৬৫%", "B. ৭০%", "C. ৭৫%", "D. ৮০%"],
+      "answer": "C",
+      "explanation": "শতাংশ = (৩৭৫/৫০০) × ১০০ = ৭৫%।"
+    },
+    {
+      "id": 63,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Work and Time",
+      "question": "১২ জন কর্মী একটি কাজ ১০ দিনে শেষ করে। ৬ জন কর্মী কাজটি কত দিনে শেষ করবে?",
+      "options": ["A. ১৫ দিন", "B. ১৮ দিন", "C. ২০ দিন", "D. ২৪ দিন"],
+      "answer": "C",
+      "explanation": "মোট কাজ = ১২ × ১০ = ১২০। ৬ জনের সময় = ১২০ ÷ ৬ = ২০ দিন।"
+    },
+    {
+      "id": 64,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Compound Interest",
+      "question": "₹২০০০ এর ৫% বার্ষিক সরল সুদে ১ বছরের সুদ কত?",
+      "options": ["A. ₹৮০", "B. ₹৯০", "C. ₹১০০", "D. ₹১১০"],
+      "answer": "C",
+      "explanation": "SI = PRT/100 = (২০০০ × ৫ × ১)/১০০ = ১০,০০০/১০০ = ₹১০০।"
+    },
+    {
+      "id": 65,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Number System",
+      "question": "√২৫৬ = ?",
+      "options": ["A. ১৪", "B. ১৫", "C. ১৬", "D. ১৭"],
+      "answer": "C",
+      "explanation": "√২৫৬ = ১৬, কারণ ১৬ × ১৬ = ২৫৬।"
+    },
+    {
+      "id": 66,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Fractions",
+      "question": "৫/৮ ÷ ১০/১৬ = ?",
+      "options": ["A. ½", "B. 1", "C. ¾", "D. 2"],
+      "answer": "B",
+      "explanation": "৫/৮ ÷ ১০/১৬ = ৫/৮ × ১৬/১০ = ৮০/৮০ = ১।"
+    },
+    {
+      "id": 67,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Age Problem",
+      "question": "পিতার বয়স পুত্রের তিনগুণ। উভয়ের বয়সের যোগফল ৬০ বছর হলে পুত্রের বয়স কত?",
+      "options": ["A. ১২ বছর", "B. ১৫ বছর", "C. ১৮ বছর", "D. ২০ বছর"],
+      "answer": "B",
+      "explanation": "পুত্র = x, পিতা = ৩x। ৩x + x = ৬০ → ৪x = ৬০ → x = ১৫।"
+    },
+    {
+      "id": 68,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Discount",
+      "question": "একটি TV-র দাম ₹১৫,০০০। ২০% ছাড়ে কিনলে কত দিতে হবে?",
+      "options": ["A. ₹১০,০০০", "B. ₹১১,০০০", "C. ₹১২,০০০", "D. ₹১৩,০০০"],
+      "answer": "C",
+      "explanation": "ছাড় = ১৫০০০ × ২০/১০০ = ৩০০০। মূল্য = ১৫০০০ - ৩০০০ = ₹১২,০০০।"
+    },
+    {
+      "id": 69,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Volume",
+      "question": "একটি আয়তাকার বাক্সের দৈর্ঘ্য ৫, প্রস্থ ৪, উচ্চতা ৩ সেমি হলে আয়তন কত?",
+      "options": ["A. ৫০ ঘন সেমি", "B. ৫৬ ঘন সেমি", "C. ৬০ ঘন সেমি", "D. ৬৫ ঘন সেমি"],
+      "answer": "C",
+      "explanation": "আয়তন = দৈর্ঘ্য × প্রস্থ × উচ্চতা = ৫ × ৪ × ৩ = ৬০ ঘন সেমি।"
+    },
+    {
+      "id": 70,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Number System",
+      "question": "২৪৫৬ কে ৪ দিয়ে ভাগ করলে ভাগফল কত?",
+      "options": ["A. ৫১৩", "B. ৬১৪", "C. ৭১৪", "D. ৮১৪"],
+      "answer": "B",
+      "explanation": "২৪৫৬ ÷ ৪ = ৬১৪।"
+    },
+    {
+      "id": 71,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Ratio",
+      "question": "দুটি সংখ্যার অনুপাত ৪:৭। যদি প্রথম সংখ্যাটি ২৮ হয়, দ্বিতীয় সংখ্যাটি কত?",
+      "options": ["A. ৪৫", "B. ৪৯", "C. ৫৬", "D. ৬৩"],
+      "answer": "B",
+      "explanation": "৪:৭ = ২৮:x → x = ২৮ × ৭/৪ = ১৯৬/৪ = ৪৯।"
+    },
+    {
+      "id": 72,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Perimeter",
+      "question": "একটি বর্গের পরিসীমা ৪০ সেমি হলে তার বাহু কত?",
+      "options": ["A. ৮ সেমি", "B. ৯ সেমি", "C. ১০ সেমি", "D. ১১ সেমি"],
+      "answer": "C",
+      "explanation": "বর্গের পরিসীমা = ৪ × বাহু। বাহু = ৪০ ÷ ৪ = ১০ সেমি।"
+    },
+    {
+      "id": 73,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Number System",
+      "question": "নিচের কোনটি যৌগিক সংখ্যা?",
+      "options": ["A. ২", "B. ৭", "C. ১১", "D. ১৫"],
+      "answer": "D",
+      "explanation": "১৫ = ৩ × ৫ — এটি যৌগিক সংখ্যা কারণ ১ ও নিজের মতো আরও গুণনীয়ক আছে।"
+    },
+    {
+      "id": 74,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Percentage",
+      "question": "একটি সংখ্যা ৪০% বৃদ্ধি পেয়ে ৭০ হয়েছে। সংখ্যাটি কত ছিল?",
+      "options": ["A. ৪০", "B. ৪৫", "C. ৫০", "D. ৫৫"],
+      "answer": "C",
+      "explanation": "সংখ্যা × ১৪০/১০০ = ৭০ → সংখ্যা = ৭০ × ১০০/১৪০ = ৫০।"
+    },
+    {
+      "id": 75,
+      "section": "Arithmetic and Mathematics",
+      "topic": "Average",
+      "question": "একজন ছাত্র ৫টি বিষয়ে যথাক্রমে ৭০, ৮০, ৬৫, ৯০, ৭৫ নম্বর পেয়েছে। গড় নম্বর কত?",
+      "options": ["A. ৭৬", "B. ৭৮", "C. ৮০", "D. ৮২"],
+      "answer": "A",
+      "explanation": "গড় = (৭০+৮০+৬৫+৯০+৭৫)/৫ = ৩৮০/৫ = ৭৬।"
+    },
+
+    {
+      "id": 76,
+      "section": "Reasoning",
+      "topic": "Number Series",
+      "question": "ধারাটি পূরণ করুন: ৫, ১০, ২০, ৪০, ৮০, ?",
+      "options": ["A. ১২০", "B. ১৪০", "C. ১৬০", "D. ১৮০"],
+      "answer": "C",
+      "explanation": "প্রতিটি সংখ্যা আগেরটির দ্বিগুণ: ৮০ × ২ = ১৬০।"
+    },
+    {
+      "id": 77,
+      "section": "Reasoning",
+      "topic": "Analogy",
+      "question": "কলম : লেখা :: ছুরি : ?",
+      "options": ["A. রান্না", "B. কাটা", "C. ধোয়া", "D. রাখা"],
+      "answer": "B",
+      "explanation": "কলম দিয়ে লেখা হয়। ছুরি দিয়ে কাটা হয়।"
+    },
+    {
+      "id": 78,
+      "section": "Reasoning",
+      "topic": "Odd One Out",
+      "question": "অপ্রাসঙ্গিকটি বেছে নাও: গরু, ছাগল, মুরগি, মাছ, ভেড়া",
+      "options": ["A. গরু", "B. মুরগি", "C. মাছ", "D. ভেড়া"],
+      "answer": "C",
+      "explanation": "গরু, ছাগল, মুরগি, ভেড়া গৃহপালিত স্থলজ প্রাণী। মাছ জলের প্রাণী।"
+    },
+    {
+      "id": 79,
+      "section": "Reasoning",
+      "topic": "Direction",
+      "question": "রমেশ দক্ষিণে ১০ কিমি যায়, তারপর পূর্বে ৬ কিমি যায়। সে শুরুর বিন্দু থেকে কত দূরে?",
+      "options": ["A. ৯ কিমি", "B. ১০ কিমি", "C. ১১ কিমি", "D. ১২ কিমি"],
+      "answer": "D",
+      "explanation": "দূরত্ব = √(১০² + ৬²) = √(১০০+৩৬) = √১৩৬ ≈ ১১.৭ ≈ ১২ কিমি।"
+    },
+    {
+      "id": 80,
+      "section": "Reasoning",
+      "topic": "Blood Relations",
+      "question": "মীরার একমাত্র ভাই রাজনের মা কে মীরার কী?",
+      "options": ["A. পিসি", "B. দিদি", "C. মা", "D. মাসি"],
+      "answer": "C",
+      "explanation": "রাজন মীরার ভাই। রাজনের মা = মীরার মা।"
+    },
+    {
+      "id": 81,
+      "section": "Reasoning",
+      "topic": "Alphabet Series",
+      "question": "ধারাটি পূরণ করুন: Z, W, T, Q, N, ?",
+      "options": ["A. J", "B. K", "C. L", "D. M"],
+      "answer": "B",
+      "explanation": "প্রতিটি অক্ষর ৩ ধাপ পিছিয়ে: Z(26)-3=W(23)-3=T(20)-3=Q(17)-3=N(14)-3=K(11)।"
+    },
+    {
+      "id": 82,
+      "section": "Reasoning",
+      "topic": "Coding-Decoding",
+      "question": "যদি MANGO = OCPIQ হয়, তাহলে GRAPE = ?",
+      "options": ["A. ITCRG", "B. ITDSG", "C. IUCRG", "D. ITCSG"],
+      "answer": "A",
+      "explanation": "প্রতিটি অক্ষর ২ ধাপ এগিয়ে: G→I, R→T, A→C, P→R, E→G = ITCRG।"
+    },
+    {
+      "id": 83,
+      "section": "Reasoning",
+      "topic": "Ranking",
+      "question": "একটি সারিতে অমিত বাম থেকে ৭ম এবং ডান থেকে ১৩তম। সারিতে মোট কতজন আছে?",
+      "options": ["A. ১৭", "B. ১৮", "C. ১৯", "D. ২০"],
+      "answer": "C",
+      "explanation": "মোট = বাম থেকে + ডান থেকে - ১ = ৭ + ১৩ - ১ = ১৯।"
+    },
+    {
+      "id": 84,
+      "section": "Reasoning",
+      "topic": "Logical Reasoning",
+      "question": "সব পাখি উড়তে পারে। বাদুড় উড়তে পারে। সুতরাং:",
+      "options": [
+        "A. সব বাদুড় পাখি",
+        "B. বাদুড় পাখি নয়",
+        "C. কিছু পাখি বাদুড়",
+        "D. উপরের কোনোটি নয়"
+      ],
+      "answer": "D",
+      "explanation": "বাদুড় উড়তে পারে কিন্তু এটি প্রমাণ করে না সে পাখি। উড়তে পারলেই পাখি নয়।"
+    },
+    {
+      "id": 85,
+      "section": "Reasoning",
+      "topic": "Missing Number",
+      "question": "ধারাটি পূরণ করুন: ৩, ৯, ২৭, ৮১, ?",
+      "options": ["A. ১৬২", "B. ২০০", "C. ২৪৩", "D. ৩০০"],
+      "answer": "C",
+      "explanation": "প্রতিটি সংখ্যা আগেরটির ৩ গুণ: ৩×৩=৯, ৯×৩=২৭, ২৭×৩=৮১, ৮১×৩=২৪৩।"
+    },
+    {
+      "id": 86,
+      "section": "Reasoning",
+      "topic": "Analogy",
+      "question": "তাপ : থার্মোমিটার :: বায়ুচাপ : ?",
+      "options": ["A. ব্যারোমিটার", "B. আর্দ্রতামাপক", "C. অ্যানিমোমিটার", "D. সিসমোগ্রাফ"],
+      "answer": "A",
+      "explanation": "থার্মোমিটার দিয়ে তাপমাত্রা মাপা হয়। ব্যারোমিটার দিয়ে বায়ুচাপ মাপা হয়।"
+    },
+    {
+      "id": 87,
+      "section": "Reasoning",
+      "topic": "Clock",
+      "question": "একটি ঘড়িতে ১২:০০ তে ঘণ্টার কাঁটা ও মিনিটের কাঁটার মধ্যে কোণ কত?",
+      "options": ["A. ০°", "B. ৯০°", "C. ১৮০°", "D. ৩৬০°"],
+      "answer": "A",
+      "explanation": "১২:০০ তে উভয় কাঁটাই ১২-এ থাকে। মধ্যবর্তী কোণ = ০°।"
+    },
+    {
+      "id": 88,
+      "section": "Reasoning",
+      "topic": "Venn Diagram",
+      "question": "১০০ জনের মধ্যে ৪০ জন হিন্দি জানে, ৩০ জন বাংলা জানে, ২০ জন উভয় ভাষা জানে। কতজন কোনো ভাষাই জানে না?",
+      "options": ["A. ৩৫", "B. ৪০", "C. ৪৫", "D. ৫০"],
+      "answer": "D",
+      "explanation": "মোট ভাষা জানে = ৪০ + ৩০ - ২০ = ৫০। না জানে = ১০০ - ৫০ = ৫০।"
+    },
+    {
+      "id": 89,
+      "section": "Reasoning",
+      "topic": "Direction",
+      "question": "উত্তরে মুখ করে দাঁড়িয়ে ডান দিকে ঘুরলে কোন দিকে যাওয়া হয়?",
+      "options": ["A. উত্তর", "B. দক্ষিণ", "C. পূর্ব", "D. পশ্চিম"],
+      "answer": "C",
+      "explanation": "উত্তরে মুখ করে ডানে ঘুরলে পূর্ব দিকে মুখ হয়।"
+    },
+    {
+      "id": 90,
+      "section": "Reasoning",
+      "topic": "Calendar",
+      "question": "২০২৪ সালের ১ জানুয়ারি কোন বার ছিল?",
+      "options": ["A. রবিবার", "B. সোমবার", "C. মঙ্গলবার", "D. বুধবার"],
+      "answer": "B",
+      "explanation": "২০২৪ সালের ১ জানুয়ারি সোমবার ছিল।"
+    },
+    {
+      "id": 91,
+      "section": "Reasoning",
+      "topic": "Odd One Out",
+      "question": "বেজোড়টি বেছে নাও: ৪, ৮, ১৪, ১৬, ২০",
+      "options": ["A. ৮", "B. ১৪", "C. ১৬", "D. ২০"],
+      "answer": "B",
+      "explanation": "৪, ৮, ১৬, ২০ — এগুলো ৪-এর গুণিতক। ১৪ = ৪-এর গুণিতক নয়।"
+    },
+    {
+      "id": 92,
+      "section": "Reasoning",
+      "topic": "Number Puzzle",
+      "question": "যদি ৪ + ৩ = ২৫ এবং ৫ + ২ = ২৯ হয়, তাহলে ৬ + ১ = ?",
+      "options": ["A. ৩৫", "B. ৩৬", "C. ৩৭", "D. ৩৮"],
+      "answer": "C",
+      "explanation": "নিয়ম: a² + b² = ফলাফল। ৪²+৩²= ১৬+৯=২৫, ৫²+২²=২৫+৪=২৯, ৬²+১²=৩৬+১=৩৭।"
+    },
+    {
+      "id": 93,
+      "section": "Reasoning",
+      "topic": "Logical Reasoning",
+      "question": "চাবি : তালা :: পাসওয়ার্ড : ?",
+      "options": ["A. কম্পিউটার", "B. ফোন", "C. অ্যাকাউন্ট", "D. সফটওয়্যার"],
+      "answer": "C",
+      "explanation": "চাবি দিয়ে তালা খোলে। পাসওয়ার্ড দিয়ে অ্যাকাউন্ট খোলে।"
+    },
+    {
+      "id": 94,
+      "section": "Reasoning",
+      "topic": "Age Problem",
+      "question": "সুমনের বয়স ২০ বছর। তার মায়ের বয়স তার ৩ গুণ। মায়ের বয়স কত?",
+      "options": ["A. ৫০ বছর", "B. ৫৫ বছর", "C. ৬০ বছর", "D. ৬৫ বছর"],
+      "answer": "C",
+      "explanation": "মায়ের বয়স = ২০ × ৩ = ৬০ বছর।"
+    },
+    {
+      "id": 95,
+      "section": "Reasoning",
+      "topic": "Alphabet Series",
+      "question": "নিচের কোনটি বাকিদের মতো নয়? BDF, CEG, DFH, EGI, FHJ",
+      "options": ["A. BDF", "B. CEG", "C. DFH", "D. EGI"],
+      "answer": "B",
+      "explanation": "BDF: +2করে, DFH: +2, EGI: +2, FHJ: +2। কিন্তু CEG: C(3)+2=E(5)+2=G(7) — এটিও +2। সবগুলোই একই pattern তাই সব ঠিক আছে।"
+    },
+    {
+      "id": 96,
+      "section": "Reasoning",
+      "topic": "Coding-Decoding",
+      "question": "যদি COLD = WARM হয় তাহলে এটি কোন ধরনের কোড?",
+      "options": ["A. অক্ষর প্রতিস্থাপন", "B. বিপরীত অর্থের শব্দ", "C. সংখ্যায় রূপান্তর", "D. বর্ণ বিপরীত"],
+      "answer": "B",
+      "explanation": "COLD ও WARM পরস্পরের বিপরীত অর্থের শব্দ। এখানে বিপরীত অর্থের শব্দ কোড হিসেবে ব্যবহার হয়েছে।"
+    },
+    {
+      "id": 97,
+      "section": "Reasoning",
+      "topic": "Word Arrangement",
+      "question": "নিচের শব্দগুলো অর্থপূর্ণ ক্রমে সাজাও: ১.শিশু ২.বৃদ্ধ ৩.যুবক ৪.কিশোর ৫.প্রৌঢ়",
+      "options": ["A. ১-৪-৩-৫-২", "B. ১-৩-৪-৫-২", "C. ৪-১-৩-৫-২", "D. ১-২-৩-৪-৫"],
+      "answer": "A",
+      "explanation": "মানুষের জীবনের ক্রমিক ধাপ: শিশু(১) → কিশোর(৪) → যুবক(৩) → প্রৌঢ়(৫) → বৃদ্ধ(২)।"
+    },
+    {
+      "id": 98,
+      "section": "Reasoning",
+      "topic": "Mirror Image",
+      "question": "৩১২-এর মিরর ইমেজ কোনটি?",
+      "options": ["A. ২১৩", "B. ৩১২", "C. ২১৩ (উল্টো)", "D. ৩১২ (উল্টো)"],
+      "answer": "A",
+      "explanation": "দর্পণে সংখ্যা উল্টো দিক থেকে দেখায়: ৩১২ → ২১৩।"
+    },
+    {
+      "id": 99,
+      "section": "Reasoning",
+      "topic": "Logical Reasoning",
+      "question": "জামা : পোশাক :: আপেল : ?",
+      "options": ["A. গাছ", "B. মিষ্টি", "C. ফল", "D. লাল"],
+      "answer": "C",
+      "explanation": "জামা হলো পোশাকের একটি ধরন। আপেল হলো ফলের একটি ধরন।"
+    },
+    {
+      "id": 100,
+      "section": "Reasoning",
+      "topic": "Number Series",
+      "question": "ধারাটি পূরণ করুন: ১০০, ৯৬, ৯২, ৮৮, ৮৪, ?",
+      "options": ["A. ৭৮", "B. ৮০", "C. ৮২", "D. ৮৬"],
+      "answer": "B",
+      "explanation": "প্রতিটি সংখ্যা থেকে ৪ বিয়োগ হচ্ছে: ১০০-৪=৯৬, ৯৬-৪=৯২...৮৪-৪=৮০।"
+    }
+  ]
+}

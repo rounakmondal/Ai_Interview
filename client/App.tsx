@@ -90,6 +90,7 @@ const BlogRRBNTPCSyllabus = lazy(() => import("./pages/blog/RRBNTPCSyllabus2026"
 const BlogIBPSPOPapers = lazy(() => import("./pages/blog/IBPSPOPreviousYearPapers"));
 const BlogSSCMTSPapers = lazy(() => import("./pages/blog/SSCMTSPreviousYearPapers"));
 const BlogWBPSCClerkship2024 = lazy(() => import("./pages/blog/WBPSCClerkship2024Paper"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -215,6 +216,8 @@ function AppContent() {
           <Route path="/eligibility-checker" element={<ExamEligibilityChecker />} />
           <Route path="/typing-test" element={<TypingSpeedTest />} />
           <Route path="/tools" element={<ToolsHub />} />
+          {/* Admin */}
+          <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
