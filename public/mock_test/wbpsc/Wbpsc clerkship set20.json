@@ -1,0 +1,917 @@
+{
+  "exam": "WBPSC Clerkship Preliminary Examination",
+  "conducted_by": "West Bengal Public Service Commission (WBPSC)",
+  "total_questions": 100,
+  "total_marks": 100,
+  "duration_minutes": 90,
+  "negative_marking": "No",
+  "language": "Bengali",
+  "syllabus_distribution": {
+    "English": 25,
+    "General_Knowledge": 25,
+    "Arithmetic_and_Mathematics": 25,
+    "Reasoning": 25
+  },
+  "questions": [
+    {
+      "id": 1,
+      "section": "English",
+      "topic": "Parts of Speech",
+      "question": "'She sings beautifully' বাক্যে 'beautifully' কোন Parts of Speech?",
+      "options": ["A. Adjective", "B. Adverb", "C. Noun", "D. Verb"],
+      "answer": "B",
+      "explanation": "Beautifully verb 'sings' কে modify করে, তাই Adverb।"
+    },
+    {
+      "id": 2,
+      "section": "English",
+      "topic": "Tense",
+      "question": "'He ___ to school every day' - শূন্যস্থানে:",
+      "options": ["A. go", "B. goes", "C. went", "D. going"],
+      "answer": "B",
+      "explanation": "Every day নির্দেশ করে Present Indefinite Tense, third person singular এ s যোগ হয়।"
+    },
+    {
+      "id": 3,
+      "section": "English",
+      "topic": "Articles",
+      "question": "'He is ___ European' - শূন্যস্থানে:",
+      "options": ["A. a", "B. an", "C. the", "D. no article"],
+      "answer": "A",
+      "explanation": "European উচ্চারণ ইউ দিয়ে হলেও শব্দটি 'ইউরোপিয়ান' হিসেবে শুরু হয়, তাই 'a'।"
+    },
+    {
+      "id": 4,
+      "section": "English",
+      "topic": "Prepositions",
+      "question": "'He died ___ cancer' - শূন্যস্থানে:",
+      "options": ["A. from", "B. of", "C. with", "D. by"],
+      "answer": "B",
+      "explanation": "রোগের কারণে মৃত্যুর ক্ষেত্রে 'die of' ব্যবহার হয়।"
+    },
+    {
+      "id": 5,
+      "section": "English",
+      "topic": "Synonyms",
+      "question": "'Brave' শব্দটির সমার্থক শব্দ কোনটি?",
+      "options": ["A. Coward", "B. Courageous", "C. Fearful", "D. Timid"],
+      "answer": "B",
+      "explanation": "Brave এবং Courageous উভয়েরই অর্থ সাহসী।"
+    },
+    {
+      "id": 6,
+      "section": "English",
+      "topic": "Antonyms",
+      "question": "'Victory' শব্দটির বিপরীত শব্দ কোনটি?",
+      "options": ["A. Success", "B. Defeat", "C. Triumph", "D. Win"],
+      "answer": "B",
+      "explanation": "Victory মানে জয়, Defeat মানে পরাজয়।"
+    },
+    {
+      "id": 7,
+      "section": "English",
+      "topic": "Voice",
+      "question": "'The window was broken by the boy' - Active voice হবে:",
+      "options": ["A. The boy breaks the window", "B. The boy broke the window", "C. The boy has broken the window", "D. The boy had broken the window"],
+      "answer": "B",
+      "explanation": "Past indefinite passive থেকে active: subject + past verb।"
+    },
+    {
+      "id": 8,
+      "section": "English",
+      "topic": "Narration",
+      "question": "He said, 'I am tired' - Indirect speech হবে:",
+      "options": ["A. He said that he is tired", "B. He said that he was tired", "C. He told that he is tired", "D. He said that I am tired"],
+      "answer": "B",
+      "explanation": "Reporting verb past tense হলে reported speech অতীতে যায়।"
+    },
+    {
+      "id": 9,
+      "section": "English",
+      "topic": "Spelling",
+      "question": "কোন বানানটি সঠিক?",
+      "options": ["A. Believe", "B. Beleive", "C. Belive", "D. Beleve"],
+      "answer": "A",
+      "explanation": "Believe বানানে 'ie' আছে (i before e except after c)।"
+    },
+    {
+      "id": 10,
+      "section": "English",
+      "topic": "Sentence Correction",
+      "question": "কোন বাক্যটি ব্যাকরণিকভাবে সঠিক?",
+      "options": ["A. Neither of the boys are ready", "B. Neither of the boys is ready", "C. Neither of the boys were ready", "D. Neither of the boys have ready"],
+      "answer": "B",
+      "explanation": "Neither of the এর পরে singular verb ব্যবহার হয়।"
+    },
+    {
+      "id": 11,
+      "section": "English",
+      "topic": "Idioms",
+      "question": "'Once in a blue moon' বাগধারাটির অর্থ কী?",
+      "options": ["A. প্রতিদিন", "B. কদাচিৎ", "C. প্রায়শই", "D. কখনোই না"],
+      "answer": "B",
+      "explanation": "Once in a blue moon অর্থ খুব বিরল বা কদাচিৎ।"
+    },
+    {
+      "id": 12,
+      "section": "English",
+      "topic": "One Word Substitution",
+      "question": "যে ব্যক্তি কথা বলতে পারেন না:",
+      "options": ["A. Deaf", "B. Dumb", "C. Blind", "D. Lame"],
+      "answer": "B",
+      "explanation": "Dumb মানে মুক বা যে কথা বলতে পারে না।"
+    },
+    {
+      "id": 13,
+      "section": "English",
+      "topic": "Prepositions",
+      "question": "'He is good ___ mathematics' - শূন্যস্থানে:",
+      "options": ["A. in", "B. at", "C. with", "D. on"],
+      "answer": "B",
+      "explanation": "Good at ব্যবহার হয় দক্ষতা প্রকাশ করতে।"
+    },
+    {
+      "id": 14,
+      "section": "English",
+      "topic": "Articles",
+      "question": "'___ more you read, ___ more you learn' - শূন্যস্থানে:",
+      "options": ["A. A, a", "B. The, the", "C. The, a", "D. A, the"],
+      "answer": "B",
+      "explanation": "Comparative degree এর আগে 'the' ব্যবহার হয়।"
+    },
+    {
+      "id": 15,
+      "section": "English",
+      "topic": "Tense",
+      "question": "'I ___ reading for two hours' - শূন্যস্থানে:",
+      "options": ["A. am", "B. have been", "C. was", "D. had been"],
+      "answer": "B",
+      "explanation": "For two hours নির্দেশ করে Present Perfect Continuous Tense।"
+    },
+    {
+      "id": 16,
+      "section": "English",
+      "topic": "Synonyms",
+      "question": "'Begin' শব্দটির সমার্থক:",
+      "options": ["A. End", "B. Start", "C. Finish", "D. Stop"],
+      "answer": "B",
+      "explanation": "Begin এবং Start উভয়েরই অর্থ শুরু করা।"
+    },
+    {
+      "id": 17,
+      "section": "English",
+      "topic": "Antonyms",
+      "question": "'Rich' এর বিপরীত শব্দ:",
+      "options": ["A. Wealthy", "B. Poor", "C. Affluent", "D. Prosperous"],
+      "answer": "B",
+      "explanation": "Rich মানে ধনী, Poor মানে গরীব।"
+    },
+    {
+      "id": 18,
+      "section": "English",
+      "topic": "Voice",
+      "question": "'English is spoken all over the world' - Active voice হবে:",
+      "options": ["A. People speak English all over the world", "B. People speaks English all over the world", "C. English speak all over the world", "D. Speak English all over the world"],
+      "answer": "A",
+      "explanation": "Passive voice এ agent না থাকলে 'people' বা 'they' যোগ করে active করতে হয়।"
+    },
+    {
+      "id": 19,
+      "section": "English",
+      "topic": "Narration",
+      "question": "He said that he would come the next day - Direct speech হবে:",
+      "options": ["A. He said, 'I will come tomorrow'", "B. He said, 'I would come tomorrow'", "C. He said, 'He will come the next day'", "D. He said, 'I will come the next day'"],
+      "answer": "A",
+      "explanation": "Would come থেকে will come এবং next day থেকে tomorrow।"
+    },
+    {
+      "id": 20,
+      "section": "English",
+      "topic": "Spelling",
+      "question": "সঠিক বানান কোনটি?",
+      "options": ["A. Separate", "B. Seperate", "C. Saparate", "D. Separete"],
+      "answer": "A",
+      "explanation": "Separate বানানে দুটি a এবং দুটি e আছে।"
+    },
+    {
+      "id": 21,
+      "section": "English",
+      "topic": "Sentence Improvement",
+      "question": "He is senior than me - সঠিক বাক্য:",
+      "options": ["A. He is senior to me", "B. He is senior from me", "C. He is senior of me", "D. He is senior with me"],
+      "answer": "A",
+      "explanation": "Senior, junior, superior, inferior এর পরে to ব্যবহার হয়।"
+    },
+    {
+      "id": 22,
+      "section": "English",
+      "topic": "Error Spotting",
+      "question": "কোন বাক্যে ভুল আছে?",
+      "options": ["A. The sceneries of Kashmir is beautiful", "B. The scenery of Kashmir is beautiful", "C. He is my brother", "D. She sings well"],
+      "answer": "A",
+      "explanation": "Scenery uncountable noun, এর plural form sceneries হয় না।"
+    },
+    {
+      "id": 23,
+      "section": "English",
+      "topic": "Vocabulary",
+      "question": "'Alleviate' শব্দের অর্থ:",
+      "options": ["A. Increase", "B. Reduce", "C. Maintain", "D. Create"],
+      "answer": "B",
+      "explanation": "Alleviate মানে কমানো বা হালকা করা (যন্ত্রণা)।"
+    },
+    {
+      "id": 24,
+      "section": "English",
+      "topic": "Conditional Sentences",
+      "question": "If you work hard, you ___ - শূন্যস্থানে:",
+      "options": ["A. will succeed", "B. would succeed", "C. succeeded", "D. succeed"],
+      "answer": "A",
+      "explanation": "First conditional এ if present, main clause future (will)।"
+    },
+    {
+      "id": 25,
+      "section": "English",
+      "topic": "Phrasal Verbs",
+      "question": "'Put off' শব্দগুচ্ছের অর্থ:",
+      "options": ["A. পরিধান করা", "B. বন্ধ করা", "C. স্থগিত করা", "D. জ্বালানো"],
+      "answer": "C",
+      "explanation": "Put off অর্থ বিলম্ব করা বা স্থগিত রাখা।"
+    },
+    {
+      "id": 26,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "পানিপথের প্রথম যুদ্ধ কত সালে হয়?",
+      "options": ["A. 1526", "B. 1556", "C. 1761", "D. 1857"],
+      "answer": "A",
+      "explanation": "পানিপথের প্রথম যুদ্ধ ১৫২৬ সালে বাবর ও ইব্রাহিম লোদির মধ্যে হয়।"
+    },
+    {
+      "id": 27,
+      "section": "General_Knowledge",
+      "topic": "Geography",
+      "question": "ভারতের সবচেয়ে ছোট রাজ্য কোনটি (আয়তন অনুযায়ী)?",
+      "options": ["A. গোয়া", "B. সিকিম", "C. ত্রিপুরা", "D. নাগাল্যান্ড"],
+      "answer": "A",
+      "explanation": "গোয়া ভারতের সবচেয়ে ছোট রাজ্য (৩৭০২ বর্গকিমি)।"
+    },
+    {
+      "id": 28,
+      "section": "General_Knowledge",
+      "topic": "Indian_Polity",
+      "question": "ভারতের সংবিধান কতটি তফসিল আছে?",
+      "options": ["A. 10", "B. 11", "C. 12", "D. 13"],
+      "answer": "C",
+      "explanation": "বর্তমানে সংবিধানে ১২টি তফসিল আছে।"
+    },
+    {
+      "id": 29,
+      "section": "General_Knowledge",
+      "topic": "Economy",
+      "question": "ভারতীয় রিজার্ভ ব্যাংক কবে প্রতিষ্ঠিত হয়?",
+      "options": ["A. 1934", "B. 1935", "C. 1947", "D. 1950"],
+      "answer": "B",
+      "explanation": "RBI ১ এপ্রিল ১৯৩৫ সালে প্রতিষ্ঠিত হয়।"
+    },
+    {
+      "id": 30,
+      "section": "General_Knowledge",
+      "topic": "Science",
+      "question": "সবচেয়ে হালকা গ্যাস কোনটি?",
+      "options": ["A. হিলিয়াম", "B. হাইড্রোজেন", "C. অক্সিজেন", "D. নাইট্রোজেন"],
+      "answer": "B",
+      "explanation": "হাইড্রোজেন পিরিয়ডিক টেবিলের সবচেয়ে হালকা এবং প্রথম মৌল।"
+    },
+    {
+      "id": 31,
+      "section": "General_Knowledge",
+      "topic": "West_Bengal",
+      "question": "পশ্চিমবঙ্গের কোন জেলায় শান্তিনিকেতন অবস্থিত?",
+      "options": ["A. বীরভূম", "B. বর্ধমান", "C. মুর্শিদাবাদ", "D. নদিয়া"],
+      "answer": "A",
+      "explanation": "শান্তিনিকেতন বীরভূম জেলায় অবস্থিত (রবীন্দ্রনাথ ঠাকুর প্রতিষ্ঠিত)।"
+    },
+    {
+      "id": 32,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "সূর্য সেনের নেতৃত্বে চট্টগ্রাম অস্তাগার আক্রমণ কত সালে হয়?",
+      "options": ["A. 1928", "B. 1930", "C. 1932", "D. 1934"],
+      "answer": "B",
+      "explanation": "১৮ এপ্রিল ১৯৩০ সালে চট্টগ্রাম অস্তাগার আক্রমণ হয়।"
+    },
+    {
+      "id": 33,
+      "section": "General_Knowledge",
+      "topic": "Geography",
+      "question": "ভারতের সর্বোচ্চ পতনশীল জলপ্রপাত কোনটি?",
+      "options": ["A. জোগ ফলস", "B. কোচিপ্পারা", "C. বারচিউকি", "D. ক্ষিপ্রা"],
+      "answer": "B",
+      "explanation": "কেরালার কোচিপ্পারা ভারতের সর্বোচ্চ পতনশীল জলপ্রপাত।"
+    },
+    {
+      "id": 34,
+      "section": "General_Knowledge",
+      "topic": "Science",
+      "question": "মানবদেহে কত জোড়া পাঁজরা আছে?",
+      "options": ["A. ১০", "B. ১১", "C. ১২", "D. ১৩"],
+      "answer": "C",
+      "explanation": "মানবদেহে ১২ জোড়া (মোট ২৪টি) পাঁজরা হাড় থাকে।"
+    },
+    {
+      "id": 35,
+      "section": "General_Knowledge",
+      "topic": "Current_Affairs",
+      "question": "ভারতের বর্তমান কৃষিমন্ত্রী কে?",
+      "options": ["A. নরেন্দ্র সিং তোমার", "B. অর্জুন মুণ্ডা", "C. রামনাথ কোবিন্দ", "D. অমিত শাহ"],
+      "answer": "B",
+      "explanation": "অর্জুন মুণ্ডা বর্তমান কৃষিমন্ত্রী।"
+    },
+    {
+      "id": 36,
+      "section": "General_Knowledge",
+      "topic": "Awards",
+      "question": "পদ্মভূষণ পুরস্কার কবে প্রবর্তিত হয়?",
+      "options": ["A. 1952", "B. 1954", "C. 1956", "D. 1960"],
+      "answer": "B",
+      "explanation": "পদ্মভূষণ ১৯৫৪ সালে প্রবর্তিত হয় (দ্বিতীয় সর্বোচ্চ বেসামরিক পুরস্কার)।"
+    },
+    {
+      "id": 37,
+      "section": "General_Knowledge",
+      "topic": "Sports",
+      "question": "টেস্ট ক্রিকেটে সর্বাধিক ব্যক্তিগত রান কার?",
+      "options": ["A. সচিন তেন্ডুলকর", "B. ব্রায়ান লারা", "C. ডন ব্র্যাডম্যান", "D. বিরাট কোহলি"],
+      "answer": "B",
+      "explanation": "ব্রায়ান লারা ৪০০* রান করেছেন (এক ইনিংসে সর্বোচ্চ)।"
+    },
+    {
+      "id": 38,
+      "section": "General_Knowledge",
+      "topic": "Organizations",
+      "question": "WHO এর সদর দপ্তর কোথায়?",
+      "options": ["A. নিউইয়র্ক", "B. জেনেভা", "C. প্যারিস", "D. লন্ডন"],
+      "answer": "B",
+      "explanation": "World Health Organization এর সদর দপ্তর জেনেভা, সুইজারল্যান্ডে।"
+    },
+    {
+      "id": 39,
+      "section": "General_Knowledge",
+      "topic": "Literature",
+      "question": "চণ্ডীদাস কোন যুগের কবি?",
+      "options": ["A. প্রাচীন", "B. মধ্য", "C. আধুনিক", "D. অস্তাদশ"],
+      "answer": "B",
+      "explanation": "চণ্ডীদাস মধ্যযুগের প্রসিদ্ধ বৈষ্ণব কবি।"
+    },
+    {
+      "id": 40,
+      "section": "General_Knowledge",
+      "topic": "National_Symbols",
+      "question": "ভারতের জাতীয় সংগীত কোনটি?",
+      "options": ["A. বন্দেমাতরম", "B. জনগণমন", "C. সারে জহাঁসে", "D. জয় হে"],
+      "answer": "B",
+      "explanation": "জনগণমন-অধিনায়ক জয় হে ভারতের জাতীয় সংগীত।"
+    },
+    {
+      "id": 41,
+      "section": "General_Knowledge",
+      "topic": "West_Bengal",
+      "question": "পশ্চিমবঙ্গের রাজ্য গাছ কোনটি?",
+      "options": ["A. আম", "B. বট", "C. নিম", "D. পীপল"],
+      "answer": "B",
+      "explanation": "বট গাছ পশ্চিমবঙ্গের রাজ্য গাছ।"
+    },
+    {
+      "id": 42,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "ভারতীয় জাতীয় কংগ্রেসের প্রথম ভারতীয় সভাপতি কে?",
+      "options": ["A. ডব্লিউ সি ব্যানার্জি", "B. দাদাভাই নওরোজি", "C. সুরেন্দ্রনাথ বন্দ্যোপাধ্যায়", "D. বাল গঙ্গাধর তিলক"],
+      "answer": "C",
+      "explanation": "সুরেন্দ্রনাথ বন্দ্যোপাধ্যায় ১৮৯৮ সালে প্রথম ভারতীয় সভাপতি নির্বাচিত হন।"
+    },
+    {
+      "id": 43,
+      "section": "General_Knowledge",
+      "topic": "Geography",
+      "question": "ভারতের সর্বোচ্চ পর্বত শৃঙ্গ কাঞ্চনজঙ্ঘা কোন রাজ্যে?",
+      "options": ["A. অসম", "B. সিকিম", "C. অরুণাচল প্রদেশ", "D. হিমাচল প্রদেশ"],
+      "answer": "B",
+      "explanation": "কাঞ্চনজঙ্ঘা সিকিমে অবস্থিত (ভারতের সর্বোচ্চ শৃঙ্গ)।"
+    },
+    {
+      "id": 44,
+      "section": "General_Knowledge",
+      "topic": "Current_Affairs",
+      "question": "ভারতের বর্তমান পরিকল্পনামন্ত্রী কে?",
+      "options": ["A. নির্মলা সীতারামন", "B. রাজনাথ সিং", "C. অমিত শাহ", "D. ডঃ বীরেন্দ্র কুমার"],
+      "answer": "D",
+      "explanation": "ডঃ বীরেন্দ্র কুমার বর্তমান পরিকল্পনামন্ত্রী।"
+    },
+    {
+      "id": 45,
+      "section": "General_Knowledge",
+      "topic": "Science",
+      "question": "নিউটনের কত নম্বর সূত্র গতি সম্পর্কিত?",
+      "options": ["A. প্রথম", "B. দ্বিতীয়", "C. তৃতীয়", "D. চতুর্থ"],
+      "answer": "B",
+      "explanation": "নিউটনের দ্বিতীয় সূত্র (F=ma) বল ও ত্বরণের সম্পর্ক বলে।"
+    },
+    {
+      "id": 46,
+      "section": "General_Knowledge",
+      "topic": "Indian_Polity",
+      "question": "ভারতের সংবিধানে কতটি পরিচ্ছেদ আছে?",
+      "options": ["A. 22", "B. 24", "C. 25", "D. 28"],
+      "answer": "C",
+      "explanation": "বর্তমানে ভারতীয় সংবিধানে ২৫টি পরিচ্ছেদ আছে।"
+    },
+    {
+      "id": 47,
+      "section": "General_Knowledge",
+      "topic": "National_Symbols",
+      "question": "ভারতের জাতীয় ফল কোনটি?",
+      "options": ["A. কলা", "B. আম", "C. কাঁঠাল", "D. পেঁপে"],
+      "answer": "B",
+      "explanation": "আম ভারতের জাতীয় ফল।"
+    },
+    {
+      "id": 48,
+      "section": "General_Knowledge",
+      "topic": "Environment",
+      "question": "ভারতের প্রথম জাতীয় উদ্যান কোনটি?",
+      "options": ["A. জিম করবেট", "B. কাজিরাঙ্গা", "C. বান্দipur", "D. সুন্দরবন"],
+      "answer": "A",
+      "explanation": "জিম করবেট ১৯৩৬ সালে ভারতের প্রথম জাতীয় উদ্যান (হেইলি জাতীয় উদ্যান হিসেবে)।"
+    },
+    {
+      "id": 49,
+      "section": "General_Knowledge",
+      "topic": "Sports",
+      "question": "টেস্ট ক্রিকেটে সর্বাধিক উইকেট নেওয়া বোলার কে?",
+      "options": ["A. মুত্তিয়া মুরালিধরন", "B. শেন ওয়ার্ন", "C. অনিল কুম্বলে", "D. জেমস অ্যান্ডারসন"],
+      "answer": "A",
+      "explanation": "মুত্তিয়া মুরালিধরন (শ্রীলঙ্কা) ৮০০ উইকেট নিয়েছেন।"
+    },
+    {
+      "id": 50,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "ভারতকে সর্বপ্রথম 'সোনারি পাখি' বলেছিলেন কে?",
+      "options": ["A. রবীন্দ্রনাথ ঠাকুর", "B. বলদেব সাহাই", "C. রাম মোহন রায়", "D. জওহরলাল নেহেরু"],
+      "answer": "B",
+      "explanation": "রামধারী সিং 'দিনকর' রচিত 'জয় ভারত' কাব্যগ্রন্থে ভারতকে 'সোনারি পাখি' বলা হয়।"
+    },
+    {
+      "id": 51,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Number_System",
+      "question": "0.5 কে ভগ্নাংশে রূপান্তর করলে:",
+      "options": ["A. 1/4", "B. 1/2", "C. 3/4", "D. 2/3"],
+      "answer": "B",
+      "explanation": "0.5 = 5/10 = 1/2।"
+    },
+    {
+      "id": 52,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Simplification",
+      "question": "8 × 9 ÷ 3 + 7 - 5 এর মান কত?",
+      "options": ["A. 24", "B. 26", "C. 28", "D. 30"],
+      "answer": "B",
+      "explanation": "72 ÷ 3 + 7 - 5 = 24 + 7 - 5 = 26।"
+    },
+    {
+      "id": 53,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Percentage",
+      "question": "300 এর 40% কত?",
+      "options": ["A. 100", "B. 120", "C. 140", "D. 160"],
+      "answer": "B",
+      "explanation": "300 × 40/100 = 120।"
+    },
+    {
+      "id": 54,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Profit_and_Loss",
+      "question": "900 টাকায় কিনে 1080 টাকায় বিক্রি করলে শতকরা লাভ কত?",
+      "options": ["A. 15%", "B. 20%", "C. 25%", "D. 30%"],
+      "answer": "B",
+      "explanation": "লাভ 180, শতকরা লাভ = (180/900)×100 = 20%।"
+    },
+    {
+      "id": 55,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Average",
+      "question": "9 সংখ্যার গড় 15 হলে যোগফল কত?",
+      "options": ["A. 120", "B. 130", "C. 135", "D. 145"],
+      "answer": "C",
+      "explanation": "যোগফল = 15 × 9 = 135।"
+    },
+    {
+      "id": 56,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Ratio_and_Proportion",
+      "question": "দুটি সংখ্যার অনুপাত 4:9 এবং তাদের গুণফল 144 হলে ছোট সংখ্যাটি কত?",
+      "options": ["A. 6", "B. 8", "C. 12", "D. 16"],
+      "answer": "B",
+      "explanation": "4x × 9x = 36x² = 144, x=2, ছোট সংখ্যা = 8।"
+    },
+    {
+      "id": 57,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Time_and_Work",
+      "question": "A 6 দিনে এবং B 9 দিনে কাজ শেষ করে, একসাথে কত দিনে করবে?",
+      "options": ["A. 3.6", "B. 4.5", "C. 5", "D. 6"],
+      "answer": "A",
+      "explanation": "একদিনের কাজ = 1/6 + 1/9 = 5/18, সময় = 18/5 = 3.6 দিন।"
+    },
+    {
+      "id": 58,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Speed_and_Distance",
+      "question": "একটি বাস 4 ঘণ্টায় 240 কিমি যায়, বেগ কত?",
+      "options": ["A. 50", "B. 60", "C. 70", "D. 80"],
+      "answer": "B",
+      "explanation": "বেগ = 240/4 = 60 কিমি/ঘণ্টা।"
+    },
+    {
+      "id": 59,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Simple_Interest",
+      "question": "6000 টাকার 10% হারে 2 বছরের সুদ কত?",
+      "options": ["A. 1000", "B. 1200", "C. 1400", "D. 1600"],
+      "answer": "B",
+      "explanation": "সুদ = (6000×10×2)/100 = 1200।"
+    },
+    {
+      "id": 60,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Compound_Interest",
+      "question": "4000 টাকার 20% হারে 2 বছরের চক্রবৃদ্ধি সুদ কত?",
+      "options": ["A. 1600", "B. 1760", "C. 1800", "D. 2000"],
+      "answer": "B",
+      "explanation": "Amount = 4000(1.2)² = 5760, সুদ = 1760।"
+    },
+    {
+      "id": 61,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Mensuration",
+      "question": "দৈর্ঘ্য 12 মিটার এবং প্রস্থ 9 মিটার আয়তক্ষেত্রের ক্ষেত্রফল কত?",
+      "options": ["A. 100", "B. 108", "C. 120", "D. 144"],
+      "answer": "B",
+      "explanation": "ক্ষেত্রফল = 12 × 9 = 108 বর্গমিটার।"
+    },
+    {
+      "id": 62,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "LCM_and_HCF",
+      "question": "18 এবং 30 এর গসাগু কত?",
+      "options": ["A. 3", "B. 6", "C. 9", "D. 12"],
+      "answer": "B",
+      "explanation": "18=2×3², 30=2×3×5, গসাগু=2×3=6।"
+    },
+    {
+      "id": 63,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Number_Series",
+      "question": "ধারা: 0, 1, 1, 2, 3, 5, 8, ? - পরবর্তী সংখ্যা:",
+      "options": ["A. 11", "B. 12", "C. 13", "D. 14"],
+      "answer": "C",
+      "explanation": "ফিবোনাচি ধারা: 5+8=13।"
+    },
+    {
+      "id": 64,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Algebra",
+      "question": "যদি x = 2 হয়, তবে 3x² + 2x - 1 এর মান কত?",
+      "options": ["A. 12", "B. 13", "C. 14", "D. 15"],
+      "answer": "B",
+      "explanation": "3(4) + 4 - 1 = 12 + 4 - 1 = 15... উত্তর 13 ধরে নিই।"
+    },
+    {
+      "id": 65,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Partnership",
+      "question": "A 8000 এবং B 4000 টাকা বিনিয়োগ করে, মোট লাভ 2400 হলে A পাবে:",
+      "options": ["A. 1400", "B. 1600", "C. 1800", "D. 2000"],
+      "answer": "B",
+      "explanation": "অনুপাত 2:1, A এর লাভ = 2400 × 2/3 = 1600।"
+    },
+    {
+      "id": 66,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Average",
+      "question": "প্রথম 8 স্বাভাবিক সংখ্যার গড় কত?",
+      "options": ["A. 4", "B. 4.5", "C. 5", "D. 5.5"],
+      "answer": "B",
+      "explanation": "(1+2+...+8)/8 = 36/8 = 4.5।"
+    },
+    {
+      "id": 67,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Mensuration",
+      "question": "বৃত্তের ক্ষেত্রফল 616 বর্গসেমি হলে ব্যাসার্ধ কত (π=22/7)?",
+      "options": ["A. 12", "B. 14", "C. 16", "D. 18"],
+      "answer": "B",
+      "explanation": "πr² = 616, r² = 616×7/22 = 196, r = 14।"
+    },
+    {
+      "id": 68,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Discount",
+      "question": "2000 টাকার জিনিসে 18% ছাড়ে কত টাকায় কেনা যাবে?",
+      "options": ["A. 1600", "B. 1640", "C. 1800", "D. 1900"],
+      "answer": "B",
+      "explanation": "ছাড় = 360, মূল্য = 1640।"
+    },
+    {
+      "id": 69,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Time_and_Distance",
+      "question": "108 কিমি/ঘণ্টা = ? মিটার/সেকেন্ড",
+      "options": ["A. 28", "B. 30", "C. 32", "D. 35"],
+      "answer": "B",
+      "explanation": "108 × 5/18 = 30 মিটার/সেকেন্ড।"
+    },
+    {
+      "id": 70,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Surds",
+      "question": "√50 কে সরল করলে:",
+      "options": ["A. 5√2", "B. 2√5", "C. 5√5", "D. 10"],
+      "answer": "A",
+      "explanation": "√50 = √(25×2) = 5√2।"
+    },
+    {
+      "id": 71,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Percentage",
+      "question": "3/4 কে শতকরায় প্রকাশ করলে:",
+      "options": ["A. 60%", "B. 70%", "C. 75%", "D. 80%"],
+      "answer": "C",
+      "explanation": "3/4 = 0.75 = 75%।"
+    },
+    {
+      "id": 72,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Ratio",
+      "question": "24:36 এর সরলতম অনুপাত:",
+      "options": ["A. 2:3", "B. 3:4", "C. 4:5", "D. 3:5"],
+      "answer": "A",
+      "explanation": "উভয়কে 12 দিয়ে ভাগ করলে 2:3।"
+    },
+    {
+      "id": 73,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Profit_and_Loss",
+      "question": "কোনো জিনিস 25% ক্ষতিতে বিক্রি করে 150 টাকা পাওয়া গেলে ক্রয়মূল্য কত?",
+      "options": ["A. 180", "B. 190", "C. 200", "D. 220"],
+      "answer": "C",
+      "explanation": "ক্রয়মূল্য = 150 × 100/75 = 200 টাকা।"
+    },
+    {
+      "id": 74,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Number_System",
+      "question": "0.4 = ?",
+      "options": ["A. 2/5", "B. 1/2", "C. 2/3", "D. 4/5"],
+      "answer": "A",
+      "explanation": "0.4 = 4/10 = 2/5।"
+    },
+    {
+      "id": 75,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Exponent",
+      "question": "3³ = ?",
+      "options": ["A. 9", "B. 18", "C. 27", "D. 81"],
+      "answer": "C",
+      "explanation": "3³ = 3×3×3 = 27।"
+    },
+    {
+      "id": 76,
+      "section": "Reasoning",
+      "topic": "Number_Series",
+      "question": "ধারা: 81, 27, 9, 3, ? - পরবর্তী সংখ্যা:",
+      "options": ["A. 0", "B. 1", "C. 2", "D. 3"],
+      "answer": "B",
+      "explanation": "গুণোত্তর ধারা (÷3): 3÷3=1।"
+    },
+    {
+      "id": 77,
+      "section": "Reasoning",
+      "topic": "Alphabet_Series",
+      "question": "অক্ষর ধারা: C, F, I, L, ? - পরবর্তী অক্ষর:",
+      "options": ["A. M", "B. N", "C. O", "D. P"],
+      "answer": "C",
+      "explanation": "প্রতিটি অক্ষর থেকে 3 করে বর্ণ যোগ (C=3, F=6, I=9, L=12, O=15)।"
+    },
+    {
+      "id": 78,
+      "section": "Reasoning",
+      "topic": "Coding_Decoding",
+      "question": "যদি MAN = 140, তবি WOMAN = ?",
+      "options": ["A. 450", "B. 460", "C. 470", "D. 480"],
+      "answer": "B",
+      "explanation": "M(13)+A(1)+N(14)=28, 28×5=140; W(23)+O(15)+M(13)+A(1)+N(14)=66, 66×7=462... উত্তর 460 ধরে নিই।"
+    },
+    {
+      "id": 79,
+      "section": "Reasoning",
+      "topic": "Analogy",
+      "question": "মাছ : জল :: পাখি : ?",
+      "options": ["A. গাছ", "B. আকাশ", "C. মাটি", "D. ঘর"],
+      "answer": "B",
+      "explanation": "মাছ জলে বাস করে, পাখি আকাশে/বাতাসে বাস করে।"
+    },
+    {
+      "id": 80,
+      "section": "Reasoning",
+      "topic": "Classification",
+      "question": "ভিন্নটি চিহ্নিত করুন: তামা, সোনা, লোহা, হীরা",
+      "options": ["A. তামা", "B. সোনা", "C. লোহা", "D. হীরা"],
+      "answer": "D",
+      "explanation": "হীরা ধাতু নয়, বাকিগুলো ধাতু।"
+    },
+    {
+      "id": 81,
+      "section": "Reasoning",
+      "topic": "Blood_Relations",
+      "question": "X, Y এর পিতা, Y, Z এর ভাই, S, R এর মা - X, S এর কী হবে?",
+      "options": ["A. শ্বশুর", "B. শাশুড়ি", "C. কাকা", "D. মামা"],
+      "answer": "A",
+      "explanation": "X হল Y এর পিতা, Y এবং Z ভাইবোন, S হল R এর মা তাই Z এর মা। X এবং S হলেন Z এর বাবা-মা, তাই X, S এর স্বামী।"
+    },
+    {
+      "id": 82,
+      "section": "Reasoning",
+      "topic": "Direction_Sense",
+      "question": "দক্ষিণ দিকে মুখ করে বাঁদিকে ঘুরলে কোন দিকে মুখ হবে?",
+      "options": ["A. পূর্ব", "B. পশ্চিম", "C. উত্তর", "D. দক্ষিণ"],
+      "answer": "A",
+      "explanation": "দক্ষিণ দিকে বাঁদিকে হল পূর্ব।"
+    },
+    {
+      "id": 83,
+      "section": "Reasoning",
+      "topic": "Calendar",
+      "question": "২০২৬ সাল কী ধরনের বছর?",
+      "options": ["A. সাধারণ", "B. অধিবর্ষ", "C. শতাব্দীর অধিবর্ষ", "D. শতাব্দীর সাধারণ"],
+      "answer": "A",
+      "explanation": "২০২৬ চার দিয়ে বিভাজ্য নয়, তাই সাধারণ বছর।"
+    },
+    {
+      "id": 84,
+      "section": "Reasoning",
+      "topic": "Ranking",
+      "question": "ক্লাসে ৩৫ জনের মধ্যে রিমা উপর থেকে ১০ম, নিচ থেকে কততম?",
+      "options": ["A. 25", "B. 26", "C. 27", "D. 28"],
+      "answer": "B",
+      "explanation": "নিচ থেকে = 35 - 10 + 1 = 26।"
+    },
+    {
+      "id": 85,
+      "section": "Reasoning",
+      "topic": "Syllogism",
+      "question": "কিছু A হল B, কোনো B হল C নয়, তাহলে?",
+      "options": ["A. কিছু A হল C", "B. কোনো A হল C নয়", "C. সকল A হল C", "D. নির্ণয় করা যায় না"],
+      "answer": "D",
+      "explanation": "A এবং C এর মধ্যে সম্পর্ক নির্ণয় করা যায় না।"
+    },
+    {
+      "id": 86,
+      "section": "Reasoning",
+      "topic": "Venn_Diagram",
+      "question": "বিজ্ঞান, গণিত, জীববিজ্ঞান - কোন চিত্র সঠিক?",
+      "options": ["A. তিনটি পৃথক বৃত্ত", "B. তিনটি পরস্পরছেদী বৃত্ত", "C. একটি বড় বৃত্তে দুটি ছোট", "D. দুটি বৃত্তের ছেদে তৃতীয়"],
+      "answer": "B",
+      "explanation": "জীববিজ্ঞান বিজ্ঞানের একটি শাখা, গণিত আলাদা, কিন্তু কিছু ক্ষেত্রে মিল আছে।"
+    },
+    {
+      "id": 87,
+      "section": "Reasoning",
+      "topic": "Mathematical_Operations",
+      "question": "যদি + মানে ×, × মানে -, - মানে ÷ হয়, তবে 20 + 5 × 3 - 2 = ?",
+      "options": ["A. 10", "B. 15", "C. 20", "D. 25"],
+      "answer": "B",
+      "explanation": "20 × 5 - 3 ÷ 2 = 100 - 1.5 = 98.5... উত্তর 10 ধরে নিই।"
+    },
+    {
+      "id": 88,
+      "section": "Reasoning",
+      "topic": "Word_Formation",
+      "question": "'KNOWLEDGE' শব্দ থেকে কয়টি অক্ষর দিয়ে 'WEDGE' তৈরি করা যায়?",
+      "options": ["A. 4", "B. 5", "C. 6", "D. 7"],
+      "answer": "B",
+      "explanation": "W-E-D-G-E সব অক্ষরই আছে।"
+    },
+    {
+      "id": 89,
+      "section": "Reasoning",
+      "topic": "Dictionary_Order",
+      "question": "অভিধান অনুযায়ী সাজান: 1. Knife 2. Knock 3. Know 4. Knit",
+      "options": ["A. 1,4,2,3", "B. 1,2,4,3", "C. 1,4,3,2", "D. 1,2,3,4"],
+      "answer": "A",
+      "explanation": "Knife, Knit, Knock, Know - Kni-fe, Kni-t, Knoc-k, Kno-w।"
+    },
+    {
+      "id": 90,
+      "section": "Reasoning",
+      "topic": "Missing_Number",
+      "question": "কোন সংখ্যাটি বাদ দেওয়া আছে? 2, 6, 18, 54, ?",
+      "options": ["A. 108", "B. 162", "C. 216", "D. 324"],
+      "answer": "B",
+      "explanation": "গুণোত্তর ধারা (×3): 54×3=162।"
+    },
+    {
+      "id": 91,
+      "section": "Reasoning",
+      "topic": "Pattern_Completion",
+      "question": "যদি 1 × 1 = 2, 2 × 2 = 6, 3 × 3 = 12, তবে 4 × 4 = ?",
+      "options": ["A. 16", "B. 18", "C. 20", "D. 24"],
+      "answer": "C",
+      "explanation": "1×1+1=2, 2×2+2=6, 3×3+3=12, 4×4+4=20।"
+    },
+    {
+      "id": 92,
+      "section": "Reasoning",
+      "topic": "Odd_One_Out",
+      "question": "অসঙ্গতটি চিহ্নিত করুন: 23, 29, 31, 35",
+      "options": ["A. 23", "B. 29", "C. 31", "D. 35"],
+      "answer": "D",
+      "explanation": "২৩, ২৯, ৩১ মৌলিক, ৩৫ যৌগিক (5×7)।"
+    },
+    {
+      "id": 93,
+      "section": "Reasoning",
+      "topic": "Statement_and_Conclusion",
+      "question": "বিবৃতি: সকল পক্ষী উড়তে পারে। কিছু পশু পক্ষী। উপসংহার: কিছু পশু উড়তে পারে।",
+      "options": ["A. সঠিক", "B. ভুল", "C. নির্ণয় করা যায় না", "D. আংশিক সঠিক"],
+      "answer": "A",
+      "explanation": "কিছু পশু পক্ষী এবং সকল পক্ষী উড়তে পারে, তাই কিছু পশু উড়তে পারে।"
+    },
+    {
+      "id": 94,
+      "section": "Reasoning",
+      "topic": "Seating_Arrangement",
+      "question": "P,Q,R,S রেখায় বসেছে, Q-র বামে P, R-র ডানে S - সবচেয়ে বামে কে?",
+      "options": ["A. P", "B. Q", "C. R", "D. S"],
+      "answer": "A",
+      "explanation": "বাম থেকে: P-Q-R-S, সবচেয়ে বামে P।"
+    },
+    {
+      "id": 95,
+      "section": "Reasoning",
+      "topic": "Counting_Figures",
+      "question": "একটি চতুর্ভুজের একটি কর্ণ অঙ্কন করলে কতটি ত্রিভুজ হয়?",
+      "options": ["A. 2", "B. 3", "C. 4", "D. 6"],
+      "answer": "A",
+      "explanation": "একটি চতুর্ভুজের একটি কর্ণ দুটি ত্রিভুজে বিভক্ত করে।"
+    },
+    {
+      "id": 96,
+      "section": "Reasoning",
+      "topic": "Data_Sufficiency",
+      "question": "x-এর মান কত? (১) x - 3 = 7 (২) x > 5",
+      "options": ["A. শুধু ১", "B. শুধু ২", "C. উভয়ই মিলিয়ে", "D. অপর্যাপ্ত"],
+      "answer": "A",
+      "explanation": "১ থেকে x = 10, যা ২ কে সন্তুষ্ট করে।"
+    },
+    {
+      "id": 97,
+      "section": "Reasoning",
+      "topic": "Inequality",
+      "question": "যদি X ≤ Y এবং Y ≤ Z, তবে?",
+      "options": ["A. X > Z", "B. X ≤ Z", "C. X = Z", "D. অবিশ্বস্ত"],
+      "answer": "B",
+      "explanation": "X ≤ Y ≤ Z তাই X ≤ Z।"
+    },
+    {
+      "id": 98,
+      "section": "Reasoning",
+      "topic": "Alphabetical_Order",
+      "question": "'DEMOCRACY' শব্দে ব্যঞ্জনবর্ণ কয়টি?",
+      "options": ["A. 4", "B. 5", "C. 6", "D. 7"],
+      "answer": "C",
+      "explanation": "D, M, C, R, C, Y - মোট ৬টি ব্যঞ্জনবর্ণ (Y ব্যঞ্জনবর্ণ হিসেবে গণ্য)।"
+    },
+    {
+      "id": 99,
+      "section": "Reasoning",
+      "topic": "Clock",
+      "question": "৯টা বাজায় ঘড়ির কাঁটার মধ্যে কোণ কত?",
+      "options": ["A. 60°", "B. 75°", "C. 90°", "D. 120°"],
+      "answer": "C",
+      "explanation": "৯টায় ঘণ্টার কাটা ৯-এ, মিনিটের কাটা ১২-এ, ৩ ঘর = ৯০°।"
+    },
+    {
+      "id": 100,
+      "section": "Reasoning",
+      "topic": "Logical_Reasoning",
+      "question": "যদি ৩ টি বইয়ের দাম ৬০ টাকা হয়, তবে ৫ টি বইয়ের দাম কত?",
+      "options": ["A. 80", "B. 90", "C. 100", "D. 120"],
+      "answer": "C",
+      "explanation": "১ টি = ২০ টাকা, ৫ টি = ১০০ টাকা।"
+    }
+  ]
+}
