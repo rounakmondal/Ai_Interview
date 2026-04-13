@@ -77,6 +77,9 @@ interface GovtPracticeState {
   exam?: ExamType;
   subject?: Subject;
   dailyTaskId?: string;
+  fullPaper?: boolean;
+  language?: "english" | "bengali" | "hindi";
+  customExam?: string;
 }
 
 export default function GovtPractice() {
@@ -84,13 +87,13 @@ export default function GovtPractice() {
   const location = useLocation();
   const incoming = location.state as GovtPracticeState | null;
   const [exam, setExam] = useState<ExamType>(incoming?.exam ?? "WBCS");
-  const [customExam, setCustomExam] = useState("");
+  const [customExam, setCustomExam] = useState(incoming?.customExam ?? "");
   const [showExtraExams, setShowExtraExams] = useState(false);
   const [subject, setSubject] = useState<Subject | null>(incoming?.subject ?? "History");
-  const [fullPaper, setFullPaper] = useState(false);
+  const [fullPaper, setFullPaper] = useState(incoming?.fullPaper ?? false);
   const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
   const [count, setCount] = useState<10 | 25 | 50 | 100>(25);
-  const [language, setLanguage] = useState<"english" | "bengali">("english");
+  const [language, setLanguage] = useState<"english" | "bengali" | "hindi">(incoming?.language ?? "english");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loadingQuestions, setLoadingQuestions] = useState<GovtQuestion[]>([]);
@@ -526,14 +529,14 @@ export default function GovtPractice() {
                 <p className="text-sm font-semibold text-foreground">Explanation Language</p>
                 <span className="text-xs text-muted-foreground">(for answer explanations)</span>
               </div>
-              <div className="flex gap-3 max-w-xs">
-                {(["english", "bengali"] as const).map((l) => (
+              <div className="flex gap-3 flex-wrap">
+                {(["english", "bengali", "hindi"] as const).map((l) => (
                   <motion.button key={l} onClick={() => setLanguage(l)} whileTap={{ scale: 0.97 }}
-                    className={`flex-1 py-3 rounded-xl border text-sm font-semibold transition-all ${language === l
+                    className={`px-4 py-3 rounded-xl border text-sm font-semibold transition-all ${language === l
                         ? "border-primary bg-primary/10 text-foreground ring-2 ring-primary/20"
                         : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border"
                       }`}>
-                    {l === "english" ? "🇬🇧 English" : "🇮🇳 বাংলা"}
+                    {l === "english" ? "🇬🇧 English" : l === "bengali" ? "🇮🇳 বাংলা" : "🇮🇳 हिन्दी"}
                   </motion.button>
                 ))}
               </div>
@@ -549,7 +552,7 @@ export default function GovtPractice() {
                   { label: difficulty, icon: <TrendingUp className="w-3 h-3" /> },
                   { label: `${count} Questions`, icon: <BookOpen className="w-3 h-3" /> },
                   { label: `~${estimatedMins} min`, icon: <Clock className="w-3 h-3" /> },
-                  { label: language === "english" ? "English" : "বাংলা", icon: <Globe2 className="w-3 h-3" /> },
+                  { label: language === "english" ? "English" : language === "bengali" ? "বাংলা" : "हिन्दी", icon: <Globe2 className="w-3 h-3" /> },
                 ].map((b) => (
                   <span key={b.label}
                     className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-card border border-border/60 text-xs font-semibold text-foreground">

@@ -1,0 +1,312 @@
+{
+  "papers": [
+    {
+      "id": "ssc_cgl_set01",
+      "title": "SSC CGL Tier 1 Mock Test — Set 1",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set01.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 30% of a number is 90, then what is 60% of that number?",
+        "options": ["150", "180", "200", "210"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set02",
+      "title": "SSC CGL Tier 1 Mock Test — Set 2",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ২",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set02.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "A sum of money doubles itself in 5 years at simple interest. What is the rate of interest per annum?",
+        "options": ["10%", "15%", "20%", "25%"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_cgl_set03",
+      "title": "SSC CGL Tier 1 Mock Test — Set 3",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৩",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set03.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "What is 15% of 480?",
+        "options": ["62", "70", "72", "78"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_cgl_set04",
+      "title": "SSC CGL Tier 1 Mock Test — Set 4",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৪",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set04.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 15% of a number is 45, what is the number?",
+        "options": ["300", "250", "350", "400"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_04",
+      "title": "SSC CGL Tier 1 Mock Test — Set 5",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৫",
+      "path": "mock_test/ssc_cgl/ssc-cgl-04.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 20% of a number is 60, what is the number?",
+        "options": ["200", "300", "400", "500"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_05",
+      "title": "SSC CGL Tier 1 Mock Test — Set 6",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৬",
+      "path": "mock_test/ssc_cgl/ssc-cgl-05.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "What is 15% of 480?",
+        "options": ["62", "70", "72", "78"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_cgl_06",
+      "title": "SSC CGL Tier 1 Mock Test — Set 7",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৭",
+      "path": "mock_test/ssc_cgl/ssc-cgl-06.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Book : Library :: Painting : ?",
+        "options": ["Museum", "Artist", "Canvas", "Gallery"],
+        "answer": "D"
+      }
+    },
+    {
+      "id": "ssc_cgl_set07",
+      "title": "SSC CGL Tier 1 Mock Test — Set 8",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৮",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set07.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "A car travels at 60 km/hr. How much time does it take to cover 240 km?",
+        "options": ["3 hours", "4 hours", "5 hours", "6 hours"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_08",
+      "title": "SSC CGL Tier 1 Mock Test — Set 9",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ৯",
+      "path": "mock_test/ssc_cgl/ssc-cgl-08.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 15% of a number is 45, what is the number?",
+        "options": ["300", "250", "350", "400"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_09",
+      "title": "SSC CGL Tier 1 Mock Test — Set 10",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১০",
+      "path": "mock_test/ssc_cgl/ssc-cgl-09.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 45 ÷ 9 + 13 × 3 − 16",
+        "options": ["24", "28", "32", "36"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_10",
+      "title": "SSC CGL Tier 1 Mock Test — Set 11",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১১",
+      "path": "mock_test/ssc_cgl/ssc-cgl-10.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 25% of a number is 75, what is the number?",
+        "options": ["300", "250", "350", "400"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_set11",
+      "title": "SSC CGL Tier 1 Mock Test — Set 12",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১২",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set11.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 48 ÷ 6 × 4 + 8 − 12",
+        "options": ["28", "32", "36", "40"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set12",
+      "title": "SSC CGL Tier 1 Mock Test — Set 13",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৩",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set12.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 40% of a number is 160, what is 25% of that number?",
+        "options": ["80", "100", "120", "140"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set13",
+      "title": "SSC CGL Tier 1 Mock Test — Set 14",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৪",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set13.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 60% of a number exceeds 40% of the same number by 50, what is the number?",
+        "options": ["200", "250", "300", "350"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set14",
+      "title": "SSC CGL Tier 1 Mock Test — Set 15",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৫",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set14.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 'TRAIN' is coded as 'VWCLP', how is 'PLANE' coded?",
+        "options": ["RNCPG", "RNCOG", "RPCPG", "QMBMF"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_set15",
+      "title": "SSC CGL Tier 1 Mock Test — Set 16",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৬",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set15.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 24 ÷ 3 × 2 + 6 − 4",
+        "options": ["18", "20", "22", "24"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_set16",
+      "title": "SSC CGL Tier 1 Mock Test — Set 17",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৭",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set16.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 45% of a number is 360, what is the number?",
+        "options": ["700", "800", "900", "1000"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set17",
+      "title": "SSC CGL Tier 1 Mock Test — Set 18",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৮",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set17.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 12 + 24 ÷ 6 × 2 − 8",
+        "options": ["8", "10", "12", "14"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_cgl_set18",
+      "title": "SSC CGL Tier 1 Mock Test — Set 19",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ১৯",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set18.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 35% of a number is 140, what is the number?",
+        "options": ["350", "400", "450", "500"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "ssc_cgl_set19",
+      "title": "SSC CGL Tier 1 Mock Test — Set 20",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ২০",
+      "path": "mock_test/ssc_cgl/ssc-cgl-set19.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 18 ÷ 3 × 2 + 7 − 5",
+        "options": ["10", "12", "14", "16"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "ssc_cgl_20",
+      "title": "SSC CGL Tier 1 Mock Test — Set 21",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ২১",
+      "path": "mock_test/ssc_cgl/ssc-cgl-20.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "Simplify: 48 ÷ 6 × 3 + 5 − 9",
+        "options": ["20", "22", "24", "26"],
+        "answer": "A"
+      }
+    },
+    {
+      "id": "ssc_cgl_21",
+      "title": "SSC CGL Tier 1 Mock Test — Set 22",
+      "titleBn": "SSC CGL টায়ার ১ মক টেস্ট — সেট ২২",
+      "path": "mock_test/ssc_cgl/ssc-cgl-21.json",
+      "questions": 100,
+      "duration": 60,
+      "language": "English & Hindi",
+      "preview": {
+        "question": "If 25% of a number is 75, what is the number?",
+        "options": ["200", "250", "300", "350"],
+        "answer": "C"
+      }
+    }
+  ]
+}

@@ -161,7 +161,7 @@ function AppContent() {
           />
           <Route
             path="/wbpsc-clerkship-mock-test"
-            element={<QuestionHub seoProfile="wbpsc-clerkship" />}
+            element={<QuestionHub seoProfile="wbpsc-clerkship" defaultAllExam="WBPSC Clerkship" />}
           />
           <Route
             path="/wb-tet-mock-test"
@@ -170,6 +170,10 @@ function AppContent() {
           <Route
             path="/ssc-mts-mock-test"
             element={<QuestionHub seoProfile="ssc-mts" />}
+          />
+          <Route
+            path="/ssc-cgl-mock-test"
+            element={<QuestionHub seoProfile="default" defaultAllExam="SSC CGL" />}
           />
           <Route
             path="/ibps-po-mock-test"

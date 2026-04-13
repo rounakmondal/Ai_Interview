@@ -60,7 +60,7 @@ type QuestionSubscriber = (session: GovtPracticeSession | null) => void;
 
 export interface GovtPracticeSession {
   config: TestConfig;
-  language: "english" | "bengali";
+  language: "english" | "bengali" | "hindi";
   dailyTaskId?: string;
   questions: GovtQuestion[];
   loadedCount: number;
@@ -87,7 +87,7 @@ export function subscribeGovtPracticeSession(listener: QuestionSubscriber) {
   };
 }
 
-function buildSSEUrl(config: TestConfig, language: "english" | "bengali") {
+function buildSSEUrl(config: TestConfig, language: "english" | "bengali" | "hindi") {
   const params = new URLSearchParams({
     exam: config.customExam?.trim() || config.exam,
     difficulty: config.difficulty,
@@ -102,7 +102,7 @@ function buildSSEUrl(config: TestConfig, language: "english" | "bengali") {
 
 export function startGovtPracticeSession(
   config: TestConfig,
-  language: "english" | "bengali",
+  language: "english" | "bengali" | "hindi",
   dailyTaskId?: string,
   onSessionChange?: (session: GovtPracticeSession) => void
 ) {

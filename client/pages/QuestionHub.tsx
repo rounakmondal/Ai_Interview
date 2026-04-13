@@ -30,6 +30,7 @@ import {
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
 import { QUESTIONS_API_BASE } from "@/lib/api-client";
+import { ExamType } from "@/lib/govt-practice-data";
 import {
   applyQuestionHubExamSeo,
   type ExamSeoProfile,
@@ -473,6 +474,17 @@ const FOLDERS: Record<string, FolderData> = {
       },
     ],
   },
+  "ssc-cgl": {
+    name: "SSC CGL (Combined Graduate Level)",
+    nameBn: "এসএসসি সিজিএল",
+    icon: <GraduationCap className="w-6 h-6" />,
+    colorKey: "mustard",
+    badge: "New",
+    publicPath: "SSC",
+    description:
+      "SSC CGL (Combined Graduate Level) previous year question papers for Tier 1 & Tier 2 preparation. Group B & C posts in Central Government departments.",
+    files: [],
+  },
   "rrb-ntpc": {
     name: "RRB NTPC (Railway)",
     nameBn: "আরআরবি এনটিপিসি",
@@ -662,6 +674,7 @@ const ALL_TAB_EXAMS = [
   "WBP SI",
   "WBCS Prelims",
   "SSC MTS",
+  "SSC CGL",
   "WBPSC Clerkship",
   "RRB NTPC",
   "JTET",
@@ -1660,12 +1673,317 @@ function WBCSPreviewCards({
   );
 }
 
+function CGLPreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/ssc_cgl/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const cglFolder = FOLDERS["ssc-cgl"];
+
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "CGL",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-amber-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0,1,2,3].map(j => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (papers.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-5 py-20 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center">
+          <GraduationCap className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-foreground mb-1">SSC CGL Papers Coming Soon!</h3>
+          <p className="text-sm text-muted-foreground max-w-sm">
+            SSC CGL (Combined Graduate Level) Tier 1 &amp; Tier 2 previous year question papers are being added. Check back soon!
+          </p>
+        </div>
+        <Link to="/mock-test?exam=SSC">
+          <Button size="sm" className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
+            <Zap className="w-4 h-4" />
+            Try AI-Generated SSC CGL Mock Test
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-amber-700/15 bg-card/80 hover:border-amber-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400" />
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/12 flex items-center justify-center">
+                    <GraduationCap className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-700/12 text-amber-800 dark:text-amber-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">Sample Question</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">{preview.question}</p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-amber-700/20 hover:bg-amber-500/8"
+                  onClick={() => onDownload(toFile(paper), cglFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-amber-600 hover:bg-amber-700 text-white"
+                  onClick={() => onStartTest(toFile(paper), cglFolder, "ssc-cgl")}
+                  disabled={navigating}
+                >
+                  {navigating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <><Play className="w-3.5 h-3.5" />Attempt Test</>}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+function WBPSCPreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/wbpsc/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const wbpscFolder = FOLDERS["wbpsc"];
+
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "Clerkship",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-green-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0,1,2,3].map(j => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-green-700/15 bg-card/80 hover:border-green-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-green-600 via-emerald-500 to-green-400" />
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-green-500/12 flex items-center justify-center">
+                    <GraduationCap className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-green-700 dark:text-green-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-green-700/12 text-green-800 dark:text-green-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">Sample Question</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">{preview.question}</p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-green-700/20 hover:bg-green-500/8"
+                  onClick={() => onDownload(toFile(paper), wbpscFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-green-700 hover:bg-green-800 text-white"
+                  onClick={() => onStartTest(toFile(paper), wbpscFolder, "wbpsc")}
+                  disabled={navigating}
+                >
+                  {navigating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <><Play className="w-3.5 h-3.5" />Attempt Test</>}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 // Slug ↔ exam label mapping (used only for back-compat URL reading)
 const SLUG_TO_EXAM: Record<string, string> = {
   "wbp-constable": "WBP Constable",
   "wbp-si":        "WBP SI",
   "wbcs":          "WBCS Prelims",
   "ssc-mts":       "SSC MTS",
+  "ssc-cgl":       "SSC CGL",
   "wbpsc":         "WBPSC Clerkship",
   "rrb-ntpc":      "RRB NTPC",
   "jtet":          "JTET",
@@ -1678,6 +1996,7 @@ const EXAM_TO_URL: Record<string, string> = {
   "WBP SI":           "/wbp-si-mock-test",
   "WBCS Prelims":     "/wbcs-mock-test",
   "SSC MTS":          "/ssc-mts-mock-test",
+  "SSC CGL":          "/ssc-cgl-mock-test",
   "WBPSC Clerkship":  "/wbpsc-clerkship-mock-test",
   "RRB NTPC":         "/rrb-ntpc-mock-test",
   "JTET":             "/jtet-mock-test",
@@ -1702,7 +2021,7 @@ export default function QuestionHub({
   const [activeTab, setActiveTab] = useState<"previous" | "all">(() => {
     if (resolvedDefaultExam) return "all";
     const urlTab = searchParams.get("view");
-    return urlTab === "all" ? "all" : "previous";
+    return urlTab === "previous" ? "previous" : "all";
   });
   const [selectedFolder, setSelectedFolder] = useState<string>(() => {
     // Persist folder selection in URL so browser back button remembers it
@@ -1725,11 +2044,12 @@ export default function QuestionHub({
 
   // Map the All-tab exam label → folder key (must match ALL_TAB_EXAMS entries exactly)
   const ALL_TAB_EXAM_TO_FOLDER: Record<string, string> = {
-    "WBP Constable": "police",       // manifest-backed → ConstablePreviewCards
-    "WBP SI":        "police-si",     // manifest-backed → SIPreviewCards
-    "WBCS Prelims":  "wbcs-manifest", // manifest-backed → WBCSPreviewCards
+    "WBP Constable": "police",          // manifest-backed → ConstablePreviewCards
+    "WBP SI":        "police-si",       // manifest-backed → SIPreviewCards
+    "WBCS Prelims":  "wbcs-manifest",   // manifest-backed → WBCSPreviewCards
     "SSC MTS":       "ssc",
-    "WBPSC Clerkship": "wbpsc",
+    "SSC CGL":       "ssc-cgl-manifest", // manifest-backed → CGLPreviewCards
+    "WBPSC Clerkship": "wbpsc-manifest", // manifest-backed → WBPSCPreviewCards
     "RRB NTPC":      "rrb-ntpc",
     "JTET":          "jtet",
     "IBPS PO":       "ibps",
@@ -1738,6 +2058,39 @@ export default function QuestionHub({
 
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "terracotta"];
+
+  const GOVERNMENT_PRACTICE_EXAM_MAP: Record<string, ExamType> = {
+    "WBP Constable": "Police",
+    "WBP SI": "Police",
+    police: "Police",
+    "police-si": "Police",
+    "Police Recruitment (WBP)": "Police",
+    "WBCS Prelims": "WBCS",
+    wbcs: "WBCS",
+    "WBCS (West Bengal Civil Service)": "WBCS",
+    "SSC MTS": "SSC",
+    "SSC CGL": "SSC",
+    ssc: "SSC",
+    "WBPSC Clerkship": "WBCS",
+    wbpsc: "WBCS",
+    "RRB NTPC": "Railway",
+    "rrb-ntpc": "Railway",
+    "IBPS PO": "Banking",
+    ibps: "Banking",
+    jtet: "WBCS",
+    "JTET": "WBCS",
+  };
+
+  const activeGovtPracticeExam: ExamType =
+    activeTab === "all"
+      ? GOVERNMENT_PRACTICE_EXAM_MAP[allTabExam] ?? "SSC"
+      : GOVERNMENT_PRACTICE_EXAM_MAP[selectedFolder] ?? "SSC";
+
+  const govtPracticeLinkState = {
+    exam: activeGovtPracticeExam,
+    fullPaper: true as const,
+    language: "english" as const,
+  };
 
   useEffect(() => {
     applyQuestionHubExamSeo(seoProfile);
@@ -2029,7 +2382,7 @@ export default function QuestionHub({
           <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
           <span className="text-sm font-medium text-foreground">QuestionHub</span>
           <div className="ml-auto flex items-center gap-2">
-            <Link to="/govt-practice" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
+            <Link to="/govt-practice" state={govtPracticeLinkState} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
               <Play className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Full Exam Test</span>
             </Link>
@@ -2661,6 +3014,20 @@ export default function QuestionHub({
                 onDownload={handleDownload}
                 navigating={testNavLoading}
               />
+            ) : allTabFolderKey === "wbpsc-manifest" ? (
+              // WBPSC Clerkship — manifest-backed cards from /mock_test/wbpsc/
+              <WBPSCPreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
+            ) : allTabFolderKey === "ssc-cgl-manifest" ? (
+              // SSC CGL — manifest-backed cards from /mock_test/ssc_cgl/
+              <CGLPreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
             ) : allTabFolderKey === "ssc" && allTabExam === "SSC MTS" ? (
               <MTSPreviewCards
                 onStartTest={handleStartTest}
@@ -2700,7 +3067,7 @@ export default function QuestionHub({
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
                 Get a fresh AI-generated question paper every time — with timer, scoring and subject-wise analysis.
               </p>
-              <Link to="/mock-test">
+              <Link to="/govt-practice" state={govtPracticeLinkState}>
                 <Button size="lg" className="gap-2">
                   <Sparkles className="w-5 h-5" />
                   Start AI Mock Test

@@ -1,0 +1,312 @@
+{
+  "papers": [
+    {
+      "id": "wbpsc_mock_test_one",
+      "title": "WBPSC Clerkship Mock Test — Set 1",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১",
+      "path": "mock_test/wbpsc/wbpsc_mock_test_one.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali & English",
+      "preview": {
+        "question": "Choose the correct synonym of 'Diligent':",
+        "options": ["Lazy", "Hardworking", "Careless", "Slow"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set2",
+      "title": "WBPSC Clerkship Mock Test — Set 2",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ২",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set2.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali & English",
+      "preview": {
+        "question": "Choose the correct synonym of 'Enormous':",
+        "options": ["Tiny", "Small", "Huge", "Thin"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set3",
+      "title": "WBPSC Clerkship Mock Test — Set 3",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৩",
+      "path": "mock_test/wbpsc/WBPSC Clerkship Preliminary Examination set 3.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'Benevolent' শব্দটির সঠিক সমার্থক শব্দ কী?",
+        "options": ["নিষ্ঠুর", "দানশীল", "কৃপণ", "নিষ্ক্রিয়"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set5",
+      "title": "WBPSC Clerkship Mock Test — Set 5",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৫",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set5.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'Honesty is the best policy' বাক্যে 'Honesty' শব্দটি কোন Parts of Speech?",
+        "options": ["Verb", "Noun", "Adjective", "Adverb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set6",
+      "title": "WBPSC Clerkship Mock Test — Set 6",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৬",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set6.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The boy runs fast' বাক্যে 'fast' শব্দটি কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set7",
+      "title": "WBPSC Clerkship Mock Test — Set 7",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৭",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set7.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'She sings beautifully' বাক্যে 'beautifully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set8",
+      "title": "WBPSC Clerkship Mock Test — Set 8",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৮",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set8.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The old man walked slowly' বাক্যে 'slowly' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set9",
+      "title": "WBPSC Clerkship Mock Test — Set 9",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ৯",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set9.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The baby sleeps peacefully' বাক্যে 'peacefully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set10",
+      "title": "WBPSC Clerkship Mock Test — Set 10",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১০",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set10.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The tall building collapsed' বাক্যে 'tall' কোন Parts of Speech?",
+        "options": ["Adverb", "Adjective", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set11",
+      "title": "WBPSC Clerkship Mock Test — Set 11",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১১",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set11.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The flowers bloom beautifully' বাক্যে 'beautifully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set12",
+      "title": "WBPSC Clerkship Mock Test — Set 12",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১২",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set12.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'She speaks softly' বাক্যে 'softly' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set13",
+      "title": "WBPSC Clerkship Mock Test — Set 13",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৩",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set13.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The flowers are very beautiful' বাক্যে 'beautiful' কোন Parts of Speech?",
+        "options": ["Noun", "Adjective", "Adverb", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set14",
+      "title": "WBPSC Clerkship Mock Test — Set 14",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৪",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set14.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'She sings beautifully' বাক্যে 'beautifully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set15",
+      "title": "WBPSC Clerkship Mock Test — Set 15",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৫",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set15.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The old man walked slowly' বাক্যে 'slowly' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set16",
+      "title": "WBPSC Clerkship Mock Test — Set 16",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৬",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set16.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The children play happily' বাক্যে 'happily' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set17",
+      "title": "WBPSC Clerkship Mock Test — Set 17",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৭",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set17.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The baby sleeps peacefully' বাক্যে 'peacefully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set18",
+      "title": "WBPSC Clerkship Mock Test — Set 18",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৮",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set18.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The tall building collapsed' বাক্যে 'tall' কোন Parts of Speech?",
+        "options": ["Adverb", "Adjective", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set19",
+      "title": "WBPSC Clerkship Mock Test — Set 19",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ১৯",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set19.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'The flowers are beautiful' বাক্যে 'beautiful' কোন Parts of Speech?",
+        "options": ["Adverb", "Adjective", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set20",
+      "title": "WBPSC Clerkship Mock Test — Set 20",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ২০",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set20.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'She sings beautifully' বাক্যে 'beautifully' কোন Parts of Speech?",
+        "options": ["Adjective", "Adverb", "Noun", "Verb"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set21",
+      "title": "WBPSC Clerkship Mock Test — Set 21",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ২১",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set21.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'Eloquent' শব্দের সমার্থক শব্দ কী?",
+        "options": ["Hesitant", "Fluent", "Quiet", "Rough"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_set22",
+      "title": "WBPSC Clerkship Mock Test — Set 22",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ মক টেস্ট — সেট ২২",
+      "path": "mock_test/wbpsc/Wbpsc clerkship set22.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "'Competent' শব্দের সমার্থক শব্দ কী?",
+        "options": ["Incompetent", "Capable", "Unable", "Weak"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "wbpsc_clerkship_mcq",
+      "title": "WBPSC Clerkship MCQ Practice Set",
+      "titleBn": "ডব্লিউবিপিএসসি ক্লার্কশিপ MCQ অনুশীলন সেট",
+      "path": "mock_test/wbpsc/wbpsc_clerkship_mcq.json",
+      "questions": 100,
+      "duration": 90,
+      "language": "Bengali",
+      "preview": {
+        "question": "নিচের বাক্যের শূন্যস্থানে সঠিক শব্দটি বসাও: She is _____ honest girl.",
+        "options": ["a", "an", "the", "কোনোটি নয়"],
+        "answer": "B"
+      }
+    }
+  ]
+}

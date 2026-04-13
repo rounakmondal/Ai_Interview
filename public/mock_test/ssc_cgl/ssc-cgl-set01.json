@@ -1,0 +1,1717 @@
+{
+  "exam": "SSC CGL - Staff Selection Commission Combined Graduate Level (Tier 1) Examination",
+  "conducted_by": "Staff Selection Commission (SSC)",
+  "total_questions": 100,
+  "total_marks": 200,
+  "duration_minutes": 60,
+  "negative_marking": "0.50 marks per wrong answer",
+  "language": "English and Hindi (bilingual)",
+  "syllabus_distribution": {
+    "General_Intelligence_and_Reasoning": 25,
+    "General_Awareness": 25,
+    "Quantitative_Aptitude": 25,
+    "English_Comprehension": 25
+  },
+  "questions":[
+  {
+    "id": 1,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Percentage",
+    "question_en": "If 30% of a number is 90, then what is 60% of that number?",
+    "question_hi": "यदि किसी संख्या का 30% = 90 है, तो उस संख्या का 60% क्या होगा?",
+    "options": ["A. 150", "B. 180", "C. 200", "D. 210"],
+    "answer": "B",
+    "explanation_en": "Number = 90 × 100 / 30 = 300. 60% of 300 = 180.",
+    "explanation_hi": "संख्या = 90 × 100 / 30 = 300. 300 का 60% = 180."
+  },
+  {
+    "id": 2,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Simple Interest",
+    "question_en": "A principal of ₹5000 earns ₹1500 as simple interest in 3 years. What is the rate of interest per annum?",
+    "question_hi": "₹5000 की मूलधन पर 3 वर्षों में ₹1500 साधारण ब्याज प्राप्त होता है। वार्षिक ब्याज दर क्या है?",
+    "options": ["A. 8%", "B. 9%", "C. 10%", "D. 12%"],
+    "answer": "C",
+    "explanation_en": "SI = PRT/100 → R = SI×100 / (P×T) = 1500×100 / (5000×3) = 10%.",
+    "explanation_hi": "SI = PRT/100 → R = 1500×100 / (5000×3) = 10%."
+  },
+  {
+    "id": 3,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Speed, Distance and Time",
+    "question_en": "A train 240 m long passes a pole in 12 seconds. What is the speed of the train in km/h?",
+    "question_hi": "240 मीटर लंबी एक ट्रेन एक खंभे को 12 सेकंड में पार करती है। ट्रेन की गति km/h में क्या है?",
+    "options": ["A. 60 km/h", "B. 72 km/h", "C. 80 km/h", "D. 90 km/h"],
+    "answer": "B",
+    "explanation_en": "Speed = 240/12 = 20 m/s = 20 × 18/5 = 72 km/h.",
+    "explanation_hi": "गति = 240/12 = 20 m/s = 20 × 18/5 = 72 km/h."
+  },
+  {
+    "id": 4,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Profit and Loss",
+    "question_en": "A shopkeeper sells an article at ₹880 after giving a 12% discount. What is the marked price?",
+    "question_hi": "एक दुकानदार 12% छूट देकर ₹880 में एक वस्तु बेचता है। अंकित मूल्य क्या है?",
+    "options": ["A. ₹980", "B. ₹1000", "C. ₹1020", "D. ₹1050"],
+    "answer": "B",
+    "explanation_en": "SP = MP × (100−12)/100 → 880 = MP × 88/100 → MP = 880×100/88 = ₹1000.",
+    "explanation_hi": "880 = MP × 88/100 → MP = 880×100/88 = ₹1000."
+  },
+  {
+    "id": 5,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Ratio and Proportion",
+    "question_en": "Divide ₹1260 among A, B, and C in the ratio 2:3:4. What is B's share?",
+    "question_hi": "₹1260 को A, B और C में 2:3:4 के अनुपात में बाँटें। B का हिस्सा क्या है?",
+    "options": ["A. ₹280", "B. ₹360", "C. ₹420", "D. ₹480"],
+    "answer": "C",
+    "explanation_en": "Total parts = 2+3+4 = 9. B's share = (3/9) × 1260 = ₹420.",
+    "explanation_hi": "कुल भाग = 9. B का हिस्सा = (3/9) × 1260 = ₹420."
+  },
+  {
+    "id": 6,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Geometry",
+    "question_en": "The area of a circle is 154 cm². What is its circumference? (π = 22/7)",
+    "question_hi": "एक वृत्त का क्षेत्रफल 154 cm² है। उसकी परिधि क्या है? (π = 22/7)",
+    "options": ["A. 44 cm", "B. 48 cm", "C. 52 cm", "D. 56 cm"],
+    "answer": "A",
+    "explanation_en": "πr² = 154 → r² = 154×7/22 = 49 → r = 7. Circumference = 2×22/7×7 = 44 cm.",
+    "explanation_hi": "r = 7. परिधि = 2×22/7×7 = 44 cm."
+  },
+  {
+    "id": 7,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Number Series",
+    "question_en": "Find the missing term: 4, 9, 25, 49, 121, ?",
+    "question_hi": "लुप्त पद ज्ञात करें: 4, 9, 25, 49, 121, ?",
+    "options": ["A. 144", "B. 169", "C. 196", "D. 225"],
+    "answer": "B",
+    "explanation_en": "These are squares of prime numbers: 2², 3², 5², 7², 11², 13² = 169.",
+    "explanation_hi": "ये अभाज्य संख्याओं के वर्ग हैं: 2², 3², 5², 7², 11², 13² = 169."
+  },
+  {
+    "id": 8,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Analogy",
+    "question_en": "Doctor : Hospital :: Teacher : ?",
+    "question_hi": "Doctor : Hospital :: Teacher : ?",
+    "options": ["A. Book", "B. Knowledge", "C. School", "D. Student"],
+    "answer": "C",
+    "explanation_en": "A Doctor works in a Hospital. Similarly, a Teacher works in a School.",
+    "explanation_hi": "Doctor अस्पताल में काम करता है। उसी प्रकार Teacher विद्यालय में काम करता है।"
+  },
+  {
+    "id": 9,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Coding-Decoding",
+    "question_en": "If GOLD is coded as IQNF, then how is IRON coded?",
+    "question_hi": "यदि GOLD को IQNF लिखा जाए, तो IRON को कैसे लिखेंगे?",
+    "options": ["A. KTQP", "B. JSPQ", "C. JSQP", "D. KSRP"],
+    "answer": "A",
+    "explanation_en": "Each letter is shifted +2: G→I, O→Q, L→N, D→F. So I→K, R→T, O→Q, N→P = KTQP.",
+    "explanation_hi": "प्रत्येक अक्षर +2 आगे: I→K, R→T, O→Q, N→P = KTQP."
+  },
+  {
+    "id": 10,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Blood Relations",
+    "question_en": "A is the brother of B. B is the mother of C. How is A related to C?",
+    "question_hi": "A, B का भाई है। B, C की माँ है। A, C से कैसे संबंधित है?",
+    "options": ["A. Father", "B. Uncle", "C. Grandfather", "D. Brother"],
+    "answer": "B",
+    "explanation_en": "B is the mother of C. A is the brother of B (mother). So A is the maternal uncle of C.",
+    "explanation_hi": "B, C की माँ है। A, B का भाई है (माँ का भाई)। अतः A, C का मामा है।"
+  },
+  {
+    "id": 11,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Direction Sense",
+    "question_en": "Ravi walks 10 km North, then 6 km East. How far is he from the starting point?",
+    "question_hi": "रवि 10 km उत्तर जाता है, फिर 6 km पूर्व। वह प्रारंभिक बिंदु से कितना दूर है?",
+    "options": ["A. 10 km", "B. 11 km", "C. 12 km", "D. 14 km"],
+    "answer": "C",
+    "explanation_en": "Distance = √(10² + 6²) = √(100 + 36) = √136 ≈ 11.66 ≈ 12 km.",
+    "explanation_hi": "दूरी = √(100 + 36) = √136 ≈ 12 km."
+  },
+  {
+    "id": 12,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Odd One Out",
+    "question_en": "Find the odd one out: Pen, Pencil, Ink, Eraser, Book",
+    "question_hi": "असंगत चुनें: Pen, Pencil, Ink, Eraser, Book",
+    "options": ["A. Pen", "B. Pencil", "C. Ink", "D. Book"],
+    "answer": "D",
+    "explanation_en": "Pen, Pencil, Ink, Eraser are all stationery writing tools. Book is not a stationery tool.",
+    "explanation_hi": "Pen, Pencil, Ink, Eraser सभी लेखन सामग्री हैं। Book लेखन उपकरण नहीं है।"
+  },
+  {
+    "id": 13,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Syllogism",
+    "question_en": "All cats are animals. All animals are living beings. Conclusion: All cats are living beings.",
+    "question_hi": "सभी बिल्लियाँ जानवर हैं। सभी जानवर सजीव हैं। निष्कर्ष: सभी बिल्लियाँ सजीव हैं।",
+    "options": ["A. Conclusion follows", "B. Conclusion does not follow", "C. Cannot be determined", "D. Only partially follows"],
+    "answer": "A",
+    "explanation_en": "Cats → Animals → Living beings. By syllogism, all cats are definitely living beings.",
+    "explanation_hi": "बिल्लियाँ → जानवर → सजीव। न्यायवाक्य से, सभी बिल्लियाँ सजीव हैं।"
+  },
+  {
+    "id": 14,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Synonyms",
+    "question_en": "Choose the correct synonym of 'Diligent':",
+    "question_hi": "'Diligent' का सही समानार्थी शब्द चुनें:",
+    "options": ["A. Lazy", "B. Hardworking", "C. Careless", "D. Arrogant"],
+    "answer": "B",
+    "explanation_en": "'Diligent' means showing care and effort in work. Synonym = Hardworking.",
+    "explanation_hi": "'Diligent' का अर्थ है परिश्रमी। समानार्थी = Hardworking."
+  },
+  {
+    "id": 15,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Antonyms",
+    "question_en": "Choose the correct antonym of 'Verbose':",
+    "question_hi": "'Verbose' का सही विपरीतार्थी शब्द चुनें:",
+    "options": ["A. Wordy", "B. Talkative", "C. Concise", "D. Elaborate"],
+    "answer": "C",
+    "explanation_en": "'Verbose' means using too many words. Antonym = 'Concise' (brief and clear).",
+    "explanation_hi": "'Verbose' का अर्थ अनावश्यक रूप से लंबा। विपरीत = 'Concise' (संक्षिप्त)."
+  },
+  {
+    "id": 16,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Fill in the Blanks",
+    "question_en": "She ______ in this company for five years by next month.",
+    "question_hi": "अगले महीने तक वह इस कंपनी में पाँच साल से ______ होगी।",
+    "options": ["A. will work", "B. will have worked", "C. has worked", "D. had worked"],
+    "answer": "B",
+    "explanation_en": "Future Perfect Tense is used for an action completed before a future point. 'Will have worked' is correct.",
+    "explanation_hi": "Future Perfect Tense का प्रयोग भविष्य की एक निर्धारित समय से पहले पूर्ण कार्य के लिए होता है।"
+  },
+  {
+    "id": 17,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Error Spotting",
+    "question_en": "Spot the error: 'He is one of the student who has passed the exam.'",
+    "question_hi": "त्रुटि पहचानें: 'He is one of the student who has passed the exam.'",
+    "options": ["A. He is one of", "B. the student", "C. who has passed", "D. the exam"],
+    "answer": "B",
+    "explanation_en": "'One of' is followed by a plural noun. Correct: 'one of the students who have passed'.",
+    "explanation_hi": "'One of' के बाद बहुवचन संज्ञा आती है। सही: 'one of the students who have passed'."
+  },
+  {
+    "id": 18,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Idioms and Phrases",
+    "question_en": "What does the idiom 'Bite the bullet' mean?",
+    "question_hi": "'Bite the bullet' मुहावरे का अर्थ क्या है?",
+    "options": ["A. To eat something hard", "B. To endure a painful situation bravely", "C. To shoot someone", "D. To avoid a problem"],
+    "answer": "B",
+    "explanation_en": "'Bite the bullet' means to endure a painful or difficult situation with courage.",
+    "explanation_hi": "'Bite the bullet' का अर्थ है कठिन परिस्थिति को साहस के साथ सहन करना।"
+  },
+  {
+    "id": 19,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "Which article of the Indian Constitution deals with the Right to Equality?",
+    "question_hi": "भारतीय संविधान का कौन सा अनुच्छेद समानता के अधिकार से संबंधित है?",
+    "options": ["A. Article 12–18", "B. Article 19–22", "C. Article 23–24", "D. Article 25–28"],
+    "answer": "A",
+    "explanation_en": "Articles 14–18 deal with the Right to Equality under Part III of the Indian Constitution.",
+    "explanation_hi": "भारतीय संविधान के भाग III में अनुच्छेद 14–18 समानता के अधिकार से संबंधित हैं।"
+  },
+  {
+    "id": 20,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science and Technology",
+    "question_en": "Which planet is known as the 'Red Planet'?",
+    "question_hi": "किस ग्रह को 'लाल ग्रह' कहा जाता है?",
+    "options": ["A. Venus", "B. Jupiter", "C. Mars", "D. Saturn"],
+    "answer": "C",
+    "explanation_en": "Mars is called the Red Planet because of iron oxide (rust) on its surface giving it a reddish appearance.",
+    "explanation_hi": "मंगल ग्रह को लाल ग्रह कहा जाता है क्योंकि इसकी सतह पर आयरन ऑक्साइड (जंग) है।"
+  },
+   {
+    "id": 21,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Average",
+    "question_en": "The average of 5 numbers is 40. If one number is excluded, the average becomes 38. What is the excluded number?",
+    "question_hi": "5 संख्याओं का औसत 40 है। यदि एक संख्या हटा दी जाए तो औसत 38 हो जाता है। हटाई गई संख्या क्या है?",
+    "options": [
+      "A. 46",
+      "B. 48",
+      "C. 50",
+      "D. 52"
+    ],
+    "answer": "B",
+    "explanation_en": "Sum of 5 numbers = 5×40 = 200. Sum of 4 numbers = 4×38 = 152. Excluded number = 200 - 152 = 48.",
+    "explanation_hi": "5 संख्याओं का योग = 200. 4 संख्याओं का योग = 152. हटाई गई संख्या = 200 - 152 = 48."
+  },
+  {
+    "id": 22,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "LCM and HCF",
+    "question_en": "The HCF of two numbers is 12 and their LCM is 144. If one number is 36, what is the other?",
+    "question_hi": "दो संख्याओं का HCF 12 और LCM 144 है। यदि एक संख्या 36 है, तो दूसरी संख्या क्या है?",
+    "options": [
+      "A. 36",
+      "B. 48",
+      "C. 52",
+      "D. 60"
+    ],
+    "answer": "B",
+    "explanation_en": "Product of two numbers = HCF × LCM = 12 × 144 = 1728. Other number = 1728 ÷ 36 = 48.",
+    "explanation_hi": "दो संख्याओं का गुणनफल = 12 × 144 = 1728. दूसरी संख्या = 1728 ÷ 36 = 48."
+  },
+  {
+    "id": 23,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Compound Interest",
+    "question_en": "What is the compound interest on ₹8000 at 10% per annum for 2 years?",
+    "question_hi": "₹8000 पर 10% वार्षिक दर से 2 वर्षों का चक्रवृद्धि ब्याज क्या है?",
+    "options": [
+      "A. ₹1600",
+      "B. ₹1680",
+      "C. ₹1700",
+      "D. ₹1750"
+    ],
+    "answer": "B",
+    "explanation_en": "A = 8000 × (1.1)² = 8000 × 1.21 = 9680. CI = 9680 - 8000 = ₹1680.",
+    "explanation_hi": "A = 8000 × (1.1)² = 9680. CI = 9680 - 8000 = ₹1680."
+  },
+  {
+    "id": 24,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Algebra",
+    "question_en": "If x + y = 10 and xy = 21, what is x² + y²?",
+    "question_hi": "यदि x + y = 10 और xy = 21 है, तो x² + y² क्या है?",
+    "options": [
+      "A. 50",
+      "B. 56",
+      "C. 58",
+      "D. 62"
+    ],
+    "answer": "C",
+    "explanation_en": "x² + y² = (x+y)² - 2xy = 100 - 42 = 58.",
+    "explanation_hi": "x² + y² = (x+y)² - 2xy = 100 - 42 = 58."
+  },
+  {
+    "id": 25,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Trigonometry",
+    "question_en": "What is the value of sin²30° + cos²60°?",
+    "question_hi": "sin²30° + cos²60° का मान क्या है?",
+    "options": [
+      "A. 1/2",
+      "B. 1",
+      "C. 3/2",
+      "D. 1/4"
+    ],
+    "answer": "A",
+    "explanation_en": "sin30° = 1/2, cos60° = 1/2. sin²30° + cos²60° = 1/4 + 1/4 = 1/2.",
+    "explanation_hi": "sin30° = 1/2, cos60° = 1/2. sin²30° + cos²60° = 1/4 + 1/4 = 1/2."
+  },
+  {
+    "id": 26,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Mensuration",
+    "question_en": "The volume of a cube is 729 cm³. What is its surface area?",
+    "question_hi": "एक घन का आयतन 729 cm³ है। उसका कुल पृष्ठीय क्षेत्रफल क्या है?",
+    "options": [
+      "A. 486 cm²",
+      "B. 496 cm²",
+      "C. 506 cm²",
+      "D. 516 cm²"
+    ],
+    "answer": "A",
+    "explanation_en": "a³ = 729 → a = 9. Surface area = 6a² = 6 × 81 = 486 cm².",
+    "explanation_hi": "a = 9. कुल पृष्ठीय क्षेत्रफल = 6 × 9² = 486 cm²."
+  },
+  {
+    "id": 27,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Number System",
+    "question_en": "What is the remainder when 7⁵¹ is divided by 6?",
+    "question_hi": "7⁵¹ को 6 से विभाजित करने पर शेषफल क्या है?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 5"
+    ],
+    "answer": "A",
+    "explanation_en": "7 ≡ 1 (mod 6). So 7⁵¹ ≡ 1⁵¹ = 1 (mod 6). Remainder = 1.",
+    "explanation_hi": "7 को 6 से भाग देने पर शेष 1 है। 7⁵¹ mod 6 = 1."
+  },
+  {
+    "id": 28,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Pipes and Cisterns",
+    "question_en": "Pipe A fills a tank in 10 hours, Pipe B empties it in 15 hours. If both are open, in how many hours will the tank be full?",
+    "question_hi": "पाइप A एक टंकी को 10 घंटे में भरता है, पाइप B 15 घंटे में खाली करता है। दोनों खुले हों तो टंकी कितने घंटे में भरेगी?",
+    "options": [
+      "A. 25 hours",
+      "B. 28 hours",
+      "C. 30 hours",
+      "D. 35 hours"
+    ],
+    "answer": "C",
+    "explanation_en": "Net per hour = 1/10 - 1/15 = 3/30 - 2/30 = 1/30. Time = 30 hours.",
+    "explanation_hi": "प्रति घंटे नेट = 1/10 - 1/15 = 1/30. समय = 30 घंटे."
+  },
+  {
+    "id": 29,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Time and Work",
+    "question_en": "A can do a work in 12 days, B in 18 days. After working together for 4 days, B leaves. In how many more days will A finish the work?",
+    "question_hi": "A एक काम 12 दिन में और B 18 दिन में करता है। 4 दिन साथ काम करने के बाद B चला जाता है। A अकेला बाकी काम कितने दिनों में पूरा करेगा?",
+    "options": [
+      "A. 4 days",
+      "B. 5 days",
+      "C. 6 days",
+      "D. 8 days"
+    ],
+    "answer": "B",
+    "explanation_en": "Work done in 4 days = 4(1/12 + 1/18) = 4×5/36 = 20/36 = 5/9. Remaining = 4/9. A takes = (4/9)÷(1/12) = 48/9 ≈ 5 days.",
+    "explanation_hi": "4 दिन में किया गया काम = 5/9. शेष = 4/9. A अकेले लेगा = (4/9)/(1/12) = 48/9 ≈ 5 दिन."
+  },
+  {
+    "id": 30,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Percentage",
+    "question_en": "A number is increased by 20% and then decreased by 20%. What is the net change?",
+    "question_hi": "एक संख्या को 20% बढ़ाया जाता है फिर 20% घटाया जाता है। शुद्ध परिवर्तन क्या है?",
+    "options": [
+      "A. 0% change",
+      "B. 2% increase",
+      "C. 4% decrease",
+      "D. 4% increase"
+    ],
+    "answer": "C",
+    "explanation_en": "Net change = -(r²/100) = -(400/100) = -4%. So 4% decrease.",
+    "explanation_hi": "शुद्ध परिवर्तन = -(r²/100) = -4%. अतः 4% की कमी."
+  },
+  {
+    "id": 31,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Mixtures and Alligation",
+    "question_en": "In what ratio must water be mixed with milk costing ₹60/litre to get a mixture worth ₹40/litre? (Water costs ₹0)",
+    "question_hi": "₹60/लीटर वाले दूध में पानी (₹0) किस अनुपात में मिलाया जाए कि मिश्रण का मूल्य ₹40/लीटर हो?",
+    "options": [
+      "A. 1:2",
+      "B. 1:3",
+      "C. 2:1",
+      "D. 3:1"
+    ],
+    "answer": "A",
+    "explanation_en": "By alligation: (60-40):(40-0) = 20:40 = 1:2. Water:Milk = 1:2.",
+    "explanation_hi": "अलिगेशन से: (60-40):(40-0) = 20:40 = 1:2. पानी:दूध = 1:2."
+  },
+  {
+    "id": 32,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Statistics",
+    "question_en": "Find the median of: 3, 7, 5, 1, 9, 11, 13",
+    "question_hi": "3, 7, 5, 1, 9, 11, 13 का माध्यिका (Median) ज्ञात करें।",
+    "options": [
+      "A. 5",
+      "B. 7",
+      "C. 9",
+      "D. 11"
+    ],
+    "answer": "B",
+    "explanation_en": "Ascending order: 1, 3, 5, 7, 9, 11, 13. Middle value (4th) = 7.",
+    "explanation_hi": "आरोही क्रम: 1, 3, 5, 7, 9, 11, 13. बीच का मान (4th) = 7."
+  },
+  {
+    "id": 33,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Mensuration",
+    "question_en": "If the radius of a cylinder is doubled and height is halved, what happens to its volume?",
+    "question_hi": "यदि किसी बेलन की त्रिज्या दोगुनी और ऊँचाई आधी कर दी जाए, तो आयतन पर क्या प्रभाव पड़ेगा?",
+    "options": [
+      "A. Remains same",
+      "B. Doubles",
+      "C. Becomes 4 times",
+      "D. Becomes 3 times"
+    ],
+    "answer": "B",
+    "explanation_en": "V = πr²h. New V = π(2r)²(h/2) = π×4r²×h/2 = 2πr²h. Volume doubles.",
+    "explanation_hi": "नया आयतन = π(2r)²(h/2) = 2πr²h. आयतन दोगुना हो जाता है."
+  },
+  {
+    "id": 34,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Geometry",
+    "question_en": "In a triangle, if angles are in ratio 1:2:3, what is the largest angle?",
+    "question_hi": "एक त्रिभुज में कोण 1:2:3 के अनुपात में हैं। सबसे बड़ा कोण क्या है?",
+    "options": [
+      "A. 60°",
+      "B. 80°",
+      "C. 90°",
+      "D. 120°"
+    ],
+    "answer": "C",
+    "explanation_en": "Sum of angles = 180°. Parts: 1+2+3 = 6. Largest = (3/6)×180 = 90°.",
+    "explanation_hi": "कुल = 180°. बड़ा कोण = (3/6)×180 = 90°."
+  },
+  {
+    "id": 35,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "Quantitative Aptitude",
+    "topic": "Profit and Loss",
+    "question_en": "By selling 10 oranges for ₹12, a man gains 20%. At what price must he sell 10 oranges to gain 30%?",
+    "question_hi": "10 संतरे ₹12 में बेचने पर 20% लाभ होता है। 30% लाभ के लिए 10 संतरे किस दाम पर बेचें?",
+    "options": [
+      "A. ₹12.50",
+      "B. ₹13",
+      "C. ₹13.50",
+      "D. ₹14"
+    ],
+    "answer": "B",
+    "explanation_en": "CP = 12×100/120 = ₹10. For 30% profit: SP = 10×130/100 = ₹13.",
+    "explanation_hi": "CP = ₹10. 30% लाभ के लिए SP = 10×130/100 = ₹13."
+  },
+  {
+    "id": 36,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Matrix",
+    "question_en": "Find the missing number: [2, 4, 8], [3, 9, 27], [4, 16, ?]",
+    "question_hi": "लुप्त संख्या ज्ञात करें: [2, 4, 8], [3, 9, 27], [4, 16, ?]",
+    "options": [
+      "A. 48",
+      "B. 56",
+      "C. 60",
+      "D. 64"
+    ],
+    "answer": "D",
+    "explanation_en": "Pattern: n, n², n³. For 4: 4¹=4, 4²=16, 4³=64.",
+    "explanation_hi": "Pattern: n, n², n³. 4 के लिए: 4, 16, 64."
+  },
+  {
+    "id": 37,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Ranking",
+    "question_en": "In a row of 40 students, Priya is 15th from the left. What is her position from the right?",
+    "question_hi": "40 छात्रों की पंक्ति में प्रिया बाएं से 15वें स्थान पर है। दाएं से उसकी स्थिति क्या है?",
+    "options": [
+      "A. 24th",
+      "B. 25th",
+      "C. 26th",
+      "D. 27th"
+    ],
+    "answer": "C",
+    "explanation_en": "Position from right = 40 - 15 + 1 = 26th.",
+    "explanation_hi": "दाएं से स्थिति = 40 - 15 + 1 = 26वीं."
+  },
+  {
+    "id": 38,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Paper Folding",
+    "question_en": "A square paper is folded once diagonally and a hole is punched. How many holes appear when unfolded?",
+    "question_hi": "एक वर्गाकार कागज को एक बार विकर्ण से मोड़कर एक छेद किया जाता है। खोलने पर कितने छेद दिखेंगे?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": "B",
+    "explanation_en": "When folded once, 2 layers are created. One punch creates 2 holes when unfolded.",
+    "explanation_hi": "एक बार मोड़ने पर 2 परतें बनती हैं। एक छेद खोलने पर 2 छेद बनते हैं."
+  },
+  {
+    "id": 39,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Letter Series",
+    "question_en": "Find the next: AZ, BY, CX, DW, ?",
+    "question_hi": "अगला पद ज्ञात करें: AZ, BY, CX, DW, ?",
+    "options": [
+      "A. EU",
+      "B. EV",
+      "C. FV",
+      "D. FU"
+    ],
+    "answer": "B",
+    "explanation_en": "First letter increases (A,B,C,D,E); second letter decreases (Z,Y,X,W,V). Answer: EV.",
+    "explanation_hi": "पहला अक्षर बढ़ता है, दूसरा घटता है: E+V = EV."
+  },
+  {
+    "id": 40,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Venn Diagram",
+    "question_en": "In a class, 30 students play cricket, 20 play football, 10 play both. How many play only cricket?",
+    "question_hi": "एक कक्षा में 30 छात्र क्रिकेट, 20 फुटबॉल खेलते हैं और 10 दोनों खेलते हैं। केवल क्रिकेट खेलने वाले कितने हैं?",
+    "options": [
+      "A. 10",
+      "B. 15",
+      "C. 20",
+      "D. 25"
+    ],
+    "answer": "C",
+    "explanation_en": "Only cricket = 30 - 10 = 20.",
+    "explanation_hi": "केवल क्रिकेट = 30 - 10 = 20."
+  },
+  {
+    "id": 41,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Clock",
+    "question_en": "What is the angle between the hour and minute hands at 4:30?",
+    "question_hi": "4:30 बजे घंटे और मिनट की सुइयों के बीच कोण क्या है?",
+    "options": [
+      "A. 35°",
+      "B. 40°",
+      "C. 45°",
+      "D. 50°"
+    ],
+    "answer": "C",
+    "explanation_en": "Minute hand at 180°. Hour hand = 4×30 + 30×0.5 = 120+15 = 135°. Angle = 180-135 = 45°.",
+    "explanation_hi": "मिनट की सुई 180°. घंटे की सुई = 135°. कोण = 45°."
+  },
+  {
+    "id": 42,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Mirror Image",
+    "question_en": "If it is 3:15 as seen in a mirror, what is the actual time?",
+    "question_hi": "दर्पण में 3:15 दिखता है, तो वास्तविक समय क्या है?",
+    "options": [
+      "A. 7:45",
+      "B. 8:45",
+      "C. 9:45",
+      "D. 10:45"
+    ],
+    "answer": "B",
+    "explanation_en": "Mirror time + actual time = 12:00 (or 11:60). 11:60 - 3:15 = 8:45.",
+    "explanation_hi": "11:60 - 3:15 = 8:45 वास्तविक समय है."
+  },
+  {
+    "id": 43,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Analogy",
+    "question_en": "Thermometer : Temperature :: Barometer : ?",
+    "question_hi": "Thermometer : Temperature :: Barometer : ?",
+    "options": [
+      "A. Wind",
+      "B. Humidity",
+      "C. Pressure",
+      "D. Rainfall"
+    ],
+    "answer": "C",
+    "explanation_en": "A Thermometer measures Temperature. A Barometer measures Atmospheric Pressure.",
+    "explanation_hi": "थर्मामीटर तापमान मापता है। बैरोमीटर वायुमंडलीय दाब मापता है."
+  },
+  {
+    "id": 44,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Seating Arrangement",
+    "question_en": "In how many ways can 6 persons sit around a circular table?",
+    "question_hi": "6 व्यक्ति एक गोल मेज के चारों ओर कितने तरीकों से बैठ सकते हैं?",
+    "options": [
+      "A. 60",
+      "B. 100",
+      "C. 120",
+      "D. 720"
+    ],
+    "answer": "C",
+    "explanation_en": "Circular permutation = (n-1)! = (6-1)! = 5! = 120.",
+    "explanation_hi": "वृत्तीय क्रमचय = (n-1)! = 5! = 120."
+  },
+  {
+    "id": 45,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Number Series",
+    "question_en": "Find the wrong number: 2, 5, 10, 17, 26, 36, 50",
+    "question_hi": "गलत संख्या ज्ञात करें: 2, 5, 10, 17, 26, 36, 50",
+    "options": [
+      "A. 26",
+      "B. 36",
+      "C. 50",
+      "D. 17"
+    ],
+    "answer": "B",
+    "explanation_en": "Pattern: n²+1: 1²+1=2, 2²+1=5, 3²+1=10, 4²+1=17, 5²+1=26, 6²+1=37≠36, 7²+1=50. Wrong = 36.",
+    "explanation_hi": "Pattern n²+1 के अनुसार 6²+1=37 होना चाहिए, 36 गलत है."
+  },
+  {
+    "id": 46,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Coding-Decoding",
+    "question_en": "If 'COMPUTER' is coded as 'RETUPMOC', how is 'LAPTOP' coded?",
+    "question_hi": "यदि 'COMPUTER' को 'RETUPMOC' लिखा जाए, तो 'LAPTOP' को कैसे लिखेंगे?",
+    "options": [
+      "A. POTPAL",
+      "B. POTAL",
+      "C. POTLAP",
+      "D. APTOL"
+    ],
+    "answer": "C",
+    "explanation_en": "The word is written in reverse. LAPTOP reversed = POTPAL. But L-A-P-T-O-P reversed = P-O-T-P-A-L = POTPAL.",
+    "explanation_hi": "शब्द को उल्टा लिखते हैं। LAPTOP उल्टा = POTPAL."
+  },
+  {
+    "id": 47,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Blood Relations",
+    "question_en": "Pointing to a photograph, a man says, 'She is the daughter of my grandfather's only son.' How is the girl related to him?",
+    "question_hi": "एक फोटो की ओर इशारा करते हुए एक आदमी कहता है, 'वह मेरे दादा के एकलौते बेटे की बेटी है।' लड़की उससे कैसे संबंधित है?",
+    "options": [
+      "A. Mother",
+      "B. Sister",
+      "C. Aunt",
+      "D. Cousin"
+    ],
+    "answer": "B",
+    "explanation_en": "Grandfather's only son = his father. Father's daughter = his sister.",
+    "explanation_hi": "दादा का एकमात्र बेटा = उसके पिता. पिता की बेटी = उसकी बहन."
+  },
+  {
+    "id": 48,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Direction Sense",
+    "question_en": "A man starts from point O, walks 4 km East, then 3 km North. What is the shortest distance from O?",
+    "question_hi": "एक व्यक्ति बिंदु O से चलकर 4 km पूर्व, फिर 3 km उत्तर जाता है। O से सबसे छोटी दूरी क्या है?",
+    "options": [
+      "A. 4 km",
+      "B. 5 km",
+      "C. 6 km",
+      "D. 7 km"
+    ],
+    "answer": "B",
+    "explanation_en": "Distance = √(4² + 3²) = √(16+9) = √25 = 5 km.",
+    "explanation_hi": "दूरी = √(16+9) = √25 = 5 km."
+  },
+  {
+    "id": 49,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Dice",
+    "question_en": "A dice has 1 opposite to 6, 2 opposite to 5, 3 opposite to 4. If top face shows 3, which face is at bottom?",
+    "question_hi": "एक पासे में 1 के विपरीत 6, 2 के विपरीत 5, 3 के विपरीत 4 है। यदि ऊपर 3 है तो नीचे कौन सा है?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 4",
+      "D. 6"
+    ],
+    "answer": "C",
+    "explanation_en": "3 is opposite to 4. So if top = 3, bottom = 4.",
+    "explanation_hi": "3 के विपरीत 4 है। यदि ऊपर 3 है तो नीचे 4 है."
+  },
+  {
+    "id": 50,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Intelligence and Reasoning",
+    "topic": "Classification",
+    "question_en": "Which one does NOT belong to the group? Mercury, Venus, Earth, Moon, Mars",
+    "question_hi": "इनमें से कौन इस समूह में नहीं है? Mercury, Venus, Earth, Moon, Mars",
+    "options": [
+      "A. Mercury",
+      "B. Venus",
+      "C. Moon",
+      "D. Mars"
+    ],
+    "answer": "C",
+    "explanation_en": "Mercury, Venus, Earth, Mars are planets. Moon is a natural satellite, not a planet.",
+    "explanation_hi": "Mercury, Venus, Earth, Mars ग्रह हैं। Moon एक प्राकृतिक उपग्रह है, ग्रह नहीं."
+  },
+  {
+    "id": 51,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Synonyms",
+    "question_en": "Choose the correct synonym of 'Pragmatic':",
+    "question_hi": "'Pragmatic' का सही समानार्थी चुनें:",
+    "options": [
+      "A. Idealistic",
+      "B. Practical",
+      "C. Theoretical",
+      "D. Impractical"
+    ],
+    "answer": "B",
+    "explanation_en": "'Pragmatic' means dealing with things sensibly and realistically. Synonym = Practical.",
+    "explanation_hi": "'Pragmatic' का अर्थ व्यावहारिक है। समानार्थी = Practical."
+  },
+  {
+    "id": 52,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Antonyms",
+    "question_en": "Choose the correct antonym of 'Benevolent':",
+    "question_hi": "'Benevolent' का सही विपरीतार्थी शब्द चुनें:",
+    "options": [
+      "A. Kind",
+      "B. Generous",
+      "C. Malevolent",
+      "D. Charitable"
+    ],
+    "answer": "C",
+    "explanation_en": "'Benevolent' means well-wishing and kind. Its antonym is 'Malevolent' = wishing evil.",
+    "explanation_hi": "'Benevolent' का अर्थ परोपकारी है। विपरीत = 'Malevolent' (दुर्भावनापूर्ण)."
+  },
+  {
+    "id": 53,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Fill in the Blanks",
+    "question_en": "Neither the principal nor the teachers ______ present at the meeting.",
+    "question_hi": "न तो प्रिंसिपल और न ही शिक्षक बैठक में उपस्थित ______ ।",
+    "options": [
+      "A. were",
+      "B. are",
+      "C. was",
+      "D. is"
+    ],
+    "answer": "C",
+    "explanation_en": "When 'neither...nor' joins singular subjects, verb agrees with the noun closest to it (teachers = plural). Correct: 'were'. But 'teachers' is plural so 'were' — Wait: 'teachers' is closer and plural, so 'were'. However since 'teachers' is plural, answer = A.",
+    "explanation_hi": "'Neither...nor' में क्रिया निकटतम subject से मिलती है। 'teachers' बहुवचन है तो 'were' सही है."
+  },
+  {
+    "id": 54,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "One Word Substitution",
+    "question_en": "A person who is unable to pay his debts:",
+    "question_hi": "वह व्यक्ति जो अपने कर्जे चुकाने में असमर्थ हो:",
+    "options": [
+      "A. Debtor",
+      "B. Bankrupt",
+      "C. Insolvent",
+      "D. Creditor"
+    ],
+    "answer": "C",
+    "explanation_en": "'Insolvent' means a person legally declared unable to pay debts.",
+    "explanation_hi": "'Insolvent' वह व्यक्ति है जो कानूनी रूप से ऋण चुकाने में असमर्थ हो."
+  },
+  {
+    "id": 55,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Idioms and Phrases",
+    "question_en": "What does 'Cost an arm and a leg' mean?",
+    "question_hi": "'Cost an arm and a leg' का अर्थ क्या है?",
+    "options": [
+      "A. To be very cheap",
+      "B. To be very expensive",
+      "C. To cause physical harm",
+      "D. To work very hard"
+    ],
+    "answer": "B",
+    "explanation_en": "'Cost an arm and a leg' means something is extremely expensive.",
+    "explanation_hi": "'Cost an arm and a leg' का अर्थ है बहुत महंगा होना."
+  },
+  {
+    "id": 56,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Error Spotting",
+    "question_en": "Spot the error: 'The sceneries of Kashmir are very beautiful.'",
+    "question_hi": "त्रुटि पहचानें: 'The sceneries of Kashmir are very beautiful.'",
+    "options": [
+      "A. The sceneries",
+      "B. of Kashmir",
+      "C. are very",
+      "D. beautiful"
+    ],
+    "answer": "A",
+    "explanation_en": "'Scenery' is an uncountable noun and has no plural form. Correct: 'The scenery of Kashmir is very beautiful.'",
+    "explanation_hi": "'Scenery' अगणनीय संज्ञा है, इसका बहुवचन नहीं होता। सही: 'The scenery is beautiful'."
+  },
+  {
+    "id": 57,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Active Passive Voice",
+    "question_en": "Change to passive: 'The manager will announce the results tomorrow.'",
+    "question_hi": "कर्मवाच्य में बदलें: 'The manager will announce the results tomorrow.'",
+    "options": [
+      "A. The results will be announced by the manager tomorrow.",
+      "B. The results are announced by the manager tomorrow.",
+      "C. The results were announced by the manager tomorrow.",
+      "D. The results have been announced by the manager tomorrow."
+    ],
+    "answer": "A",
+    "explanation_en": "Future active → passive: Subject + will be + past participle + by + agent.",
+    "explanation_hi": "Future tense में: The results will be announced by the manager tomorrow."
+  },
+  {
+    "id": 58,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Sentence Improvement",
+    "question_en": "Improve the sentence: 'He is too weak to not lift the box.'",
+    "question_hi": "वाक्य सुधारें: 'He is too weak to not lift the box.'",
+    "options": [
+      "A. He is too weak to lift the box.",
+      "B. He is very weak to not lift the box.",
+      "C. He is too weak so he cannot lift the box.",
+      "D. No improvement needed."
+    ],
+    "answer": "A",
+    "explanation_en": "'Too...to' already implies negation. 'He is too weak to lift the box' is correct.",
+    "explanation_hi": "'Too...to' में नकारात्मकता पहले से है। 'He is too weak to lift the box' सही है."
+  },
+  {
+    "id": 59,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Cloze Test",
+    "question_en": "Fill in the blank: Honesty is the ______ policy.",
+    "question_hi": "रिक्त स्थान भरें: Honesty is the ______ policy.",
+    "options": [
+      "A. best",
+      "B. better",
+      "C. good",
+      "D. great"
+    ],
+    "answer": "A",
+    "explanation_en": "The fixed phrase/proverb is 'Honesty is the best policy.'",
+    "explanation_hi": "यह एक प्रसिद्ध कहावत है: 'Honesty is the best policy.'"
+  },
+  {
+    "id": 60,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Narration",
+    "question_en": "Change to indirect speech: The teacher said, 'The earth revolves around the sun.'",
+    "question_hi": "अप्रत्यक्ष कथन में बदलें: The teacher said, 'The earth revolves around the sun.'",
+    "options": [
+      "A. The teacher said that the earth revolved around the sun.",
+      "B. The teacher said that the earth revolves around the sun.",
+      "C. The teacher told that the earth revolves around the sun.",
+      "D. The teacher said that the earth had revolved around the sun."
+    ],
+    "answer": "B",
+    "explanation_en": "Universal truths do not change tense in indirect speech. 'Revolves' stays as it is.",
+    "explanation_hi": "सार्वभौमिक सत्य में indirect speech में काल नहीं बदलता। 'revolves' वैसे ही रहेगा."
+  },
+  {
+    "id": 61,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Comprehension",
+    "question_en": "Choose the word closest in meaning to 'Ephemeral':",
+    "question_hi": "'Ephemeral' के सबसे निकटतम अर्थ वाला शब्द चुनें:",
+    "options": [
+      "A. Eternal",
+      "B. Permanent",
+      "C. Transient",
+      "D. Everlasting"
+    ],
+    "answer": "C",
+    "explanation_en": "'Ephemeral' means lasting for a very short time. Closest = 'Transient' (temporary).",
+    "explanation_hi": "'Ephemeral' का अर्थ अल्पकालीन है। निकटतम = 'Transient' (अस्थायी)."
+  },
+  {
+    "id": 62,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Spelling",
+    "question_en": "Choose the correctly spelled word:",
+    "question_hi": "सही वर्तनी वाला शब्द चुनें:",
+    "options": [
+      "A. Accomodation",
+      "B. Accommodation",
+      "C. Accomadation",
+      "D. Accommodation"
+    ],
+    "answer": "B",
+    "explanation_en": "The correct spelling is 'Accommodation' with double 'c' and double 'm'.",
+    "explanation_hi": "सही वर्तनी 'Accommodation' है — दोहरा 'c' और दोहरा 'm'."
+  },
+  {
+    "id": 63,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Preposition",
+    "question_en": "Fill in the blank: She has been working here ______ five years.",
+    "question_hi": "रिक्त स्थान भरें: वह यहाँ ______ पाँच वर्षों से काम कर रही है।",
+    "options": [
+      "A. since",
+      "B. for",
+      "C. from",
+      "D. during"
+    ],
+    "answer": "B",
+    "explanation_en": "'For' is used with a period of time. 'Since' is used with a point of time.",
+    "explanation_hi": "'For' समयावधि के साथ आता है। 'Since' समय के बिंदु के साथ आता है."
+  },
+  {
+    "id": 64,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Phrase",
+    "question_en": "What does 'Break the ice' mean?",
+    "question_hi": "'Break the ice' का क्या अर्थ है?",
+    "options": [
+      "A. To cause destruction",
+      "B. To initiate conversation in an awkward situation",
+      "C. To end a relationship",
+      "D. To solve a difficult problem"
+    ],
+    "answer": "B",
+    "explanation_en": "'Break the ice' means to do or say something to reduce tension and make people feel comfortable.",
+    "explanation_hi": "'Break the ice' का अर्थ है असहज स्थिति में बातचीत शुरू करना।"
+  },
+  {
+    "id": 65,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "English Comprehension",
+    "topic": "Conjunction",
+    "question_en": "Fill in the blank: He is poor ______ honest.",
+    "question_hi": "रिक्त स्थान भरें: वह गरीब ______ ईमानदार है।",
+    "options": [
+      "A. so",
+      "B. and",
+      "C. but",
+      "D. or"
+    ],
+    "answer": "C",
+    "explanation_en": "'But' is used to show contrast. Being poor and honest are contrasting qualities.",
+    "explanation_hi": "'But' विपरीत बातों को जोड़ता है। गरीब और ईमानदार विपरीत गुण हैं."
+  },
+  {
+    "id": 66,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "Who is the constitutional head of state of India?",
+    "question_hi": "भारत का संवैधानिक राज्य प्रमुख कौन है?",
+    "options": [
+      "A. Prime Minister",
+      "B. Chief Justice",
+      "C. President",
+      "D. Vice President"
+    ],
+    "answer": "C",
+    "explanation_en": "The President of India is the constitutional head of state, though executive power is exercised by the Prime Minister.",
+    "explanation_hi": "भारत के राष्ट्रपति संवैधानिक राज्य प्रमुख हैं। वास्तविक शक्ति प्रधानमंत्री के पास होती है."
+  },
+  {
+    "id": 67,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian History",
+    "question_en": "The Quit India Movement was launched in which year?",
+    "question_hi": "भारत छोड़ो आंदोलन किस वर्ष शुरू हुआ था?",
+    "options": [
+      "A. 1939",
+      "B. 1940",
+      "C. 1942",
+      "D. 1945"
+    ],
+    "answer": "C",
+    "explanation_en": "The Quit India Movement was launched by Mahatma Gandhi on 8 August 1942.",
+    "explanation_hi": "भारत छोड़ो आंदोलन 8 अगस्त 1942 को महात्मा गांधी द्वारा शुरू किया गया था."
+  },
+  {
+    "id": 68,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Geography",
+    "question_en": "Which is the largest ocean in the world?",
+    "question_hi": "विश्व का सबसे बड़ा महासागर कौन सा है?",
+    "options": [
+      "A. Atlantic Ocean",
+      "B. Indian Ocean",
+      "C. Arctic Ocean",
+      "D. Pacific Ocean"
+    ],
+    "answer": "D",
+    "explanation_en": "The Pacific Ocean is the world's largest ocean, covering about 46% of the world's water surface.",
+    "explanation_hi": "प्रशांत महासागर विश्व का सबसे बड़ा महासागर है जो पृथ्वी के लगभग 46% जल क्षेत्र को कवर करता है."
+  },
+  {
+    "id": 69,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Economy",
+    "question_en": "GST was implemented in India from which date?",
+    "question_hi": "भारत में GST किस तारीख से लागू हुई?",
+    "options": [
+      "A. 1 April 2017",
+      "B. 1 June 2017",
+      "C. 1 July 2017",
+      "D. 1 August 2017"
+    ],
+    "answer": "C",
+    "explanation_en": "GST (Goods and Services Tax) was implemented in India from 1 July 2017.",
+    "explanation_hi": "भारत में GST 1 जुलाई 2017 से लागू की गई थी."
+  },
+  {
+    "id": 70,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Biology",
+    "question_en": "Which organ produces insulin in the human body?",
+    "question_hi": "मानव शरीर में इंसुलिन कौन सा अंग बनाता है?",
+    "options": [
+      "A. Liver",
+      "B. Kidney",
+      "C. Pancreas",
+      "D. Heart"
+    ],
+    "answer": "C",
+    "explanation_en": "Insulin is produced by beta cells in the Islets of Langerhans in the Pancreas.",
+    "explanation_hi": "इंसुलिन अग्न्याशय (Pancreas) में लैंगरहैंस की द्वीपिकाओं की बीटा कोशिकाओं द्वारा बनाई जाती है."
+  },
+  {
+    "id": 71,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Physics",
+    "question_en": "What is the SI unit of electric current?",
+    "question_hi": "विद्युत धारा की SI इकाई क्या है?",
+    "options": [
+      "A. Volt",
+      "B. Ohm",
+      "C. Watt",
+      "D. Ampere"
+    ],
+    "answer": "D",
+    "explanation_en": "The SI unit of electric current is Ampere (A), named after André-Marie Ampère.",
+    "explanation_hi": "विद्युत धारा की SI इकाई एम्पीयर (A) है."
+  },
+  {
+    "id": 72,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Chemistry",
+    "question_en": "The chemical name of table salt is:",
+    "question_hi": "साधारण नमक का रासायनिक नाम क्या है?",
+    "options": [
+      "A. Sodium Chloride",
+      "B. Potassium Chloride",
+      "C. Calcium Chloride",
+      "D. Magnesium Chloride"
+    ],
+    "answer": "A",
+    "explanation_en": "Table salt is Sodium Chloride (NaCl).",
+    "explanation_hi": "साधारण नमक का रासायनिक नाम सोडियम क्लोराइड (NaCl) है."
+  },
+  {
+    "id": 73,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Culture",
+    "question_en": "Bharatanatyam is a classical dance form of which state?",
+    "question_hi": "भरतनाट्यम किस राज्य का शास्त्रीय नृत्य है?",
+    "options": [
+      "A. Kerala",
+      "B. Andhra Pradesh",
+      "C. Tamil Nadu",
+      "D. Karnataka"
+    ],
+    "answer": "C",
+    "explanation_en": "Bharatanatyam is a classical dance form that originated in Tamil Nadu.",
+    "explanation_hi": "भरतनाट्यम तमिलनाडु का शास्त्रीय नृत्य है."
+  },
+  {
+    "id": 74,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "National Awards",
+    "question_en": "Which is the highest civilian award in India?",
+    "question_hi": "भारत में सर्वोच्च नागरिक पुरस्कार कौन सा है?",
+    "options": [
+      "A. Padma Vibhushan",
+      "B. Padma Bhushan",
+      "C. Bharat Ratna",
+      "D. Padma Shri"
+    ],
+    "answer": "C",
+    "explanation_en": "Bharat Ratna is the highest civilian award in India, established in 1954.",
+    "explanation_hi": "भारत रत्न भारत का सर्वोच्च नागरिक पुरस्कार है, जो 1954 में स्थापित हुआ था."
+  },
+  {
+    "id": 75,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Sports",
+    "question_en": "How many players are there in a basketball team on the court at one time?",
+    "question_hi": "बास्केटबॉल में एक समय में मैदान पर एक टीम में कितने खिलाड़ी होते हैं?",
+    "options": [
+      "A. 4",
+      "B. 5",
+      "C. 6",
+      "D. 7"
+    ],
+    "answer": "B",
+    "explanation_en": "Each basketball team has 5 players on the court at a time.",
+    "explanation_hi": "बास्केटबॉल में एक समय में एक टीम के 5 खिलाड़ी मैदान पर होते हैं."
+  },
+  {
+    "id": 76,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Computer",
+    "question_en": "What does 'RAM' stand for in computers?",
+    "question_hi": "कंप्यूटर में 'RAM' का पूर्ण रूप क्या है?",
+    "options": [
+      "A. Read Access Memory",
+      "B. Random Access Memory",
+      "C. Rapid Access Memory",
+      "D. Real Access Memory"
+    ],
+    "answer": "B",
+    "explanation_en": "RAM stands for Random Access Memory — the primary volatile memory used by computers.",
+    "explanation_hi": "RAM का पूर्ण रूप Random Access Memory है — यह कंप्यूटर की अस्थायी मेमोरी है."
+  },
+  {
+    "id": 77,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "International Organizations",
+    "question_en": "Where is the headquarters of the United Nations?",
+    "question_hi": "संयुक्त राष्ट्र का मुख्यालय कहाँ है?",
+    "options": [
+      "A. London",
+      "B. Washington D.C.",
+      "C. Geneva",
+      "D. New York"
+    ],
+    "answer": "D",
+    "explanation_en": "The UN headquarters is located in New York City, USA.",
+    "explanation_hi": "संयुक्त राष्ट्र का मुख्यालय न्यूयॉर्क सिटी, USA में है."
+  },
+  {
+    "id": 78,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Geography",
+    "question_en": "Which is the longest river in India?",
+    "question_hi": "भारत की सबसे लंबी नदी कौन सी है?",
+    "options": [
+      "A. Yamuna",
+      "B. Godavari",
+      "C. Ganga",
+      "D. Krishna"
+    ],
+    "answer": "C",
+    "explanation_en": "The Ganga (2,525 km) is the longest river in India.",
+    "explanation_hi": "गंगा (2,525 km) भारत की सबसे लंबी नदी है."
+  },
+  {
+    "id": 79,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "How many fundamental duties are there in the Indian Constitution?",
+    "question_hi": "भारतीय संविधान में कितने मूल कर्तव्य हैं?",
+    "options": [
+      "A. 9",
+      "B. 10",
+      "C. 11",
+      "D. 12"
+    ],
+    "answer": "C",
+    "explanation_en": "There are 11 Fundamental Duties in the Indian Constitution (Article 51A).",
+    "explanation_hi": "भारतीय संविधान में 11 मूल कर्तव्य हैं (अनुच्छेद 51A)."
+  },
+  {
+    "id": 80,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Environment",
+    "question_en": "The ozone layer is found in which layer of the atmosphere?",
+    "question_hi": "ओजोन परत वायुमंडल की किस परत में पाई जाती है?",
+    "options": [
+      "A. Troposphere",
+      "B. Stratosphere",
+      "C. Mesosphere",
+      "D. Thermosphere"
+    ],
+    "answer": "B",
+    "explanation_en": "The ozone layer is located in the Stratosphere, between 15-35 km above Earth.",
+    "explanation_hi": "ओजोन परत स्ट्रैटोस्फीयर में 15-35 km की ऊँचाई पर पाई जाती है."
+  },
+  {
+    "id": 81,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian History",
+    "question_en": "The first battle of Panipat was fought between whom?",
+    "question_hi": "पानीपत की पहली लड़ाई किनके बीच हुई थी?",
+    "options": [
+      "A. Akbar and Hemu",
+      "B. Babur and Ibrahim Lodi",
+      "C. Humayun and Sher Shah",
+      "D. Akbar and Ibrahim Lodi"
+    ],
+    "answer": "B",
+    "explanation_en": "The First Battle of Panipat (1526) was fought between Babur and Ibrahim Lodi.",
+    "explanation_hi": "पानीपत की पहली लड़ाई (1526) बाबर और इब्राहिम लोदी के बीच हुई थी."
+  },
+  {
+    "id": 82,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Physics",
+    "question_en": "Which mirror is used in the rear-view mirror of vehicles?",
+    "question_hi": "वाहनों के रियर-व्यू मिरर में किस दर्पण का उपयोग होता है?",
+    "options": [
+      "A. Concave mirror",
+      "B. Plane mirror",
+      "C. Convex mirror",
+      "D. Bifocal mirror"
+    ],
+    "answer": "C",
+    "explanation_en": "Convex mirrors are used in rear-view mirrors because they provide a wider field of view.",
+    "explanation_hi": "वाहनों में उत्तल (Convex) दर्पण का उपयोग होता है क्योंकि यह विस्तृत दृश्य प्रदान करता है."
+  },
+  {
+    "id": 83,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "Which amendment of the Indian Constitution added the words 'Socialist' and 'Secular' to the Preamble?",
+    "question_hi": "किस संविधान संशोधन ने प्रस्तावना में 'समाजवादी' और 'धर्मनिरपेक्ष' शब्द जोड़े?",
+    "options": [
+      "A. 40th Amendment",
+      "B. 42nd Amendment",
+      "C. 44th Amendment",
+      "D. 46th Amendment"
+    ],
+    "answer": "B",
+    "explanation_en": "The 42nd Constitutional Amendment (1976) added 'Socialist', 'Secular' to the Preamble.",
+    "explanation_hi": "42वें संविधान संशोधन (1976) ने प्रस्तावना में 'समाजवादी' और 'धर्मनिरपेक्ष' शब्द जोड़े."
+  },
+  {
+    "id": 84,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "World Geography",
+    "question_en": "Which is the smallest country in the world?",
+    "question_hi": "विश्व का सबसे छोटा देश कौन सा है?",
+    "options": [
+      "A. Monaco",
+      "B. San Marino",
+      "C. Vatican City",
+      "D. Liechtenstein"
+    ],
+    "answer": "C",
+    "explanation_en": "Vatican City (0.44 sq km) is the world's smallest independent state.",
+    "explanation_hi": "वेटिकन सिटी (0.44 वर्ग km) विश्व का सबसे छोटा स्वतंत्र देश है."
+  },
+  {
+    "id": 85,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Biology",
+    "question_en": "Which blood group is known as the universal donor?",
+    "question_hi": "कौन सा रक्त समूह 'सार्वभौमिक दाता' के रूप में जाना जाता है?",
+    "options": [
+      "A. A+",
+      "B. B+",
+      "C. AB+",
+      "D. O-"
+    ],
+    "answer": "D",
+    "explanation_en": "O- is the universal donor as it can be given to any blood group patient.",
+    "explanation_hi": "O- सार्वभौमिक दाता है क्योंकि इसे किसी भी रक्त समूह वाले रोगी को दिया जा सकता है."
+  },
+  {
+    "id": 86,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Economy",
+    "question_en": "Which institution is known as the 'Apex Bank' for agriculture in India?",
+    "question_hi": "भारत में कृषि के लिए 'शीर्ष बैंक' किसे कहा जाता है?",
+    "options": [
+      "A. SBI",
+      "B. RBI",
+      "C. NABARD",
+      "D. SIDBI"
+    ],
+    "answer": "C",
+    "explanation_en": "NABARD (National Bank for Agriculture and Rural Development) is the apex institution for agriculture in India.",
+    "explanation_hi": "NABARD (राष्ट्रीय कृषि और ग्रामीण विकास बैंक) भारत में कृषि के लिए शीर्ष संस्था है."
+  },
+  {
+    "id": 87,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Chemistry",
+    "question_en": "What is the chemical formula of rust?",
+    "question_hi": "जंग (Rust) का रासायनिक सूत्र क्या है?",
+    "options": [
+      "A. Fe₂O₃",
+      "B. Fe₂O₃·xH₂O",
+      "C. FeO",
+      "D. Fe₃O₄"
+    ],
+    "answer": "B",
+    "explanation_en": "Rust is hydrated iron oxide, Fe₂O₃·xH₂O, formed when iron reacts with oxygen and water.",
+    "explanation_hi": "जंग हाइड्रेटेड आयरन ऑक्साइड Fe₂O₃·xH₂O है, जो लोहे की ऑक्सीजन और पानी से क्रिया से बनती है."
+  },
+  {
+    "id": 88,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Current Affairs",
+    "question_en": "India's Chandrayaan-3 mission successfully landed on which part of the Moon?",
+    "question_hi": "भारत के चंद्रयान-3 मिशन ने चंद्रमा के किस भाग पर सफलतापूर्वक लैंडिंग की?",
+    "options": [
+      "A. North Pole",
+      "B. Equator",
+      "C. South Pole",
+      "D. Dark side"
+    ],
+    "answer": "C",
+    "explanation_en": "Chandrayaan-3 landed on the South Pole of the Moon on 23 August 2023.",
+    "explanation_hi": "चंद्रयान-3 ने 23 अगस्त 2023 को चंद्रमा के दक्षिणी ध्रुव पर सफलतापूर्वक लैंडिंग की."
+  },
+  {
+    "id": 89,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "Who appoints the Chief Election Commissioner of India?",
+    "question_hi": "भारत के मुख्य चुनाव आयुक्त की नियुक्ति कौन करता है?",
+    "options": [
+      "A. Prime Minister",
+      "B. President",
+      "C. Chief Justice",
+      "D. Speaker of Lok Sabha"
+    ],
+    "answer": "B",
+    "explanation_en": "The Chief Election Commissioner of India is appointed by the President of India.",
+    "explanation_hi": "भारत के मुख्य चुनाव आयुक्त की नियुक्ति राष्ट्रपति द्वारा की जाती है."
+  },
+  {
+    "id": 90,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Biology",
+    "question_en": "Which gas is released during photosynthesis?",
+    "question_hi": "प्रकाश संश्लेषण के दौरान कौन सी गैस निकलती है?",
+    "options": [
+      "A. Carbon Dioxide",
+      "B. Nitrogen",
+      "C. Hydrogen",
+      "D. Oxygen"
+    ],
+    "answer": "D",
+    "explanation_en": "During photosynthesis, plants absorb CO₂ and release Oxygen (O₂).",
+    "explanation_hi": "प्रकाश संश्लेषण में पौधे CO₂ लेते हैं और ऑक्सीजन (O₂) छोड़ते हैं."
+  },
+  {
+    "id": 91,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian History",
+    "question_en": "Who was the founder of the Indian National Congress?",
+    "question_hi": "भारतीय राष्ट्रीय कांग्रेस की स्थापना किसने की?",
+    "options": [
+      "A. Bal Gangadhar Tilak",
+      "B. Mahatma Gandhi",
+      "C. A.O. Hume",
+      "D. Gopal Krishna Gokhale"
+    ],
+    "answer": "C",
+    "explanation_en": "A.O. Hume (Allan Octavian Hume) founded the Indian National Congress in 1885.",
+    "explanation_hi": "ए.ओ. ह्यूम (Allan Octavian Hume) ने 1885 में भारतीय राष्ट्रीय कांग्रेस की स्थापना की."
+  },
+  {
+    "id": 92,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Sports",
+    "question_en": "In which year did India win its first Cricket World Cup?",
+    "question_hi": "भारत ने पहली बार क्रिकेट विश्व कप किस वर्ष जीता?",
+    "options": [
+      "A. 1975",
+      "B. 1979",
+      "C. 1983",
+      "D. 1987"
+    ],
+    "answer": "C",
+    "explanation_en": "India won its first Cricket World Cup in 1983 under the captaincy of Kapil Dev.",
+    "explanation_hi": "भारत ने 1983 में कपिल देव की कप्तानी में पहली बार क्रिकेट विश्व कप जीता."
+  },
+  {
+    "id": 93,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Geography",
+    "question_en": "The Tropic of Cancer passes through how many Indian states?",
+    "question_hi": "कर्क रेखा कितने भारतीय राज्यों से होकर गुजरती है?",
+    "options": [
+      "A. 6",
+      "B. 7",
+      "C. 8",
+      "D. 9"
+    ],
+    "answer": "C",
+    "explanation_en": "The Tropic of Cancer passes through 8 Indian states: Gujarat, Rajasthan, MP, Chhattisgarh, Jharkhand, WB, Tripura, Mizoram.",
+    "explanation_hi": "कर्क रेखा 8 राज्यों से गुजरती है: गुजरात, राजस्थान, MP, छत्तीसगढ़, झारखंड, WB, त्रिपुरा, मिजोरम."
+  },
+  {
+    "id": 94,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Physics",
+    "question_en": "Which law states that the pressure of a gas is inversely proportional to its volume at constant temperature?",
+    "question_hi": "कौन सा नियम कहता है कि स्थिर तापमान पर गैस का दाब उसके आयतन के व्युत्क्रमानुपाती होता है?",
+    "options": [
+      "A. Charles' Law",
+      "B. Boyle's Law",
+      "C. Gay-Lussac's Law",
+      "D. Avogadro's Law"
+    ],
+    "answer": "B",
+    "explanation_en": "Boyle's Law: At constant temperature, P ∝ 1/V (pressure and volume are inversely proportional).",
+    "explanation_hi": "बॉयल का नियम: स्थिर तापमान पर P ∝ 1/V (दाब और आयतन व्युत्क्रमानुपाती हैं)."
+  },
+  {
+    "id": 95,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Culture",
+    "question_en": "Kathakali is a classical dance form of which Indian state?",
+    "question_hi": "कथकली किस भारतीय राज्य का शास्त्रीय नृत्य है?",
+    "options": [
+      "A. Tamil Nadu",
+      "B. Karnataka",
+      "C. Andhra Pradesh",
+      "D. Kerala"
+    ],
+    "answer": "D",
+    "explanation_en": "Kathakali is a classical dance drama from Kerala, known for elaborate costumes and makeup.",
+    "explanation_hi": "कथकली केरल का शास्त्रीय नृत्य नाटक है जो अपने विस्तृत वेशभूषा और मेकअप के लिए प्रसिद्ध है."
+  },
+  {
+    "id": 96,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "International Affairs",
+    "question_en": "Which country is known as the 'Land of the Rising Sun'?",
+    "question_hi": "किस देश को 'उगते सूरज की भूमि' कहा जाता है?",
+    "options": [
+      "A. China",
+      "B. South Korea",
+      "C. Japan",
+      "D. Thailand"
+    ],
+    "answer": "C",
+    "explanation_en": "Japan is called the 'Land of the Rising Sun' because it is located to the east where the sun rises first.",
+    "explanation_hi": "जापान को 'उगते सूरज की भूमि' कहते हैं क्योंकि यह पूर्व में स्थित है जहाँ सूर्य पहले उगता है."
+  },
+  {
+    "id": 97,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Chemistry",
+    "question_en": "Which gas is used in fire extinguishers?",
+    "question_hi": "अग्निशामक यंत्रों में कौन सी गैस का उपयोग होता है?",
+    "options": [
+      "A. Nitrogen",
+      "B. Oxygen",
+      "C. Carbon Dioxide",
+      "D. Hydrogen"
+    ],
+    "answer": "C",
+    "explanation_en": "CO₂ is used in fire extinguishers as it displaces oxygen and suffocates the fire.",
+    "explanation_hi": "CO₂ (कार्बन डाइऑक्साइड) का उपयोग अग्निशामक में होता है क्योंकि यह ऑक्सीजन हटाकर आग बुझाती है."
+  },
+  {
+    "id": 98,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian Polity",
+    "question_en": "The Right to Information Act was passed in which year?",
+    "question_hi": "सूचना का अधिकार अधिनियम किस वर्ष पारित हुआ?",
+    "options": [
+      "A. 2003",
+      "B. 2004",
+      "C. 2005",
+      "D. 2006"
+    ],
+    "answer": "C",
+    "explanation_en": "The RTI Act was passed in 2005 and came into force on 12 October 2005.",
+    "explanation_hi": "RTI अधिनियम 2005 में पारित हुआ और 12 अक्टूबर 2005 से लागू हुआ."
+  },
+  {
+    "id": 99,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Science - Biology",
+    "question_en": "What is the scientific name of the human being?",
+    "question_hi": "मनुष्य का वैज्ञानिक नाम क्या है?",
+    "options": [
+      "A. Homo erectus",
+      "B. Homo sapiens",
+      "C. Homo habilis",
+      "D. Homo neanderthalensis"
+    ],
+    "answer": "B",
+    "explanation_en": "The scientific name of modern human beings is Homo sapiens.",
+    "explanation_hi": "आधुनिक मनुष्य का वैज्ञानिक नाम Homo sapiens है."
+  },
+  {
+    "id": 100,
+    "exam": "SSC",
+    "tier": "Tier1",
+    "section": "General Awareness",
+    "topic": "Indian History",
+    "question_en": "The Jallianwala Bagh massacre took place on which date?",
+    "question_hi": "जलियाँवाला बाग हत्याकांड किस तारीख को हुआ?",
+    "options": [
+      "A. 10 April 1919",
+      "B. 13 April 1919",
+      "C. 15 April 1919",
+      "D. 20 April 1919"
+    ],
+    "answer": "B",
+    "explanation_en": "The Jallianwala Bagh massacre occurred on 13 April 1919 when General Dyer ordered firing on unarmed civilians.",
+    "explanation_hi": "जलियाँवाला बाग हत्याकांड 13 अप्रैल 1919 को हुआ जब जनरल डायर ने निहत्थे नागरिकों पर गोली चलाने का आदेश दिया."
+  }
+]
+}

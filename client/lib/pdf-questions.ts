@@ -65,9 +65,12 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
       const jsonData = await response.json();
 
       // Flatten nested question structures:
-      // Some JSONs have a flat `questions` array, others nest them inside `sections` or `parts`
+      // Some JSONs have a flat `questions` array, a root-level array, or nest inside `sections`/`parts`
       let rawQuestions: any[] = [];
-      if (Array.isArray(jsonData.questions) && jsonData.questions.length > 0) {
+      if (Array.isArray(jsonData)) {
+        // Root-level array format: [...] (e.g. SSC CGL files)
+        rawQuestions = jsonData;
+      } else if (Array.isArray(jsonData.questions) && jsonData.questions.length > 0) {
         // Flat format: { questions: [...] }
         rawQuestions = jsonData.questions;
       } else if (Array.isArray(jsonData.sections)) {
@@ -92,21 +95,38 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
 
       // Parse JSON format - questions array should have question, options, answer fields
       const questions: ExtractedQuestion[] = rawQuestions.map((q: any, idx: number) => {
-        // Handle different answer formats (a/b/c/d or A/B/C/D or 0/1/2/3)
+        // Handle different answer formats (a/b/c/d or A/B/C/D or 0-based correctIndex)
         let correctIdx = 0;
-        const ans = q.answer || "";
-        
-        if (typeof ans === "number") {
-          correctIdx = ans;
-        } else if (typeof ans === "string") {
-          const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
-          correctIdx = map[ans.toLowerCase()] ?? 0;
+
+        // Prefer explicit 0-based correctIndex (used in SSC CGL files)
+        if (typeof q.correctIndex === "number") {
+          correctIdx = q.correctIndex;
+        } else {
+          const ans = q.answer ?? "";
+          if (typeof ans === "number") {
+            correctIdx = ans;
+          } else if (typeof ans === "string") {
+            const trimmed = ans.trim();
+            const letterMap: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
+            if (letterMap[trimmed.toLowerCase()] !== undefined) {
+              correctIdx = letterMap[trimmed.toLowerCase()];
+            } else if (Array.isArray(q.options)) {
+              // Answer is the actual value — find its index in options
+              const idx = q.options.findIndex(
+                (o: any) => String(o).replace(/^[A-D]\.\s*/i, "").trim() === trimmed
+              );
+              correctIdx = idx >= 0 ? idx : 0;
+            }
+          }
         }
 
         // Handle options as either object {a,b,c,d} / {A,B,C,D} or array [opt1, opt2, ...]
         let options: string[];
+        // Handle options: strip "A. ", "B. " label prefixes if present
         if (Array.isArray(q.options)) {
-          options = q.options.map((o: any) => String(o));
+          options = q.options.map((o: any) =>
+            String(o).replace(/^[A-D]\.\s+/i, "").trim()
+          );
         } else if (q.options) {
           // Normalize keys: support both uppercase (A,B,C,D) and lowercase (a,b,c,d)
           const opts = q.options;
@@ -119,20 +139,28 @@ export async function extractPDFQuestions(pdfPath: string): Promise<PDFTestData>
         } else {
           options = ["", "", "", ""];
         }
-        
+
+        // Resolve question text: prefer `question`, fall back to bilingual `question_en`
+        const questionText: string =
+          q.question || q.question_en || q.question_hi || "";
+
+        // Resolve explanation: prefer `explanation`, fall back to `explanation_en`
+        const explanationText: string =
+          q.explanation || q.explanation_en || q.explanationEn || "";
+
         return {
           id: idx,
-          question: q.question || "",
+          question: questionText,
           options,
           difficulty: "Medium" as const,
-          subject: q.subject || jsonData.subject || "General Knowledge",
+          subject: q.subject || q.section || (Array.isArray(jsonData) ? "General Knowledge" : jsonData.subject) || "General Knowledge",
           correct_index: correctIdx,
-          explanation: q.explanation || "",
+          explanation: explanationText,
         };
       });
 
       return {
-        title: jsonData.exam || "Exam",
+        title: (Array.isArray(jsonData) ? "SSC CGL" : jsonData.exam) || "Exam",
         totalQuestions: questions.length,
         duration_minutes: Math.round(questions.length * 1.2),
         questions,

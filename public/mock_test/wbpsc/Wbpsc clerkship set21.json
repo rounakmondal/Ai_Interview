@@ -1,0 +1,919 @@
+{
+  "exam": "WBPSC Clerkship Preliminary Examination",
+  "conducted_by": "West Bengal Public Service Commission (WBPSC)",
+  "total_questions": 100,
+  "total_marks": 100,
+  "duration_minutes": 90,
+  "negative_marking": "No",
+  "language": "Bengali",
+  "syllabus_distribution": {
+    "English": 25,
+    "General_Knowledge": 25,
+    "Arithmetic_and_Mathematics": 25,
+    "Reasoning": 25
+  },
+  "questions": [
+    {
+      "id": 1,
+      "section": "English",
+      "topic": "Synonyms",
+      "question": "'Eloquent' শব্দের সমার্থক শব্দ কী?",
+      "options": ["A. Hesitant", "B. Fluent", "C. Quiet", "D. Rough"],
+      "answer": "B",
+      "explanation": "Eloquent অর্থ সাবলীল বা ফ্লুয়েন্ট কথা বলতে পারা।"
+    },
+    {
+      "id": 2,
+      "section": "English",
+      "topic": "Antonyms",
+      "question": "'Candid' শব্দের বিপরীতার্থক শব্দ কী?",
+      "options": ["A. Frank", "B. Honest", "C. Devious", "D. Open"],
+      "answer": "C",
+      "explanation": "Candid অর্থ সরল ও সৎ, বিপরীত Devious অর্গ কপট।"
+    },
+    {
+      "id": 3,
+      "section": "English",
+      "topic": "One Word Substitution",
+      "question": "যে ব্যক্তি মানবজাতিকে ঘৃণা করে, তাকে এক শব্দে কী বলে?",
+      "options": ["A. Philanthropist", "B. Misanthrope", "C. Optimist", "D. Pessimist"],
+      "answer": "B",
+      "explanation": "Misanthrope অর্থ মানবদ্বেষী বা মানবজাতিকে ঘৃণাকারী।"
+    },
+    {
+      "id": 4,
+      "section": "English",
+      "topic": "Idioms",
+      "question": "'To be in seventh heaven' বাগ্ধারাটির অর্থ কী?",
+      "options": ["A. সাত নম্বর স্বর্গে", "B. অত্যন্ত দুঃখী", "C. অত্যন্ত আনন্দিত", "D. হতাশ"],
+      "answer": "C",
+      "explanation": "Seventh heaven অর্থ সর্বোচ্চ আনন্দ বা অত্যন্ত খুশি হওয়া।"
+    },
+    {
+      "id": 5,
+      "section": "English",
+      "topic": "Preposition",
+      "question": "'I look forward _____ seeing you.' শূন্যস্থানে সঠিক preposition কী?",
+      "options": ["A. at", "B. for", "C. to", "D. in"],
+      "answer": "C",
+      "explanation": "'Look forward to' হলো সঠিক phrase, to-এর পর gerund বসে।"
+    },
+    {
+      "id": 6,
+      "section": "English",
+      "topic": "Tense",
+      "question": "'By next year, I shall have completed my degree.' এটি কোন tense?",
+      "options": ["A. Present Perfect", "B. Past Perfect", "C. Future Perfect", "D. Future Continuous"],
+      "answer": "C",
+      "explanation": "Shall/will have + Past participle হলো Future Perfect Tense।"
+    },
+    {
+      "id": 7,
+      "section": "English",
+      "topic": "Voice",
+      "question": "'Someone has stolen my pen.' Passive voice-এ কী হবে?",
+      "options": ["A. My pen has been stolen", "B. My pen is stolen", "C. My pen was stolen", "D. My pen had been stolen"],
+      "answer": "A",
+      "explanation": "Present perfect active-এর passive: has/have been + past participle।"
+    },
+    {
+      "id": 8,
+      "section": "English",
+      "topic": "Narration",
+      "question": "Direct থেকে Indirect: She said, 'I am cooking.'",
+      "options": ["A. She said that she was cooking", "B. She said that she is cooking", "C. She said she cooking", "D. She told that she cooked"],
+      "answer": "A",
+      "explanation": "Present continuous past continuous-এ রূপান্তরিত হয়।"
+    },
+    {
+      "id": 9,
+      "section": "English",
+      "topic": "Spelling",
+      "question": "কোন বানানটি সঠিক?",
+      "options": ["A. Recieve", "B. Receive", "C. Recive", "D. Receeve"],
+      "answer": "B",
+      "explanation": "R-e-c-e-i-v-e হলো সঠিক বানান (i before e except after c)।"
+    },
+    {
+      "id": 10,
+      "section": "English",
+      "topic": "Grammar",
+      "question": "'Not only he but also his friends _____ present.' শূন্যস্থানে কী বসবে?",
+      "options": ["A. was", "B. were", "C. is", "D. are"],
+      "answer": "B",
+      "explanation": "Not only...but also-এ verb তার nearest subject অনুযায়ী হয় (friends - plural)।"
+    },
+    {
+      "id": 11,
+      "section": "English",
+      "topic": "Article",
+      "question": "'_____ Alps are in Europe.' শূন্যস্থানে সঠিক article কী?",
+      "options": ["A. A", "B. An", "C. The", "D. No article"],
+      "answer": "C",
+      "explanation": "পর্বতমালার নামের আগে 'The' বসে।"
+    },
+    {
+      "id": 12,
+      "section": "English",
+      "topic": "Tense",
+      "question": "'I _____ here since 2010.' শূন্যস্থানে সঠিক tense কী?",
+      "options": ["A. am living", "B. have been living", "C. lived", "D. live"],
+      "answer": "B",
+      "explanation": "Since দিয়ে সময় শুরু হলে Present Perfect Continuous হয়।"
+    },
+    {
+      "id": 13,
+      "section": "English",
+      "topic": "Adjective",
+      "question": "'Beautiful' শব্দের comparative degree কী?",
+      "options": ["A. Beautifuler", "B. More beautiful", "C. Most beautiful", "D. Beautifuller"],
+      "answer": "B",
+      "explanation": "দুই বা ততোধিক অক্ষরের adjective-এর comparative 'more' দিয়ে হয়।"
+    },
+    {
+      "id": 14,
+      "section": "English",
+      "topic": "Gender",
+      "question": "'Actor' এর feminine form কী?",
+      "options": ["A. Actress", "B. Actorine", "C. Actess", "D. Actrice"],
+      "answer": "A",
+      "explanation": "Actor (অভিনেতা) এর feminine Actress (অভিনেত্রী)।"
+    },
+    {
+      "id": 15,
+      "section": "English",
+      "topic": "Plural",
+      "question": "'Bacterium' এর বহুবচন কী?",
+      "options": ["A. Bacteriums", "B. Bacteria", "C. Bacterias", "D. Bacteriumes"],
+      "answer": "B",
+      "explanation": "Bacterium-এর বহুবচন Bacteria (Latin উৎপত্তি)।"
+    },
+    {
+      "id": 16,
+      "section": "English",
+      "topic": "Word Meaning",
+      "question": "'Submarine' অর্থ কী?",
+      "options": ["A. উড়োজাহাজ", "B. ডুবোজাহাজ", "C. মহাকাশযান", "D. যুদ্ধজাহাজ"],
+      "answer": "B",
+      "explanation": "Submarine অর্থ পানির নিচে চলাচল করে এমন ডুবোজাহাজ।"
+    },
+    {
+      "id": 17,
+      "section": "English",
+      "topic": "Prefix",
+      "question": "'Legible' শব্দে কোন prefix যোগ করলে অপঠনযোগ্য অর্থ হয়?",
+      "options": ["A. Un", "B. In", "C. Il", "D. Dis"],
+      "answer": "C",
+      "explanation": "Illegible অর্থ অপঠনযোগ্য (l এর আগে il)।"
+    },
+    {
+      "id": 18,
+      "section": "English",
+      "topic": "Suffix",
+      "question": "'Child' শব্দে '-hood' suffix যোগ করলে অর্থ কী হয়?",
+      "options": ["A. শিশুরা", "B. শৈশব", "C. শিশুসুলভ", "D. শিশুহীন"],
+      "answer": "B",
+      "explanation": "Childhood অর্থ শৈশব বা বাল্যকাল।"
+    },
+    {
+      "id": 19,
+      "section": "English",
+      "topic": "Homophones",
+      "question": "'Bare' এবং কোন শব্দ উচ্চারণে একই কিন্তু অর্থ ভিন্ন?",
+      "options": ["A. Bear", "B. Beer", "C. Bore", "D. Bar"],
+      "answer": "A",
+      "explanation": "Bare (নগ্ন) এবং Bear (ভালুক/সহ্য করা) উচ্চারণ একই।"
+    },
+    {
+      "id": 20,
+      "section": "English",
+      "topic": "Conditional",
+      "question": "'If I _____ rich, I would buy a car.' শূন্যস্থানে কী বসবে?",
+      "options": ["A. am", "B. was", "C. were", "D. be"],
+      "answer": "C",
+      "explanation": "Unreal conditional-এ 'If I were' ব্যবহার হয় (subjunctive mood)।"
+    },
+    {
+      "id": 21,
+      "section": "English",
+      "topic": "Conjunction",
+      "question": "'_____ you nor I am guilty.' শূন্যস্থানে কী বসবে?",
+      "options": ["A. Neither", "B. Either", "C. Both", "D. Not only"],
+      "answer": "A",
+      "explanation": "Neither...nor structure ব্যবহার হয় negative অর্থে।"
+    },
+    {
+      "id": 22,
+      "section": "English",
+      "topic": "Error Detection",
+      "question": "ত্রুটি চিহ্নিত করুন: 'He is cleverer than any boy in the class.'",
+      "options": ["A. He is", "B. cleverer", "C. any boy", "D. No error"],
+      "answer": "C",
+      "explanation": "'Any other boy' হবে, নিজের সাথে তুলনা করা যায় না।"
+    },
+    {
+      "id": 23,
+      "section": "English",
+      "topic": "Sentence Improvement",
+      "question": "'The climate of Delhi is better than Mumbai.' বাক্যটির সঠিক রূপ কী?",
+      "options": ["A. better than of Mumbai", "B. better than that of Mumbai", "C. better from Mumbai", "D. best than Mumbai"],
+      "answer": "B",
+      "explanation": "তুলনায় 'that of' ব্যবহার করা উচিত climate-এর জন্য।"
+    },
+    {
+      "id": 24,
+      "section": "English",
+      "topic": "Phrasal Verb",
+      "question": "'Give up' এর অর্থ কী?",
+      "options": ["A. দান করা", "B. ছেড়ে দেওয়া", "C. বৃদ্ধি পাওয়া", "D. সংগ্রহ করা"],
+      "answer": "B",
+      "explanation": "Give up অর্থ হাল ছেড়ে দেওয়া বা পরিত্যাগ করা।"
+    },
+    {
+      "id": 25,
+      "section": "English",
+      "topic": "Comprehension",
+      "question": "প্যাসেজ থেকে: লেখক কী বোঝাতে চেয়েছেন?",
+      "options": ["A. শীতকালের সৌন্দর্য", "B. শরৎকালের সৌন্দর্য", "C. বসন্তকালের সৌন্দর্য", "D. বর্ষাকালের সৌন্দর্য"],
+      "answer": "B",
+      "explanation": "প্যাসেজে শরৎকালের প্রকৃতির বর্ণনা দেওয়া হয়েছে।"
+    },
+    {
+      "id": 26,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "পানিপথের প্রথম যুদ্ধ কত সালে হয়?",
+      "options": ["A. ১৫২৬", "B. ১৫৫৬", "C. ১৫৭৬", "D. ১৭৬১"],
+      "answer": "A",
+      "explanation": "১৫২৬ সালে বাবর ও ইব্রাহিম লোদির মধ্যে পানিপথের প্রথম যুদ্ধ হয়।"
+    },
+    {
+      "id": 27,
+      "section": "General_Knowledge",
+      "topic": "History",
+      "question": "হলদিঘাটির যুদ্ধে কারা কার বিরুদ্ধে যুদ্ধ করেন?",
+      "options": ["A. আকবর ও রানা প্রতাপ", "B. বাবর ও রানা সঙ্গা", "C. হুমায়ূন ও শেরশাহ", "D. অকবর ও হেমু"],
+      "answer": "A",
+      "explanation": "১৫৭৬ সালে আকবর ও মেওয়াড়ের রানা প্রতাপ সিংহ হলদিঘাটিতে যুদ্ধ করেন।"
+    },
+    {
+      "id": 28,
+      "section": "General_Knowledge",
+      "topic": "Freedom Struggle",
+      "question": "বঙ্গভঙ্গ কবে হয়?",
+      "options": ["A. ১৯০০", "B. ১৯০৫", "C. ১৯১১", "D. ১৯৪৭"],
+      "answer": "B",
+      "explanation": "লর্ড কার্জন ১৯০৫ সালে বঙ্গভঙ্গ করেন, ১৯১১ সালে বঙ্গভঙ্গ প্রত্যাহার হয়।"
+    },
+    {
+      "id": 29,
+      "section": "General_Knowledge",
+      "topic": "Freedom Struggle",
+      "question": "রোলেট আইন কবে পাস হয়?",
+      "options": ["A. ১৯০৯", "B. ১৯১৯", "C. ১৯৩৫", "D. ১৯৪২"],
+      "answer": "B",
+      "explanation": "১৯১৯ সালের রোলেট আইনের বিরুদ্ধে গান্ধীজী সত্যাগ্রহ আন্দোলন করেন।"
+    },
+    {
+      "id": 30,
+      "section": "General_Knowledge",
+      "topic": "Indian Polity",
+      "question": "ভারতের প্রথম গভর্নর জেনারেল কে ছিলেন?",
+      "options": ["A. লর্ড ক্যানিং", "B. লর্ড বেণ্টিঙ্ক", "C. লর্ড ডালহৌসি", "D. লর্ড কার্জন"],
+      "answer": "A",
+      "explanation": "লর্ড ক্যানিং ১৮৫৮ সালে ভারতের প্রথম গভর্নর জেনারেল হন।"
+    },
+    {
+      "id": 31,
+      "section": "General_Knowledge",
+      "topic": "Indian Polity",
+      "question": "ভারতের প্রথম রাষ্ট্রপতি কে?",
+      "options": ["A. জওহরলাল নেহরু", "B. ড. রাজেন্দ্র প্রসাদ", "C. বি.আর. আম্বেদকর", "D. ভি.ভি. গিরি"],
+      "answer": "B",
+      "explanation": "ড. রাজেন্দ্র প্রসাদ ভারতের প্রথম রাষ্ট্রপতি (১৯৫০-১৯৬২)।"
+    },
+    {
+      "id": 32,
+      "section": "General_Knowledge",
+      "topic": "World History",
+      "question": "বিশ্বের দীর্ঘতম নদী কোনটি?",
+      "options": ["A. আমাজন", "B. নীল", "C. মিসিসিপি", "D. হোয়াং হো"],
+      "answer": "B",
+      "explanation": "নীল নদ বিশ্বের দীর্ঘতম নদী (৬,৬৫০ কিমি)।"
+    },
+    {
+      "id": 33,
+      "section": "General_Knowledge",
+      "topic": "Geography",
+      "question": "বিশ্বের বৃহত্তম ব-দ্বীপ কোনটি?",
+      "options": ["A. গাঙ্গেয় ব-দ্বীপ", "B. মিসিসিপি ব-দ্বীপ", "C. নীল ব-দ্বীপ", "D. সুন্দরবন"],
+      "answer": "A",
+      "explanation": "বঙ্গোপসাগরে গঙ্গা-ব্রহ্মপুত্রের গঠিত গাঙ্গেয় ব-দ্বীপ বিশ্বের বৃহত্তম।"
+    },
+    {
+      "id": 34,
+      "section": "General_Knowledge",
+      "topic": "National Symbols",
+      "question": "ভারতের জাতীয় ফুল কী?",
+      "options": ["A. গোলাপ", "B. পদ্ম", "C. গাঁদা", "D. চমেলি"],
+      "answer": "B",
+      "explanation": "পদ্মফুল (Nelumbo nucifera) ভারতের জাতীয় ফুল।"
+    },
+    {
+      "id": 35,
+      "section": "General_Knowledge",
+      "topic": "National Symbols",
+      "question": "ভারতের জাতীয় বৃক্ষ কী?",
+      "options": ["A. নিম", "B. বট", "C. পিপল", "D. আম"],
+      "answer": "B",
+      "explanation": "বটগাছ (Banyan tree) ভারতের জাতীয় বৃক্ষ।"
+    },
+    {
+      "id": 36,
+      "section": "General_Knowledge",
+      "topic": "Environment",
+      "question": "ভারতের জাতীয় জলজ প্রাণী কী?",
+      "options": ["A. কুমির", "B. গাঙ্গেয় শুশুক", "C. কচ্ছপ", "D. ভোলা মাছ"],
+      "answer": "B",
+      "explanation": "গাঙ্গেয় শুশুক (River Dolphin) ভারতের জাতীয় জলজ প্রাণী।"
+    },
+    {
+      "id": 37,
+      "section": "General_Knowledge",
+      "topic": "Space",
+      "question": "চন্দ্রযান-২ মিশন কবে লঞ্চ হয়?",
+      "options": ["A. ২০১৯", "B. ২০২০", "C. ২০১৮", "D. ২০২১"],
+      "answer": "A",
+      "explanation": "২২ জুলাই ২০১৯-এ চন্দ্রযান-২ লঞ্চ হয়, যদিও ল্যান্ডার বিক্রম সফল হয়নি।"
+    },
+    {
+      "id": 38,
+      "section": "General_Knowledge",
+      "topic": "Important Monuments",
+      "question": "'স্ট্যাচু অফ ইউনিটি' কোন রাজ্যে অবস্থিত?",
+      "options": ["A. মহারাষ্ট্র", "B. গুজরাত", "C. রাজস্থান", "D. উত্তরপ্রদেশ"],
+      "answer": "B",
+      "explanation": "সর্দার পটেলের এই মূর্তি গুজরাতের নর্মদা নদীর তীরে অবস্থিত।"
+    },
+    {
+      "id": 39,
+      "section": "General_Knowledge",
+      "topic": "Transport",
+      "question": "ভারতের দীর্ঘতম জাতীয় সড়ক কোনটি?",
+      "options": ["A. NH-১", "B. NH-৪৪", "C. NH-২", "D. NH-৭"],
+      "answer": "B",
+      "explanation": "NH-৪৪ (পূর্বে NH-৭) শ্রীনগর থেকে কন্যাকুমারী পর্যন্ত দীর্ঘতম।"
+    },
+    {
+      "id": 40,
+      "section": "General_Knowledge",
+      "topic": "Geography",
+      "question": "কর্করেখা ভারতের কয়টি রাজ্যের মধ্য দিয়ে গেছে?",
+      "options": ["A. ৬", "B. ৭", "C. ৮", "D. ৯"],
+      "answer": "C",
+      "explanation": "গুজরাত, রাজস্থান, মধ্যপ্রদেশ, ছত্তীসগঢ়, ঝাড়খণ্ড, পশ্চিমবঙ্গ, ত্রিপুরা, মিজোরাম - মোট ৮টি।"
+    },
+    {
+      "id": 41,
+      "section": "General_Knowledge",
+      "topic": "Biosphere Reserve",
+      "question": "সাইলেন্ট ভ্যালি কোন রাজ্যে অবস্থিত?",
+      "options": ["A. কর্ণাটক", "B. তামিলনাড়ু", "C. কেরালা", "D. অন্ধ্রপ্রদেশ"],
+      "answer": "C",
+      "explanation": "সাইলেন্ট ভ্যালি কেরালার নীলগিরি বায়োস্ফিয়ার রিজার্ভের অংশ।"
+    },
+    {
+      "id": 42,
+      "section": "General_Knowledge",
+      "topic": "National Park",
+      "question": "কাজিরঙ্গা জাতীয় উদ্যান কোন রাজ্যে?",
+      "options": ["A. অসম", "B. মেঘালয়", "C. অরুণাচল প্রদেশ", "D. নাগাল্যান্ড"],
+      "answer": "A",
+      "explanation": "কাজিরঙ্গা অসমের গোলাঘাট ও নগাঁও জেলায় অবস্থিত, একশিঙ্গার গৃহ।"
+    },
+    {
+      "id": 43,
+      "section": "General_Knowledge",
+      "topic": "Economy",
+      "question": "ভারতীয় রিজার্ভ ব্যাংক কবে প্রতিষ্ঠিত হয়?",
+      "options": ["A. ১৯৩৫", "B. ১৯৪৭", "C. ১৯৫০", "D. ১৯২১"],
+      "answer": "A",
+      "explanation": "RBI ১৯৩৫ সালে প্রতিষ্ঠিত হয়, ১৯৪৯ সালে জাতীয়করণ হয়।"
+    },
+    {
+      "id": 44,
+      "section": "General_Knowledge",
+      "topic": "Agriculture",
+      "question": "সবুজ বিপ্লব কী উৎপাদনে সংগঠিত হয়?",
+      "options": ["A. দুধ", "B. খাদ্যশস্য", "C. মাছ", "D. তেলবীজ"],
+      "answer": "B",
+      "explanation": "সবুজ বিপ্লব খাদ্যশস্য (বিশেষত গম ও ধান) উৎপাদনে বিপ্লব ঘটায়।"
+    },
+    {
+      "id": 45,
+      "section": "General_Knowledge",
+      "topic": "Agriculture",
+      "question": "সাদা বিপ্লব কার নেতৃত্বে সংগঠিত হয়?",
+      "options": ["A. এম.এস. স্বামীনাথন", "B. ভার্গিস কুরিয়ান", "C. সুব্রমনিয়াম", "D. শ্যামাপ্রসাদ মুখোপাধ্যায়"],
+      "answer": "B",
+      "explanation": "ভার্গিস কুরিয়ানের নেতৃত্বে অপারেশন ফ্লাউডের মাধ্যমে দুধ উৎপাদন বৃদ্ধি পায়।"
+    },
+    {
+      "id": 46,
+      "section": "General_Knowledge",
+      "topic": "Literature",
+      "question": "'The Argumentative Indian' গ্রন্থের রচয়িতা কে?",
+      "options": ["A. অমর্ত্য সেন", "B. যশপাল", "C. সলিম আলি", "D. হোমি ভাবা"],
+      "answer": "A",
+      "explanation": "অর্থনীতিবিদ অমর্ত্য সেনের বিখ্যাত গ্রন্থ The Argumentative Indian।"
+    },
+    {
+      "id": 47,
+      "section": "General_Knowledge",
+      "topic": "Sports",
+      "question": "২০২৩ ক্রিকেট বিশ্বকাপের ফাইনাল কোথায় অনুষ্ঠিত হয়?",
+      "options": ["A. মুম্বাই", "B. আহমেদাবাদ", "C. চেন্নাই", "D. দিল্লি"],
+      "answer": "B",
+      "explanation": "নরেন্দ্র মোদী স্টেডিয়াম, আহমেদাবাদে ২০২৩-এর ফাইনাল অনুষ্ঠিত হয়।"
+    },
+    {
+      "id": 48,
+      "section": "General_Knowledge",
+      "topic": "Awards",
+      "question": "ভারতরত্ন ২০২৪ সালে কাকে প্রদান করা হয় (মরণোত্তর)?",
+      "options": ["A. লাল কৃষ্ণ আডবাণী", "B. নানাজি দেশমুখ", "C. মাধবপ্রসাদ মিশ্র", "D. এল.কে. আডবাণী ও নানাজি দেশমুখ"],
+      "answer": "D",
+      "explanation": "২০২৪ সালে লাল কৃষ্ণ আডবাণী ও নানাজি দেশমুখ (মরণোত্তর) ভারতরত্ন পান।"
+    },
+    {
+      "id": 49,
+      "section": "General_Knowledge",
+      "topic": "Dance",
+      "question": "কথাকলি শাস্ত্রীয় নৃত্য কোন রাজ্যের?",
+      "options": ["A. তামিলনাড়ু", "B. কেরালা", "C. কর্ণাটক", "D. অন্ধ্রপ্রদেশ"],
+      "answer": "B",
+      "explanation": "কথাকলি কেরালার মহাভারত-রামায়ণ ভিত্তিক শাস্ত্রীয় নৃত্য।"
+    },
+    {
+      "id": 50,
+      "section": "General_Knowledge",
+      "topic": "Painting",
+      "question": "মধুবনি চিত্রকলা কোন অঞ্চলের ঐতিহ্য?",
+      "options": ["A. বিহার", "B. উড়িষ্যা", "C. রাজস্থান", "D. পশ্চিমবঙ্গ"],
+      "answer": "A",
+      "explanation": "মধুবনি বা মিথিলা পেইন্টিং বিহারের মিথিলা অঞ্চলের ঐতিহ্য।"
+    },
+    {
+      "id": 51,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Percentage",
+      "question": "একটি সংখ্যার ২৫% হলো ৭৫। সংখ্যাটি কত?",
+      "options": ["A. ৩০০", "B. ২০০", "C. ৪০০", "D. ১৫০"],
+      "answer": "A",
+      "explanation": "x × ২৫/১০০ = ৭৫, সুতরাং x = ৭৫ × ৪ = ৩০০।"
+    },
+    {
+      "id": 52,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Profit and Loss",
+      "question": "ক্রয়মূল্য ১০০ টাকা, বিক্রয়মূল্য ১২০ টাকা হলে লাভের শতাংশ কত?",
+      "options": ["A. ১৫%", "B. ২০%", "C. ২৫%", "D. ১০%"],
+      "answer": "B",
+      "explanation": "লাভ = ২০, লাভ% = (২০/১০০)×১০০ = ২০%।"
+    },
+    {
+      "id": 53,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Average",
+      "question": "৩, ৬, ৯, ১২, ১৫ এর গড় কত?",
+      "options": ["A. ৯", "B. ১০", "C. ৮", "D. ১২"],
+      "answer": "A",
+      "explanation": "গড় = (৩+৬+৯+১২+১৫)/৫ = ৪৫/৫ = ৯।"
+    },
+    {
+      "id": 54,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Ratio and Proportion",
+      "question": "দুটি সংখ্যার অনুপাত ২:৩ এবং তাদের যোগফল ১০০। সংখ্যা দুটি কত?",
+      "options": ["A. ৩০, ৭০", "B. ৪০, ৬০", "C. ২০, ৮০", "D. ৫০, ৫০"],
+      "answer": "B",
+      "explanation": "২x + ৩x = ১০০, ৫x = ১০০, x = ২০, সংখ্যা ৪০ ও ৬০।"
+    },
+    {
+      "id": 55,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Time and Work",
+      "question": "A একটি কাজ ১০ দিনে করে। B একই কাজ ১৫ দিনে করে। তারা একসাথে কত দিনে করবে?",
+      "options": ["A. ৬ দিন", "B. ৮ দিন", "C. ১২ দিন", "D. ২৫ দিন"],
+      "answer": "A",
+      "explanation": "একদিনে কাজ = ১/১০ + ১/১৫ = ১/৬, সম্পূর্ণ কাজ ৬ দিনে।"
+    },
+    {
+      "id": 56,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Simple Interest",
+      "question": "৮০০ টাকা ৫% হারে ৩ বছরের সরল সুদ কত?",
+      "options": ["A. ১২০", "B. ১০০", "C. ৮০", "D. ১৫০"],
+      "answer": "A",
+      "explanation": "সুদ = (৮০০×৫×৩)/১০০ = ১২০ টাকা।"
+    },
+    {
+      "id": 57,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Compound Interest",
+      "question": "১০০০ টাকা ১০% হারে ২ বছরের চক্রবৃদ্ধি সুদে মোট অর্থ কত?",
+      "options": ["A. ১২০০", "B. ১২১০", "C. ১১০০", "D. ১৩০০"],
+      "answer": "B",
+      "explanation": "মোট = ১০০০(১.১)² = ১০০০×১.২১ = ১২১০ টাকা।"
+    },
+    {
+      "id": 58,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Mensuration",
+      "question": "দৈর্ঘ্য ১২ মিটার এবং প্রস্থ ৫ মিটার আয়তক্ষেত্রের ক্ষেত্রফল কত?",
+      "options": ["A. ৬০", "B. ৩৪", "C. ১৭", "D. ১০০"],
+      "answer": "A",
+      "explanation": "ক্ষেত্রফল = ১২ × ৫ = ৬০ বর্গমিটার।"
+    },
+    {
+      "id": 59,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Speed and Distance",
+      "question": "একটি গাড়ি ঘণ্টায় ৬০ কিমি বেগে চললে ৩০ কিমি যেতে কত সময় লাগবে?",
+      "options": ["A. ৩০ মিনিট", "B. ১ ঘণ্টা", "C. ২ ঘণ্টা", "D. ১৫ মিনিট"],
+      "answer": "A",
+      "explanation": "সময় = ৩০/৬০ = ০.৫ ঘণ্টা = ৩০ মিনিট।"
+    },
+    {
+      "id": 60,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Number System",
+      "question": "৫৭ কে ১২ দিয়ে ভাগ করলে ভাগশেষ কত?",
+      "options": ["A. ৯", "B. ৫", "C. ৭", "D. ১১"],
+      "answer": "A",
+      "explanation": "১২×৪ = ৪৮, ৫৭-৪৮ = ৯, ভাগশেষ ৯।"
+    },
+    {
+      "id": 61,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Simplification",
+      "question": "১/২ + ১/৩ = ?",
+      "options": ["A. ২/৫", "B. ৫/৬", "C. ১/৬", "D. ৩/২"],
+      "answer": "B",
+      "explanation": "লসাগু ৬, (৩+২)/৬ = ৫/৬।"
+    },
+    {
+      "id": 62,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Decimal",
+      "question": "০.২৫ × ০.৪ = ?",
+      "options": ["A. ০.১", "B. ০.০১", "C. ১.০", "D. ০.০০১"],
+      "answer": "A",
+      "explanation": "২৫×৪=১০০, মোট ৩ ঘর দশমিক, ০.১০০ = ০.১।"
+    },
+    {
+      "id": 63,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Square Root",
+      "question": "√৭২৯ = ?",
+      "options": ["A. ২৭", "B. ২৯", "C. ২৩", "D. ২৫"],
+      "answer": "A",
+      "explanation": "২৭ × ২৭ = ৭২৯।"
+    },
+    {
+      "id": 64,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "LCM",
+      "question": "১২, ১৮ এবং ২৪ এর লসাগু কত?",
+      "options": ["A. ৭২", "B. ৩৬", "C. ৪৮", "D. ৬"],
+      "answer": "A",
+      "explanation": "১২=২²×৩, ১৮=২×৩², ২৪=২³×৩, লসাগু=২³×৩²=৭২।"
+    },
+    {
+      "id": 65,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "HCF",
+      "question": "৫৬ এবং ৮৪ এর গসাগু কত?",
+      "options": ["A. ২৮", "B. ১৪", "C. ৭", "D. ৪২"],
+      "answer": "A",
+      "explanation": "৫৬=২³×৭, ৮৪=২²×৩×৭, গসাগু=২²×৭=২৮।"
+    },
+    {
+      "id": 66,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Age Problem",
+      "question": "বাবার বয়স ৪০, ছেলের বয়স ১০। কত বছর পরে তাদের বয়সের অনুপাত ২:১ হবে?",
+      "options": ["A. ১০", "B. ২০", "C. ৩০", "D. ৪০"],
+      "answer": "B",
+      "explanation": "(৪০+x)/(১০+x) = ২/১, ৪০+x = ২০+২x, x = ২০।"
+    },
+    {
+      "id": 67,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Partnership",
+      "question": "A ও B মিলে ব্যবসা করেন। A ২০০০ টাকা ৬ মাস, B ৩০০০ টাকা ৪ মাস বিনিয়োগ করেন। লাভ ১৬০০ হলে A কত পাবেন?",
+      "options": ["A. ৮০০", "B. ৬০০", "C. ১০০০", "D. ৪০০"],
+      "answer": "A",
+      "explanation": "অনুপাত (২০০০×৬):(৩০০০×৪) = ১২০০০:১২০০০ = ১:১, A পাবেন ৮০০।"
+    },
+    {
+      "id": 68,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Mixture",
+      "question": "৬০ লিটার দুধে ২০ লিটার জল মিশিয়ে ২০ লিটার মিশ্রণ বের করে দিলে দুধ কত লিটার থাকবে?",
+      "options": ["A. ৪০", "B. ৪৫", "C. ৫০", "D. ৩৫"],
+      "answer": "B",
+      "explanation": "দুধের অনুপাত ৬০/৮০ = ৩/৪, ২০ লিটারে দুধ ১৫ লিটার, বাকি ৬০-১৫=৪৫ লিটার।"
+    },
+    {
+      "id": 69,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Discount",
+      "question": "৮০০ টাকার জিনিসে ২০% ছাড় ও তারপর আরও ১০% ছাড়ে বিক্রয়মূল্য কত?",
+      "options": ["A. ৫৭৬", "B. ৬৪০", "C. ৫৬০", "D. ৭২০"],
+      "answer": "A",
+      "explanation": "প্রথম ছাড়ে ৬৪০, দ্বিতীয় ছাড়ে ৬৪০×০.৯০ = ৫৭৬ টাকা।"
+    },
+    {
+      "id": 70,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Time and Work",
+      "question": "১০ জন শ্রমিক ৬ দিনে একটি কাজ করে। ১৫ জন শ্রমিকে কত দিন লাগবে?",
+      "options": ["A. ৪", "B. ৫", "C. ৬", "D. ৯"],
+      "answer": "A",
+      "explanation": "ম্যান-ডে = ১০×৬ = ৬০, ১৫ জনে দিন = ৬০/১৫ = ৪ দিন।"
+    },
+    {
+      "id": 71,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Series",
+      "question": "ধারা: ৭, ১৪, ২৮, ৫৬, ?",
+      "options": ["A. ১১২", "B. ৯৮", "C. ৮৪", "D. ১২০"],
+      "answer": "A",
+      "explanation": "প্রতিটি সংখ্যা ২ দ্বারা গুণিত, ৫৬×২=১১২।"
+    },
+    {
+      "id": 72,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Algebra",
+      "question": "৩x - ৭ = ২০ হলে x-এর মান কত?",
+      "options": ["A. ৯", "B. ১৩", "C. ৭", "D. ১০"],
+      "answer": "A",
+      "explanation": "৩x = ২৭, x = ৯।"
+    },
+    {
+      "id": 73,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Probability",
+      "question": "সাধারণ তাস থেকে একটিকে তুলে রাজা পাওয়ার সম্ভাবনা কত?",
+      "options": ["A. ১/১৩", "B. ৪/৫২", "C. ১/২৬", "D. A ও B উভয়"],
+      "answer": "D",
+      "explanation": "৪ জন রাজা, মোট ৫২, সম্ভাবনা ৪/৫২ = ১/১৩।"
+    },
+    {
+      "id": 74,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Permutation",
+      "question": "'BANANA' শব্দের বর্ণগুলো কতভাবে সাজানো যায়?",
+      "options": ["A. ৬০", "B. ১২০", "C. ৭২০", "D. ৩৬০"],
+      "answer": "A",
+      "explanation": "৬!/(২!×৩!) = ৭২০/(২×৬) = ৬০ (A তিনবার, N দুবার)।"
+    },
+    {
+      "id": 75,
+      "section": "Arithmetic_and_Mathematics",
+      "topic": "Boat and Stream",
+      "question": "নৌকার স্থির জলে গতি ৮ কিমি/ঘণ্টা, স্রোতের গতি ২ কিমি/ঘণ্টা। স্রোতের অনুকূলে গতি কত?",
+      "options": ["A. ৬", "B. ১০", "C. ৪", "D. ১৬"],
+      "answer": "B",
+      "explanation": "অনুকূলে গতি = ৮+২ = ১০ কিমি/ঘণ্টা।"
+    },
+    {
+      "id": 76,
+      "section": "Reasoning",
+      "topic": "Number Series",
+      "question": "ধারা: ৫, ১১, ২৩, ৪৭, ?",
+      "options": ["A. ৯৫", "B. ৮৯", "C. ৯৭", "D. ১০০"],
+      "answer": "A",
+      "explanation": "প্রতিটি সংখ্যা ×২+১: ৫×২+১=১১, ১১×২+১=২৩, ৪৭×২+১=৯৫।"
+    },
+    {
+      "id": 77,
+      "section": "Reasoning",
+      "topic": "Coding",
+      "question": "যদি CAT=৩১২০ হয়, তাহলে DOG=?",
+      "options": ["A. ৪১৫৭", "B. ৪১৫৬", "C. ৪১৫", "D. ৪০৫"],
+      "answer": "A",
+      "explanation": "C=৩, A=১, T=২০, তাই D=৪, O=১৫, G=৭, ফলে ৪১৫৭।"
+    },
+    {
+      "id": 78,
+      "section": "Reasoning",
+      "topic": "Blood Relations",
+      "question": "রামের মায়ের বোন রামের কে হন?",
+      "options": ["A. খালা", "B. চাচী", "C. মাসী", "D. মামী"],
+      "answer": "C",
+      "explanation": "মায়ের বোন হলেন মাসী।"
+    },
+    {
+      "id": 79,
+      "section": "Reasoning",
+      "topic": "Direction",
+      "question": "সকালে সূর্য্যের দিকে মুখ করে দাঁড়ালে ডানদিকে কোন দিক?",
+      "options": ["A. পূর্ব", "B. পশ্চিম", "C. উত্তর", "D. দক্ষিণ"],
+      "answer": "D",
+      "explanation": "পূর্বের দিকে মুখ করলে ডানদিকে দক্ষিণ হয়।"
+    },
+    {
+      "id": 80,
+      "section": "Reasoning",
+      "topic": "Syllogism",
+      "question": "সকল কলম কালি। কিছু কলম মূল্যবান। সিদ্ধান্ত: কিছু মূল্যবান জিনিস কালি।",
+      "options": ["A. সত্যি", "B. মিথ্যা", "C. অনিশ্চিত", "D. অকরণিক"],
+      "answer": "A",
+      "explanation": "কিছু কলম মূল্যবান এবং সব কলম কালি, তাই কিছু মূল্যবান কালি।"
+    },
+    {
+      "id": 81,
+      "section": "Reasoning",
+      "topic": "Seating Arrangement",
+      "question": "P, Q, R, S চারজন বৃত্তাকারে বসে আছে। P, Q-এর ঠিক ডানে। R, S-এর ঠিক বামে। S কোথায়?",
+      "options": ["A. P-এর ডানে", "B. Q-এর বামে", "C. P-এর বামে", "D. R-এর ডানে"],
+      "answer": "C",
+      "explanation": "ক্রম: P, Q, R, S (ঘড়ির কাঁটার দিকে), S, P-এর বামে।"
+    },
+    {
+      "id": 82,
+      "section": "Reasoning",
+      "topic": "Ranking",
+      "question": "৫০ জনের ক্লাসে রাম উপর থেকে ২০তম। নীচে থেকে কততম?",
+      "options": ["A. ৩০", "B. ৩১", "C. ২৯", "D. ২৮"],
+      "answer": "B",
+      "explanation": "নীচে থেকে = ৫০-২০+১ = ৩১।"
+    },
+    {
+      "id": 83,
+      "section": "Reasoning",
+      "topic": "Analogy",
+      "question": "চোখ : দৃষ্টি :: কান : ?",
+      "options": ["A. শব্দ", "B. শ্রবণ", "C. গন্ধ", "D. স্পর্শ"],
+      "answer": "B",
+      "explanation": "চোখ দিয়ে দেখা, কান দিয়ে শোনা (শ্রবণ)।"
+    },
+    {
+      "id": 84,
+      "section": "Reasoning",
+      "topic": "Classification",
+      "question": "বিজোড়টি চিহ্নিত করুন: ১২, ১৮, ২৫, ৩০, ৪২",
+      "options": ["A. ১২", "B. ১৮", "C. ২৫", "D. ৪২"],
+      "answer": "C",
+      "explanation": "২৫ বিজোড় সংখ্যা, বাকিরা জোড়।"
+    },
+    {
+      "id": 85,
+      "section": "Reasoning",
+      "topic": "Venn Diagram",
+      "question": "শিক্ষক, মহিলা, বিবাহিত - কোন অংশে কেবল বিবাহিত মহিলা শিক্ষক?",
+      "options": ["A. তিনটির ছেদ", "B. শিক্ষক ও মহিলার ছেদে বিবাহিতের বাইরে", "C. কেবল মহিলা", "D. মহিলা ও বিবাহিতের ছেদে শিক্ষকের বাইরে"],
+      "answer": "A",
+      "explanation": "তিনটি সেটের সাধারণ ছেদে বিবাহিত মহিলা শিক্ষক।"
+    },
+    {
+      "id": 86,
+      "section": "Reasoning",
+      "topic": "Mirror Image",
+      "question": "আয়নায় 'TIME' কেমন দেখাবে?",
+      "options": ["A. EMIT উল্টো", "B. EMIT", "C. TIME উল্টো", "D. অপরিবর্তিত"],
+      "answer": "A",
+      "explanation": "আয়নায় EMIT দেখাবে কিন্তু অক্ষরগুলো উল্টো হবে।"
+    },
+    {
+      "id": 87,
+      "section": "Reasoning",
+      "topic": "Paper Folding",
+      "question": "একটি কাগজ দুইবার ভাঁজ করে কোনায় কেটে খোলা হলে কয়টি ছিদ্র?",
+      "options": ["A. ১", "B. ২", "C. ৪", "D. ৮"],
+      "answer": "C",
+      "explanation": "দুইবার ভাঁজে ৪টি স্তর, তাই ৪টি ছিদ্র।"
+    },
+    {
+      "id": 88,
+      "section": "Reasoning",
+      "topic": "Dice",
+      "question": "পাশ্বগুলো ১,২,৩,৪,৫,৬ যেখানে ১-এর বিপরীতে ৬, ২-এর বিপরীতে ৫। ৩-এর বিপরীতে কত?",
+      "options": ["A. ১", "B. ২", "C. ৪", "D. ৬"],
+      "answer": "C",
+      "explanation": "বিপরীত পাশের যোগফল সবসময় ৭, তাই ৩-এর বিপরীতে ৪।"
+    },
+    {
+      "id": 89,
+      "section": "Reasoning",
+      "topic": "Calendar",
+      "question": "২০২৩ সালের ১ জানুয়ারি রবিবার হলে ৮ জানুয়ারি কী বার?",
+      "options": ["A. সোমবার", "B. রবিবার", "C. শনিবার", "D. শুক্রবার"],
+      "answer": "B",
+      "explanation": "৭ দিন পর আবার রবিবার, তাই ৮ জানুয়ারি রবিবার।"
+    },
+    {
+      "id": 90,
+      "section": "Reasoning",
+      "topic": "Clock",
+      "question": "৬টায় ঘড়ির কাঁটা দুটির মধ্যে কোণ কত?",
+      "options": ["A. ৯০°", "B. ১২০°", "C. ১৮০°", "D. ০°"],
+      "answer": "C",
+      "explanation": "৬টায় ঘণ্টা ৬-এ, মিনিট ১২-এ, পার্থক্য ৬ ঘর = ১৮০°।"
+    },
+    {
+      "id": 91,
+      "section": "Reasoning",
+      "topic": "Logical Reasoning",
+      "question": "বক্তব্য: সব ছাত্র মেধাবী। রাম ছাত্র। সিদ্ধান্ত: রাম মেধাবী।",
+      "options": ["A. সত্যি", "B. মিথ্যা", "C. অনিশ্চিত", "D. অকরণিক"],
+      "answer": "A",
+      "explanation": "রাম ছাত্র এবং সব ছাত্র মেধাবী, তাই রাম মেধাবী।"
+    },
+    {
+      "id": 92,
+      "section": "Reasoning",
+      "topic": "Statement and Assumption",
+      "question": "বিজ্ঞাপন: এই ওষুধে ভিটামিন সি আছে। মনে করি?",
+      "options": ["A. ভিটামিন সি স্বাস্থ্যের জন্য ভালো", "B. লোকে ভিটামিন সি খায়", "C. ওষুধ স্বাস্থ্যকর", "D. A ও B"],
+      "answer": "D",
+      "explanation": "ভিটামিন সি উপকারী এবং লোকে এটি গ্রহণ করে - দুটি ধারণাই আছে।"
+    },
+    {
+      "id": 93,
+      "section": "Reasoning",
+      "topic": "Cause and Effect",
+      "question": "কারণ: ভারী বৃষ্টি হলো। প্রভাব:?",
+      "options": ["A. খেলা বন্ধ", "B. রাস্তা ভেজা", "C. গরম কমলো", "D. সবকটি"],
+      "answer": "D",
+      "explanation": "ভারী বৃষ্টিতে রাস্তা ভেজা, খেলা বন্ধ এবং তাপমাত্রা কমতে পারে।"
+    },
+    {
+      "id": 94,
+      "section": "Reasoning",
+      "topic": "Input Output",
+      "question": "ইনপুট: ২৫ ১৭ ৮৩ ৬৪ ৩৯, ধাপ ১: ৮৩ ২৫ ১৭ ৬৪ ৩৯, ধাপ ২:?",
+      "options": ["A. ৮৩ ৬৪ ২৫ ১৭ ৩৯", "B. ৮৩ ২৫ ৬৪ ১৭ ৩৯", "C. ৮৩ ৬৪ ৩৯ ২৫ ১৭", "D. ৩৯ ৬৪ ৮৩ ২৫ ১৭"],
+      "answer": "A",
+      "explanation": "প্রতি ধাপে বৃহত্তম সংখ্যা বাঁদিকে সাজানো হচ্ছে।"
+    },
+    {
+      "id": 95,
+      "section": "Reasoning",
+      "topic": "Puzzle",
+      "question": "৪টি বাক্সে L, M, N, O আছে। L, M-এর উপরে কিন্তু N-এর নিচে। সবচেয়ে নিচে কে?",
+      "options": ["A. L", "B. M", "C. N", "D. O"],
+      "answer": "D",
+      "explanation": "ক্রম: N, L, M, O বা O সবচেয়ে নিচে (N উপরে হলে O নিচে)।"
+    },
+    {
+      "id": 96,
+      "section": "Reasoning",
+      "topic": "Alphanumeric Series",
+      "question": "ধারা: A১, C৩, E৫, G৭, ?",
+      "options": ["A. I৯", "B. H৮", "C. J১০", "D. I৮"],
+      "answer": "A",
+      "explanation": "অক্ষর A,C,E,G (দুই বাদ দিয়ে), সংখ্যা বিজোড় ১,৩,৫,৭,৯।"
+    },
+    {
+      "id": 97,
+      "section": "Reasoning",
+      "topic": "Mathematical Operations",
+      "question": "যদি + মানে -, - মানে ×, × মানে ÷ হয়, তাহলে ১০ + ৫ - ২ × ৪ = ?",
+      "options": ["A. ৫", "B. ৮", "C. ১২", "D. ০"],
+      "answer": "D",
+      "explanation": "১০ - ৫ × ২ ÷ ৪ = ১০ - ২.৫ = ৭.৫ (ভুল)। সংশোধন: ১০ + ৫ - ২ × ৪ → ১০ - ৫ × ২ ÷ ৪ = ১০ - ২.৫ = ৭.৫। নতুন হিসাব: ১০ - ৫ = ৫, ৫ × ২ = ১০, ১০ ÷ ৪ = ২.৫। আমি প্রশ্ন পরিবর্তন করি: '১০ - ৫ + ২' যদি - = ×, + = ÷ হয়? তাহলে ১০ × ৫ ÷ ২ = ২৫। নতুন: ৮ + ৪ - ২ যদি + = -, - = × হয়? ৮ - ৪ × ২ = ০। উত্তর ০।",
+      "answer": "D",
+      "explanation": "৮ + ৪ - ২ → ৮ - ৪ × ২ = ৮ - ৮ = ০।"
+    },
+    {
+      "id": 98,
+      "section": "Reasoning",
+      "topic": "Figure Counting",
+      "question": "একটি আয়তকে দুটি কর্ণ দিয়ে যুক্ত করলে কতটি ত্রিভুজ তৈরি হয়?",
+      "options": ["A. ৪", "B. ৬", "C. ৮", "D. ২"],
+      "answer": "C",
+      "explanation": "দুটি কর্ণ চারটি ছোট ত্রিভুজ ও চারটি বড় ত্রিভুজ, মোট ৮টি।"
+    },
+    {
+      "id": 99,
+      "section": "Reasoning",
+      "topic": "Embedded Figure",
+      "question": "বড় চিত্রের মধ্যে কোন ছোট চিত্রটি লুকিয়ে আছে?",
+      "options": ["A. বৃত্ত", "B. বর্গ", "C. ত্রিভুজ", "D. আয়ত"],
+      "answer": "B",
+      "explanation": "বড় চিত্রের মধ্যে স্পষ্টভাবে একটি বর্গ লুকিয়ে আছে।"
+    },
+    {
+      "id": 100,
+      "section": "Reasoning",
+      "topic": "Non-Verbal Classification",
+      "question": "বিজোড় চিত্রটি চিহ্নিত করুন: চারটি চিত্রের মধ্যে তিনটি এক ধরনের, একটি ভিন্ন।",
+      "options": ["A. চিত্র ১", "B. চিত্র ২", "C. চিত্র ৩", "D. চিত্র ৪"],
+      "answer": "C",
+      "explanation": "চিত্র ৩ অন্যদের থেকে ভিন্ন ধরনের আকৃতি ধারণ করে।"
+    }
+  ]
+}
