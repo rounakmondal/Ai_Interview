@@ -1,0 +1,46 @@
+{
+  "papers": [
+    {
+      "id": "IBPS_PO_Mock_Test_01",
+      "title": "IBPS PO Mock Test 01",
+      "titleBn": "IBPS PO মক টেস্ট ০১",
+      "path": "mock_test/ibps_po/IBPS_PO_Mock_Test_01.json",
+      "questions": 100,
+      "duration": 120,
+      "language": "English",
+      "preview": {
+        "question": "If 25% of a number is 150, what is the number?",
+        "options": ["A. 500", "B. 550", "C. 600", "D. 650"],
+        "answer": "C"
+      }
+    },
+    {
+      "id": "IBPS_PO_Mock_Test_02",
+      "title": "IBPS PO Mock Test 02",
+      "titleBn": "IBPS PO মক টেস্ট ০২",
+      "path": "mock_test/ibps_po/IBPS_PO_Mock_Test_02.json",
+      "questions": 100,
+      "duration": 120,
+      "language": "English",
+      "preview": {
+        "question": "If 30% of a number is 90, what is the number?",
+        "options": ["A. 250", "B. 300", "C. 350", "D. 400"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "IBPS_PO_Mock_Test_03",
+      "title": "IBPS PO Mock Test 03",
+      "titleBn": "IBPS PO মক টেস্ট ০৩",
+      "path": "mock_test/ibps_po/IBPS_PO_Mock_Test_03.json",
+      "questions": 100,
+      "duration": 120,
+      "language": "English",
+      "preview": {
+        "question": "What is 15% of 25% of 4000?",
+        "options": ["A. 125", "B. 150", "C. 175", "D. 200"],
+        "answer": "B"
+      }
+    }
+  ]
+}

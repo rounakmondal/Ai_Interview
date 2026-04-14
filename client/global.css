@@ -101,13 +101,29 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    /* Safe area support for notch/punch-hole phones */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  /* Ensure minimum touch target size (44px) for interactive elements */
+  button, [role="button"], a {
+    min-height: 0; /* don't force height, just ensure tappable area via padding */
+    -webkit-tap-highlight-color: transparent;
   }
 
   pre,

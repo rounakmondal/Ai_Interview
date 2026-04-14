@@ -19,21 +19,21 @@ import { applyExamSeoPayload } from "@/lib/exam-seo";
 
 function applyHomepageSeo() {
   applyExamSeoPayload({
-    title: "MedhaHub – West Bengal Govt Exam Preparation 2026 | WBCS, WBPSC, WB Police, TET Mock Tests",
+    title: "MedhaHub — Free WBCS, WBPSC, WB Police & TET Mock Tests 2026",
     description:
-      "Free mock tests, previous year question papers & AI study plans for WBCS, WBPSC Clerkship, WB Police SI/Constable, WB Primary TET & SSC exams. Bengali language support, instant scoring & 200+ company interview questions. Start preparing now!",
+      "Free mock tests & PYQs for WBCS, WBPSC Clerkship, WB Police SI/Constable & Primary TET. AI scoring, instant results & Bengali support. Start free!",
     keywords:
-      "WBCS mock test 2026, WBPSC clerkship mock test, WB Police SI mock test, WB Primary TET mock test, West Bengal govt exam preparation, সরকারি পরীক্ষার প্রস্তুতি, previous year question paper, MedhaHub, free mock test online, AI study plan, company interview questions",
+      "WBCS mock test 2026, WBPSC clerkship mock test, WB Police SI mock test, WB Primary TET mock test, West Bengal govt exam preparation, free mock test online, previous year question paper, MedhaHub",
     canonicalPath: "/",
-    ogTitle: "MedhaHub – #1 WB Govt Exam Prep Platform | Free Mock Tests & PYQs",
+    ogTitle: "MedhaHub — Free WBCS, WBPSC, WB Police & TET Mock Tests 2026",
     ogDescription:
-      "Practice WBCS, WBPSC, WB Police & TET exams with free mock tests, previous year papers, AI scoring & Bengali support. Join 1 lakh+ aspirants!",
+      "Free mock tests & previous year papers for WBCS, WBPSC, WB Police & TET. AI-powered scoring, instant results & Bengali support.",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "MedhaHub",
       url: "https://medhahub.in",
-      description: "West Bengal Government Exam Preparation Platform with free mock tests, previous year papers & AI-powered study plans.",
+      description: "Free exam preparation platform — WBCS, WBPSC, WB Police & TET mock tests with previous year papers, AI scoring & Bengali support.",
       potentialAction: {
         "@type": "SearchAction",
         target: "https://medhahub.in/question-hub?q={search_term_string}",
@@ -49,7 +49,7 @@ export default function PremiumLanding() {
     applyHomepageSeo();
   }, []);
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <main className="min-h-screen bg-background overflow-hidden">
       {/* Navbar */}
       <PremiumNavbar />
 
@@ -104,7 +104,7 @@ export default function PremiumLanding() {
 
       {/* Footer */}
       <Footer />
-    </div>
+    </main>
   );
 }
 

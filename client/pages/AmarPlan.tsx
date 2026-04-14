@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { usePageSEO } from "@/lib/page-seo";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import ProfileButton from "@/components/ProfileButton";
@@ -245,6 +246,7 @@ function AmarPlanOnboarding({ onCreated }: { onCreated: (plan: AmarPlanData) => 
 // ── Main Amar Plan Dashboard ──────────────────────────────────────────────────
 
 export default function AmarPlan() {
+  usePageSEO("/amar-plan");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
@@ -500,7 +502,7 @@ export default function AmarPlan() {
               {stats.completedTasks}/{stats.totalTasks} কাজ সম্পূর্ণ · {stats.daysRemaining} দিন বাকি
             </p>
           </div>
-          <div className="grid grid-cols-4 gap-3 w-full md:w-auto md:min-w-[340px]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full md:w-auto md:min-w-[340px]">
             <div className="text-center p-3 rounded-xl bg-background/80 border border-border/40">
               <p className="text-2xl font-bold text-primary">{stats.percentage}%</p>
               <p className="text-xs text-muted-foreground">সম্পূর্ণ</p>

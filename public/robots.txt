@@ -35,6 +35,23 @@ Allow: /interview-questions
 Allow: /interview-questions/
 Allow: /skill-matrix
 
+# Feature & tool pages
+Allow: /chatbot
+Allow: /study-with-me
+Allow: /story-telling
+Allow: /photo-solver
+Allow: /resume
+Allow: /career-mentor
+Allow: /vacancies
+Allow: /leaderboard
+Allow: /mock-test
+Allow: /study-plan
+Allow: /amar-plan
+Allow: /about
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms-of-service
+
 # Company interview pages (200+ companies)
 # Google: please crawl these frequently
 Allow: /interview-questions/tcs
@@ -54,6 +71,8 @@ Disallow: /evaluation
 Disallow: /govt-result
 Disallow: /pdf-mock-test
 Disallow: /chapter-test/
+Disallow: /personal-dashboard
+Disallow: /exam-room
 
 # Allow crawling of all public assets
 Allow: /logo.png

@@ -118,19 +118,18 @@ export default function NotificationBell() {
             transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
             onMouseLeave={() => setIsOpen(false)}
             className={`absolute right-0 top-full mt-2 w-80 rounded-2xl border shadow-2xl z-[100] overflow-hidden ${isDark
-              ? "bg-slate-900/98 border-white/10 shadow-black/40"
+              ? "bg-[#1a1c23] border-slate-700 shadow-black/60"
               : "bg-white border-slate-200 shadow-slate-200/60"
               }`}
-            style={{ backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
           >
             {/* Header */}
             <div
-              className={`px-4 py-3 flex items-center justify-between border-b ${isDark ? "border-white/10" : "border-slate-100"
+              className={`px-4 py-3 flex items-center justify-between border-b ${isDark ? "border-slate-700/80" : "border-slate-100"
                 }`}
             >
               <div className="flex items-center gap-2">
                 <Bell className="w-4 h-4 text-orange-400" />
-                <span className={`text-[13px] font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
+                <span className={`text-[13px] font-semibold ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                   Notifications
                 </span>
               </div>
@@ -144,8 +143,8 @@ export default function NotificationBell() {
             <div className="max-h-[420px] overflow-y-auto">
               {/* Incomplete Daily Tasks */}
               {incompleteTasks.length > 0 && (
-                <div className={`px-4 py-3 border-b ${isDark ? "border-white/5" : "border-slate-50"}`}>
-                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-white/40" : "text-slate-400"}`}>
+                <div className={`px-4 py-3 border-b ${isDark ? "border-slate-700/60" : "border-slate-50"}`}>
+                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-slate-400" : "text-slate-400"}`}>
                     Daily Tasks
                   </p>
                   <div className="space-y-1.5">
@@ -154,14 +153,14 @@ export default function NotificationBell() {
                         to="/daily-tasks"
                         key={task.id}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-slate-700/60" : "hover:bg-slate-50"
                           }`}
                       >
                         <CheckCircle2 className="w-4 h-4 text-orange-400 flex-shrink-0" />
-                        <span className={`text-[13px] flex-1 truncate ${isDark ? "text-white/80" : "text-slate-700"}`}>
+                        <span className={`text-[13px] flex-1 truncate ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                           {task.label}
                         </span>
-                        <ChevronRight className={`w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ${isDark ? "text-white/40" : "text-slate-400"}`} />
+                        <ChevronRight className={`w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ${isDark ? "text-slate-400" : "text-slate-400"}`} />
                       </Link>
                     ))}
                   </div>
@@ -170,26 +169,26 @@ export default function NotificationBell() {
 
               {/* Pending Mock Test */}
               {pendingMockTest && (
-                <div className={`px-4 py-3 border-b ${isDark ? "border-white/5" : "border-slate-50"}`}>
-                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-white/40" : "text-slate-400"}`}>
+                <div className={`px-4 py-3 border-b ${isDark ? "border-slate-700/60" : "border-slate-50"}`}>
+                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-slate-400" : "text-slate-400"}`}>
                     Mock Test
                   </p>
                   <Link
                     to="/mock-test"
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-slate-700/60" : "hover:bg-slate-50"
                       }`}
                   >
                     <FileText className="w-4 h-4 text-orange-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className={`text-[13px] font-medium ${isDark ? "text-white/90" : "text-slate-800"}`}>
+                      <p className={`text-[13px] font-medium ${isDark ? "text-slate-100" : "text-slate-800"}`}>
                         New paper available — 4 PM refresh
                       </p>
-                      <p className={`text-[11px] ${isDark ? "text-white/40" : "text-slate-400"}`}>
+                      <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-400"}`}>
                         Tap to take the test now
                       </p>
                     </div>
-                    <ChevronRight className={`w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ${isDark ? "text-white/40" : "text-slate-400"}`} />
+                    <ChevronRight className={`w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ${isDark ? "text-slate-400" : "text-slate-400"}`} />
                   </Link>
                 </div>
               )}
@@ -197,7 +196,7 @@ export default function NotificationBell() {
               {/* Recommended Questions */}
               {recommendedQuestions.length > 0 && (
                 <div className="px-4 py-3">
-                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-white/40" : "text-slate-400"}`}>
+                  <p className={`text-[11px] uppercase tracking-widest font-semibold mb-2 ${isDark ? "text-slate-400" : "text-slate-400"}`}>
                     Recommended Questions
                   </p>
                   <div className="space-y-1.5">
@@ -206,19 +205,19 @@ export default function NotificationBell() {
                         to="/mock-test"
                         key={idx}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-start gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                        className={`flex items-start gap-2.5 px-3 py-2 rounded-lg transition-colors group ${isDark ? "hover:bg-slate-700/60" : "hover:bg-slate-50"
                           }`}
                       >
                         <BookOpen className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                         <div className="flex-1 min-w-0">
-                          <p className={`text-[12px] leading-snug line-clamp-2 ${isDark ? "text-white/80" : "text-slate-700"}`}>
+                          <p className={`text-[12px] leading-snug line-clamp-2 ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                             {q.question}
                           </p>
                           <div className="flex gap-1.5 mt-1">
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-orange-500/15 text-orange-400" : "bg-orange-50 text-orange-600"}`}>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-orange-500/20 text-orange-300" : "bg-orange-50 text-orange-600"}`}>
                               {q.subject}
                             </span>
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-white/10 text-white/50" : "bg-slate-100 text-slate-500"}`}>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${isDark ? "bg-slate-700 text-slate-300" : "bg-slate-100 text-slate-500"}`}>
                               {q.topic}
                             </span>
                           </div>
@@ -232,8 +231,8 @@ export default function NotificationBell() {
               {/* Empty state */}
               {!hasNotifications && (
                 <div className="px-4 py-8 flex flex-col items-center gap-2">
-                  <Bell className={`w-8 h-8 ${isDark ? "text-white/20" : "text-slate-300"}`} />
-                  <p className={`text-[13px] ${isDark ? "text-white/40" : "text-slate-400"}`}>
+                  <Bell className={`w-8 h-8 ${isDark ? "text-slate-600" : "text-slate-300"}`} />
+                  <p className={`text-[13px] ${isDark ? "text-slate-500" : "text-slate-400"}`}>
                     You're all caught up!
                   </p>
                 </div>
@@ -241,7 +240,7 @@ export default function NotificationBell() {
             </div>
 
             {/* Footer */}
-            <div className={`px-4 py-2.5 border-t ${isDark ? "border-white/10" : "border-slate-100"}`}>
+            <div className={`px-4 py-2.5 border-t ${isDark ? "border-slate-700/80" : "border-slate-100"}`}>
               <Link
                 to="/daily-tasks"
                 onClick={() => setIsOpen(false)}

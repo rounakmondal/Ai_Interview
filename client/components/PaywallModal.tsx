@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { X, Check, Zap, Star, Lock, FileDown, BookOpen, Loader2, Tag, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRazorpay } from "@/hooks/use-razorpay";
@@ -81,6 +82,7 @@ const PLANS = [
 
 export default function PaywallModal({ open, onClose, examType = "", context = "test", onSuccess }: Props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const session = getSession();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +144,7 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
 
   async function handleBuy(planId: "single_exam" | "monthly_pass" | "pro_monthly") {
     if (!session) {
-      navigate("/auth");
+      navigate("/auth", { state: { redirect: location.pathname + location.search } });
       return;
     }
     setError(null);

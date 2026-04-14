@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { usePageSEO } from "@/lib/page-seo";
 import {
   ArrowLeft,
   Send,
@@ -64,6 +65,7 @@ function SoundWave({ active }: { active: boolean }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function StoryTelling() {
+  usePageSEO("/story-telling");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);

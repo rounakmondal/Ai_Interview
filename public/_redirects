@@ -1,3 +1,4 @@
 # Static JSON/asset files take priority over this rule automatically on Netlify.
-# This SPA fallback only fires when NO matching static file exists.
+# This SPA fallback fires when NO matching static file exists.
+# 200 status lets React Router handle the routing (including showing the 404 page).
 /*    /index.html    200

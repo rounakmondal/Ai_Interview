@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import ProfileButton from "@/components/ProfileButton";
+import { usePageSEO } from "@/lib/page-seo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -47,6 +48,7 @@ function formatDate(dateStr: string) {
 }
 
 export default function Dashboard() {
+  usePageSEO("/dashboard");
   const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats>(MOCK_DASHBOARD);
   const studyExam = getStudyExamPreference();
@@ -97,13 +99,13 @@ export default function Dashboard() {
             <Link to="/daily-tasks">
               <Button size="sm" variant="outline" className="gap-1.5">
                 <Flame className="w-3.5 h-3.5 text-orange-500" />
-                Daily Tasks
+                <span className="hidden sm:inline">Daily Tasks</span>
               </Button>
             </Link>
             <Link to="/govt-practice">
             <Button size="sm" className="gradient-primary gap-1.5">
               <Zap className="w-3.5 h-3.5" />
-              Take a Test
+              <span className="hidden sm:inline">Take a Test</span>
             </Button>
           </Link>
           </div>

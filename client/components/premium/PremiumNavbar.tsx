@@ -207,7 +207,7 @@ export default function PremiumNavbar() {
             </Link>
 
             {/* Center Section - Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -227,7 +227,7 @@ export default function PremiumNavbar() {
             </div>
 
             {/* Right Section - Auth */}
-            <div className="hidden md:flex items-center gap-3 border border-orange-400/40 px-3 py-1 rounded-full">
+            <div className="hidden lg:flex items-center gap-3 border border-orange-400/40 px-3 py-1 rounded-full">
               {/* Notification Bell */}
               <NotificationBell />
               
@@ -278,7 +278,7 @@ export default function PremiumNavbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               <NotificationBell />
               <LanguageToggle />
               <ThemeToggle />
@@ -330,7 +330,7 @@ export default function PremiumNavbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setIsMobileOpen(false)}
-              className={`fixed inset-0 backdrop-blur-sm z-40 md:hidden ${isDark ? "bg-slate-900/60" : "bg-slate-600/30"
+              className={`fixed inset-0 backdrop-blur-sm z-40 lg:hidden ${isDark ? "bg-slate-900/60" : "bg-slate-600/30"
                 }`}
             />
 
@@ -340,7 +340,7 @@ export default function PremiumNavbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: smoothEase }}
-              className={`fixed top-28 sm:top-32 left-4 right-4 backdrop-blur-xl border rounded-2xl z-50 md:hidden shadow-2xl overflow-hidden ${isDark
+              className={`fixed top-28 sm:top-32 left-4 right-4 backdrop-blur-xl border rounded-2xl z-50 lg:hidden shadow-2xl overflow-hidden ${isDark
                 ? "bg-slate-900/98 border-white/10 shadow-black/20"
                 : "bg-white/98 border-slate-200 shadow-slate-200/50"
                 }`}

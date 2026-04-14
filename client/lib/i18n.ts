@@ -3,7 +3,7 @@
  * Use local/casual Bengali for natural, friendly feel
  */
 
-export type Language = "en" | "bn";
+export type Language = "en" | "bn" | "hi";
 
 export interface Translations {
   // Navigation
@@ -293,11 +293,90 @@ const BN: Translations = {
   mockTest: "মক পরীক্ষা",
 };
 
+const HI: Translations = {
+  home: "होम",
+  dailyTasks: "दैनिक कार्य",
+  govtPractice: "सरकारी अभ्यास",
+  questionBank: "प्रश्न बैंक",
+  aiChat: "AI चैट",
+  study: "अध्ययन",
+  about: "हमारे बारे में",
+  contact: "संपर्क",
+  dashboard: "डैशबोर्ड",
+  profile: "प्रोफ़ाइल",
+  leaderboard: "लीडरबोर्ड",
+  signIn: "साइन इन",
+  signUp: "साइन अप",
+  logout: "लॉगआउट",
+  getStarted: "शुरू करें",
+  next: "अगला",
+  previous: "पिछला",
+  skip: "छोड़ें",
+  cancel: "रद्द करें",
+  save: "सहेजें",
+  submit: "जमा करें",
+  complete: "पूर्ण करें",
+  back: "वापस",
+  start: "शुरू",
+  tryNow: "अभी आज़माएं",
+  loading: "लोड हो रहा है",
+  loadingPage: "पृष्ठ लोड हो रहा है...",
+  startPracticeTest: "अभ्यास परीक्षा शुरू करें",
+  viewLeaderboard: "लीडरबोर्ड देखें",
+  prepareNow: "अभी तैयारी करें",
+  noLoginRequired: "लॉगिन की ज़रूरत नहीं",
+  startMockInterview: "मुफ़्त मॉक इंटरव्यू शुरू करें",
+  tryQuestions: "1 प्रश्न आज़माएं",
+  pickYourExam: "अपनी परीक्षा चुनें",
+  takeMockTest: "मॉक टेस्ट दें",
+  seeYourResult: "अपना परिणाम देखें",
+  myDashboard: "मेरा डैशबोर्ड",
+  yourProgress: "आपकी प्रगति",
+  streak: "स्ट्रीक",
+  questionsAttempted: "प्रश्न",
+  accuracy: "सटीकता",
+  days: "दिन",
+  myTasks: "मेरे कार्य",
+  taskCompleted: "पूर्ण",
+  taskPending: "लंबित",
+  settings: "सेटिंग्स",
+  language: "भाषा",
+  theme: "थीम",
+  darkMode: "डार्क मोड",
+  lightMode: "लाइट मोड",
+  yes: "हाँ",
+  no: "नहीं",
+  search: "खोजें",
+  filter: "फ़िल्टर",
+  sort: "क्रमबद्ध करें",
+  delete: "हटाएं",
+  edit: "संपादित करें",
+  add: "जोड़ें",
+  close: "बंद करें",
+  error: "त्रुटि",
+  success: "सफल",
+  warning: "चेतावनी",
+  info: "जानकारी",
+  features: "विशेषताएं",
+  studentsMonths: "500+ छात्र पहले से अभ्यास कर रहे हैं",
+  aceYourInterview: "अपने अगले इंटरव्यू में सफलता पाएं",
+  practiceUntilSucceed: "तब तक अभ्यास करें जब तक सफल न हों",
+  voiceMockInterviewDesc: "तत्काल AI प्रतिक्रिया के साथ वॉयस-बेस्ड मॉक इंटरव्यू। WBCS, SSC, पुलिस, IT नौकरियों के लिए अभ्यास करें।",
+  startFreeInterview: "मुफ़्त मॉक इंटरव्यू शुरू करें",
+  tryOneQuestionNoLogin: "1 प्रश्न आज़माएं — लॉगिन ज़रूरी नहीं",
+  siSubInspector: "सब-इंस्पेक्टर (SI)",
+  constable: "कॉन्स्टेबल",
+  ladyConstable: "महिला कॉन्स्टेबल",
+  download: "डाउनलोड",
+  mockTest: "मॉक परीक्षा",
+};
+
 export const translations: Record<Language, Translations> = {
   en: EN,
   bn: BN,
+  hi: HI,
 };
 
 export function getTranslation(language: Language, key: keyof Translations): string {
-  return translations[language][key] || EN[key];
+  return translations[language]?.[key] || EN[key];
 }

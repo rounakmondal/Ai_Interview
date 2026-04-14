@@ -205,14 +205,15 @@ export default function PremiumHero() {
             {/* Headline */}
             <motion.div variants={item} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">
-              
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
-                       Practice Until You Succeed
-                  </span>
-
-                </span>
+                Free{" "}
+                <span className="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  Mock Tests
+                </span>{" "}
+                for WB Govt Exams
               </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground font-medium">
+                WBCS &middot; WBPSC &middot; WB Police &middot; TET &middot; SSC
+              </p>
             </motion.div>
 
             {/* Subtext */}

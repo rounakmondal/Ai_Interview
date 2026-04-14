@@ -80,6 +80,9 @@ interface GovtPracticeState {
   fullPaper?: boolean;
   language?: "english" | "bengali" | "hindi";
   customExam?: string;
+  autoGenerate?: boolean;
+  difficulty?: Difficulty;
+  count?: 10 | 25 | 50 | 100;
 }
 
 export default function GovtPractice() {
@@ -91,14 +94,15 @@ export default function GovtPractice() {
   const [showExtraExams, setShowExtraExams] = useState(false);
   const [subject, setSubject] = useState<Subject | null>(incoming?.subject ?? "History");
   const [fullPaper, setFullPaper] = useState(incoming?.fullPaper ?? false);
-  const [difficulty, setDifficulty] = useState<Difficulty>("Medium");
-  const [count, setCount] = useState<10 | 25 | 50 | 100>(25);
+  const [difficulty, setDifficulty] = useState<Difficulty>(incoming?.difficulty ?? "Medium");
+  const [count, setCount] = useState<10 | 25 | 50 | 100>(incoming?.count ?? 25);
   const [language, setLanguage] = useState<"english" | "bengali" | "hindi">(incoming?.language ?? "english");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loadingQuestions, setLoadingQuestions] = useState<GovtQuestion[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const hasNavigated = useRef(false);
+  const autoGenerateFired = useRef(false);
 
   const {
     showPaywall, setShowPaywall,
@@ -132,6 +136,17 @@ export default function GovtPractice() {
       "keywords",
       "government exam practice, WBCS mock test, SSC practice, police recruitment exam, government exam preparation West Bengal, corporate jobs, tech interview, WBCS tech interview mock test, SSC Infosys interview preparation, West Bengal police exam TCS recruitment, government corporate dual preparation"
     );
+  }, []);
+
+  // Auto-generate when redirected from GovtResult with a targeted weak-area config
+  useEffect(() => {
+    if (incoming?.autoGenerate && !autoGenerateFired.current) {
+      autoGenerateFired.current = true;
+      // Small delay so state is settled
+      const t = setTimeout(() => handleGenerate(), 120);
+      return () => clearTimeout(t);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Auto-set question count when fullPaper is toggled
@@ -414,7 +429,7 @@ export default function GovtPractice() {
                     : "border-border/60 bg-muted/20 text-muted-foreground hover:border-border hover:text-foreground"}`}
                 >
                   <LayoutList className="w-3.5 h-3.5" />
-                  Full Paper {fullPaper ? "✓" : "(All Subjects)"}
+                  <span className="hidden xs:inline">Full Paper </span>{fullPaper ? "✓" : <span className="hidden sm:inline">(All Subjects)</span>}
                 </button>
               </div>
 
@@ -634,7 +649,7 @@ export default function GovtPractice() {
         {/* ── Quick Access Grid ─────────────────────────────────────────── */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5, ease: smoothEase }}
-          className="mt-6 grid grid-cols-3 gap-3">
+          className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
             { label: "Previous Year Papers", sub: "2018 – 2024", icon: BookOpen, to: "/prev-year-questions", color: "from-orange-500/10 to-red-500/10 border-blue-500/20 hover:border-blue-500/40", icon_color: "text-blue-500" },
             { label: "Current Affairs", sub: "Daily Updates", icon: Zap, to: "/current-affairs", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 hover:border-amber-500/40", icon_color: "text-amber-500" },

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfileButton from "@/components/ProfileButton";
+import { usePageSEO } from "@/lib/page-seo";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ const rankIcon = (rank: number) => {
 };
 
 export default function Leaderboard() {
+  usePageSEO("/leaderboard");
   const [filter, setFilter] = useState<Filter>("weekly");
   const [sorted, setSorted] = useState<LeaderboardEntry[]>([]);
   const [loadingLB, setLoadingLB] = useState(true);

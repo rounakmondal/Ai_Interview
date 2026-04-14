@@ -164,7 +164,7 @@ export default function Footer() {
             </div>
 
             {/* Right Section - Link Columns */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
               {/* Resources */}
               <div>
                 <h4 className="text-white font-semibold mb-4">Resources</h4>

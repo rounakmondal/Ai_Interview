@@ -228,7 +228,7 @@ export default function VirtualExamResultReport() {
         <ScoreCard result={result} stats={stats} />
 
         {/* Charts and Analysis */}
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Subject-wise Performance */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -298,7 +298,7 @@ export default function VirtualExamResultReport() {
         <PerformanceMatrix result={result} language={language} />
 
         {/* Tips and Recommendations */}
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <TipsCard language={language} tips={tips} />
           <RecommendationsCard result={result} language={language} />
         </div>
@@ -328,7 +328,7 @@ function ScoreCard({
       animate={{ opacity: 1, scale: 1 }}
       className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 rounded-lg p-8 mb-8"
     >
-      <div className="grid grid-cols-5 gap-6">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 sm:gap-6">
         <div className="text-center">
           <p className="text-slate-300 text-sm font-semibold">Score</p>
           <p className="text-4xl font-bold text-orange-400 mt-2">

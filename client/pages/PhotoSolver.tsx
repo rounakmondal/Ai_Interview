@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { usePageSEO } from "@/lib/page-seo";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -53,6 +54,7 @@ function mockSolve(imageDataUrl: string): Promise<SolverResult> {
 }
 
 export default function PhotoSolver() {
+  usePageSEO("/photo-solver");
   const [image, setImage] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [status, setStatus] = useState<"idle" | "processing" | "done">("idle");

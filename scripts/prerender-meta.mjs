@@ -404,6 +404,24 @@ const ROUTES = [
     keywords: "contact MedhaHub, MedhaHub support, exam help contact",
   },
   {
+    path: "/story-telling",
+    title: "Story Telling Practice — Improve Communication Skills | MedhaHub",
+    description: "Practice story telling for interviews and group discussions. AI-powered feedback on communication, vocabulary, and presentation skills.",
+    keywords: "story telling practice, communication skills, interview preparation, group discussion, presentation skills",
+  },
+  {
+    path: "/privacy-policy",
+    title: "Privacy Policy — MedhaHub",
+    description: "Read MedhaHub's privacy policy. We respect your data and are transparent about how we collect, use, and protect your information.",
+    keywords: "MedhaHub privacy policy, data protection, privacy",
+  },
+  {
+    path: "/terms-of-service",
+    title: "Terms of Service — MedhaHub",
+    description: "Read MedhaHub's terms of service. Understand the rules and guidelines for using our exam preparation platform.",
+    keywords: "MedhaHub terms of service, terms and conditions, user agreement",
+  },
+  {
     path: "/setup",
     title: "AI Mock Interview Setup — Practice for TCS, Google, Amazon & More | MedhaHub",
     description: "Start a free AI mock interview. Choose your target company, role, and difficulty. Practice for TCS, Google, Amazon, Infosys & 200+ companies.",

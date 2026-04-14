@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import type { Language } from "@shared/api";
 import { extractCVText } from "@/lib/cv-extractor";
+import { applyExamSeoPayload } from "@/lib/exam-seo";
 
 const languages = [
   { id: "english", label: "English", flag: "🇬🇧" },
@@ -38,16 +39,43 @@ const languages = [
 
 export default function InterviewSetup() {
   const navigate = useNavigate();
+  const location = useLocation();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // SEO injection for the /ai-mock-interview alias route
+  useEffect(() => {
+    if (location.pathname === "/ai-mock-interview") {
+      applyExamSeoPayload({
+        title: "AI Mock Interview 2026 — WBCS, SSC, Police, IT | MedhaHub",
+        description:
+          "Practice AI-powered mock interviews for WBCS, SSC, WB Police, IT & HR roles. Get instant voice feedback, personalised questions & scoring — free, no login needed for 1 question.",
+        keywords:
+          "AI mock interview, free mock interview online, WBCS interview practice, SSC interview, WB Police interview, IT mock interview, HR interview preparation, voice interview AI, MedhaHub AI interview",
+        canonicalPath: "/ai-mock-interview",
+        ogTitle: "AI Mock Interview — Instant Voice Practice for Govt & IT Jobs | MedhaHub",
+        ogDescription:
+          "AI-powered voice mock interviews for WBCS, Police SI, SSC, Banking & IT. Real-time feedback, personalised questions. Start free in seconds.",
+        jsonLd: {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "AI Mock Interview — MedhaHub",
+          description:
+            "Free AI-powered voice mock interview practice for government exams and IT jobs in India.",
+          url: "https://medhahub.in/ai-mock-interview",
+          publisher: { "@type": "Organization", name: "MedhaHub", url: "https://medhahub.in" },
+        },
+      });
+    }
+  }, [location.pathname]);
 
   const { showPaywall, setShowPaywall, paywallContext, activeExamType, requestInterviewAccess, refreshPremium } = useAccessGate();
 
-  // Redirect guests to login immediately
+  // Redirect guests to login
   useEffect(() => {
     if (!isLoggedIn()) {
-      navigate("/auth", { replace: true, state: { redirect: "/setup" } });
+      navigate("/auth", { replace: true, state: { redirect: location.pathname } });
     }
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
   const [interviewRole, setInterviewRole] = useState(""); // Free text interview role/type
   const [jobDescription, setJobDescription] = useState(""); // Optional job description

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { usePageSEO } from "@/lib/page-seo";
 import {
   ArrowLeft, Play, Pause, RotateCcw, SkipForward,
   Volume2, VolumeX, CheckCircle2, Circle, Plus, X,
@@ -130,6 +131,7 @@ function Particle({ color, index }: { color: string; index: number }) {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function StudyWithMe() {
+  usePageSEO("/study-with-me");
   const [phase, setPhase] = useState<Phase>("work");
   const [timeLeft, setTimeLeft] = useState(PHASE_DURATIONS.work);
   const [running, setRunning] = useState(false);

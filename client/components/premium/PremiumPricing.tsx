@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Check, Zap, Star, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRazorpay } from "@/hooks/use-razorpay";
@@ -79,6 +79,7 @@ export default function PremiumPricing() {
   const [isYearly, setIsYearly] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   const session = getSession();
@@ -102,7 +103,7 @@ export default function PremiumPricing() {
 
   async function handleGetPro() {
     if (!session) {
-      navigate("/auth");
+      navigate("/auth", { state: { redirect: location.pathname + location.search } });
       return;
     }
     const plan = isYearly ? "pro_yearly" : "pro_monthly";

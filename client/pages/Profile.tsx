@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { usePageSEO } from "@/lib/page-seo";
 import {
   ArrowLeft,
   User,
@@ -34,6 +36,7 @@ import {
   CalendarRange,
   ArrowRight,
   Play,
+  Globe,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getSession, clearSession, AuthUser } from "@/lib/auth-api";
@@ -58,6 +61,10 @@ import {
   getSavedAIPlan,
 } from "@/lib/exam-syllabus-data";
 import { BookMarked, GanttChart } from "lucide-react";
+
+// ── Animation constants ────────────────────────────────────────────────
+const FADE_UP = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
+const STAGGER = { show: { transition: { staggerChildren: 0.07 } } };
 
 // ── Avatar color palettes ──────────────────────────────────────────────
 const AVATAR_COLORS = [
@@ -127,7 +134,7 @@ function Section({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={`rounded-2xl border border-[#e5e7eb] dark:border-[#1f2937] bg-white dark:bg-[#111827] shadow-[0_1px_4px_rgba(0,0,0,0.06)] dark:shadow-[0_1px_4px_rgba(0,0,0,0.3)] ${className}`}
+      className={`rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm ${className}`}
       {...props}
     >
       {children}
@@ -150,12 +157,12 @@ function SectionHeader({
   return (
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-[#f3f4f6] dark:bg-[#1f2937] flex items-center justify-center">
-          <Icon className="w-4.5 h-4.5 text-[#374151] dark:text-[#9ca3af]" size={18} />
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-900/30 dark:to-indigo-900/30 flex items-center justify-center">
+          <Icon className="w-4.5 h-4.5 text-violet-600 dark:text-violet-400" size={18} />
         </div>
         <div>
-          <h2 className="text-[15px] font-semibold text-[#111827] dark:text-[#f9fafb] tracking-tight">{title}</h2>
-          {subtitle && <p className="text-[12px] text-[#6b7280] dark:text-[#6b7280] mt-0.5">{subtitle}</p>}
+          <h2 className="text-[15px] font-bold text-slate-900 dark:text-white tracking-tight">{title}</h2>
+          {subtitle && <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>}
         </div>
       </div>
       {action}
@@ -164,6 +171,7 @@ function SectionHeader({
 }
 
 export default function Profile() {
+  usePageSEO("/profile");
   const navigate = useNavigate();
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -178,6 +186,18 @@ export default function Profile() {
   const [readiness, setReadiness] = useState<ExamReadiness | null>(null);
   const [studyExam, setStudyExam] = useState<StudyExamType | "">(getStudyExamPreference() ?? "");
   const [planRefresh, setPlanRefresh] = useState(0);
+
+  // ── Question language preference ──────────────────────────────────────
+  const LANG_KEY = "interview-ai-language";
+  const [questionLang, setQuestionLang] = useState<"en" | "bn" | "hi">(() => {
+    const stored = localStorage.getItem(LANG_KEY);
+    return (stored === "bn" || stored === "hi") ? stored as "bn" | "hi" : "en";
+  });
+  const handleLangChange = (lang: "en" | "bn" | "hi") => {
+    setQuestionLang(lang);
+    localStorage.setItem(LANG_KEY, lang);
+    toast({ title: lang === "bn" ? "ভাষা: বাংলা ✓" : lang === "hi" ? "भाषा: हिन्दी ✓" : "Language: English ✓" });
+  };
 
   // Re-sync exam state when localStorage is updated (e.g. from ExamOnboardingModal)
   useEffect(() => {
@@ -304,25 +324,25 @@ export default function Profile() {
   const avatarGradient = getAvatarColor(user.name);
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] dark:bg-[#0d1117]">
+    <div className="min-h-screen bg-[#f8f9fc] dark:bg-[#0a0d14]">
 
-      {/* ── Header ─────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#0d1117]/90 backdrop-blur-md border-b border-[#e5e7eb] dark:border-[#1f2937]">
-        <div className="max-w-4xl mx-auto px-5 h-[52px] flex items-center justify-between">
+      {/* ── Navbar ─────────────────────────────────────────────────── */}
+      <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0a0d14]/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link
               to="/"
-              className="flex items-center gap-1.5 text-[13px] text-[#6b7280] hover:text-[#111827] dark:hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Home
             </Link>
-            <span className="text-[#d1d5db] dark:text-[#374151] mx-0.5">/</span>
-            <span className="text-[13px] font-medium text-[#111827] dark:text-white">Profile</span>
+            <span className="text-slate-300 dark:text-slate-700 mx-0.5">/</span>
+            <span className="text-[13px] font-semibold text-slate-900 dark:text-white">Profile</span>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1.5 text-[13px] text-[#6b7280] hover:text-[#ef4444] dark:hover:text-[#f87171] transition-colors"
+            className="flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-red-500 dark:hover:text-red-400 transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             Sign out
@@ -330,31 +350,41 @@ export default function Profile() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-5 py-8 space-y-5">
+      <main className="max-w-5xl mx-auto px-5 py-6 space-y-6">
 
         {/* ═══════════════════════════════════════════════════════════
-            PROFILE HERO
+            PROFILE HERO — Gradient Banner
         ═══════════════════════════════════════════════════════════ */}
-        <Section>
-          {/* Top accent bar using avatar gradient */}
-          <div className={`h-1 w-full rounded-t-2xl bg-gradient-to-r ${avatarGradient}`} />
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="relative rounded-3xl overflow-hidden p-6 sm:p-8"
+          style={{ background: "linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #6d28d9 100%)" }}
+        >
+          {/* Decorative blobs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-8 -right-8 w-48 h-48 bg-violet-400/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl" />
+            <div className="absolute top-4 right-1/3 w-2 h-2 bg-white/30 rounded-full" />
+            <div className="absolute bottom-6 right-1/4 w-1.5 h-1.5 bg-orange-300/50 rounded-full" />
+          </div>
 
-          <div className="p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row items-start gap-6">
-              {/* Avatar */}
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="relative group flex-shrink-0"
+          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6">
+            {/* Avatar */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="relative group flex-shrink-0"
               >
                 {avatarUrl ? (
                   <img
                     src={avatarUrl}
                     alt={user.name}
-                    className="w-[72px] h-[72px] rounded-2xl object-cover ring-1 ring-black/[0.08] dark:ring-white/[0.08]"
+                    className="w-[72px] h-[72px] rounded-2xl object-cover ring-2 ring-white/30"
                   />
                 ) : (
                   <div
-                    className={`w-[72px] h-[72px] rounded-2xl bg-gradient-to-br ${avatarGradient} flex items-center justify-center ring-1 ring-black/[0.08] dark:ring-white/[0.08]`}
+                    className={`w-[72px] h-[72px] rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center ring-2 ring-white/20`}
                   >
                     <span className="text-xl font-bold text-white tracking-tight">{initials}</span>
                   </div>
@@ -374,55 +404,52 @@ export default function Profile() {
               {/* Identity */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <h1 className="text-xl font-semibold text-[#111827] dark:text-white tracking-tight">{user.name}</h1>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#16a34a] bg-[#f0fdf4] dark:bg-[#16a34a]/10 dark:text-[#4ade80] border border-[#bbf7d0] dark:border-[#16a34a]/20 px-2 py-0.5 rounded-full">
+                  <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">{user.name}</h1>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-200 bg-emerald-400/20 border border-emerald-300/20 px-2 py-0.5 rounded-full">
                     <CircleDot className="w-2 h-2" />
                     Active
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#6b7280] bg-[#f3f4f6] dark:bg-[#1f2937] dark:text-[#9ca3af] border border-[#e5e7eb] dark:border-[#374151] px-2 py-0.5 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-200 bg-white/15 border border-white/20 px-2 py-0.5 rounded-full">
                     <Shield className="w-2.5 h-2.5" />
                     Free
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2">
-                  <span className="flex items-center gap-1.5 text-[13px] text-[#6b7280]">
+                  <span className="flex items-center gap-1.5 text-[13px] text-indigo-200">
                     <Mail className="w-3.5 h-3.5" />
                     {user.email}
                   </span>
-                  <span className="flex items-center gap-1.5 text-[13px] text-[#6b7280]">
+                  <span className="flex items-center gap-1.5 text-[13px] text-indigo-200">
                     <Calendar className="w-3.5 h-3.5" />
                     Joined {formatDate(user.createdAt)}
                   </span>
                 </div>
+                {/* Inline stats pills */}
+                {stats && !loading && (
+                  <div className="flex flex-wrap items-center gap-2 mt-3">
+                    {[
+                      { label: "Tests", value: stats.totalTests, emoji: "📝" },
+                      { label: "Avg", value: `${stats.averageScore}%`, emoji: "📊" },
+                      { label: "This Week", value: stats.weeklyTests, emoji: "⚡" },
+                    ].map((s) => (
+                      <span key={s.label} className="inline-flex items-center gap-1.5 text-xs font-bold bg-white/15 px-3 py-1.5 rounded-full text-white border border-white/20">
+                        {s.emoji} {s.value} {s.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* Divider */}
-            <div className="border-t border-[#f3f4f6] dark:border-[#1f2937] mt-6 mb-5" />
-
-            {/* Inline stats row */}
-            {stats && !loading && (
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { label: "Tests Taken", value: stats.totalTests, color: "text-[#2563eb]" },
-                  { label: "Average Score", value: `${stats.averageScore}%`, color: "text-[#059669]" },
-                  { label: "This Week", value: stats.weeklyTests, color: "text-[#d97706]" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <p className={`text-2xl font-bold tracking-tight ${s.color}`}>{s.value}</p>
-                    <p className="text-[12px] text-[#9ca3af] mt-0.5 font-medium">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </Section>
+        </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════
             STUDY PLAN — high visibility, clear + sustainable habits
         ═══════════════════════════════════════════════════════════ */}
-        <section
-          className="rounded-2xl border-2 border-primary/25 dark:border-primary/35 bg-gradient-to-br from-primary/[0.07] via-background to-violet-500/[0.06] shadow-[0_8px_30px_-12px_rgba(79,70,229,0.35)] dark:shadow-[0_8px_30px_-12px_rgba(99,102,241,0.2)] overflow-hidden"
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.4 }}
+          className="rounded-3xl border-2 border-primary/25 dark:border-primary/35 bg-gradient-to-br from-primary/[0.07] via-background to-violet-500/[0.06] shadow-[0_8px_30px_-12px_rgba(79,70,229,0.35)] dark:shadow-[0_8px_30px_-12px_rgba(99,102,241,0.2)] overflow-hidden"
           data-sync={planRefresh}
         >
           <div className="px-5 sm:px-8 py-6 sm:py-8 space-y-6">
@@ -588,11 +615,136 @@ export default function Profile() {
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            PERSONALIZED DASHBOARD WIDGET
+        ═══════════════════════════════════════════════════════════ */}
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+        <Section>
+          <div className="h-1 w-full rounded-t-2xl bg-gradient-to-r from-violet-500 to-indigo-500" />
+          <div className="p-6 space-y-5">
+            <SectionHeader
+              icon={BarChart3}
+              title="Personalized Dashboard"
+              subtitle="AI-powered weak area detection, targeted mock tests & email reports"
+            />
+
+            {/* ── Language preference ─────────────────────────────── */}
+            <div className="rounded-xl border border-[#e5e7eb] dark:border-[#1f2937] bg-[#fafafa] dark:bg-[#0d1117] p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-7 h-7 rounded-lg bg-[#f3f4f6] dark:bg-[#1f2937] flex items-center justify-center">
+                  <Globe className="w-3.5 h-3.5 text-[#6b7280]" />
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">Question Language</p>
+                  <p className="text-[11px] text-[#9ca3af]">AI-generated mock tests will be in this language</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                {([
+                  { value: "en", label: "English",          flag: "🇬🇧" },
+                  { value: "bn", label: "বাংলা (Bengali)",   flag: "🇧🇩" },
+                  { value: "hi", label: "हिन्दी (Hindi)",    flag: "🇮🇳" },
+                ] as const).map(({ value, label, flag }) => (
+                  <button
+                    key={value}
+                    onClick={() => handleLangChange(value)}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-lg border text-[12px] font-medium transition-all ${
+                      questionLang === value
+                        ? "border-violet-500 bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-300"
+                        : "border-[#e5e7eb] dark:border-[#1f2937] text-[#6b7280] hover:border-violet-300 dark:hover:border-violet-700"
+                    }`}
+                  >
+                    <span className="text-base">{flag}</span>
+                    {label}
+                    {questionLang === value && (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-violet-500" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Feature tags + CTA ──────────────────────────────── */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1 space-y-2">
+                <p className="text-[13px] text-[#6b7280] leading-relaxed">
+                  Track your accuracy per subject, get AI-curated weak-area mock tests, set daily practice targets and receive personalised performance reports straight to your inbox.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { label: "Weak-area tests", color: "text-red-600 bg-red-50 dark:bg-red-950/20 border-red-200" },
+                    { label: "AI analysis",     color: "text-violet-600 bg-violet-50 dark:bg-violet-950/20 border-violet-200" },
+                    { label: "Email reports",   color: "text-blue-600 bg-blue-50 dark:bg-blue-950/20 border-blue-200" },
+                    { label: "Daily targets",   color: "text-amber-600 bg-amber-50 dark:bg-amber-950/20 border-amber-200" },
+                  ].map(({ label, color }) => (
+                    <span key={label} className={`inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full border ${color}`}>
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <Link
+                to="/personal-dashboard"
+                className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-[13px] font-semibold hover:from-violet-700 hover:to-indigo-700 transition-all shadow-sm"
+              >
+                <Zap className="w-4 h-4" />
+                Open Dashboard
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </Section>
+        </motion.div>
+
+        {/* ═══════════════════════════════════════════════════════════
+            EXAM ROOM WIDGET
+        ═══════════════════════════════════════════════════════════ */}
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        <Section>
+          <div className="h-1 w-full rounded-t-2xl bg-gradient-to-r from-amber-500 to-orange-500" />
+          <div className="p-6 space-y-4">
+            <SectionHeader
+              icon={Trophy}
+              title="Exam Room"
+              subtitle="Chapter-wise mock tests with progressive difficulty — Easy → Medium → Hard"
+            />
+            <div className="rounded-xl border border-[#e5e7eb] dark:border-[#1f2937] bg-[#fafafa] dark:bg-[#0d1117] p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1 space-y-2">
+                <p className="text-[13px] text-[#6b7280] leading-relaxed">
+                  Practice chapter by chapter across WBCS, SSC CGL, IBPS PO, WB Police SI and Railway. Each chapter has 3 difficulty levels — unlock Medium &amp; Hard by scoring ≥60% in the previous level.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { label: "Easy → Medium → Hard", color: "text-amber-700 bg-amber-50 dark:bg-amber-950/20 border-amber-200" },
+                    { label: "Negative marking",      color: "text-rose-600  bg-rose-50  dark:bg-rose-950/20  border-rose-200"  },
+                    { label: "Progress tracking",     color: "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200" },
+                    { label: "5 exams",               color: "text-violet-600 bg-violet-50 dark:bg-violet-950/20 border-violet-200" },
+                  ].map(({ label, color }) => (
+                    <span key={label} className={`inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full border ${color}`}>
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <Link
+                to="/exam-room"
+                className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[13px] font-semibold hover:from-amber-600 hover:to-orange-600 transition-all shadow-sm"
+              >
+                <Trophy className="w-4 h-4" />
+                Open Exam Room
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </Section>
+        </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════
             EXAM TARGET
         ═══════════════════════════════════════════════════════════ */}
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
         <Section className="p-6 sm:p-8">
           <SectionHeader
             icon={Target}
@@ -693,11 +845,13 @@ export default function Profile() {
             </div>
           )}
         </Section>
+        </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════
             EXAM READINESS
         ═══════════════════════════════════════════════════════════ */}
         {readiness && upcomingExam && (
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           <Section className="p-6 sm:p-8">
             <SectionHeader
               icon={Target}
@@ -766,6 +920,7 @@ export default function Profile() {
               </div>
             </div>
           </Section>
+          </motion.div>
         )}
 
       
@@ -781,25 +936,27 @@ export default function Profile() {
         ) : stats ? (
           <>
             {/* Stat cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <motion.div variants={STAGGER} initial="hidden" animate="show" className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { label: "Total Tests", value: stats.totalTests, icon: BookOpen, num: "text-[#2563eb]", bg: "bg-[#eff6ff] dark:bg-[#2563eb]/10" },
-                { label: "Avg Score", value: `${stats.averageScore}%`, icon: BarChart3, num: "text-[#059669]", bg: "bg-[#f0fdf4] dark:bg-[#059669]/10" },
-                { label: "This Week", value: stats.weeklyTests, icon: Zap, num: "text-[#d97706]", bg: "bg-[#fffbeb] dark:bg-[#d97706]/10" },
-                { label: "Subjects", value: stats.subjectScores.length, icon: GraduationCap, num: "text-[#7c3aed]", bg: "bg-[#f5f3ff] dark:bg-[#7c3aed]/10" },
+                { label: "Total Tests", value: stats.totalTests, icon: BookOpen, num: "text-blue-700 dark:text-blue-400", bg: "from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20", border: "border-blue-200 dark:border-blue-800/40" },
+                { label: "Avg Score", value: `${stats.averageScore}%`, icon: BarChart3, num: "text-emerald-700 dark:text-emerald-400", bg: "from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20", border: "border-emerald-200 dark:border-emerald-800/40" },
+                { label: "This Week", value: stats.weeklyTests, icon: Zap, num: "text-amber-700 dark:text-amber-400", bg: "from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20", border: "border-orange-200 dark:border-orange-800/40" },
+                { label: "Subjects", value: stats.subjectScores.length, icon: GraduationCap, num: "text-violet-700 dark:text-violet-400", bg: "from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20", border: "border-violet-200 dark:border-violet-800/40" },
               ].map((item) => (
-                <Section key={item.label} className="p-5">
-                  <div className={`w-9 h-9 rounded-xl ${item.bg} flex items-center justify-center mb-4`}>
-                    <item.icon className={`w-4 h-4 ${item.num}`} />
+                <motion.div key={item.label} variants={FADE_UP}
+                  className={`rounded-2xl border bg-gradient-to-br ${item.bg} ${item.border} p-5 text-center`}>
+                  <div className="flex justify-center mb-2">
+                    <item.icon className={`w-5 h-5 ${item.num}`} />
                   </div>
-                  <p className={`text-2xl font-bold tracking-tight ${item.num}`}>{item.value}</p>
-                  <p className="text-[12px] text-[#9ca3af] mt-0.5 font-medium">{item.label}</p>
-                </Section>
+                  <p className={`text-2xl font-black tracking-tight ${item.num}`}>{item.value}</p>
+                  <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mt-0.5">{item.label}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Subject performance + sidebar */}
-            <div className="grid lg:grid-cols-5 gap-5">
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+              className="grid lg:grid-cols-5 gap-5">
               {/* Subject breakdown */}
               <Section className="lg:col-span-3 p-6 sm:p-8">
                 <SectionHeader icon={BarChart3} title="Subject Performance" />
@@ -912,10 +1069,11 @@ export default function Profile() {
                   </div>
                 </Section>
               </div>
-            </div>
+            </motion.div>
 
             {/* Recent Tests */}
             {stats.recentTests.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
               <Section className="p-6 sm:p-8">
                 <SectionHeader
                   icon={Clock}
@@ -955,10 +1113,12 @@ export default function Profile() {
                   })}
                 </div>
               </Section>
+              </motion.div>
             )}
 
             {/* Score Trend */}
             {stats.progressData.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
               <Section className="p-6 sm:p-8">
                 <SectionHeader icon={TrendingUp} title="Score Trend" subtitle="Weekly performance" />
                 <div className="flex items-end gap-2 h-28 mt-2">
@@ -984,6 +1144,7 @@ export default function Profile() {
                   })}
                 </div>
               </Section>
+              </motion.div>
             )}
           </>
         ) : (
@@ -1005,6 +1166,7 @@ export default function Profile() {
         {/* ═══════════════════════════════════════════════════════════
             ACCOUNT
         ═══════════════════════════════════════════════════════════ */}
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
         <Section className="p-6 sm:p-8">
           <SectionHeader
             icon={Shield}
@@ -1044,6 +1206,7 @@ export default function Profile() {
             </button>
           </div>
         </Section>
+        </motion.div>
 
         <div className="h-8" />
       </main>

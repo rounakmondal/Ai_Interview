@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { usePageSEO } from "@/lib/page-seo";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -36,6 +37,7 @@ function formatTime(seconds: number): string {
 }
 
 export default function DailyQuiz() {
+  usePageSEO("/daily-quiz");
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state as LocationState | null;

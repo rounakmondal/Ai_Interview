@@ -195,7 +195,7 @@ export default function PremiumInterviewTypes() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: smoothEase }}
-          className={`bg-card border-2 ${active.border} rounded-2xl p-8 lg:p-10 grid lg:grid-cols-2 gap-10 items-center`}
+          className={`bg-card border-2 ${active.border} rounded-2xl p-5 sm:p-8 lg:p-10 grid lg:grid-cols-2 gap-6 lg:gap-10 items-center`}
         >
           {/* Left */}
           <div className="space-y-6">

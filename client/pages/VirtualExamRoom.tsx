@@ -340,9 +340,9 @@ export default function VirtualExamRoom() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6 p-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 p-4">
         {/* Main Content */}
-        <div className="col-span-9">
+        <div className="lg:col-span-9">
           {/* Question Detail View */}
           {testState.questions.length > 0 && (
             <motion.div
@@ -400,7 +400,7 @@ export default function VirtualExamRoom() {
         </div>
 
         {/* Sidebar: Question Navigator */}
-        <div className="col-span-3">
+        <div className="hidden lg:block lg:col-span-3">
           <div className="bg-slate-800 border border-slate-700 rounded-lg p-4 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
             <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />

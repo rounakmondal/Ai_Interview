@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Mail, MessageSquare, HelpCircle, Bug, Lightbulb, Building } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { usePageSEO } from "@/lib/page-seo";
 
 export default function Contact() {
+  usePageSEO("/contact");
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",

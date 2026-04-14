@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePageSEO } from "@/lib/page-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -41,6 +42,7 @@ function sStyle(s: string) { return SUBJECT_STYLE[s] ?? DEFAULT_STYLE; }
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
 export default function DailyTasks() {
+  usePageSEO("/daily-tasks");
   const navigate = useNavigate();
   const [taskState, setTaskState] = useState<DailyTasksState | null>(null);
   const [loading, setLoading] = useState(true);

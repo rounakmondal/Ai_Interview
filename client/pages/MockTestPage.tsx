@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { usePageSEO } from "@/lib/page-seo";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -82,6 +83,7 @@ const STYLES = `
 `;
 
 export default function MockTestPage() {
+  usePageSEO("/mock-test");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const examType = searchParams.get("exam") ?? "WBCS";

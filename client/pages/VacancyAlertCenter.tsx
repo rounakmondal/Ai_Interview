@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useVacancyAlert } from "@/hooks/use-vacancy-alert";
 import { VacancyCard } from "@/components/VacancyCard";
+import { usePageSEO } from "@/lib/page-seo";
 import { Button } from "@/components/ui/button";
 import { 
   Bell, 
@@ -39,6 +40,7 @@ const EXAM_TYPES = [
 ];
 
 export default function VacancyAlertCenter() {
+  usePageSEO("/vacancies");
   const { vacancies, loading, status, subscribe, fetchVacancies } = useVacancyAlert();
   const [selectedExam, setSelectedExam] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);

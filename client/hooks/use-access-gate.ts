@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getSession } from '@/lib/auth-api';
 import {
   checkTestAccess,
@@ -47,6 +48,10 @@ interface UseAccessGateReturn {
 }
 
 export function useAccessGate(): UseAccessGateReturn {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.pathname + location.search;
+
   const [premium, setPremium] = useState<PremiumStatus | null>(null);
   const [ready, setReady] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
@@ -104,12 +109,14 @@ export function useAccessGate(): UseAccessGateReturn {
 
       if (result.needsLogin) {
         setNeedsLogin(true);
+        setShowPaywall(false);
+        navigate('/auth', { state: { redirect: redirectPath }, replace: true });
       } else {
         setShowPaywall(true);
       }
       return false;
     },
-    [premium]
+    [premium, navigate, redirectPath]
   );
 
   const requestPdfAccess = useCallback((): boolean => {
@@ -124,11 +131,13 @@ export function useAccessGate(): UseAccessGateReturn {
 
     if (result.needsLogin) {
       setNeedsLogin(true);
+      setShowPaywall(false);
+      navigate('/auth', { state: { redirect: redirectPath }, replace: true });
     } else {
       setShowPaywall(true);
     }
     return false;
-  }, [premium]);
+  }, [premium, navigate, redirectPath]);
 
   const requestInterviewAccess = useCallback((): boolean => {
     const session = getSession();
@@ -148,11 +157,13 @@ export function useAccessGate(): UseAccessGateReturn {
 
     if (result.needsLogin) {
       setNeedsLogin(true);
+      setShowPaywall(false);
+      navigate('/auth', { state: { redirect: redirectPath }, replace: true });
     } else {
       setShowPaywall(true);
     }
     return false;
-  }, [premium]);
+  }, [premium, navigate, redirectPath]);
 
   return {
     ready,

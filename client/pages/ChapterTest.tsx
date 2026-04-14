@@ -315,13 +315,13 @@ export default function ChapterTest() {
           </Card>
 
           {/* Quick tips */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { icon: <Zap className="w-4 h-4 text-yellow-500" />, text: "Read carefully before answering" },
               { icon: <TrendingUp className="w-4 h-4 text-green-500" />, text: "Attempt all questions" },
               { icon: <Award className="w-4 h-4 text-orange-500" />, text: "No negative marking" },
             ].map((item, i) => (
-              <div key={i} className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 text-center">
+              <div key={i} className="flex items-center sm:flex-col gap-2 sm:gap-1.5 p-3 rounded-xl bg-muted/30 sm:text-center">
                 {item.icon}
                 <p className="text-xs text-muted-foreground">{item.text}</p>
               </div>

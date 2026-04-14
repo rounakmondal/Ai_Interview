@@ -4,6 +4,9 @@ import { Link, useNavigate, useSearchParams, useParams } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
+import PaywallModal from "@/components/PaywallModal";
+import { isLoggedIn } from "@/lib/auth-api";
+import { useAccessGate } from "@/hooks/use-access-gate";
 import {
   ArrowLeft,
   Download,
@@ -26,6 +29,9 @@ import {
   Info,
   Search,
   Play,
+  Lock,
+  BadgeCheck,
+  BarChart3,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -1530,6 +1536,148 @@ function MTSPreviewCards({
   );
 }
 
+// ─── IBPS PO Preview Cards (for All Question Papers tab) ────────────────────
+
+function IBPSPreviewCards({
+  onStartTest,
+  onDownload,
+  navigating,
+}: {
+  onStartTest: (file: PDFItem, folder: FolderData, key: string) => void;
+  onDownload: (file: PDFItem, folder: FolderData) => void;
+  navigating: boolean;
+}) {
+  const [papers, setPapers] = React.useState<ConstableManifestPaper[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/mock_test/ibps_po/manifest.json")
+      .then((r) => r.json())
+      .then((d) => setPapers(d.papers ?? []))
+      .catch(() => setPapers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const ibpsFolder = FOLDERS["ibps"];
+  const toFile = (p: ConstableManifestPaper): PDFItem => ({
+    path: p.path,
+    name: p.title,
+    downloadHref: `/${p.path}`,
+    type: "IBPS",
+  });
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="rounded-2xl border border-amber-700/10 bg-card/60 p-5 animate-pulse">
+            <div className="h-4 bg-muted rounded w-1/2 mb-4" />
+            <div className="h-3 bg-muted rounded w-full mb-2" />
+            <div className="h-3 bg-muted rounded w-3/4 mb-5" />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[0, 1, 2, 3].map((j) => <div key={j} className="h-7 bg-muted rounded-lg" />)}
+            </div>
+            <div className="h-9 bg-muted rounded-xl" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {papers.map((paper, idx) => {
+        const preview = paper.preview;
+        const correctLabel = preview?.answer ?? "A";
+        return (
+          <motion.div
+            key={paper.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative flex flex-col rounded-2xl border border-amber-700/15 bg-card/80 hover:border-amber-500/40 hover:shadow-xl transition-all overflow-hidden"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400" />
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/12 flex items-center justify-center">
+                    <GraduationCap className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
+                      {paper.title}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{paper.titleBn}</p>
+                  </div>
+                </div>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-700/12 text-amber-800 dark:text-amber-300 font-medium whitespace-nowrap">
+                  {paper.questions} Qs
+                </span>
+              </div>
+
+              {preview ? (
+                <div className="flex-1">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-medium mb-2">Sample Question</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug mb-3 line-clamp-3">{preview.question}</p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {preview.options.map((opt, oi) => {
+                      const label = OPTION_LABELS[oi];
+                      const isCorrect = label === correctLabel;
+                      return (
+                        <div
+                          key={oi}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                            isCorrect
+                              ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-semibold"
+                              : "bg-muted/50 border border-border/40 text-muted-foreground"
+                          }`}
+                        >
+                          <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? "bg-emerald-500/25 text-emerald-700 dark:text-emerald-400" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {label}
+                          </span>
+                          <span className="line-clamp-1">{opt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-1 border-t border-border/30">
+                <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{paper.duration} min</span>
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" />{paper.language}</span>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 gap-1.5 text-xs border-amber-700/20 hover:bg-amber-500/8"
+                  onClick={() => onDownload(toFile(paper), ibpsFolder)}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+                <Button
+                  size="sm"
+                  className="flex-1 gap-1.5 text-xs bg-amber-600 hover:bg-amber-700 text-white"
+                  onClick={() => onStartTest(toFile(paper), ibpsFolder, "ibps")}
+                  disabled={navigating}
+                >
+                  {navigating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <><Play className="w-3.5 h-3.5" />Attempt Test</>}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── WBCS Preview Cards (for All Question Papers tab) ────────────────────
 
 function WBCSPreviewCards({
@@ -2039,7 +2187,15 @@ export default function QuestionHub({
   const [filesFromApi, setFilesFromApi] = useState<PDFItem[] | null>(null);
   const [listLoading, setListLoading] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showPricingModal, setShowPricingModal] = useState(false);
+  const [pricingContext, setPricingContext] = useState<"test" | "pdf">("test");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const {
+    showPaywall, setShowPaywall,
+    paywallContext, activeExamType,
+    requestTestAccess, refreshPremium,
+  } = useAccessGate();
   const [allTabExam, setAllTabExam] = useState(resolvedDefaultExam ?? "WBP Constable");
 
   // Map the All-tab exam label → folder key (must match ALL_TAB_EXAMS entries exactly)
@@ -2052,10 +2208,10 @@ export default function QuestionHub({
     "WBPSC Clerkship": "wbpsc-manifest", // manifest-backed → WBPSCPreviewCards
     "RRB NTPC":      "rrb-ntpc",
     "JTET":          "jtet",
-    "IBPS PO":       "ibps",
+    "IBPS PO":       "ibps-manifest",
   };
-  const allTabFolderKey = ALL_TAB_EXAM_TO_FOLDER[allTabExam] ?? "police";
 
+  const allTabFolderKey = ALL_TAB_EXAM_TO_FOLDER[allTabExam] ?? "police";
   const currentFolder = FOLDERS[selectedFolder];
   const colors = FOLDER_COLORS[currentFolder?.colorKey ?? "terracotta"];
 
@@ -2295,11 +2451,29 @@ export default function QuestionHub({
   };
 
   const handleStartTest = (file: PDFItem, folder: FolderData = currentFolder, fKey: string = selectedFolder) => {
+    // ── Access gate: check if user has paid for this exam ──────────────────────
+    const FOLDER_KEY_TO_EXAM: Record<string, string> = {
+      "police":          "WBP Constable",
+      "police-si":       "WBP SI",
+      "wbcs":            "WBCS Prelims",
+      "wbcs-manifest":   "WBCS Prelims",
+      "ssc":             "SSC MTS",
+      "ssc-cgl-manifest": "SSC CGL",
+      "wbpsc":           "WBPSC Clerkship",
+      "wbpsc-manifest":  "WBPSC Clerkship",
+      "rrb-ntpc":        "RRB NTPC",
+      "jtet":            "JTET",
+      "wb-primary-tet":  "JTET",
+      "ibps":            "IBPS PO",
+      "ibps-manifest":   "IBPS PO",
+    };
+    const examType = FOLDER_KEY_TO_EXAM[fKey] ?? folder?.name ?? fKey;
+    if (!requestTestAccess(examType)) return; // blocked → paywall or login redirect
+
     setTestNavLoading(true);
     const pdfPath =
       file.downloadHref ??
       `${folder.publicPath}/${encodePathPreserveSlashes(file.path)}`;
-    // Ensure the path is relative to the public folder (no leading slash)
     const relativePdfPath = pdfPath.replace(/^\//, "");
     navigate("/pdf-mock-test", {
       state: {
@@ -2382,6 +2556,10 @@ export default function QuestionHub({
           <span className="text-amber-700/40 dark:text-amber-500/30">/</span>
           <span className="text-sm font-medium text-foreground">QuestionHub</span>
           <div className="ml-auto flex items-center gap-2">
+            <Link to="/exam-room" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 text-xs font-medium transition-all">
+              <Trophy className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Exam Room</span>
+            </Link>
             <Link to="/govt-practice" state={govtPracticeLinkState} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 text-xs font-medium transition-all">
               <Play className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Full Exam Test</span>
@@ -2490,6 +2668,113 @@ export default function QuestionHub({
           </div>
         </motion.div>
 
+        {/* PaywallModal for direct plan purchase (pricing banner) */}
+        <PaywallModal
+          open={showPricingModal}
+          onClose={() => setShowPricingModal(false)}
+          examType={allTabExam}
+          context={pricingContext}
+          onSuccess={() => setShowPricingModal(false)}
+        />
+
+        {/* PaywallModal triggered by access gate (attempt test without payment) */}
+        <PaywallModal
+          open={showPaywall}
+          onClose={() => setShowPaywall(false)}
+          examType={activeExamType}
+          context={paywallContext}
+          onSuccess={() => { refreshPremium(); setShowPaywall(false); }}
+        />
+
+        {/* ── Pricing Banner ─────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-8 rounded-2xl overflow-hidden border border-orange-500/30 bg-gradient-to-r from-orange-500/8 via-amber-500/6 to-orange-500/8 dark:from-orange-500/12 dark:via-amber-500/8 dark:to-orange-500/12"
+        >
+          <div className="flex flex-col sm:flex-row gap-0 divide-y sm:divide-y-0 sm:divide-x divide-orange-500/15">
+            {/* Left: Single exam ₹19 */}
+            <div className="flex-1 px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-orange-500/15 flex items-center justify-center shrink-0">
+                  <BookOpen className="w-4 h-4 text-orange-500" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-[13px] font-bold text-foreground">Single Exam Pass</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-orange-500 text-white font-semibold">₹19 only</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-0.5 leading-tight">
+                    Unlock <span className="font-semibold text-foreground">unlimited mock tests</span> for any one exam.
+                    <span className="ml-1 inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                      <BarChart3 className="w-3 h-3" />Analytics free
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <Button
+                size="sm"
+                className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold px-4 h-8 rounded-lg gap-1.5"
+                onClick={() => {
+                  if (!isLoggedIn()) {
+                    navigate("/auth", { state: { redirect: window.location.pathname + window.location.search } });
+                    return;
+                  }
+                  setPricingContext("test");
+                  setShowPricingModal(true);
+                }}
+              >
+                {!isLoggedIn() ? <><Lock className="w-3 h-3" />Login to Buy</> : <>Buy ₹19</>}
+              </Button>
+            </div>
+
+            {/* Right: All exams ₹99 */}
+            <div className="flex-1 px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-violet-500/15 flex items-center justify-center shrink-0">
+                  <Zap className="w-4 h-4 text-violet-500" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-[13px] font-bold text-foreground">All Exams Pro</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-violet-600 text-white font-semibold">₹99 / mo</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-amber-500/40 text-amber-600 dark:text-amber-400 font-medium">Best Value</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-0.5 leading-tight">
+                    All exam papers + PDF download +
+                    <span className="ml-1 inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                      <BarChart3 className="w-3 h-3" />Full analytics
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <Button
+                size="sm"
+                className="shrink-0 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold px-4 h-8 rounded-lg gap-1.5"
+                onClick={() => {
+                  if (!isLoggedIn()) {
+                    navigate("/auth", { state: { redirect: window.location.pathname + window.location.search } });
+                    return;
+                  }
+                  setPricingContext("pdf");
+                  setShowPricingModal(true);
+                }}
+              >
+                {!isLoggedIn() ? <><Lock className="w-3 h-3" />Login to Buy</> : <>Buy ₹99</>}
+              </Button>
+            </div>
+          </div>
+
+          {/* Free tier note */}
+          <div className="px-5 py-2 border-t border-orange-500/10 flex items-center gap-1.5 bg-emerald-500/5">
+            <BadgeCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+            <p className="text-[11px] text-muted-foreground">
+              <span className="font-semibold text-emerald-600 dark:text-emerald-400">Free preview</span> — see sample questions for every exam. Buy a pass to attempt full mock tests.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Search Box */}
         <motion.div
           initial={{ opacity: 0, y: -6 }}
@@ -2522,11 +2807,11 @@ export default function QuestionHub({
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.18 }}
-          className="flex gap-1 mb-8 p-1 rounded-xl bg-muted/40 border border-border/40 w-fit"
+          className="flex gap-1 mb-8 p-1 rounded-xl bg-muted/40 border border-border/40 overflow-x-auto"
         >
           <button
             onClick={() => handleTabChange("previous")}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap ${
               activeTab === "previous"
                 ? "bg-background shadow text-foreground border border-border/60"
                 : "text-muted-foreground hover:text-foreground"
@@ -3024,6 +3309,13 @@ export default function QuestionHub({
             ) : allTabFolderKey === "ssc-cgl-manifest" ? (
               // SSC CGL — manifest-backed cards from /mock_test/ssc_cgl/
               <CGLPreviewCards
+                onStartTest={handleStartTest}
+                onDownload={handleDownload}
+                navigating={testNavLoading}
+              />
+            ) : allTabFolderKey === "ibps-manifest" ? (
+              // IBPS PO — manifest-backed cards from /mock_test/ibps_po/
+              <IBPSPreviewCards
                 onStartTest={handleStartTest}
                 onDownload={handleDownload}
                 navigating={testNavLoading}

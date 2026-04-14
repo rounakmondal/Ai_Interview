@@ -342,6 +342,39 @@ export default function GovtTest() {
               })}
             </div>
 
+            {/* Mobile Question Navigator (horizontal scroll) */}
+            <div className="lg:hidden space-y-2">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>Question Navigator</span>
+                <span>{answered} answered · {flagged.size} flagged</span>
+              </div>
+              <div className="flex gap-1.5 overflow-x-auto pb-1 hide-scrollbar">
+                {questions.map((_, i) => {
+                  const ans = answers[i];
+                  const isAnswered = ans?.selectedIndex !== null;
+                  const isFlagged = flagged.has(i);
+                  const isCurrent = i === current;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => setCurrent(i)}
+                      className={`flex-shrink-0 w-8 h-8 rounded-lg text-xs font-bold transition-all border ${
+                        isCurrent
+                          ? "bg-primary text-primary-foreground border-primary ring-2 ring-primary/30"
+                          : isFlagged
+                          ? "bg-amber-100 border-amber-300 text-amber-700 dark:bg-amber-900/30 dark:border-amber-600"
+                          : isAnswered
+                          ? "bg-green-100 border-green-300 text-green-700 dark:bg-green-900/30 dark:border-green-600"
+                          : "bg-muted/50 border-border/60 text-muted-foreground"
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Navigation */}
             <div className="flex items-center justify-between pt-2">
               <Button

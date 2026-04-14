@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { usePageSEO } from "@/lib/page-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -42,6 +43,7 @@ const PHASE_COLORS = [
 ];
 
 export default function StudyPlan() {
+  usePageSEO("/study-plan");
   const navigate = useNavigate();
   const studyExam = getStudyExamPreference();
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { usePageSEO } from "@/lib/page-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -46,6 +47,7 @@ const STUDY_TIPS = [
 ];
 
 export default function SyllabusTracker() {
+  usePageSEO("/syllabus");
   const navigate = useNavigate();
   const studyExam = getStudyExamPreference();
 

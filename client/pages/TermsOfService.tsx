@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText } from "lucide-react";
+import { usePageSEO } from "@/lib/page-seo";
 
 export default function TermsOfService() {
+  usePageSEO("/terms-of-service");
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 py-16 max-w-4xl">

@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileButton from "@/components/ProfileButton";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft,
@@ -30,9 +31,22 @@ import {
   Send,
   ChevronDown,
   ChevronUp,
+  Lock,
+  ArrowUpRight,
 } from "lucide-react";
 import { usePDFMockTest } from "@/hooks/use-pdf-mock-test";
 import { applyPdfMockTestSeo } from "@/lib/exam-seo";
+import { isLoggedIn, getSession } from "@/lib/auth-api";
+
+/* ── Folder → exam label map ──────────────────────────────────────────────── */
+const FOLDER_TO_EXAM: Record<string, string> = {
+  ssc_cgl: "SSC CGL", ssc_chsl: "SSC CHSL", ssc_mts: "SSC MTS",
+  wbcs: "WBCS", wbpsc: "WBPSC", police: "Police",
+  rrb_ntpc: "RRB NTPC", railway: "Railway", banking: "Banking", jtet: "JTET",
+};
+function folderToExam(folder: string): string {
+  return FOLDER_TO_EXAM[folder.toLowerCase()] ?? folder.replace(/_/g, " ").toUpperCase();
+}
 
 /* ─── Helpers ──────────────────────────────────────────────────────────────── */
 
@@ -173,6 +187,7 @@ export default function PDFMockTest() {
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFileName: string; folder: string }) {
+  const navigate = useNavigate();
   const test = usePDFMockTest({
     pdfPath,
     onError: (error) => console.error("Test error:", error),
@@ -182,6 +197,18 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
   const [showNav, setShowNav] = useState(false); // mobile sidebar toggle
   const [showReview, setShowReview] = useState(false); // results review toggle
   const [customDuration, setCustomDuration] = useState<number | null>(null); // user-picked duration (minutes)
+
+  // ── AI Analytics state ──────────────────────────────────────────────────
+  const [aiInsight, setAiInsight] = useState<{
+    insight: string;
+    recommendations: string[];
+    message: string;
+  } | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [weakSubjects, setWeakSubjects] = useState<
+    { subject: string; accuracy: number; correct: number; total: number }[]
+  >([]);
+  const analyticsFiredRef = useRef(false);
 
   const LOADING_MSGS = [
     "Loading question paper…",
@@ -200,6 +227,83 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
   useEffect(() => {
     applyPdfMockTestSeo(folder, pdfFileName);
   }, [folder, pdfFileName]);
+
+  // ── Fetch AI analytics once the test is submitted ───────────────────────
+  useEffect(() => {
+    if (!test.submitted || analyticsFiredRef.current || test.questions.length === 0) return;
+    analyticsFiredRef.current = true;
+
+    const profileLang = localStorage.getItem("interview-ai-language") ?? "en";
+    const totalSecs = (customDuration ?? test.duration) * 60;
+    const timeTakenSeconds = totalSecs - test.timeRemaining;
+    const examName = folderToExam(folder);
+
+    const questionsForApi = test.questions.map((q) => ({
+      id: q.id,
+      subject: q.subject,
+      correctIndex: q.correct_index ?? 0,
+    }));
+    const answersForApi = Object.entries(test.answers).map(([id, idx]) => ({
+      questionId: parseInt(id, 10),
+      selectedIndex: idx,
+    }));
+
+    setAiLoading(true);
+    fetch("/api/personal-dashboard/post-test-analytics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        questions: questionsForApi,
+        answers: answersForApi,
+        exam: examName,
+        subject: null,
+        difficulty: "Mixed",
+        language: profileLang,
+        timeTakenSeconds,
+      }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.success) {
+          setAiInsight(d.analytics);
+          setWeakSubjects(d.weakSubjects ?? []);
+
+          // ── Send email report if logged in ───────────────────────
+          if (isLoggedIn()) {
+            const session = getSession();
+            if (session?.user?.email) {
+              const score = Object.values(test.answers).filter((a, i) => {
+                const q = test.questions[i];
+                return q && a === q.correct_index;
+              }).length;
+              const pct = test.questions.length > 0
+                ? Math.round((score / test.questions.length) * 100)
+                : 0;
+              const mins = Math.floor(timeTakenSeconds / 60);
+              const secs = timeTakenSeconds % 60;
+              fetch("/api/test-result-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  email: session.user.email,
+                  name: session.user.name || "Student",
+                  exam: examName,
+                  subject: "Previous Year Paper",
+                  accuracy: pct,
+                  correct: score,
+                  total: test.questions.length,
+                  weakAreas: (d.weakSubjects ?? []).map((w: any) => ({ name: w.subject, accuracy: w.accuracy })),
+                  timeTaken: `${mins}m ${secs}s`,
+                }),
+              }).catch(() => {}); // fire-and-forget
+            }
+          }
+        }
+      })
+      .catch(() => {})
+      .finally(() => setAiLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [test.submitted]);
 
   // Calculations for the results page
   const resultData = useMemo(() => {
@@ -501,14 +605,29 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                   Cancel
                 </Button>
               </Link>
-              <Button
-                onClick={handleStartExam}
-                className="flex-[2] bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40 transition-all"
-              >
-                <Zap className="w-5 h-5" />
-                Start Exam Now
-                <ChevronRight className="w-4 h-4 ml-1" />
-              </Button>
+              {isLoggedIn() ? (
+                <Button
+                  onClick={handleStartExam}
+                  className="flex-[2] bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40 transition-all"
+                >
+                  <Zap className="w-5 h-5" />
+                  Start Exam Now
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </Button>
+              ) : (
+                <div className="flex-[2] flex flex-col gap-2">
+                  <Button
+                    onClick={() => navigate("/login", { state: { from: "/pdf-mock-test", pdfPath, pdfFileName, folder } })}
+                    className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40"
+                  >
+                    <Lock className="w-4 h-4" />
+                    Login to Start Exam
+                  </Button>
+                  <p className="text-center text-xs text-slate-400">
+                    Sign in to track your progress & get AI analytics
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Bottom Feature Strip */}
@@ -871,6 +990,9 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
      ═══════════════════════════════════════════════════════════════════════════ */
   if (test.submitted && resultData) {
     const { correct, wrong, skipped, bySubject, percentage } = resultData;
+    const profileLang = localStorage.getItem("interview-ai-language") ?? "en";
+    const isBn = profileLang === "bn";
+    const isHi = profileLang === "hi";
 
     return (
       <div className="min-h-screen bg-white relative overflow-hidden">
@@ -909,10 +1031,18 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
                 <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
-                  {percentage >= 70 ? "Excellent Performance! 🎉" : percentage >= 50 ? "Good Effort! 👍" : "Keep Practicing! 💪"}
+                  {isBn
+                    ? (percentage >= 70 ? "অসাধারণ পারফরম্যান্স! 🎉" : percentage >= 50 ? "ভালো চেষ্টা! 👍" : "অনুশীলন চালিয়ে যান! 💪")
+                    : isHi
+                    ? (percentage >= 70 ? "शानदार प्रदर्शन! 🎉" : percentage >= 50 ? "अच्छा प्रयास! 👍" : "अभ्यास जारी रखें! 💪")
+                    : (percentage >= 70 ? "Excellent Performance! 🎉" : percentage >= 50 ? "Good Effort! 👍" : "Keep Practicing! 💪")}
                 </h1>
                 <p className="text-slate-500">
-                  You scored <strong className="text-slate-800">{correct}</strong> out of <strong className="text-slate-800">{test.questions.length}</strong> questions
+                  {isBn
+                    ? <>মোট <strong className="text-slate-800">{test.questions.length}</strong>টি প্রশ্নের মধ্যে <strong className="text-slate-800">{correct}</strong>টি সঠিক</>
+                    : isHi
+                    ? <><strong className="text-slate-800">{test.questions.length}</strong> में से <strong className="text-slate-800">{correct}</strong> प्रश्न सही किए</>
+                    : <>You scored <strong className="text-slate-800">{correct}</strong> out of <strong className="text-slate-800">{test.questions.length}</strong> questions</>}
                 </p>
               </motion.div>
             </div>
@@ -969,6 +1099,104 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                 </div>
               </motion.div>
             )}
+
+            {/* ── AI Analytics ─────────────────────────────────────────── */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }} className="mb-8">
+              <div className={`rounded-2xl border p-5 sm:p-6 ${aiLoading ? "animate-pulse bg-slate-50 border-slate-200" : "bg-gradient-to-br from-orange-50 to-amber-50/40 border-orange-200"}`}>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                    {aiLoading ? <Loader2 className="w-5 h-5 text-orange-500 animate-spin" /> : <Brain className="w-5 h-5 text-orange-500" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-orange-700 mb-2 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {isBn ? "AI ব্যক্তিগত বিশ্লেষণ" : isHi ? "AI व्यक्तिगत विश्लेषण" : "AI Personalised Analysis"}
+                    </p>
+                    {aiLoading ? (
+                      <p className="text-sm text-slate-400">{isBn ? "বিশ্লেষণ তৈরি হচ্ছে…" : isHi ? "विश्लेषण तैयार हो रहा है…" : "Generating personalised insights…"}</p>
+                    ) : aiInsight ? (
+                      <div className="space-y-3">
+                        <p className="text-sm text-slate-700 leading-relaxed">{aiInsight.insight}</p>
+                        {aiInsight.recommendations?.length > 0 && (
+                          <ul className="space-y-1.5">
+                            {aiInsight.recommendations.map((rec, i) => (
+                              <li key={i} className="flex items-start gap-2 text-[13px] text-slate-600">
+                                <ChevronRight className="w-3.5 h-3.5 text-orange-500 flex-shrink-0 mt-0.5" />
+                                {rec}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {aiInsight.message && (
+                          <p className="text-xs font-semibold text-orange-600 bg-orange-100 px-3 py-2 rounded-xl inline-block">
+                            ✨ {aiInsight.message}
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-slate-400">{isBn ? "AI বিশ্লেষণ পাওয়া যায়নি।" : isHi ? "AI विश्लेषण उपलब्ध नहीं।" : "AI analysis unavailable. Check your connection."}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ── Smart Next Steps ─────────────────────────────────────────── */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.35 }} className="mb-8">
+              <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-5 sm:p-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-blue-500" />
+                  <h3 className="font-bold text-slate-900">
+                    {isBn ? "পরবর্তী পদক্ষেপ — গতি ধরে রাখুন" : isHi ? "अगले कदम — गति बनाए रखें" : "Next Steps — Keep the Momentum"}
+                  </h3>
+                </div>
+                <div className="grid sm:grid-cols-3 gap-3">
+                  {/* Weak area practice buttons */}
+                  {weakSubjects.slice(0, 2).map((area) => (
+                    <button
+                      key={area.subject}
+                      onClick={() =>
+                        navigate("/govt-practice", {
+                          state: {
+                            exam: folderToExam(folder),
+                            subject: area.subject,
+                            difficulty: "Easy",
+                            count: 10,
+                            autoGenerate: true,
+                          },
+                        })
+                      }
+                      className="flex flex-col gap-1.5 p-4 rounded-xl bg-red-500/8 border border-red-200 hover:bg-red-50 transition-all text-left group"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-red-600 uppercase tracking-wide">{isBn ? "দুর্বল বিষয়" : isHi ? "कमजोर विषय" : "Weak Area"}</span>
+                        <Badge variant="outline" className="text-[10px] text-red-600 border-red-300">{area.accuracy}%</Badge>
+                      </div>
+                      <p className="text-sm font-bold text-slate-800">{area.subject}</p>
+                      <p className="text-[11px] text-slate-500">{isBn ? "১০টি সহজ প্রশ্ন → তাৎক্ষণিক অনুশীলন" : isHi ? "10 आसान प्रश्न → तुरंत अभ्यास" : "10 easy questions → instant practice"}</p>
+                      <div className="flex items-center gap-1 text-[11px] text-red-600 font-semibold mt-1 group-hover:gap-2 transition-all">
+                        <Zap className="w-3 h-3" /> {isBn ? "এখনই অনুশীলন করুন" : isHi ? "अभी अभ्यास करें" : "Practice Now"} <ChevronRight className="w-3 h-3" />
+                      </div>
+                    </button>
+                  ))}
+                  {/* Try another paper */}
+                  <button
+                    onClick={() => navigate("/question-hub")}
+                    className="flex flex-col gap-1.5 p-4 rounded-xl bg-blue-500/5 border border-blue-200 hover:bg-blue-50 transition-all text-left group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wide">{isBn ? "পরবর্তী পেপার" : isHi ? "अगला पेपर" : "Next Paper"}</span>
+                      <Badge variant="outline" className="text-[10px] text-blue-600 border-blue-300">PYQ</Badge>
+                    </div>
+                    <p className="text-sm font-bold text-slate-800">{isBn ? "অন্য পেপার চেষ্টা করুন" : isHi ? "दूसरा पेपर आज़माएं" : "Try Another Paper"}</p>
+                    <p className="text-[11px] text-slate-500">{isBn ? "আরও পুরনো প্রশ্নপত্র দেখুন" : isHi ? "और पिछले वर्ष के पेपर देखें" : "Browse more previous year papers"}</p>
+                    <div className="flex items-center gap-1 text-[11px] text-blue-600 font-semibold mt-1 group-hover:gap-2 transition-all">
+                      <ArrowUpRight className="w-3 h-3" /> {isBn ? "পেপার দেখুন" : isHi ? "पेपर देखें" : "Browse Papers"} <ChevronRight className="w-3 h-3" />
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Question Review Toggle */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
@@ -1040,12 +1268,59 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
               </AnimatePresence>
             </motion.div>
 
+            {/* ── Premium Upsell ───────────────────────────────────────── */}
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.55 }} className="mb-6">
+              <div className="relative rounded-2xl overflow-hidden border border-orange-300 bg-gradient-to-br from-orange-500 via-red-500 to-rose-600 p-6 shadow-xl shadow-orange-200/40 text-white">
+                {/* Sparkle decoration */}
+                <div className="absolute top-3 right-4 text-2xl opacity-30 select-none">✦</div>
+                <div className="absolute bottom-2 right-16 text-xl opacity-20 select-none">✦</div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-bold bg-white/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        {isBn ? "প্রিমিয়াম সুবিধা" : isHi ? "प्रीमियम खोलें" : "Unlock Premium"}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-black mb-1">
+                      {isBn ? "AI-চালিত MCQ প্র্যাকটিস + বিস্তারিত বিশ্লেষণ" : isHi ? "AI-संचालित MCQ अभ्यास + गहरा विश्लेषण" : "AI-Powered MCQ Practice + Deep Analytics"}
+                    </h3>
+                    <p className="text-sm text-white/80 leading-relaxed mb-4">
+                      {isBn
+                        ? "বিষয়ভিত্তিক প্র্যাকটিস, দুর্বলতা ট্র্যাকিং, লিডারবোর্ড এবং সীমাহীন AI প্রশ্ন — সব এক জায়গায়।"
+                        : isHi
+                        ? "विषयवार अभ्यास, कमज़ोरी ट्रैकिंग, लीडरबोर्ड और असीमित AI प्रश्न — सब एक जगह।"
+                        : "Subject-wise practice, weakness tracking, leaderboards & unlimited AI questions — all in one place."}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {["AI-generated MCQs", "Weakness tracker", "Leaderboard", "Email reports"].map((f) => (
+                        <span key={f} className="text-[10px] font-semibold bg-white/15 border border-white/20 px-2.5 py-1 rounded-full">
+                          ✓ {f}
+                        </span>
+                      ))}
+                    </div>
+                    <Button
+                      onClick={() => navigate("/govt-practice")}
+                      className="bg-white text-orange-600 hover:bg-orange-50 font-bold rounded-xl h-11 px-6 gap-2 border-0 shadow-lg"
+                    >
+                      <Zap className="w-4 h-4" />
+                      {isBn ? "এখনই শুরু করুন — বিনামূল্যে" : isHi ? "अभ्यास शुरू करें — मुफ़्त" : "Start Practising — Free"}
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Action buttons */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }} className="flex gap-3 sm:gap-4">
               <Link to="/question-hub" className="flex-1">
                 <Button variant="outline" className="w-full h-12 sm:h-14 rounded-2xl font-semibold text-sm gap-2 border-2">
                   <ArrowLeft className="w-4 h-4" />
-                  Back to Hub
+                  {isBn ? "প্রশ্নের ভান্ডারে ফিরুন" : isHi ? "हब पर वापस जाएं" : "Back to Hub"}
                 </Button>
               </Link>
               <Button
@@ -1053,7 +1328,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
                 className="flex-[2] bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-400 hover:via-red-400 hover:to-red-500 text-white font-bold h-12 sm:h-14 rounded-2xl text-sm gap-2 border-0 shadow-xl shadow-orange-200/40 transition-all"
               >
                 <RotateCcw className="w-4 h-4" />
-                Retake Test
+                {isBn ? "পুনরায় পরীক্ষা দিন" : isHi ? "परीक्षा फिर दें" : "Retake Test"}
               </Button>
             </motion.div>
           </motion.div>

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { usePageSEO } from "@/lib/page-seo";
 import { Card } from "@/components/ui/card";
 import {
     ArrowLeft,
@@ -207,6 +208,7 @@ function MentorResponse({
 // ─────────────────────────────────────────────
 
 export default function CareerMentorPage() {
+    usePageSEO("/career-mentor");
     const [messages, setMessages] = useState<ChatMessage[]>([
         {
             role: "assistant",

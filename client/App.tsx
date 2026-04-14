@@ -15,6 +15,7 @@ import { useNotificationCheck } from "@/hooks/use-notification-check";
 import { scheduleAmarPlanReminder } from "@/lib/notification-service";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
+import StudentCornerFAB from "@/components/StudentCornerFAB";
 import { RouteLoader } from "@/components/RouteLoader";
 import LandingPage from "./pages/Landing";
 import PremiumLanding from "./pages/PremiumLanding";
@@ -91,6 +92,8 @@ const BlogIBPSPOPapers = lazy(() => import("./pages/blog/IBPSPOPreviousYearPaper
 const BlogSSCMTSPapers = lazy(() => import("./pages/blog/SSCMTSPreviousYearPapers"));
 const BlogWBPSCClerkship2024 = lazy(() => import("./pages/blog/WBPSCClerkship2024Paper"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const PersonalDashboard = lazy(() => import("./pages/PersonalDashboard"));
+const ExamRoom = lazy(() => import("./pages/ExamRoom"));
 
 const queryClient = new QueryClient();
 
@@ -110,11 +113,13 @@ function AppContent() {
   return (
     <>
       {isLoggedIn() && <PostLoginBriefingModal />}
+      <StudentCornerFAB />
       <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route path="/" element={<PremiumLanding />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/setup" element={<InterviewSetup />} />
+          <Route path="/ai-mock-interview" element={<InterviewSetup />} />
           <Route path="/interview" element={<InterviewRoom />} />
           <Route path="/evaluation" element={<EvaluationPage />} />
           <Route path="/resume" element={<ResumeBuilder />} />
@@ -137,6 +142,8 @@ function AppContent() {
           <Route path="/story-telling" element={<StoryTelling />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/personal-dashboard" element={<PersonalDashboard />} />
+          <Route path="/exam-room" element={<ExamRoom />} />
           <Route path="/daily-tasks" element={<DailyTasks />} />
           <Route path="/daily-quiz" element={<DailyQuiz />} />
           <Route path="/study-plan" element={<StudyPlan />} />

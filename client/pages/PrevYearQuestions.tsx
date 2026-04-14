@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { usePageSEO } from "@/lib/page-seo";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -33,6 +34,7 @@ const EXAM_OPTIONS: (ExamType | "all")[] = ["all", "WBCS", "SSC", "Railway", "Ba
 const SUBJECT_OPTIONS: (Subject | "all")[] = ["all", "History", "Geography", "Polity", "Reasoning", "Math", "Current Affairs"];
 
 export default function PrevYearQuestions() {
+  usePageSEO("/prev-year-questions");
   const [exam, setExam] = useState<ExamType | "all">("all");
   const [year, setYear] = useState<number | "all">("all");
   const [subject, setSubject] = useState<Subject | "all">("all");

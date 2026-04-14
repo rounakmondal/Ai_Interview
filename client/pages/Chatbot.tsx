@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { usePageSEO } from "@/lib/page-seo";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -65,6 +66,7 @@ const SUGGESTIONS = [
 ];
 
 export default function Chatbot() {
+  usePageSEO("/chatbot");
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 0,

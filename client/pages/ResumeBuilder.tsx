@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { usePageSEO } from "@/lib/page-seo";
 
 export default function ResumeBuilder() {
+  usePageSEO("/resume");
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-6">Build Your Resume</h1>

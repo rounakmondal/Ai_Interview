@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -36,6 +36,8 @@ type Step = "email" | "otp" | "password";
 
 export default function Auth() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const authRedirect = (location.state as { redirect?: string } | null)?.redirect ?? "/";
   const { toast } = useToast();
 
   const [mode, setMode] = useState<AuthMode>("login");
@@ -62,7 +64,7 @@ export default function Auth() {
       saveSession(res.token, res.user);
       requestPostLoginBriefing();
       toast({ title: "Welcome back!", description: `Logged in as ${res.user.name}` });
-      navigate("/");
+      navigate(authRedirect, { replace: true });
     } catch (err: any) {
       toast({ title: "Login failed", description: err.message, variant: "destructive" });
     } finally {
@@ -121,7 +123,7 @@ export default function Auth() {
       saveSession(res.token, res.user);
       requestPostLoginBriefing();
       toast({ title: "Account created!", description: `Welcome ${res.user.name}` });
-      navigate("/");
+      navigate(authRedirect, { replace: true });
     } catch (err: any) {
       toast({ title: "Signup failed", description: err.message, variant: "destructive" });
     } finally {
@@ -145,7 +147,7 @@ export default function Auth() {
       saveSession(res.token, res.user);
       requestPostLoginBriefing();
       toast({ title: "Password reset!", description: "You're now logged in" });
-      navigate("/");
+      navigate(authRedirect, { replace: true });
     } catch (err: any) {
       toast({ title: "Reset failed", description: err.message, variant: "destructive" });
     } finally {
