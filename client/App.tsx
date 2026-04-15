@@ -16,6 +16,7 @@ import { scheduleAmarPlanReminder } from "@/lib/notification-service";
 import ExamOnboardingModal from "@/components/ExamOnboardingModal";
 import PostLoginBriefingModal from "@/components/PostLoginBriefingModal";
 import StudentCornerFAB from "@/components/StudentCornerFAB";
+import LanguagePickerModal from "@/components/LanguagePickerModal";
 import { RouteLoader } from "@/components/RouteLoader";
 import LandingPage from "./pages/Landing";
 import PremiumLanding from "./pages/PremiumLanding";
@@ -94,6 +95,7 @@ const BlogWBPSCClerkship2024 = lazy(() => import("./pages/blog/WBPSCClerkship202
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const PersonalDashboard = lazy(() => import("./pages/PersonalDashboard"));
 const ExamRoom = lazy(() => import("./pages/ExamRoom"));
+const ExamLandingPage = lazy(() => import("./pages/ExamLandingPage"));
 
 const queryClient = new QueryClient();
 
@@ -229,6 +231,8 @@ function AppContent() {
           <Route path="/tools" element={<ToolsHub />} />
           {/* Admin */}
           <Route path="/admin" element={<AdminDashboard />} />
+          {/* Exam-specific SEO landing pages */}
+          <Route path="/exam/:examSlug" element={<ExamLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -244,7 +248,7 @@ export default function App() {
     const checkExam = () => {
       if (isLoggedIn() && !localStorage.getItem("upcoming_exam")) {
         setShowOnboarding(true);
-      } else if (localStorage.getItem("upcoming_exam")) {
+      } else {
         setShowOnboarding(false);
       }
     };
@@ -265,6 +269,7 @@ export default function App() {
             <TooltipProvider>
               <Toaster />
               <Sonner />
+              <LanguagePickerModal />
               <ExamOnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
               <BrowserRouter>
                 <AppContent />

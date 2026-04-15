@@ -15,6 +15,8 @@ import GovtPracticeSection from "@/components/premium/GovtPracticeSection";
 import StudyToolsSection from "@/components/premium/StudyToolsSection";
 import FreeToolsSection from "@/components/premium/FreeToolsSection";
 import ExamSyllabusSection from "@/components/premium/ExamSyllabusSection";
+import ExamRoomBanner from "@/components/premium/ExamRoomBanner";
+import TodaysMockTest from "@/components/premium/TodaysMockTest";
 import { applyExamSeoPayload } from "@/lib/exam-seo";
 
 function applyHomepageSeo() {
@@ -56,6 +58,11 @@ export default function PremiumLanding() {
       {/* Hero Section */}
       <PremiumHero />
 
+      {/* 🚨 Exam Room — topic-wise practice banner */}
+      <ExamRoomBanner />
+
+      {/* 📝 Today's Mock Test — daily auto-generated paper */}
+      <TodaysMockTest />
 
  {/* Free Student Tools (CGPA, Age, Salary, Eligibility, Typing) */}
       <FreeToolsSection />

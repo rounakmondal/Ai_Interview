@@ -25,6 +25,47 @@
     <!-- Puter.js — free TTS -->
     <script defer src="https://js.puter.com/v2/"></script>
 
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,bn,hi',
+          layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+          autoDisplay: false
+        }, 'google_translate_element');
+      }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+    <style>
+      /* ── Nuke every trace of Google Translate chrome ── */
+      .goog-te-banner-frame,
+      #goog-gt-tt,
+      .goog-te-balloon-frame,
+      .goog-tooltip,
+      .goog-tooltip:hover { display: none !important; }
+      body { top: 0 !important; position: static !important; }
+      .goog-text-highlight { background: none !important; box-shadow: none !important; }
+
+      /* Hide the raw Google widget — we use our own UI in the navbar */
+      #google_translate_element {
+        position: fixed;
+        bottom: -9999px;
+        left: -9999px;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      /* Kill any leftover Google cruft */
+      .goog-te-gadget { font-size: 0 !important; line-height: 0 !important; color: transparent !important; }
+      .goog-te-gadget > span,
+      .goog-logo-link,
+      .goog-te-gadget > div:not(:first-child) { display: none !important; }
+    </style>
+
     <!-- Primary SEO -->
     <title>MedhaHub — Free WBCS, WBPSC, WB Police & TET Mock Tests 2026</title>
     <meta name="description" content="Free mock tests & PYQs for WBCS, WBPSC Clerkship, WB Police SI/Constable & Primary TET. AI scoring, instant results & Bengali support. Start free!" />
@@ -230,6 +271,7 @@
   </head>
 
   <body>
+    <div id="google_translate_element"></div>
     <div id="root"></div>
 
     <script type="module" src="/client/main.tsx"></script>

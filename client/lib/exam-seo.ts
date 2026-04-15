@@ -497,9 +497,27 @@ export function applyQuestionHubExamSeo(profile: ExamSeoProfile) {
     return;
   }
 
+  if (profile === "ibps-po") {
+    applyExamSeoPayload({
+      title:
+        "IBPS PO Mock Test Free | Previous Year Papers & AI Practice | MedhaHub",
+      description:
+        "Practice IBPS PO with free online mock tests from previous year papers. Know IBPS PO syllabus 2026, exam pattern, cutoff marks. Reasoning, Quant & English sections with instant scoring.",
+      keywords: `${IBPS_PO_KEYWORDS}, IBPS PO syllabus 2026, IBPS PO exam pattern, IBPS PO cutoff marks`,
+      canonicalPath: "/ibps-po-mock-test",
+      jsonLd: webPageJsonLd({
+        name: "IBPS PO mock test, syllabus & previous year papers",
+        description:
+          "Free IBPS PO mock tests, complete syllabus and previous year question papers for Prelims & Mains.",
+        path: "/ibps-po-mock-test",
+      }),
+    });
+    return;
+  }
+
   applyExamSeoPayload({
     title:
-      "Exam Syllabus 2026 | WBP, WBCS, WBPSC, WB TET, SSC, IBPS PO & JTET Previous Year Papers Free | Mock Test | MedhaHub",
+      "Free Mock Tests & Previous Year Papers 2026 | MedhaHub",
     description:
       "Know your exam syllabus & pattern 2026 — WBCS, WB Police SI, SSC CGL, IBPS PO, UPSC, Railway, CTET, JTET. Download previous year question papers free. Practice online mock tests for government, banking & teaching exams. Complete exam pattern, marks distribution, cutoff marks & preparation tips on MedhaHub.",
     keywords: [
