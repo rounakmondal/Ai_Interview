@@ -37,6 +37,20 @@
       "duration": 120,
       "language": "English",
       "preview": {
+        "question": "If 45% of a number is 135, what is 75% of that number?",
+        "options": ["A. 200", "B. 225", "C. 250", "D. 275"],
+        "answer": "B"
+      }
+    },
+    {
+      "id": "IBPS_PO_Mock_Test_04",
+      "title": "IBPS PO Mock Test 04",
+      "titleBn": "IBPS PO মক টেস্ট ০৪",
+      "path": "mock_test/ibps_po/IBPS_PO_Mock_Test_04.json",
+      "questions": 100,
+      "duration": 120,
+      "language": "English",
+      "preview": {
         "question": "What is 15% of 25% of 4000?",
         "options": ["A. 125", "B. 150", "C. 175", "D. 200"],
         "answer": "B"

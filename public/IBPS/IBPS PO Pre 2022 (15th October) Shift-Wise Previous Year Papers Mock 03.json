@@ -1,0 +1,84 @@
+{
+    "subject": "IBPS PO Pre 2022 (15th October) Shift-Wise Previous Year Papers Mock 03",
+    "total_questions": 100,
+    "message": "Generated questions based on the uploaded IBPS PO Pre 2022 PDF.",
+    "questions": [
+        {
+            "q_no": "Q1",
+            "question": "Which of the following is correct according to the passage regarding small enterprises like local kirana stores?",
+            "options": {
+                "a": "They have gained significantly from the rise in smartphone use.",
+                "b": "They remain in a digital vacuum for 'near and now' inventory.",
+                "c": "They are the primary beneficiaries of the online revolution.",
+                "d": "They have easily adapted to numerous online platforms.",
+                "e": "None of these"
+            }
+        },
+        {
+            "q_no": "Q8",
+            "question": "In the following question, a sentence is given with four words marked as (A), (B), (C) and (D). These words may or may not be placed at their correct places. Choose the one that reflects the correct arrangement.",
+            "options": {
+                "a": "D-C-B-A",
+                "b": "B-A-C-D",
+                "c": "C-B-A-D",
+                "d": "A-C-B-D",
+                "e": "No rearrangement required"
+            }
+        },
+        {
+            "q_no": "Q31",
+            "question": "A boat can travel 12.8 km downstream in 24 min. If the speed of the water current is 1/4th of the speed of the boat in still water, then find the distance traveled by the boat upstream in 135 min?",
+            "options": {
+                "a": "42.5 km",
+                "b": "45 km",
+                "c": "40.5 km",
+                "d": "35 km",
+                "e": "52 km"
+            }
+        },
+        {
+            "q_no": "Q36",
+            "question": "What will come in place of the question mark (?) in the following number series? 12, 13, 28, 87, 352, ?",
+            "options": {
+                "a": "1765",
+                "b": "1760",
+                "c": "1755",
+                "d": "1770",
+                "e": "1785"
+            }
+        },
+        {
+            "q_no": "Q66",
+            "question": "Who among the following sits third to the right of P?",
+            "options": {
+                "a": "S",
+                "b": "T",
+                "c": "R",
+                "d": "Q",
+                "e": "V"
+            }
+        },
+        {
+            "q_no": "Q81",
+            "question": "Statements: Only a few grapes are mango. All mango are apple. No apple is guava. Conclusions: I. Some grapes are apple. II. Some mango can be guava.",
+            "options": {
+                "a": "If only conclusion I follows.",
+                "b": "If only conclusion II follows.",
+                "c": "If either conclusion I or II follows.",
+                "d": "If neither conclusion I nor II follows.",
+                "e": "If both conclusions I and II follow."
+            }
+        },
+        {
+            "q_no": "Q91",
+            "question": "How many such symbols are there in the above arrangement each of which is immediately preceded by a number and immediately followed by a consonant?",
+            "options": {
+                "a": "None",
+                "b": "One",
+                "c": "Two",
+                "d": "Three",
+                "e": "More than three"
+            }
+        }
+    ]
+}
