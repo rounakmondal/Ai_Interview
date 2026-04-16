@@ -65,7 +65,7 @@ export function useRazorpay({
   const rzInstanceRef = useRef<RazorpayInstance | null>(null);
 
   const initiatePayment = useCallback(
-    async (plan: 'pro_monthly' | 'pro_yearly' | 'monthly_pass' | 'single_exam', examType?: string, couponCode?: string) => {
+    async (plan: 'pro_monthly' | 'pro_yearly' | 'monthly_pass' | 'single_exam' | 'single_test' | 'ai_interview_single' | 'ai_interview_all', examType?: string, couponCode?: string) => {
       if (!authToken) {
         onError?.('Please log in to continue.');
         return;
@@ -104,10 +104,13 @@ export function useRazorpay({
 
       // Plan labels for display
       const PLAN_LABELS: Record<string, string> = {
-        single_exam: examType ? `Single Exam Pass – ${examType}` : 'Single Exam Pass',
+        single_test: 'Single Mock Test',
+        single_exam: examType ? `${examType} Monthly Pass` : 'Single Exam Pass',
         monthly_pass: 'All Exams Pass – Monthly',
         pro_monthly: 'Pro Plan – Monthly',
         pro_yearly: 'Pro Plan – Yearly',
+        ai_interview_single: examType ? `AI Interview – ${examType}` : 'AI Interview – Single',
+        ai_interview_all: 'AI Interview – All Companies',
       };
 
       // 3. Open Razorpay checkout

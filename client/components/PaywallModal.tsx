@@ -1,29 +1,29 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { X, Check, Zap, Star, Lock, FileDown, BookOpen, Loader2, Tag, ChevronRight } from "lucide-react";
+import { X, Check, Zap, Star, Lock, FileDown, BookOpen, Loader2, Tag, ChevronRight, Sparkles, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRazorpay } from "@/hooks/use-razorpay";
 import { getSession } from "@/lib/auth-api";
 import { useNavigate } from "react-router-dom";
 
-export type PaywallContext = "test" | "pdf";
+export type PaywallContext = "test" | "pdf" | "interview" | "recommendation";
 
 interface Props {
   open: boolean;
   onClose: () => void;
   /** The exam being attempted (shown on single-exam card) */
   examType?: string;
-  /** "test" = attempting a test, "pdf" = downloading pdf */
+  /** "test" = attempting a test, "pdf" = downloading pdf, "interview" = AI interview, "recommendation" = AI recommendations */
   context?: PaywallContext;
   /** Called when payment is successful */
   onSuccess?: (plan: string) => void;
 }
 
-const PLANS = [
+const TEST_PLANS = [
   {
-    id: "single_exam" as const,
-    label: "Single Exam Pass",
+    id: "single_test" as const,
+    label: "This Test Only",
     price: "₹9",
     period: "one-time",
     icon: <BookOpen className="w-5 h-5" />,
@@ -32,14 +32,14 @@ const PLANS = [
     badgeBg: "",
     btnClass: "border-blue-500 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20",
     btnVariant: "outline" as const,
-    description: "Unlock one specific exam forever.",
-    features: ["Unlimited tests for this exam", "Instant AI scoring", "Full analytics"],
-    notFor: ["Other exams", "PDF downloads"],
+    description: "Unlock 1 mock test. Full analytics included.",
+    features: ["1 mock test unlock", "Full analytics & scoring", "Subject-wise breakdown"],
+    notFor: ["Other tests", "PDF downloads", "AI recommendations"],
     contextOk: ["test"],
   },
   {
-    id: "monthly_pass" as const,
-    label: "All Exams Pass",
+    id: "single_exam" as const,
+    label: "Single Exam Pass",
     price: "₹29",
     period: "/ month",
     icon: <Zap className="w-5 h-5" />,
@@ -49,10 +49,10 @@ const PLANS = [
     btnClass:
       "bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border-0",
     btnVariant: "default" as const,
-    description: "Unlimited access to every exam on MedhaHub.",
-    features: ["All exams unlocked", "Unlimited tests", "AI scoring + analytics", "4 language support"],
-    notFor: ["PDF downloads"],
-    contextOk: ["test", "pdf"],
+    description: "Unlimited tests for one exam + AI recommendations.",
+    features: ["Unlimited tests (1 exam)", "Full analytics & scoring", "AI recommendations", "Weak area practice"],
+    notFor: ["Other exams", "PDF downloads"],
+    contextOk: ["test", "recommendation"],
   },
   {
     id: "pro_monthly" as const,
@@ -66,19 +66,57 @@ const PLANS = [
     btnClass:
       "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white border-0",
     btnVariant: "default" as const,
-    description: "Everything unlocked — including PDF download.",
+    description: "Everything unlocked — all exams, PDF, recommendations.",
     features: [
       "All exams unlocked",
       "Unlimited tests",
-      "AI scoring + analytics",
+      "Full analytics & AI scoring",
+      "AI recommendations",
       "PDF download (results & papers)",
-      "4 language support",
       "Priority support",
     ],
     notFor: [],
-    contextOk: ["test", "pdf"],
+    contextOk: ["test", "pdf", "recommendation"],
   },
 ];
+
+const INTERVIEW_PLANS = [
+  {
+    id: "ai_interview_single" as const,
+    label: "This Company",
+    price: "₹19",
+    period: "one-time",
+    icon: <Mic className="w-5 h-5" />,
+    color: "border-emerald-500/40",
+    badge: null,
+    badgeBg: "",
+    btnClass: "border-emerald-500 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20",
+    btnVariant: "outline" as const,
+    description: "1 AI mock interview for this company.",
+    features: ["1 mock interview", "Voice-based AI feedback", "Detailed evaluation"],
+    notFor: ["Other companies"],
+    contextOk: ["interview"],
+  },
+  {
+    id: "ai_interview_all" as const,
+    label: "All 200 Companies",
+    price: "₹11",
+    period: "/ month",
+    icon: <Sparkles className="w-5 h-5" />,
+    color: "border-amber-500",
+    badge: "Save 99.7%",
+    badgeBg: "bg-gradient-to-r from-amber-500 to-orange-500",
+    btnClass:
+      "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0",
+    btnVariant: "default" as const,
+    description: "Unlimited AI interviews — every company, all month.",
+    features: ["All 200+ companies", "Unlimited interviews", "Voice AI feedback", "Detailed evaluations"],
+    notFor: [],
+    contextOk: ["interview"],
+  },
+];
+
+type AnyPlanId = "single_test" | "single_exam" | "pro_monthly" | "ai_interview_single" | "ai_interview_all";
 
 export default function PaywallModal({ open, onClose, examType = "", context = "test", onSuccess }: Props) {
   const navigate = useNavigate();
@@ -142,19 +180,51 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
     },
   });
 
-  async function handleBuy(planId: "single_exam" | "monthly_pass" | "pro_monthly") {
+  async function handleBuy(planId: AnyPlanId) {
     if (!session) {
       navigate("/auth", { state: { redirect: location.pathname + location.search } });
       return;
     }
     setError(null);
     setLoadingPlan(planId);
-    await initiatePayment(planId, planId === "single_exam" ? examType : undefined, appliedCoupon?.code);
+    const needsExamType = planId === "single_exam" || planId === "single_test" || planId === "ai_interview_single";
+    await initiatePayment(planId, needsExamType ? examType : undefined, appliedCoupon?.code);
     setLoadingPlan(null);
   }
 
-  // Highlight the plan that makes sense for context (pdf → pro)
-  const suggestedId = context === "pdf" ? "pro_monthly" : "monthly_pass";
+  // Choose which plans to show based on context
+  const isInterview = context === "interview";
+  const plans = isInterview ? INTERVIEW_PLANS : TEST_PLANS;
+
+  // Highlight the plan that makes sense for context
+  const suggestedId = context === "pdf"
+    ? "pro_monthly"
+    : context === "recommendation"
+    ? "single_exam"
+    : context === "interview"
+    ? "ai_interview_all"
+    : "single_exam";
+
+  // Header text by context
+  const headerTitle = context === "pdf"
+    ? "Unlock PDF Download"
+    : context === "interview"
+    ? "Unlock AI Interview"
+    : context === "recommendation"
+    ? "Unlock AI Recommendations"
+    : "Unlock More Tests";
+
+  const headerDescription = context === "pdf"
+    ? "PDF download is a Pro feature. Choose a plan to continue."
+    : context === "interview"
+    ? examType
+      ? `Practice AI mock interview for ${examType}. Pick a plan.`
+      : "AI interviews help you prepare for real company interviews."
+    : context === "recommendation"
+    ? "Get AI-powered study recommendations to improve faster."
+    : examType
+    ? `Continue practising ${examType} — pick a plan that fits you.`
+    : "You've used your free test. Pick a plan to keep practising.";
 
   return (
     <AnimatePresence>
@@ -198,14 +268,10 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-foreground leading-tight">
-                    {context === "pdf" ? "Unlock PDF Download" : "Unlock More Tests"}
+                    {headerTitle}
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {context === "pdf"
-                      ? "PDF download is a Pro feature. Choose a plan to continue."
-                      : examType
-                      ? `Continue practising ${examType} — pick a plan that fits you.`
-                      : "You've used your free test. Pick a plan to keep practising."}
+                    {headerDescription}
                   </p>
                 </div>
               </div>
@@ -258,8 +324,8 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
               </div>
 
               {/* Plans grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {PLANS.map((plan) => {
+              <div className={`grid grid-cols-1 ${plans.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-4`}>
+                {plans.map((plan) => {
                   const isSuggested = plan.id === suggestedId;
                   const isLoading = loadingPlan === plan.id;
                   const disabled = loadingPlan !== null;
@@ -276,8 +342,6 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                           <span
                             className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold text-white ${plan.badgeBg} whitespace-nowrap shadow`}
                           >
-                            {plan.id === "monthly_pass" && <Zap className="w-3 h-3" />}
-                            {plan.id === "pro_monthly" && <Star className="w-3 h-3 fill-white" />}
                             {plan.badge}
                           </span>
                         </div>
@@ -314,13 +378,19 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                         size="default"
                         variant={plan.btnVariant}
                         className={`w-full gap-2 mt-2 font-semibold ${plan.btnClass}`}
-                        onClick={() => handleBuy(plan.id)}
+                        onClick={() => handleBuy(plan.id as AnyPlanId)}
                         disabled={disabled}
                       >
                         {isLoading ? (
                           <><Loader2 className="w-4 h-4 animate-spin" /> Processing…</>
+                        ) : plan.id === "single_test" ? (
+                          <>Buy This Test – ₹9</>
                         ) : plan.id === "single_exam" && examType ? (
-                          <>Unlock {examType} – ₹9</>
+                          <>Unlock {examType} – ₹29/mo</>
+                        ) : plan.id === "ai_interview_single" && examType ? (
+                          <>{examType} Interview – ₹19</>
+                        ) : plan.id === "ai_interview_all" ? (
+                          <>All Companies – ₹11/mo</>
                         ) : (
                           <>Get {plan.label}</>
                         )}
@@ -330,11 +400,17 @@ export default function PaywallModal({ open, onClose, examType = "", context = "
                 })}
               </div>
 
-              {/* PDF note */}
+              {/* Context-specific note */}
               {context === "pdf" && (
                 <p className="mt-5 text-center text-sm text-muted-foreground flex items-center justify-center gap-1.5">
                   <FileDown className="w-4 h-4" />
                   PDF downloads are available only on the Pro Plan (₹99/month)
+                </p>
+              )}
+              {context === "interview" && (
+                <p className="mt-5 text-center text-sm text-muted-foreground flex items-center justify-center gap-1.5">
+                  <Mic className="w-4 h-4" />
+                  200 companies × ₹19 = ₹3,800 — Get all for just ₹11. Save 99.7%
                 </p>
               )}
 

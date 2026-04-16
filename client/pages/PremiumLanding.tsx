@@ -17,6 +17,7 @@ import FreeToolsSection from "@/components/premium/FreeToolsSection";
 import ExamSyllabusSection from "@/components/premium/ExamSyllabusSection";
 import ExamRoomBanner from "@/components/premium/ExamRoomBanner";
 import TodaysMockTest from "@/components/premium/TodaysMockTest";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import { applyExamSeoPayload } from "@/lib/exam-seo";
 
 function applyHomepageSeo() {
@@ -52,6 +53,9 @@ export default function PremiumLanding() {
   }, []);
   return (
     <main className="min-h-screen bg-background overflow-hidden">
+      {/* Top Announcement Banner */}
+      <AnnouncementBar />
+
       {/* Navbar */}
       <PremiumNavbar />
 

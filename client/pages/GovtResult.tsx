@@ -38,6 +38,7 @@ import {
   ChevronRight,
   Zap,
   ArrowUpRight,
+  Lock,
 } from "lucide-react";
 import {
   GovtQuestion,
@@ -212,8 +213,10 @@ export default function GovtResult() {
 
   const {
     showPaywall, setShowPaywall, paywallContext, activeExamType,
-    requestPdfAccess, refreshPremium,
+    requestPdfAccess, refreshPremium, canViewAnalytics,
   } = useAccessGate();
+
+  const hasFullAnalytics = canViewAnalytics();
 
   if (!state) return null;
 
@@ -579,10 +582,43 @@ export default function GovtResult() {
 
         {/* ── Performance Analytics Charts ───────────────────────────────────── */}
         {subjEntries.length > 0 && (
-          <div className="space-y-4">
+          <div className="relative">
+            {/* Blur overlay for free users */}
+            {!hasFullAnalytics && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/60 backdrop-blur-md rounded-2xl">
+                <Lock className="w-10 h-10 text-orange-500 mb-3" />
+                <p className="text-lg font-bold text-foreground mb-1">
+                  {isBn ? "বিস্তারিত বিশ্লেষণ আনলক করুন" : isHi ? "विस्तृत विश्लेषण अनलॉक करें" : "Unlock Detailed Analytics"}
+                </p>
+                <p className="text-sm text-muted-foreground mb-4 text-center max-w-xs">
+                  {isBn ? "বিষয়ভিত্তিক বিশ্লেষণ, AI ইনসাইট ও দুর্বল এলাকা দেখতে যেকোনো প্ল্যান নিন।"
+                    : isHi ? "विषयवार विश्लेषण, AI इनसाइट और कमजोर क्षेत्र देखने के लिए कोई भी प्लान लें।"
+                    : "Get subject-wise performance, AI insights & weak area analysis with any paid plan."}
+                </p>
+                <div className="flex gap-3">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-blue-500 text-blue-600 hover:bg-blue-50"
+                    onClick={() => { setShowPaywall(true); }}
+                  >
+                    ₹9 — This Test
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="bg-gradient-to-r from-orange-500 to-red-500 text-white"
+                    onClick={() => { setShowPaywall(true); }}
+                  >
+                    ₹29/mo — Unlimited
+                  </Button>
+                </div>
+              </div>
+            )}
+
+          <div className={`space-y-4 ${!hasFullAnalytics ? 'select-none' : ''}`}>
             <h2 className="text-xl font-bold flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
-              {isBn ? "পারফরম্যান্স বিশ্লেষণ" : isHi ? "प্रदर्शन विश्लेषण" : "Performance Analytics"}
+              {isBn ? "পারফরম্যান্স বিশ্লেষণ" : isHi ? "प्रदर्शन विश्लेषण" : "Performance Analytics"}
             </h2>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -678,6 +714,7 @@ export default function GovtResult() {
                 ))}
               </div>
             </Card>
+          </div>
           </div>
         )}
 

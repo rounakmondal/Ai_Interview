@@ -115,13 +115,13 @@ function normalizeApiQuestion(raw: any, index: number): MockQuestion {
 // ── Cache Layer ───────────────────────────────────────────────────────────────
 
 const STORAGE_KEY = "mock_paper_cache";
-const REFRESH_HOUR = 16; // 4 PM
+const REFRESH_HOURS = [9, 16]; // 9 AM and 4 PM IST
 
 interface CachedPaper {
   data: MockPaperResponse;
   lastFetchDate: string;   // "YYYY-MM-DD"
   lastFetchHour: number;   // 0-23
-  refreshedAt4PM: boolean; // 4PM refresh hoyeche ki na
+  refreshSlots: number[];  // which refresh hours have been fetched [9, 16]
 }
 
 function getTodayString(): string {
@@ -142,12 +142,12 @@ function getCachedPaper(examType: string): CachedPaper | null {
   }
 }
 
-function setCachedPaper(examType: string, data: MockPaperResponse, refreshedAt4PM: boolean): void {
+function setCachedPaper(examType: string, data: MockPaperResponse, completedSlots: number[]): void {
   const cache: CachedPaper = {
     data,
     lastFetchDate: getTodayString(),
     lastFetchHour: getCurrentHour(),
-    refreshedAt4PM,
+    refreshSlots: completedSlots,
   };
   localStorage.setItem(`${STORAGE_KEY}_${examType}`, JSON.stringify(cache));
 }
@@ -168,10 +168,13 @@ function shouldFetchFromApi(cache: CachedPaper | null): boolean {
     return true;
   }
 
-  // Same day, current time >= 4PM and 4PM refresh not done yet → fetch
-  if (currentHour >= REFRESH_HOUR && !cache.refreshedAt4PM) {
-    console.log("[MockTest] 4PM refresh triggered → API call");
-    return true;
+  // Check if any refresh slot has passed that we haven't fetched for yet
+  const completedSlots = cache.refreshSlots || [];
+  for (const slot of REFRESH_HOURS) {
+    if (currentHour >= slot && !completedSlots.includes(slot)) {
+      console.log(`[MockTest] ${slot}:00 refresh triggered → API call`);
+      return true;
+    }
   }
 
   // Cache is valid → serve from storage
@@ -223,8 +226,9 @@ export async function fetchMockTestPaper(examType: string): Promise<MockPaperRes
   // Fetch from API
   try {
     const result = await fetchFromApi(examType);
-    const is4PMRefresh = getCurrentHour() >= REFRESH_HOUR;
-    setCachedPaper(examType, result, is4PMRefresh);
+    const currentHour = getCurrentHour();
+    const completedSlots = REFRESH_HOURS.filter((h) => currentHour >= h);
+    setCachedPaper(examType, result, completedSlots);
     return result;
   } catch (err) {
     console.warn("[MockTest] API failed, using fallback:", err);

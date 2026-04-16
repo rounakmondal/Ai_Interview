@@ -58,8 +58,8 @@ export function verifyOtp(email: string, otp: string) {
 }
 
 /** Step 3 (Sign-up only): Set name + password after OTP verification */
-export function signUp(tempToken: string, name: string, password: string) {
-  return authFetch<SetPasswordResponse>("/signup", { tempToken, name, password });
+export function signUp(tempToken: string, name: string, password: string, deviceFingerprint?: string) {
+  return authFetch<SetPasswordResponse>("/signup", { tempToken, name, password, deviceFingerprint });
 }
 
 /** Login with email + password */

@@ -88,7 +88,7 @@ const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 // ─── API helpers ──────────────────────────────────────────────────────────────
 
 async function fetchExams(): Promise<Exam[]> {
-  const r = await fetch(`${API_BASE}/api/exam-room/exams`);
+  const r = await fetch(`${API_BASE}/exam-room/exams`);
   const d = await r.json();
   return d.success ? d.data : [];
 }

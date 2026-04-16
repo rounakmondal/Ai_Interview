@@ -281,7 +281,7 @@ export default function GovtTest() {
         Loaded {questions.length} / {config.count} questions. More questions are added in the background as they arrive.
       </div>
 
-      <main className="flex-1 container px-4 py-8 max-w-5xl mx-auto">
+      <main className="flex-1 container px-6 sm:px-10 py-8 max-w-5xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_240px] gap-6">
           {/* Question Card */}
           <div className="space-y-5">

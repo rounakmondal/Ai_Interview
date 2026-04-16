@@ -460,7 +460,7 @@ export default function MockTestPage() {
         <div className="flex flex-1 overflow-hidden">
           <main className="flex-1 flex flex-col overflow-hidden">
             <div className="flex-1 overflow-y-auto">
-              <div className="container px-5 py-8 max-w-4xl mx-auto space-y-5">
+              <div className="container px-6 sm:px-10 py-8 max-w-4xl mx-auto space-y-5">
                <div className="relative rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
   {/* The decorative left accent bar */}
   <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${p.gradient} z-10`} />

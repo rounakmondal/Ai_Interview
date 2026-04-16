@@ -30,6 +30,7 @@ import {
   saveSession,
 } from "@/lib/auth-api";
 import { requestPostLoginBriefing } from "@/components/PostLoginBriefingModal";
+import { getDeviceFingerprint } from "@/lib/device-fingerprint";
 
 type AuthMode = "login" | "signup" | "forgot";
 type Step = "email" | "otp" | "password";
@@ -119,7 +120,8 @@ export default function Auth() {
     }
     setLoading(true);
     try {
-      const res = await signUp(tempToken, name, password);
+      const fp = await getDeviceFingerprint();
+      const res = await signUp(tempToken, name, password, fp);
       saveSession(res.token, res.user);
       requestPostLoginBriefing();
       toast({ title: "Account created!", description: `Welcome ${res.user.name}` });

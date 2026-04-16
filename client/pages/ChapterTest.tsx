@@ -513,7 +513,7 @@ export default function ChapterTest() {
       <Navbar title={chapterName} showTimer />
       <Progress value={progressPct} className="h-1 rounded-none" />
 
-      <main className="container px-4 py-6 max-w-2xl mx-auto space-y-5">
+      <main className="container px-6 sm:px-10 py-6 max-w-2xl mx-auto space-y-5">
         {/* Status bar */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

@@ -202,6 +202,14 @@ export default function PremiumHero() {
 
           {/* Left */}
           <motion.div variants={container} initial="hidden" animate="visible" className="space-y-7">
+            {/* Tagline pill */}
+            <motion.div variants={item}>
+              <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-4 py-1.5 text-xs font-bold text-amber-600 dark:text-amber-300 tracking-wide">
+                <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"/><span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"/></span>
+                AI generates a fresh mock test every day — costs less than chai ☕
+              </span>
+            </motion.div>
+
             {/* Headline */}
             <motion.div variants={item} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight text-foreground">

@@ -240,7 +240,7 @@ export default function DailyQuiz() {
         </div>
       </header>
 
-      <main className="container px-4 py-6 max-w-2xl mx-auto space-y-6">
+      <main className="container px-6 sm:px-10 py-6 max-w-2xl mx-auto space-y-6">
         {/* Progress */}
         <Progress value={((current + 1) / questions.length) * 100} className="h-1.5" />
 

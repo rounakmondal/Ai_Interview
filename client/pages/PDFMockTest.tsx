@@ -731,7 +731,7 @@ function TestEngine({ pdfPath, pdfFileName, folder }: { pdfPath: string; pdfFile
 
           {/* ── Question Panel (scrollable) ───────────────────────────────── */}
           <main className="flex-1 overflow-y-auto">
-            <div className="container px-3 sm:px-4 py-5 sm:py-6 max-w-3xl mx-auto space-y-5">
+            <div className="container px-6 sm:px-10 py-5 sm:py-6 max-w-3xl mx-auto space-y-5">
 
               {/* Question card */}
               <AnimatePresence mode="wait">

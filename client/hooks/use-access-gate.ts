@@ -5,6 +5,8 @@ import {
   checkTestAccess,
   checkPdfAccess,
   checkInterviewAccess,
+  checkAnalyticsAccess,
+  checkRecommendationAccess,
   incrementGuestTestCount,
   incrementUserFreeTestCount,
   incrementInterviewUsedCount,
@@ -35,14 +37,25 @@ interface UseAccessGateReturn {
    * Returns true if allowed (and increments counter on first use).
    * Returns false if blocked (needsLogin → redirect to auth, else shows paywall).
    */
-  requestInterviewAccess: () => boolean;
+  requestInterviewAccess: (companyName?: string) => boolean;
+  /**
+   * Check if full analytics should be shown (vs blurred).
+   * Returns true for any paid user.
+   */
+  canViewAnalytics: () => boolean;
+  /**
+   * Check if recommendations are available.
+   * Returns true for ₹49/mo or ₹99/mo users.
+   * If false and showPaywall not wanted, use the boolean quietly.
+   */
+  requestRecommendationAccess: () => boolean;
   /** Whether to show the paywall modal */
   showPaywall: boolean;
   setShowPaywall: (v: boolean) => void;
   /** Whether to show a login prompt */
   needsLogin: boolean;
-  /** Context for the modal (test vs pdf) */
-  paywallContext: 'test' | 'pdf';
+  /** Context for the modal (test / pdf / interview / recommendation) */
+  paywallContext: 'test' | 'pdf' | 'interview' | 'recommendation';
   /** The exam in focus (for single-exam plan labelling) */
   activeExamType: string;
 }
@@ -56,7 +69,7 @@ export function useAccessGate(): UseAccessGateReturn {
   const [ready, setReady] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
   const [needsLogin, setNeedsLogin] = useState(false);
-  const [paywallContext, setPaywallContext] = useState<'test' | 'pdf'>('test');
+  const [paywallContext, setPaywallContext] = useState<'test' | 'pdf' | 'interview' | 'recommendation'>('test');
   const [activeExamType, setActiveExamType] = useState('');
 
   const fetchedRef = useRef(false);
@@ -73,7 +86,12 @@ export function useAccessGate(): UseAccessGateReturn {
         headers: { Authorization: `Bearer ${session.token}` },
       });
       const json = await res.json();
-      if (json.success) setPremium(json.premium);
+      if (json.success) {
+        const p = json.premium || {};
+        // Attach firstSeenAt from top-level response into premium object
+        if (json.firstSeenAt) p.firstSeenAt = json.firstSeenAt;
+        setPremium(p);
+      }
     } catch {
       // Silently fail — treat as free user
     } finally {
@@ -139,21 +157,51 @@ export function useAccessGate(): UseAccessGateReturn {
     return false;
   }, [premium, navigate, redirectPath]);
 
-  const requestInterviewAccess = useCallback((): boolean => {
+  const requestInterviewAccess = useCallback(
+    (companyName?: string): boolean => {
+      const session = getSession();
+      const userId = session?.user?.id ?? null;
+      const result = checkInterviewAccess(userId, premium, companyName);
+
+      if (result.allowed) {
+        // Increment only for logged-in free users (not for paid plans)
+        if (userId && !premium?.active && !premium?.aiInterviewAll && !(premium?.interviewCredits && premium.interviewCredits > 0)) {
+          incrementInterviewUsedCount(userId);
+        }
+        return true;
+      }
+
+      setPaywallContext('interview');
+      setActiveExamType(companyName || 'interview');
+
+      if (result.needsLogin) {
+        setNeedsLogin(true);
+        setShowPaywall(false);
+        navigate('/auth', { state: { redirect: redirectPath }, replace: true });
+      } else {
+        setShowPaywall(true);
+      }
+      return false;
+    },
+    [premium, navigate, redirectPath]
+  );
+
+  const canViewAnalytics = useCallback((): boolean => {
     const session = getSession();
     const userId = session?.user?.id ?? null;
-    const result = checkInterviewAccess(userId, premium);
+    const result = checkAnalyticsAccess(userId, premium);
+    return result.allowed;
+  }, [premium]);
 
-    if (result.allowed) {
-      // Increment only for logged-in free users (not for paid plans)
-      if (userId && !premium?.active) {
-        incrementInterviewUsedCount(userId);
-      }
-      return true;
-    }
+  const requestRecommendationAccess = useCallback((): boolean => {
+    const session = getSession();
+    const userId = session?.user?.id ?? null;
+    const result = checkRecommendationAccess(userId, premium);
 
-    setPaywallContext('test');
-    setActiveExamType('interview');
+    if (result.allowed) return true;
+
+    setPaywallContext('recommendation');
+    setActiveExamType('');
 
     if (result.needsLogin) {
       setNeedsLogin(true);
@@ -172,6 +220,8 @@ export function useAccessGate(): UseAccessGateReturn {
     requestTestAccess,
     requestPdfAccess,
     requestInterviewAccess,
+    canViewAnalytics,
+    requestRecommendationAccess,
     showPaywall,
     setShowPaywall,
     needsLogin,

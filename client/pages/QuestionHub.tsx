@@ -32,6 +32,7 @@ import {
   Lock,
   BadgeCheck,
   BarChart3,
+  ArrowRight,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { extractPDFQuestions } from "@/lib/pdf-questions";
@@ -2666,6 +2667,30 @@ export default function QuestionHub({
               <Info className="w-3.5 h-3.5" /> Syllabus & Dates
             </button>
           </div>
+        </motion.div>
+
+        {/* Daily AI Test Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-8 rounded-2xl border border-amber-200 dark:border-amber-500/20 bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 dark:from-amber-950/30 dark:via-orange-950/20 dark:to-amber-950/30 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+        >
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-400/20">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-slate-900 dark:text-white">AI generates a fresh mock test every day for your exact exam</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Costs less than chai ☕ &middot; ₹9 per test &middot; New paper at 9 AM &amp; 4 PM daily</p>
+            </div>
+          </div>
+          <button
+            onClick={() => navigate(`/mock-test?exam=${encodeURIComponent(allTabExam)}`)}
+            className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-sm font-bold shadow-lg shadow-amber-400/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Today&apos;s Paper <ArrowRight className="w-4 h-4" />
+          </button>
         </motion.div>
 
         {/* PaywallModal for direct plan purchase (pricing banner) */}
