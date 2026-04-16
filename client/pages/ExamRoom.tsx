@@ -85,6 +85,7 @@ const DIFFICULTY_RING: Record<string, string> = {
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
+console.log("API_BASE:", API_BASE);
 // ─── API helpers ──────────────────────────────────────────────────────────────
 
 async function fetchExams(): Promise<Exam[]> {
