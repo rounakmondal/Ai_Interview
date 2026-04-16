@@ -97,7 +97,7 @@ async function fetchExams(): Promise<Exam[]> {
 async function fetchExamRoom(slug: string, token?: string): Promise<{ exam: Exam; subjects: Subject[] }> {
   const headers: Record<string, string> = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
-  const r = await fetch(`${API_BASE}/api/exam-room/${slug}`, { headers });
+  const r = await fetch(`${API_BASE}/exam-room/${slug}`, { headers });
   if (!r.ok) throw new Error("Exam not found");
   const d = await r.json();
   if (!d.success) throw new Error(d.error ?? "Failed to load exam room");
@@ -347,7 +347,7 @@ export default function ExamRoom() {
     }
 
     try {
-      const r = await fetch(`${API_BASE}/api/exam-room/test/${test.testId}/questions`, {
+      const r = await fetch(`${API_BASE}/exam-room/test/${test.testId}/questions`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const d = await r.json();
