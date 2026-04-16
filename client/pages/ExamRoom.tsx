@@ -354,7 +354,10 @@ export default function ExamRoom() {
       if (!d.success) throw new Error(d.error ?? "Could not load questions");
 
       // Map to GovtQuestion shape expected by /govt-test
-      const lang = localStorage.getItem("interview-ai-language") ?? "en";
+      // WB-specific exams default to Bengali
+      const WB_SLUGS = ["wbcs", "wbpsc", "wb-police-si", "wb-police-constable", "wbpsc-food-si", "wbpsc-misc-services"];
+      const isWB = selectedSlug ? WB_SLUGS.includes(selectedSlug) : false;
+      const lang = isWB ? "bn" : (localStorage.getItem("interview-ai-language") ?? "en");
       const questions = d.questions.map((q: Record<string, unknown>, idx: number) => ({
         id:           typeof q.id === "number" ? q.id : idx + 1,
         exam:         (examData?.exam.name ?? "Exam") as any,

@@ -186,7 +186,9 @@ export default function GovtResult() {
   // Fetch AI post-test analytics (no auth required)
   useEffect(() => {
     if (!state?.questions?.length) return;
-    const profileLang = localStorage.getItem("interview-ai-language") ?? "en";
+    // Use navigation state language (ExamRoom forces "bengali" for WB exams)
+    const stateLang = state.language === "bengali" ? "bn" : state.language === "hindi" ? "hi" : null;
+    const profileLang = stateLang || localStorage.getItem("interview-ai-language") || "en";
     setAiLoading(true);
     fetch("/api/personal-dashboard/post-test-analytics", {
       method: "POST",
@@ -226,8 +228,9 @@ export default function GovtResult() {
 
   const { correct, wrong, unanswered, total, accuracy } = score;
 
-  // Language from user profile setting
-  const lang = localStorage.getItem("interview-ai-language") ?? "en";
+  // Language from navigation state (WB exams = bengali) or user profile setting
+  const stateLang = language === "bengali" ? "bn" : language === "hindi" ? "hi" : null;
+  const lang = stateLang || localStorage.getItem("interview-ai-language") || "en";
   const isBn = lang === "bn";
   const isHi = lang === "hi";
 
