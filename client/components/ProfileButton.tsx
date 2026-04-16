@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { User, LogIn } from "lucide-react";
 import { isLoggedIn, getSession } from "@/lib/auth-api";
 
@@ -27,9 +27,11 @@ export default function ProfileButton() {
     );
   }
 
+  const location = useLocation();
   return (
     <Link
       to="/auth"
+      state={{ redirect: location.pathname + location.search }}
       className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border text-xs font-medium transition-all"
     >
       <LogIn className="w-3.5 h-3.5" />

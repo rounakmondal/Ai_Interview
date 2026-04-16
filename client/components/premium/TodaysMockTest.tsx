@@ -105,7 +105,7 @@ export default function TodaysMockTest() {
 
   const goViewPaper = () => {
     if (!loggedIn) {
-      navigate("/auth");
+      navigate("/auth", { state: { redirect: `/mock-test?exam=${encodeURIComponent(examType)}` } });
       return;
     }
     navigate(`/mock-test?exam=${encodeURIComponent(examType)}`);
@@ -113,7 +113,7 @@ export default function TodaysMockTest() {
 
   const goAttempt = () => {
     if (!loggedIn) {
-      navigate("/auth");
+      navigate("/auth", { state: { redirect: `/mock-test?exam=${encodeURIComponent(examType)}` } });
       return;
     }
     navigate(`/mock-test?exam=${encodeURIComponent(examType)}`);
@@ -147,7 +147,7 @@ export default function TodaysMockTest() {
                 Login to access AI-generated fresh mock tests every morning &amp; 4 PM — tailored to your exam. Costs less than chai ☕
               </p>
               <button
-                onClick={() => navigate("/auth")}
+                onClick={() => navigate("/auth", { state: { redirect: "/" } })}
                 className="mt-2 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <LogIn className="w-4 h-4" /> Login to Start

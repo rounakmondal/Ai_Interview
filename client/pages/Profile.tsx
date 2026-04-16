@@ -218,7 +218,7 @@ export default function Profile() {
   useEffect(() => {
     const session = getSession();
     if (!session) {
-      navigate("/auth", { replace: true });
+      navigate("/auth", { replace: true, state: { redirect: "/profile" } });
       return;
     }
     setUser(session.user);

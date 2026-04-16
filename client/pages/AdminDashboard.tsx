@@ -70,7 +70,7 @@ export default function AdminDashboard() {
   }
 
   useEffect(() => {
-    if (!token) { navigate("/auth"); return; }
+    if (!token) { navigate("/auth", { state: { redirect: "/admin" } }); return; }
     fetchCoupons();
   }, [token]);
 

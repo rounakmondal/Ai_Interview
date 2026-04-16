@@ -179,7 +179,7 @@ export default function PersonalDashboard() {
   // Guard: must be logged in
   useEffect(() => {
     if (!getSession()) {
-      navigate("/auth", { replace: true });
+      navigate("/auth", { replace: true, state: { redirect: "/dashboard" } });
     }
   }, [navigate]);
 

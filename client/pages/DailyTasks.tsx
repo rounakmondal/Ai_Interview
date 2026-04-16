@@ -48,7 +48,7 @@ export default function DailyTasks() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isLoggedIn()) { navigate("/auth", { replace: true }); return; }
+    if (!isLoggedIn()) { navigate("/auth", { replace: true, state: { redirect: "/daily-tasks" } }); return; }
     setTaskState(getDailyTasks());
     setLoading(false);
   }, [navigate]);

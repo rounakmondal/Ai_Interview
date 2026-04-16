@@ -342,7 +342,7 @@ export default function ExamRoom() {
   const handleStartTest = useCallback(async (test: MockTest) => {
     if (!token) {
       toast({ title: "Login required", description: "Please log in to take tests.", variant: "destructive" });
-      navigate("/auth");
+      navigate("/auth", { state: { redirect: "/exam-room" } });
       return;
     }
 

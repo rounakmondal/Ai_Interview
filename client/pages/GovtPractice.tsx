@@ -223,7 +223,7 @@ export default function GovtPractice() {
             <p className="text-sm text-muted-foreground">You&apos;ve used your free guest test. Log in to unlock one more free test!</p>
             <div className="flex gap-3">
               <Button variant="outline" className="flex-1" onClick={() => window.location.reload()}>Cancel</Button>
-              <Button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white" onClick={() => authNavigate("/auth")}>Log In</Button>
+              <Button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white" onClick={() => authNavigate("/auth", { state: { redirect: window.location.pathname + window.location.search } })}>Log In</Button>
             </div>
           </div>
         </div>

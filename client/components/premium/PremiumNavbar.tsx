@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, User, BookOpen, Flame, Clock, ChevronRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
@@ -127,6 +127,7 @@ export default function PremiumNavbar() {
   const { resolvedTheme } = useTheme();
   const { t } = useLanguage();
   const isDark = resolvedTheme === "dark";
+  const location = useLocation();
 
   useNotificationCheck();
 
@@ -256,7 +257,7 @@ export default function PremiumNavbar() {
                   </motion.button>
                 </Link>
               ) : (
-                <Link to="/auth">
+                <Link to="/auth" state={{ redirect: location.pathname + location.search }}>
                   <motion.button
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -380,7 +381,7 @@ export default function PremiumNavbar() {
                   </Link>
                 ) : (
                   <>
-                    <Link to="/auth" onClick={() => setIsMobileOpen(false)}>
+                    <Link to="/auth" state={{ redirect: location.pathname + location.search }} onClick={() => setIsMobileOpen(false)}>
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
